@@ -1,0 +1,13 @@
+﻿Packages to Install
+
+Microsoft.EntityFrameworkCore.SqlServer
+Microsoft.EntityFrameworkCore.Tools
+Microsoft.EntityFrameworkCore.SqlServer.Design
+Microsoft.CSharp
+System.Configuration.ConfigurationManager
+
+Database mapping:
+
+Scaffold-DbContext "DBConn" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Entities/DB -Tables ApiKeys -Force
+
+optionsBuilder.UseSqlServer(new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("ConnectionStrings")["SqlConnection"]);

@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AcccountCreationFailedError" xml:space="preserve">
+    <value>Ups, hubo un error</value>
+  </data>
+  <data name="AccountCreationFailed" xml:space="preserve">
+    <value>Ocurrió un error al intentar crear la cuenta, por favor revisa tus datos e intenta de nuevo</value>
+  </data>
+  <data name="AccountValidationNeeded" xml:space="preserve">
+    <value>Requieres validar tu cuenta para continuar</value>
+  </data>
+  <data name="AccountValidationNeededTitle" xml:space="preserve">
+    <value>Validación requerida</value>
+  </data>
+  <data name="AlreadyRegisteredEmail" xml:space="preserve">
+    <value>El email ingresado está vinculado por otra cuenta. Si te pertenece recupera tu cuenta, o trata con un email distinto</value>
+  </data>
+  <data name="AlreadyRegisteredEmailTitle" xml:space="preserve">
+    <value>Email inválido</value>
+  </data>
+  <data name="April" xml:space="preserve">
+    <value>Abril</value>
+  </data>
+  <data name="August" xml:space="preserve">
+    <value>Agosto</value>
+  </data>
+  <data name="Bronze" xml:space="preserve">
+    <value>Bronce</value>
+  </data>
+  <data name="December" xml:space="preserve">
+    <value>Diciembre</value>
+  </data>
+  <data name="Diamond" xml:space="preserve">
+    <value>Diamante</value>
+  </data>
+  <data name="EmptyAppleIdentityTokenIssue" xml:space="preserve">
+    <value>Apple Identity Token no recibido</value>
+  </data>
+  <data name="EmptyTokenIssue" xml:space="preserve">
+    <value>No se ha recibido token</value>
+  </data>
+  <data name="FacebookAccountNotFound" xml:space="preserve">
+    <value>Cuenta de Facebook no encontrada</value>
+  </data>
+  <data name="February" xml:space="preserve">
+    <value>Febrero</value>
+  </data>
+  <data name="Gold" xml:space="preserve">
+    <value>Oro</value>
+  </data>
+  <data name="GoogleAccountNotFound" xml:space="preserve">
+    <value>Cuenta de Google no encontrada</value>
+  </data>
+  <data name="InvalidAppleId" xml:space="preserve">
+    <value>Appler User ID inválido</value>
+  </data>
+  <data name="InvalidCredentials" xml:space="preserve">
+    <value>Credenciales inválidas</value>
+  </data>
+  <data name="InvalidEmailOrPassword" xml:space="preserve">
+    <value>Email o contraseña tienen formatos inválidos</value>
+  </data>
+  <data name="InvalidEmailOrPasswordTitle" xml:space="preserve">
+    <value>Formato incorrecto</value>
+  </data>
+  <data name="InvalidFBToken" xml:space="preserve">
+    <value>Facebook token inválido</value>
+  </data>
+  <data name="InvalidGoogleToken" xml:space="preserve">
+    <value>Google token inválido</value>
+  </data>
+  <data name="InvalidMobilePhone" xml:space="preserve">
+    <value>El número de teléfono no es válido, corrigelo y vuelve a intentar</value>
+  </data>
+  <data name="InvalidMobilePhoneTitle" xml:space="preserve">
+    <value>Ups, teléfono inválido</value>
+  </data>
+  <data name="InvalidPayload" xml:space="preserve">
+    <value>Parámetros inválidos</value>
+  </data>
+  <data name="InvalidProfileUpdateData" xml:space="preserve">
+    <value>Tu perfil contiene error, por favor revise y vuelve a intentar</value>
+  </data>
+  <data name="InvalidProfileUpdateTitle" xml:space="preserve">
+    <value>Ups, datos inválidos</value>
+  </data>
+  <data name="InvalidRefCode" xml:space="preserve">
+    <value>El código ingresado no existe, por favor revísalo e intenta de nuevo</value>
+  </data>
+  <data name="InvalidRefCodeTitle" xml:space="preserve">
+    <value>Código inválido</value>
+  </data>
+  <data name="InvalidSignupData" xml:space="preserve">
+    <value>Los datos de registro poseen errors, revisa e intenta de nuevo</value>
+  </data>
+  <data name="InvalidSignupDataTitle" xml:space="preserve">
+    <value>Datos inválidos</value>
+  </data>
+  <data name="InvalidToken" xml:space="preserve">
+    <value>Token inválido</value>
+  </data>
+  <data name="InvalidUserOrLocation" xml:space="preserve">
+    <value>Usuario o ubicación inválidos</value>
+  </data>
+  <data name="InvalidValidationCode" xml:space="preserve">
+    <value>Código de validación inválido</value>
+  </data>
+  <data name="January" xml:space="preserve">
+    <value>Enero</value>
+  </data>
+  <data name="July" xml:space="preserve">
+    <value>Julio</value>
+  </data>
+  <data name="June" xml:space="preserve">
+    <value>Junio</value>
+  </data>
+  <data name="March" xml:space="preserve">
+    <value>Marzo</value>
+  </data>
+  <data name="May" xml:space="preserve">
+    <value>Mayo</value>
+  </data>
+  <data name="NotSpecified" xml:space="preserve">
+    <value>Sin especificar</value>
+  </data>
+  <data name="NotValidatedAccount" xml:space="preserve">
+    <value>Cuenta no validada</value>
+  </data>
+  <data name="November" xml:space="preserve">
+    <value>Noviembre</value>
+  </data>
+  <data name="October" xml:space="preserve">
+    <value>Octubre</value>
+  </data>
+  <data name="OpenWalletRewardDescription" xml:space="preserve">
+    <value>Abriste you alcancía YOY, ¡con ella ganas dinero real!</value>
+  </data>
+  <data name="OpenWalletRewardTitle" xml:space="preserve">
+    <value>+{0} YOYs como regalor por unirte a YOY</value>
+  </data>
+  <data name="PasswordMismatch" xml:space="preserve">
+    <value>Las contraseña no coinciden, por favor revísalo e intenta de nuevo</value>
+  </data>
+  <data name="PasswordMismatchTitle" xml:space="preserve">
+    <value>Contraseña inválida</value>
+  </data>
+  <data name="PhoneNumberAlreadyRegistered" xml:space="preserve">
+    <value>Este número ya está asociado a otra cuenta, por favor ingresa otro</value>
+  </data>
+  <data name="Platinum" xml:space="preserve">
+    <value>Platino</value>
+  </data>
+  <data name="RandomGUID" xml:space="preserve">
+    <value>El identificador es: {0}</value>
+  </data>
+  <data name="RepeatedEmail" xml:space="preserve">
+    <value>Email asociado a otra cuanta</value>
+  </data>
+  <data name="RepeatedPhoneNumber" xml:space="preserve">
+    <value>El número ya está asociado a una cuenta</value>
+  </data>
+  <data name="RepeatedPhoneNumberTitle" xml:space="preserve">
+    <value>Número inválido</value>
+  </data>
+  <data name="September" xml:space="preserve">
+    <value>Setiembre</value>
+  </data>
+  <data name="Silver" xml:space="preserve">
+    <value>Plata</value>
+  </data>
+  <data name="UnexistenRefCode" xml:space="preserve">
+    <value>Código inexistente</value>
+  </data>
+  <data name="UserLocationIsRestricted" xml:space="preserve">
+    <value>La ubicación del usuario tiene uso restringido de la app</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>Usuario no encontrado</value>
+  </data>
+  <data name="ValidationMsg" xml:space="preserve">
+    <value>{0} , es tu código de verificación. Expira en {1} minutos, no se lo des a nadie por tu seguridad</value>
+  </data>
+  <data name="WrongUsernameOrPassword" xml:space="preserve">
+    <value>Email o contraseña incorrectas, trata nuevamente.</value>
+  </data>
+  <data name="WrongUsernameOrPasswordTitle" xml:space="preserve">
+    <value>Credenciales incorrectas</value>
+  </data>
+  <data name="WrongValidationCode" xml:space="preserve">
+    <value>El código que ingresaste es incorrecto, corrígelo e intenta de nuevo</value>
+  </data>
+  <data name="WrongValidationCodeTitle" xml:space="preserve">
+    <value>Código inválido</value>
+  </data>
+</root>

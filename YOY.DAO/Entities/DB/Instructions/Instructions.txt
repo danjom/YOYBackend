@@ -1,0 +1,16 @@
+﻿Packages to Install
+
+Microsoft.EntityFrameworkCore.SqlServer
+Microsoft.EntityFrameworkCore.Tools
+Microsoft.EntityFrameworkCore.SqlServer.Design
+Microsoft.CSharp
+System.Configuration.ConfigurationManager
+
+Database mapping:
+
+Scaffold-DbContext "DBConn" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Entities/DB -Force
+
+**IN AccountNumber from AspNetUsers
+[System.ComponentModel.DataAnnotations.Schema.DatabaseGenerated(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)]
+
+optionsBuilder.UseSqlServer(Settings.Default.default_connection);

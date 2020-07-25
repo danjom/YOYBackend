@@ -1,0 +1,37 @@
+﻿Packages to Install:
+
+Microsoft.EntityFrameworkCore.SqlServer
+Microsoft.EntityFrameworkCore.Tools
+Microsoft.EntityFrameworkCore.SqlServer.Design
+Microsoft.AspNetCore.Authentication.JwtBearer
+Microsoft.AspNetCore.Identity.EntityFrameworkCore
+Microsoft.AspNetCore.Mvc.Formatters.Json
+Microsoft.AspNetCore.Mvc.NewtonsoftJson
+Microsoft.AspNetCore.Mvc.Versioning
+Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer
+Microsoft.VisualStudio.Web.CodeGeneration.Design
+System.IdentityModel.Tokens.JWT
+
+Database mapping:
+Scaffold-DbContext "DBConn" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Entities/DB -Tables RefreshTokens -Force
+
+//Testing
+optionsBuilder.UseSqlServer(new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("ConnectionStrings")["SqlConnection"]);
+
+SecretClientOptions options = new SecretClientOptions()
+{
+    Retry =
+    {
+        Delay= TimeSpan.FromSeconds(2),
+        MaxDelay = TimeSpan.FromSeconds(16),
+        MaxRetries = 5,
+        Mode = RetryMode.Exponential
+    }
+};
+var client = new SecretClient(new Uri("https://yoyvault.vault.azure.net/"), new DefaultAzureCredential(), options);
+
+KeyVaultSecret secret = client.GetSecret("ConnectionStrings--SqlConnection");
+
+string connString = secret.Value;
+
+optionsBuilder.UseSqlServer(KeyVaultHandler.GetSecret("ConnectionStrings--SqlConnection"));

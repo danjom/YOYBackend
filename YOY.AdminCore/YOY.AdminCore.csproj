@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Miscellaneous\Logic\File\**" />
+    <Content Remove="Miscellaneous\Logic\File\**" />
+    <EmbeddedResource Remove="Miscellaneous\Logic\File\**" />
+    <None Remove="Miscellaneous\Logic\File\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.IdentityModel.Logging" Version="6.7.1" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\YOY.DAO\YOY.DAO.csproj" />
+    <ProjectReference Include="..\YOY.DTO\YOY.DTO.csproj" />
+    <ProjectReference Include="..\YOY.ThirdpartyServices\YOY.ThirdpartyServices.csproj" />
+    <ProjectReference Include="..\YOY.Values\YOY.Values.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Miscellaneous\Models\Image\POCO\" />
+  </ItemGroup>
+
+</Project>

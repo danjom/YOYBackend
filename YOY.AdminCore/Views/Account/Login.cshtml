@@ -1,0 +1,126 @@
+﻿@using YOY.AdminCore.Models.Identity
+@using YOY.Values.Strings
+@model LoginViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>YOY Core</title>
+
+    <link rel="icon" type="image/jpg" href="/img/yoy-logo-b.jpg" />
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/css/sb-admin.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="https://l2.io/ip.js?var=myip"></script>
+
+</head>
+<body>
+
+    <form asp-controller="Account" asp-action="Login" method="post" class="form-horizontal">
+        <!-- MAIN PAGE CONTENT -->
+        <div>
+
+            <div style="overflow:scroll;" id="loginModal" class="modal show" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- HEADER -->
+                        <div class="modal-header">
+
+                            <center>
+                                <img class="img-responsive" src="/img/yoy-logo-b.jpg" style="height:250px;" />
+                            </center>
+                            <h1 class="text-center">@Resources.Login</h1>
+                            <h4 class="text-center">YOY Core v1.0</h4>
+                        </div>
+                        <!-- HEADERN ENDS -->
+                        <!-- BODY -->
+                        <div class="modal-body">
+
+                            <div id="loginForm">
+
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                                <div class="center-block">
+
+                                    <div class="form-group">
+                                        <center>
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control input-lg", @placeholder = Resources.Username })
+                                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                        </center>
+                                    </div>
+                                    <div class="form-group">
+                                        <center>
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control input-lg", @placeholder = Resources.Password })
+                                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                        </center>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <center>
+                                            <div class="checkbox">
+                                                @Html.CheckBoxFor(m => m.RememberMe)
+                                                @Resources.RememberMe
+                                            </div>
+                                        </center>
+                                    </div>
+
+
+                                </div>
+                                <!-- MODAL CONTAINER ENDS  -->
+
+                            </div>
+
+
+                        </div>
+                        <!-- BODY ENDS -->
+                        <!-- FOOTER -->
+                        <div class="modal-footer">
+
+                            <center>
+                                <div class="col-md-12">
+                                    <button class="btn btn-primary" type="submit" aria-hidden="true">@Resources.Enter</button>
+                                    @Html.ActionLink(Resources.ForgotMyPassword, "ForgotPassword", "Account", new { @Class = "btn btn-danger" })
+                                </div>
+                            </center>
+
+
+                        </div>
+                        <!-- FOOTER ENDS -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+        <!-- RENDER SCRIPTS -->
+        <!--Jquery-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+        <!--Bootstrap-->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

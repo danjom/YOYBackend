@@ -1,0 +1,50 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="YOY.ThirdpartyServices.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="sendgrid_username" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">azure_66180f966b172f8e44ae5436c2afb20e@azure.com
+</Value>
+    </Setting>
+    <Setting Name="sendgrid_password" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">yTXri14u121uEuk
+</Value>
+    </Setting>
+    <Setting Name="sendgrid_apikey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">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</Value>
+    </Setting>
+    <Setting Name="drive_service_account" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">audiostorage@enjoyit-961.iam.gserviceaccount.com</Value>
+    </Setting>
+    <Setting Name="cloudinaryCloudName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">yoyimgs</Value>
+    </Setting>
+    <Setting Name="cloudinaryApiKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">427598412712759</Value>
+    </Setting>
+    <Setting Name="cloudinaryApiSecret" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">EpNpUUQVtrZg5JC5_D3NsvmrDBc</Value>
+    </Setting>
+    <Setting Name="algoliaApiKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">6d59677373947956772bffedd94abe41</Value>
+    </Setting>
+    <Setting Name="cognitiveServicesSubscriptionKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">925fa4aabca0414280fa6c083dce4652</Value>
+    </Setting>
+    <Setting Name="visionOCRServicesUriBase" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://southcentralus.api.cognitive.microsoft.com/vision/v2.0/ocr</Value>
+    </Setting>
+    <Setting Name="fcmSenderId" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">676417410513</Value>
+    </Setting>
+    <Setting Name="fcmApiKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">AAAAnX2eldE:APA91bHwieXy17-ahCvRi0lDmfTwVKQzr9YGNv5QBqyRvSJ6lv0vlgX19zJlFVmUHwG5mlEwyib-rLilqGiycIezHZhYRMZi8ISGzUcZ01e4JOP3w8GiT0hhMX05cSQ6VJM1pY3t59wF</Value>
+    </Setting>
+    <Setting Name="twilioAccountSID" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">ACdac490f123cf29dff800cfca9ce76734</Value>
+    </Setting>
+    <Setting Name="twilioAuthToken" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">d5367d843c0180d634dbf222244d39a5</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

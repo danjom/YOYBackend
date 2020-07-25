@@ -1,0 +1,16 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="YOY.DAO" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="default_connection" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=de4tg5joydev.database.windows.net,1433;Initial Catalog=yoyIj7qM58dCj;MultipleActiveResultSets=true;Persist Security Info=True;User ID=yoyadmi3726;Password=vCRUS4JypY0yzFjry5hb&lt;/ConnectionString&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=de4tg5joydev.database.windows.net,1433;Initial Catalog=yoyIj7qM58dCj;MultipleActiveResultSets=true;Persist Security Info=True;User ID=yoyadmi3726;Password=vCRUS4JypY0yzFjry5hb</Value>
+    </Setting>
+    <Setting Name="salt" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">BQXtvmvwRg4DVQCm5I6Wt+kNIlezwES8lfbiZoB0DBIfkSZu8Ft3e31jYHNdyfydmpRWO978kfc8UxbtFbfV7E9Af3n+nFSjV+MygcCT7mxxgKH0FB4wrGNDpcVyle6yiRxbcaaZdzhAtfhFkX8qlXigG3JURWIwPvrNeMQGSRuqgO0N1b/G8TS43VZhqVr/O0pDrGDtZlIqoIvcwa1Dv8isYSfL++bWCw0SffMHiLdFuIG9E8u7mPJU0GoUs13UUPTphKPkkHrwD4ds6ncCnGMRejHjZIPKTyq1Rf1zj1jxp9d/1eLs+rRTsMrQ/g7P+NlkiPpJDYZoLNBuveCnWQ==</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

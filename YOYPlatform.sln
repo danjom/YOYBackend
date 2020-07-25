@@ -1,0 +1,84 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.36
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6F980EC4-4C7A-4B06-AA84-607478AA0113}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YOY.DAO", "YOY.DAO\YOY.DAO.csproj", "{B7FCB3B4-3291-446A-BFF4-B36C837DB7F1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YOY.Values", "YOY.Values\YOY.Values.csproj", "{1FE3DE37-8709-42C0-BBFA-0F4C661807DC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YOY.DTO", "YOY.DTO\YOY.DTO.csproj", "{2A6176DA-9FA7-4EED-914B-384319E4CFC0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YOY.Sys.Security", "YOY.Sys.Security\YOY.Sys.Security.csproj", "{039025A7-1EAE-4012-8A48-94B611C14572}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YOY.ThirdpartyServices", "YOY.ThirdpartyServices\YOY.ThirdpartyServices.csproj", "{9D67F9F9-E5AA-46B2-8CED-E3FEB41F4F55}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YOY.AdminCore", "YOY.AdminCore\YOY.AdminCore.csproj", "{F9D28817-A5E8-4D16-853C-59A19F5E2EC5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YOY.BusinessAPI", "YOY.BusinessAPI\YOY.BusinessAPI.csproj", "{0E6575A9-1024-4BEA-B6FE-1534186FFE15}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YOY.ValidationAPI.APIKeyAuth", "YOY.ValidationAPI.APIKeyAuth\YOY.ValidationAPI.APIKeyAuth.csproj", "{FAFCDFD0-2DFD-4387-8BE2-C9C1E64C0B57}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YOY.UserAPI", "YOY.UserAPI\YOY.UserAPI.csproj", "{6CEDF68E-49DB-4B9A-97DE-01DD64FC9FAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YOY.ValidationAPI.TwilioWebhook", "YOY.ValidationAPI.TwilioWebhook\YOY.ValidationAPI.TwilioWebhook.csproj", "{CF41B695-A7A3-43BC-A208-3E026B0322A1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B7FCB3B4-3291-446A-BFF4-B36C837DB7F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7FCB3B4-3291-446A-BFF4-B36C837DB7F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7FCB3B4-3291-446A-BFF4-B36C837DB7F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7FCB3B4-3291-446A-BFF4-B36C837DB7F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FE3DE37-8709-42C0-BBFA-0F4C661807DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FE3DE37-8709-42C0-BBFA-0F4C661807DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FE3DE37-8709-42C0-BBFA-0F4C661807DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FE3DE37-8709-42C0-BBFA-0F4C661807DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A6176DA-9FA7-4EED-914B-384319E4CFC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A6176DA-9FA7-4EED-914B-384319E4CFC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A6176DA-9FA7-4EED-914B-384319E4CFC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A6176DA-9FA7-4EED-914B-384319E4CFC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{039025A7-1EAE-4012-8A48-94B611C14572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{039025A7-1EAE-4012-8A48-94B611C14572}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{039025A7-1EAE-4012-8A48-94B611C14572}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{039025A7-1EAE-4012-8A48-94B611C14572}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D67F9F9-E5AA-46B2-8CED-E3FEB41F4F55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D67F9F9-E5AA-46B2-8CED-E3FEB41F4F55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D67F9F9-E5AA-46B2-8CED-E3FEB41F4F55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D67F9F9-E5AA-46B2-8CED-E3FEB41F4F55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9D28817-A5E8-4D16-853C-59A19F5E2EC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9D28817-A5E8-4D16-853C-59A19F5E2EC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9D28817-A5E8-4D16-853C-59A19F5E2EC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9D28817-A5E8-4D16-853C-59A19F5E2EC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E6575A9-1024-4BEA-B6FE-1534186FFE15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E6575A9-1024-4BEA-B6FE-1534186FFE15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E6575A9-1024-4BEA-B6FE-1534186FFE15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E6575A9-1024-4BEA-B6FE-1534186FFE15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAFCDFD0-2DFD-4387-8BE2-C9C1E64C0B57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAFCDFD0-2DFD-4387-8BE2-C9C1E64C0B57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAFCDFD0-2DFD-4387-8BE2-C9C1E64C0B57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAFCDFD0-2DFD-4387-8BE2-C9C1E64C0B57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CEDF68E-49DB-4B9A-97DE-01DD64FC9FAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CEDF68E-49DB-4B9A-97DE-01DD64FC9FAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CEDF68E-49DB-4B9A-97DE-01DD64FC9FAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CEDF68E-49DB-4B9A-97DE-01DD64FC9FAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF41B695-A7A3-43BC-A208-3E026B0322A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF41B695-A7A3-43BC-A208-3E026B0322A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF41B695-A7A3-43BC-A208-3E026B0322A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF41B695-A7A3-43BC-A208-3E026B0322A1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3855E1E9-B353-45B8-B2BE-AC09C9621B43}
+	EndGlobalSection
+EndGlobal

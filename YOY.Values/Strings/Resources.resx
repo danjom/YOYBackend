@@ -1,0 +1,4750 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AcceptAndRegister" xml:space="preserve">
+    <value>Acéptalo y descuenta el monto a la compra</value>
+  </data>
+  <data name="AcceptsCommunityPointsAsPayment" xml:space="preserve">
+    <value>Pago con YOYs Alcancia</value>
+  </data>
+  <data name="AcceptsLoyaltyPointsAsPayment" xml:space="preserve">
+    <value>Acepta YOYs como pago</value>
+  </data>
+  <data name="AcceptsSelfPointsAsPayment" xml:space="preserve">
+    <value>Pago con YOYs propios</value>
+  </data>
+  <data name="AccesedByUser" xml:space="preserve">
+    <value>Accedido por el usuario</value>
+  </data>
+  <data name="AccessDeal" xml:space="preserve">
+    <value>Ver Promo</value>
+  </data>
+  <data name="AccessiblePoints" xml:space="preserve">
+    <value>YOYs Accesibles</value>
+  </data>
+  <data name="AccountNumber" xml:space="preserve">
+    <value>Número de Cuenta</value>
+  </data>
+  <data name="AccountPayable" xml:space="preserve">
+    <value>Cuenta por Pagar</value>
+  </data>
+  <data name="AccountReceivable" xml:space="preserve">
+    <value>Cuenta por Cobrar</value>
+  </data>
+  <data name="AccountValidation" xml:space="preserve">
+    <value>Validación de cuenta</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Acciones</value>
+  </data>
+  <data name="ActionType" xml:space="preserve">
+    <value>Tipo de acción</value>
+  </data>
+  <data name="ActivelyWorking" xml:space="preserve">
+    <value>En funcionamiento</value>
+  </data>
+  <data name="ActivePlayer" xml:space="preserve">
+    <value>Participante Activo</value>
+  </data>
+  <data name="ActiveRouteMembers" xml:space="preserve">
+    <value>Miembros Activos</value>
+  </data>
+  <data name="ActiveState" xml:space="preserve">
+    <value>Activo</value>
+  </data>
+  <data name="ActiveTenants" xml:space="preserve">
+    <value>Comercios Participando</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Agregar</value>
+  </data>
+  <data name="AddAverageTicket" xml:space="preserve">
+    <value>Agregar Ticket Promedio</value>
+  </data>
+  <data name="AddBroadcastingDevice" xml:space="preserve">
+    <value>Agregar Transmisor</value>
+  </data>
+  <data name="AddCategory" xml:space="preserve">
+    <value>Agregar Categoría</value>
+  </data>
+  <data name="AddCodes" xml:space="preserve">
+    <value>Crear Códigos</value>
+  </data>
+  <data name="AddContentRemainder" xml:space="preserve">
+    <value>Para gestionar el contenido de esta campaña, ve a la pestaña "Contenido"</value>
+  </data>
+  <data name="AddDeliveryMethod" xml:space="preserve">
+    <value>Agregar forma de envío</value>
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>Agregado</value>
+  </data>
+  <data name="AddedToIt" xml:space="preserve">
+    <value>se han agregado a ella</value>
+  </data>
+  <data name="AddedToYourClub" xml:space="preserve">
+    <value>se han agreado a tu Club</value>
+  </data>
+  <data name="AddedToYourWallet" xml:space="preserve">
+    <value>se han agreado a tu Alcancía</value>
+  </data>
+  <data name="AddGeofence" xml:space="preserve">
+    <value>Agregar Geocerca</value>
+  </data>
+  <data name="AddGeoSegmentation" xml:space="preserve">
+    <value>Agregar Región de Alcance</value>
+  </data>
+  <data name="AddGeotrigger" xml:space="preserve">
+    <value>Agregar Geotrigger</value>
+  </data>
+  <data name="AddImageRemainder" xml:space="preserve">
+    <value>Para asignar una imagen a esta promo, ve a la pestaña "Imágenes"</value>
+  </data>
+  <data name="AddInvitationPoints" xml:space="preserve">
+    <value>Invitar Amigo</value>
+  </data>
+  <data name="AdDisplay" xml:space="preserve">
+    <value>Publicidad</value>
+  </data>
+  <data name="AdditionalNotes" xml:space="preserve">
+    <value>Notas Adicionales</value>
+  </data>
+  <data name="AddLink" xml:space="preserve">
+    <value>Agregar Link</value>
+  </data>
+  <data name="AddMembershipLevel" xml:space="preserve">
+    <value>Agregar Nivel de Lealtad</value>
+  </data>
+  <data name="AddMonetaryCreditCodes" xml:space="preserve">
+    <value>Crear Códigos de Pago</value>
+  </data>
+  <data name="AddPaymentMethod" xml:space="preserve">
+    <value>Agregar forma de pago</value>
+  </data>
+  <data name="AddPoints" xml:space="preserve">
+    <value>Agregar YOY</value>
+  </data>
+  <data name="AddProductClassification" xml:space="preserve">
+    <value>Agregar Clasificación de Products</value>
+  </data>
+  <data name="AddQuestion" xml:space="preserve">
+    <value>Agregar Pregunta</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Dirección</value>
+  </data>
+  <data name="AddressLength" xml:space="preserve">
+    <value>Direccion no debe tener más de 512 caracteres</value>
+  </data>
+  <data name="AddressRequired" xml:space="preserve">
+    <value>La dirección es requerida</value>
+  </data>
+  <data name="AddSavingRouteMember" xml:space="preserve">
+    <value>Agregar Miembro de Ruta</value>
+  </data>
+  <data name="AddSchedule" xml:space="preserve">
+    <value>Agregar horario de apertura</value>
+  </data>
+  <data name="AddSupporterTenant" xml:space="preserve">
+    <value>Agregar Comercio Participante</value>
+  </data>
+  <data name="AddTenantSupporter" xml:space="preserve">
+    <value>Agregar Comercio Participante</value>
+  </data>
+  <data name="AddUniqueCodesSeparatedByCommas" xml:space="preserve">
+    <value>Agrega la lista de códigos separados por coma(,)</value>
+  </data>
+  <data name="Admin" xml:space="preserve">
+    <value>Administrador</value>
+  </data>
+  <data name="AgeRange" xml:space="preserve">
+    <value>Rango de Edades</value>
+  </data>
+  <data name="Ago" xml:space="preserve">
+    <value>Hace</value>
+  </data>
+  <data name="Alert" xml:space="preserve">
+    <value>Alerta</value>
+  </data>
+  <data name="AllBranches" xml:space="preserve">
+    <value>Todos</value>
+  </data>
+  <data name="AllDays" xml:space="preserve">
+    <value>Todos los días</value>
+  </data>
+  <data name="AllLocations" xml:space="preserve">
+    <value>Todos los locales</value>
+  </data>
+  <data name="AllOffers" xml:space="preserve">
+    <value>Todas las Promos</value>
+  </data>
+  <data name="AllowProgrammedOrders" xml:space="preserve">
+    <value>Acepta Ordenes Programadas</value>
+  </data>
+  <data name="AllPurpose" xml:space="preserve">
+    <value>Todo Propósito</value>
+  </data>
+  <data name="AlreadyUsed" xml:space="preserve">
+    <value>Intento de Reuso</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Monto</value>
+  </data>
+  <data name="AnchorBusiness" xml:space="preserve">
+    <value>Comercio Ancla</value>
+  </data>
+  <data name="AndForOpeningYOYYouWon" xml:space="preserve">
+    <value>y te premiamos</value>
+  </data>
+  <data name="AndForUsingYOYYouWontIt" xml:space="preserve">
+    <value>y por haber usado YOY, te los ganaste</value>
+  </data>
+  <data name="AnimatedImage" xml:space="preserve">
+    <value>Imagen Animada</value>
+  </data>
+  <data name="AnyBranch" xml:space="preserve">
+    <value>En cualquiera</value>
+  </data>
+  <data name="Approved" xml:space="preserve">
+    <value>Aprobado</value>
+  </data>
+  <data name="April" xml:space="preserve">
+    <value>Abril</value>
+  </data>
+  <data name="AprilAbbr" xml:space="preserve">
+    <value>Abr</value>
+  </data>
+  <data name="AroundBranch" xml:space="preserve">
+    <value>Circundando la sucursal</value>
+  </data>
+  <data name="Assigned" xml:space="preserve">
+    <value>Asignado</value>
+  </data>
+  <data name="AssignedCodesCount" xml:space="preserve">
+    <value>Códigos Utilizados</value>
+  </data>
+  <data name="AssignedDate" xml:space="preserve">
+    <value>Fecha de asignación</value>
+  </data>
+  <data name="Attending" xml:space="preserve">
+    <value>Siendo Atendido</value>
+  </data>
+  <data name="AttractCustomers" xml:space="preserve">
+    <value>Generar Tráfico</value>
+  </data>
+  <data name="Audio" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+  <data name="AudioRecognition" xml:space="preserve">
+    <value>Reconocimiento de Audio</value>
+  </data>
+  <data name="August" xml:space="preserve">
+    <value>Agosto</value>
+  </data>
+  <data name="AugustAbbr" xml:space="preserve">
+    <value>Ago</value>
+  </data>
+  <data name="Automatic" xml:space="preserve">
+    <value>Automática</value>
+  </data>
+  <data name="AutomaticallyExtracted" xml:space="preserve">
+    <value>Extracción Automática</value>
+  </data>
+  <data name="AutomaticallyValidated" xml:space="preserve">
+    <value>Validado Automáticamente</value>
+  </data>
+  <data name="Available" xml:space="preserve">
+    <value>Disponible</value>
+  </data>
+  <data name="AvailableCodesCount" xml:space="preserve">
+    <value>Códigos Disponibles</value>
+  </data>
+  <data name="AvailableDeals" xml:space="preserve">
+    <value>promos disponibles</value>
+  </data>
+  <data name="AvailableForUsage" xml:space="preserve">
+    <value>DISPONIBLE PARA USO</value>
+  </data>
+  <data name="AvailableLoyaltyPoints" xml:space="preserve">
+    <value>YOYs Acumulados</value>
+  </data>
+  <data name="AvailableQuantity" xml:space="preserve">
+    <value>Cantidad Disponible</value>
+  </data>
+  <data name="AvailableRewards" xml:space="preserve">
+    <value>premios</value>
+  </data>
+  <data name="AverageTicket" xml:space="preserve">
+    <value>Ticket Promedio</value>
+  </data>
+  <data name="AverageTicketSetFailed" xml:space="preserve">
+    <value>No se ha podido asignar el ticket promedio, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="AverageTicketSuccessfullySet" xml:space="preserve">
+    <value>Se ha asignado el ticket promedio éxitosamente</value>
+  </data>
+  <data name="AverageTicketSuccessfullyUpdated" xml:space="preserve">
+    <value>Se ha actualizado el ticket promedio éxitosamente</value>
+  </data>
+  <data name="AverageTicketUpdateFailed" xml:space="preserve">
+    <value>No se ha podido actualizar el ticket promedio, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="Bancomer" xml:space="preserve">
+    <value>Bancomer</value>
+  </data>
+  <data name="BankAccountId" xml:space="preserve">
+    <value>Id de Cuenta Bancaria</value>
+  </data>
+  <data name="BankFee" xml:space="preserve">
+    <value>Comisión Bancaria</value>
+  </data>
+  <data name="Banned" xml:space="preserve">
+    <value>Baneado</value>
+  </data>
+  <data name="Banregio" xml:space="preserve">
+    <value>Banregio</value>
+  </data>
+  <data name="Barcode" xml:space="preserve">
+    <value>Código Barras</value>
+  </data>
+  <data name="Base" xml:space="preserve">
+    <value>Base</value>
+  </data>
+  <data name="BasedOnAverageTicket" xml:space="preserve">
+    <value>Basado en Ticket Prom.</value>
+  </data>
+  <data name="BasedOnFixedAmount" xml:space="preserve">
+    <value>Monto Fijo</value>
+  </data>
+  <data name="BasedOnIncentive" xml:space="preserve">
+    <value>Basado en Precio de Promo</value>
+  </data>
+  <data name="BasedOnPurchasedAmount" xml:space="preserve">
+    <value>Basado en Monto de Compra</value>
+  </data>
+  <data name="Basic" xml:space="preserve">
+    <value>Básico</value>
+  </data>
+  <data name="Beacon" xml:space="preserve">
+    <value>Beacon</value>
+  </data>
+  <data name="BeaconDeviceType" xml:space="preserve">
+    <value>Tipo de Transmisor</value>
+  </data>
+  <data name="BeginningDay" xml:space="preserve">
+    <value>Día Inicial</value>
+  </data>
+  <data name="BeginningHour" xml:space="preserve">
+    <value>Hora Inicial</value>
+  </data>
+  <data name="BeneficiaryEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="BeneficiaryName" xml:space="preserve">
+    <value>Nombre de Beneficiario</value>
+  </data>
+  <data name="BeneficiaryPhoneNumber" xml:space="preserve">
+    <value>Nº celular de Beneficiario</value>
+  </data>
+  <data name="BeneficiarySectionLabel" xml:space="preserve">
+    <value>Datos de Beneficiario</value>
+  </data>
+  <data name="BirthdayGift" xml:space="preserve">
+    <value>Obsequio</value>
+  </data>
+  <data name="Blocked" xml:space="preserve">
+    <value>Bloqueado</value>
+  </data>
+  <data name="Boolean" xml:space="preserve">
+    <value>Booleano</value>
+  </data>
+  <data name="BrainPortalDescription" xml:space="preserve">
+    <value>Portal web para administrar comercios de YOY</value>
+  </data>
+  <data name="Branch" xml:space="preserve">
+    <value>Sucursal</value>
+  </data>
+  <data name="BranchAddedSuccessfully" xml:space="preserve">
+    <value>La sucursal se ha agregado con éxito</value>
+  </data>
+  <data name="BranchAddFailed" xml:space="preserve">
+    <value>No se ha podido agregar la sucursal, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="BranchDetails" xml:space="preserve">
+    <value>Detalles de sucursal</value>
+  </data>
+  <data name="BranchEmailLength" xml:space="preserve">
+    <value>El email no debe tener más de 120 caracteres</value>
+  </data>
+  <data name="Branches" xml:space="preserve">
+    <value>Comercios</value>
+  </data>
+  <data name="BranchesManagement" xml:space="preserve">
+    <value>Administración de Sucursales</value>
+  </data>
+  <data name="BranchFailedCreation" xml:space="preserve">
+    <value>No se ha podido crear la sucursal, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="BranchHolder" xml:space="preserve">
+    <value>Sucursal Contenedora</value>
+  </data>
+  <data name="BranchNameLength" xml:space="preserve">
+    <value>El nombre no debe tener más de 60 caracteres</value>
+  </data>
+  <data name="BranchSuccessfullyCreated" xml:space="preserve">
+    <value>La sucursal se ha creado éxitosamente</value>
+  </data>
+  <data name="Brand" xml:space="preserve">
+    <value>Marca</value>
+  </data>
+  <data name="BrandHolder" xml:space="preserve">
+    <value>Centralizado por el Representante</value>
+  </data>
+  <data name="BrandHolderAndFrachises" xml:space="preserve">
+    <value>Representante y Franquicias</value>
+  </data>
+  <data name="BrandHolderPayer" xml:space="preserve">
+    <value>Representante de Marca</value>
+  </data>
+  <data name="Broadcaster" xml:space="preserve">
+    <value>Transmisor</value>
+  </data>
+  <data name="BroadcastingAndListings" xml:space="preserve">
+    <value>Listados y transmisión</value>
+  </data>
+  <data name="BroadcastingAndLoyalty" xml:space="preserve">
+    <value>Transmisión y Lealtad</value>
+  </data>
+  <data name="BroadcastingAndWalkInCheckIn" xml:space="preserve">
+    <value>Transmisión y CheckIn</value>
+  </data>
+  <data name="BroadcastingDetails" xml:space="preserve">
+    <value>Detalles de Transmisión</value>
+  </data>
+  <data name="BroadcastingDevice" xml:space="preserve">
+    <value>Transmisor</value>
+  </data>
+  <data name="BroadcastingDeviceAddedFailed" xml:space="preserve">
+    <value>No se ha podido agregar el transmisor, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="BroadcastingDeviceAddedSuccessfully" xml:space="preserve">
+    <value>El trasmisor se ha agregado con éxito</value>
+  </data>
+  <data name="BroadcastingDeviceCreatedSuccessfully" xml:space="preserve">
+    <value>El transmisor se ha creado con éxito</value>
+  </data>
+  <data name="BroadcastingDeviceCreationFailed" xml:space="preserve">
+    <value>No se ha podido crear el transmisor, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="BroadcastingDeviceDeleteFailed" xml:space="preserve">
+    <value>No se ha podido eliminar el transmisor, intenta de nuevo</value>
+  </data>
+  <data name="BroadcastingDeviceDeleteSuccessfully" xml:space="preserve">
+    <value>El transmisor se ha eliminado con éxito</value>
+  </data>
+  <data name="BroadcastingDeviceDetails" xml:space="preserve">
+    <value>Detalles de Transmisor</value>
+  </data>
+  <data name="BroadcastingDevices" xml:space="preserve">
+    <value>Transmisores</value>
+  </data>
+  <data name="BroadcastingDevicesManagement" xml:space="preserve">
+    <value>Administración de Transmisores</value>
+  </data>
+  <data name="BroadcastingExclusive" xml:space="preserve">
+    <value>Transmisión de Contenido</value>
+  </data>
+  <data name="BroadcastingMsg" xml:space="preserve">
+    <value>Mensaje de Sorpresa</value>
+  </data>
+  <data name="BroadcastingOnly" xml:space="preserve">
+    <value>Solo en transmisión</value>
+  </data>
+  <data name="BroadcastingProtocol" xml:space="preserve">
+    <value>Protocolo</value>
+  </data>
+  <data name="BroadcastingScreen" xml:space="preserve">
+    <value>Pantalla Transmisión</value>
+  </data>
+  <data name="BroadcastingTitle" xml:space="preserve">
+    <value>Título de Sorpresa</value>
+  </data>
+  <data name="BroadcastingURL" xml:space="preserve">
+    <value>BroadcastingURL</value>
+  </data>
+  <data name="Bronze" xml:space="preserve">
+    <value>Bronce</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Explorar...</value>
+  </data>
+  <data name="BTLContent" xml:space="preserve">
+    <value>Material Gráfico</value>
+  </data>
+  <data name="BTLContentCreationFailed" xml:space="preserve">
+    <value>No se ha podido crear el contenido gráfico, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="BTLContentDetails" xml:space="preserve">
+    <value>Detalles de Material Gráfico</value>
+  </data>
+  <data name="BTLContents" xml:space="preserve">
+    <value>Contenidos Gráficos</value>
+  </data>
+  <data name="BTLContentSuccefullyCreated" xml:space="preserve">
+    <value>El contenido gráfico se ha creado con éxito</value>
+  </data>
+  <data name="BTLContenttsManagement" xml:space="preserve">
+    <value>Administración de Contenido Gráfico</value>
+  </data>
+  <data name="Business" xml:space="preserve">
+    <value>Comercios</value>
+  </data>
+  <data name="BusinessStructure" xml:space="preserve">
+    <value>Estructura Comercial</value>
+  </data>
+  <data name="ByAmountBlock" xml:space="preserve">
+    <value>Por Bloque de Monto</value>
+  </data>
+  <data name="ByAmountBlockPurchaseFrequency" xml:space="preserve">
+    <value>Por Frecuencia y Bloque de Monto</value>
+  </data>
+  <data name="ByDirectAmount" xml:space="preserve">
+    <value>Por monto directo</value>
+  </data>
+  <data name="ByDoingCheckIn" xml:space="preserve">
+    <value>check-in</value>
+  </data>
+  <data name="ByJoiningOurClub" xml:space="preserve">
+    <value>por unirte al club</value>
+  </data>
+  <data name="ByOpeningYourWallet" xml:space="preserve">
+    <value>por abrir tu Alcancía</value>
+  </data>
+  <data name="ByPercentage" xml:space="preserve">
+    <value>Por porcentaje</value>
+  </data>
+  <data name="ByRegisteringYourVisit" xml:space="preserve">
+    <value>por tu check-in</value>
+  </data>
+  <data name="BySignUpYOY" xml:space="preserve">
+    <value>Por unirte a YOY</value>
+  </data>
+  <data name="ByTotalAmount" xml:space="preserve">
+    <value>Por Monto Total</value>
+  </data>
+  <data name="ByTotalAmountPurchaseFrequency" xml:space="preserve">
+    <value>Por Frecuencia y Monto Total</value>
+  </data>
+  <data name="Calendar" xml:space="preserve">
+    <value>Calendario</value>
+  </data>
+  <data name="CampaignDefaultContentMsg" xml:space="preserve">
+    <value>Msj de campañas</value>
+  </data>
+  <data name="CampaignDefaultTitleMsg" xml:space="preserve">
+    <value>Título de campañas</value>
+  </data>
+  <data name="CampaignFailedCreation" xml:space="preserve">
+    <value>No se ha podido crear la campaña, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="Campaigns" xml:space="preserve">
+    <value>Campañas</value>
+  </data>
+  <data name="CampaignSuccessfullyCreated" xml:space="preserve">
+    <value>La campaña se ha creado con éxito</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Cancelled" xml:space="preserve">
+    <value>Cancelado</value>
+  </data>
+  <data name="CantBeRegistered" xml:space="preserve">
+    <value>No puede ser registrado, NO lo aceptes</value>
+  </data>
+  <data name="CardinalGateway" xml:space="preserve">
+    <value>Cardinal</value>
+  </data>
+  <data name="CashbackDetail" xml:space="preserve">
+    <value>Detalle de cashback</value>
+  </data>
+  <data name="CashbackIncentive" xml:space="preserve">
+    <value>Incentivo de Cashback</value>
+  </data>
+  <data name="CashbackIncentives" xml:space="preserve">
+    <value>Incentivos de Cashback</value>
+  </data>
+  <data name="CashbackIncentivesManagement" xml:space="preserve">
+    <value>Administración de Incentivos de Cashback</value>
+  </data>
+  <data name="CashbackListMultipleCommerces" xml:space="preserve">
+    <value>Cashback de multiples comercios</value>
+  </data>
+  <data name="CashbackListSingleCommerce" xml:space="preserve">
+    <value>Cashback de comercio único</value>
+  </data>
+  <data name="Cashier" xml:space="preserve">
+    <value>En caja</value>
+  </data>
+  <data name="CashierApp" xml:space="preserve">
+    <value>Desde app del comercio</value>
+  </data>
+  <data name="Catalog" xml:space="preserve">
+    <value>Catálogo</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Categorías</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Categoría</value>
+  </data>
+  <data name="CategoryAddFailed" xml:space="preserve">
+    <value>No se ha podido agregar la categoría, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="CategoryAverageTicket" xml:space="preserve">
+    <value>Ticket Prom. de Categoría</value>
+  </data>
+  <data name="CategoryDescriptionLength" xml:space="preserve">
+    <value>Descripción no debe tener más de 300 caracteres</value>
+  </data>
+  <data name="CategoryNameLength" xml:space="preserve">
+    <value>Nombre no debe más de 60 caracteres</value>
+  </data>
+  <data name="CategorySuccessfullyAdded" xml:space="preserve">
+    <value>La categoría se ha agregado con éxito</value>
+  </data>
+  <data name="ChangeActiveState" xml:space="preserve">
+    <value>Cambiar Estado</value>
+  </data>
+  <data name="ChangeStatus" xml:space="preserve">
+    <value>Actualizar Estatus</value>
+  </data>
+  <data name="ChangeSyncedState" xml:space="preserve">
+    <value>Cambiar</value>
+  </data>
+  <data name="Charities" xml:space="preserve">
+    <value>Causas Benéficas</value>
+  </data>
+  <data name="CharitiesManagement" xml:space="preserve">
+    <value>Administración de Causas Benéficas</value>
+  </data>
+  <data name="Charity" xml:space="preserve">
+    <value>Causa Benéfica</value>
+  </data>
+  <data name="CharityCreationFailed" xml:space="preserve">
+    <value>No se ha podido crear la causa benéfica, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="CharityDescriptionExplanation" xml:space="preserve">
+    <value>Breve reseña de la iniciativa</value>
+  </data>
+  <data name="CharityDetails" xml:space="preserve">
+    <value>Detalles de Causa</value>
+  </data>
+  <data name="CharitySuccessfullyCreated" xml:space="preserve">
+    <value>La causa benéfica se ha creado con éxito</value>
+  </data>
+  <data name="CharityTenantCreationFailed" xml:space="preserve">
+    <value>No se ha podido agregar al comercio, revisa los datos y trata de nuevo</value>
+  </data>
+  <data name="CharityTenantDeleteFailed" xml:space="preserve">
+    <value>No se ha podido eliminar el comercio, trata de nuevo</value>
+  </data>
+  <data name="CharityTenantDeleteSuccessfully" xml:space="preserve">
+    <value>Se ha eliminado el comercio con éxito</value>
+  </data>
+  <data name="CharityTenantSuccessfullyCreated" xml:space="preserve">
+    <value>El comercio se ha agregado con éxito</value>
+  </data>
+  <data name="Chat" xml:space="preserve">
+    <value>Chat</value>
+  </data>
+  <data name="CheatingSuspect" xml:space="preserve">
+    <value>Comportamiento sospechoso</value>
+  </data>
+  <data name="Checkbox" xml:space="preserve">
+    <value>Checkbox</value>
+  </data>
+  <data name="CheckInEarnPointsMsg" xml:space="preserve">
+    <value>&lt;SponsoredCommerceName&gt; te da &lt;EarnedPoints&gt; YOYs por venir a &lt;VisitedCommerceName&gt;</value>
+  </data>
+  <data name="CheckInFailed" xml:space="preserve">
+    <value>Ocurrió un error, no se asignaron YOYs al cliente</value>
+  </data>
+  <data name="CheckInNotRegistered" xml:space="preserve">
+    <value>El cliente no ha acumulado YOYs</value>
+  </data>
+  <data name="CheckInPoints" xml:space="preserve">
+    <value>YOYs por Check-in</value>
+  </data>
+  <data name="CheckInRegistered" xml:space="preserve">
+    <value>El cliente ha recibido YOYs</value>
+  </data>
+  <data name="CheckInType" xml:space="preserve">
+    <value>Tipo de CheckIn</value>
+  </data>
+  <data name="CheckTicketManually" xml:space="preserve">
+    <value>Revisar Ticket Manualmente</value>
+  </data>
+  <data name="ChooseFile" xml:space="preserve">
+    <value>Seleccionar Archivo</value>
+  </data>
+  <data name="ChooseTenant" xml:space="preserve">
+    <value>Selecciona un comercio</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Ciudad</value>
+  </data>
+  <data name="CityBusiness" xml:space="preserve">
+    <value>Alcance en Ciudad</value>
+  </data>
+  <data name="CitySegmentation" xml:space="preserve">
+    <value>Nivel Cuidad</value>
+  </data>
+  <data name="ClaimByPhone" xml:space="preserve">
+    <value>Redención por teléfono</value>
+  </data>
+  <data name="ClaimDeal" xml:space="preserve">
+    <value>Uso de Promo</value>
+  </data>
+  <data name="ClaimedOffer" xml:space="preserve">
+    <value>Promo Canjeada</value>
+  </data>
+  <data name="ClaimFailed" xml:space="preserve">
+    <value>No se ha podido registrar el canje</value>
+  </data>
+  <data name="ClaimInStore" xml:space="preserve">
+    <value>Redención en local</value>
+  </data>
+  <data name="ClaimLocation" xml:space="preserve">
+    <value>Ubicación de Canje</value>
+  </data>
+  <data name="ClaimOnline" xml:space="preserve">
+    <value>Canje online</value>
+  </data>
+  <data name="ClaimPickup" xml:space="preserve">
+    <value>Canje en punto pickup</value>
+  </data>
+  <data name="ClaimPoints" xml:space="preserve">
+    <value>YOYs por Promo</value>
+  </data>
+  <data name="ClaimsPerUser" xml:space="preserve">
+    <value>Usos por Usuario</value>
+  </data>
+  <data name="ClaimSuccessMessage" xml:space="preserve">
+    <value>Se ha registrado el canje éxitosamente. Usa éste código para registrar la compra en el sistema facturación.</value>
+  </data>
+  <data name="ClaimThanks" xml:space="preserve">
+    <value>Gracias por usar una de nuestras promos</value>
+  </data>
+  <data name="Clean" xml:space="preserve">
+    <value>Limpiar</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Borrar</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Cerrar</value>
+  </data>
+  <data name="Closed" xml:space="preserve">
+    <value>Cerrado</value>
+  </data>
+  <data name="Club" xml:space="preserve">
+    <value>Club</value>
+  </data>
+  <data name="ClubBalanceTitle" xml:space="preserve">
+    <value>Ganas por ser parte de nuestro club</value>
+  </data>
+  <data name="ClubDescription" xml:space="preserve">
+    <value>Mira tus clubs de lealtad y sus beneficios</value>
+  </data>
+  <data name="ClubExtraBonusLabel" xml:space="preserve">
+    <value>Gana &lt;Bonus&gt; más en nuestro Club</value>
+  </data>
+  <data name="ClubTransferedPoints" xml:space="preserve">
+    <value>al Club de &lt;CommerceName&gt;</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Código</value>
+  </data>
+  <data name="CodeNotVisible" xml:space="preserve">
+    <value>Código Mostrado</value>
+  </data>
+  <data name="CodePlaceHolder" xml:space="preserve">
+    <value>Código para reclamar incentivo</value>
+  </data>
+  <data name="CodesAddFailed" xml:space="preserve">
+    <value>No se han podido crear los códigos, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="CodesQuantity" xml:space="preserve">
+    <value>Cantidad de Códigos</value>
+  </data>
+  <data name="CodesSuccessfullyAdded" xml:space="preserve">
+    <value>Se han creado los códigos éxitosamente</value>
+  </data>
+  <data name="CodeType" xml:space="preserve">
+    <value>Tipo de Código</value>
+  </data>
+  <data name="CollectedAmount" xml:space="preserve">
+    <value>Recolectado</value>
+  </data>
+  <data name="ColombianPeso" xml:space="preserve">
+    <value>Peso Colombiano</value>
+  </data>
+  <data name="ColombianPesoCurrency" xml:space="preserve">
+    <value>Peso Colombiano</value>
+  </data>
+  <data name="ColombianPesos" xml:space="preserve">
+    <value>Pesos Colombianos</value>
+  </data>
+  <data name="ColorPicker" xml:space="preserve">
+    <value>Selector de color</value>
+  </data>
+  <data name="CombineType" xml:space="preserve">
+    <value>Tipo de Acumulación</value>
+  </data>
+  <data name="ComeBackSoon" xml:space="preserve">
+    <value>Pronto regreso</value>
+  </data>
+  <data name="Commerce" xml:space="preserve">
+    <value>Comercio</value>
+  </data>
+  <data name="CommerceCategories" xml:space="preserve">
+    <value>Categorías Comerciales</value>
+  </data>
+  <data name="CommerceCategory" xml:space="preserve">
+    <value>Categoría Comercial</value>
+  </data>
+  <data name="CommerceCategoryDetails" xml:space="preserve">
+    <value>Detalles de Categoría Comercial</value>
+  </data>
+  <data name="CommerceClassification" xml:space="preserve">
+    <value>Clasificación Comercial</value>
+  </data>
+  <data name="CommerceContact" xml:space="preserve">
+    <value>Contacto Comercio</value>
+  </data>
+  <data name="CommerceDescriptionExplanation" xml:space="preserve">
+    <value>Breve reseña del comercio</value>
+  </data>
+  <data name="CommerceDetails" xml:space="preserve">
+    <value>Detalles de Comercio</value>
+  </data>
+  <data name="CommerceFailedCreation" xml:space="preserve">
+    <value>No se ha podido crear el comercio, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="CommerceIncentivesActionButtonLabel" xml:space="preserve">
+    <value>Ganar CA$HBACK</value>
+  </data>
+  <data name="CommerceLoyalty" xml:space="preserve">
+    <value>Club de fans</value>
+  </data>
+  <data name="CommerceLoyaltyProgram" xml:space="preserve">
+    <value>Club de fans</value>
+  </data>
+  <data name="CommerceMismatch" xml:space="preserve">
+    <value>Comercio No Corresponde</value>
+  </data>
+  <data name="CommercePointsApplied" xml:space="preserve">
+    <value>Aplicados al Comercio</value>
+  </data>
+  <data name="Commerces" xml:space="preserve">
+    <value>Comercios</value>
+  </data>
+  <data name="CommercesManagement" xml:space="preserve">
+    <value>Administración de Comercios</value>
+  </data>
+  <data name="CommerceSuccessfullyCreated" xml:space="preserve">
+    <value>El comercio se ha creado con éxito</value>
+  </data>
+  <data name="CommerceType" xml:space="preserve">
+    <value>Tipo de Comercio</value>
+  </data>
+  <data name="CommissionFeeType" xml:space="preserve">
+    <value>Cálculo de Comisión</value>
+  </data>
+  <data name="CommissionFeeTypeExplanation" xml:space="preserve">
+    <value>Determina la política que determine como se calcula la comisión</value>
+  </data>
+  <data name="CommissionFeeUpdated" xml:space="preserve">
+    <value>Monto de comisión se ha actualizado</value>
+  </data>
+  <data name="CommissionFeeValue" xml:space="preserve">
+    <value>Valor de Comisión</value>
+  </data>
+  <data name="CommissionPercentageFee" xml:space="preserve">
+    <value>Porcentage de comisión</value>
+  </data>
+  <data name="Completed" xml:space="preserve">
+    <value>Completado</value>
+  </data>
+  <data name="CompletedPayment" xml:space="preserve">
+    <value>Pago éxitoso</value>
+  </data>
+  <data name="Concept" xml:space="preserve">
+    <value>Concepto</value>
+  </data>
+  <data name="Condition" xml:space="preserve">
+    <value>Condición</value>
+  </data>
+  <data name="Conditions" xml:space="preserve">
+    <value>Términos y Condiciones</value>
+  </data>
+  <data name="ConditionsExplanation" xml:space="preserve">
+    <value>Términos y condiciones de la iniciativa</value>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>Configuración</value>
+  </data>
+  <data name="ConfirmationCodeRequired" xml:space="preserve">
+    <value>El código de confirmación es requerido</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirmar contraseña</value>
+  </data>
+  <data name="ConfirmPasswordRequired" xml:space="preserve">
+    <value>La confirmación de contraseña es requerida</value>
+  </data>
+  <data name="ConsumerCashbackPercentage" xml:space="preserve">
+    <value>% Cashback Comprador</value>
+  </data>
+  <data name="ContactEmail" xml:space="preserve">
+    <value>Email Contacto</value>
+  </data>
+  <data name="ContactEmailRequired" xml:space="preserve">
+    <value>El email de contacto es requerido</value>
+  </data>
+  <data name="ContactInfo" xml:space="preserve">
+    <value>Info Contacto</value>
+  </data>
+  <data name="ContactName" xml:space="preserve">
+    <value>Nombre Contacto</value>
+  </data>
+  <data name="ContactNameLength" xml:space="preserve">
+    <value>El nombre de contacto no debe tener mas de 128 caracteres</value>
+  </data>
+  <data name="ContactNameRequired" xml:space="preserve">
+    <value>El nombre de contacto es requerido</value>
+  </data>
+  <data name="ContactPhoneNumber" xml:space="preserve">
+    <value>Teléfono Contacto</value>
+  </data>
+  <data name="ContactPhoneNumberRequired" xml:space="preserve">
+    <value>El número de contacto es requerido</value>
+  </data>
+  <data name="ContactPhoneRequired" xml:space="preserve">
+    <value>El número de contacto es requerido</value>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>Contenido</value>
+  </data>
+  <data name="ContentItemSuccessfullyCreated" xml:space="preserve">
+    <value>El item se ha creado con éxito</value>
+  </data>
+  <data name="ContentManager" xml:space="preserve">
+    <value>Administrador de Contenido</value>
+  </data>
+  <data name="ContentManagerPortalDescription" xml:space="preserve">
+    <value>Portal web para la administración del contenido que se muestra dentro de YOY para un comercio</value>
+  </data>
+  <data name="ContentParamCreationFailed" xml:space="preserve">
+    <value>No se han podido definir los parámetros, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="ContentParamSuccessfullyCreated" xml:space="preserve">
+    <value>Los parámetros se han definido con éxito</value>
+  </data>
+  <data name="ContentParamSuccessfullyUpdated" xml:space="preserve">
+    <value>Los parámetros se han actualizado con éxito</value>
+  </data>
+  <data name="ContentParamUpdateFailed" xml:space="preserve">
+    <value>No se han podido actualizar los parámetros, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="Contents" xml:space="preserve">
+    <value>Contenidos</value>
+  </data>
+  <data name="ContentType" xml:space="preserve">
+    <value>Contenido</value>
+  </data>
+  <data name="ContentTypeRequired" xml:space="preserve">
+    <value>Tipo de contenido es requerido</value>
+  </data>
+  <data name="ContinousBroadcasting" xml:space="preserve">
+    <value>Transmisión Continua</value>
+  </data>
+  <data name="Continously" xml:space="preserve">
+    <value>Contínuamente</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Continuar</value>
+  </data>
+  <data name="Control" xml:space="preserve">
+    <value>Control</value>
+  </data>
+  <data name="ConvertPoints" xml:space="preserve">
+    <value>Convertir YOYs</value>
+  </data>
+  <data name="Coordinates" xml:space="preserve">
+    <value>Coordenadas</value>
+  </data>
+  <data name="Core" xml:space="preserve">
+    <value>Base</value>
+  </data>
+  <data name="CostaRicaColons" xml:space="preserve">
+    <value>Colones Costarricenses</value>
+  </data>
+  <data name="CostaRicanColonCurrency" xml:space="preserve">
+    <value>Colón Costarricense</value>
+  </data>
+  <data name="CotentItemCreationFailed" xml:space="preserve">
+    <value>No se ha podido crear el item, revisar los datos y vuelve a intentar</value>
+  </data>
+  <data name="Countdown" xml:space="preserve">
+    <value>Cuenta Regresiva</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>País</value>
+  </data>
+  <data name="CountryRequired" xml:space="preserve">
+    <value>El país es requerido</value>
+  </data>
+  <data name="CountrySegmentation" xml:space="preserve">
+    <value>Nivel Nacional</value>
+  </data>
+  <data name="Coupon" xml:space="preserve">
+    <value>Cupón</value>
+  </data>
+  <data name="CouponExplanation" xml:space="preserve">
+    <value>Un cupón no posee precio definido, aplica para descuentos porcentuales sobre montos de compra que no se conocen, por ejemplo: 20% de descuento en la uenta</value>
+  </data>
+  <data name="CRCBankIdRefName" xml:space="preserve">
+    <value>IBAN/Cuenta Cliente</value>
+  </data>
+  <data name="CRCBeneficiaryId" xml:space="preserve">
+    <value>Nº de cédula</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Crear</value>
+  </data>
+  <data name="CreateBranch" xml:space="preserve">
+    <value>Crear Sucursal</value>
+  </data>
+  <data name="CreateBroadcastingDevice" xml:space="preserve">
+    <value>Crear Transmisor</value>
+  </data>
+  <data name="CreateBTLContent" xml:space="preserve">
+    <value>Crear Contenido BTL</value>
+  </data>
+  <data name="CreateCharity" xml:space="preserve">
+    <value>Crear Causa</value>
+  </data>
+  <data name="CreateCommerce" xml:space="preserve">
+    <value>Crear Comercio</value>
+  </data>
+  <data name="CreateCommerceCategory" xml:space="preserve">
+    <value>Crear Categoría Comercial</value>
+  </data>
+  <data name="Created" xml:space="preserve">
+    <value>Creado</value>
+  </data>
+  <data name="CreateDeliveryMethod" xml:space="preserve">
+    <value>Crear Forma de Entrega</value>
+  </data>
+  <data name="CreateDepartment" xml:space="preserve">
+    <value>Crear Departamento</value>
+  </data>
+  <data name="CreateEmployee" xml:space="preserve">
+    <value>Crear Empleado</value>
+  </data>
+  <data name="CreateFranchisee" xml:space="preserve">
+    <value>Crear Franquiciado</value>
+  </data>
+  <data name="CreateGeotrigger" xml:space="preserve">
+    <value>Crear Geotrigger</value>
+  </data>
+  <data name="CreatePreference" xml:space="preserve">
+    <value>Crear Preferencia</value>
+  </data>
+  <data name="CreateProductCategory" xml:space="preserve">
+    <value>Crear Categoría de Producto</value>
+  </data>
+  <data name="CreateProductClassification" xml:space="preserve">
+    <value>Crear Clasificación de Producto</value>
+  </data>
+  <data name="CreatePurchaseIncentive" xml:space="preserve">
+    <value>Crear Incentivo de Compra</value>
+  </data>
+  <data name="CreateReward" xml:space="preserve">
+    <value>Crear Recompensa</value>
+  </data>
+  <data name="CreateSavingRoute" xml:space="preserve">
+    <value>Crear Ruta del Ahorro</value>
+  </data>
+  <data name="CreateSurvey" xml:space="preserve">
+    <value>Crear Encuesta</value>
+  </data>
+  <data name="CreationDate" xml:space="preserve">
+    <value>Fecha de Creación</value>
+  </data>
+  <data name="Credit" xml:space="preserve">
+    <value>Crédito</value>
+  </data>
+  <data name="Creditor" xml:space="preserve">
+    <value>Acreedor</value>
+  </data>
+  <data name="CrossSelling" xml:space="preserve">
+    <value>Venta Cruzada</value>
+  </data>
+  <data name="CurrencySymbol" xml:space="preserve">
+    <value>Moneda</value>
+  </data>
+  <data name="CurrencySymbolRequired" xml:space="preserve">
+    <value>La moneda es requerida</value>
+  </data>
+  <data name="CurrentState" xml:space="preserve">
+    <value>Estado Actual</value>
+  </data>
+  <data name="CustomAmounts" xml:space="preserve">
+    <value>Montos Ajustables</value>
+  </data>
+  <data name="CustomerInteraction" xml:space="preserve">
+    <value>Interacción con el cliente</value>
+  </data>
+  <data name="CustomerStatus" xml:space="preserve">
+    <value>Estado de Cliente</value>
+  </data>
+  <data name="CustomMsg" xml:space="preserve">
+    <value>Mensage Personalizado</value>
+  </data>
+  <data name="CustomParams" xml:space="preserve">
+    <value>Parámetros Personalizados</value>
+  </data>
+  <data name="Damaged" xml:space="preserve">
+    <value>Descompuesto</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Tablero</value>
+  </data>
+  <data name="DataRetrievedFailed" xml:space="preserve">
+    <value>No hemos podido recuperar la información, por favor intenta de nuevo</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="DateOfBirth" xml:space="preserve">
+    <value>Fecha de Nacimiento</value>
+  </data>
+  <data name="DateOfBirthRequired" xml:space="preserve">
+    <value>La fecha de nacimiento es requerida</value>
+  </data>
+  <data name="day" xml:space="preserve">
+    <value>día</value>
+  </data>
+  <data name="days" xml:space="preserve">
+    <value>días</value>
+  </data>
+  <data name="Deal" xml:space="preserve">
+    <value>Promo</value>
+  </data>
+  <data name="DealClaim" xml:space="preserve">
+    <value>Uso de Promo</value>
+  </data>
+  <data name="DealClaimMethod" xml:space="preserve">
+    <value>Método de Canje</value>
+  </data>
+  <data name="DealDeniel" xml:space="preserve">
+    <value>Promo Rechazada</value>
+  </data>
+  <data name="DealDetail" xml:space="preserve">
+    <value>Detalle de incentivo</value>
+  </data>
+  <data name="Deals" xml:space="preserve">
+    <value>Promos</value>
+  </data>
+  <data name="DealsByCategory" xml:space="preserve">
+    <value>Por Categoría</value>
+  </data>
+  <data name="DealsByCategoryDescription" xml:space="preserve">
+    <value>Mira las promos por categoría</value>
+  </data>
+  <data name="DealsByCommerce" xml:space="preserve">
+    <value>Por Comercio</value>
+  </data>
+  <data name="DealsByCommerceDescription" xml:space="preserve">
+    <value>Mira las promos por comercio</value>
+  </data>
+  <data name="DealsListMultipleCommerces" xml:space="preserve">
+    <value>Incentivos de multiples comercios</value>
+  </data>
+  <data name="DealsListSingleCommerce" xml:space="preserve">
+    <value>Incentivos de comercio único</value>
+  </data>
+  <data name="DealsManagement" xml:space="preserve">
+    <value>Administración de Promos</value>
+  </data>
+  <data name="DealType" xml:space="preserve">
+    <value>Forma de Canje</value>
+  </data>
+  <data name="Debit" xml:space="preserve">
+    <value>Débito</value>
+  </data>
+  <data name="Debtor" xml:space="preserve">
+    <value>Deudor</value>
+  </data>
+  <data name="December" xml:space="preserve">
+    <value>Diciembre</value>
+  </data>
+  <data name="DecemberAbbr" xml:space="preserve">
+    <value>Dic</value>
+  </data>
+  <data name="DefaultBeacon" xml:space="preserve">
+    <value>Transmisor Principal</value>
+  </data>
+  <data name="DefaultCharityConditions" xml:space="preserve">
+    <value>Restricciones podrían aplicar.
+Válido por periódo limitado.
+Debes hacer uso de las promos que apoyen ésta causa, y de esa forma se destinará un porcentaje de tu compra a apoyar.</value>
+  </data>
+  <data name="DefaultCharityRules" xml:space="preserve">
+    <value>Causa benéfica apoyada por YOY y sus marcas afiliadas.
+Es un apoyo sin fines de lucro.
+Al hacer efectiva una promo participante, apoyará económicamente la causa.
+Cualquier duda o consulta, escribe a info@clubyoy.com</value>
+  </data>
+  <data name="DefaultConditions" xml:space="preserve">
+    <value>Restricciones podrían aplicar.
+
+Válido por periódo limitado, si se utilza luego del tiempo de vencimiento, YOY no se responsabiliza.
+
+Las promos están sujetas a la disponibilidad de las mismas, y aplican hasta agotar existencia.
+
+Debes hacerla efectiva antes de que el tiempo para obtenerla se agote, en caso contrario no podrás hacerlo sin responsabilidad de YOY ni del comercio.</value>
+  </data>
+  <data name="DefaultConditionsExplanation" xml:space="preserve">
+    <value>Condiciones generales de promos</value>
+  </data>
+  <data name="DefaultConditionsText" xml:space="preserve">
+    <value>Condiciones para promos</value>
+  </data>
+  <data name="DefaultDealConditions" xml:space="preserve">
+    <value>- Restricciones podrían aplicar.
+- Válido por tiempo limitado.
+- Cada código es válido por 1 promo en caso de desear más puede canjearlo varias veces.
+- Para hacer efectiva esta promo debe comprarla y mostrar el código que se genere.
+- Debe hacerla efectiva antes de que el tiempo para obtenerla se agote, en caso contrario no podrá hacerlo sin responsabilidad de YOY ni del comercio.</value>
+  </data>
+  <data name="DefaultDealConditionsExplanation" xml:space="preserve">
+    <value>Términos y condiciones generales para uso de las promos</value>
+  </data>
+  <data name="DefaultDealConditionsText" xml:space="preserve">
+    <value>Términos y condiciones para promos</value>
+  </data>
+  <data name="DefaultDealRules" xml:space="preserve">
+    <value>- Antes de reclamar una promo, debe haberla reservado, para esto ingrese al detalle de la misma y presione "LO QUIERO"
+- Al momento ir a solicitarla, debe buscar la promo en la opción de RESERVADOS, en el menú del app, y dentro de ella presionar "VER CÓDIGO DE PROMO"
+- Esta promo debe ser aceptada por los locales participantes, en caso de no hacerlo, repórtelo a info@clubyoy.com, a través de nuestro call center, Facebook o Whatsapp
+- Debe respetar las restricciones, términos y condiciones que el comercio establece</value>
+  </data>
+  <data name="DefaultDealRulesExplanation" xml:space="preserve">
+    <value>Reglas generales para el uso de las promos</value>
+  </data>
+  <data name="DefaultDealRulesText" xml:space="preserve">
+    <value>Reglas para promos</value>
+  </data>
+  <data name="DefaultIncentiveClaimInstructions" xml:space="preserve">
+    <value>- Conserve su tiquete de compra
+- Utiliza el app móvil de YOY para validar su compra, para ellos debe realizar el proceso en el que envía capturas del tiquete
+- Una vez hecho eso, su compra será verificada por nuestro sistema y se le notificará el resultado</value>
+  </data>
+  <data name="DefaultIncentiveConditions" xml:space="preserve">
+    <value>- Restricciones podrían aplicar.
+- Válido por tiempo limitado.
+- Aplica únicamente para comprar realizadas en una hora y fecha hábil
+- Para hacer efectiva este incentivo debe validar la compra usando nuestro app para enviar el tiquete de compra
+- El cashback únicamente aplica si la fecha en que se realizó la compra era una fecha en la que el este incentivo estaba habilitado</value>
+  </data>
+  <data name="DefaultIncentiveConditionsExplanation" xml:space="preserve">
+    <value>Términos y condiciones generales para uso de los incentivos</value>
+  </data>
+  <data name="DefaultIncentiveConditionsText" xml:space="preserve">
+    <value>Términos y condiciones para incentivos</value>
+  </data>
+  <data name="DefaultIncentiveRules" xml:space="preserve">
+    <value>- Para validar una compra debe enviar por medio del app el ticket de compra
+- Para enviar el ticket de compra sólo debe realizar el proceso dentro del app con el que se captura el tiquete de compra
+- Asegúrese de que las capturas del tiquete sean claras y legible
+- En caso de enviar captura ilegibles, es su propia responsabilidad y podría rechazarse la compra
+- Una vez completado el proceso, su compra será verificada para determinar su validez
+- En caso de ser validada, se asignará a su Alcancía el CA$HBACK correspondiente
+- En caso de ser rechazada, se le informará el motivo
+- Para poder acceder al cashback, la fecha y hora de la compra debe ser una en la cuál el incentivo se encuentre habilitado
+- Debe respetar las restricciones, términos y condiciones que el comercio establece</value>
+  </data>
+  <data name="DefaultIncentiveRulesExplanation" xml:space="preserve">
+    <value>Reglas generales para el uso de los incentivos</value>
+  </data>
+  <data name="DefaultIncentiveRulesText" xml:space="preserve">
+    <value>Reglas para incentivos</value>
+  </data>
+  <data name="DefaultInStoreDealClaimInstructions" xml:space="preserve">
+    <value>1- Acerquese a uno de nuestros locales
+2- Cuando va a reclamar la promo, presione el botón "VER CÓDIGO DE PROMO"
+3- El cajero debe escanear o digitar el código
+4- Disfrute de su compra ☺
+** Validar su compra le da YOYs convertibles a dinero**</value>
+  </data>
+  <data name="DefaultInStoreDealClaimInstructionsExplanation" xml:space="preserve">
+    <value>Instrucciones generales para el canje de promos en puntos de venta</value>
+  </data>
+  <data name="DefaultInStoreDealClaimInstructionsText" xml:space="preserve">
+    <value>Instrucciones de canje en sucursales</value>
+  </data>
+  <data name="DefaultOnlineDealClaimInstructions" xml:space="preserve">
+    <value>1 - Cuando esté listo para comprar, presiona el botón "VER CÓDIGO DE PROMO"
+2- Copie el código que aparecerá presionándolo
+3- Presione el boton "USAR CÓDIGO ", esto lo enviará al sitio web donde podrá aplicar el código
+4- Compre usando el incentivo correspondiente
+5- Al momento de pagar, ingrese el código para obtener la promo
+** Validar su compra le da YOYs convertibles a dinero**</value>
+  </data>
+  <data name="DefaultOnlineDealClaimInstructionsExplanation" xml:space="preserve">
+    <value>Instrucciones generales para el canje de promos en línea</value>
+  </data>
+  <data name="DefaultOnlineDealClaimInstructionsText" xml:space="preserve">
+    <value>Instrucciones de canje en línea</value>
+  </data>
+  <data name="DefaultPhoneDealClaimInstructions" xml:space="preserve">
+    <value>1 - Cuando esté listo para comprar, presiona el botón "VER CÓDIGO"
+2- Copie el código que aparecerá
+3- Presione el boton "USAR CÓDIGO", esto permitirá realizar la llamada en la cual puede solicitar la promo
+4- Realice la compra de la promo correspondiente
+5- Mencione al operador que tiene un código de YOY, para que lo aplique en su compra
+** Validar su compra le da YOYs convertibles a dinero**</value>
+  </data>
+  <data name="DefaultPhoneDealClaimInstructionsExplanation" xml:space="preserve">
+    <value>Instrucciones generales para el canje de promos por teléfono</value>
+  </data>
+  <data name="DefaultPhoneDealClaimInstructionsText" xml:space="preserve">
+    <value>Instrucciones de canje por teléfono</value>
+  </data>
+  <data name="DefaultRules" xml:space="preserve">
+    <value>Utiliza el código para hacerla efectiva, lo que te permite acumular YOYs, con los cuales puedes ganar premios y regalos.
+
+Debe ser aceptada en las todos los locales de la región, de no ser así repórtalo a info@clubyoy.com</value>
+  </data>
+  <data name="DefaultRulesExplanation" xml:space="preserve">
+    <value>Reglas generales de promos</value>
+  </data>
+  <data name="DefaultRulesText" xml:space="preserve">
+    <value>Reglas para promos</value>
+  </data>
+  <data name="DefaultSavingRouteConditions" xml:space="preserve">
+    <value>- Ruta del tesoro de comercios afiliados, organizada por YOY
+- Debes hacer efectiva cada promo de los comercios con YOY
+- En caso de irregularidades, los premios de la ruta serán anulados para el usuario.
+- YOY se reserva el derecho de verificar la auténtica participación del usuario en la ruta
+Cualquier duda o consulta, escribe a info@clubyoy.com</value>
+  </data>
+  <data name="DefaultSavingRouteRules" xml:space="preserve">
+    <value>- Para completar la ruta debe hacer uno de al menos 1 promo de cada uno de los comercios participantes, de esa forma accederás a los premios de la ruta.
+- Restricciones podrían aplicar.
+- Válido por tiempo limitado.</value>
+  </data>
+  <data name="Definitions" xml:space="preserve">
+    <value>Definiciones</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="DeleteFailed" xml:space="preserve">
+    <value>No se ha podido eliminar el transmisor, intenta de nuevo</value>
+  </data>
+  <data name="DeliverMethodSuccessfullyCreated" xml:space="preserve">
+    <value>La forma de envío se ha creado con éxito</value>
+  </data>
+  <data name="DeliveryMethod" xml:space="preserve">
+    <value>Forma de Entrega</value>
+  </data>
+  <data name="DeliveryMethodAddedFailed" xml:space="preserve">
+    <value>No se ha podido agregar la forma de entrega, revisa los datos e intenta de nuevo</value>
+    <comment>N</comment>
+  </data>
+  <data name="DeliveryMethodAddedSuccessfully" xml:space="preserve">
+    <value>La forma de entrega se ha agregado con éxito</value>
+  </data>
+  <data name="DeliveryMethodDescriptionLength" xml:space="preserve">
+    <value>Descripción no debe tener más de 300 caracteres</value>
+  </data>
+  <data name="DeliveryMethodDetails" xml:space="preserve">
+    <value>Detalles de Forma de Entrega</value>
+  </data>
+  <data name="DeliveryMethodFailedCreation" xml:space="preserve">
+    <value>No se ha podido crear la forma de envío, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="DeliveryMethodNameLength" xml:space="preserve">
+    <value>Nombre no debe tener más de 30 caracteres</value>
+  </data>
+  <data name="DeliveryMethods" xml:space="preserve">
+    <value>Formas de Entrega</value>
+  </data>
+  <data name="DeliveryMethodsManagement" xml:space="preserve">
+    <value>Administración de Formas de Entrega</value>
+  </data>
+  <data name="Department" xml:space="preserve">
+    <value>Sección Comercial</value>
+  </data>
+  <data name="DepartmentDetails" xml:space="preserve">
+    <value>Detalles de Sección Comercial</value>
+  </data>
+  <data name="DepartmentFailedCreation" xml:space="preserve">
+    <value>No se ha podido crear la sección comercial, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="DepartmentHolder" xml:space="preserve">
+    <value>Departamento Contenedor</value>
+  </data>
+  <data name="Departments" xml:space="preserve">
+    <value>Secciones Comerciales</value>
+  </data>
+  <data name="DepartmentsManagement" xml:space="preserve">
+    <value>Administración de Secciones Comerciales</value>
+  </data>
+  <data name="DepartmentSuccessfullyCreated" xml:space="preserve">
+    <value>La sección comercial se ha creado con éxito</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="DescriptionRequired" xml:space="preserve">
+    <value>La descripción es requerida</value>
+  </data>
+  <data name="DescriptiveAddress" xml:space="preserve">
+    <value>Dirección</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Detalles</value>
+  </data>
+  <data name="DetailScreen" xml:space="preserve">
+    <value>Pantalla Detalle</value>
+  </data>
+  <data name="Detection" xml:space="preserve">
+    <value>Detección</value>
+  </data>
+  <data name="DeviceType" xml:space="preserve">
+    <value>Transmisor</value>
+  </data>
+  <data name="Diamond" xml:space="preserve">
+    <value>Diamante</value>
+  </data>
+  <data name="DiffTypeCumulative" xml:space="preserve">
+    <value>Acumulativo Distinto</value>
+  </data>
+  <data name="DirectlyGranted" xml:space="preserve">
+    <value>Puntos Otorgados Directamente</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Deshabilitados</value>
+  </data>
+  <data name="Disableds" xml:space="preserve">
+    <value>Deshabilitadas</value>
+  </data>
+  <data name="Discount" xml:space="preserve">
+    <value>Descuento</value>
+  </data>
+  <data name="DispatchPurchase" xml:space="preserve">
+    <value>Entrega de compra</value>
+  </data>
+  <data name="DispatchValidationRequested" xml:space="preserve">
+    <value>Solicitud de confirmación de entrega</value>
+  </data>
+  <data name="DisplayImage" xml:space="preserve">
+    <value>Imagen Principal</value>
+  </data>
+  <data name="DisplayInListing" xml:space="preserve">
+    <value>Mostrar en listados</value>
+  </data>
+  <data name="DisplayType" xml:space="preserve">
+    <value>Forma de Visualización</value>
+  </data>
+  <data name="Disputed" xml:space="preserve">
+    <value>En Disputa</value>
+  </data>
+  <data name="DistanceRange" xml:space="preserve">
+    <value>Rango Distancia</value>
+  </data>
+  <data name="District" xml:space="preserve">
+    <value>Distrito</value>
+  </data>
+  <data name="DoExpires" xml:space="preserve">
+    <value>Expira</value>
+  </data>
+  <data name="DoHaveDoneCheckIn" xml:space="preserve">
+    <value>Has hecho check-in en</value>
+  </data>
+  <data name="DontExpires" xml:space="preserve">
+    <value>No Expira</value>
+  </data>
+  <data name="Dropdown" xml:space="preserve">
+    <value>Dropdown</value>
+  </data>
+  <data name="Dweling" xml:space="preserve">
+    <value>Permaneciendo</value>
+  </data>
+  <data name="Each" xml:space="preserve">
+    <value>cada</value>
+  </data>
+  <data name="EarnedPointsModalTitle" xml:space="preserve">
+    <value>¡Ganaste YOYs!</value>
+  </data>
+  <data name="EarningType" xml:space="preserve">
+    <value>Tipo de Ganancia</value>
+  </data>
+  <data name="EarnPoints" xml:space="preserve">
+    <value>Puntos Ganados</value>
+  </data>
+  <data name="EarnPointsAlertText" xml:space="preserve">
+    <value>Compra usando esta promo y recibe YOYs convertibles a dinero</value>
+  </data>
+  <data name="EarnPointsEnabledActions" xml:space="preserve">
+    <value>Acciones Válidas para Acumular Puntos</value>
+  </data>
+  <data name="Eddystone" xml:space="preserve">
+    <value>EddyStone</value>
+  </data>
+  <data name="Elegible" xml:space="preserve">
+    <value>Eligible</value>
+  </data>
+  <data name="ElegibleByCoordinates" xml:space="preserve">
+    <value>Elegible por Ubicación</value>
+  </data>
+  <data name="ElegibleByDealType" xml:space="preserve">
+    <value>Elegible por Tipo</value>
+  </data>
+  <data name="ElegibleBySignal" xml:space="preserve">
+    <value>Elegible por Cercanía</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EmailBackgroundImg" xml:space="preserve">
+    <value>Fondo de Emails</value>
+  </data>
+  <data name="EmailConfirmed" xml:space="preserve">
+    <value>Cuenta Validada</value>
+  </data>
+  <data name="EmailInvalid" xml:space="preserve">
+    <value>El formato de email es inválido</value>
+  </data>
+  <data name="EmailLength" xml:space="preserve">
+    <value>El email debe tener entre 6 y 120 caracteres</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>El email es requerido</value>
+  </data>
+  <data name="EmailWrongFormat" xml:space="preserve">
+    <value>El formato del email es inválido</value>
+  </data>
+  <data name="Employee" xml:space="preserve">
+    <value>Empleado</value>
+  </data>
+  <data name="EmployeeDetails" xml:space="preserve">
+    <value>Detalles de Empleado</value>
+  </data>
+  <data name="EmployeeFailedCreation" xml:space="preserve">
+    <value>No se ha podido crear al empleado, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="Employees" xml:space="preserve">
+    <value>Empleados</value>
+  </data>
+  <data name="EmployeesManagement" xml:space="preserve">
+    <value>Administración de Empleados</value>
+  </data>
+  <data name="EmployeesPerformance" xml:space="preserve">
+    <value>Desempeño de Empleados</value>
+  </data>
+  <data name="EmployeeSuccessfullyCreated" xml:space="preserve">
+    <value>El empleado se ha creado con éxito</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>Habilitados</value>
+  </data>
+  <data name="EnabledActions" xml:space="preserve">
+    <value>Acciones Válidas</value>
+  </data>
+  <data name="EnabledMoneyAmounts" xml:space="preserve">
+    <value>Montos de Conversion a Dinero</value>
+  </data>
+  <data name="EnabledMoneyAmountsExplanation" xml:space="preserve">
+    <value>Montos de dinero que el usuario puede convertir, separe los montons por comas(,). -1 significa monto indefinido</value>
+  </data>
+  <data name="Enableds" xml:space="preserve">
+    <value>Habilitadas</value>
+  </data>
+  <data name="EndAge" xml:space="preserve">
+    <value>Edad Final</value>
+  </data>
+  <data name="EndDay" xml:space="preserve">
+    <value>Día Final</value>
+  </data>
+  <data name="EndHour" xml:space="preserve">
+    <value>Hora Final</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>Inglés</value>
+  </data>
+  <data name="Enter" xml:space="preserve">
+    <value>Entrar</value>
+  </data>
+  <data name="EnterEvaluationMonths" xml:space="preserve">
+    <value>Ingresa Meses de Evaluación</value>
+  </data>
+  <data name="Entering" xml:space="preserve">
+    <value>Entrando</value>
+  </data>
+  <data name="EnterMaxGeneratedPoints" xml:space="preserve">
+    <value>Ingresa Máximo de YOYs Generados</value>
+  </data>
+  <data name="EnterMaxPurchasesCount" xml:space="preserve">
+    <value>Ingresa Máxima Cantidad de Compras</value>
+  </data>
+  <data name="EnterMinGeneratedPoints" xml:space="preserve">
+    <value>Ingresa Mínimo de YOYs Generados</value>
+  </data>
+  <data name="EnterMinPurchasesCount" xml:space="preserve">
+    <value>Ingresa Mínima Cantidad de Compras</value>
+  </data>
+  <data name="EnterMonetaryConversionFactor" xml:space="preserve">
+    <value>Ingresa el Factor de Conversión de dinero</value>
+  </data>
+  <data name="EnterpriseAcc" xml:space="preserve">
+    <value>Cuenta empresarial</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="EvaluationMonths" xml:space="preserve">
+    <value>Meses de Evaluación</value>
+  </data>
+  <data name="Event" xml:space="preserve">
+    <value>Evento</value>
+  </data>
+  <data name="EventLog" xml:space="preserve">
+    <value>Bitácora</value>
+  </data>
+  <data name="ExactLocation" xml:space="preserve">
+    <value>Ubicación</value>
+  </data>
+  <data name="ExclusiveOffers" xml:space="preserve">
+    <value>Promos Exclusivas</value>
+  </data>
+  <data name="Executed" xml:space="preserve">
+    <value>Ejecutado</value>
+  </data>
+  <data name="Exiting" xml:space="preserve">
+    <value>Saliendo</value>
+  </data>
+  <data name="ExpirationDate" xml:space="preserve">
+    <value>Fecha de Expiración</value>
+  </data>
+  <data name="ExpirationDay" xml:space="preserve">
+    <value>Día de Finalización</value>
+  </data>
+  <data name="ExpirationHour" xml:space="preserve">
+    <value>Hora de Finalización</value>
+  </data>
+  <data name="Expired" xml:space="preserve">
+    <value>Expirado</value>
+  </data>
+  <data name="ExpiredConvertCode" xml:space="preserve">
+    <value>Código de pago EXPIRADO</value>
+  </data>
+  <data name="ExternalId" xml:space="preserve">
+    <value>Identificador</value>
+  </data>
+  <data name="ExternalServiceDetails" xml:space="preserve">
+    <value>Detalles Externos</value>
+  </data>
+  <data name="ExtraBonus" xml:space="preserve">
+    <value>Bono Cashback Adicional</value>
+  </data>
+  <data name="ExtraBonusAdditionType" xml:space="preserve">
+    <value>Tipo de Acreditación de Bono</value>
+  </data>
+  <data name="ExtraBonusAdditionTypeExplanation" xml:space="preserve">
+    <value>Se define si el bono será agregado a la Alcancía o si al Club, basado en ello será agregado</value>
+  </data>
+  <data name="ExtraBonusType" xml:space="preserve">
+    <value>Tipo de Bono Cashback Adicional</value>
+  </data>
+  <data name="ExtraBonusTypeExplanation" xml:space="preserve">
+    <value>Se puede definir un bono de cashback adicional como parte del beneficio para usar el incentivo, el bono corresponde al total de compra y el 100% se asigna al usuario</value>
+  </data>
+  <data name="Faces" xml:space="preserve">
+    <value>Caritas</value>
+  </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Fallado</value>
+  </data>
+  <data name="FailedDelivery" xml:space="preserve">
+    <value>Entrega fallida</value>
+  </data>
+  <data name="FailedPayment" xml:space="preserve">
+    <value>Pago fallido</value>
+  </data>
+  <data name="FailedRegistrationConvertCode" xml:space="preserve">
+    <value>El registro del código HA FALLADO, intenta nuevamente</value>
+  </data>
+  <data name="FailedRegistrationOnBusinessApp" xml:space="preserve">
+    <value>Registro en Comercio Fallido</value>
+  </data>
+  <data name="FastCountdown" xml:space="preserve">
+    <value>Cuenta Relámpago</value>
+  </data>
+  <data name="February" xml:space="preserve">
+    <value>Febrero</value>
+  </data>
+  <data name="FebruaryAbbr" xml:space="preserve">
+    <value>Feb</value>
+  </data>
+  <data name="FeeAmount" xml:space="preserve">
+    <value>Monto</value>
+  </data>
+  <data name="FeePerPromo" xml:space="preserve">
+    <value>Aporte por promo</value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>Femenino</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>Archivo</value>
+  </data>
+  <data name="Files" xml:space="preserve">
+    <value>Archivos</value>
+  </data>
+  <data name="FileSuccessfullyUploaded" xml:space="preserve">
+    <value>El archivo se ha guardado con éxito</value>
+  </data>
+  <data name="FileUploadFailed" xml:space="preserve">
+    <value>No se ha podido recuperar el archivo para guardarlo, intenta de nuevo</value>
+  </data>
+  <data name="FinantialDetails" xml:space="preserve">
+    <value>Detalles Financieros</value>
+  </data>
+  <data name="FirstNeed" xml:space="preserve">
+    <value>1era Necesidad</value>
+  </data>
+  <data name="FixedAmount" xml:space="preserve">
+    <value>Monto definido</value>
+  </data>
+  <data name="ForbiddenAccess" xml:space="preserve">
+    <value>Tu acceso a este portal no está permitido</value>
+  </data>
+  <data name="ForDealClaim" xml:space="preserve">
+    <value>por usar una promo</value>
+  </data>
+  <data name="ForgotMyPassword" xml:space="preserve">
+    <value>Olvidé mi contraseña</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Olvidé mi contraseña</value>
+  </data>
+  <data name="Format" xml:space="preserve">
+    <value>Formato</value>
+  </data>
+  <data name="ForUsingADeal" xml:space="preserve">
+    <value>por usar una promo</value>
+  </data>
+  <data name="ForYouSection" xml:space="preserve">
+    <value>Para tí</value>
+  </data>
+  <data name="FrachiseeSuccessfullyCreated" xml:space="preserve">
+    <value>El franquiciado se ha creado con éxito</value>
+  </data>
+  <data name="Franchisee" xml:space="preserve">
+    <value>Franquiciatario</value>
+  </data>
+  <data name="FranchiseeDetails" xml:space="preserve">
+    <value>Detalles de Franquiciado</value>
+  </data>
+  <data name="FranchiseeFailedCreation" xml:space="preserve">
+    <value>No se ha podido crear el franquiciado, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="Franchisees" xml:space="preserve">
+    <value>Franquiciados</value>
+  </data>
+  <data name="FranchiseesManagement" xml:space="preserve">
+    <value>Administración de Franquiciados</value>
+  </data>
+  <data name="Franchises" xml:space="preserve">
+    <value>Franquicias Distribuidas</value>
+  </data>
+  <data name="Free" xml:space="preserve">
+    <value>Gratis</value>
+  </data>
+  <data name="FreeService" xml:space="preserve">
+    <value>Servicio Gratuito</value>
+  </data>
+  <data name="Friday" xml:space="preserve">
+    <value>Viernes</value>
+  </data>
+  <data name="FridayAbbr" xml:space="preserve">
+    <value>Vie</value>
+  </data>
+  <data name="FriendlyName" xml:space="preserve">
+    <value>Nombre Púbico</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>de</value>
+  </data>
+  <data name="FromDay" xml:space="preserve">
+    <value>Día Inicial</value>
+  </data>
+  <data name="FromDayRequired" xml:space="preserve">
+    <value>Día Inicial es requerido</value>
+  </data>
+  <data name="FromHour" xml:space="preserve">
+    <value>Hora Inicial</value>
+  </data>
+  <data name="FromHourRequired" xml:space="preserve">
+    <value>Hora Inicial es requerida</value>
+  </data>
+  <data name="FromMinutes" xml:space="preserve">
+    <value>Minuto Inicial</value>
+  </data>
+  <data name="FullyCancelled" xml:space="preserve">
+    <value>Completamente cancelado</value>
+  </data>
+  <data name="FullyDelivered" xml:space="preserve">
+    <value>Completamente entregado</value>
+  </data>
+  <data name="FullyIssueRaised" xml:space="preserve">
+    <value>Con problemas en su totalidad</value>
+  </data>
+  <data name="FullyReturned" xml:space="preserve">
+    <value>Completamente devuelto</value>
+  </data>
+  <data name="FundingPending" xml:space="preserve">
+    <value>Esperando Pago del Comercio</value>
+  </data>
+  <data name="Game" xml:space="preserve">
+    <value>Juego</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Género</value>
+  </data>
+  <data name="GenderRequired" xml:space="preserve">
+    <value>El género es requerido</value>
+  </data>
+  <data name="GeneratedPoints" xml:space="preserve">
+    <value>Puntos Generados</value>
+  </data>
+  <data name="GeneratePaymentRequest" xml:space="preserve">
+    <value>Generar solicitud de pago</value>
+  </data>
+  <data name="GenerateTraffic" xml:space="preserve">
+    <value>Generar Tráfico</value>
+  </data>
+  <data name="GenericPurpose" xml:space="preserve">
+    <value>Propósito Genérico</value>
+  </data>
+  <data name="Geofence" xml:space="preserve">
+    <value>Geocerca</value>
+  </data>
+  <data name="GeofenceDetails" xml:space="preserve">
+    <value>Detalles de Geocerca</value>
+  </data>
+  <data name="GeofenceDwell" xml:space="preserve">
+    <value>Permanencia en geocerca</value>
+  </data>
+  <data name="GeofenceEnter" xml:space="preserve">
+    <value>Entrada a geocerca</value>
+  </data>
+  <data name="GeofenceExit" xml:space="preserve">
+    <value>Salida de geocerca</value>
+  </data>
+  <data name="GeofenceFailedCreation" xml:space="preserve">
+    <value>No se ha podido crear la geocerca, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="Geofences" xml:space="preserve">
+    <value>Geocercas</value>
+  </data>
+  <data name="GeofenceSuccessfullyCreated" xml:space="preserve">
+    <value>La geocerca se ha creado con éxito</value>
+  </data>
+  <data name="Geolocation" xml:space="preserve">
+    <value>Geolocalización</value>
+  </data>
+  <data name="GeoSegmentation" xml:space="preserve">
+    <value>Alcance Geográfico</value>
+  </data>
+  <data name="GeoSegmentations" xml:space="preserve">
+    <value>Alcances del Contenido</value>
+  </data>
+  <data name="GeoSegmentationTemporalLimitation" xml:space="preserve">
+    <value>Por ahora el tipo de alcance disponible, abarca todos los locales habilitados</value>
+  </data>
+  <data name="GeoSegmentationType" xml:space="preserve">
+    <value>Alcance</value>
+  </data>
+  <data name="GeoSegmentationTypeRequired" xml:space="preserve">
+    <value>Tipo de alcance es requerido</value>
+  </data>
+  <data name="GeotriggerDetails" xml:space="preserve">
+    <value>Detalles de Geotrigger</value>
+  </data>
+  <data name="GeotriggerFailedCreation" xml:space="preserve">
+    <value>No se ha podido crear el triggers, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="GeotriggerManagement" xml:space="preserve">
+    <value>Administración de Geotrigger</value>
+  </data>
+  <data name="Geotriggers" xml:space="preserve">
+    <value>Geotriggers</value>
+  </data>
+  <data name="GeotriggerSuccessfullyCreated" xml:space="preserve">
+    <value>El trigger se ha creado con éxito</value>
+  </data>
+  <data name="Geozone" xml:space="preserve">
+    <value>Geozona</value>
+  </data>
+  <data name="GeozoneDetails" xml:space="preserve">
+    <value>Detalles de Geozona</value>
+  </data>
+  <data name="GeozoneFailedCreation" xml:space="preserve">
+    <value>No se ha podido crear la geozona, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="GeozoneManagement" xml:space="preserve">
+    <value>Administración de Geozonas</value>
+  </data>
+  <data name="Geozones" xml:space="preserve">
+    <value>Geozonas</value>
+  </data>
+  <data name="GeozoneSuccessfullyCreated" xml:space="preserve">
+    <value>La geozone se ha creado con éxito</value>
+  </data>
+  <data name="GetCashbackForYourPurchases" xml:space="preserve">
+    <value>Ganá CA$HBACK al validar tu compra</value>
+  </data>
+  <data name="Gift" xml:space="preserve">
+    <value>Obsequio</value>
+  </data>
+  <data name="GiftCard" xml:space="preserve">
+    <value>Tarjeta de Regalo</value>
+  </data>
+  <data name="GoalAmount" xml:space="preserve">
+    <value>A recaudar</value>
+  </data>
+  <data name="Gold" xml:space="preserve">
+    <value>Oro</value>
+  </data>
+  <data name="GrantedByReceiptSubmission" xml:space="preserve">
+    <value>Compra Comprobada</value>
+  </data>
+  <data name="GrantReward" xml:space="preserve">
+    <value>Entregar Premio</value>
+  </data>
+  <data name="GuatemalanQuetzal" xml:space="preserve">
+    <value>Quetzal</value>
+  </data>
+  <data name="HasBranchHolder" xml:space="preserve">
+    <value>Contenido en Establecimiento</value>
+  </data>
+  <data name="Hidden" xml:space="preserve">
+    <value>Oculto</value>
+  </data>
+  <data name="HideMenu" xml:space="preserve">
+    <value>Ocultar Menú</value>
+  </data>
+  <data name="HighAccuracy" xml:space="preserve">
+    <value>Alta</value>
+  </data>
+  <data name="Holder" xml:space="preserve">
+    <value>Contenedor</value>
+  </data>
+  <data name="HonduranLempira" xml:space="preserve">
+    <value>Lempira</value>
+  </data>
+  <data name="hour" xml:space="preserve">
+    <value>hora</value>
+  </data>
+  <data name="HourDef" xml:space="preserve">
+    <value>Hora</value>
+  </data>
+  <data name="hours" xml:space="preserve">
+    <value>horas</value>
+  </data>
+  <data name="iBeacon" xml:space="preserve">
+    <value>iBeacon</value>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>Ícono</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Imagen</value>
+  </data>
+  <data name="ImageDeleteFailed" xml:space="preserve">
+    <value>No se ha podido eliminar la imagen, por favor intenta de nuevo</value>
+  </data>
+  <data name="ImagePicker" xml:space="preserve">
+    <value>Selector de imagen</value>
+  </data>
+  <data name="ImageRecognition" xml:space="preserve">
+    <value>Reconocimiento de Imágenes</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>Imágenes</value>
+  </data>
+  <data name="ImageSuccessfullyDeleted" xml:space="preserve">
+    <value>Imagen eliminada con éxito</value>
+  </data>
+  <data name="ImageSuccessfullyUploaded" xml:space="preserve">
+    <value>La imagen se ha guardado con éxito</value>
+  </data>
+  <data name="ImageType" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="ImageUploadFailed" xml:space="preserve">
+    <value>No se ha podido guardar la imagen, revísa los datos e intenta de nuevo</value>
+  </data>
+  <data name="Img" xml:space="preserve">
+    <value>Imagen</value>
+  </data>
+  <data name="ImmediatelyEnabled" xml:space="preserve">
+    <value>Habilitado al reservar</value>
+  </data>
+  <data name="InactiveState" xml:space="preserve">
+    <value>Inactivo</value>
+  </data>
+  <data name="Incentive" xml:space="preserve">
+    <value>Incentivo</value>
+  </data>
+  <data name="IncentiveClaimInstructions" xml:space="preserve">
+    <value>Envía el tiquete de tu compra, con ello validaremos tu compra y te asignaremos el CA$HBACK en tu Alcancía</value>
+  </data>
+  <data name="IncentiveCreationFailed" xml:space="preserve">
+    <value>No se ha podido crear el incentivo, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="IncentivePurchase" xml:space="preserve">
+    <value>Compra de Incentivo</value>
+  </data>
+  <data name="Incentives" xml:space="preserve">
+    <value>Incentivos</value>
+  </data>
+  <data name="IncentivesByCategory" xml:space="preserve">
+    <value>Por Categoría</value>
+  </data>
+  <data name="IncentivesByCategoryDescription" xml:space="preserve">
+    <value>Mira los incentivos por categoría</value>
+  </data>
+  <data name="IncentivesByCommerce" xml:space="preserve">
+    <value>Por Comercio</value>
+  </data>
+  <data name="IncentivesByCommerceDescription" xml:space="preserve">
+    <value>Mira los incentivos por comercio</value>
+  </data>
+  <data name="IncentiveSuccefullyCreated" xml:space="preserve">
+    <value>El incentivo se ha creado con éxito</value>
+  </data>
+  <data name="IncentiveValue" xml:space="preserve">
+    <value>Valor del Incentivo</value>
+  </data>
+  <data name="InClub" xml:space="preserve">
+    <value>En Club</value>
+  </data>
+  <data name="Incomplete" xml:space="preserve">
+    <value>Abierto</value>
+  </data>
+  <data name="IncompleteRequiredData" xml:space="preserve">
+    <value>La información requerida está incompleta</value>
+  </data>
+  <data name="IncompleteRoute" xml:space="preserve">
+    <value>No completada</value>
+  </data>
+  <data name="IncorrectPurchaseAmount" xml:space="preserve">
+    <value>Monto de Compra Incorrecto</value>
+  </data>
+  <data name="Indistinguish" xml:space="preserve">
+    <value>Indistinto</value>
+  </data>
+  <data name="IndividualAcc" xml:space="preserve">
+    <value>Cuenta personal</value>
+  </data>
+  <data name="InEnabledBranches" xml:space="preserve">
+    <value>En Sucursales Habilitadas</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Información</value>
+  </data>
+  <data name="InOpeningHours" xml:space="preserve">
+    <value>En horario de atención</value>
+  </data>
+  <data name="InPlace" xml:space="preserve">
+    <value>En el lugar</value>
+  </data>
+  <data name="InPurchasedItem" xml:space="preserve">
+    <value>En los items de compra</value>
+  </data>
+  <data name="InputText" xml:space="preserve">
+    <value>Campo de texto</value>
+  </data>
+  <data name="InquiryPhoneNumber" xml:space="preserve">
+    <value>Número de consultas</value>
+  </data>
+  <data name="InscriptionDate" xml:space="preserve">
+    <value>Fecha de Registro</value>
+  </data>
+  <data name="Insights" xml:space="preserve">
+    <value>Análisis</value>
+  </data>
+  <data name="InstalledOnTenant" xml:space="preserve">
+    <value>Instalado</value>
+  </data>
+  <data name="InstanceId" xml:space="preserve">
+    <value>InstanceId</value>
+  </data>
+  <data name="InstanceType" xml:space="preserve">
+    <value>Tipo de Instancia</value>
+  </data>
+  <data name="Instore" xml:space="preserve">
+    <value>En Locales</value>
+  </data>
+  <data name="InStoreClaimLocation" xml:space="preserve">
+    <value>En las sucursales habilitadas</value>
+  </data>
+  <data name="InStoreDeal" xml:space="preserve">
+    <value>En locales</value>
+  </data>
+  <data name="InStoreLocation" xml:space="preserve">
+    <value>Ubicación</value>
+  </data>
+  <data name="InStoreMarketing" xml:space="preserve">
+    <value>Local Marketing</value>
+  </data>
+  <data name="InStoreRefCodeLabel" xml:space="preserve">
+    <value>{RefCode} pide que agreguen este código a tu ticket</value>
+  </data>
+  <data name="InStoreViewCodeButton" xml:space="preserve">
+    <value>Usar Código</value>
+  </data>
+  <data name="InStoreViewCodeButtonMsg" xml:space="preserve">
+    <value>Muestra este código y pide que lo REGISTREN en YOY, recuerda que al reclamar tu promo con YOY, recibes CASHBACK</value>
+  </data>
+  <data name="InStoreViewCodeMsg" xml:space="preserve">
+    <value>VE al comercio y MUESTRA este código para pedir tu promo</value>
+  </data>
+  <data name="Instructions" xml:space="preserve">
+    <value>Instrucciones</value>
+  </data>
+  <data name="Interaction" xml:space="preserve">
+    <value>Interacción</value>
+  </data>
+  <data name="InternationalBusiness" xml:space="preserve">
+    <value>Empresa Transnacional</value>
+  </data>
+  <data name="InTicketInfoAccNumber" xml:space="preserve">
+    <value>Número de cuenta</value>
+  </data>
+  <data name="InTicketInfoAppName" xml:space="preserve">
+    <value>Nombre del app</value>
+  </data>
+  <data name="InTicketInfoRefCode" xml:space="preserve">
+    <value>Código de referencia</value>
+  </data>
+  <data name="Invalid" xml:space="preserve">
+    <value>Inválido</value>
+  </data>
+  <data name="InvalidAccountNumber" xml:space="preserve">
+    <value>Número de cuenta inválido</value>
+  </data>
+  <data name="InvalidAccountNumber1" xml:space="preserve">
+    <value>Número de cuenta inválido, no corresponde a ningún cliente</value>
+  </data>
+  <data name="InvalidaData" xml:space="preserve">
+    <value>Datos Inválidos</value>
+  </data>
+  <data name="InvalidClaim" xml:space="preserve">
+    <value>La promo que el cliente intenta reclamar ya ha sido reclamada o ya venció</value>
+  </data>
+  <data name="InvalidCode" xml:space="preserve">
+    <value>Código Inválido</value>
+  </data>
+  <data name="InvalidConfirmationCode" xml:space="preserve">
+    <value>Código de confirmación inválido, verifica que sea correcto y si lo es, pide al cliente que genere uno nuevo para proceder</value>
+  </data>
+  <data name="InvalidConvertCode" xml:space="preserve">
+    <value>Este código de pago es inexistente</value>
+  </data>
+  <data name="InvalidCredentials" xml:space="preserve">
+    <value>Credenciales inválidas</value>
+  </data>
+  <data name="InvalidData" xml:space="preserve">
+    <value>Datos inválidos, trata de nuevo</value>
+  </data>
+  <data name="InvalidDelete" xml:space="preserve">
+    <value>Eliminación Inválida</value>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>El email es inválid</value>
+  </data>
+  <data name="InvalidEmailFormat" xml:space="preserve">
+    <value>Formato inválido de email</value>
+  </data>
+  <data name="InvalidInvitationCode" xml:space="preserve">
+    <value>Lo sentimos, el código de invitación es inválido</value>
+  </data>
+  <data name="InvalidLoginAttempt" xml:space="preserve">
+    <value>Credenciales inválidas</value>
+  </data>
+  <data name="InvalidLoginAttempt1" xml:space="preserve">
+    <value>Inicio de sesión inválido</value>
+  </data>
+  <data name="InvalidOperator" xml:space="preserve">
+    <value>Sesión inválida, el usuario registrado no existe o no tiene permisos</value>
+  </data>
+  <data name="InvalidPayload" xml:space="preserve">
+    <value>Datos recibidos inválidos</value>
+  </data>
+  <data name="InvalidPoints" xml:space="preserve">
+    <value>Puntos Invalidados</value>
+  </data>
+  <data name="InvalidUpdate" xml:space="preserve">
+    <value>Actualización Inválida</value>
+  </data>
+  <data name="InvalidUser" xml:space="preserve">
+    <value>La cuenta del cliente es inválida</value>
+  </data>
+  <data name="Invalid_Grant" xml:space="preserve">
+    <value>Email o contraseña incorrecta, intenta de nuevo</value>
+  </data>
+  <data name="InvitationAccepted" xml:space="preserve">
+    <value>Invitación Aceptada</value>
+  </data>
+  <data name="InvitedRouteMembers" xml:space="preserve">
+    <value>Miembros Invitados</value>
+  </data>
+  <data name="InvitedTenants" xml:space="preserve">
+    <value>Comercios Invitados</value>
+  </data>
+  <data name="Invoice" xml:space="preserve">
+    <value>Factura</value>
+  </data>
+  <data name="InWallet" xml:space="preserve">
+    <value>En Alcancía</value>
+  </data>
+  <data name="iOTDevice" xml:space="preserve">
+    <value>Dispositivo IOT</value>
+  </data>
+  <data name="IsExclusive" xml:space="preserve">
+    <value>Exclusivo de YOY</value>
+  </data>
+  <data name="IsExclusiveExplanation" xml:space="preserve">
+    <value>Es una promo que sólo está disponible con YOY</value>
+  </data>
+  <data name="IsFranchise" xml:space="preserve">
+    <value>Es Franquicia</value>
+  </data>
+  <data name="IsOpen" xml:space="preserve">
+    <value>Abierto</value>
+  </data>
+  <data name="IsSavingRoutePrize" xml:space="preserve">
+    <value>Premio Exclusivo</value>
+  </data>
+  <data name="IssueOpened" xml:space="preserve">
+    <value>Tu reporte ha sido recibido, lo revisaremos y te ayudaremos a resolverlo</value>
+  </data>
+  <data name="IssueReportFailed" xml:space="preserve">
+    <value>Lo sentimos, ha ocurrido un error y el reporte no se ha creado. Trata de nuevo</value>
+  </data>
+  <data name="IssuesReported" xml:space="preserve">
+    <value>Problemas reportados</value>
+  </data>
+  <data name="IsSystemCategory" xml:space="preserve">
+    <value>Cat. de Sistema</value>
+  </data>
+  <data name="ItemsPricesGreater" xml:space="preserve">
+    <value>Precio de items es mayor</value>
+  </data>
+  <data name="IWantIt" xml:space="preserve">
+    <value>LO QUIERO</value>
+  </data>
+  <data name="January" xml:space="preserve">
+    <value>Enero</value>
+  </data>
+  <data name="JanuaryAbbr" xml:space="preserve">
+    <value>Ene</value>
+  </data>
+  <data name="JoinWelcomePoints" xml:space="preserve">
+    <value>YOYs de bienvenida</value>
+  </data>
+  <data name="July" xml:space="preserve">
+    <value>Julio</value>
+  </data>
+  <data name="JulyAbbr" xml:space="preserve">
+    <value>Jul</value>
+  </data>
+  <data name="June" xml:space="preserve">
+    <value>Junio</value>
+  </data>
+  <data name="JuneAbbr" xml:space="preserve">
+    <value>Jun</value>
+  </data>
+  <data name="JustWon" xml:space="preserve">
+    <value>acaba de ganar</value>
+  </data>
+  <data name="KeepLevelHint" xml:space="preserve">
+    <value>Mantén tu nivel completando estas metas:</value>
+  </data>
+  <data name="Keywords" xml:space="preserve">
+    <value>Palabras Clave</value>
+  </data>
+  <data name="KeywordsExplanation" xml:space="preserve">
+    <value>Palabras que identifiquen al comercio</value>
+  </data>
+  <data name="Label" xml:space="preserve">
+    <value>Etiqueta</value>
+  </data>
+  <data name="LandingImg" xml:space="preserve">
+    <value>Portada</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Lenguage</value>
+  </data>
+  <data name="LastMonth" xml:space="preserve">
+    <value>Mes Prev.</value>
+  </data>
+  <data name="Lastname" xml:space="preserve">
+    <value>Apellido</value>
+  </data>
+  <data name="LastnameLength" xml:space="preserve">
+    <value>El apellido no debe tener más de 30 caracteres</value>
+  </data>
+  <data name="LastnameRequired" xml:space="preserve">
+    <value>El apellido es requerido</value>
+  </data>
+  <data name="LastVisitToDate" xml:space="preserve">
+    <value>Ultima Visita</value>
+  </data>
+  <data name="LatestState" xml:space="preserve">
+    <value>Última Condición</value>
+  </data>
+  <data name="LatestStatus" xml:space="preserve">
+    <value>Último Status</value>
+  </data>
+  <data name="Latitude" xml:space="preserve">
+    <value>Latitud</value>
+  </data>
+  <data name="LegalId" xml:space="preserve">
+    <value>Cédula jurídica</value>
+  </data>
+  <data name="LegalName" xml:space="preserve">
+    <value>Nombre Legal</value>
+  </data>
+  <data name="LegalNameInReceipt" xml:space="preserve">
+    <value>Nombre Legal en Ticket</value>
+  </data>
+  <data name="LessThan" xml:space="preserve">
+    <value>Menos de</value>
+  </data>
+  <data name="LessThanMinimumWithdrawAmount" xml:space="preserve">
+    <value>El monto que solicitas retirar es menor que el mínimo de retiro, por favor aumenta el monto e intenta de nuevo</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>Nivel</value>
+  </data>
+  <data name="Link" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="LinkDetails" xml:space="preserve">
+    <value>Detalles de Enlace</value>
+  </data>
+  <data name="ListingsOnly" xml:space="preserve">
+    <value>Solo en listados</value>
+  </data>
+  <data name="ListScreen" xml:space="preserve">
+    <value>Pantalla Listado</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Cargando</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Ubicación</value>
+  </data>
+  <data name="LocationAddress" xml:space="preserve">
+    <value>Ubicación Territorial</value>
+  </data>
+  <data name="LocationAddressRequired" xml:space="preserve">
+    <value>Debes seleccionar provincia, cantón y distrito</value>
+  </data>
+  <data name="LoggedOut" xml:space="preserve">
+    <value>Sesión cerrada éxitosamente</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Iniciar Sesión</value>
+  </data>
+  <data name="Logo" xml:space="preserve">
+    <value>Logo</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Cerrar Sesión</value>
+  </data>
+  <data name="LogoutValidation" xml:space="preserve">
+    <value>¿Listo para salir del portal?</value>
+  </data>
+  <data name="LogoutValidationMsg" xml:space="preserve">
+    <value>Selecciona "Cerrar Sesión" si deseas cerrar tu sesión</value>
+  </data>
+  <data name="LogsCount" xml:space="preserve">
+    <value>Registros Recibidos</value>
+  </data>
+  <data name="Longitude" xml:space="preserve">
+    <value>Longitud</value>
+  </data>
+  <data name="LowAccuracy" xml:space="preserve">
+    <value>Baja</value>
+  </data>
+  <data name="Loyalty" xml:space="preserve">
+    <value>Lealtad</value>
+  </data>
+  <data name="LoyaltyCashBackPercentage" xml:space="preserve">
+    <value>Porcentage de retorno(&lt;100)</value>
+  </data>
+  <data name="LoyaltyCashBackPercentageExplanation" xml:space="preserve">
+    <value>Porcentage del monto de compra que se devuelve al usuario en puntos</value>
+  </data>
+  <data name="LoyaltyCheckInEarnPointsMsg" xml:space="preserve">
+    <value>Ganaste &lt;EarnedPoints&gt; YOYs por comprar en &lt;VisitedCommerceName&gt;</value>
+  </data>
+  <data name="LoyaltyCheckInEarnPointsMsg1" xml:space="preserve">
+    <value>Ganaste &lt;EarnedPoints&gt; YOYs por comprar en &lt;VisitedCommerceName&gt;</value>
+  </data>
+  <data name="LoyaltyClubCashierCheckIn" xml:space="preserve">
+    <value>Programa de Lealtad por compra</value>
+  </data>
+  <data name="LoyaltyClubWalkInCheckIn" xml:space="preserve">
+    <value>Programa de Lealtad por visita</value>
+  </data>
+  <data name="LoyaltyExclusive" xml:space="preserve">
+    <value>Programa de Lealtad</value>
+  </data>
+  <data name="LoyaltyInfo" xml:space="preserve">
+    <value>Info de Lealtad</value>
+  </data>
+  <data name="LoyaltyLevel" xml:space="preserve">
+    <value>Nivel de Lealtad</value>
+  </data>
+  <data name="LoyaltyPoints" xml:space="preserve">
+    <value>YOYs</value>
+  </data>
+  <data name="LoyaltyPointsAtCommerce" xml:space="preserve">
+    <value>YOYs en comercio</value>
+  </data>
+  <data name="LoyaltyPointsName" xml:space="preserve">
+    <value>YOYs</value>
+  </data>
+  <data name="LoyaltyPointsUsed" xml:space="preserve">
+    <value>YOYs Gastados</value>
+  </data>
+  <data name="LoyaltyPointsValue" xml:space="preserve">
+    <value>Mínimo de YOYs Acumulados</value>
+  </data>
+  <data name="LoyaltyProgramEnabled" xml:space="preserve">
+    <value>Programa de Lealtad</value>
+  </data>
+  <data name="LoyaltyProgramFee" xml:space="preserve">
+    <value>Pago Cliente Frecuente</value>
+  </data>
+  <data name="LoyaltyProgramPlan" xml:space="preserve">
+    <value>Programa de Lealtad</value>
+  </data>
+  <data name="LoyaltyThanks" xml:space="preserve">
+    <value>¡gracias por tu lealtad!</value>
+  </data>
+  <data name="MainDetails" xml:space="preserve">
+    <value>Detalles Principales</value>
+  </data>
+  <data name="Major" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Masculino</value>
+  </data>
+  <data name="Manage" xml:space="preserve">
+    <value>Administrar</value>
+  </data>
+  <data name="Manual" xml:space="preserve">
+    <value>Manual</value>
+  </data>
+  <data name="ManuallyExtracted" xml:space="preserve">
+    <value>Extracción Manual</value>
+  </data>
+  <data name="ManuallyValidated" xml:space="preserve">
+    <value>Validado Manualmente</value>
+  </data>
+  <data name="March" xml:space="preserve">
+    <value>Marzo</value>
+  </data>
+  <data name="MarchAbbr" xml:space="preserve">
+    <value>Mar</value>
+  </data>
+  <data name="Marketing" xml:space="preserve">
+    <value>Mercado</value>
+  </data>
+  <data name="Match" xml:space="preserve">
+    <value>Coinciden</value>
+  </data>
+  <data name="MaxCashbackAmount" xml:space="preserve">
+    <value>Máx. Monto de Cashback</value>
+  </data>
+  <data name="MaxClaimDate" xml:space="preserve">
+    <value>Día máximo para canjear</value>
+  </data>
+  <data name="MaxGeneratedPoints" xml:space="preserve">
+    <value>Máximo YOYs Generados</value>
+  </data>
+  <data name="MaxItemsPerDelivery" xml:space="preserve">
+    <value>Máx. Productos por Envío</value>
+  </data>
+  <data name="MaxPurchasesCount" xml:space="preserve">
+    <value>Máxima Cantidad de Compras</value>
+  </data>
+  <data name="MaxRewardRedemptions" xml:space="preserve">
+    <value>Máximo Canje de Beneficios</value>
+  </data>
+  <data name="May" xml:space="preserve">
+    <value>Mayo</value>
+  </data>
+  <data name="MayAbbr" xml:space="preserve">
+    <value>May</value>
+  </data>
+  <data name="MediaInteraction" xml:space="preserve">
+    <value>Interacción de medios</value>
+  </data>
+  <data name="MediaMarketing" xml:space="preserve">
+    <value>Mercadeo de medios</value>
+  </data>
+  <data name="MediumAccuracy" xml:space="preserve">
+    <value>Media</value>
+  </data>
+  <data name="MemberInvited" xml:space="preserve">
+    <value>Invitado a Participar</value>
+  </data>
+  <data name="MembersEnroll" xml:space="preserve">
+    <value>Registro de Miembros</value>
+  </data>
+  <data name="MembershipLevel" xml:space="preserve">
+    <value>Nivel de Lealtad</value>
+  </data>
+  <data name="MembershipLevelDetails" xml:space="preserve">
+    <value>Detalles de Nivel de Lealtad</value>
+  </data>
+  <data name="MembershipLevelFailedCreation" xml:space="preserve">
+    <value>No se ha podido agregar el nivel de lealtad, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="MembershipLevelManagement" xml:space="preserve">
+    <value>Administración de Niveles de Lealtad</value>
+  </data>
+  <data name="MembershipLevels" xml:space="preserve">
+    <value>Niveles de Lealtad</value>
+  </data>
+  <data name="MembershipLevelSuccessfullyCreated" xml:space="preserve">
+    <value>El nivel de lealtad se ha creado con éxito</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Menú</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Mensaje</value>
+  </data>
+  <data name="Meters" xml:space="preserve">
+    <value>Metros</value>
+  </data>
+  <data name="MexicanPeso" xml:space="preserve">
+    <value>Peso Mexicano</value>
+  </data>
+  <data name="MexicanPesoCurrency" xml:space="preserve">
+    <value>Peso Mexicano</value>
+  </data>
+  <data name="MexicanPesos" xml:space="preserve">
+    <value>Pesos Mexicano</value>
+  </data>
+  <data name="Microlocation" xml:space="preserve">
+    <value>Microlocalización</value>
+  </data>
+  <data name="MimeType" xml:space="preserve">
+    <value>Formato</value>
+  </data>
+  <data name="MinCommisionAmount" xml:space="preserve">
+    <value>Monto mínimo de comisión</value>
+  </data>
+  <data name="MinCommissionFeeExplanation" xml:space="preserve">
+    <value>Este es el monto mínimi que se va a cobrar al comercio por cada uso de este incentivo, aborda el caso en que el usuario no suba el ticket</value>
+  </data>
+  <data name="MinGeneratedPoints" xml:space="preserve">
+    <value>Mínimo YOYs Generados</value>
+  </data>
+  <data name="MinMembershipLevel" xml:space="preserve">
+    <value>Nivel de Lealtad Mínimo</value>
+  </data>
+  <data name="MinMembershipLevelExplanation" xml:space="preserve">
+    <value>El usuario debe tener al menos el nivel de lealtad seleccionado para poder acceder el premio</value>
+  </data>
+  <data name="Minor" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="MinPurchasedAmount" xml:space="preserve">
+    <value>Monto Mín. de Compra</value>
+  </data>
+  <data name="MinPurchasesCount" xml:space="preserve">
+    <value>Mínima Cantidad de Compras</value>
+  </data>
+  <data name="MinRequiredPurchases" xml:space="preserve">
+    <value>Mínimo de Compras</value>
+  </data>
+  <data name="MinRetriggeredTime" xml:space="preserve">
+    <value>Tiempo entre eventos</value>
+  </data>
+  <data name="MinRetriggeredTimeExplanation" xml:space="preserve">
+    <value>Tiempo minimo entre un geodisparador y el siguiente, con e fin de no inundar al usuario con información constantemente</value>
+  </data>
+  <data name="mins" xml:space="preserve">
+    <value>mins</value>
+  </data>
+  <data name="MinsToRedeem" xml:space="preserve">
+    <value>Tiempo para Aceptar</value>
+  </data>
+  <data name="minute" xml:space="preserve">
+    <value>minuto</value>
+  </data>
+  <data name="minutes" xml:space="preserve">
+    <value>minutes</value>
+  </data>
+  <data name="Miscellaneous" xml:space="preserve">
+    <value>Genérica</value>
+  </data>
+  <data name="MiscellaneousDetails" xml:space="preserve">
+    <value>Detalles Secundarios</value>
+  </data>
+  <data name="MobilePhoneNumber" xml:space="preserve">
+    <value>Número telefónico</value>
+  </data>
+  <data name="MobilePhoneNumberConfirmed" xml:space="preserve">
+    <value>Número telefónico confirmado</value>
+  </data>
+  <data name="MobilePhoneNumberRequired" xml:space="preserve">
+    <value>El número telefónico es requerido</value>
+  </data>
+  <data name="Monday" xml:space="preserve">
+    <value>Lunes</value>
+  </data>
+  <data name="MondayAbbr" xml:space="preserve">
+    <value>Lun</value>
+  </data>
+  <data name="MonetaryConversionFactor" xml:space="preserve">
+    <value>Factor de Conversión a dinero ( &lt;1 )</value>
+  </data>
+  <data name="MonetaryCreditCode" xml:space="preserve">
+    <value>Código de Pago</value>
+  </data>
+  <data name="MonetaryCreditCodes" xml:space="preserve">
+    <value>Códigos de Pago</value>
+  </data>
+  <data name="MonetaryCreditCodesManagement" xml:space="preserve">
+    <value>Administración de Códigos de Pago</value>
+  </data>
+  <data name="MonetaryFeeLog" xml:space="preserve">
+    <value>Movimiento de Dinero</value>
+  </data>
+  <data name="MonetaryFeeLogDetails" xml:space="preserve">
+    <value>Administrar Movimiento de Dinero</value>
+  </data>
+  <data name="MonetaryFeeLogs" xml:space="preserve">
+    <value>Movimientos de Dinero</value>
+  </data>
+  <data name="MonetaryFeeLogsManagement" xml:space="preserve">
+    <value>Administrar Movimientos de Dinero</value>
+  </data>
+  <data name="MoneyConversionFactorExplanation" xml:space="preserve">
+    <value>Factor por el que se multiplica el cálculo de los YOYs necesarios para recibir un monto de pago, debe ser menor o igual que 1. Cuanto menor sea el nivel, menor este factor</value>
+  </data>
+  <data name="MoneyConversionLog" xml:space="preserve">
+    <value>Pago con YOYs</value>
+  </data>
+  <data name="MoneyConversionLogDetails" xml:space="preserve">
+    <value>Detalles de Pago con YOYs</value>
+  </data>
+  <data name="MoneyConversionLogs" xml:space="preserve">
+    <value>Pagos con YOYs</value>
+  </data>
+  <data name="MoneyConversionLogsManagement" xml:space="preserve">
+    <value>Administrar Pagos Recibidos</value>
+  </data>
+  <data name="MoneyExpiditTransfer" xml:space="preserve">
+    <value>Envío de Dinero</value>
+  </data>
+  <data name="MoneyTransferReceived" xml:space="preserve">
+    <value>Transferencia de dinero recibida</value>
+  </data>
+  <data name="MoneyTransferWillBeSend" xml:space="preserve">
+    <value>Próxima transferencia de dinero</value>
+  </data>
+  <data name="MoneyWithdrawalRequest" xml:space="preserve">
+    <value>Solicitud de retiro de dinero</value>
+  </data>
+  <data name="Months" xml:space="preserve">
+    <value>meses</value>
+  </data>
+  <data name="MoreThan" xml:space="preserve">
+    <value>Más de</value>
+  </data>
+  <data name="MostLikelyFemale" xml:space="preserve">
+    <value>Preferiblemente Mujeres</value>
+  </data>
+  <data name="MostLikelyMale" xml:space="preserve">
+    <value>Preferiblemente Hombres</value>
+  </data>
+  <data name="MostRecent" xml:space="preserve">
+    <value>Más Reciente</value>
+  </data>
+  <data name="MXBankIdRefName" xml:space="preserve">
+    <value>CLABE/Nº de tarjeta</value>
+  </data>
+  <data name="MyBusiness" xml:space="preserve">
+    <value>Mi Negocio</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="NameInReceipt" xml:space="preserve">
+    <value>Nombre en Ticket</value>
+  </data>
+  <data name="NameInReceiptExplanation" xml:space="preserve">
+    <value>Exactamente igual a como aparece en los tickets de compra, asegúrate de ingresarlo de forma precisa</value>
+  </data>
+  <data name="NameLength" xml:space="preserve">
+    <value>El nombre no debe tener más de 30 caracteres</value>
+  </data>
+  <data name="NameRequired" xml:space="preserve">
+    <value>Nombre es requerido</value>
+  </data>
+  <data name="NamespaceId" xml:space="preserve">
+    <value>NamespaceId</value>
+  </data>
+  <data name="NationalBusiness" xml:space="preserve">
+    <value>Alcance Nacional</value>
+  </data>
+  <data name="NationalBusiness1" xml:space="preserve">
+    <value>Alcance Nacional</value>
+  </data>
+  <data name="NearbySection" xml:space="preserve">
+    <value>Cercanos</value>
+  </data>
+  <data name="NearbyStore" xml:space="preserve">
+    <value>En cercanías del establecimiento</value>
+  </data>
+  <data name="NewCategoryRequest" xml:space="preserve">
+    <value>Si deseas que una nueva categoría sea agregada escribe a soporte@clubyoy.com, e indica los detalles de la misma</value>
+  </data>
+  <data name="NewCustomer" xml:space="preserve">
+    <value>Nuevo Cliente</value>
+  </data>
+  <data name="NextMonth" xml:space="preserve">
+    <value>Mes Sig.</value>
+  </data>
+  <data name="NicaraguanCordoba" xml:space="preserve">
+    <value>Cordoba</value>
+  </data>
+  <data name="NoAvailableItems" xml:space="preserve">
+    <value>No hay items</value>
+  </data>
+  <data name="NoCheckIn" xml:space="preserve">
+    <value>Sin check-In</value>
+  </data>
+  <data name="NoClaimInstructionsAvailable" xml:space="preserve">
+    <value>Intrucciones de canje sin especificar</value>
+  </data>
+  <data name="NoConditionsAvailable" xml:space="preserve">
+    <value>Condiciones sin especificar</value>
+  </data>
+  <data name="NoDetails" xml:space="preserve">
+    <value>Esta operación no cuenta con una descripción asociada, si tienes dudas contáctanos</value>
+  </data>
+  <data name="NoElements" xml:space="preserve">
+    <value>No hay opciones</value>
+  </data>
+  <data name="NoMinPurchasesCount" xml:space="preserve">
+    <value>Sin mínimo de compras</value>
+  </data>
+  <data name="NoMoreCodesAvaialable" xml:space="preserve">
+    <value>Lo sentimos, ya no hay códigos disponibles para esta promo</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Ninguno</value>
+  </data>
+  <data name="NoPointsToEarn" xml:space="preserve">
+    <value>No genera YOYs</value>
+  </data>
+  <data name="NoPromoCodesAvailable" xml:space="preserve">
+    <value>Lo sentimos, se han agotado los códigos de esta promo</value>
+  </data>
+  <data name="NoRecords" xml:space="preserve">
+    <value>Sin historial</value>
+  </data>
+  <data name="NoRulesAvailable" xml:space="preserve">
+    <value>Reglas sin especificar</value>
+  </data>
+  <data name="NotApply" xml:space="preserve">
+    <value>No Aplica</value>
+  </data>
+  <data name="NotAssigned" xml:space="preserve">
+    <value>Sin Asignar</value>
+  </data>
+  <data name="NotBelongingConvertCode" xml:space="preserve">
+    <value>Código de pago NO APLICABLE</value>
+  </data>
+  <data name="NotConfigured" xml:space="preserve">
+    <value>No configurado</value>
+  </data>
+  <data name="NotDetermined" xml:space="preserve">
+    <value>Sin determinar</value>
+  </data>
+  <data name="NotElegible" xml:space="preserve">
+    <value>No Elegible</value>
+  </data>
+  <data name="NotElegibleDueUnavailableLocation" xml:space="preserve">
+    <value>Descartado por Ubicación</value>
+  </data>
+  <data name="NotEnoughPoints" xml:space="preserve">
+    <value>El cliente no tiene suficientes YOYs</value>
+  </data>
+  <data name="NotEnoughPoints1" xml:space="preserve">
+    <value>No tienes suficientes YOYs</value>
+  </data>
+  <data name="NotEnoughPointsForWithdrawalAmount" xml:space="preserve">
+    <value>No tienes suficientes YOYs para retirar el monto que indicaste, por favor disminuye el monto e intenta de nuevo</value>
+  </data>
+  <data name="NotFoundInReceipt" xml:space="preserve">
+    <value>No Encontrado</value>
+  </data>
+  <data name="NotIndicated" xml:space="preserve">
+    <value>No indicado</value>
+  </data>
+  <data name="NotReleased" xml:space="preserve">
+    <value>Calendarizado</value>
+  </data>
+  <data name="NotSpecified" xml:space="preserve">
+    <value>Sin especificar</value>
+  </data>
+  <data name="NotValidated" xml:space="preserve">
+    <value>Sin Validar</value>
+  </data>
+  <data name="November" xml:space="preserve">
+    <value>Noviembre</value>
+  </data>
+  <data name="NovemberAbbr" xml:space="preserve">
+    <value>Nov</value>
+  </data>
+  <data name="Numeric" xml:space="preserve">
+    <value>Numérico</value>
+  </data>
+  <data name="ObjectiveType" xml:space="preserve">
+    <value>Propósito</value>
+  </data>
+  <data name="ObjectiveTypeRequired" xml:space="preserve">
+    <value>Tipo de propósito es requerido</value>
+  </data>
+  <data name="October" xml:space="preserve">
+    <value>Octubre</value>
+  </data>
+  <data name="OctoberAbbr" xml:space="preserve">
+    <value>Oct</value>
+  </data>
+  <data name="Offer" xml:space="preserve">
+    <value>Promo</value>
+  </data>
+  <data name="OfferApproved" xml:space="preserve">
+    <value>Promo Aprobada</value>
+  </data>
+  <data name="OfferExplanation" xml:space="preserve">
+    <value>Una promo tiene un precio definido, se usa para cuando el incentivo es para productos establecidos y se conoce su precio final. por ejemplo: Medio pollo a mitad de precio</value>
+  </data>
+  <data name="OfferRejected" xml:space="preserve">
+    <value>Promo Rechazada</value>
+  </data>
+  <data name="OfferSet" xml:space="preserve">
+    <value>Promo Asignada</value>
+  </data>
+  <data name="OfLoyaltyPoints" xml:space="preserve">
+    <value>de cliente frecuente</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Oldest" xml:space="preserve">
+    <value>Más Antiguo</value>
+  </data>
+  <data name="OneTimeRedemptionError" xml:space="preserve">
+    <value>Este código es válido una sola vez, y ya ha sido usado</value>
+  </data>
+  <data name="OnHold" xml:space="preserve">
+    <value>En Pausa</value>
+  </data>
+  <data name="Online" xml:space="preserve">
+    <value>En línea</value>
+  </data>
+  <data name="OnlineClaimLocation" xml:space="preserve">
+    <value>Link del incentivo, ej: www.misitio.com/promo</value>
+  </data>
+  <data name="OnlineDeal" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="OnlineRefCodeLabel" xml:space="preserve">
+    <value>{RefCode} digita este código de referencia al comprar</value>
+  </data>
+  <data name="OnlineViewCodeButton" xml:space="preserve">
+    <value>Usar Código</value>
+  </data>
+  <data name="OnlineViewCodeButtonMsg" xml:space="preserve">
+    <value>Te llevaré al sitio web para hacer efectiva la promo, he COPIADO el código, para usarlo sólo PÉGALO donde te lo soliciten</value>
+  </data>
+  <data name="OnlineViewCodeMsg" xml:space="preserve">
+    <value>Promo ONLINE, presiona "Usar Código", irás a un sitio web para recibirla</value>
+  </data>
+  <data name="OnlyFemale" xml:space="preserve">
+    <value>Sólo Mujeres</value>
+  </data>
+  <data name="OnlyMale" xml:space="preserve">
+    <value>Sólo Hombres</value>
+  </data>
+  <data name="OnlyOnline" xml:space="preserve">
+    <value>Solo pagos en línea</value>
+  </data>
+  <data name="OnlyOnlineExplanation" xml:space="preserve">
+    <value>Indica si la forma de pago está exclusivamente disponible para compras en línea</value>
+  </data>
+  <data name="OnMaintenance" xml:space="preserve">
+    <value>En mantenimiento</value>
+  </data>
+  <data name="OnPayment" xml:space="preserve">
+    <value>Al pagar</value>
+  </data>
+  <data name="OnProcessPayment" xml:space="preserve">
+    <value>Pago en proceso</value>
+  </data>
+  <data name="OnPurchase" xml:space="preserve">
+    <value>Al comprar</value>
+  </data>
+  <data name="OnTheFence" xml:space="preserve">
+    <value>En zona cercana</value>
+  </data>
+  <data name="OnVerification" xml:space="preserve">
+    <value>Verificando comprobante</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Abierto</value>
+  </data>
+  <data name="OpenAccess" xml:space="preserve">
+    <value>Accesso Libre</value>
+  </data>
+  <data name="Opened" xml:space="preserve">
+    <value>Abierto</value>
+  </data>
+  <data name="OpenedYOYIn" xml:space="preserve">
+    <value>Abriste YOY en</value>
+  </data>
+  <data name="OpenForRedemption" xml:space="preserve">
+    <value>Canje por YOYs</value>
+  </data>
+  <data name="OpenStatus" xml:space="preserve">
+    <value>Apertura</value>
+  </data>
+  <data name="Operations" xml:space="preserve">
+    <value>Operaciones</value>
+  </data>
+  <data name="Operator" xml:space="preserve">
+    <value>Operador</value>
+  </data>
+  <data name="OperatorColombianPesoCurrency" xml:space="preserve">
+    <value>Pesos($)</value>
+  </data>
+  <data name="OperatorCostaRicanColonCurrency" xml:space="preserve">
+    <value>Colones(₡)</value>
+  </data>
+  <data name="OperatorGuatemalanQuetzalCurrency" xml:space="preserve">
+    <value>Quetzales</value>
+  </data>
+  <data name="OperatorHonduranLempiraCurrency" xml:space="preserve">
+    <value>Lempiras</value>
+  </data>
+  <data name="OperatorMexicanPesoCurrency" xml:space="preserve">
+    <value>Pesos($)</value>
+  </data>
+  <data name="OperatorNicaraguanCordobaCurrency" xml:space="preserve">
+    <value>Córdobas</value>
+  </data>
+  <data name="OperatorUSDollarCurrency" xml:space="preserve">
+    <value>Dólares($)</value>
+  </data>
+  <data name="OrdersPhoneNumber" xml:space="preserve">
+    <value>Número de consultas</value>
+  </data>
+  <data name="OrdersPhoneNumberRequired" xml:space="preserve">
+    <value>El número de consultas es requerido</value>
+  </data>
+  <data name="OriginType" xml:space="preserve">
+    <value>Origen</value>
+  </data>
+  <data name="Other" xml:space="preserve">
+    <value>Otro</value>
+  </data>
+  <data name="OutOfSchedule" xml:space="preserve">
+    <value>FUERA DE HORARIO</value>
+  </data>
+  <data name="OutOfStockDeal" xml:space="preserve">
+    <value>Promo Agotada</value>
+  </data>
+  <data name="Oxxo" xml:space="preserve">
+    <value>Oxxo</value>
+  </data>
+  <data name="ParentCategory" xml:space="preserve">
+    <value>Categoría Padre</value>
+  </data>
+  <data name="PartiallyCancelled" xml:space="preserve">
+    <value>Parcialmente cancelado</value>
+  </data>
+  <data name="PartiallyDelivered" xml:space="preserve">
+    <value>Entregado parcialmente</value>
+  </data>
+  <data name="PartiallyIssueRaised" xml:space="preserve">
+    <value>Con problemas parcialmente</value>
+  </data>
+  <data name="PartiallyReturned" xml:space="preserve">
+    <value>Parcialmente devuelto</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="PasswordFormat" xml:space="preserve">
+    <value>La contraseña debe tener al menos 1 número y 1 número</value>
+  </data>
+  <data name="PasswordLength" xml:space="preserve">
+    <value>La contraseña debe tener entre 6 y 16 caracteres</value>
+  </data>
+  <data name="PasswordMismatch" xml:space="preserve">
+    <value>La contraseña no coincide</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>La contraseña es requerida</value>
+  </data>
+  <data name="PasswordWrongFormat" xml:space="preserve">
+    <value>El formato de la contraseña es incorrecto</value>
+  </data>
+  <data name="PayDisabled" xml:space="preserve">
+    <value>Deshabilitado</value>
+  </data>
+  <data name="Payed" xml:space="preserve">
+    <value>Pagado</value>
+  </data>
+  <data name="PayedPurchase" xml:space="preserve">
+    <value>Compra pagada</value>
+  </data>
+  <data name="PayEnabled" xml:space="preserve">
+    <value>Habilitado</value>
+  </data>
+  <data name="Payer" xml:space="preserve">
+    <value>Pagador</value>
+  </data>
+  <data name="PayerTypes" xml:space="preserve">
+    <value>Pagador</value>
+  </data>
+  <data name="PaymentAmount" xml:space="preserve">
+    <value>Monto de Pago</value>
+  </data>
+  <data name="PaymentBeforeShipping" xml:space="preserve">
+    <value>Pago antes de envío</value>
+  </data>
+  <data name="PaymentDay" xml:space="preserve">
+    <value>Día de Pago</value>
+  </data>
+  <data name="PaymentDayRequired" xml:space="preserve">
+    <value>El día de pago es requerido</value>
+  </data>
+  <data name="PaymentDevice" xml:space="preserve">
+    <value>Dispositivo de pago</value>
+  </data>
+  <data name="PaymentGateway" xml:space="preserve">
+    <value>Pasarela de Pago</value>
+  </data>
+  <data name="PaymentMethod" xml:space="preserve">
+    <value>Forma de Pago</value>
+  </data>
+  <data name="PaymentMethodAddedFailed" xml:space="preserve">
+    <value>La forma de pago no se ha podido agregar, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="PaymentMethodAddedSuccessfully" xml:space="preserve">
+    <value>La forma de pago se ha agregado con éxito</value>
+  </data>
+  <data name="PaymentMethodDescriptionLength" xml:space="preserve">
+    <value>Descripción no debe tener más de 300 caracteres</value>
+  </data>
+  <data name="PaymentMethodDetails" xml:space="preserve">
+    <value>Detalles de forma de pago</value>
+  </data>
+  <data name="PaymentMethodFailedCreation" xml:space="preserve">
+    <value>No se ha podido agregar la forma de pago, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="PaymentMethodManagement" xml:space="preserve">
+    <value>Administración de formas de pago</value>
+  </data>
+  <data name="PaymentMethodNameLength" xml:space="preserve">
+    <value>El nombre no debe tener más de 30 caracteres</value>
+  </data>
+  <data name="PaymentMethods" xml:space="preserve">
+    <value>Forma de Pagos</value>
+  </data>
+  <data name="PaymentMethodSuccessfullyCreated" xml:space="preserve">
+    <value>La forma de pago se ha creado con éxito</value>
+  </data>
+  <data name="PaymentPending" xml:space="preserve">
+    <value>Pago Pendiente</value>
+  </data>
+  <data name="PaymentSubject" xml:space="preserve">
+    <value>Concepto de pago</value>
+  </data>
+  <data name="PaymentVoucher" xml:space="preserve">
+    <value>Vale de Pago</value>
+  </data>
+  <data name="PaymentWithPoints" xml:space="preserve">
+    <value>Pago con Puntos</value>
+  </data>
+  <data name="PaypalDeposit" xml:space="preserve">
+    <value>Envío por Paypal</value>
+  </data>
+  <data name="PayWithPointsOperation" xml:space="preserve">
+    <value>Pago con YOYs</value>
+  </data>
+  <data name="PendingToSet" xml:space="preserve">
+    <value>DEBE INGRESARSE</value>
+  </data>
+  <data name="Percentage" xml:space="preserve">
+    <value>Porcentage</value>
+  </data>
+  <data name="PercentageCompleted" xml:space="preserve">
+    <value>Avance(%)</value>
+  </data>
+  <data name="PerEach" xml:space="preserve">
+    <value>por cada</value>
+  </data>
+  <data name="PerPurchases" xml:space="preserve">
+    <value>Premio por compras</value>
+  </data>
+  <data name="PersonalId" xml:space="preserve">
+    <value>Cédula</value>
+  </data>
+  <data name="PhoneCall" xml:space="preserve">
+    <value>Llamada</value>
+  </data>
+  <data name="PhoneClaimLocation" xml:space="preserve">
+    <value>Teléfono al que llamar, ej: 222-567-9789</value>
+  </data>
+  <data name="PhoneDeal" xml:space="preserve">
+    <value>Telefónico</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Número Telefónico</value>
+  </data>
+  <data name="PhoneNumberLength" xml:space="preserve">
+    <value>El número no debe tener más de 20 dígitos</value>
+  </data>
+  <data name="PhoneNumberSINPE" xml:space="preserve">
+    <value>Nº celular SINPE</value>
+  </data>
+  <data name="PhoneNumberWireTransfer" xml:space="preserve">
+    <value>Celular ligado a Cuenta Bancaria</value>
+  </data>
+  <data name="PhoneRefCodeLabel" xml:space="preserve">
+    <value>{RefCode} pide que agreguen este código a tu ticket</value>
+  </data>
+  <data name="PhoneViewCodeButton" xml:space="preserve">
+    <value>Usar Código</value>
+  </data>
+  <data name="PhoneViewCodeButtonMsg" xml:space="preserve">
+    <value>Llamaré para que pidas tu promo, una vez te atiendan INDICA el nombre de la promo y DALE este código</value>
+  </data>
+  <data name="PhoneViewCodeMsg" xml:space="preserve">
+    <value>Promo TELEFONICA, presiona "Usar Código", harás una llamada para pedirla</value>
+  </data>
+  <data name="Photos" xml:space="preserve">
+    <value>Fotografías</value>
+  </data>
+  <data name="PickUp" xml:space="preserve">
+    <value>Pick-up</value>
+  </data>
+  <data name="PlacedOrder" xml:space="preserve">
+    <value>Orden enviada</value>
+  </data>
+  <data name="PlatformName" xml:space="preserve">
+    <value>YOY</value>
+  </data>
+  <data name="PlatformPropietary" xml:space="preserve">
+    <value>Propiedad de la plataforma</value>
+  </data>
+  <data name="Platinum" xml:space="preserve">
+    <value>Platino</value>
+  </data>
+  <data name="Plus" xml:space="preserve">
+    <value>Plus</value>
+  </data>
+  <data name="Points" xml:space="preserve">
+    <value>YOYs</value>
+  </data>
+  <data name="PointsBalance" xml:space="preserve">
+    <value>Balance de Puntos</value>
+  </data>
+  <data name="PointsConverted" xml:space="preserve">
+    <value>Puntos Convertidos</value>
+  </data>
+  <data name="PointsEarnStatus" xml:space="preserve">
+    <value>Status de YOYs</value>
+  </data>
+  <data name="PointsLifeSpanMonths" xml:space="preserve">
+    <value>Validez de YOYs</value>
+  </data>
+  <data name="PointsLifeSpanMonthsExplanation" xml:space="preserve">
+    <value>Cantidad de meses durante los cuales los YOYs son válidos</value>
+  </data>
+  <data name="PointsMonetaryTransferResultMsg" xml:space="preserve">
+    <value>Se ha completado la transferencia de YOYs por un monto de &lt;TransferedAmount&gt; a  &lt;BeneficiaryName&gt;. Se han usado &lt;UsedPoints&gt; YOYs para esto.</value>
+  </data>
+  <data name="PointsNotFunded" xml:space="preserve">
+    <value>Comercio No Pagó</value>
+  </data>
+  <data name="PointsRedemption" xml:space="preserve">
+    <value>Canje de YOYs</value>
+  </data>
+  <data name="PointsRevertion" xml:space="preserve">
+    <value>Disminución de YOYs</value>
+  </data>
+  <data name="PointsSpent" xml:space="preserve">
+    <value>YOYs gastados</value>
+  </data>
+  <data name="PointsToMoneyEnabled" xml:space="preserve">
+    <value>Pagar con YOYs</value>
+  </data>
+  <data name="PointsTransferReceived" xml:space="preserve">
+    <value>Has recibido una transferencia de YOYs</value>
+  </data>
+  <data name="PointsTransferResultMsg" xml:space="preserve">
+    <value>Se ha completado la transferencia de &lt;TransferedAmount&gt; a  &lt;BeneficiaryName&gt;.</value>
+  </data>
+  <data name="PointsTransferResultTitle" xml:space="preserve">
+    <value>Transferencia de YOYs</value>
+  </data>
+  <data name="PopularSection" xml:space="preserve">
+    <value>Populares</value>
+  </data>
+  <data name="PostalCode" xml:space="preserve">
+    <value>Código Postal</value>
+  </data>
+  <data name="PoweredBy" xml:space="preserve">
+    <value>Potenciado por</value>
+  </data>
+  <data name="PredefinedCommissionFeePercentage" xml:space="preserve">
+    <value>% Comisión Predefinido</value>
+  </data>
+  <data name="Preference" xml:space="preserve">
+    <value>Preferencia</value>
+  </data>
+  <data name="PreferenceManagement" xml:space="preserve">
+    <value>Administración de Preferencias</value>
+  </data>
+  <data name="PreferenceRelevance" xml:space="preserve">
+    <value>Relevancia en Consumo</value>
+  </data>
+  <data name="Preferences" xml:space="preserve">
+    <value>Preferencias</value>
+  </data>
+  <data name="PreferencesSuccessfullySaved" xml:space="preserve">
+    <value>¡Hemos guardado tus preferencias!</value>
+  </data>
+  <data name="Premium" xml:space="preserve">
+    <value>Premium</value>
+  </data>
+  <data name="PreviousIncentiveValue" xml:space="preserve">
+    <value>Valor Anterior</value>
+  </data>
+  <data name="Prize" xml:space="preserve">
+    <value>Premio</value>
+  </data>
+  <data name="PrizesGranted" xml:space="preserve">
+    <value>Premios Otorgados</value>
+  </data>
+  <data name="Product" xml:space="preserve">
+    <value>Producto</value>
+  </data>
+  <data name="ProductCategories" xml:space="preserve">
+    <value>Categorías de Productos</value>
+  </data>
+  <data name="ProductCategory" xml:space="preserve">
+    <value>Categoría de Productos</value>
+  </data>
+  <data name="ProductCategoryDetails" xml:space="preserve">
+    <value>Detalles de Categoría de Producto</value>
+  </data>
+  <data name="ProductCategoryFailedCreation" xml:space="preserve">
+    <value>No se ha podido crear la categoría, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="ProductCategorySuccessfullyCreated" xml:space="preserve">
+    <value>La categoría se ha creado con éxito</value>
+  </data>
+  <data name="ProductClassification" xml:space="preserve">
+    <value>Clasificación de Producto</value>
+  </data>
+  <data name="ProductClassificationManagement" xml:space="preserve">
+    <value>Administración de Clasificaciones de Productos</value>
+  </data>
+  <data name="ProductClassifications" xml:space="preserve">
+    <value>Clasificaciones de Productos</value>
+  </data>
+  <data name="ProductClassificationsManagement" xml:space="preserve">
+    <value>Administración de Clasificación de Productos</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Perfíl</value>
+  </data>
+  <data name="ProfileDetails" xml:space="preserve">
+    <value>Detalles de Perfíl</value>
+  </data>
+  <data name="Progress" xml:space="preserve">
+    <value>Progreso</value>
+  </data>
+  <data name="PromoEarnPointsMsg" xml:space="preserve">
+    <value>Ganaste &lt;EarnedPoints&gt; por usar una promo en &lt;CommerceName&gt;</value>
+  </data>
+  <data name="PromoNotFound" xml:space="preserve">
+    <value>No se ha encontrado la promo seleccionada</value>
+  </data>
+  <data name="Promotion" xml:space="preserve">
+    <value>Promoción</value>
+  </data>
+  <data name="Promotional" xml:space="preserve">
+    <value>Promocional</value>
+  </data>
+  <data name="PromotionalMarketing" xml:space="preserve">
+    <value>Marketing promocional</value>
+  </data>
+  <data name="Proximity" xml:space="preserve">
+    <value>Proximidad</value>
+  </data>
+  <data name="Published" xml:space="preserve">
+    <value>Publicado</value>
+  </data>
+  <data name="PublishState" xml:space="preserve">
+    <value>Publicación</value>
+  </data>
+  <data name="PurchaIncentiveDetails" xml:space="preserve">
+    <value>Detalles de Incentivo de Compra</value>
+  </data>
+  <data name="PurchaseClubAndWalletEarnPointsMsg" xml:space="preserve">
+    <value>Ganaste &lt;WalletEarnedPoints&gt; YOYs en tu Alcancía y &lt;ClubEarnedPoints&gt; YOYs por usar YOY en &lt;CommerceName&gt;</value>
+  </data>
+  <data name="PurchaseCountedSince" xml:space="preserve">
+    <value>Compras después de</value>
+  </data>
+  <data name="PurchasedAmountBlock" xml:space="preserve">
+    <value>Bloque Monto de Compra</value>
+  </data>
+  <data name="PurchaseDelivered" xml:space="preserve">
+    <value>Compra pagada</value>
+  </data>
+  <data name="PurchaseEarnPointsMsg" xml:space="preserve">
+    <value>Ganaste &lt;EarnedPoints&gt; YOYs comprar en &lt;CommerceName&gt;</value>
+  </data>
+  <data name="PurchaseIncentive" xml:space="preserve">
+    <value>Incentivo de Compra</value>
+  </data>
+  <data name="PurchaseIncentives" xml:space="preserve">
+    <value>Incentivos de Compra</value>
+  </data>
+  <data name="PurchaseIncentivesManagement" xml:space="preserve">
+    <value>Administración de Incentivos de Compra</value>
+  </data>
+  <data name="PurchaseIncentiveType" xml:space="preserve">
+    <value>Incentivo</value>
+  </data>
+  <data name="PurchasePayment" xml:space="preserve">
+    <value>Pago de Compra</value>
+  </data>
+  <data name="PurchaseReturned" xml:space="preserve">
+    <value>Compra devuelta</value>
+  </data>
+  <data name="PurchasesCountStartDay" xml:space="preserve">
+    <value>Compras Hechas desde</value>
+  </data>
+  <data name="PurchaseSpentBalance" xml:space="preserve">
+    <value>Balance de Gasto</value>
+  </data>
+  <data name="PurchaseSpentBalanceExplanation" xml:space="preserve">
+    <value>Ticket promedio de consumo para la categoría</value>
+  </data>
+  <data name="PurchaseWalletEarnPointsMsg" xml:space="preserve">
+    <value>Ganaste &lt;WalletEarnedPoints&gt; YOYs en tu Alcancía por comprar en &lt;CommerceName&gt;</value>
+  </data>
+  <data name="PurchaseWithIssues" xml:space="preserve">
+    <value>Compra con problemas</value>
+  </data>
+  <data name="PurposeType" xml:space="preserve">
+    <value>Propósito</value>
+  </data>
+  <data name="PurposeTypeExplanation" xml:space="preserve">
+    <value>El objetivo de la recompensa define para cuál es el propósito, ya sea usarla como un beneficio de YOY o para el programa de cliente frecuente</value>
+  </data>
+  <data name="QRCode" xml:space="preserve">
+    <value>Código QR</value>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>Pregunta</value>
+  </data>
+  <data name="QuestionDetails" xml:space="preserve">
+    <value>Detalles de Pregunta</value>
+  </data>
+  <data name="Questions" xml:space="preserve">
+    <value>Preguntas</value>
+  </data>
+  <data name="RadioButton" xml:space="preserve">
+    <value>Radio Button</value>
+  </data>
+  <data name="Radius" xml:space="preserve">
+    <value>Radios</value>
+  </data>
+  <data name="Raffle" xml:space="preserve">
+    <value>Sorteo</value>
+  </data>
+  <data name="RaffleDate" xml:space="preserve">
+    <value>Fecha del Sorteo</value>
+  </data>
+  <data name="RaffleDay" xml:space="preserve">
+    <value>Día del sorteo</value>
+  </data>
+  <data name="RaffleHour" xml:space="preserve">
+    <value>Hora del sorteo</value>
+  </data>
+  <data name="RaffleWinnersCount" xml:space="preserve">
+    <value># Ganadores del Sorteo</value>
+  </data>
+  <data name="RankingPosition" xml:space="preserve">
+    <value>Ranking</value>
+  </data>
+  <data name="RateDeal" xml:space="preserve">
+    <value>Calificar Promo</value>
+  </data>
+  <data name="RateEarnPointsMsg" xml:space="preserve">
+    <value>Ganaste &lt;EarnedPoints&gt; YOYs dar tu opinión sobre un producto en &lt;CommerceName&gt;</value>
+  </data>
+  <data name="ReadByUser" xml:space="preserve">
+    <value>Leído por el usuario</value>
+  </data>
+  <data name="Receipt" xml:space="preserve">
+    <value>Ticket de Compra</value>
+  </data>
+  <data name="ReceiptPhotoSent" xml:space="preserve">
+    <value>Comprobante enviado</value>
+  </data>
+  <data name="ReceiptRejectedValidationMsg" xml:space="preserve">
+    <value>Ticket inválido o ya validado, te recordamos que intentar validar tickets así infringe nuestros términos y es penalizado. Si crees que es un error contáctanos a info@clubyoy.com</value>
+  </data>
+  <data name="ReceiptRejectedValidationResultTitle" xml:space="preserve">
+    <value>Validación Rechazada</value>
+  </data>
+  <data name="ReceiptRequiresManualValidationMsg" xml:space="preserve">
+    <value>No hemos podido validar tu ticket, lo revisaremos manualmente para validar tu compra. Te notificaremos por email el resultado final.</value>
+  </data>
+  <data name="ReceiptRequiresManualValidationTitle" xml:space="preserve">
+    <value>Habrá Revisión Manual</value>
+  </data>
+  <data name="ReceiptSubmmittedRequiresValidation" xml:space="preserve">
+    <value>Compra Requiere Revisión</value>
+  </data>
+  <data name="ReceiptSuccesfullyValidatedTitle" xml:space="preserve">
+    <value>Hemos validado tu compra</value>
+  </data>
+  <data name="ReceiptSuccesfullyValidatedWithBenefitsMsg" xml:space="preserve">
+    <value>Muchas gracias por validar tu compra, esto te permite seguir accediendo a beneficios exclusivos</value>
+  </data>
+  <data name="ReceiptSuccesfullyValidatedWithYOYsMsg" xml:space="preserve">
+    <value>Muchas gracias por validar tu compra, hemos registrado tus YOYs y los tendrás disponibles tan pronto el comercio los pague</value>
+  </data>
+  <data name="ReceiveEmailMarketing" xml:space="preserve">
+    <value>Recibir Emails</value>
+  </data>
+  <data name="ReceiveSMSMarketing" xml:space="preserve">
+    <value>Recibir SMSs</value>
+  </data>
+  <data name="Recommended" xml:space="preserve">
+    <value>Recomendadas</value>
+  </data>
+  <data name="RecordRegistered" xml:space="preserve">
+    <value>Promo canjeada</value>
+  </data>
+  <data name="RedeemDeal" xml:space="preserve">
+    <value>Reservación de Promo</value>
+  </data>
+  <data name="RedeemPoints" xml:space="preserve">
+    <value>Canje de Puntos</value>
+  </data>
+  <data name="RedemptionDetails" xml:space="preserve">
+    <value>Detalles de Canje</value>
+  </data>
+  <data name="RedemptionFailed" xml:space="preserve">
+    <value>Error, no hemos podido reservar la promo. Por favor intenta de nuevo; si falla, contáctanos</value>
+  </data>
+  <data name="Redemptions" xml:space="preserve">
+    <value>Reservados</value>
+  </data>
+  <data name="Reference" xml:space="preserve">
+    <value>Referencia</value>
+  </data>
+  <data name="RegexToMatchInReceipt" xml:space="preserve">
+    <value>Regex de Identificación</value>
+  </data>
+  <data name="RegexToMatchInReceiptExplanation" xml:space="preserve">
+    <value>Regex con el que se puede identificar la validez del incentivo</value>
+  </data>
+  <data name="RegionalBusiness" xml:space="preserve">
+    <value>Alcance Regional</value>
+  </data>
+  <data name="RegisteredConvertCode" xml:space="preserve">
+    <value>Código de pago REGISTRADO éxitosamente</value>
+  </data>
+  <data name="RegisteredOnBusinessApp" xml:space="preserve">
+    <value>Registro de Pago Completo</value>
+  </data>
+  <data name="Registries" xml:space="preserve">
+    <value>Registros</value>
+  </data>
+  <data name="RegularPrice" xml:space="preserve">
+    <value>Precio Regular</value>
+  </data>
+  <data name="RegularValue" xml:space="preserve">
+    <value>Valor Regular</value>
+  </data>
+  <data name="RegularWireTransfer" xml:space="preserve">
+    <value>Transferencia Bancaria Regular</value>
+  </data>
+  <data name="Rejected" xml:space="preserve">
+    <value>Rechazado</value>
+  </data>
+  <data name="RejectedClaim" xml:space="preserve">
+    <value>Canje rechazado</value>
+  </data>
+  <data name="RejectedWithdrawal" xml:space="preserve">
+    <value>Rechazado</value>
+  </data>
+  <data name="Released" xml:space="preserve">
+    <value>Publicado</value>
+  </data>
+  <data name="ReleaseDate" xml:space="preserve">
+    <value>Fecha de lanzamiento</value>
+  </data>
+  <data name="ReleaseDay" xml:space="preserve">
+    <value>Día de Lanzamiento</value>
+  </data>
+  <data name="ReleasedState" xml:space="preserve">
+    <value>Visibilidad</value>
+  </data>
+  <data name="ReleaseHour" xml:space="preserve">
+    <value>Hora de Lanzamiento</value>
+  </data>
+  <data name="ReleaseNow" xml:space="preserve">
+    <value>Publicar yá</value>
+  </data>
+  <data name="RelevanceStatus" xml:space="preserve">
+    <value>Relevancia Comercial</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Recuérdame</value>
+  </data>
+  <data name="Remote" xml:space="preserve">
+    <value>Remoto</value>
+  </data>
+  <data name="Requested" xml:space="preserve">
+    <value>Solicitado</value>
+  </data>
+  <data name="RequiredFields" xml:space="preserve">
+    <value>Campos Requeridos</value>
+  </data>
+  <data name="RequiresCall" xml:space="preserve">
+    <value>Requiere Confirmación Telefónica</value>
+  </data>
+  <data name="RequiresCallExplanation" xml:space="preserve">
+    <value>Indica si se necesita realizar una confirmación del pago con una llamada telefónica de un representante</value>
+  </data>
+  <data name="RequiresManualExtraction" xml:space="preserve">
+    <value>Require Extracción Manual</value>
+  </data>
+  <data name="RequiresManualValidation" xml:space="preserve">
+    <value>Requiere Revisión Manual</value>
+  </data>
+  <data name="RequiresReferenceCode" xml:space="preserve">
+    <value>Necesita Código de Referencia</value>
+  </data>
+  <data name="RequiresReferenceCodeExplanation" xml:space="preserve">
+    <value>Indica si es necesario que para poder validar el cashback debe indicarse un código de referencia único para identificar la compra</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reestablecer</value>
+  </data>
+  <data name="Resolved" xml:space="preserve">
+    <value>Resuelto</value>
+  </data>
+  <data name="Responses" xml:space="preserve">
+    <value>Respuestas</value>
+  </data>
+  <data name="RetailBusiness" xml:space="preserve">
+    <value>Venta al Detalle</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Regresar</value>
+  </data>
+  <data name="ReturningIncentive" xml:space="preserve">
+    <value>Incentivar Retorno de Cliente</value>
+  </data>
+  <data name="ReturningIncentive1" xml:space="preserve">
+    <value>Incentivar Retorno de Cliente</value>
+  </data>
+  <data name="Reward" xml:space="preserve">
+    <value>Recompensa</value>
+  </data>
+  <data name="RewardCreationFailed" xml:space="preserve">
+    <value>No se ha podido crear el premio, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="RewardDeliveryFailed" xml:space="preserve">
+    <value>No se ha podido registrar la entrega del premio, intenta de nuevo</value>
+  </data>
+  <data name="RewardDetails" xml:space="preserve">
+    <value>Detalles de Premio</value>
+  </data>
+  <data name="RewardPoints" xml:space="preserve">
+    <value>YOYs al completar</value>
+  </data>
+  <data name="RewardPurchases" xml:space="preserve">
+    <value>Premiar compras</value>
+  </data>
+  <data name="RewardRedemption" xml:space="preserve">
+    <value>Redención de Premio</value>
+  </data>
+  <data name="RewardRedemptionFailed" xml:space="preserve">
+    <value>No se ha podido reservar el premio, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="RewardRedemptionTimeout" xml:space="preserve">
+    <value>Tiempo entre canjes</value>
+  </data>
+  <data name="RewardRedemptionTimeoutExplanation" xml:space="preserve">
+    <value>Indica la mínima cantidad de tiempo que debe pasar desde la última vez que el usuario canjeó este premio para permitírselo de nuevo</value>
+  </data>
+  <data name="Rewards" xml:space="preserve">
+    <value>Premios</value>
+  </data>
+  <data name="RewardsGranted" xml:space="preserve">
+    <value>Premios Otorgados</value>
+  </data>
+  <data name="RewardsManagement" xml:space="preserve">
+    <value>Administración de Premios</value>
+  </data>
+  <data name="RewardSuccefullyCreated" xml:space="preserve">
+    <value>El premio se ha creado con éxito</value>
+  </data>
+  <data name="RewardSuccessfullyDelivered" xml:space="preserve">
+    <value>La entrega del premio se ha registrado con éxito, dáselo al cliente</value>
+  </data>
+  <data name="RewardSuccessfullyRedeemed" xml:space="preserve">
+    <value>La reservación del premio se ha registrado con éxito</value>
+  </data>
+  <data name="RewardType" xml:space="preserve">
+    <value>Tipo de Premio</value>
+  </data>
+  <data name="RewardUsageType" xml:space="preserve">
+    <value>Habilitado Para</value>
+  </data>
+  <data name="RewardUsageTypeExplanation" xml:space="preserve">
+    <value>Define cuál es el propósito del premio, ya sea usarla como un beneficio de YOY o para el programa de cliente frecuente</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Rol</value>
+  </data>
+  <data name="RolRequired" xml:space="preserve">
+    <value>El rol es requerido</value>
+  </data>
+  <data name="RouteAccomplished" xml:space="preserve">
+    <value>Ruta Completada</value>
+  </data>
+  <data name="RouteAccomplisherVerified" xml:space="preserve">
+    <value>Ruta Completa Validada</value>
+  </data>
+  <data name="RouteMembers" xml:space="preserve">
+    <value>Miembros de Ruta</value>
+  </data>
+  <data name="RouteParticipantRecords" xml:space="preserve">
+    <value>Registros de Participación</value>
+  </data>
+  <data name="RouteParticipants" xml:space="preserve">
+    <value>Participantes de Ruta</value>
+  </data>
+  <data name="Rules" xml:space="preserve">
+    <value>Reglas</value>
+  </data>
+  <data name="RulesExplanation" xml:space="preserve">
+    <value>Reglas que aplican para la participación de la iniciativa</value>
+  </data>
+  <data name="SalesConversion" xml:space="preserve">
+    <value>Convertir Ventas</value>
+  </data>
+  <data name="SameTypeCumulative" xml:space="preserve">
+    <value>Acumulativo Mismo Tipo</value>
+  </data>
+  <data name="SameTypeCumulative1" xml:space="preserve">
+    <value>Acumulativo Mismo Tipo</value>
+  </data>
+  <data name="SatisfactionSurvey" xml:space="preserve">
+    <value>Encuesta de Satisfacción</value>
+  </data>
+  <data name="Saturday" xml:space="preserve">
+    <value>Sábado</value>
+  </data>
+  <data name="SaturdayAbbr" xml:space="preserve">
+    <value>Sab</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="SavingRoute" xml:space="preserve">
+    <value>Ruta del Ahorro</value>
+  </data>
+  <data name="SavingRouteCreationFailed" xml:space="preserve">
+    <value>No se ha podido crear la ruta, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="SavingRouteDescriptionExplanation" xml:space="preserve">
+    <value>Breve description de la nueva ruta del ahorro</value>
+  </data>
+  <data name="SavingRouteDetails" xml:space="preserve">
+    <value>Detalles de Ruta</value>
+  </data>
+  <data name="SavingRouteManagement" xml:space="preserve">
+    <value>Administración de Rutas del Ahorro</value>
+  </data>
+  <data name="SavingRouteMemberCreationFailed" xml:space="preserve">
+    <value>No se ha podido crear el miembro de ruta, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="SavingRouteMemberDetails" xml:space="preserve">
+    <value>Detalles de Miembro de Ruta</value>
+  </data>
+  <data name="SavingRouteMemberManagement" xml:space="preserve">
+    <value>Administración de Miembros de Ruta</value>
+  </data>
+  <data name="SavingRouteMemberSucessfullyAdded" xml:space="preserve">
+    <value>El miembro de ruta se ha agregado con éxito</value>
+  </data>
+  <data name="SavingRouteParticipant" xml:space="preserve">
+    <value>Participante de Ruta</value>
+  </data>
+  <data name="SavingRouteParticipantDetails" xml:space="preserve">
+    <value>Detalles de Participante de Ruta</value>
+  </data>
+  <data name="SavingRouteParticipantManagement" xml:space="preserve">
+    <value>Administración de Participantes de Ruta</value>
+  </data>
+  <data name="SavingRouteParticipantRecordManagement" xml:space="preserve">
+    <value>Administración de Registros de Participación</value>
+  </data>
+  <data name="SavingRouteParticipants" xml:space="preserve">
+    <value>Participantes de Rutas</value>
+  </data>
+  <data name="SavingRoutePrize" xml:space="preserve">
+    <value>Premio de Ruta</value>
+  </data>
+  <data name="SavingRoutes" xml:space="preserve">
+    <value>Rutas del Ahorro</value>
+  </data>
+  <data name="SavingRouteSuccessfullyCreated" xml:space="preserve">
+    <value>La ruta se ha creado con éxito</value>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>Escala</value>
+  </data>
+  <data name="Schedule" xml:space="preserve">
+    <value>Horario</value>
+  </data>
+  <data name="ScheduleCreated" xml:space="preserve">
+    <value>El horario se ha creado con éxito</value>
+  </data>
+  <data name="ScheduleCreationFailed" xml:space="preserve">
+    <value>No se ha podido crear el horario, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="ScheduleOverlaps" xml:space="preserve">
+    <value>El horario choca con otro ya existente</value>
+  </data>
+  <data name="Schedules" xml:space="preserve">
+    <value>Horarios</value>
+  </data>
+  <data name="ScheduleSuccesfullyCreated" xml:space="preserve">
+    <value>El horario de apertura se ha creado con éxito</value>
+  </data>
+  <data name="ScheduleType" xml:space="preserve">
+    <value>Tipo de Horario</value>
+  </data>
+  <data name="Scheduling" xml:space="preserve">
+    <value>Calendarización</value>
+  </data>
+  <data name="SecondNeed" xml:space="preserve">
+    <value>2da Necesidad</value>
+  </data>
+  <data name="SectionLevelDetail" xml:space="preserve">
+    <value>Detalle</value>
+  </data>
+  <data name="SectionLevelGeneral" xml:space="preserve">
+    <value>Listado</value>
+  </data>
+  <data name="SegmentationByState" xml:space="preserve">
+    <value>Alcance por Estado</value>
+  </data>
+  <data name="SegmentationParams" xml:space="preserve">
+    <value>Parámetros de Segmentación</value>
+  </data>
+  <data name="Segmented" xml:space="preserve">
+    <value>Segmentado</value>
+  </data>
+  <data name="SelectBranch" xml:space="preserve">
+    <value>Debes seleccionar una sucursal</value>
+  </data>
+  <data name="SelectCategory" xml:space="preserve">
+    <value>Debes seleccionar una categoría</value>
+  </data>
+  <data name="SelectEmptyOption" xml:space="preserve">
+    <value>Seleccionar...</value>
+  </data>
+  <data name="SelectFile" xml:space="preserve">
+    <value>Seleccionar Archivo...</value>
+  </data>
+  <data name="SelectMembershipLevel" xml:space="preserve">
+    <value>Selecciona Nivel de Lealtad</value>
+  </data>
+  <data name="SelectMonthDirectly" xml:space="preserve">
+    <value>Seleccionar mes</value>
+  </data>
+  <data name="SelectRol" xml:space="preserve">
+    <value>Debes seleccionar un rol</value>
+  </data>
+  <data name="SelectUser" xml:space="preserve">
+    <value>Debes seleccionar un usuario</value>
+  </data>
+  <data name="SelectYearDirectly" xml:space="preserve">
+    <value>Seleccionar año</value>
+  </data>
+  <data name="SentRequested" xml:space="preserve">
+    <value>Envío solicitado</value>
+  </data>
+  <data name="September" xml:space="preserve">
+    <value>Setiembre</value>
+  </data>
+  <data name="SeptemberAbbr" xml:space="preserve">
+    <value>Set</value>
+  </data>
+  <data name="ServiceSurvey" xml:space="preserve">
+    <value>Encuesta de servicio</value>
+  </data>
+  <data name="SetAverageTicket" xml:space="preserve">
+    <value>Ingresa el Ticket Promedio</value>
+  </data>
+  <data name="SetClaimsPerUser" xml:space="preserve">
+    <value>Limitar Usos por Usuario</value>
+  </data>
+  <data name="SetClaimsPerUserExplanation" xml:space="preserve">
+    <value>Solo en casos especiales se debe limitar los usos por usuario</value>
+  </data>
+  <data name="SetCommissionFee" xml:space="preserve">
+    <value>Ingresa el monto de comisión</value>
+  </data>
+  <data name="SetContentParamsExplanation" xml:space="preserve">
+    <value>Define parámetros personalizados para mejorar la elección de usuarios a los que mostrarle este incentivo</value>
+  </data>
+  <data name="SetRegulatValue" xml:space="preserve">
+    <value>Ingresar Precio Regular</value>
+  </data>
+  <data name="SetUniqueCodes" xml:space="preserve">
+    <value>Agrega los códigos abajo</value>
+  </data>
+  <data name="ShoppingMall" xml:space="preserve">
+    <value>Centro Comercial</value>
+  </data>
+  <data name="ShowInMenu" xml:space="preserve">
+    <value>Mostrar a usuarios</value>
+  </data>
+  <data name="Signal" xml:space="preserve">
+    <value>Señal</value>
+  </data>
+  <data name="SignalRecognition" xml:space="preserve">
+    <value>Reconocimiento de señales</value>
+  </data>
+  <data name="Silver" xml:space="preserve">
+    <value>Plata</value>
+  </data>
+  <data name="SingleLocation" xml:space="preserve">
+    <value>Local único</value>
+  </data>
+  <data name="SINPETransfer" xml:space="preserve">
+    <value>Transferencia SINPE</value>
+  </data>
+  <data name="SmallBusiness" xml:space="preserve">
+    <value>Empresa Pequeña</value>
+  </data>
+  <data name="SmartMarketing" xml:space="preserve">
+    <value>Mercadeo Inteligente</value>
+  </data>
+  <data name="Software" xml:space="preserve">
+    <value>Software</value>
+  </data>
+  <data name="SomeoneHasSentYou" xml:space="preserve">
+    <value>te ha enviado</value>
+  </data>
+  <data name="SoonAvailable" xml:space="preserve">
+    <value>Pronto disponible</value>
+  </data>
+  <data name="Spanish" xml:space="preserve">
+    <value>Español</value>
+  </data>
+  <data name="Special" xml:space="preserve">
+    <value>Especial</value>
+  </data>
+  <data name="SpecialPrice" xml:space="preserve">
+    <value>Precio Especial</value>
+  </data>
+  <data name="SpecialProduct" xml:space="preserve">
+    <value>Producto Especial</value>
+  </data>
+  <data name="SpecificCampaign" xml:space="preserve">
+    <value>Campaña específica</value>
+  </data>
+  <data name="Sponsored" xml:space="preserve">
+    <value>Patrocinado</value>
+  </data>
+  <data name="SponsoredCommercePointsApplied" xml:space="preserve">
+    <value>Aplicados al Comercio Patrocinador</value>
+  </data>
+  <data name="Standalone" xml:space="preserve">
+    <value>Único</value>
+  </data>
+  <data name="StartAge" xml:space="preserve">
+    <value>Edad Inicial</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="StateBusiness" xml:space="preserve">
+    <value>Alcance Estatal</value>
+  </data>
+  <data name="StateSegmentation" xml:space="preserve">
+    <value>Nivel Estatal</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Estadísticas</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Estatus</value>
+  </data>
+  <data name="StatusDetails" xml:space="preserve">
+    <value>Detalles de Estatus</value>
+  </data>
+  <data name="Sticker" xml:space="preserve">
+    <value>Sticker</value>
+  </data>
+  <data name="StripeGateway" xml:space="preserve">
+    <value>Stripe</value>
+  </data>
+  <data name="Submitted" xml:space="preserve">
+    <value>Enviado</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Éxito</value>
+  </data>
+  <data name="SuccessfulDelete" xml:space="preserve">
+    <value>El transmisor se ha eliminado con éxito</value>
+  </data>
+  <data name="SuccessfullyDelivered" xml:space="preserve">
+    <value>Entregado con éxito</value>
+  </data>
+  <data name="SuccessfulUpdate" xml:space="preserve">
+    <value>La actualización se ha completado con éxito</value>
+  </data>
+  <data name="Sunday" xml:space="preserve">
+    <value>Domingo</value>
+  </data>
+  <data name="SundayAbbr" xml:space="preserve">
+    <value>Dom</value>
+  </data>
+  <data name="Supermarket" xml:space="preserve">
+    <value>Supermercado</value>
+  </data>
+  <data name="SupporterDetails" xml:space="preserve">
+    <value>Detalles del Apoyo</value>
+  </data>
+  <data name="SupporterTenants" xml:space="preserve">
+    <value>Comercios Involucrados</value>
+  </data>
+  <data name="SupporterTenantsManagement" xml:space="preserve">
+    <value>Administración de Comercios Involucrados</value>
+  </data>
+  <data name="Survey" xml:space="preserve">
+    <value>Encuesta</value>
+  </data>
+  <data name="SurveyDetails" xml:space="preserve">
+    <value>Detalles de Encuesta</value>
+  </data>
+  <data name="SurveyFailedCreation" xml:space="preserve">
+    <value>No se ha podido crear la encuesta, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="SurveyQuestionFailedCreation" xml:space="preserve">
+    <value>La creación de la pregunta ha fallado, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="SurveyQuestionSuccessfullyCreated" xml:space="preserve">
+    <value>La pregunta se ha creado éxitosamente</value>
+  </data>
+  <data name="SurveyResponded" xml:space="preserve">
+    <value>Encuesta Respondida</value>
+  </data>
+  <data name="SurveyResponse" xml:space="preserve">
+    <value>Contestación de Encuesta</value>
+  </data>
+  <data name="Surveys" xml:space="preserve">
+    <value>Encuestas</value>
+  </data>
+  <data name="SurveysManagement" xml:space="preserve">
+    <value>Administración de Encuestas</value>
+  </data>
+  <data name="SurveySuccessfullyCreated" xml:space="preserve">
+    <value>La encuesta se ha creado con éxito</value>
+  </data>
+  <data name="Synced" xml:space="preserve">
+    <value>Sincronizado</value>
+  </data>
+  <data name="System" xml:space="preserve">
+    <value>Sistema</value>
+  </data>
+  <data name="SystemCategory" xml:space="preserve">
+    <value>Categoría de Sistema</value>
+  </data>
+  <data name="TagsPicker" xml:space="preserve">
+    <value>Selector de tags</value>
+  </data>
+  <data name="TargetMarket" xml:space="preserve">
+    <value>Mercado Meta</value>
+  </data>
+  <data name="TargetSex" xml:space="preserve">
+    <value>Sexo Objetivo</value>
+  </data>
+  <data name="TargettingParam" xml:space="preserve">
+    <value>Parámetros de Segmentación</value>
+  </data>
+  <data name="TaxAddress" xml:space="preserve">
+    <value>Domicilio Fiscal</value>
+  </data>
+  <data name="TaxDetails" xml:space="preserve">
+    <value>Detalles Fiscales</value>
+  </data>
+  <data name="TaxId" xml:space="preserve">
+    <value>Id Fiscal</value>
+  </data>
+  <data name="TaxIdInReceipt" xml:space="preserve">
+    <value>Id Fiscal en Ticket</value>
+  </data>
+  <data name="TaxIdInReceiptExplanation" xml:space="preserve">
+    <value>El Id Fiscal tal y como aparece en los tickets de compra</value>
+  </data>
+  <data name="TenantDescriptionLength" xml:space="preserve">
+    <value>La descripción no debe tener más de 300 caracteres</value>
+  </data>
+  <data name="TenantHolder" xml:space="preserve">
+    <value>Establecimiento Contenedor</value>
+  </data>
+  <data name="TenantNameLength" xml:space="preserve">
+    <value>El nombre no debe tener más de 60 caracteres</value>
+  </data>
+  <data name="TenantNonSeclected" xml:space="preserve">
+    <value>No has elegido ningún comercio</value>
+  </data>
+  <data name="TenantsToVisit" xml:space="preserve">
+    <value>Por Visitar</value>
+  </data>
+  <data name="TenantsVisited" xml:space="preserve">
+    <value>Visitados</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Texto</value>
+  </data>
+  <data name="TextArea" xml:space="preserve">
+    <value>Area de texto</value>
+  </data>
+  <data name="TheDeal" xml:space="preserve">
+    <value>la promo</value>
+  </data>
+  <data name="TheReward" xml:space="preserve">
+    <value>la recompensa</value>
+  </data>
+  <data name="ThirdNeed" xml:space="preserve">
+    <value>3era Necesidad</value>
+  </data>
+  <data name="ThisPromoCanBeClaimed" xml:space="preserve">
+    <value>Esta promo puede canjearse un máximo de</value>
+  </data>
+  <data name="Thursday" xml:space="preserve">
+    <value>Jueves</value>
+  </data>
+  <data name="ThursdayAbbr" xml:space="preserve">
+    <value>Jue</value>
+  </data>
+  <data name="TicketsLog" xml:space="preserve">
+    <value>Bitácora de Tickets</value>
+  </data>
+  <data name="TicketsLogManagement" xml:space="preserve">
+    <value>Administración de Bitácora de Tickets</value>
+  </data>
+  <data name="TimerType" xml:space="preserve">
+    <value>Tipo de Cronómetro</value>
+  </data>
+  <data name="Times" xml:space="preserve">
+    <value>veces</value>
+  </data>
+  <data name="TimeToClaim" xml:space="preserve">
+    <value>Tiempo para reclamar</value>
+  </data>
+  <data name="TimeToClaimExplanation" xml:space="preserve">
+    <value>Tiempo que tiene el usuario para hacer efectivo el incentivo de compra luego de reservarlo</value>
+  </data>
+  <data name="TimeToUnlock" xml:space="preserve">
+    <value>Tiempo Bloqueado</value>
+  </data>
+  <data name="TimeToUnlockExplanation" xml:space="preserve">
+    <value>Es posible poner un tiempo en el que el usuario debe esperar luego de reservar el incentivo, para que pueda reclamarlo. Esto funciona especialmente para promociones que buscar el retorno del usuario prontamente</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Título</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="Today" xml:space="preserve">
+    <value>Hoy</value>
+  </data>
+  <data name="ToDayRequired" xml:space="preserve">
+    <value>Día Final es requerido</value>
+  </data>
+  <data name="ToHour" xml:space="preserve">
+    <value>Hora Final</value>
+  </data>
+  <data name="ToHourRequired" xml:space="preserve">
+    <value>Hora Final es requerida</value>
+  </data>
+  <data name="ToMinutes" xml:space="preserve">
+    <value>Minuto Final</value>
+  </data>
+  <data name="Tone" xml:space="preserve">
+    <value>Señal</value>
+  </data>
+  <data name="ToneRecognition" xml:space="preserve">
+    <value>Reconocimiento de señales</value>
+  </data>
+  <data name="TooEarlyCheckIn" xml:space="preserve">
+    <value>recibió puntos recientemente, no se ha cumplido el tiempo de espera</value>
+  </data>
+  <data name="TooEarlyClaim" xml:space="preserve">
+    <value>Recientemente reclamaste esta promo, debes esperar</value>
+  </data>
+  <data name="TooEarlyRedemption" xml:space="preserve">
+    <value>Recientemente reservaste esta promo, debes esperar</value>
+  </data>
+  <data name="ToPay" xml:space="preserve">
+    <value>para pagar</value>
+  </data>
+  <data name="TotalAmount" xml:space="preserve">
+    <value>Monto Total</value>
+  </data>
+  <data name="TotalAmountGreater" xml:space="preserve">
+    <value>Monto total es mayor</value>
+  </data>
+  <data name="ToTryAgain" xml:space="preserve">
+    <value>para intentar de nuevo</value>
+  </data>
+  <data name="ToUseIn" xml:space="preserve">
+    <value>para usar en</value>
+  </data>
+  <data name="Transaction" xml:space="preserve">
+    <value>Transacción</value>
+  </data>
+  <data name="TransactionDetails" xml:space="preserve">
+    <value>Detalles de Transacción</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Transacciones</value>
+  </data>
+  <data name="TransactionsCount" xml:space="preserve">
+    <value># de Transacciones</value>
+  </data>
+  <data name="TransactionsManagement" xml:space="preserve">
+    <value>Administrar Transacciones</value>
+  </data>
+  <data name="TransactionType" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="TransferedMoneyReceivedModalTitle" xml:space="preserve">
+    <value>¡Te han enviado dinero!</value>
+  </data>
+  <data name="TransferedPointsReceivedModalTitle" xml:space="preserve">
+    <value>¡Te han enviado YOYs!</value>
+  </data>
+  <data name="TransferMoneyReceivedMsg" xml:space="preserve">
+    <value>&lt;SenderName&gt; te ha enviado &lt;TransferedAmount&gt;, equivalente a &lt;TransferedPoints&gt; YOYs</value>
+  </data>
+  <data name="TransferPoints" xml:space="preserve">
+    <value>Transferir YOYs</value>
+  </data>
+  <data name="TransferPointsReceivedMsg" xml:space="preserve">
+    <value>&lt;SenderName&gt; te ha enviado &lt;TransferedPoints&gt; YOYs </value>
+  </data>
+  <data name="TriggerTypeExplanation" xml:space="preserve">
+    <value>Tipo de evento que genera el disparo del evento</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>Verifica e intenta de nuevo</value>
+  </data>
+  <data name="Tuesday" xml:space="preserve">
+    <value>Martes</value>
+  </data>
+  <data name="TuesdayAbbr" xml:space="preserve">
+    <value>Mar</value>
+  </data>
+  <data name="Twilio" xml:space="preserve">
+    <value>Twilio</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="Types" xml:space="preserve">
+    <value>Tipos</value>
+  </data>
+  <data name="UnableToUsePoints" xml:space="preserve">
+    <value>Error, no hemos podido hacer el canje. Por favor intenta de nuevo; si falla, contáctanos</value>
+  </data>
+  <data name="Unassigned" xml:space="preserve">
+    <value>No asignado</value>
+  </data>
+  <data name="UnathorizedAccess" xml:space="preserve">
+    <value>Tu accesso no está autorizado</value>
+  </data>
+  <data name="UnauthorizedOperation" xml:space="preserve">
+    <value>Operación no autorizada, este usuario no posee los permisos para realizarla</value>
+  </data>
+  <data name="Unavailable" xml:space="preserve">
+    <value>No disponible</value>
+  </data>
+  <data name="Uncollectible" xml:space="preserve">
+    <value>Incobrable</value>
+  </data>
+  <data name="Unconfirmed_Account" xml:space="preserve">
+    <value>Cuenta no se ha validado, por favor utiliza el SMS o Email que te enviamos para hacerlo</value>
+  </data>
+  <data name="Undefined" xml:space="preserve">
+    <value>Indefinido</value>
+  </data>
+  <data name="UndefinedAmount" xml:space="preserve">
+    <value>Monto Indefinido</value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>Ocurrió un error inesperado, por favor trata de nuevo y en caso de persistir, contáctanos</value>
+  </data>
+  <data name="UniqueCodes" xml:space="preserve">
+    <value>Códigos Únicos</value>
+  </data>
+  <data name="UniqueCodesExplanation" xml:space="preserve">
+    <value>Corresponde al listado de códigos únicos que se usarán para la redención de esta promo, cada código equivale a 1 redención</value>
+  </data>
+  <data name="UnitPrice" xml:space="preserve">
+    <value>Precio</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Desconocido</value>
+  </data>
+  <data name="Unlimited" xml:space="preserve">
+    <value>Sin límite</value>
+  </data>
+  <data name="UntilOutOfStock" xml:space="preserve">
+    <value>Hasta agotar existencia</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Actualizar</value>
+  </data>
+  <data name="UpdateAverageTicket" xml:space="preserve">
+    <value>Actualizar Ticket Promedio</value>
+  </data>
+  <data name="UpdateFailed" xml:space="preserve">
+    <value>La actualización ha fallido, revisa los datos e intenta de nuevo</value>
+  </data>
+  <data name="UpdateSavingRouteMemberStatus" xml:space="preserve">
+    <value>Actualizar Estatus de Miembro</value>
+  </data>
+  <data name="UpdateSavingRouteParticipantStatus" xml:space="preserve">
+    <value>Actualizar Estatus de Registro</value>
+  </data>
+  <data name="UpdateStatus" xml:space="preserve">
+    <value>Cambiar Status</value>
+  </data>
+  <data name="UpgradeLevelAccomplished" xml:space="preserve">
+    <value>¡Lo has logrado, subirás de nivel!</value>
+  </data>
+  <data name="UpgradeLevelHint" xml:space="preserve">
+    <value>Sube de nivel completando estas metas:</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Subir</value>
+  </data>
+  <data name="UploadFile" xml:space="preserve">
+    <value>Subir Archivo</value>
+  </data>
+  <data name="UploadImage" xml:space="preserve">
+    <value>Subir Imagen</value>
+  </data>
+  <data name="UploadVideo" xml:space="preserve">
+    <value>Subir Video</value>
+  </data>
+  <data name="UpRunning" xml:space="preserve">
+    <value>Funcionando correctamente</value>
+  </data>
+  <data name="UpSelling" xml:space="preserve">
+    <value>Aumentar Venta</value>
+  </data>
+  <data name="UpTo" xml:space="preserve">
+    <value>Hasta</value>
+  </data>
+  <data name="URLRedirect" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="UsageRecordLine" xml:space="preserve">
+    <value>Registro de Canje</value>
+  </data>
+  <data name="UsageType" xml:space="preserve">
+    <value>Uso</value>
+  </data>
+  <data name="USDollarCurrency" xml:space="preserve">
+    <value>Dólar Americano</value>
+  </data>
+  <data name="USDollars" xml:space="preserve">
+    <value>Dólares Americanos</value>
+  </data>
+  <data name="Used" xml:space="preserve">
+    <value>Usado</value>
+  </data>
+  <data name="UsedConvertCode" xml:space="preserve">
+    <value>Código de pago ya HA SIDO UTILIZADO</value>
+  </data>
+  <data name="UsedPoints" xml:space="preserve">
+    <value>YOYs Usados</value>
+  </data>
+  <data name="UseItNow" xml:space="preserve">
+    <value>¡Usar ya!</value>
+  </data>
+  <data name="UserAccNotFound" xml:space="preserve">
+    <value>No existe un usuario con ese número de cuenta</value>
+  </data>
+  <data name="UserApp" xml:space="preserve">
+    <value>Desde app de usuario</value>
+  </data>
+  <data name="UserCheckInNotRegistered" xml:space="preserve">
+    <value>No hemos podido asignarle los YOYs al cliente por su compra, por favor intenta de nuevo</value>
+  </data>
+  <data name="UserEmail" xml:space="preserve">
+    <value>Email de Usuario</value>
+  </data>
+  <data name="UserId" xml:space="preserve">
+    <value>Identificador de Usuario</value>
+  </data>
+  <data name="UserInviteRegistryFailed" xml:space="preserve">
+    <value>No hemos podido registrar tu invitación</value>
+  </data>
+  <data name="UserMismatch" xml:space="preserve">
+    <value>Usuario No Corresponde</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="UserNameLenght" xml:space="preserve">
+    <value>El nombre no debe tener más de 30 caracteres</value>
+  </data>
+  <data name="UsernameLength" xml:space="preserve">
+    <value>El usuario no debe tener más de 64 caracteres</value>
+  </data>
+  <data name="UsernameRequired" xml:space="preserve">
+    <value>El usuario es requerido</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>Usuario inválido, es incorrecto o no existe</value>
+  </data>
+  <data name="UserPasswordLength" xml:space="preserve">
+    <value>La contraseña debe tener de 6 a 16 caracteres</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Usuarios</value>
+  </data>
+  <data name="UserWithoutAccess" xml:space="preserve">
+    <value>El usuario no tiene acceso</value>
+  </data>
+  <data name="Uses" xml:space="preserve">
+    <value>Usos</value>
+  </data>
+  <data name="UUID" xml:space="preserve">
+    <value>UUID</value>
+  </data>
+  <data name="Validated" xml:space="preserve">
+    <value>Validado</value>
+  </data>
+  <data name="ValidateDealClaim" xml:space="preserve">
+    <value>Compra de Promo</value>
+  </data>
+  <data name="ValidateProductPurchase" xml:space="preserve">
+    <value>Compra de Producto</value>
+  </data>
+  <data name="ValidationPending" xml:space="preserve">
+    <value>Validación Pendiente</value>
+  </data>
+  <data name="ValidHours" xml:space="preserve">
+    <value>Horas Habilitadas</value>
+  </data>
+  <data name="ValidMonthDays" xml:space="preserve">
+    <value>Días del Mes Habilitados</value>
+  </data>
+  <data name="ValidReceipts" xml:space="preserve">
+    <value>Tickets Válidos</value>
+  </data>
+  <data name="ValidWeekDays" xml:space="preserve">
+    <value>Días de la Semana Habilitados</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Valor</value>
+  </data>
+  <data name="Verified" xml:space="preserve">
+    <value>Canje validado</value>
+  </data>
+  <data name="Verify" xml:space="preserve">
+    <value>Verificar</value>
+  </data>
+  <data name="VerifyPassword" xml:space="preserve">
+    <value>Confirmar Contraseña</value>
+  </data>
+  <data name="VerifyPasswordRequired" xml:space="preserve">
+    <value>La confirmación de contraseña es requerida</value>
+  </data>
+  <data name="Video" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="VideoMP4Format" xml:space="preserve">
+    <value>Video Formato MP4</value>
+  </data>
+  <data name="Videos" xml:space="preserve">
+    <value>Videos</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Ver</value>
+  </data>
+  <data name="ViewAll" xml:space="preserve">
+    <value>Ver todos</value>
+  </data>
+  <data name="ViewCode" xml:space="preserve">
+    <value>VER CÓDIGO DE PROMO</value>
+  </data>
+  <data name="ViewDeal" xml:space="preserve">
+    <value>ACCEDER PROMO</value>
+  </data>
+  <data name="ViewMyClub" xml:space="preserve">
+    <value>Ver Mi Club</value>
+  </data>
+  <data name="ViewMyWallet" xml:space="preserve">
+    <value>Ver Mi Alcancía</value>
+  </data>
+  <data name="VisitGreetings" xml:space="preserve">
+    <value>¡gracias por visitarnos!</value>
+  </data>
+  <data name="VisitPointsEarn" xml:space="preserve">
+    <value>Has ganado YOYs por tu visita</value>
+  </data>
+  <data name="VisitsInTheLastPeriod" xml:space="preserve">
+    <value>en los últimos</value>
+  </data>
+  <data name="Voucher" xml:space="preserve">
+    <value>Comprobante</value>
+  </data>
+  <data name="VoucherEmailSent" xml:space="preserve">
+    <value>Te hemos enviado un correo como comprobante</value>
+  </data>
+  <data name="WalkIn" xml:space="preserve">
+    <value>Al entrar</value>
+  </data>
+  <data name="WalkInCashier" xml:space="preserve">
+    <value>Al entrar y en caja</value>
+  </data>
+  <data name="WalkInCheckIn" xml:space="preserve">
+    <value>Visita al local</value>
+  </data>
+  <data name="WalkInCheckInExclusive" xml:space="preserve">
+    <value>CheckIn</value>
+  </data>
+  <data name="Wallet" xml:space="preserve">
+    <value>Alcancia YOY</value>
+  </data>
+  <data name="WalletAndClub" xml:space="preserve">
+    <value>Alcancía y Club</value>
+  </data>
+  <data name="WalletBalanceTitle" xml:space="preserve">
+    <value>Ganas por ser un comprador inteligente</value>
+  </data>
+  <data name="WalletDescription" xml:space="preserve">
+    <value>Mira todos los premios que tenemos para ti</value>
+  </data>
+  <data name="WalletExtraBonusLabel" xml:space="preserve">
+    <value>Gana &lt;Bonus&gt; más en tu Alcancia</value>
+  </data>
+  <data name="WalletTransferedPoints" xml:space="preserve">
+    <value>a tu Alcancía</value>
+  </data>
+  <data name="Website" xml:space="preserve">
+    <value>Sitio Web</value>
+  </data>
+  <data name="Wednesday" xml:space="preserve">
+    <value>Miércoles</value>
+  </data>
+  <data name="WednesdayAbbr" xml:space="preserve">
+    <value>Mie</value>
+  </data>
+  <data name="week" xml:space="preserve">
+    <value>semana</value>
+  </data>
+  <data name="weeks" xml:space="preserve">
+    <value>semanas</value>
+  </data>
+  <data name="WeWelcomeYou" xml:space="preserve">
+    <value>te damos la bienvenida</value>
+  </data>
+  <data name="WiredTransfer" xml:space="preserve">
+    <value>Transferencia Bancaria</value>
+  </data>
+  <data name="With" xml:space="preserve">
+    <value>con</value>
+  </data>
+  <data name="WithdrawRequestCompleted" xml:space="preserve">
+    <value>Solicitud de retiro procesada, código de seguimiento: </value>
+  </data>
+  <data name="WithdrawRequestDeliveryDate" xml:space="preserve">
+    <value>Tu dinero será transferido a más tardar el </value>
+  </data>
+  <data name="WithdrawRequestFailed" xml:space="preserve">
+    <value>La solicitud de retiro ha fallado, intenta de nuevo</value>
+  </data>
+  <data name="WithdrawRequestReceivedSuccessMsg" xml:space="preserve">
+    <value>Tu solicitud de retiro por &lt;WithdrawalAmount&gt; se ha registrado, código de seguimiento &lt;FollowUpCode&gt;; será enviada antes del &lt;MaxDeliveryDate&gt;. El beneficiario del retiro es &lt;BeneficiaryName&gt;, se han requerido &lt;UsedPoints&gt; YOYs. Un comprobante se ha enviado por correo.</value>
+  </data>
+  <data name="WithdrawRequestReceivedTitle" xml:space="preserve">
+    <value>Solicitud de Retiro Recibida</value>
+  </data>
+  <data name="WithItEarnRealMoney" xml:space="preserve">
+    <value>¡con ella ganas dinero real!</value>
+  </data>
+  <data name="Years" xml:space="preserve">
+    <value>años</value>
+  </data>
+  <data name="Yesterday" xml:space="preserve">
+    <value>Ayer</value>
+  </data>
+  <data name="YouClaimed" xml:space="preserve">
+    <value>Usaste</value>
+  </data>
+  <data name="YouConverted" xml:space="preserve">
+    <value>Convertiste</value>
+  </data>
+  <data name="YouEarned" xml:space="preserve">
+    <value>Ganaste</value>
+  </data>
+  <data name="YouEarnedYOYsForCheckIn" xml:space="preserve">
+    <value>¡Ganaste YOYs de cliente frecuente, felicidades!</value>
+  </data>
+  <data name="YouEarnedYOYsForClaim" xml:space="preserve">
+    <value>¡Ganaste YOYs por usar una promo, felicidades!</value>
+  </data>
+  <data name="YouGot" xml:space="preserve">
+    <value>Obtuviste</value>
+  </data>
+  <data name="YouJoinedLoyaltyClubOf" xml:space="preserve">
+    <value>Te uniste al club de</value>
+  </data>
+  <data name="YouJoinedYOY" xml:space="preserve">
+    <value>Te uniste a YOY</value>
+  </data>
+  <data name="YouMadeTransfer" xml:space="preserve">
+    <value>Enviaste YOYs a un amigo</value>
+  </data>
+  <data name="YouOpenedYourWallet" xml:space="preserve">
+    <value>Iniciaste tu Alcancía</value>
+  </data>
+  <data name="YouPurchasedIn" xml:space="preserve">
+    <value>Compraste en</value>
+  </data>
+  <data name="YouRated" xml:space="preserve">
+    <value>Calificaste</value>
+  </data>
+  <data name="YouReachedThatLimit" xml:space="preserve">
+    <value>ya alcanzaste esa cantidad</value>
+  </data>
+  <data name="YouReceived" xml:space="preserve">
+    <value>Recibiste</value>
+  </data>
+  <data name="YouReceivedLoyaltyPointsTransfer" xml:space="preserve">
+    <value>¡Recibiste YOYs de un amigo, felicidades!</value>
+  </data>
+  <data name="YouReceivedTransfer" xml:space="preserve">
+    <value>Recibiste YOYs de un amigo</value>
+  </data>
+  <data name="YouRedeemed" xml:space="preserve">
+    <value>Canjeaste</value>
+  </data>
+  <data name="YouSpent" xml:space="preserve">
+    <value>Gastaste</value>
+  </data>
+  <data name="YouTransfered" xml:space="preserve">
+    <value>Transferiste</value>
+  </data>
+  <data name="YouWillWin" xml:space="preserve">
+    <value>Ganarás</value>
+  </data>
+  <data name="YOYBenefits" xml:space="preserve">
+    <value>Beneficios YOY</value>
+  </data>
+  <data name="YOYPointsApplied" xml:space="preserve">
+    <value>Aplicados a YOY</value>
+  </data>
+  <data name="YOYWalkInCheckIn" xml:space="preserve">
+    <value>YOY por visita a comercio</value>
+  </data>
+  <data name="YOYWallet" xml:space="preserve">
+    <value>Alcancía</value>
+  </data>
+</root>

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\YOY.DAO\YOY.DAO.csproj" />
+    <ProjectReference Include="..\YOY.DTO\YOY.DTO.csproj" />
+    <ProjectReference Include="..\YOY.Sys.Security\YOY.Sys.Security.csproj" />
+    <ProjectReference Include="..\YOY.ThirdpartyServices\YOY.ThirdpartyServices.csproj" />
+    <ProjectReference Include="..\YOY.Values\YOY.Values.csproj" />
+  </ItemGroup>
+
+
+</Project>
