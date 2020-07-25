@@ -34,5 +34,9 @@
     <ProjectReference Include="..\YOY.Values\YOY.Values.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\v1\CashbackIncentive\SET\" />
+  </ItemGroup>
+
 
 </Project>

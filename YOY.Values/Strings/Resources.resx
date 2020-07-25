@@ -4390,6 +4390,9 @@ Cualquier duda o consulta, escribe a info@clubyoy.com</value>
   <data name="Unlimited" xml:space="preserve">
     <value>Sin límite</value>
   </data>
+  <data name="UnlockCodeRequired" xml:space="preserve">
+    <value>Requiere código</value>
+  </data>
   <data name="UntilOutOfStock" xml:space="preserve">
     <value>Hasta agotar existencia</value>
   </data>

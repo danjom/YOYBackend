@@ -31,19 +31,6 @@ namespace YOY.BusinessAPI.Controllers
 
         private const int controllerVersion = 1;
 
-        private const int mainHintMinLength = 3;
-        private const int mainHintMaxLength = 9;
-        private const int complementaryHintMinLength = 3;
-        private const int complementaryHintMaxLength = 9;
-        private const int nameMinLength = 10;
-        private const int nameMaxLength = 64;
-        private const int keywordsMaxLength = 1000;
-        public const int codeMaxLenght = 15;
-        private const int descriptionMinLength = 10;
-        private const int descriptionMaxLength = 64;
-        private const int availableQuantityMinValue = 30;
-        public const int infiteAvailableQuantity = -1;
-
         #endregion
     }
 }

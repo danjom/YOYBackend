@@ -8,7 +8,10 @@ namespace YOY.DTO.Entities.Misc.Category
 {
     public class CategoryRelation
     {
+        public Guid Id { set; get; }
         public Guid CategoryId { set; get; }
+        public int HerarchyLevel { set; get; }
+        public Guid? GeneratorRelationId { set; get; }
         public Guid? ParentCategoryId { set; get; }
         public string CategoryName { set; get; }
         public Guid ReferenceId { set; get; }

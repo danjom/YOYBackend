@@ -7,7 +7,7 @@ namespace YOY.DAO.Entities.DB
     {
         public DeffeaturedSlides()
         {
-            DeffeaturedSlideContents = new HashSet<DeffeaturedSlideContents>();
+            DefpromotionalCampaigns = new HashSet<DefpromotionalCampaigns>();
         }
 
         public Guid Id { get; set; }
@@ -18,8 +18,6 @@ namespace YOY.DAO.Entities.DB
         public Guid CountryId { get; set; }
         public Guid? StateId { get; set; }
         public int Type { get; set; }
-        public int? RouteContentType { get; set; }
-        public string AccessRoute { get; set; }
         public int MaxViews { get; set; }
         public bool? IsActive { get; set; }
         public bool Deleted { get; set; }
@@ -29,6 +27,6 @@ namespace YOY.DAO.Entities.DB
         public DateTime UpdatedDate { get; set; }
 
         public virtual Oltpimages Image { get; set; }
-        public virtual ICollection<DeffeaturedSlideContents> DeffeaturedSlideContents { get; set; }
+        public virtual ICollection<DefpromotionalCampaigns> DefpromotionalCampaigns { get; set; }
     }
 }

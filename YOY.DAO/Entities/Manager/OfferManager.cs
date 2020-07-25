@@ -151,6 +151,7 @@ namespace YOY.DAO.Entities.Manager
                 DisplayTypes.ListingsOnly => Resources.ListingsOnly,
                 DisplayTypes.BroadcastingAndListings => Resources.BroadcastingAndListings,
                 DisplayTypes.BroadcastingOnly => Resources.BroadcastingOnly,
+                DisplayTypes.UnlockCodeRequired => Resources.UnlockCodeRequired,
                 _ => "--",
             };
             return typeName;

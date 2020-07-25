@@ -13,11 +13,13 @@ namespace YOY.DAO.Entities.DB
         public Guid Id { get; set; }
         public Guid TenantId { get; set; }
         public int EarningType { get; set; }
+        public int DisplayType { get; set; }
         public int Type { get; set; }
         public int DealType { get; set; }
         public int CombineType { get; set; }
         public decimal UnitValue { get; set; }
         public decimal PreviousUnitValue { get; set; }
+        public int MinMembershipLevel { get; set; }
         public decimal MinPurchasedAmount { get; set; }
         public decimal PurchasedAmountBlock { get; set; }
         public decimal MaxValue { get; set; }

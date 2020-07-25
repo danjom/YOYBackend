@@ -162,20 +162,6 @@
         public const int SpecificCampaign = 3;
     }
 
-    public static class FeaturedSlideAccessRouteTypes
-    {
-        public const int All = 0;
-        public const int None = 1;
-        public const int DealsListMultipleCommerces = 2;
-        public const int DealsListSingleCommerce = 3;
-        public const int CashbackListMultipleCommerces = 4;
-        public const int CashbackListSingleCommerces = 5;
-        public const int DealDetail = 6;
-        public const int CashbackDetail = 7;
-        public const int Image = 8;
-        public const int Video = 9;
-    }
-
     public static class HardwareIOTDeviceTypes
     {
         public const int All = 0;
@@ -1188,6 +1174,7 @@
         public const int ListingsOnly = 1;
         public const int BroadcastingAndListings = 2;
         public const int BroadcastingOnly = 3;
+        public const int UnlockCodeRequired = 4;
     }
 
     public static class ScheduleTypes
@@ -1245,8 +1232,6 @@
         public const int All = -1;
         public const int ByTotalAmount = 1;
         public const int ByAmountBlock = 2;
-        public const int ByTotalAmountPurchaseFrequency = 3;
-        public const int ByAmountBlockPurchaseFrequency = 4;
     }
 
     public static class CashbackApplyTypes

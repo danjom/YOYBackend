@@ -17,9 +17,6 @@ namespace YOY.DTO.Entities
         public Guid? StateId { set; get; }
         public int Type { set; get; }
         public string TypeName { set; get; }
-        public int? RouteContentType { set; get; }
-        public string RouteContentTypeName { set; get; }
-        public string AccessRoute { set; get; }
         public int MaxViews { set; get; }
         public bool IsActive { set; get; }
         public DateTime ReleaseDate { set; get; }

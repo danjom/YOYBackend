@@ -38,8 +38,6 @@ namespace YOY.DAO.Entities.DB
         public virtual DbSet<Defbroadcasters> Defbroadcasters { get; set; }
         public virtual DbSet<DefbroadcastersView> DefbroadcastersView { get; set; }
         public virtual DbSet<DefbroadcastingSchedules> DefbroadcastingSchedules { get; set; }
-        public virtual DbSet<DefcategoryRelations> DefcategoryRelations { get; set; }
-        public virtual DbSet<DefcategoryRelationsView> DefcategoryRelationsView { get; set; }
         public virtual DbSet<Defcities> Defcities { get; set; }
         public virtual DbSet<DefconfigValues> DefconfigValues { get; set; }
         public virtual DbSet<Defcountries> Defcountries { get; set; }
@@ -50,7 +48,6 @@ namespace YOY.DAO.Entities.DB
         public virtual DbSet<Defdepartments> Defdepartments { get; set; }
         public virtual DbSet<Defdistricts> Defdistricts { get; set; }
         public virtual DbSet<DefearningsIncreasers> DefearningsIncreasers { get; set; }
-        public virtual DbSet<DeffeaturedSlideContents> DeffeaturedSlideContents { get; set; }
         public virtual DbSet<DeffeaturedSlides> DeffeaturedSlides { get; set; }
         public virtual DbSet<Deffranchisees> Deffranchisees { get; set; }
         public virtual DbSet<Defgeofences> Defgeofences { get; set; }
@@ -67,6 +64,8 @@ namespace YOY.DAO.Entities.DB
         public virtual DbSet<DefmembershipLevelsView> DefmembershipLevelsView { get; set; }
         public virtual DbSet<DefpaymentMethods> DefpaymentMethods { get; set; }
         public virtual DbSet<DefpaymentMethodsView> DefpaymentMethodsView { get; set; }
+        public virtual DbSet<DefpromotionCampaignMembers> DefpromotionCampaignMembers { get; set; }
+        public virtual DbSet<DefpromotionalCampaigns> DefpromotionalCampaigns { get; set; }
         public virtual DbSet<DefreceiptAnalyzerConfigs> DefreceiptAnalyzerConfigs { get; set; }
         public virtual DbSet<DefsearchIndexes> DefsearchIndexes { get; set; }
         public virtual DbSet<Defstates> Defstates { get; set; }
@@ -92,6 +91,8 @@ namespace YOY.DAO.Entities.DB
         public virtual DbSet<OltpcashbackIncentives> OltpcashbackIncentives { get; set; }
         public virtual DbSet<Oltpcategories> Oltpcategories { get; set; }
         public virtual DbSet<OltpcategoriesView> OltpcategoriesView { get; set; }
+        public virtual DbSet<OltpcategoryRelations> OltpcategoryRelations { get; set; }
+        public virtual DbSet<OltpcategoryRelationsView> OltpcategoryRelationsView { get; set; }
         public virtual DbSet<OltpcheckInsView> OltpcheckInsView { get; set; }
         public virtual DbSet<Oltpcheckins> Oltpcheckins { get; set; }
         public virtual DbSet<OltpclaimRecordLines> OltpclaimRecordLines { get; set; }
@@ -187,8 +188,7 @@ namespace YOY.DAO.Entities.DB
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=tcp:de4tg5joydev.database.windows.net,1433;Database=yoyIj7qM58dCj;User ID=yoyadmi3726@de4tg5joydev;Password=vCRUS4JypY0yzFjry5hb;Trusted_Connection=False;Encrypt=True;Connection Timeout=45;");
+                optionsBuilder.UseSqlServer(Settings.Default.default_connection);
             }
         }
 
@@ -1263,37 +1263,6 @@ namespace YOY.DAO.Entities.DB
                     .HasDefaultValueSql("(getutcdate())");
             });
 
-            modelBuilder.Entity<DefcategoryRelations>(entity =>
-            {
-                entity.HasKey(e => new { e.CategoryId, e.ReferenceId, e.ReferenceType });
-
-                entity.ToTable("DEFCategoryRelations");
-
-                entity.HasIndex(e => e.ReferenceType);
-
-                entity.Property(e => e.CreatedDate)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getutcdate())");
-
-                entity.HasOne(d => d.Category)
-                    .WithMany(p => p.DefcategoryRelations)
-                    .HasForeignKey(d => d.CategoryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_DEFTenantCategories_OLTPCategories");
-            });
-
-            modelBuilder.Entity<DefcategoryRelationsView>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToView("DEFCategoryRelationsView");
-
-                entity.Property(e => e.CategoryName)
-                    .IsRequired()
-                    .HasMaxLength(60)
-                    .IsUnicode(false);
-            });
-
             modelBuilder.Entity<Defcities>(entity =>
             {
                 entity.ToTable("DEFCities");
@@ -1670,30 +1639,6 @@ namespace YOY.DAO.Entities.DB
                     .HasConstraintName("FK_DEFEarningsIncreasers_DEFTenants");
             });
 
-            modelBuilder.Entity<DeffeaturedSlideContents>(entity =>
-            {
-                entity.ToTable("DEFFeaturedSlideContents");
-
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedDate)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getutcdate())");
-
-                entity.Property(e => e.IsActive)
-                    .IsRequired()
-                    .HasDefaultValueSql("((1))");
-
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getutcdate())");
-
-                entity.HasOne(d => d.FeaturedSlide)
-                    .WithMany(p => p.DeffeaturedSlideContents)
-                    .HasForeignKey(d => d.FeaturedSlideId)
-                    .HasConstraintName("FK_DEFFeaturedSlideContents_DEFFeaturedSlides");
-            });
-
             modelBuilder.Entity<DeffeaturedSlides>(entity =>
             {
                 entity.ToTable("DEFFeaturedSlides");
@@ -1703,11 +1648,6 @@ namespace YOY.DAO.Entities.DB
                 entity.HasIndex(e => e.StateId);
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.AccessRoute)
-                    .IsRequired()
-                    .HasMaxLength(1024)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.CreatedDate)
                     .HasColumnType("datetime")
@@ -2352,6 +2292,64 @@ namespace YOY.DAO.Entities.DB
                     .IsUnicode(false);
 
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<DefpromotionCampaignMembers>(entity =>
+            {
+                entity.ToTable("DEFPromotionCampaignMembers");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getutcdate())");
+
+                entity.Property(e => e.UpdatedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getutcdate())");
+
+                entity.HasOne(d => d.PromotionalCampaign)
+                    .WithMany(p => p.DefpromotionCampaignMembers)
+                    .HasForeignKey(d => d.PromotionalCampaignId)
+                    .HasConstraintName("FK_DEFPromotionCampaignMembers_DEFPromotionalCampaigns");
+            });
+
+            modelBuilder.Entity<DefpromotionalCampaigns>(entity =>
+            {
+                entity.ToTable("DEFPromotionalCampaigns");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getutcdate())");
+
+                entity.Property(e => e.ExpirationDate).HasColumnType("datetime");
+
+                entity.Property(e => e.IsActive)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ReleaseDate).HasColumnType("datetime");
+
+                entity.Property(e => e.UnlockCode)
+                    .HasMaxLength(24)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getutcdate())");
+
+                entity.HasOne(d => d.FeaturedSlide)
+                    .WithMany(p => p.DefpromotionalCampaigns)
+                    .HasForeignKey(d => d.FeaturedSlideId)
+                    .OnDelete(DeleteBehavior.SetNull)
+                    .HasConstraintName("FK_DEFPromotionalCampaigns_DEFFeaturedSliders");
             });
 
             modelBuilder.Entity<DefreceiptAnalyzerConfigs>(entity =>
@@ -3570,6 +3568,8 @@ namespace YOY.DAO.Entities.DB
 
                 entity.Property(e => e.MaxValue).HasColumnType("decimal(19, 2)");
 
+                entity.Property(e => e.MinMembershipLevel).HasDefaultValueSql("((1))");
+
                 entity.Property(e => e.MinPurchasedAmount).HasColumnType("decimal(19, 2)");
 
                 entity.Property(e => e.Name)
@@ -3698,6 +3698,46 @@ namespace YOY.DAO.Entities.DB
                     .IsUnicode(false);
 
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<OltpcategoryRelations>(entity =>
+            {
+                entity.ToTable("OLTPCategoryRelations");
+
+                entity.HasIndex(e => e.ReferenceType);
+
+                entity.HasIndex(e => new { e.ReferenceType, e.ReferenceId, e.CategoryId })
+                    .HasName("AK_OLTPCategoryRelations_Column")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getutcdate())");
+
+                entity.HasOne(d => d.Category)
+                    .WithMany(p => p.OltpcategoryRelations)
+                    .HasForeignKey(d => d.CategoryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_OLTPTenantCategories_OLTPCategories");
+
+                entity.HasOne(d => d.GeneratorRelation)
+                    .WithMany(p => p.InverseGeneratorRelation)
+                    .HasForeignKey(d => d.GeneratorRelationId)
+                    .HasConstraintName("FK_OLTPCategoryRelations_DEFCategoryRelations");
+            });
+
+            modelBuilder.Entity<OltpcategoryRelationsView>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("OLTPCategoryRelationsView");
+
+                entity.Property(e => e.CategoryName)
+                    .IsRequired()
+                    .HasMaxLength(60)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<OltpcheckInsView>(entity =>
@@ -4925,7 +4965,7 @@ namespace YOY.DAO.Entities.DB
 
                 entity.Property(e => e.Value)
                     .IsRequired()
-                    .HasMaxLength(200)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Image)

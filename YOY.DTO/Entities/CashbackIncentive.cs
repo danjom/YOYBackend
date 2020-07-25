@@ -12,6 +12,8 @@ namespace YOY.DTO.Entities
         public Guid TenantId { set; get; }
         public int Type { set; get; }
         public string TypeName { set; get; }
+        public int DisplayType { set; get; }
+        public string DisplayTypeName { set; get; }
         public int EarningType { set; get; }
         public string EarningTypeName { set; get; }
         public int DealType { set; get; }
@@ -20,6 +22,7 @@ namespace YOY.DTO.Entities
         public string CombineTypeName { set; get; }
         public decimal UnitValue { set; get; }
         public decimal PreviousUnitValue { set; get; }
+        public int MinMembershipLevel { set; get; }
         public decimal MinPurchasedAmount { set; get; }
         public decimal PurchasedAmountBlock { set; get; }
         public decimal MaxValue { set; get; }

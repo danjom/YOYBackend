@@ -1358,7 +1358,7 @@ namespace YOY.DAO.Entities.Manager
         }//METHOD DELETE ENDS --------------------------------------------------------------------------------------------------------------------------- //
 
 
-        public string GetPreference(Guid id, int herarchyLevel)
+        public string GetPreferenceName(Guid id, int herarchyLevel)
         {
             string preferenceName = "";
 
@@ -1368,10 +1368,10 @@ namespace YOY.DAO.Entities.Manager
                 switch (herarchyLevel)
                 {
                     case CategoryHerarchyLevels.ProductCategory:
-                        preferenceName = this._businessObjects.StoredProcsHandler.GetPreferenceForProductCategory(id, herarchyLevel);
+                        preferenceName = this._businessObjects.StoredProcsHandler.GetPreferenceNameForProductCategory(id, herarchyLevel);
                         break;
                     case CategoryHerarchyLevels.TenantCategory:
-                        preferenceName = this._businessObjects.StoredProcsHandler.GetPreferenceForCommerceCategory(id, herarchyLevel);
+                        preferenceName = this._businessObjects.StoredProcsHandler.GetPreferenceNameForCommerceCategory(id, herarchyLevel);
                         break;
                 }
 
@@ -1428,7 +1428,7 @@ namespace YOY.DAO.Entities.Manager
 
             try
             {
-                var query = from x in this._businessObjects.Context.DefcategoryRelationsView
+                var query = from x in this._businessObjects.Context.OltpcategoryRelationsView
                             where x.ReferenceType == referenceType && x.ReferenceId == referenceId
                             select x;
 
@@ -1437,15 +1437,18 @@ namespace YOY.DAO.Entities.Manager
                     categoryRelations = new List<CategoryRelation>();
                     CategoryRelation categoryRelation;
 
-                    foreach (DefcategoryRelationsView item in query)
+                    foreach (OltpcategoryRelationsView item in query)
                     {
                         categoryRelation = new CategoryRelation
                         {
+                            Id = item.Id,
                             CategoryId = item.CategoryId,
                             CategoryName = item.CategoryName,
+                            HerarchyLevel = item.HerarchyLevel,
                             ParentCategoryId = item.ParentCategoryId,
                             ReferenceId = item.ReferenceId,
-                            ReferenceType = item.ReferenceType
+                            ReferenceType = item.ReferenceType,
+                            GeneratorRelationId = item.GeneratorRelationId
                         };
 
                         categoryRelations.Add(categoryRelation);
@@ -1518,20 +1521,56 @@ namespace YOY.DAO.Entities.Manager
             return enabledCategories;
         }
 
-        public bool Post(Guid categoryId, Guid referenceId, int referenceType)
+        public bool Post(Guid categoryId, int herarchyLevel, Guid referenceId, int referenceType)
         {
             bool success;
             try
             {
-                DefcategoryRelations newCategoryRelation = new DefcategoryRelations
+                OltpcategoryRelations newCategoryRelation = new OltpcategoryRelations
                 {
+                    Id = Guid.NewGuid(),
                     CategoryId = categoryId,
+                    HerarchyLevel = herarchyLevel,
                     ReferenceId = referenceId,
                     ReferenceType = referenceType,
+                    GeneratorRelationId = null,
                     CreatedDate = DateTime.UtcNow
                 };
 
-                this._businessObjects.Context.DefcategoryRelations.Add(newCategoryRelation);
+                this._businessObjects.Context.OltpcategoryRelations.Add(newCategoryRelation);
+
+                //Now needs to generate the preference relation
+                Guid preferenceId = Guid.Empty;
+
+                switch (referenceType)
+                {
+                    case CategoryRelatiomReferenceTypes.Tenant:
+
+                        preferenceId = this._businessObjects.StoredProcsHandler.GetPreferenceIdForCommerceCategory(categoryId, herarchyLevel) ;
+
+                        break;
+                    case CategoryRelatiomReferenceTypes.Offer:
+
+                        preferenceId = this._businessObjects.StoredProcsHandler.GetPreferenceIdForProductCategory(categoryId, herarchyLevel);
+
+
+                        break;
+                }
+
+                if(preferenceId != Guid.Empty)
+                {
+                    OltpcategoryRelations newPreferenceRelation = new OltpcategoryRelations
+                    {
+                        Id = Guid.NewGuid(),
+                        CategoryId = preferenceId,
+                        HerarchyLevel = CategoryHerarchyLevels.Preference,
+                        ReferenceId = referenceId,
+                        ReferenceType = referenceType,
+                        GeneratorRelationId = newCategoryRelation.Id,
+                        CreatedDate = DateTime.UtcNow
+                    };
+                }
+                
                 this._businessObjects.Context.SaveChanges();
 
                 success = true;
@@ -1554,26 +1593,29 @@ namespace YOY.DAO.Entities.Manager
 
             try
             {
-                var query = from x in this._businessObjects.Context.DefcategoryRelations
-                            where x.CategoryId == categoryId && x.ReferenceType == referenceType && x.ReferenceId == referenceId
-                            select x;
 
-                if (query != null)
+                OltpcategoryRelations categoryRelation = (from x in this._businessObjects.Context.OltpcategoryRelations
+                                                         where x.CategoryId == categoryId && x.ReferenceType == referenceType && x.ReferenceId == referenceId
+                                                         select x).FirstOrDefault();
+
+                if (categoryRelation != null)
                 {
-                    DefcategoryRelations currentRelation = null;
 
-                    foreach (DefcategoryRelations item in query)
+                    //1st deletes the relations
+                    var query = from x in this._businessObjects.Context.OltpcategoryRelations
+                                where x.GeneratorRelationId == categoryRelation.Id
+                                select x;
+
+                    foreach (OltpcategoryRelations item in query)
                     {
-                        currentRelation = item;
+                        this._businessObjects.Context.OltpcategoryRelations.Remove(item);
                     }
 
-                    if (currentRelation != null)
-                    {
-                        this._businessObjects.Context.DefcategoryRelations.Remove(currentRelation);
-                        this._businessObjects.Context.SaveChanges();
+                    this._businessObjects.Context.OltpcategoryRelations.Remove(categoryRelation);
 
-                        success = true;
-                    }
+                    this._businessObjects.Context.SaveChanges();
+
+                    success = true;
                 }
             }
             catch (Exception e)

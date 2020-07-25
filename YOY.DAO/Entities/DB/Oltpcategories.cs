@@ -7,12 +7,12 @@ namespace YOY.DAO.Entities.DB
     {
         public Oltpcategories()
         {
-            DefcategoryRelations = new HashSet<DefcategoryRelations>();
             DefdepartmentCategories = new HashSet<DefdepartmentCategories>();
             Defkeywords = new HashSet<Defkeywords>();
             DeftenantInformations = new HashSet<DeftenantInformations>();
             InverseParentCategoryNavigation = new HashSet<Oltpcategories>();
             Oltpbtlcontents = new HashSet<Oltpbtlcontents>();
+            OltpcategoryRelations = new HashSet<OltpcategoryRelations>();
             Oltpoffers = new HashSet<Oltpoffers>();
             OltpproductItems = new HashSet<OltpproductItems>();
         }
@@ -32,12 +32,12 @@ namespace YOY.DAO.Entities.DB
         public int? HerarchyLevel { get; set; }
 
         public virtual Oltpcategories ParentCategoryNavigation { get; set; }
-        public virtual ICollection<DefcategoryRelations> DefcategoryRelations { get; set; }
         public virtual ICollection<DefdepartmentCategories> DefdepartmentCategories { get; set; }
         public virtual ICollection<Defkeywords> Defkeywords { get; set; }
         public virtual ICollection<DeftenantInformations> DeftenantInformations { get; set; }
         public virtual ICollection<Oltpcategories> InverseParentCategoryNavigation { get; set; }
         public virtual ICollection<Oltpbtlcontents> Oltpbtlcontents { get; set; }
+        public virtual ICollection<OltpcategoryRelations> OltpcategoryRelations { get; set; }
         public virtual ICollection<Oltpoffers> Oltpoffers { get; set; }
         public virtual ICollection<OltpproductItems> OltpproductItems { get; set; }
     }

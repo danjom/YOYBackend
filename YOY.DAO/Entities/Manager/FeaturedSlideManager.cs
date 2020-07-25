@@ -50,25 +50,8 @@ namespace YOY.DAO.Entities.Manager
             return typeName;
         }
 
-        private string GetRouteContentTypeName(int type)
-        {
-            string  typeName = type switch
-            {
-                FeaturedSlideAccessRouteTypes.None => Resources.None,
-                FeaturedSlideAccessRouteTypes.DealsListMultipleCommerces => Resources.DealsListMultipleCommerces,
-                FeaturedSlideAccessRouteTypes.DealsListSingleCommerce => Resources.DealsListSingleCommerce,
-                FeaturedSlideAccessRouteTypes.CashbackListMultipleCommerces => Resources.CashbackListMultipleCommerces,
-                FeaturedSlideAccessRouteTypes.CashbackListSingleCommerces => Resources.CashbackListMultipleCommerces,
-                FeaturedSlideAccessRouteTypes.DealDetail => Resources.DealDetail,
-                FeaturedSlideAccessRouteTypes.CashbackDetail => Resources.CashbackDetail,
-                FeaturedSlideAccessRouteTypes.Image => Resources.Image,
-                FeaturedSlideAccessRouteTypes.Video => Resources.Video,
-                _ => "--",
-            };
-            return typeName;
-        }
 
-        public List<FeaturedSlide> Gets(Guid? countryId, Guid? stateId, Guid? tenantId, int type, int routeAccessType, DateTime minDate, DateTime maxDate, int pageSize, int pageNumber)
+        public List<FeaturedSlide> Gets(Guid? countryId, Guid? stateId, Guid? tenantId, int type, DateTime minDate, DateTime maxDate, int pageSize, int pageNumber)
         {
             List<FeaturedSlide> featuredSlides = null;
 
@@ -84,74 +67,34 @@ namespace YOY.DAO.Entities.Manager
                         {
                             if (type != FeaturedSlideTypes.All)
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
-                                else
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
+                                query = (from x in this._businessObjects.Context.DeffeaturedSlides
+                                         where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.CreatedDate > minDate && x.CreatedDate < maxDate
+                                         orderby x.CreatedDate descending
+                                         select x).Skip(pageSize * pageNumber).Take(pageSize);
                             }
                             else
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
-                                else
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
+                                query = (from x in this._businessObjects.Context.DeffeaturedSlides
+                                         where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.CreatedDate > minDate && x.CreatedDate < maxDate
+                                         orderby x.CreatedDate descending
+                                         select x).Skip(pageSize * pageNumber).Take(pageSize);
                             }
                         }
                         else
                         {
                             if (type != FeaturedSlideTypes.All)
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.RouteContentType == routeAccessType && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
-                                else
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
+                                query = (from x in this._businessObjects.Context.DeffeaturedSlides
+                                         where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.CreatedDate > minDate && x.CreatedDate < maxDate
+                                         orderby x.CreatedDate descending
+                                         select x).Skip(pageSize * pageNumber).Take(pageSize);
                             }
                             else
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.RouteContentType == routeAccessType && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
-                                else
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
+                                query = (from x in this._businessObjects.Context.DeffeaturedSlides
+                                         where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.CreatedDate > minDate && x.CreatedDate < maxDate
+                                         orderby x.CreatedDate descending
+                                         select x).Skip(pageSize * pageNumber).Take(pageSize);
                             }
                         }
                     }
@@ -161,74 +104,34 @@ namespace YOY.DAO.Entities.Manager
                         {
                             if (type != FeaturedSlideTypes.All)
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
-                                else
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
+                                query = (from x in this._businessObjects.Context.DeffeaturedSlides
+                                         where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.CreatedDate > minDate && x.CreatedDate < maxDate
+                                         orderby x.CreatedDate descending
+                                         select x).Skip(pageSize * pageNumber).Take(pageSize);
                             }
                             else
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
-                                else
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
+                                query = (from x in this._businessObjects.Context.DeffeaturedSlides
+                                         where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.CreatedDate > minDate && x.CreatedDate < maxDate
+                                         orderby x.CreatedDate descending
+                                         select x).Skip(pageSize * pageNumber).Take(pageSize);
                             }
                         }
                         else
                         {
                             if (type != FeaturedSlideTypes.All)
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.CountryId == countryId && x.Type == type && x.RouteContentType == routeAccessType && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
-                                else
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.CountryId == countryId && x.Type == type && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
+                                query = (from x in this._businessObjects.Context.DeffeaturedSlides
+                                         where !x.Deleted && x.CountryId == countryId && x.Type == type && x.CreatedDate > minDate && x.CreatedDate < maxDate
+                                         orderby x.CreatedDate descending
+                                         select x).Skip(pageSize * pageNumber).Take(pageSize);
                             }
                             else
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.CountryId == countryId && x.RouteContentType == routeAccessType && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
-                                else
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.CountryId == countryId && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
+                                query = (from x in this._businessObjects.Context.DeffeaturedSlides
+                                         where !x.Deleted && x.CountryId == countryId && x.CreatedDate > minDate && x.CreatedDate < maxDate
+                                         orderby x.CreatedDate descending
+                                         select x).Skip(pageSize * pageNumber).Take(pageSize);
                             }
                         }
                     }
@@ -241,74 +144,34 @@ namespace YOY.DAO.Entities.Manager
                         {
                             if (type != FeaturedSlideTypes.All)
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
-                                else
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
+                                query = (from x in this._businessObjects.Context.DeffeaturedSlides
+                                         where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.CreatedDate > minDate && x.CreatedDate < maxDate
+                                         orderby x.CreatedDate descending
+                                         select x).Skip(pageSize * pageNumber).Take(pageSize);
                             }
                             else
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
-                                else
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
+                                query = (from x in this._businessObjects.Context.DeffeaturedSlides
+                                         where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.CreatedDate > minDate && x.CreatedDate < maxDate
+                                         orderby x.CreatedDate descending
+                                         select x).Skip(pageSize * pageNumber).Take(pageSize);
                             }
                         }
                         else
                         {
                             if (type != FeaturedSlideTypes.All)
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.StateId == stateId && x.Type == type && x.RouteContentType == routeAccessType && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
-                                else
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.StateId == stateId && x.Type == type && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
+                                query = (from x in this._businessObjects.Context.DeffeaturedSlides
+                                         where !x.Deleted && x.StateId == stateId && x.Type == type && x.CreatedDate > minDate && x.CreatedDate < maxDate
+                                         orderby x.CreatedDate descending
+                                         select x).Skip(pageSize * pageNumber).Take(pageSize);
                             }
                             else
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.StateId == stateId && x.RouteContentType == routeAccessType && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
-                                else
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.StateId == stateId && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
+                                query = (from x in this._businessObjects.Context.DeffeaturedSlides
+                                         where !x.Deleted && x.StateId == stateId && x.CreatedDate > minDate && x.CreatedDate < maxDate
+                                         orderby x.CreatedDate descending
+                                         select x).Skip(pageSize * pageNumber).Take(pageSize);
                             }
                         }
                     }
@@ -318,74 +181,34 @@ namespace YOY.DAO.Entities.Manager
                         {
                             if (type != FeaturedSlideTypes.All)
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.CreatedDate < minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
-                                else
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
+                                query = (from x in this._businessObjects.Context.DeffeaturedSlides
+                                         where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.CreatedDate > minDate && x.CreatedDate < maxDate
+                                         orderby x.CreatedDate descending
+                                         select x).Skip(pageSize * pageNumber).Take(pageSize);
                             }
                             else
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
-                                else
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.TenantId == tenantId && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
+                                query = (from x in this._businessObjects.Context.DeffeaturedSlides
+                                         where !x.Deleted && x.TenantId == tenantId && x.CreatedDate > minDate && x.CreatedDate < maxDate
+                                         orderby x.CreatedDate descending
+                                         select x).Skip(pageSize * pageNumber).Take(pageSize);
                             }
                         }
                         else
                         {
                             if (type != FeaturedSlideTypes.All)
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.Type == type && x.RouteContentType == routeAccessType && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
-                                else
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.Type == type && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
+                                query = (from x in this._businessObjects.Context.DeffeaturedSlides
+                                         where !x.Deleted && x.Type == type && x.CreatedDate > minDate && x.CreatedDate < maxDate
+                                         orderby x.CreatedDate descending
+                                         select x).Skip(pageSize * pageNumber).Take(pageSize);
                             }
                             else
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.RouteContentType == routeAccessType && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
-                                else
-                                {
-                                    query = (from x in this._businessObjects.Context.DeffeaturedSlides
-                                             where !x.Deleted && x.CreatedDate > minDate && x.CreatedDate < maxDate
-                                             orderby x.CreatedDate descending
-                                             select x).Skip(pageSize * pageNumber).Take(pageSize);
-                                }
+                                query = (from x in this._businessObjects.Context.DeffeaturedSlides
+                                         where !x.Deleted && x.CreatedDate > minDate && x.CreatedDate < maxDate
+                                         orderby x.CreatedDate descending
+                                         select x).Skip(pageSize * pageNumber).Take(pageSize);
                             }
                         }
                     }
@@ -409,9 +232,6 @@ namespace YOY.DAO.Entities.Manager
                             StateId = item.StateId,
                             Type = item.Type,
                             TypeName = GetTypeName(item.Type),
-                            RouteContentType = item.RouteContentType,
-                            RouteContentTypeName = item.RouteContentType != null ? GetRouteContentTypeName((int)item.RouteContentType) : "-",
-                            AccessRoute = item.AccessRoute,
                             MaxViews = item.MaxViews,
                             IsActive = (bool)item.IsActive,
                             ReleaseDate = item.ReleaseDate,
@@ -450,308 +270,152 @@ namespace YOY.DAO.Entities.Manager
                         {
                             if (type != FeaturedSlideTypes.All)
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
+                                switch (releaseState)
                                 {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
-                                }
-                                else
-                                {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
+                                    case ReleaseStates.All:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.NotReleased:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate > date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate > date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.Released:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
                                 }
                             }
                             else
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
+                                switch (releaseState)
                                 {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.RouteContentType == routeAccessType
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
-                                }
-                                else
-                                {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
+                                    case ReleaseStates.All:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.NotReleased:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate > date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate > date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.Released:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate <= date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate <= date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
                                 }
                             }
                         }
@@ -759,308 +423,152 @@ namespace YOY.DAO.Entities.Manager
                         {
                             if (type != FeaturedSlideTypes.All)
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
+                                switch (releaseState)
                                 {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.RouteContentType == routeAccessType
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.RouteContentType == routeAccessType && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.RouteContentType == routeAccessType && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
-                                }
-                                else
-                                {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
+                                    case ReleaseStates.All:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.NotReleased:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.ReleaseDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.ReleaseDate > date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.ReleaseDate > date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.Released:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.ReleaseDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
                                 }
                             }
                             else
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
+                                switch (releaseState)
                                 {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.RouteContentType == routeAccessType
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.RouteContentType == routeAccessType && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.RouteContentType == routeAccessType && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.RouteContentType == routeAccessType && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.RouteContentType == routeAccessType && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
-                                }
-                                else
-                                {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
+                                    case ReleaseStates.All:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.NotReleased:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.ReleaseDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.ReleaseDate > date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.ReleaseDate > date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.Released:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.ReleaseDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.ReleaseDate <= date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.StateId == stateId && x.ReleaseDate <= date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
                                 }
                             }
                         }
@@ -1071,308 +579,152 @@ namespace YOY.DAO.Entities.Manager
                         {
                             if (type != FeaturedSlideTypes.All)
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
+                                switch (releaseState)
                                 {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
-                                }
-                                else
-                                {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted &&  x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate < date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate < date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate < date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate >= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate >= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate >= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
+                                    case ReleaseStates.All:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.NotReleased:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate < date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate < date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate < date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.Released:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate >= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate >= date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate >= date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
                                 }
                             }
                             else
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
+                                switch (releaseState)
                                 {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.RouteContentType == routeAccessType
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
-                                }
-                                else
-                                {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
+                                    case ReleaseStates.All:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.NotReleased:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.ReleaseDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.ReleaseDate > date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.ReleaseDate > date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.Released:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.ReleaseDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.ReleaseDate <= date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.TenantId == tenantId && x.ReleaseDate <= date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
                                 }
                             }
                         }
@@ -1380,308 +732,152 @@ namespace YOY.DAO.Entities.Manager
                         {
                             if (type != FeaturedSlideTypes.All)
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
+                                switch (releaseState)
                                 {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.Type == type && x.RouteContentType == routeAccessType
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.Type == type && x.RouteContentType == routeAccessType && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.Type == type && x.RouteContentType == routeAccessType && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
-                                }
-                                else
-                                {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.Type == type
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.Type == type && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.Type == type && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.Type == type && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.Type == type && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.Type == type && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.Type == type && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
+                                    case ReleaseStates.All:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.Type == type
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.Type == type && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.Type == type && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.NotReleased:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.Type == type && x.ReleaseDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.Type == type && x.ReleaseDate > date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.Type == type && x.ReleaseDate > date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.Released:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.Type == type && x.ReleaseDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
                                 }
                             }
                             else
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
+                                switch (releaseState)
                                 {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.RouteContentType == routeAccessType
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.RouteContentType == routeAccessType && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.RouteContentType == routeAccessType && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.RouteContentType == routeAccessType && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.RouteContentType == routeAccessType && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
-                                }
-                                else
-                                {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.CountryId == countryId && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
+                                    case ReleaseStates.All:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.NotReleased:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.ReleaseDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.ReleaseDate > date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.ReleaseDate > date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.Released:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.ReleaseDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.ReleaseDate <= date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.CountryId == countryId && x.ReleaseDate <= date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
                                 }
                             }
                         }
@@ -1695,308 +891,152 @@ namespace YOY.DAO.Entities.Manager
                         {
                             if (type != FeaturedSlideTypes.All)
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
+                                switch (releaseState)
                                 {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
-                                }
-                                else
-                                {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
+                                    case ReleaseStates.All:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.NotReleased:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate > date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate > date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.Released:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
                                 }
                             }
                             else
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
+                                switch (releaseState)
                                 {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.RouteContentType == routeAccessType
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
-                                }
-                                else
-                                {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
+                                    case ReleaseStates.All:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.NotReleased:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate > date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate > date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.Released:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate <= date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.TenantId == tenantId && x.ReleaseDate <= date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
                                 }
                             }
                         }
@@ -2004,309 +1044,153 @@ namespace YOY.DAO.Entities.Manager
                         {
                             if (type != FeaturedSlideTypes.All)
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
+                                switch (releaseState)
                                 {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.Type == type && x.RouteContentType == routeAccessType
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.Type == type && x.RouteContentType == routeAccessType && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.Type == type && x.RouteContentType == routeAccessType && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
-                                }
-                                else
-                                {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.Type == type
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.Type == type & x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.Type == type & x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.Type == type && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.Type == type && x.ReleaseDate > date & x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.Type == type && x.ReleaseDate > date & x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.Type == type && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.Type == type && x.ReleaseDate <= date & x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.Type == type && x.ReleaseDate <= date & x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
+                                    case ReleaseStates.All:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.Type == type
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.Type == type & x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.Type == type & x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.NotReleased:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.Type == type && x.ReleaseDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.Type == type && x.ReleaseDate > date & x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.Type == type && x.ReleaseDate > date & x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.Released:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.Type == type && x.ReleaseDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.Type == type && x.ReleaseDate <= date & x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.Type == type && x.ReleaseDate <= date & x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
 
-                                    }
                                 }
                             }
                             else
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
+                                switch (releaseState)
                                 {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.RouteContentType == routeAccessType
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.RouteContentType == routeAccessType && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.RouteContentType == routeAccessType && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.RouteContentType == routeAccessType && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.RouteContentType == routeAccessType && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
-                                }
-                                else
-                                {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.StateId == stateId && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
+                                    case ReleaseStates.All:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.NotReleased:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.ReleaseDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.ReleaseDate > date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.ReleaseDate > date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.Released:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.ReleaseDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.ReleaseDate <= date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.StateId == stateId && x.ReleaseDate <= date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
                                 }
                             }
                         }
@@ -2317,308 +1201,152 @@ namespace YOY.DAO.Entities.Manager
                         {
                             if (type != FeaturedSlideTypes.All)
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
+                                switch (releaseState)
                                 {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
-                                }
-                                else
-                                {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.Type == type
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
+                                    case ReleaseStates.All:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.TenantId == tenantId && x.Type == type
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.NotReleased:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.ReleaseDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.ReleaseDate > date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.ReleaseDate > date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.Released:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.ReleaseDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.TenantId == tenantId && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
                                 }
                             }
                             else
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
+                                switch (releaseState)
                                 {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.RouteContentType == routeAccessType
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
-                                }
-                                else
-                                {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.TenantId == tenantId && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
+                                    case ReleaseStates.All:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.TenantId == tenantId
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.TenantId == tenantId && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.TenantId == tenantId && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.NotReleased:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.TenantId == tenantId && x.ReleaseDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.TenantId == tenantId && x.ReleaseDate > date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.TenantId == tenantId && x.ReleaseDate > date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.Released:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.TenantId == tenantId && x.ReleaseDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.TenantId == tenantId && x.ReleaseDate <= date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.TenantId == tenantId && x.ReleaseDate <= date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
                                 }
                             }
                         }
@@ -2626,308 +1354,152 @@ namespace YOY.DAO.Entities.Manager
                         {
                             if (type != FeaturedSlideTypes.All)
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
+                                switch (releaseState)
                                 {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.Type == type && x.RouteContentType == routeAccessType
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.Type == type && x.RouteContentType == routeAccessType && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.Type == type && x.RouteContentType == routeAccessType && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.Type == type && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
-                                }
-                                else
-                                {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.Type == type
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.Type == type && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.Type == type && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.Type == type && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.Type == type && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.Type == type && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.Type == type && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
+                                    case ReleaseStates.All:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.Type == type
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.Type == type && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.Type == type && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.NotReleased:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.Type == type && x.ReleaseDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.Type == type && x.ReleaseDate > date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.Type == type && x.ReleaseDate > date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.Released:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.Type == type && x.ReleaseDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.Type == type && x.ReleaseDate <= date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
                                 }
                             }
                             else
                             {
-                                if (routeAccessType != FeaturedSlideAccessRouteTypes.All)
+                                switch (releaseState)
                                 {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.RouteContentType == routeAccessType
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.RouteContentType == routeAccessType && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.RouteContentType == routeAccessType && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.RouteContentType == routeAccessType && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.RouteContentType == routeAccessType && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.RouteContentType == routeAccessType && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.RouteContentType == routeAccessType && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
-                                }
-                                else
-                                {
-                                    switch (releaseState)
-                                    {
-                                        case ReleaseStates.All:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.NotReleased:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.ReleaseDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.ReleaseDate > date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.ReleaseDate > date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                        case ReleaseStates.Released:
-                                            switch (expiredState)
-                                            {
-                                                case ExpiredStates.All:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.ReleaseDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Valid:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.ReleaseDate <= date && x.ExpirationDate > date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                                case ExpiredStates.Expired:
-                                                    query = from x in this._businessObjects.Context.DeffeaturedSlides
-                                                            where !x.Deleted && x.ReleaseDate <= date && x.ExpirationDate <= date
-                                                            orderby x.CreatedDate descending
-                                                            select x;
-                                                    break;
-                                            }
-                                            break;
-                                    }
+                                    case ReleaseStates.All:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.NotReleased:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.ReleaseDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.ReleaseDate > date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.ReleaseDate > date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
+                                    case ReleaseStates.Released:
+                                        switch (expiredState)
+                                        {
+                                            case ExpiredStates.All:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.ReleaseDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Valid:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.ReleaseDate <= date && x.ExpirationDate > date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                            case ExpiredStates.Expired:
+                                                query = from x in this._businessObjects.Context.DeffeaturedSlides
+                                                        where !x.Deleted && x.ReleaseDate <= date && x.ExpirationDate <= date
+                                                        orderby x.CreatedDate descending
+                                                        select x;
+                                                break;
+                                        }
+                                        break;
                                 }
                             }
                         }
@@ -2952,9 +1524,6 @@ namespace YOY.DAO.Entities.Manager
                             StateId = item.StateId,
                             Type = item.Type,
                             TypeName = GetTypeName(item.Type),
-                            RouteContentType = item.RouteContentType,
-                            RouteContentTypeName = item.RouteContentType != null ? GetRouteContentTypeName((int)item.RouteContentType) : "-",
-                            AccessRoute = item.AccessRoute,
                             MaxViews = item.MaxViews,
                             IsActive = (bool)item.IsActive,
                             ReleaseDate = item.ReleaseDate,
@@ -3002,9 +1571,6 @@ namespace YOY.DAO.Entities.Manager
                             StateId = item.StateId,
                             Type = item.Type,
                             TypeName = GetTypeName(item.Type),
-                            RouteContentType = item.RouteContentType,
-                            RouteContentTypeName = item.RouteContentType != null ? GetRouteContentTypeName((int)item.RouteContentType) : "-",
-                            AccessRoute = item.AccessRoute,
                             MaxViews = item.MaxViews,
                             IsActive = (bool)item.IsActive,
                             ReleaseDate = item.ReleaseDate,
@@ -3026,7 +1592,7 @@ namespace YOY.DAO.Entities.Manager
             return featuredSlide;
         }
 
-        public FeaturedSlide Post(Guid countryId, Guid? state, Guid? tenantId, Guid? imageId, string name, string description, int type, int routeContentType, string accessRoute, int maxViews, DateTime releaseDate, DateTime expirationDate)
+        public FeaturedSlide Post(Guid countryId, Guid? state, Guid? tenantId, Guid? imageId, string name, string description, int type, int maxViews, DateTime releaseDate, DateTime expirationDate)
         {
             FeaturedSlide featuredSlide;
 
@@ -3042,8 +1608,6 @@ namespace YOY.DAO.Entities.Manager
                     Name = name,
                     Description = description,
                     Type = type,
-                    RouteContentType = routeContentType,
-                    AccessRoute = accessRoute,
                     MaxViews = maxViews,
                     IsActive = true,
                     ReleaseDate = releaseDate,
@@ -3066,9 +1630,6 @@ namespace YOY.DAO.Entities.Manager
                     StateId = newFeaturedSlide.StateId,
                     Type = newFeaturedSlide.Type,
                     TypeName = GetTypeName(newFeaturedSlide.Type),
-                    RouteContentType = newFeaturedSlide.RouteContentType,
-                    RouteContentTypeName = newFeaturedSlide.RouteContentType != null ? GetRouteContentTypeName((int)newFeaturedSlide.RouteContentType) : "-",
-                    AccessRoute = newFeaturedSlide.AccessRoute,
                     MaxViews = newFeaturedSlide.MaxViews,
                     IsActive = (bool)newFeaturedSlide.IsActive,
                     ReleaseDate = newFeaturedSlide.ReleaseDate,
@@ -3088,7 +1649,7 @@ namespace YOY.DAO.Entities.Manager
             return featuredSlide;
         }
 
-        public FeaturedSlide Put(Guid id, Guid? stateId, string name, string description, string accessRoute, int maxViews, DateTime releaseDate, DateTime expirationDate)
+        public FeaturedSlide Put(Guid id, Guid? stateId, string name, string description, int maxViews, DateTime releaseDate, DateTime expirationDate)
         {
             FeaturedSlide featuredSlide = null;
 
@@ -3112,7 +1673,6 @@ namespace YOY.DAO.Entities.Manager
                         currentFeaturedSlide.StateId = stateId;
                         currentFeaturedSlide.Name = name;
                         currentFeaturedSlide.Description = description;
-                        currentFeaturedSlide.AccessRoute = accessRoute;
                         currentFeaturedSlide.MaxViews = maxViews;
                         currentFeaturedSlide.ReleaseDate = releaseDate;
                         currentFeaturedSlide.ExpirationDate = expirationDate;
@@ -3131,9 +1691,6 @@ namespace YOY.DAO.Entities.Manager
                             StateId = currentFeaturedSlide.StateId,
                             Type = currentFeaturedSlide.Type,
                             TypeName = GetTypeName(currentFeaturedSlide.Type),
-                            RouteContentType = currentFeaturedSlide.RouteContentType,
-                            RouteContentTypeName = currentFeaturedSlide.RouteContentType != null ? GetRouteContentTypeName((int)currentFeaturedSlide.RouteContentType) : "-",
-                            AccessRoute = currentFeaturedSlide.AccessRoute,
                             MaxViews = currentFeaturedSlide.MaxViews,
                             IsActive = (bool)currentFeaturedSlide.IsActive,
                             ReleaseDate = currentFeaturedSlide.ReleaseDate,
@@ -3268,216 +1825,6 @@ namespace YOY.DAO.Entities.Manager
 
         #endregion
 
-        #region CONTENTS
-
-        public List<FeaturedSlideContent> Gets(Guid featuredSlideId, int activeState)
-        {
-            List<FeaturedSlideContent> featuredSlideContents = null;
-
-            try
-            {
-                var query = (dynamic)null;
-
-                switch (activeState)
-                {
-                    case ActiveStates.All:
-                        query = from x in this._businessObjects.Context.DeffeaturedSlideContents
-                                where x.FeaturedSlideId == featuredSlideId
-                                select x;
-                        break;
-                    case ActiveStates.Active:
-                        query = from x in this._businessObjects.Context.DeffeaturedSlideContents
-                                where (bool)x.IsActive && x.FeaturedSlideId == featuredSlideId
-                                select x;
-                        break;
-                    case ActiveStates.Inactive:
-                        query = from x in this._businessObjects.Context.DeffeaturedSlideContents
-                                where !(bool)x.IsActive && x.FeaturedSlideId == featuredSlideId
-                                select x;
-                        break;
-
-                }
-
-                if (query != null)
-                {
-                    featuredSlideContents = new List<FeaturedSlideContent>();
-                    FeaturedSlideContent featuredSlideContent = null;
-
-                    foreach (DeffeaturedSlideContents item in query)
-                    {
-                        featuredSlideContent = new FeaturedSlideContent
-                        {
-                            Id = item.Id,
-                            ReferenceId = item.ReferenceId,
-                            ReferenceType = item.ReferenceType,
-                            ReferenceTypeName = GetRouteContentTypeName(item.ReferenceType),
-                            IsActive = (bool)item.IsActive,
-                            CreatedDate = item.CreatedDate,
-                            UpdatedDate = item.UpdatedDate
-
-                        };
-
-                        featuredSlideContents.Add(featuredSlideContent);
-                    }
-                }
-
-
-            }
-            catch (Exception e)
-            {
-                featuredSlideContents = null;
-                //ERROR MANAGEMENT 
-                this._businessObjects.StoredProcsHandler.AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
-            }
-
-            return featuredSlideContents;
-        }
-
-        public FeaturedSlideContent Get(Guid id, int nothing)
-        {
-            FeaturedSlideContent featuredSlideContent = null;
-
-            try
-            {
-                var query = from x in this._businessObjects.Context.DeffeaturedSlideContents
-                            where x.Id == id
-                            select x;
-
-                if (query != null)
-                {
-
-                    foreach (DeffeaturedSlideContents item in query)
-                    {
-                        featuredSlideContent = new FeaturedSlideContent
-                        {
-                            Id = item.Id,
-                            ReferenceId = item.ReferenceId,
-                            ReferenceType = item.ReferenceType,
-                            ReferenceTypeName = GetRouteContentTypeName(item.ReferenceType),
-                            IsActive = (bool)item.IsActive,
-                            CreatedDate = item.CreatedDate,
-                            UpdatedDate = item.UpdatedDate
-                        };
-                    }
-                }
-
-
-            }
-            catch (Exception e)
-            {
-                featuredSlideContent = null;
-                //ERROR MANAGEMENT 
-                this._businessObjects.StoredProcsHandler.AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
-            }
-
-            return featuredSlideContent;
-        }
-
-        public bool Post(Guid featuredSlideId, Guid referenceId, int referenceType)
-        {
-            bool success = false;
-
-            try
-            {
-                DeffeaturedSlideContents newContent = new DeffeaturedSlideContents
-                {
-                    Id = Guid.NewGuid(),
-                    FeaturedSlideId = featuredSlideId,
-                    ReferenceId = referenceId,
-                    ReferenceType = referenceType,
-                    IsActive = true,
-                    CreatedDate = DateTime.UtcNow,
-                    UpdatedDate = DateTime.UtcNow
-                };
-
-                this._businessObjects.Context.DeffeaturedSlideContents.Add(newContent);
-                this._businessObjects.Context.SaveChanges();
-
-                success = true;
-            }
-            catch (Exception e)
-            {
-                success = false;
-                //ERROR MANAGEMENT 
-                this._businessObjects.StoredProcsHandler.AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
-            }
-
-            return success;
-        }
-
-        public bool Put(Guid id, int nothing)
-        {
-            bool success = false;
-
-            try
-            {
-                var query = from x in this._businessObjects.Context.DeffeaturedSlideContents
-                            where x.Id == id
-                            select x;
-
-                if (query != null)
-                {
-                    DeffeaturedSlideContents currenctContent = null;
-
-                    foreach (DeffeaturedSlideContents item in query)
-                    {
-                        currenctContent = item;
-                    }
-
-                    if (currenctContent != null)
-                    {
-                        currenctContent.IsActive = !currenctContent.IsActive;
-                        currenctContent.UpdatedDate = DateTime.UtcNow;
-
-                        this._businessObjects.Context.SaveChanges();
-
-                        success = true;
-                    }
-                }
-
-            }
-            catch (Exception e)
-            {
-                success = false;
-                //ERROR MANAGEMENT 
-                this._businessObjects.StoredProcsHandler.AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
-            }
-
-            return success;
-        }
-
-        public bool Delete(Guid id, int nothing)
-        {
-            bool success = false;
-
-            try
-            {
-                DeffeaturedSlideContents currenctContent = (from x in this._businessObjects.Context.DeffeaturedSlideContents
-                                                            where x.Id == id
-                                                            select x).FirstOrDefault();
-
-                if (currenctContent != null)
-                {
-                    currenctContent.Deleted = true;
-                    currenctContent.UpdatedDate = DateTime.UtcNow;
-
-                    this._businessObjects.Context.SaveChanges();
-
-                    success = true;
-                }
-
-            }
-            catch (Exception e)
-            {
-                success = false;
-                //ERROR MANAGEMENT 
-                this._businessObjects.StoredProcsHandler.AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
-            }
-
-            return success;
-        }
-
-        #endregion
 
         #region CONSTRUCTORS
         // ---------------------------------------------------------------------------------------------------------------------------------------------- //

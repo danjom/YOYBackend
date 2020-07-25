@@ -715,7 +715,7 @@ namespace YOY.BusinessAPI.Controllers
                                 if (newOffer != null)
                                 {
                                     //Creates the category relation
-                                    this._businessObjects.Categories.Post(model.MainCategoryId, newOffer.Id, CategoryRelatiomReferenceTypes.Offer);
+                                    this._businessObjects.Categories.Post(model.MainCategoryId, CategoryHerarchyLevels.ProductCategory, newOffer.Id, CategoryRelatiomReferenceTypes.Offer);
 
                                     //Needs to add it to Algolia 1st
                                     if (newOffer.DisplayType < DisplayTypes.BroadcastingOnly)//If the offer will be publicly accessible
@@ -752,7 +752,7 @@ namespace YOY.BusinessAPI.Controllers
                                         ErrorCode = Values.StatusCodes.BadRequest,
                                         ShowErrorToUser = true,
                                         InnerError = "Error at creation procceess",
-                                        PublicError = "No hemos podido crear este incentivo, por favor revisa el formulario y trata de nuevo"
+                                        PublicError = "No hemos podido crear esta promo, por favor revisa el formulario y trata de nuevo"
                                     });
                                 }
                             }
@@ -764,7 +764,7 @@ namespace YOY.BusinessAPI.Controllers
                                         ErrorCode = Values.StatusCodes.BadRequest,
                                         ShowErrorToUser = true,
                                         InnerError = "Wrong commerce",
-                                        PublicError = "No hemos podido crear este incentivo, por favor revisa el formulario y trata de nuevo"
+                                        PublicError = "No hemos podido crear esta promo, por favor revisa el formulario y trata de nuevo"
                                     });
                             }
                         }
@@ -777,7 +777,7 @@ namespace YOY.BusinessAPI.Controllers
                                            ErrorCode = Values.StatusCodes.BadRequest,
                                            ShowErrorToUser = true,
                                            InnerError = "Invalid employee",
-                                           PublicError = "No hemos podido crear este incentivo, por favor revisa el formulario y trata de nuevo"
+                                           PublicError = "No hemos podido crear esta promo, por favor revisa el formulario y trata de nuevo"
                                        });
 
                     }
@@ -987,46 +987,70 @@ namespace YOY.BusinessAPI.Controllers
 
                             if (tenantInfo != null)
                             {
+                                Offer offer = this._businessObjects.Offers.Get(model.Id, false);
+                                Guid currentMainCategoryId;
 
-                                double relevanceRate = model.RelevanceRate ?? -1;
-
-                                Offer updatedOffer = this._businessObjects.Offers.Put(model.Id, model.OfferType, model.MainCategoryId, model.Name, model.MainHint, model.ComplementaryHint, model.Keywords, model.Code, null, model.Description, (bool)model.IsActive, model.IsExclusive,
-                                    model.IsSponsored, false, model.AvailableQuantity, -1, 0, null, model.ClaimLocation, model.Value, model.RegularValue, model.ExtraBonus, model.ExtraBonusType, model.Value,
-                                    model.Value, 0, 0, 0, imgId, targettingParams, model.ReleaseDate, model.ExpirationDate, relevanceRate);
-
-
-
-                                if (updatedOffer != null)
+                                if(offer != null)
                                 {
-                                    //Creates the category relation
-                                    this._businessObjects.Categories.Post(model.MainCategoryId, updatedOffer.Id, CategoryRelatiomReferenceTypes.Offer);
+                                    currentMainCategoryId = offer.MainCategoryId;
 
-                                    //Needs to add it to Algolia 1st
-                                    if (updatedOffer.DisplayType < DisplayTypes.BroadcastingOnly)//If the offer will be publicly accessible
+                                    double relevanceRate = model.RelevanceRate ?? -1;
+
+                                    Offer updatedOffer = this._businessObjects.Offers.Put(model.Id, model.OfferType, model.MainCategoryId, model.Name, model.MainHint, model.ComplementaryHint, model.Keywords, model.Code, null, model.Description, (bool)model.IsActive, model.IsExclusive,
+                                        model.IsSponsored, false, model.AvailableQuantity, -1, 0, null, model.ClaimLocation, model.Value, model.RegularValue, model.ExtraBonus, model.ExtraBonusType, model.Value,
+                                        model.Value, 0, 0, 0, imgId, targettingParams, model.ReleaseDate, model.ExpirationDate, relevanceRate);
+
+
+
+                                    if (updatedOffer != null)
                                     {
-
-                                        ImageHandler imgHandler = new ImageHandler();
-
-                                        string index;
-
-                                        if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+                                        if(currentMainCategoryId != updatedOffer.MainCategoryId)
                                         {
-                                            index = "dev_DEALS";
+                                            //Needs to update the category relation
+                                            this._businessObjects.Categories.Delete(offer.MainCategoryId, model.Id, CategoryRelatiomReferenceTypes.Offer);
 
-                                        }
-                                        else
-                                        {
-                                            index = "prod_DEALS";
+                                            //Creates the category relation
+                                            this._businessObjects.Categories.Post(model.MainCategoryId, CategoryHerarchyLevels.ProductCategory, updatedOffer.Id, CategoryRelatiomReferenceTypes.Offer);
                                         }
 
-                                        SearchObjectHandler.SetParams("HDFTAAQXVP", index);
+                                        //Needs to add it to Algolia 1st
+                                        if (updatedOffer.DisplayType < DisplayTypes.BroadcastingOnly)//If the offer will be publicly accessible
+                                        {
 
-                                        bool success = SearchObjectHandler.AddObject(updatedOffer.Id, updatedOffer.TenantId, tenantInfo.CountryId, updatedOffer.MainHint + " - " + updatedOffer.ComplementaryHint, DealContentTypes.Offer, SearchableObjectTypes.Deal, imgHandler.GetImgUrl((Guid)tenantInfo.Logo, ImageStorages.Cloudinary, ImageRequesters.App).ImgUrl,
-                                            updatedOffer.MainCategoryName, this._businessObjects.Categories.GetParentCategory(updatedOffer.MainCategoryId, CategoryHerarchyLevels.ProductCategory), updatedOffer.Keywords, updatedOffer.DealTypeName, updatedOffer.IsActive,
-                                            (DateTime)updatedOffer.ReleaseDate, updatedOffer.ExpirationDate);
+                                            ImageHandler imgHandler = new ImageHandler();
+
+                                            string index;
+
+                                            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+                                            {
+                                                index = "dev_DEALS";
+
+                                            }
+                                            else
+                                            {
+                                                index = "prod_DEALS";
+                                            }
+
+                                            SearchObjectHandler.SetParams("HDFTAAQXVP", index);
+
+                                            bool success = SearchObjectHandler.AddObject(updatedOffer.Id, updatedOffer.TenantId, tenantInfo.CountryId, updatedOffer.MainHint + " - " + updatedOffer.ComplementaryHint, DealContentTypes.Offer, SearchableObjectTypes.Deal, imgHandler.GetImgUrl((Guid)tenantInfo.Logo, ImageStorages.Cloudinary, ImageRequesters.App).ImgUrl,
+                                                updatedOffer.MainCategoryName, this._businessObjects.Categories.GetParentCategory(updatedOffer.MainCategoryId, CategoryHerarchyLevels.ProductCategory), updatedOffer.Keywords, updatedOffer.DealTypeName, updatedOffer.IsActive,
+                                                (DateTime)updatedOffer.ReleaseDate, updatedOffer.ExpirationDate);
+                                        }
+
+                                        result = Ok(this.GetDealContent(updatedOffer, updatedOffer.OfferType));
                                     }
-
-                                    result = Ok(this.GetDealContent(updatedOffer, updatedOffer.OfferType));
+                                    else
+                                    {
+                                        result = new BadRequestObjectResult(
+                                        new ErrorResponse
+                                        {
+                                            ErrorCode = Values.StatusCodes.BadRequest,
+                                            ShowErrorToUser = true,
+                                            InnerError = "Error at creation procceess",
+                                            PublicError = "No hemos podido editar esta promo, por favor revisa el formulario y trata de nuevo"
+                                        });
+                                    }
                                 }
                                 else
                                 {
@@ -1035,10 +1059,11 @@ namespace YOY.BusinessAPI.Controllers
                                     {
                                         ErrorCode = Values.StatusCodes.BadRequest,
                                         ShowErrorToUser = true,
-                                        InnerError = "Error at creation procceess",
-                                        PublicError = "No hemos podido crear este incentivo, por favor revisa el formulario y trata de nuevo"
+                                        InnerError = "Error at update procceess",
+                                        PublicError = "No hemos podido actualizar este incentivo, por favor revisa el formulario y trata de nuevo"
                                     });
                                 }
+
                             }
                             else
                             {

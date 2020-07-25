@@ -12766,6 +12766,15 @@ namespace YOY.Values.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Requiere código.
+        /// </summary>
+        public static string UnlockCodeRequired {
+            get {
+                return ResourceManager.GetString("UnlockCodeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hasta agotar existencia.
         /// </summary>
         public static string UntilOutOfStock {

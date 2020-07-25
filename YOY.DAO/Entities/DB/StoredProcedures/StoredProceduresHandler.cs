@@ -330,7 +330,38 @@ namespace YOY.DAO.Entities.DB.StoredProcedures
 
         }
 
-        public string GetPreferenceForCommerceCategory(Guid categoryId, int herarchyLevel)
+        public Guid GetPreferenceIdForCommerceCategory(Guid categoryId, int herarchyLevel)
+        {
+            Guid preferenceId = Guid.Empty;
+
+            try
+            {
+                Guid? preferenceIdAux = Guid.Empty;
+
+                var categoryIdParam = new SqlParameter("categoryId", categoryId);
+                var herarchyLevelParam = new SqlParameter("herarchyLevel", herarchyLevel);
+                var preferenceIdParam = new SqlParameter("preferenceId", preferenceIdAux) { Direction = ParameterDirection.Output };
+
+                // Processing.  
+                _dbContext.Database.ExecuteSqlRaw("EXEC [dbo].[GetPreferenceIdForCommerceCategory] @categoryId, @herarchyLevel, @preferenceId output", new[] { categoryIdParam, herarchyLevelParam, preferenceIdParam });
+                
+                if(preferenceIdParam.Value != null)
+                    Guid.TryParse(preferenceIdParam.Value.ToString(), out preferenceId);
+
+                //preferenceId = Convert.ToString(preferenceIdParam.Value);
+            }
+            catch (Exception e)
+            {
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return preferenceId;
+
+        }
+
+        public string GetPreferenceNameForCommerceCategory(Guid categoryId, int herarchyLevel)
         {
             string preferenceName = "";
 
@@ -342,7 +373,7 @@ namespace YOY.DAO.Entities.DB.StoredProcedures
                 var preferenceNameParam = new SqlParameter("preferenceName", preferenceName) { Direction = ParameterDirection.Output };
 
                 // Processing.  
-                _dbContext.Database.ExecuteSqlRaw("EXEC [dbo].[GetPreferenceForCommerceCategory] @categoryId, @herarchyLevel, @preferenceName output", new[] { categoryIdParam, herarchyLevelParam, preferenceNameParam });
+                _dbContext.Database.ExecuteSqlRaw("EXEC [dbo].[GetPreferenceNameForCommerceCategory] @categoryId, @herarchyLevel, @preferenceName output", new[] { categoryIdParam, herarchyLevelParam, preferenceNameParam });
                 preferenceName = Convert.ToString(preferenceNameParam.Value);
             }
             catch (Exception e)
@@ -357,7 +388,37 @@ namespace YOY.DAO.Entities.DB.StoredProcedures
 
         }
 
-        public string GetPreferenceForProductCategory(Guid categoryId, int herarchyLevel)
+        public Guid GetPreferenceIdForProductCategory(Guid categoryId, int herarchyLevel)
+        {
+            Guid preferenceId = Guid.Empty;
+
+            try
+            {
+
+                Guid? preferenceIdAux = Guid.Empty;
+
+                var categoryIdParam = new SqlParameter("categoryId", categoryId);
+                var herarchyLevelParam = new SqlParameter("herarchyLevel", herarchyLevel);
+                var preferenceIdParam = new SqlParameter("preferenceId", preferenceIdAux) { Direction = ParameterDirection.Output };
+
+                // Processing.  
+                _dbContext.Database.ExecuteSqlRaw("EXEC [dbo].[GetPreferenceIdForProductCategory] @categoryId, @herarchyLevel, @preferenceId output", new[] { categoryIdParam, herarchyLevelParam, preferenceIdParam });
+
+                if (preferenceIdParam.Value != null)
+                    Guid.TryParse(preferenceIdParam.Value.ToString(), out preferenceId);
+            }
+            catch (Exception e)
+            {
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return preferenceId;
+
+        }
+
+        public string GetPreferenceNameForProductCategory(Guid categoryId, int herarchyLevel)
         {
             string preferenceName = "";
 
@@ -369,7 +430,7 @@ namespace YOY.DAO.Entities.DB.StoredProcedures
                 var preferenceNameParam = new SqlParameter("preferenceName", preferenceName) { Direction = ParameterDirection.Output };
 
                 // Processing.  
-                _dbContext.Database.ExecuteSqlRaw("EXEC [dbo].[GetPreferenceForProductCategory] @categoryId, @herarchyLevel, @preferenceName output", new[] { categoryIdParam, herarchyLevelParam, preferenceNameParam });
+                _dbContext.Database.ExecuteSqlRaw("EXEC [dbo].[GetPreferenceNameForProductCategory] @categoryId, @herarchyLevel, @preferenceName output", new[] { categoryIdParam, herarchyLevelParam, preferenceNameParam });
                 preferenceName = Convert.ToString(preferenceNameParam.Value);
             }
             catch (Exception e)

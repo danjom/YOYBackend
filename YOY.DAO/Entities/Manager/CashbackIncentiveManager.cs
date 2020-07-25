@@ -89,8 +89,19 @@ namespace YOY.DAO.Entities.Manager
             {
                 CashbackTypes.ByTotalAmount => Resources.ByTotalAmount,
                 CashbackTypes.ByAmountBlock => Resources.ByAmountBlock,
-                CashbackTypes.ByTotalAmountPurchaseFrequency => Resources.ByTotalAmountPurchaseFrequency,
-                CashbackTypes.ByAmountBlockPurchaseFrequency => Resources.ByAmountBlockPurchaseFrequency,
+                _ => "--",
+            };
+            return typeName;
+        }
+
+        private string GetDisplayTypeName(int displayType)
+        {
+            string typeName = displayType switch
+            {
+                DisplayTypes.ListingsOnly => Resources.ListingsOnly,
+                DisplayTypes.BroadcastingAndListings => Resources.BroadcastingAndListings,
+                DisplayTypes.BroadcastingOnly => Resources.BroadcastingOnly,
+                DisplayTypes.UnlockCodeRequired => Resources.UnlockCodeRequired,
                 _ => "--",
             };
             return typeName;
@@ -1266,12 +1277,15 @@ namespace YOY.DAO.Entities.Manager
                             TypeName = GetTypeName(item.Type),
                             EarningType = item.EarningType,
                             EarningTypeName = GetEarningTypeName(item.EarningType),
+                            DisplayType = item.DisplayType,
+                            DisplayTypeName = GetDisplayTypeName(item.DisplayType),
                             DealType = item.DealType,
                             DealTypeName = GetDealTypeName(item.DealType),
                             CombineType = item.CombineType,
                             CombineTypeName = GetCombineTypeName(item.CombineType),
                             UnitValue = item.UnitValue,
                             PreviousUnitValue = item.PreviousUnitValue,
+                            MinMembershipLevel = item.MinMembershipLevel,
                             MinPurchasedAmount = item.MinPurchasedAmount,
                             PurchasedAmountBlock = item.PurchasedAmountBlock,
                             MaxValue = item.MaxValue,
@@ -1539,12 +1553,15 @@ namespace YOY.DAO.Entities.Manager
                             TypeName = GetTypeName(item.Type),
                             EarningType = item.EarningType,
                             EarningTypeName = GetEarningTypeName(item.EarningType),
+                            DisplayType = item.DisplayType,
+                            DisplayTypeName = GetDisplayTypeName(item.DisplayType),
                             DealType = item.DealType,
                             DealTypeName = GetDealTypeName(item.DealType),
                             CombineType = item.CombineType,
                             CombineTypeName = GetCombineTypeName(item.CombineType),
                             UnitValue = item.UnitValue,
                             PreviousUnitValue = item.PreviousUnitValue,
+                            MinMembershipLevel = item.MinMembershipLevel,
                             MinPurchasedAmount = item.MinPurchasedAmount,
                             PurchasedAmountBlock = item.PurchasedAmountBlock,
                             MaxValue = item.MaxValue,
@@ -1651,12 +1668,15 @@ namespace YOY.DAO.Entities.Manager
                             TypeName = GetTypeName(item.Type),
                             EarningType = item.EarningType,
                             EarningTypeName = GetEarningTypeName(item.EarningType),
+                            DisplayType = item.DisplayType,
+                            DisplayTypeName = GetDisplayTypeName(item.DisplayType),
                             DealType = item.DealType,
                             DealTypeName = GetDealTypeName(item.DealType),
                             CombineType = item.CombineType,
                             CombineTypeName = GetCombineTypeName(item.CombineType),
                             UnitValue = item.UnitValue,
                             PreviousUnitValue = item.PreviousUnitValue,
+                            MinMembershipLevel = item.MinMembershipLevel,
                             MinPurchasedAmount = item.MinPurchasedAmount,
                             PurchasedAmountBlock = item.PurchasedAmountBlock,
                             MaxValue = item.MaxValue,
@@ -1757,12 +1777,15 @@ namespace YOY.DAO.Entities.Manager
                             TypeName = GetTypeName(item.Type),
                             EarningType = item.EarningType,
                             EarningTypeName = GetEarningTypeName(item.EarningType),
+                            DisplayType = item.DisplayType,
+                            DisplayTypeName = GetDisplayTypeName(item.DisplayType),
                             DealType = item.DealType,
                             DealTypeName = GetDealTypeName(item.DealType),
                             CombineType = item.CombineType,
                             CombineTypeName = GetCombineTypeName(item.CombineType),
                             UnitValue = item.UnitValue,
                             PreviousUnitValue = item.PreviousUnitValue,
+                            MinMembershipLevel = item.MinMembershipLevel,
                             MinPurchasedAmount = item.MinPurchasedAmount,
                             PurchasedAmountBlock = item.PurchasedAmountBlock,
                             MaxValue = item.MaxValue,
@@ -2022,12 +2045,15 @@ namespace YOY.DAO.Entities.Manager
                             TypeName = GetTypeName(item.Type),
                             EarningType = item.EarningType,
                             EarningTypeName = GetEarningTypeName(item.EarningType),
+                            DisplayType = item.DisplayType,
+                            DisplayTypeName = GetDisplayTypeName(item.DisplayType),
                             DealType = item.DealType,
                             DealTypeName = GetDealTypeName(item.DealType),
                             CombineType = item.CombineType,
                             CombineTypeName = GetCombineTypeName(item.CombineType),
                             UnitValue = item.UnitValue,
                             PreviousUnitValue = item.PreviousUnitValue,
+                            MinMembershipLevel = item.MinMembershipLevel,
                             MinPurchasedAmount = item.MinPurchasedAmount,
                             PurchasedAmountBlock = item.PurchasedAmountBlock,
                             MaxValue = item.MaxValue,
@@ -2082,8 +2108,6 @@ namespace YOY.DAO.Entities.Manager
         }//GETS METHOD ENDS ----------------------------------------------------------------------------------------------------------------------------- //
 
 
-
-
         public CashbackIncentive Get(Guid id, int type, bool filterByTenant)
         {
             CashbackIncentive cashbackIncentive = null;
@@ -2117,12 +2141,15 @@ namespace YOY.DAO.Entities.Manager
                         TypeName = GetTypeName(item.Type),
                         EarningType = item.EarningType,
                         EarningTypeName = GetEarningTypeName(item.EarningType),
+                        DisplayType = item.DisplayType,
+                        DisplayTypeName = GetDisplayTypeName(item.DisplayType),
                         DealType = item.DealType,
                         DealTypeName = GetDealTypeName(item.DealType),
                         CombineType = item.CombineType,
                         CombineTypeName = GetCombineTypeName(item.CombineType),
                         UnitValue = item.UnitValue,
                         PreviousUnitValue = item.PreviousUnitValue,
+                        MinMembershipLevel = item.MinMembershipLevel,
                         MinPurchasedAmount = item.MinPurchasedAmount,
                         PurchasedAmountBlock = item.PurchasedAmountBlock,
                         MaxValue = item.MaxValue,
@@ -2202,12 +2229,15 @@ namespace YOY.DAO.Entities.Manager
                         TypeName = GetTypeName(item.Type),
                         EarningType = item.EarningType,
                         EarningTypeName = GetEarningTypeName(item.EarningType),
+                        DisplayType = item.DisplayType,
+                        DisplayTypeName = GetDisplayTypeName(item.DisplayType),
                         DealType = item.DealType,
                         DealTypeName = GetDealTypeName(item.DealType),
                         CombineType = item.CombineType,
                         CombineTypeName = GetCombineTypeName(item.CombineType),
                         UnitValue = item.UnitValue,
                         PreviousUnitValue = item.PreviousUnitValue,
+                        MinMembershipLevel = item.MinMembershipLevel,
                         MinPurchasedAmount = item.MinPurchasedAmount,
                         PurchasedAmountBlock = item.PurchasedAmountBlock,
                         MaxValue = item.MaxValue,
@@ -2288,10 +2318,10 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="commissionFeeValue"></param>
         /// <param name="minCommissionFeeAmount"></param>
         /// <returns></returns>
-        public CashbackIncentive Post(int earningType, int type, int dealType, int combineType, decimal unitValue, decimal previousUnitValue, decimal minPurchasedAmount, decimal purchasedAmountBlock, decimal maxValue, int availableQuantity, string name,
-            string description, string keywords, bool isSponsored, DateTime releaseDate, DateTime expirationDate, string validWeekDays, string validMonthDays, string validHours, int maxUsagesPerUser,
-            int geoSegmentationType, string rules, string conditions, string claimInstructions, bool oneTimeUsagePerUser, int minPurchasesCountToUse, DateTime? purchasesCountStartDate, int minPurchasesHoursTimeoutToUse, int maxPurchasesDaysTimeoutToUse,
-            double relevanceRate)
+        public CashbackIncentive Post(int earningType, int displayType, int type, int dealType, int combineType, decimal unitValue, decimal previousUnitValue, int minMembershipLevel, decimal minPurchasedAmount, 
+            decimal purchasedAmountBlock, decimal maxValue, int availableQuantity, string name, string description, string keywords, bool isSponsored, DateTime releaseDate, DateTime expirationDate, string validWeekDays, 
+            string validMonthDays, string validHours, int maxUsagesPerUser, int geoSegmentationType, string rules, string conditions, string claimInstructions, bool oneTimeUsagePerUser, int minPurchasesCountToUse, 
+            DateTime? purchasesCountStartDate, int minPurchasesHoursTimeoutToUse, int maxPurchasesDaysTimeoutToUse, double relevanceRate)
         {
             CashbackIncentive cashbackIncentive;
             OltpcashbackIncentives newCashbackIncentive = null;
@@ -2303,11 +2333,13 @@ namespace YOY.DAO.Entities.Manager
                     Id = Guid.NewGuid(),
                     TenantId = _businessObjects.Tenant.TenantId,
                     Type = type,
+                    DisplayType = displayType,
                     EarningType = earningType,
                     DealType = dealType,
                     CombineType = combineType,
                     UnitValue = unitValue,
                     PreviousUnitValue = previousUnitValue,
+                    MinMembershipLevel = minMembershipLevel,
                     MinPurchasedAmount = minPurchasedAmount,
                     PurchasedAmountBlock = purchasedAmountBlock,
                     MaxValue = maxValue,
@@ -2349,11 +2381,14 @@ namespace YOY.DAO.Entities.Manager
                     TypeName = GetTypeName(newCashbackIncentive.Type),
                     EarningType = newCashbackIncentive.EarningType,
                     EarningTypeName = GetEarningTypeName(newCashbackIncentive.EarningType),
+                    DisplayType = newCashbackIncentive.DisplayType,
+                    DisplayTypeName = GetDisplayTypeName(newCashbackIncentive.DisplayType),
                     DealType = newCashbackIncentive.DealType,
                     DealTypeName = GetDealTypeName(newCashbackIncentive.DealType),
                     CombineType = newCashbackIncentive.CombineType,
                     CombineTypeName = GetCombineTypeName(newCashbackIncentive.CombineType),
                     UnitValue = newCashbackIncentive.UnitValue,
+                    MinMembershipLevel = newCashbackIncentive.MinMembershipLevel,
                     PreviousUnitValue = newCashbackIncentive.PreviousUnitValue,
                     MinPurchasedAmount = newCashbackIncentive.MinPurchasedAmount,
                     PurchasedAmountBlock = newCashbackIncentive.PurchasedAmountBlock,
@@ -2439,10 +2474,10 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="commissionFeeValue"></param>
         /// <param name="minCommissionFeeAmount"></param>
         /// <returns></returns>
-        public CashbackIncentive Put(Guid id, int earningType, int type, int dealType, int combineType, decimal unitValue, decimal previousUnitValue, decimal minPurchasedAmount, decimal purchasedAmountBlock, decimal maxValue, string name,
-            int availableQuantity, string description, string keywords, bool isSponsored, DateTime releaseDate, DateTime expirationDate, string validWeekDays, string validMonthDays, string validHours, int maxUsagesPerUser,
-            int geoSegmentationType, string rules, string conditions, string claimInstructions, bool oneTimeUsagePerUser, int minPurchasesCountToUse, DateTime? purchasesCountStartDate, int minPurchasesHoursTimeoutToUse, int maxPurchasesDaysTimeoutToUse,
-            double relevanceRate)
+        public CashbackIncentive Put(Guid id, int earningType, int displayType, int type, int dealType, int combineType, decimal unitValue, decimal previousUnitValue, int minMembershipLevel, decimal minPurchasedAmount, 
+            decimal purchasedAmountBlock, decimal maxValue, string name, int availableQuantity, string description, string keywords, bool isSponsored, DateTime releaseDate, DateTime expirationDate, string validWeekDays, 
+            string validMonthDays, string validHours, int maxUsagesPerUser, int geoSegmentationType, string rules, string conditions, string claimInstructions, bool oneTimeUsagePerUser, int minPurchasesCountToUse, 
+            DateTime? purchasesCountStartDate, int minPurchasesHoursTimeoutToUse, int maxPurchasesDaysTimeoutToUse, double relevanceRate)
         {
             CashbackIncentive cashbackIncentive = null;
 
@@ -2463,10 +2498,12 @@ namespace YOY.DAO.Entities.Manager
                 {
                     currentCashbackIncentive.Type = type;
                     currentCashbackIncentive.EarningType = earningType;
+                    currentCashbackIncentive.DisplayType = displayType;
                     currentCashbackIncentive.DealType = dealType;
                     currentCashbackIncentive.CombineType = combineType;
                     currentCashbackIncentive.UnitValue = unitValue;
                     currentCashbackIncentive.PreviousUnitValue = previousUnitValue;
+                    currentCashbackIncentive.MinMembershipLevel = minMembershipLevel;
                     currentCashbackIncentive.MinPurchasedAmount = minPurchasedAmount;
                     currentCashbackIncentive.PurchasedAmountBlock = purchasedAmountBlock;
                     currentCashbackIncentive.MaxValue = maxValue;
@@ -2503,12 +2540,15 @@ namespace YOY.DAO.Entities.Manager
                         TypeName = GetTypeName(currentCashbackIncentive.Type),
                         EarningType = currentCashbackIncentive.EarningType,
                         EarningTypeName = GetEarningTypeName(currentCashbackIncentive.EarningType),
+                        DisplayType = currentCashbackIncentive.DisplayType,
+                        DisplayTypeName = GetDisplayTypeName(currentCashbackIncentive.DisplayType),
                         DealType = currentCashbackIncentive.DealType,
                         DealTypeName = GetDealTypeName(currentCashbackIncentive.DealType),
                         CombineType = currentCashbackIncentive.CombineType,
                         CombineTypeName = GetCombineTypeName(currentCashbackIncentive.CombineType),
                         UnitValue = currentCashbackIncentive.UnitValue,
                         PreviousUnitValue = currentCashbackIncentive.PreviousUnitValue,
+                        MinMembershipLevel = currentCashbackIncentive.MinMembershipLevel,
                         MinPurchasedAmount = currentCashbackIncentive.MinPurchasedAmount,
                         PurchasedAmountBlock = currentCashbackIncentive.PurchasedAmountBlock,
                         MaxValue = currentCashbackIncentive.MaxValue,

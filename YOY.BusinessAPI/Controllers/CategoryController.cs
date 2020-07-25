@@ -181,7 +181,7 @@ namespace YOY.BusinessAPI.Controllers
 
                     foreach(CategoryOpData item in model.Categories)
                     {
-                        success = this._businessObjects.Categories.Post(item.Id, model.DealId, CategoryRelatiomReferenceTypes.Offer);
+                        success = this._businessObjects.Categories.Post(item.Id, CategoryHerarchyLevels.ProductCategory, model.DealId, CategoryRelatiomReferenceTypes.Offer);
 
                         if (!success)
                             valid = false;
