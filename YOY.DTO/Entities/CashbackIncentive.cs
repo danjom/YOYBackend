@@ -32,26 +32,21 @@ namespace YOY.DTO.Entities
         public string Keywords { set; get; }
         public bool IsActive { set; get; }
         public bool IsSponsored { set; get; }
-        public DateTime CreatedDate { set; get; }
-        public DateTime UpdatedDate { set; get; }
-        public DateTime ReleaseDate { set; get; }
-        public DateTime ExpirationDate { set; get; }
         public string ValidWeekDays { set; get; }
         public string ValidMonthDays { set; get; }
         public string ValidHours { set; get; }
         public int MaxUsagePerUser { set; get; }
+        public int MinPurchasesCountToUse { set; get; }
         public int UsageCount { set; get; }
-        public double RelevanceRate { set; get; }
         public int GeoSegmentationType { set; get; }
         public string GeoSegmentationTypeName { set; get; }
         public string Rules { set; get; }
         public string Conditions { set; get; }
-        public string ClaimInstructions { set; get; }
-        public bool OneTimeUsagePerUser { set; get; }
-        public int MinPurchasesCountToUse { set; get; }
-        public int MinPurchasesHoursTimeoutToUse { set; get; }
-        public int MaxPurchasesDaysTimeoutToUse { set; get; }
-        public DateTime? PurchasesCountStartDate { set; get; }
+        public DateTime ReleaseDate { set; get; }
+        public DateTime ExpirationDate { set; get; }
+        public double RelevanceRate { set; get; }
+        public DateTime CreatedDate { set; get; }
+        public DateTime UpdatedDate { set; get; }
         public string PublishState { set; get; }
     }
 }

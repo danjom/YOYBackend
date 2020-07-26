@@ -24,24 +24,19 @@ namespace YOY.DAO.Entities.DB
         public string Keywords { get; set; }
         public bool IsSponsored { get; set; }
         public bool IsActive { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime ReleaseDate { get; set; }
-        public DateTime ExpirationDate { get; set; }
         public string ValidWeekDays { get; set; }
         public string ValidMonthDays { get; set; }
         public string ValidHours { get; set; }
         public int MaxUsagesPerUser { get; set; }
+        public int MinPurchasesCountToUse { get; set; }
         public int UsageCount { get; set; }
         public double RelevanceRate { get; set; }
         public int GeoSegmentationType { get; set; }
         public string Rules { get; set; }
         public string Conditions { get; set; }
-        public string ClaimInstructions { get; set; }
-        public bool OneTimeUsagePerUser { get; set; }
-        public int MinPurchasesCountToUse { get; set; }
-        public DateTime? PurchasesCountStartDate { get; set; }
-        public int MinPurchasesHoursTimeoutToUse { get; set; }
-        public int MaxPurchasesDaysTimeoutToUse { get; set; }
+        public DateTime ReleaseDate { get; set; }
+        public DateTime ExpirationDate { get; set; }
+        public DateTime CreatedDate { get; set; }
         public string TenantName { get; set; }
         public Guid TenantLogo { get; set; }
         public Guid TenantCountryId { get; set; }

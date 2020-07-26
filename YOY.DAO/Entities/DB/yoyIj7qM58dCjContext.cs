@@ -3542,10 +3542,6 @@ namespace YOY.DAO.Entities.DB
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.ClaimInstructions)
-                    .HasMaxLength(1024)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.Conditions)
                     .HasMaxLength(1024)
                     .IsUnicode(false);
@@ -3580,8 +3576,6 @@ namespace YOY.DAO.Entities.DB
                 entity.Property(e => e.PreviousUnitValue).HasColumnType("decimal(19, 2)");
 
                 entity.Property(e => e.PurchasedAmountBlock).HasColumnType("decimal(19, 2)");
-
-                entity.Property(e => e.PurchasesCountStartDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ReleaseDate).HasColumnType("datetime");
 
@@ -7614,10 +7608,6 @@ namespace YOY.DAO.Entities.DB
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ClaimInstructions)
-                    .HasMaxLength(1024)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.Conditions)
                     .HasMaxLength(1024)
                     .IsUnicode(false);
@@ -7664,8 +7654,6 @@ namespace YOY.DAO.Entities.DB
                 entity.Property(e => e.PreviousUnitValue).HasColumnType("decimal(19, 2)");
 
                 entity.Property(e => e.PurchasedAmountBlock).HasColumnType("decimal(19, 2)");
-
-                entity.Property(e => e.PurchasesCountStartDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ReleaseDate).HasColumnType("datetime");
 

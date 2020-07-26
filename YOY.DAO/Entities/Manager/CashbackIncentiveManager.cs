@@ -347,6 +347,8 @@ namespace YOY.DAO.Entities.Manager
                             TenantId = item.TenantId,
                             Type = item.Type,
                             TypeName = GetTypeName(item.Type),
+                            DisplayType = item.DisplayType,
+                            DisplayTypeName = GetDisplayTypeName(item.DisplayType),
                             EarningType = item.EarningType,
                             EarningTypeName = GetEarningTypeName(item.EarningType),
                             DealType = item.DealType,
@@ -355,6 +357,7 @@ namespace YOY.DAO.Entities.Manager
                             CombineTypeName = GetCombineTypeName(item.CombineType),
                             UnitValue = item.UnitValue,
                             PreviousUnitValue = item.PreviousUnitValue,
+                            MinMembershipLevel = item.MinMembershipLevel,
                             MinPurchasedAmount = item.MinPurchasedAmount,
                             PurchasedAmountBlock = item.PurchasedAmountBlock,
                             MaxValue = item.MaxValue,
@@ -364,26 +367,21 @@ namespace YOY.DAO.Entities.Manager
                             Keywords = item.Keywords,
                             IsActive = item.IsActive,
                             IsSponsored = item.IsSponsored,
-                            CreatedDate = item.CreatedDate,
-                            UpdatedDate = item.UpdatedDate,
-                            ReleaseDate = item.ReleaseDate,
-                            ExpirationDate = item.ExpirationDate,
                             ValidWeekDays = item.ValidWeekDays,
                             ValidMonthDays = item.ValidMonthDays,
                             ValidHours = item.ValidHours,
                             MaxUsagePerUser = item.MaxUsagesPerUser,
+                            MinPurchasesCountToUse = item.MinPurchasesCountToUse,
                             UsageCount = item.UsageCount,
-                            RelevanceRate = item.RelevanceRate,
                             GeoSegmentationType = item.GeoSegmentationType,
                             GeoSegmentationTypeName = GetGeoSegmentationTypeName(item.GeoSegmentationType),
                             Rules = item.Rules ?? Resources.NoRulesAvailable,
                             Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
-                            ClaimInstructions = item.ClaimInstructions ?? Resources.DefaultIncentiveClaimInstructions,
-                            OneTimeUsagePerUser = item.OneTimeUsagePerUser,
-                            PurchasesCountStartDate = item.PurchasesCountStartDate,
-                            MinPurchasesCountToUse = item.MinPurchasesCountToUse,
-                            MinPurchasesHoursTimeoutToUse = item.MinPurchasesHoursTimeoutToUse,
-                            MaxPurchasesDaysTimeoutToUse = item.MaxPurchasesDaysTimeoutToUse
+                            RelevanceRate = item.RelevanceRate,
+                            ReleaseDate = item.ReleaseDate,
+                            ExpirationDate = item.ExpirationDate,
+                            UpdatedDate = item.UpdatedDate,
+                            CreatedDate = item.CreatedDate,
                         };
 
                         cashbackIncentive.PublishState = this.GetPublishState(cashbackIncentive.ReleaseDate, cashbackIncentive.ExpirationDate, dateTime);
@@ -1275,10 +1273,10 @@ namespace YOY.DAO.Entities.Manager
                             TenantId = item.TenantId,
                             Type = item.Type,
                             TypeName = GetTypeName(item.Type),
-                            EarningType = item.EarningType,
-                            EarningTypeName = GetEarningTypeName(item.EarningType),
                             DisplayType = item.DisplayType,
                             DisplayTypeName = GetDisplayTypeName(item.DisplayType),
+                            EarningType = item.EarningType,
+                            EarningTypeName = GetEarningTypeName(item.EarningType),
                             DealType = item.DealType,
                             DealTypeName = GetDealTypeName(item.DealType),
                             CombineType = item.CombineType,
@@ -1295,25 +1293,21 @@ namespace YOY.DAO.Entities.Manager
                             Keywords = item.Keywords,
                             IsActive = item.IsActive,
                             IsSponsored = item.IsSponsored,
-                            CreatedDate = item.CreatedDate,
-                            UpdatedDate = item.UpdatedDate,
-                            ReleaseDate = item.ReleaseDate,
-                            ExpirationDate = item.ExpirationDate,
                             ValidWeekDays = item.ValidWeekDays,
                             ValidMonthDays = item.ValidMonthDays,
                             ValidHours = item.ValidHours,
                             MaxUsagePerUser = item.MaxUsagesPerUser,
+                            MinPurchasesCountToUse = item.MinPurchasesCountToUse,
                             UsageCount = item.UsageCount,
-                            RelevanceRate = item.RelevanceRate,
                             GeoSegmentationType = item.GeoSegmentationType,
                             GeoSegmentationTypeName = GetGeoSegmentationTypeName(item.GeoSegmentationType),
                             Rules = item.Rules ?? Resources.NoRulesAvailable,
                             Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
-                            ClaimInstructions = item.ClaimInstructions ?? Resources.DefaultIncentiveClaimInstructions,
-                            OneTimeUsagePerUser = item.OneTimeUsagePerUser,
-                            MinPurchasesCountToUse = item.MinPurchasesCountToUse,
-                            MinPurchasesHoursTimeoutToUse = item.MinPurchasesHoursTimeoutToUse,
-                            MaxPurchasesDaysTimeoutToUse = item.MaxPurchasesDaysTimeoutToUse
+                            RelevanceRate = item.RelevanceRate,
+                            ReleaseDate = item.ReleaseDate,
+                            ExpirationDate = item.ExpirationDate,
+                            UpdatedDate = item.UpdatedDate,
+                            CreatedDate = item.CreatedDate,
                         };
 
                         cashbackIncentive.PublishState = this.GetPublishState((DateTime)cashbackIncentive.ReleaseDate, cashbackIncentive.ExpirationDate, dateTime);
@@ -1551,10 +1545,10 @@ namespace YOY.DAO.Entities.Manager
                             TenantId = item.TenantId,
                             Type = item.Type,
                             TypeName = GetTypeName(item.Type),
-                            EarningType = item.EarningType,
-                            EarningTypeName = GetEarningTypeName(item.EarningType),
                             DisplayType = item.DisplayType,
                             DisplayTypeName = GetDisplayTypeName(item.DisplayType),
+                            EarningType = item.EarningType,
+                            EarningTypeName = GetEarningTypeName(item.EarningType),
                             DealType = item.DealType,
                             DealTypeName = GetDealTypeName(item.DealType),
                             CombineType = item.CombineType,
@@ -1571,25 +1565,21 @@ namespace YOY.DAO.Entities.Manager
                             Keywords = item.Keywords,
                             IsActive = item.IsActive,
                             IsSponsored = item.IsSponsored,
-                            CreatedDate = item.CreatedDate,
-                            UpdatedDate = item.UpdatedDate,
-                            ReleaseDate = item.ReleaseDate,
-                            ExpirationDate = item.ExpirationDate,
                             ValidWeekDays = item.ValidWeekDays,
                             ValidMonthDays = item.ValidMonthDays,
                             ValidHours = item.ValidHours,
                             MaxUsagePerUser = item.MaxUsagesPerUser,
+                            MinPurchasesCountToUse = item.MinPurchasesCountToUse,
                             UsageCount = item.UsageCount,
-                            RelevanceRate = item.RelevanceRate,
                             GeoSegmentationType = item.GeoSegmentationType,
                             GeoSegmentationTypeName = GetGeoSegmentationTypeName(item.GeoSegmentationType),
                             Rules = item.Rules ?? Resources.NoRulesAvailable,
                             Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
-                            ClaimInstructions = item.ClaimInstructions ?? Resources.DefaultIncentiveClaimInstructions,
-                            OneTimeUsagePerUser = item.OneTimeUsagePerUser,
-                            MinPurchasesCountToUse = item.MinPurchasesCountToUse,
-                            MinPurchasesHoursTimeoutToUse = item.MinPurchasesHoursTimeoutToUse,
-                            MaxPurchasesDaysTimeoutToUse = item.MaxPurchasesDaysTimeoutToUse
+                            RelevanceRate = item.RelevanceRate,
+                            ReleaseDate = item.ReleaseDate,
+                            ExpirationDate = item.ExpirationDate,
+                            UpdatedDate = item.UpdatedDate,
+                            CreatedDate = item.CreatedDate,
                         };
 
                         cashbackIncentive.PublishState = this.GetPublishState((DateTime)cashbackIncentive.ReleaseDate, cashbackIncentive.ExpirationDate, dateTime);
@@ -1666,10 +1656,10 @@ namespace YOY.DAO.Entities.Manager
                             TenantId = item.TenantId,
                             Type = item.Type,
                             TypeName = GetTypeName(item.Type),
-                            EarningType = item.EarningType,
-                            EarningTypeName = GetEarningTypeName(item.EarningType),
                             DisplayType = item.DisplayType,
                             DisplayTypeName = GetDisplayTypeName(item.DisplayType),
+                            EarningType = item.EarningType,
+                            EarningTypeName = GetEarningTypeName(item.EarningType),
                             DealType = item.DealType,
                             DealTypeName = GetDealTypeName(item.DealType),
                             CombineType = item.CombineType,
@@ -1686,25 +1676,21 @@ namespace YOY.DAO.Entities.Manager
                             Keywords = item.Keywords,
                             IsActive = item.IsActive,
                             IsSponsored = item.IsSponsored,
-                            CreatedDate = item.CreatedDate,
-                            UpdatedDate = item.UpdatedDate,
-                            ReleaseDate = item.ReleaseDate,
-                            ExpirationDate = item.ExpirationDate,
                             ValidWeekDays = item.ValidWeekDays,
                             ValidMonthDays = item.ValidMonthDays,
                             ValidHours = item.ValidHours,
                             MaxUsagePerUser = item.MaxUsagesPerUser,
+                            MinPurchasesCountToUse = item.MinPurchasesCountToUse,
                             UsageCount = item.UsageCount,
-                            RelevanceRate = item.RelevanceRate,
                             GeoSegmentationType = item.GeoSegmentationType,
                             GeoSegmentationTypeName = GetGeoSegmentationTypeName(item.GeoSegmentationType),
                             Rules = item.Rules ?? Resources.NoRulesAvailable,
                             Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
-                            ClaimInstructions = item.ClaimInstructions ?? Resources.DefaultIncentiveClaimInstructions,
-                            OneTimeUsagePerUser = item.OneTimeUsagePerUser,
-                            MinPurchasesCountToUse = item.MinPurchasesCountToUse,
-                            MinPurchasesHoursTimeoutToUse = item.MinPurchasesHoursTimeoutToUse,
-                            MaxPurchasesDaysTimeoutToUse = item.MaxPurchasesDaysTimeoutToUse
+                            RelevanceRate = item.RelevanceRate,
+                            ReleaseDate = item.ReleaseDate,
+                            ExpirationDate = item.ExpirationDate,
+                            UpdatedDate = item.UpdatedDate,
+                            CreatedDate = item.CreatedDate,
                         };
 
                         cashbackIncentive.PublishState = this.GetPublishState((DateTime)cashbackIncentive.ReleaseDate, cashbackIncentive.ExpirationDate, dateTime);
@@ -1775,10 +1761,10 @@ namespace YOY.DAO.Entities.Manager
                             TenantId = item.TenantId,
                             Type = item.Type,
                             TypeName = GetTypeName(item.Type),
-                            EarningType = item.EarningType,
-                            EarningTypeName = GetEarningTypeName(item.EarningType),
                             DisplayType = item.DisplayType,
                             DisplayTypeName = GetDisplayTypeName(item.DisplayType),
+                            EarningType = item.EarningType,
+                            EarningTypeName = GetEarningTypeName(item.EarningType),
                             DealType = item.DealType,
                             DealTypeName = GetDealTypeName(item.DealType),
                             CombineType = item.CombineType,
@@ -1795,25 +1781,21 @@ namespace YOY.DAO.Entities.Manager
                             Keywords = item.Keywords,
                             IsActive = item.IsActive,
                             IsSponsored = item.IsSponsored,
-                            CreatedDate = item.CreatedDate,
-                            UpdatedDate = item.UpdatedDate,
-                            ReleaseDate = item.ReleaseDate,
-                            ExpirationDate = item.ExpirationDate,
                             ValidWeekDays = item.ValidWeekDays,
                             ValidMonthDays = item.ValidMonthDays,
                             ValidHours = item.ValidHours,
                             MaxUsagePerUser = item.MaxUsagesPerUser,
+                            MinPurchasesCountToUse = item.MinPurchasesCountToUse,
                             UsageCount = item.UsageCount,
-                            RelevanceRate = item.RelevanceRate,
                             GeoSegmentationType = item.GeoSegmentationType,
                             GeoSegmentationTypeName = GetGeoSegmentationTypeName(item.GeoSegmentationType),
                             Rules = item.Rules ?? Resources.NoRulesAvailable,
                             Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
-                            ClaimInstructions = item.ClaimInstructions ?? Resources.DefaultIncentiveClaimInstructions,
-                            OneTimeUsagePerUser = item.OneTimeUsagePerUser,
-                            MinPurchasesCountToUse = item.MinPurchasesCountToUse,
-                            MinPurchasesHoursTimeoutToUse = item.MinPurchasesHoursTimeoutToUse,
-                            MaxPurchasesDaysTimeoutToUse = item.MaxPurchasesDaysTimeoutToUse
+                            RelevanceRate = item.RelevanceRate,
+                            ReleaseDate = item.ReleaseDate,
+                            ExpirationDate = item.ExpirationDate,
+                            UpdatedDate = item.UpdatedDate,
+                            CreatedDate = item.CreatedDate,
                         };
 
                         cashbackIncentive.PublishState = this.GetPublishState((DateTime)cashbackIncentive.ReleaseDate, cashbackIncentive.ExpirationDate, dateTime);
@@ -2043,10 +2025,10 @@ namespace YOY.DAO.Entities.Manager
                             TenantId = item.TenantId,
                             Type = item.Type,
                             TypeName = GetTypeName(item.Type),
-                            EarningType = item.EarningType,
-                            EarningTypeName = GetEarningTypeName(item.EarningType),
                             DisplayType = item.DisplayType,
                             DisplayTypeName = GetDisplayTypeName(item.DisplayType),
+                            EarningType = item.EarningType,
+                            EarningTypeName = GetEarningTypeName(item.EarningType),
                             DealType = item.DealType,
                             DealTypeName = GetDealTypeName(item.DealType),
                             CombineType = item.CombineType,
@@ -2063,25 +2045,21 @@ namespace YOY.DAO.Entities.Manager
                             Keywords = item.Keywords,
                             IsActive = item.IsActive,
                             IsSponsored = item.IsSponsored,
-                            CreatedDate = item.CreatedDate,
-                            UpdatedDate = item.UpdatedDate,
-                            ReleaseDate = item.ReleaseDate,
-                            ExpirationDate = item.ExpirationDate,
                             ValidWeekDays = item.ValidWeekDays,
                             ValidMonthDays = item.ValidMonthDays,
                             ValidHours = item.ValidHours,
                             MaxUsagePerUser = item.MaxUsagesPerUser,
+                            MinPurchasesCountToUse = item.MinPurchasesCountToUse,
                             UsageCount = item.UsageCount,
-                            RelevanceRate = item.RelevanceRate,
                             GeoSegmentationType = item.GeoSegmentationType,
                             GeoSegmentationTypeName = GetGeoSegmentationTypeName(item.GeoSegmentationType),
                             Rules = item.Rules ?? Resources.NoRulesAvailable,
                             Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
-                            ClaimInstructions = item.ClaimInstructions ?? Resources.DefaultIncentiveClaimInstructions,
-                            OneTimeUsagePerUser = item.OneTimeUsagePerUser,
-                            MinPurchasesCountToUse = item.MinPurchasesCountToUse,
-                            MinPurchasesHoursTimeoutToUse = item.MinPurchasesHoursTimeoutToUse,
-                            MaxPurchasesDaysTimeoutToUse = item.MaxPurchasesDaysTimeoutToUse
+                            RelevanceRate = item.RelevanceRate,
+                            ReleaseDate = item.ReleaseDate,
+                            ExpirationDate = item.ExpirationDate,
+                            UpdatedDate = item.UpdatedDate,
+                            CreatedDate = item.CreatedDate,
                         };
 
                         cashbackIncentive.PublishState = this.GetPublishState((DateTime)cashbackIncentive.ReleaseDate, cashbackIncentive.ExpirationDate, dateTime);
@@ -2139,10 +2117,10 @@ namespace YOY.DAO.Entities.Manager
                         TenantId = item.TenantId,
                         Type = item.Type,
                         TypeName = GetTypeName(item.Type),
-                        EarningType = item.EarningType,
-                        EarningTypeName = GetEarningTypeName(item.EarningType),
                         DisplayType = item.DisplayType,
                         DisplayTypeName = GetDisplayTypeName(item.DisplayType),
+                        EarningType = item.EarningType,
+                        EarningTypeName = GetEarningTypeName(item.EarningType),
                         DealType = item.DealType,
                         DealTypeName = GetDealTypeName(item.DealType),
                         CombineType = item.CombineType,
@@ -2159,25 +2137,21 @@ namespace YOY.DAO.Entities.Manager
                         Keywords = item.Keywords,
                         IsActive = item.IsActive,
                         IsSponsored = item.IsSponsored,
-                        CreatedDate = item.CreatedDate,
-                        UpdatedDate = item.UpdatedDate,
-                        ReleaseDate = item.ReleaseDate,
-                        ExpirationDate = item.ExpirationDate,
                         ValidWeekDays = item.ValidWeekDays,
                         ValidMonthDays = item.ValidMonthDays,
                         ValidHours = item.ValidHours,
                         MaxUsagePerUser = item.MaxUsagesPerUser,
+                        MinPurchasesCountToUse = item.MinPurchasesCountToUse,
                         UsageCount = item.UsageCount,
-                        RelevanceRate = item.RelevanceRate,
                         GeoSegmentationType = item.GeoSegmentationType,
                         GeoSegmentationTypeName = GetGeoSegmentationTypeName(item.GeoSegmentationType),
                         Rules = item.Rules ?? Resources.NoRulesAvailable,
-                        ClaimInstructions = item.ClaimInstructions ?? Resources.DefaultIncentiveClaimInstructions,
                         Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
-                        OneTimeUsagePerUser = item.OneTimeUsagePerUser,
-                        MinPurchasesCountToUse = item.MinPurchasesCountToUse,
-                        MinPurchasesHoursTimeoutToUse = item.MinPurchasesHoursTimeoutToUse,
-                        MaxPurchasesDaysTimeoutToUse = item.MaxPurchasesDaysTimeoutToUse
+                        RelevanceRate = item.RelevanceRate,
+                        ReleaseDate = item.ReleaseDate,
+                        ExpirationDate = item.ExpirationDate,
+                        UpdatedDate = item.UpdatedDate,
+                        CreatedDate = item.CreatedDate,
                     };
 
                     DateTime now = DateTime.UtcNow;
@@ -2227,10 +2201,10 @@ namespace YOY.DAO.Entities.Manager
                         TenantId = item.TenantId,
                         Type = item.Type,
                         TypeName = GetTypeName(item.Type),
-                        EarningType = item.EarningType,
-                        EarningTypeName = GetEarningTypeName(item.EarningType),
                         DisplayType = item.DisplayType,
                         DisplayTypeName = GetDisplayTypeName(item.DisplayType),
+                        EarningType = item.EarningType,
+                        EarningTypeName = GetEarningTypeName(item.EarningType),
                         DealType = item.DealType,
                         DealTypeName = GetDealTypeName(item.DealType),
                         CombineType = item.CombineType,
@@ -2247,25 +2221,21 @@ namespace YOY.DAO.Entities.Manager
                         Keywords = item.Keywords,
                         IsActive = item.IsActive,
                         IsSponsored = item.IsSponsored,
-                        CreatedDate = item.CreatedDate,
-                        UpdatedDate = item.UpdatedDate,
-                        ReleaseDate = item.ReleaseDate,
-                        ExpirationDate = item.ExpirationDate,
                         ValidWeekDays = item.ValidWeekDays,
                         ValidMonthDays = item.ValidMonthDays,
                         ValidHours = item.ValidHours,
                         MaxUsagePerUser = item.MaxUsagesPerUser,
+                        MinPurchasesCountToUse = item.MinPurchasesCountToUse,
                         UsageCount = item.UsageCount,
-                        RelevanceRate = item.RelevanceRate,
                         GeoSegmentationType = item.GeoSegmentationType,
                         GeoSegmentationTypeName = GetGeoSegmentationTypeName(item.GeoSegmentationType),
                         Rules = item.Rules ?? Resources.NoRulesAvailable,
                         Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
-                        ClaimInstructions = item.ClaimInstructions ?? Resources.DefaultIncentiveClaimInstructions,
-                        OneTimeUsagePerUser = item.OneTimeUsagePerUser,
-                        MinPurchasesCountToUse = item.MinPurchasesCountToUse,
-                        MinPurchasesHoursTimeoutToUse = item.MinPurchasesHoursTimeoutToUse,
-                        MaxPurchasesDaysTimeoutToUse = item.MaxPurchasesDaysTimeoutToUse
+                        RelevanceRate = item.RelevanceRate,
+                        ReleaseDate = item.ReleaseDate,
+                        ExpirationDate = item.ExpirationDate,
+                        UpdatedDate = item.UpdatedDate,
+                        CreatedDate = item.CreatedDate,
                     };
 
                     DateTime now = DateTime.UtcNow;
@@ -2288,40 +2258,37 @@ namespace YOY.DAO.Entities.Manager
         /// <summary>
         /// Creates new cashback incentive
         /// </summary>
-        /// <param name="earningType"></param>
         /// <param name="type"></param>
+        /// <param name="displayType"></param>
+        /// <param name="earningType"></param>
         /// <param name="dealType"></param>
+        /// <param name="combineType"></param>
         /// <param name="unitValue"></param>
+        /// <param name="previousUnitValue"></param>
+        /// <param name="minMembershipLevel"></param>
         /// <param name="minPurchasedAmount"></param>
         /// <param name="purchasedAmountBlock"></param>
         /// <param name="maxValue"></param>
+        /// <param name="availableQuantity"></param>
         /// <param name="name"></param>
         /// <param name="description"></param>
         /// <param name="keywords"></param>
-        /// <param name="requiresReferenceCode"></param>
-        /// <param name="releaseDate"></param>
-        /// <param name="expirationDate"></param>
+        /// <param name="isSponsored"></param>
         /// <param name="validWeekDays"></param>
         /// <param name="validMonthDays"></param>
         /// <param name="validHours"></param>
         /// <param name="maxUsagesPerUser"></param>
-        /// <param name="usageCount"></param>
+        /// <param name="minPurchasesCountToUse"></param>
         /// <param name="geoSegmentationType"></param>
         /// <param name="rules"></param>
         /// <param name="conditions"></param>
-        /// <param name="oneTimeUsagePerUser"></param>
-        /// <param name="minPurchasesCountToUse"></param>
-        /// <param name="purchasesCountStartDate"></param>
-        /// <param name="minPurchasesHoursTimeoutToUse"></param>
-        /// <param name="maxPurchasesDaysTimeoutToUse"></param>
-        /// <param name="commissionFeeType"></param>
-        /// <param name="commissionFeeValue"></param>
-        /// <param name="minCommissionFeeAmount"></param>
+        /// <param name="relevanceRate"></param>
+        /// <param name="releaseDate"></param>
+        /// <param name="expirationDate"></param>
         /// <returns></returns>
-        public CashbackIncentive Post(int earningType, int displayType, int type, int dealType, int combineType, decimal unitValue, decimal previousUnitValue, int minMembershipLevel, decimal minPurchasedAmount, 
-            decimal purchasedAmountBlock, decimal maxValue, int availableQuantity, string name, string description, string keywords, bool isSponsored, DateTime releaseDate, DateTime expirationDate, string validWeekDays, 
-            string validMonthDays, string validHours, int maxUsagesPerUser, int geoSegmentationType, string rules, string conditions, string claimInstructions, bool oneTimeUsagePerUser, int minPurchasesCountToUse, 
-            DateTime? purchasesCountStartDate, int minPurchasesHoursTimeoutToUse, int maxPurchasesDaysTimeoutToUse, double relevanceRate)
+        public CashbackIncentive Post(int type, int displayType, int earningType, int dealType, int combineType, decimal unitValue, decimal previousUnitValue, int minMembershipLevel, decimal minPurchasedAmount, 
+            decimal purchasedAmountBlock, decimal maxValue, int availableQuantity, string name, string description, string keywords, bool isSponsored, string validWeekDays, 
+            string validMonthDays, string validHours, int maxUsagesPerUser, int minPurchasesCountToUse, int geoSegmentationType, string rules, string conditions, double relevanceRate, DateTime releaseDate, DateTime expirationDate)
         {
             CashbackIncentive cashbackIncentive;
             OltpcashbackIncentives newCashbackIncentive = null;
@@ -2347,27 +2314,23 @@ namespace YOY.DAO.Entities.Manager
                     Name = name,
                     Description = description,
                     Keywords = keywords,
-                    IsSponsored = isSponsored,
                     IsActive = true,
-                    CreatedDate = DateTime.UtcNow,
-                    UpdatedDate = DateTime.UtcNow,
-                    ReleaseDate = releaseDate,
-                    ExpirationDate = expirationDate,
+                    IsSponsored = isSponsored,
                     ValidWeekDays = validWeekDays,
                     ValidMonthDays = validMonthDays,
                     ValidHours = validHours,
                     MaxUsagesPerUser = maxUsagesPerUser,
+                    MinPurchasesCountToUse = minPurchasesCountToUse,
                     UsageCount = 0,
-                    RelevanceRate = relevanceRate,
                     GeoSegmentationType = geoSegmentationType,
                     Rules = rules,
                     Conditions = conditions,
-                    ClaimInstructions = claimInstructions,
-                    OneTimeUsagePerUser = oneTimeUsagePerUser,
-                    MinPurchasesCountToUse = minPurchasesCountToUse,
-                    PurchasesCountStartDate = purchasesCountStartDate,
-                    MinPurchasesHoursTimeoutToUse = minPurchasesHoursTimeoutToUse,
-                    MaxPurchasesDaysTimeoutToUse = maxPurchasesDaysTimeoutToUse
+                    RelevanceRate = relevanceRate,
+                    ReleaseDate = releaseDate,
+                    ExpirationDate = expirationDate,
+                    UpdatedDate = DateTime.UtcNow,
+                    CreatedDate = DateTime.UtcNow,
+                    Deleted = false
                 };
 
                 this._businessObjects.Context.OltpcashbackIncentives.Add(newCashbackIncentive);
@@ -2379,17 +2342,17 @@ namespace YOY.DAO.Entities.Manager
                     TenantId = newCashbackIncentive.TenantId,
                     Type = newCashbackIncentive.Type,
                     TypeName = GetTypeName(newCashbackIncentive.Type),
-                    EarningType = newCashbackIncentive.EarningType,
-                    EarningTypeName = GetEarningTypeName(newCashbackIncentive.EarningType),
                     DisplayType = newCashbackIncentive.DisplayType,
                     DisplayTypeName = GetDisplayTypeName(newCashbackIncentive.DisplayType),
+                    EarningType = newCashbackIncentive.EarningType,
+                    EarningTypeName = GetEarningTypeName(newCashbackIncentive.EarningType),
                     DealType = newCashbackIncentive.DealType,
                     DealTypeName = GetDealTypeName(newCashbackIncentive.DealType),
                     CombineType = newCashbackIncentive.CombineType,
                     CombineTypeName = GetCombineTypeName(newCashbackIncentive.CombineType),
                     UnitValue = newCashbackIncentive.UnitValue,
-                    MinMembershipLevel = newCashbackIncentive.MinMembershipLevel,
                     PreviousUnitValue = newCashbackIncentive.PreviousUnitValue,
+                    MinMembershipLevel = newCashbackIncentive.MinMembershipLevel,
                     MinPurchasedAmount = newCashbackIncentive.MinPurchasedAmount,
                     PurchasedAmountBlock = newCashbackIncentive.PurchasedAmountBlock,
                     MaxValue = newCashbackIncentive.MaxValue,
@@ -2399,26 +2362,21 @@ namespace YOY.DAO.Entities.Manager
                     Keywords = newCashbackIncentive.Keywords,
                     IsActive = newCashbackIncentive.IsActive,
                     IsSponsored = newCashbackIncentive.IsSponsored,
-                    CreatedDate = newCashbackIncentive.CreatedDate,
-                    UpdatedDate = newCashbackIncentive.UpdatedDate,
-                    ReleaseDate = newCashbackIncentive.ReleaseDate,
-                    ExpirationDate = newCashbackIncentive.ExpirationDate,
                     ValidWeekDays = newCashbackIncentive.ValidWeekDays,
                     ValidMonthDays = newCashbackIncentive.ValidMonthDays,
                     ValidHours = newCashbackIncentive.ValidHours,
                     MaxUsagePerUser = newCashbackIncentive.MaxUsagesPerUser,
+                    MinPurchasesCountToUse = newCashbackIncentive.MinPurchasesCountToUse,
                     UsageCount = newCashbackIncentive.UsageCount,
-                    RelevanceRate = newCashbackIncentive.RelevanceRate,
                     GeoSegmentationType = newCashbackIncentive.GeoSegmentationType,
                     GeoSegmentationTypeName = GetGeoSegmentationTypeName(newCashbackIncentive.GeoSegmentationType),
                     Rules = newCashbackIncentive.Rules ?? Resources.NoRulesAvailable,
                     Conditions = newCashbackIncentive.Conditions ?? Resources.NoConditionsAvailable,
-                    ClaimInstructions = newCashbackIncentive.ClaimInstructions ?? Resources.DefaultIncentiveClaimInstructions,
-                    OneTimeUsagePerUser = newCashbackIncentive.OneTimeUsagePerUser,
-                    PurchasesCountStartDate = newCashbackIncentive.PurchasesCountStartDate,
-                    MinPurchasesCountToUse = newCashbackIncentive.MinPurchasesCountToUse,
-                    MinPurchasesHoursTimeoutToUse = newCashbackIncentive.MinPurchasesHoursTimeoutToUse,
-                    MaxPurchasesDaysTimeoutToUse = newCashbackIncentive.MaxPurchasesDaysTimeoutToUse
+                    RelevanceRate = newCashbackIncentive.RelevanceRate,
+                    ReleaseDate = newCashbackIncentive.ReleaseDate,
+                    ExpirationDate = newCashbackIncentive.ExpirationDate,
+                    UpdatedDate = newCashbackIncentive.UpdatedDate,
+                    CreatedDate = newCashbackIncentive.CreatedDate,
                 };
 
                 DateTime now = DateTime.UtcNow;
@@ -2474,31 +2432,24 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="commissionFeeValue"></param>
         /// <param name="minCommissionFeeAmount"></param>
         /// <returns></returns>
-        public CashbackIncentive Put(Guid id, int earningType, int displayType, int type, int dealType, int combineType, decimal unitValue, decimal previousUnitValue, int minMembershipLevel, decimal minPurchasedAmount, 
-            decimal purchasedAmountBlock, decimal maxValue, string name, int availableQuantity, string description, string keywords, bool isSponsored, DateTime releaseDate, DateTime expirationDate, string validWeekDays, 
-            string validMonthDays, string validHours, int maxUsagesPerUser, int geoSegmentationType, string rules, string conditions, string claimInstructions, bool oneTimeUsagePerUser, int minPurchasesCountToUse, 
-            DateTime? purchasesCountStartDate, int minPurchasesHoursTimeoutToUse, int maxPurchasesDaysTimeoutToUse, double relevanceRate)
+        public CashbackIncentive Put(Guid id, int type, int displayType, int earningType, int dealType, int combineType, decimal unitValue, decimal previousUnitValue, int minMembershipLevel, decimal minPurchasedAmount, 
+            decimal purchasedAmountBlock, decimal maxValue, int availableQuantity, string name, string description, string keywords, bool isSponsored, string validWeekDays, 
+            string validMonthDays, string validHours, int maxUsagesPerUser, int minPurchasesCountToUse, int geoSegmentationType, string rules, string conditions, 
+            double relevanceRate, DateTime releaseDate, DateTime expirationDate)
         {
             CashbackIncentive cashbackIncentive = null;
 
             try
             {
-                OltpcashbackIncentives currentCashbackIncentive = null;
-
-                var query = from x in _businessObjects.Context.OltpcashbackIncentives
-                            where x.Type == type && x.TenantId == _businessObjects.Tenant.TenantId && x.Id == id
-                            select x;
-
-                foreach (OltpcashbackIncentives item in query)
-                {
-                    currentCashbackIncentive = item;
-                }
+                OltpcashbackIncentives currentCashbackIncentive = (from x in _businessObjects.Context.OltpcashbackIncentives
+                                                                    where x.Type == type && x.TenantId == _businessObjects.Tenant.TenantId && x.Id == id
+                                                                    select x).FirstOrDefault();
 
                 if (currentCashbackIncentive != null)
                 {
                     currentCashbackIncentive.Type = type;
-                    currentCashbackIncentive.EarningType = earningType;
                     currentCashbackIncentive.DisplayType = displayType;
+                    currentCashbackIncentive.EarningType = earningType;
                     currentCashbackIncentive.DealType = dealType;
                     currentCashbackIncentive.CombineType = combineType;
                     currentCashbackIncentive.UnitValue = unitValue;
@@ -2512,22 +2463,17 @@ namespace YOY.DAO.Entities.Manager
                     currentCashbackIncentive.Description = description;
                     currentCashbackIncentive.Keywords = keywords;
                     currentCashbackIncentive.IsSponsored = isSponsored;
-                    currentCashbackIncentive.RelevanceRate = relevanceRate;
-                    currentCashbackIncentive.ReleaseDate = releaseDate;
-                    currentCashbackIncentive.ExpirationDate = expirationDate;
                     currentCashbackIncentive.ValidWeekDays = validWeekDays;
                     currentCashbackIncentive.ValidMonthDays = validMonthDays;
                     currentCashbackIncentive.ValidHours = validHours;
                     currentCashbackIncentive.MaxUsagesPerUser = maxUsagesPerUser;
+                    currentCashbackIncentive.MinPurchasesCountToUse = minPurchasesCountToUse;
                     currentCashbackIncentive.GeoSegmentationType = geoSegmentationType;
                     currentCashbackIncentive.Rules = rules;
                     currentCashbackIncentive.Conditions = conditions;
-                    currentCashbackIncentive.ClaimInstructions = claimInstructions;
-                    currentCashbackIncentive.OneTimeUsagePerUser = oneTimeUsagePerUser;
-                    currentCashbackIncentive.PurchasesCountStartDate = purchasesCountStartDate;
-                    currentCashbackIncentive.MinPurchasesCountToUse = minPurchasesCountToUse;
-                    currentCashbackIncentive.MinPurchasesHoursTimeoutToUse = minPurchasesHoursTimeoutToUse;
-                    currentCashbackIncentive.MaxPurchasesDaysTimeoutToUse = maxPurchasesDaysTimeoutToUse;
+                    currentCashbackIncentive.RelevanceRate = relevanceRate;
+                    currentCashbackIncentive.ReleaseDate = releaseDate;
+                    currentCashbackIncentive.ExpirationDate = expirationDate;
                     currentCashbackIncentive.UpdatedDate = DateTime.UtcNow;
 
                     this._businessObjects.Context.SaveChanges();
@@ -2538,10 +2484,10 @@ namespace YOY.DAO.Entities.Manager
                         TenantId = currentCashbackIncentive.TenantId,
                         Type = currentCashbackIncentive.Type,
                         TypeName = GetTypeName(currentCashbackIncentive.Type),
-                        EarningType = currentCashbackIncentive.EarningType,
-                        EarningTypeName = GetEarningTypeName(currentCashbackIncentive.EarningType),
                         DisplayType = currentCashbackIncentive.DisplayType,
                         DisplayTypeName = GetDisplayTypeName(currentCashbackIncentive.DisplayType),
+                        EarningType = currentCashbackIncentive.EarningType,
+                        EarningTypeName = GetEarningTypeName(currentCashbackIncentive.EarningType),
                         DealType = currentCashbackIncentive.DealType,
                         DealTypeName = GetDealTypeName(currentCashbackIncentive.DealType),
                         CombineType = currentCashbackIncentive.CombineType,
@@ -2556,28 +2502,23 @@ namespace YOY.DAO.Entities.Manager
                         Name = currentCashbackIncentive.Name,
                         Description = currentCashbackIncentive.Description,
                         Keywords = currentCashbackIncentive.Keywords,
-                        IsSponsored = currentCashbackIncentive.IsSponsored,
                         IsActive = currentCashbackIncentive.IsActive,
-                        CreatedDate = currentCashbackIncentive.CreatedDate,
-                        UpdatedDate = currentCashbackIncentive.UpdatedDate,
-                        ReleaseDate = currentCashbackIncentive.ReleaseDate,
-                        ExpirationDate = currentCashbackIncentive.ExpirationDate,
+                        IsSponsored = currentCashbackIncentive.IsSponsored,
                         ValidWeekDays = currentCashbackIncentive.ValidWeekDays,
                         ValidMonthDays = currentCashbackIncentive.ValidMonthDays,
                         ValidHours = currentCashbackIncentive.ValidHours,
                         MaxUsagePerUser = currentCashbackIncentive.MaxUsagesPerUser,
+                        MinPurchasesCountToUse = currentCashbackIncentive.MinPurchasesCountToUse,
                         UsageCount = currentCashbackIncentive.UsageCount,
-                        RelevanceRate = currentCashbackIncentive.RelevanceRate,
                         GeoSegmentationType = currentCashbackIncentive.GeoSegmentationType,
                         GeoSegmentationTypeName = GetGeoSegmentationTypeName(currentCashbackIncentive.GeoSegmentationType),
                         Rules = currentCashbackIncentive.Rules ?? Resources.NoRulesAvailable,
                         Conditions = currentCashbackIncentive.Conditions ?? Resources.NoConditionsAvailable,
-                        ClaimInstructions = currentCashbackIncentive.ClaimInstructions ?? Resources.DefaultIncentiveClaimInstructions,
-                        OneTimeUsagePerUser = currentCashbackIncentive.OneTimeUsagePerUser,
-                        PurchasesCountStartDate = currentCashbackIncentive.PurchasesCountStartDate,
-                        MinPurchasesCountToUse = currentCashbackIncentive.MinPurchasesCountToUse,
-                        MinPurchasesHoursTimeoutToUse = currentCashbackIncentive.MinPurchasesHoursTimeoutToUse,
-                        MaxPurchasesDaysTimeoutToUse = currentCashbackIncentive.MaxPurchasesDaysTimeoutToUse
+                        RelevanceRate = currentCashbackIncentive.RelevanceRate,
+                        ReleaseDate = currentCashbackIncentive.ReleaseDate,
+                        ExpirationDate = currentCashbackIncentive.ExpirationDate,
+                        UpdatedDate = currentCashbackIncentive.UpdatedDate,
+                        CreatedDate = currentCashbackIncentive.CreatedDate,
                     };
 
                     DateTime now = DateTime.UtcNow;
@@ -2865,14 +2806,13 @@ namespace YOY.DAO.Entities.Manager
                                             TenantId = item.TenantId,
                                             Type = item.Type,
                                             TypeName = GetTypeName(item.Type),
+                                            DisplayType = item.DisplayType,
                                             EarningType = item.EarningType,
-                                            EarningTypeName = GetEarningTypeName(item.EarningType),
                                             DealType = item.DealType,
-                                            DealTypeName = GetDealTypeName(item.DealType),
                                             CombineType = item.CombineType,
-                                            CombineTypeName = GetCombineTypeName(item.CombineType),
                                             UnitValue = item.UnitValue,
                                             PreviousUnitValue = item.PreviousUnitValue,
+                                            MinMembershipLevel = item.MinMembershipLevel,
                                             MinPurchasedAmount = item.MinPurchasedAmount,
                                             PurchasedAmountBlock = item.PurchasedAmountBlock,
                                             MaxValue = item.MaxValue,
@@ -2882,24 +2822,19 @@ namespace YOY.DAO.Entities.Manager
                                             Keywords = item.Keywords,
                                             IsActive = item.IsActive,
                                             IsSponsored = item.IsSponsored,
-                                            CreatedDate = item.CreatedDate,
-                                            ReleaseDate = item.ReleaseDate,
-                                            ExpirationDate = item.ExpirationDate,
                                             ValidWeekDays = item.ValidWeekDays,
                                             ValidMonthDays = item.ValidMonthDays,
                                             ValidHours = item.ValidHours,
                                             MaxUsagePerUser = item.MaxUsagesPerUser,
+                                            MinPurchasesCountToUse = item.MinPurchasesCountToUse,
                                             UsageCount = item.UsageCount,
-                                            RelevanceRate = item.RelevanceRate,
                                             GeoSegmentationType = item.GeoSegmentationType,
-                                            GeoSegmentationTypeName = GetGeoSegmentationTypeName(item.GeoSegmentationType),
                                             Rules = item.Rules ?? Resources.NoRulesAvailable,
                                             Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
-                                            ClaimInstructions = item.ClaimInstructions ?? Resources.DefaultIncentiveClaimInstructions,
-                                            OneTimeUsagePerUser = item.OneTimeUsagePerUser,
-                                            MinPurchasesCountToUse = item.MinPurchasesCountToUse,
-                                            MinPurchasesHoursTimeoutToUse = item.MinPurchasesHoursTimeoutToUse,
-                                            MaxPurchasesDaysTimeoutToUse = item.MaxPurchasesDaysTimeoutToUse
+                                            RelevanceRate = item.RelevanceRate,
+                                            ReleaseDate = item.ReleaseDate,
+                                            ExpirationDate = item.ExpirationDate,
+                                            CreatedDate = item.CreatedDate,
                                         },
                                         Tenant = new DTO.Entities.Misc.TenantData.BasicTenantData
                                         {
@@ -3021,15 +2956,13 @@ namespace YOY.DAO.Entities.Manager
                                             Id = item.Id,
                                             TenantId = item.TenantId,
                                             Type = item.Type,
-                                            TypeName = GetTypeName(item.Type),
+                                            DisplayType = item.DisplayType,
                                             EarningType = item.EarningType,
-                                            EarningTypeName = GetEarningTypeName(item.EarningType),
                                             DealType = item.DealType,
-                                            DealTypeName = GetDealTypeName(item.DealType),
                                             CombineType = item.CombineType,
-                                            CombineTypeName = GetCombineTypeName(item.CombineType),
                                             UnitValue = item.UnitValue,
                                             PreviousUnitValue = item.PreviousUnitValue,
+                                            MinMembershipLevel = item.MinMembershipLevel,
                                             MinPurchasedAmount = item.MinPurchasedAmount,
                                             PurchasedAmountBlock = item.PurchasedAmountBlock,
                                             MaxValue = item.MaxValue,
@@ -3039,24 +2972,19 @@ namespace YOY.DAO.Entities.Manager
                                             Keywords = item.Keywords,
                                             IsActive = item.IsActive,
                                             IsSponsored = item.IsSponsored,
-                                            CreatedDate = item.CreatedDate,
-                                            ReleaseDate = item.ReleaseDate,
-                                            ExpirationDate = item.ExpirationDate,
                                             ValidWeekDays = item.ValidWeekDays,
                                             ValidMonthDays = item.ValidMonthDays,
                                             ValidHours = item.ValidHours,
                                             MaxUsagePerUser = item.MaxUsagesPerUser,
+                                            MinPurchasesCountToUse = item.MinPurchasesCountToUse,
                                             UsageCount = item.UsageCount,
-                                            RelevanceRate = item.RelevanceRate,
                                             GeoSegmentationType = item.GeoSegmentationType,
-                                            GeoSegmentationTypeName = GetGeoSegmentationTypeName(item.GeoSegmentationType),
                                             Rules = item.Rules ?? Resources.NoRulesAvailable,
                                             Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
-                                            ClaimInstructions = item.ClaimInstructions ?? Resources.DefaultIncentiveClaimInstructions,
-                                            OneTimeUsagePerUser = item.OneTimeUsagePerUser,
-                                            MinPurchasesCountToUse = item.MinPurchasesCountToUse,
-                                            MinPurchasesHoursTimeoutToUse = item.MinPurchasesHoursTimeoutToUse,
-                                            MaxPurchasesDaysTimeoutToUse = item.MaxPurchasesDaysTimeoutToUse
+                                            RelevanceRate = item.RelevanceRate,
+                                            ReleaseDate = item.ReleaseDate,
+                                            ExpirationDate = item.ExpirationDate,
+                                            CreatedDate = item.CreatedDate,
                                         },
                                         Tenant = new DTO.Entities.Misc.TenantData.BasicTenantData
                                         {
