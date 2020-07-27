@@ -13,6 +13,7 @@ using YOY.Values;
 using YOY.Values.Strings;
 using YOY.BusinessAPI.Handlers.Search;
 using YOY.DTO.Entities.Misc.ObjectState.POCO;
+using YOY.DTO.Entities.Misc.Category;
 
 namespace YOY.BusinessAPI.Controllers
 {
@@ -39,15 +40,15 @@ namespace YOY.BusinessAPI.Controllers
         private const int controllerVersion = 1;
 
         private const int mainHintMinLength = 3;
-        private const int mainHintMaxLength = 9;
+        private const int mainHintMaxLength = 10;
         private const int complementaryHintMinLength = 3;
-        private const int complementaryHintMaxLength = 9;
+        private const int complementaryHintMaxLength = 22;
         private const int nameMinLength = 10;
         private const int nameMaxLength = 64;
         private const int keywordsMaxLength = 1000;
         public const int codeMaxLenght = 15;
         private const int descriptionMinLength = 10;
-        private const int descriptionMaxLength = 64;
+        private const int descriptionMaxLength = 360;
         private const int availableQuantityMinValue = 30;
         public const int infiteAvailableQuantity = -1;
 
@@ -406,7 +407,7 @@ namespace YOY.BusinessAPI.Controllers
             return dealsData;
         }
 
-        private int GetTotalDealsCount()
+        private int GetTotalDealsCount(DateTime startDate, DateTime endDate)
         {
             int? count;
 
@@ -414,7 +415,7 @@ namespace YOY.BusinessAPI.Controllers
 
             try
             {
-                count = this._businessObjects.Offers.GetOffersCount(this._businessObjects.Tenant.TenantId, SearchableObjectTypes.Commerce, DateTime.UtcNow, OfferPurposeTypes.Deal);
+                count = this._businessObjects.Offers.GetOffersCountByDateRange(this._businessObjects.Tenant.TenantId, SearchableObjectTypes.Commerce, startDate, endDate, OfferPurposeTypes.Deal);
             }
             catch(Exception e)
             {
@@ -475,7 +476,7 @@ namespace YOY.BusinessAPI.Controllers
                     Task<List<DealData>> getDealsDataTask = new Task<List<DealData>>(() => this.GetDealsData(pageSize, pageNumber));
                     getDealsDataTask.Start();
 
-                    Task<int> getDealsCountTask = new Task<int>(() => this.GetTotalDealsCount());
+                    Task<int> getDealsCountTask = new Task<int>(() => this.GetTotalDealsCount(startDate, endDate));
                     getDealsCountTask.Start();
 
                     deals.Deals = await getDealsDataTask;
@@ -507,7 +508,7 @@ namespace YOY.BusinessAPI.Controllers
         [HttpPost]
         [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status200OK)]
         [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest)]
-        public IActionResult Post([FromBody] NewDeal model)
+        public async Task<IActionResult> PostAsync([FromBody] NewDeal model)
         {
             int callId = 2;
             string parameters = model.ToString();
@@ -548,7 +549,7 @@ namespace YOY.BusinessAPI.Controllers
 
                         this.Initialize(currenEmployee.TenantId, currenEmployee.UserId);
 
-                        if (model.MainCategoryId == Guid.Empty)
+                        if (model.MainCategoryId == null || model.MainCategoryId == Guid.Empty)
                         {
                             valid = false;
                             dataErrors = "-Categoría principal debe ser seleccionada\n";
@@ -639,6 +640,12 @@ namespace YOY.BusinessAPI.Controllers
                             dataErrors = "-El periodo de validez es incorrecto, la fecha de lanzamiento debe ser menor que la fecha de expiración\n";
                         }
 
+                        if (string.IsNullOrWhiteSpace(model.ReleaseHour) || string.IsNullOrWhiteSpace(model.ExpirationHour))
+                        {
+                            valid = false;
+                            dataErrors = "-Las horas de lanzamiento y vencimiento deben ser especificadas";
+                        }
+
 
                         if (model.DisplayImgData == null)
                         {
@@ -661,8 +668,8 @@ namespace YOY.BusinessAPI.Controllers
                         else
                         {
                             //Need to convert dates to UTC
-                            model.ReleaseDate = LocalToUtc(model.ReleaseDate, "", this._businessObjects.Tenant.UtcTimeDiff);
-                            model.ExpirationDate = LocalToUtc(model.ExpirationDate, "", this._businessObjects.Tenant.UtcTimeDiff);
+                            model.ReleaseDate = LocalToUtc(model.ReleaseDate, model.ReleaseHour, this._businessObjects.Tenant.UtcTimeDiff);
+                            model.ExpirationDate = LocalToUtc(model.ExpirationDate, model.ExpirationHour, this._businessObjects.Tenant.UtcTimeDiff);
 
                             //Now needs to store the image in database
                             Guid? imgId = null;
@@ -723,23 +730,23 @@ namespace YOY.BusinessAPI.Controllers
 
                                         ImageHandler imgHandler = new ImageHandler();
 
-                                        string index;
+                                        string indexName;
 
                                         if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
                                         {
-                                            index = "dev_DEALS";
+                                            indexName = SearchIndexNames.DevAppend+SearchIndexNames.GeneralContent;
 
                                         }
                                         else
                                         {
-                                            index = "prod_DEALS";
+                                            indexName = SearchIndexNames.ProdAppend + SearchIndexNames.GeneralContent;
                                         }
 
-                                        SearchObjectHandler.SetParams("HDFTAAQXVP", index);
+                                        SearchObjectHandler.SetParams(SearchIndexNames.AppName, indexName);
 
-                                        bool success = SearchObjectHandler.AddObject(newOffer.Id, newOffer.TenantId, tenantInfo.CountryId, newOffer.MainHint + " - " + newOffer.ComplementaryHint, DealContentTypes.Offer, SearchableObjectTypes.Deal, imgHandler.GetImgUrl((Guid)tenantInfo.Logo, ImageStorages.Cloudinary, ImageRequesters.App).ImgUrl,
-                                            newOffer.MainCategoryName, this._businessObjects.Categories.GetParentCategory(newOffer.MainCategoryId, CategoryHerarchyLevels.ProductCategory), newOffer.Keywords, newOffer.DealTypeName, newOffer.IsActive,
-                                            (DateTime)newOffer.ReleaseDate, newOffer.ExpirationDate);
+                                        bool success = await SearchObjectHandler.AddGeneralSearchableObjectAsync(newOffer.Id, newOffer.TenantId, tenantInfo.CountryId, newOffer.Keywords, imgHandler.GetImgUrl((Guid)tenantInfo.Logo, ImageStorages.Cloudinary, ImageRequesters.App).ImgUrl, newOffer.IsSponsored, newOffer.IsActive, newOffer.RelevanceRate,
+                                            0, newOffer.ReleaseDate, newOffer.ExpirationDate, SearchableObjectTypes.Deal, newOffer.MainHint + " " + newOffer.ComplementaryHint, newOffer.Name, newOffer.MainCategoryName, newOffer.MainCategoryName,
+                                            this._businessObjects.Categories.GetParentCategory(newOffer.MainCategoryId, CategoryHerarchyLevels.ProductCategory), newOffer.Value, 1);
                                     }
 
                                     result = Ok(this.GetDealContent(newOffer, newOffer.OfferType));
@@ -801,7 +808,7 @@ namespace YOY.BusinessAPI.Controllers
         [HttpPut]
         [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status200OK)]
         [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest)]
-        public IActionResult Put([FromBody] UpdatedDeal model)
+        public async Task<IActionResult> PutAsync([FromBody] UpdatedDeal model)
         {
             int callId = 3;
             string parameters = model.ToString();
@@ -932,7 +939,7 @@ namespace YOY.BusinessAPI.Controllers
                         if (string.IsNullOrWhiteSpace(model.ReleaseHour) || string.IsNullOrWhiteSpace(model.ExpirationHour))
                         {
                             valid = false;
-                            dataErrors = "-Las horas de lanzamiento deben ser especificadas";
+                            dataErrors = "-Las horas de lanzamiento y vencimiento deben ser especificadas";
                         }
 
                         if (model.DisplayImgData == null || string.IsNullOrEmpty(model.DisplayImgData.ExternalId))
@@ -1013,29 +1020,44 @@ namespace YOY.BusinessAPI.Controllers
                                             this._businessObjects.Categories.Post(model.MainCategoryId, CategoryHerarchyLevels.ProductCategory, updatedOffer.Id, CategoryRelatiomReferenceTypes.Offer);
                                         }
 
-                                        //Needs to add it to Algolia 1st
+                                        //Needs to update it to Algolia
                                         if (updatedOffer.DisplayType < DisplayTypes.BroadcastingOnly)//If the offer will be publicly accessible
                                         {
 
-                                            ImageHandler imgHandler = new ImageHandler();
+                                            //Need to retrieve all categories
+                                            List<CategoryRelation> categoryRelations = this._businessObjects.Categories.Gets(updatedOffer.Id, CategoryRelationTypes.Offer);
 
-                                            string index;
+                                            string categories = "";
+                                            string classifications = "";
+
+                                            if (categoryRelations?.Count > 0)
+                                            {
+                                                foreach (CategoryRelation item in categoryRelations)
+                                                {
+                                                    if (item.HerarchyLevel == CategoryHerarchyLevels.ProductCategory)
+                                                    {
+                                                        categories += item.CategoryName;
+                                                        classifications += this._businessObjects.Categories.GetParentCategory(item.CategoryId, CategoryHerarchyLevels.ProductCategory);
+                                                    }
+                                                }
+                                            }
+
+                                            string indexName;
 
                                             if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
                                             {
-                                                index = "dev_DEALS";
+                                                indexName = SearchIndexNames.DevAppend + SearchIndexNames.GeneralContent;
 
                                             }
                                             else
                                             {
-                                                index = "prod_DEALS";
+                                                indexName = SearchIndexNames.ProdAppend + SearchIndexNames.GeneralContent;
                                             }
 
-                                            SearchObjectHandler.SetParams("HDFTAAQXVP", index);
+                                            SearchObjectHandler.SetParams(SearchIndexNames.AppName, indexName);
 
-                                            bool success = SearchObjectHandler.AddObject(updatedOffer.Id, updatedOffer.TenantId, tenantInfo.CountryId, updatedOffer.MainHint + " - " + updatedOffer.ComplementaryHint, DealContentTypes.Offer, SearchableObjectTypes.Deal, imgHandler.GetImgUrl((Guid)tenantInfo.Logo, ImageStorages.Cloudinary, ImageRequesters.App).ImgUrl,
-                                                updatedOffer.MainCategoryName, this._businessObjects.Categories.GetParentCategory(updatedOffer.MainCategoryId, CategoryHerarchyLevels.ProductCategory), updatedOffer.Keywords, updatedOffer.DealTypeName, updatedOffer.IsActive,
-                                                (DateTime)updatedOffer.ReleaseDate, updatedOffer.ExpirationDate);
+                                            bool success = await SearchObjectHandler.UpdateGeneralSearchableObjectAsync(updatedOffer.Id, updatedOffer.Keywords, updatedOffer.IsSponsored, updatedOffer.IsActive, updatedOffer.RelevanceRate, updatedOffer.ReleaseDate, updatedOffer.ExpirationDate, 
+                                                updatedOffer.MainHint + " " + updatedOffer.ComplementaryHint, updatedOffer.Name, updatedOffer.MainCategoryName, categories, classifications, updatedOffer.Value, 1 );
                                         }
 
                                         result = Ok(this.GetDealContent(updatedOffer, updatedOffer.OfferType));
@@ -1110,7 +1132,7 @@ namespace YOY.BusinessAPI.Controllers
         [HttpPut]
         [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status200OK)]
         [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest)]
-        public IActionResult PutActiveState([FromBody] DealModifierById model)
+        public async Task<IActionResult> PutActiveStateAsync([FromBody] DealModifierById model)
         {
             int callId = 4;
             string parameters = model.ToString();
@@ -1148,6 +1170,29 @@ namespace YOY.BusinessAPI.Controllers
 
                     if (stateUpdate != null)
                     {
+                        Offer updatedOffer = this._businessObjects.Offers.Get(model.Id, model.OfferType, true);
+
+                        //Needs to update it to Algolia
+                        if (updatedOffer.DisplayType < DisplayTypes.BroadcastingOnly)//If the offer will be publicly accessible
+                        {
+
+                            string indexName;
+
+                            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+                            {
+                                indexName = SearchIndexNames.DevAppend + SearchIndexNames.GeneralContent;
+
+                            }
+                            else
+                            {
+                                indexName = SearchIndexNames.ProdAppend + SearchIndexNames.GeneralContent;
+                            }
+
+                            SearchObjectHandler.SetParams(SearchIndexNames.AppName, indexName);
+
+                            bool success = await SearchObjectHandler.UpdateSearchableObjectActiveStateAsync(updatedOffer.Id, updatedOffer.IsActive);
+                        }
+
                         SuccessResponse response = new SuccessResponse
                         {
                             StatusCode = Values.StatusCodes.Ok,
@@ -1188,7 +1233,7 @@ namespace YOY.BusinessAPI.Controllers
         [HttpDelete]
         [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status200OK)]
         [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest)]
-        public IActionResult Delete([FromBody] DealModifierById model)
+        public async Task<IActionResult> DeleteAsync([FromBody] DealModifierById model)
         {
             int callId = 5;
             string parameters = model.ToString();
@@ -1221,9 +1266,27 @@ namespace YOY.BusinessAPI.Controllers
 
                 try
                 {
+                    Guid? deletedId = this._businessObjects.Offers.Delete(model.Id, model.OfferType);
 
-                    if (this._businessObjects.Offers.Delete(model.Id, model.OfferType))
+                    if (deletedId != null)
                     {
+
+                        string indexName;
+
+                        if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+                        {
+                            indexName = SearchIndexNames.DevAppend + SearchIndexNames.GeneralContent;
+
+                        }
+                        else
+                        {
+                            indexName = SearchIndexNames.ProdAppend + SearchIndexNames.GeneralContent;
+                        }
+
+                        SearchObjectHandler.SetParams(SearchIndexNames.AppName, indexName);
+
+                        bool success = await SearchObjectHandler.DeleteSearchableObjectAsync(((Guid)deletedId).ToString());
+
                         SuccessResponse response = new SuccessResponse
                         {
                             StatusCode = Values.StatusCodes.Ok,

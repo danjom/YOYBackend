@@ -59,12 +59,6 @@ namespace YOY.BusinessAPI.Models.v1.CashbackIncentive.POCO
         public bool IsSponsored { set; get; }
         [NotNull]
         [Required]
-        public DateTime ReleaseDate { set; get; }
-        [NotNull]
-        [Required]
-        public DateTime ExpirationDate { set; get; }
-        [NotNull]
-        [Required]
         public string ValidWeekDays { set; get; }
         [NotNull]
         [Required]
@@ -75,6 +69,17 @@ namespace YOY.BusinessAPI.Models.v1.CashbackIncentive.POCO
         [NotNull]
         [Required]
         public int MaxUsagePerUser { set; get; }
+        [NotNull]
+        [Required]
+        public int MinPurchaseCountToUse { set; get; }
+        [AllowNull]
+        public int? RelevanceRate { set; get; }
+        [NotNull]
+        [Required]
+        public DateTime ReleaseDate { set; get; }
+        [NotNull]
+        [Required]
+        public DateTime ExpirationDate { set; get; }
 
     }
 }

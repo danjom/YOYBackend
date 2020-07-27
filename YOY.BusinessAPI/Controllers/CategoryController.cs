@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using YOY.BusinessAPI.Handlers.Search;
 using YOY.BusinessAPI.Models.v1.Category.POCO;
 using YOY.BusinessAPI.Models.v1.Category.SET;
 using YOY.BusinessAPI.Models.v1.Misc.BasicResponse.POCO;
@@ -145,7 +146,7 @@ namespace YOY.BusinessAPI.Controllers
         [HttpPost]
         [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status200OK)]
         [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest)]
-        public IActionResult Post([FromBody] CategoryOpDataList model)
+        public async Task<IActionResult> PostAsync([FromBody] CategoryOpDataList model)
         {
             int callId = 2;
             string parameters = model.ToString();
@@ -188,7 +189,51 @@ namespace YOY.BusinessAPI.Controllers
                     }
 
                     if (valid)
+                    {
+                        //Needs to update offer categories on search index
+
+                        Offer updatedOffer = this._businessObjects.Offers.Get(model.DealId, true);
+
+                        if (updatedOffer.DisplayType > DisplayTypes.BroadcastingOnly)
+                        {
+                            //Need to retrieve all categories
+                            List<CategoryRelation> categoryRelations = this._businessObjects.Categories.Gets(updatedOffer.Id, CategoryRelationTypes.Offer);
+
+                            string categories = "";
+                            string classifications = "";
+
+                            if (categoryRelations?.Count > 0)
+                            {
+                                foreach (CategoryRelation relation in categoryRelations)
+                                {
+                                    if (relation.HerarchyLevel == CategoryHerarchyLevels.ProductCategory)
+                                    {
+                                        categories += relation.CategoryName;
+                                        classifications += this._businessObjects.Categories.GetParentCategory(relation.CategoryId, CategoryHerarchyLevels.ProductCategory);
+                                    }
+                                }
+                            }
+
+                            string indexName;
+
+                            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+                            {
+                                indexName = SearchIndexNames.DevAppend + SearchIndexNames.GeneralContent;
+
+                            }
+                            else
+                            {
+                                indexName = SearchIndexNames.ProdAppend + SearchIndexNames.GeneralContent;
+                            }
+
+                            SearchObjectHandler.SetParams(SearchIndexNames.AppName, indexName);
+
+                            await SearchObjectHandler.UpdateSearchableObjectCategoryDataAsync(updatedOffer.Id, categories, classifications);
+
+                        }
+
                         result = Ok();
+                    }
                     else
                         result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
                 }
@@ -215,7 +260,7 @@ namespace YOY.BusinessAPI.Controllers
         [HttpDelete]
         [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status200OK)]
         [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest)]
-        public IActionResult Delete([FromBody] CategoryOpDataList model)
+        public async Task<IActionResult> DeleteAsync([FromBody] CategoryOpDataList model)
         {
             int callId = 2;
             string parameters = model.ToString();
@@ -258,7 +303,51 @@ namespace YOY.BusinessAPI.Controllers
                     }
 
                     if (valid)
+                    {
+                        //Needs to update offer categories on search index
+
+                        Offer updatedOffer = this._businessObjects.Offers.Get(model.DealId, true);
+
+                        if (updatedOffer.DisplayType > DisplayTypes.BroadcastingOnly)
+                        {
+                            //Need to retrieve all categories
+                            List<CategoryRelation> categoryRelations = this._businessObjects.Categories.Gets(updatedOffer.Id, CategoryRelationTypes.Offer);
+
+                            string categories = "";
+                            string classifications = "";
+
+                            if (categoryRelations?.Count > 0)
+                            {
+                                foreach (CategoryRelation relation in categoryRelations)
+                                {
+                                    if (relation.HerarchyLevel == CategoryHerarchyLevels.ProductCategory)
+                                    {
+                                        categories += relation.CategoryName;
+                                        classifications += this._businessObjects.Categories.GetParentCategory(relation.CategoryId, CategoryHerarchyLevels.ProductCategory);
+                                    }
+                                }
+                            }
+
+                            string indexName;
+
+                            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+                            {
+                                indexName = SearchIndexNames.DevAppend + SearchIndexNames.GeneralContent;
+
+                            }
+                            else
+                            {
+                                indexName = SearchIndexNames.ProdAppend + SearchIndexNames.GeneralContent;
+                            }
+
+                            SearchObjectHandler.SetParams(SearchIndexNames.AppName, indexName);
+
+                            await SearchObjectHandler.UpdateSearchableObjectCategoryDataAsync(updatedOffer.Id, categories, classifications);
+
+                        }
+
                         result = Ok();
+                    }
                     else
                         result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
                 }

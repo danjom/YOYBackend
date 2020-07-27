@@ -56,6 +56,7 @@ namespace YOY.DAO.Entities.DB
         public int AccessFailedCount { get; set; }
         public long AccountNumber { get; set; }
         public string AccountCode { get; set; }
+        public string PersonalId { get; set; }
         public string ProfilePicUrl { get; set; }
         public string InvitorUserId { get; set; }
         public string ReferenceCode { get; set; }

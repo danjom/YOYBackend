@@ -615,9 +615,10 @@
         public const int All = -1;
         public const int None = 0;
         public const int Deal = 1;
-        public const int Commerce = 2;
+        public const int CashbackIncentive = 2;
         public const int Category = 3;
-        public const int Club = 4;
+        public const int Commerce = 4;
+        public const int ShoppingMall = 5;
     }
 
     public static class SearchIndexes
@@ -626,6 +627,16 @@
         public const string dev_CLUBS = "093a4d94-53db-4dec-a555-14890b364fba";
         public const int dealsIndex = 1;
         public const int clubIndex = 2;
+    }
+
+    public static class SearchIndexNames
+    {
+        public const string AppName = "HDFTAAQXVP";
+        public const string ProdAppend = "prod_";
+        public const string DevAppend = "dev_";
+        public const string GeneralContent = "GENERALCONTENT";
+        public const string CommercePreferences = "COMMERCEPREFERENCES";
+        public const string CashbackIncentives = "CASHBACKINCENTIVES";
     }
 
     public static class SearchSources
@@ -1876,6 +1887,12 @@
         public const int Offer = 240;
     }
 
+    public static class UserIdentityValueTypes
+    {
+        public const int PersonalId = 1;
+        public const int PhoneNumber = 2;
+    }
+
     public static class UserIdTypes
     {
         public const int Id = 1;
@@ -2354,6 +2371,7 @@
         public const int State = 4;
         public const int ProfilePic = 5;
         public const int Language = 6;
+        public const int PersonalId = 7;
     }
 
     public static class FirstLevelAggregationTypes

@@ -156,8 +156,32 @@
   <data name="EmptyTokenIssue" xml:space="preserve">
     <value>No se ha recibido token</value>
   </data>
+  <data name="ErrorRemovingPersonalId" xml:space="preserve">
+    <value>Hubo un error al intentar eliminar tu id personal</value>
+  </data>
+  <data name="ErrorSettingBirthdate" xml:space="preserve">
+    <value>Hubo un error al actualizar tu fecha de nacimiento</value>
+  </data>
+  <data name="ErrorSettingPersonalId" xml:space="preserve">
+    <value>Hubo un error al registrar tu id personal</value>
+  </data>
+  <data name="ErrorSettingProfilePicture" xml:space="preserve">
+    <value>Hubo un error al actualizar tu foto de perfil</value>
+  </data>
+  <data name="ErrorSettingReferenceCode" xml:space="preserve">
+    <value>Hubo un error al registrar tu código de invitación</value>
+  </data>
+  <data name="ErrorSettingState" xml:space="preserve">
+    <value>Hubo un error al registrar la ciudad que elegiste</value>
+  </data>
+  <data name="ErrorUpdatingProfilePicture" xml:space="preserve">
+    <value>Hubo un error al actualizar tu foto de perfil</value>
+  </data>
   <data name="FacebookAccountNotFound" xml:space="preserve">
     <value>Cuenta de Facebook no encontrada</value>
+  </data>
+  <data name="FailedOperation" xml:space="preserve">
+    <value>Operación fallida</value>
   </data>
   <data name="February" xml:space="preserve">
     <value>Febrero</value>
@@ -207,6 +231,9 @@
   <data name="InvalidRefCodeTitle" xml:space="preserve">
     <value>Código inválido</value>
   </data>
+  <data name="InvalidReferenceCode" xml:space="preserve">
+    <value>Código de invitación inválido, revisa y reintenta</value>
+  </data>
   <data name="InvalidSignupData" xml:space="preserve">
     <value>Los datos de registro poseen errors, revisa e intenta de nuevo</value>
   </data>
@@ -255,11 +282,17 @@
   <data name="OpenWalletRewardTitle" xml:space="preserve">
     <value>+{0} YOYs como regalor por unirte a YOY</value>
   </data>
+  <data name="OutOfBirthdateRange" xml:space="preserve">
+    <value>El rango de edad aceptado va de los 10 a los 100 años</value>
+  </data>
   <data name="PasswordMismatch" xml:space="preserve">
     <value>Las contraseña no coinciden, por favor revísalo e intenta de nuevo</value>
   </data>
   <data name="PasswordMismatchTitle" xml:space="preserve">
     <value>Contraseña inválida</value>
+  </data>
+  <data name="PersonalIdRecentlyUsedInOtherAccount" xml:space="preserve">
+    <value>Este id se ha asociado recientemente a otra cuenta</value>
   </data>
   <data name="PhoneNumberAlreadyRegistered" xml:space="preserve">
     <value>Este número ya está asociado a otra cuenta, por favor ingresa otro</value>
@@ -284,6 +317,12 @@
   </data>
   <data name="Silver" xml:space="preserve">
     <value>Plata</value>
+  </data>
+  <data name="UnchangedPhoneNumber" xml:space="preserve">
+    <value>El número que ingresaste ya lo tienes vinculado a tu cuenta</value>
+  </data>
+  <data name="UnchangedPhoneNumberTitle" xml:space="preserve">
+    <value>Número sin cambio</value>
   </data>
   <data name="UnexistenRefCode" xml:space="preserve">
     <value>Código inexistente</value>

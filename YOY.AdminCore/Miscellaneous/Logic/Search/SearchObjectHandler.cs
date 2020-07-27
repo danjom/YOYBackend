@@ -1,6 +1,7 @@
 ﻿using YOY.DTO.Services.Search.Algolia;
 using YOY.ThirdpartyServices.Services.Search.Algolia;
 using System;
+using System.Threading.Tasks;
 
 namespace YOY.AdminCore.Miscellaneous.Logic.Search
 {
@@ -34,29 +35,39 @@ namespace YOY.AdminCore.Miscellaneous.Logic.Search
             indexName = index;
         }
 
-        public static bool AddObject(Guid id, Guid tenantId, string name, int type, string img, string category, string keywords, string details, bool isActive, DateTime releaseDate, DateTime? expirationDate)
+        public static async Task<bool> AddGeneralSearchableObjectAsync(Guid id, Guid tenantId, Guid countryId, string keywords, string imgUrl, bool isSponsored, bool isActive, double relevanceRate, int usageCount, DateTime releaseDate, DateTime expirationDate, int searchableType, string searchableMainKey, string details, string mainCategory, string relatedCategories, string classifications, decimal value, double cashbackPercentage)
         {
             bool success = false;
 
             try
             {
-                SearchableObject obj = new SearchableObject
+                SearchableObjectCore obj = new GeneralContentSearchableObject
                 {
-                    objectID = id + "",
-                    commerceId = tenantId + "",
-                    type = type,
-                    name = name,
-                    keywords = keywords,
-                    category = category,
-                    details = details,
-                    isActive = isActive ? "1" : "0",
-                    releaseDate = DateTimeToUnixTimestamp(releaseDate),
-                    expirationDate = expirationDate != null ? DateTimeToUnixTimestamp((DateTime)expirationDate) : DateTimeToUnixTimestamp(DateTime.MaxValue),
-                    icon = img
+                    //CORE DATA
+                    ObjectID = id + "",
+                    CommerceId = tenantId + "",
+                    CountryId = countryId + "",
+                    Keywords = keywords,
+                    ImgUrl = imgUrl,
+                    IsSponsored = isSponsored,
+                    IsActive = isActive,
+                    RelevanceRate = relevanceRate,
+                    UsageCount = usageCount,
+                    ReleaseDate = DateTimeToUnixTimestamp(releaseDate),
+                    ExpirationDate = DateTimeToUnixTimestamp(DateTime.MaxValue),
+                    //GENERAL CONTENT DATA
+                    SearchableObjectType = searchableType,
+                    SearchMainKey = searchableMainKey,
+                    Details = details,
+                    MainCategory = mainCategory,
+                    Categories = relatedCategories,
+                    Classifications = classifications,
+                    Value = value,
+                    CashbackPercentage = cashbackPercentage
                 };
 
                 if (!string.IsNullOrEmpty(appName) && !string.IsNullOrEmpty(indexName))
-                    success = SearchIndexer.SingleAdd(appName, indexName, obj);
+                    success = await SearchIndexer.SingleAddAsync(appName, indexName, obj);
             }
             catch (Exception)
             {
@@ -67,29 +78,35 @@ namespace YOY.AdminCore.Miscellaneous.Logic.Search
             return success;
         }
 
-        public static bool UpdateObject(Guid id, string name, int type, string category, string keywords, string details, DateTime releaseDate, DateTime? expirationDate)
+        public static async Task<bool> UpdateGeneralSearchableObjectAsync(Guid id, string keywords, bool isSponsored, bool isActive, double relevanceRate, DateTime releaseDate, DateTime? expirationDate, string searchKey, string details, string mainCategory, string categories, string classifications, decimal value, double cashbackPercentage)
         {
             bool success = false;
 
             try
             {
 
-
-                SearchableObjectData obj = new SearchableBaseObject
+                UpdateSearchableObjectCore obj = new UpdateGeneralContentSearchableObject
                 {
-                    objectID = id + "",
-                    type = type,
-                    name = name,
-                    keywords = keywords,
-                    category = category,
-                    details = details,
-                    releaseDate = DateTimeToUnixTimestamp(releaseDate),
-                    expirationDate = expirationDate != null ? DateTimeToUnixTimestamp((DateTime)expirationDate) : DateTimeToUnixTimestamp(DateTime.MaxValue)
-
+                    //CORE DATA
+                    ObjectID = id + "",
+                    Keywords = keywords,
+                    IsSponsored = isSponsored,
+                    IsActive = isActive,
+                    RelevanceRate = relevanceRate,
+                    ReleaseDate = DateTimeToUnixTimestamp(releaseDate),
+                    ExpirationDate = expirationDate != null ? DateTimeToUnixTimestamp((DateTime)expirationDate) : DateTimeToUnixTimestamp(DateTime.MaxValue),
+                    //GENERAL CONTENT DATA
+                    SearchKey = searchKey,
+                    Details = details,
+                    MainCategory = mainCategory,
+                    Categories = categories,
+                    Classifications = classifications,
+                    Value = value,
+                    CashbackPercentage = cashbackPercentage
                 };
 
                 if (!string.IsNullOrEmpty(appName) && !string.IsNullOrEmpty(indexName))
-                    success = SearchIndexer.Update(appName, indexName, obj);
+                    success = await SearchIndexer.PartiallySingleUpdateAsync(appName, indexName, obj);
             }
             catch (Exception)
             {
@@ -100,21 +117,21 @@ namespace YOY.AdminCore.Miscellaneous.Logic.Search
             return success;
         }
 
-        public static bool UpdateObject(Guid id, string img)
+        public static async Task<bool> UpdateSearchableObjectActiveStateAsync(Guid id, bool isActive)
         {
             bool success = false;
 
             try
             {
 
-                SearchableObjectData obj = new SearchableObjectIcon
+                UpdateSearchableObjectActiveState obj = new UpdateSearchableObjectActiveState
                 {
-                    objectID = id + "",
-                    icon = img
+                    ObjectID = id + "",
+                    IsActive = isActive
                 };
 
                 if (!string.IsNullOrEmpty(appName) && !string.IsNullOrEmpty(indexName))
-                    success = SearchIndexer.Update(appName, indexName, obj);
+                    success = await SearchIndexer.UpdateActiveStateAsync(appName, indexName, obj);
             }
             catch (Exception)
             {
@@ -125,22 +142,22 @@ namespace YOY.AdminCore.Miscellaneous.Logic.Search
             return success;
         }
 
-        public static bool UpdateObject(Guid id, bool isActive)
+        public static async Task<bool> UpdateSearchableObjectCategoryDataAsync(Guid id, string categories, string classifications)
         {
             bool success = false;
 
             try
             {
 
-
-                SearchableObjectData obj = new SearchableObjectActiveState
+                UpdateSearchableObjectCategoryData obj = new UpdateSearchableObjectCategoryData
                 {
-                    objectID = id + "",
-                    isActive = isActive ? "1" : "0"
+                    ObjectID = id + "",
+                    Categories = categories,
+                    Classifications = classifications
                 };
 
                 if (!string.IsNullOrEmpty(appName) && !string.IsNullOrEmpty(indexName))
-                    success = SearchIndexer.Update(appName, indexName, obj);
+                    success = await SearchIndexer.UpdateCategoryDataAsync(appName, indexName, obj);
             }
             catch (Exception)
             {
@@ -151,14 +168,14 @@ namespace YOY.AdminCore.Miscellaneous.Logic.Search
             return success;
         }
 
-        public static bool DeleteObject(string id)
+        public static async Task<bool> DeleteSearchableObjectAsync(string id)
         {
             bool success = false;
 
             try
             {
                 if (!string.IsNullOrEmpty(appName) && !string.IsNullOrEmpty(indexName))
-                    success = SearchIndexer.Delete(appName, indexName, id);
+                    success = await SearchIndexer.SingleDeleteAsync(appName, indexName, id);
             }
             catch (Exception)
             {

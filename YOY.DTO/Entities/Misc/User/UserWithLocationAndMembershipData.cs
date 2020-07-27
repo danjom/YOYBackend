@@ -5,6 +5,7 @@ namespace YOY.DTO.Entities.Misc.User
     public class UserWithLocationAndMembershipData
     {
         public string Id { set; get; }
+        public string PersonalId { set; get; }
         public string ProfilePic { set; get; }
         public long AccountNumber { set; get; }
         public string AccountCode { set; get; }

@@ -156,8 +156,32 @@
   <data name="EmptyTokenIssue" xml:space="preserve">
     <value>Token not received</value>
   </data>
+  <data name="ErrorRemovingPersonalId" xml:space="preserve">
+    <value>There was an error while removing your personal id</value>
+  </data>
+  <data name="ErrorSettingBirthdate" xml:space="preserve">
+    <value>There was an error when setting birthdate</value>
+  </data>
+  <data name="ErrorSettingPersonalId" xml:space="preserve">
+    <value>There was an error while setting your personal id</value>
+  </data>
+  <data name="ErrorSettingProfilePicture" xml:space="preserve">
+    <value>There was an error while setting your profile picture</value>
+  </data>
+  <data name="ErrorSettingReferenceCode" xml:space="preserve">
+    <value>There was an error while setting reference code</value>
+  </data>
+  <data name="ErrorSettingState" xml:space="preserve">
+    <value>There was an error while setting your chosen city</value>
+  </data>
+  <data name="ErrorUpdatingProfilePicture" xml:space="preserve">
+    <value>There was an error while updating your personal id</value>
+  </data>
   <data name="FacebookAccountNotFound" xml:space="preserve">
     <value>Facebook account not found</value>
+  </data>
+  <data name="FailedOperation" xml:space="preserve">
+    <value>Operation failed</value>
   </data>
   <data name="February" xml:space="preserve">
     <value>February</value>
@@ -207,6 +231,9 @@
   <data name="InvalidRefCodeTitle" xml:space="preserve">
     <value>Invalid code</value>
   </data>
+  <data name="InvalidReferenceCode" xml:space="preserve">
+    <value>Invalid invitation code, please check and retry</value>
+  </data>
   <data name="InvalidSignupData" xml:space="preserve">
     <value>Your signup form contains errors, please check and retry</value>
   </data>
@@ -255,11 +282,17 @@
   <data name="OpenWalletRewardTitle" xml:space="preserve">
     <value>+{0} YOYs as gift for joining YOY</value>
   </data>
+  <data name="OutOfBirthdateRange" xml:space="preserve">
+    <value>Birthdate must be greater than 10 and less than 100</value>
+  </data>
   <data name="PasswordMismatch" xml:space="preserve">
     <value>Password don't match, please check and retry</value>
   </data>
   <data name="PasswordMismatchTitle" xml:space="preserve">
     <value>Invalid password</value>
+  </data>
+  <data name="PersonalIdRecentlyUsedInOtherAccount" xml:space="preserve">
+    <value>Inputted id has been recenty linked to other account</value>
   </data>
   <data name="PhoneNumberAlreadyRegistered" xml:space="preserve">
     <value>This phone number is already linked to other user, please use a different one</value>
@@ -284,6 +317,12 @@
   </data>
   <data name="Silver" xml:space="preserve">
     <value>Silver</value>
+  </data>
+  <data name="UnchangedPhoneNumber" xml:space="preserve">
+    <value>Inputted phone number is the same currently linked to your account</value>
+  </data>
+  <data name="UnchangedPhoneNumberTitle" xml:space="preserve">
+    <value>Unchanged phone number</value>
   </data>
   <data name="UnexistenRefCode" xml:space="preserve">
     <value>Unexisten code</value>

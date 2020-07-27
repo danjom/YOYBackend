@@ -4274,9 +4274,9 @@ namespace YOY.DAO.Entities.Manager
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool Delete(Guid id, int offerType)
+        public Guid? Delete(Guid id, int offerType)
         {
-            bool success = false;
+            Guid? deletedId = null;
 
             try
             {
@@ -4289,21 +4289,22 @@ namespace YOY.DAO.Entities.Manager
                 if (offer != null)
                 {
                     offer.Deleted = true;
+                    offer.UpdatedDate = DateTime.UtcNow;
+                    deletedId = offer.Id;
                     this._businessObjects.Context.SaveChanges();
-                    success = true;
                 }
 
 
             }
             catch (Exception e)
             {
-                success = false;
+                deletedId = null;
                 //ERROR HANDLING
                 this._businessObjects.StoredProcsHandler.AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
 
             }
 
-            return success;
+            return deletedId;
         }//METHOD DELETE ENDS --------------------------------------------------------------------------------------------------------------------------- //
 
 
@@ -6050,6 +6051,36 @@ namespace YOY.DAO.Entities.Manager
                         break;
                     case SearchableObjectTypes.Commerce:
                         count = this._businessObjects.StoredProcsHandler.GetOffersCountForCommerce(refId, dateTime, offerPurpose);
+                        break;
+                }
+
+            }
+            catch (Exception e)
+            {
+                count = -1;
+                //ERROR HANDLING
+                this._businessObjects.StoredProcsHandler.AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return count;
+        }
+
+
+        public int? GetOffersCountByDateRange(Guid refId, int refType, DateTime minDate, DateTime maxDate, int offerPurpose)
+        {
+            int? count = 0;
+
+            try
+            {
+
+                switch (refType)
+                {
+                    case SearchableObjectTypes.Category:
+                        //PENDING
+                        break;
+                    case SearchableObjectTypes.Commerce:
+                        count = this._businessObjects.StoredProcsHandler.GetOffersCountForCommerceByDateRange(refId, minDate, maxDate, offerPurpose);
                         break;
                 }
 

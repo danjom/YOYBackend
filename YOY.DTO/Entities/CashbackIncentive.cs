@@ -23,6 +23,7 @@ namespace YOY.DTO.Entities
         public decimal UnitValue { set; get; }
         public decimal PreviousUnitValue { set; get; }
         public int MinMembershipLevel { set; get; }
+        public string MinMembershipLevelName { set; get; }
         public decimal MinPurchasedAmount { set; get; }
         public decimal PurchasedAmountBlock { set; get; }
         public decimal MaxValue { set; get; }

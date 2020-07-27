@@ -60,7 +60,7 @@ namespace YOY.ThirdpartyServices.Services.Search.Algolia
             return success;
         }
 
-        public static bool SingleAdd(string appName, string indexName, SearchableObject searchableObject)
+        public static async Task<bool> SingleAddAsync(string appName, string indexName, SearchableObjectCore searchableObject)
         {
 
             bool success;
@@ -68,15 +68,7 @@ namespace YOY.ThirdpartyServices.Services.Search.Algolia
             {
                 Initialize(appName, indexName);
 
-                List<JObject> objs = new List<JObject>();
-                JObject currentObj = (JObject)JToken.FromObject(searchableObject);
-                objs.Add(currentObj);
-
-                //JObject res = index.AddObjects(objs);
-                index.SaveObjects(objs, autoGenerateObjectId: false);
-
-                // Asynchronous
-                // var res = await index.AddObjectsAsync(objs);
+                await index.SaveObjectAsync(searchableObject);
 
                 success = true;
             }
@@ -89,27 +81,16 @@ namespace YOY.ThirdpartyServices.Services.Search.Algolia
             return success;
         }
 
-        public static async Task<bool> Add(string appName, string indexName, List<SearchableObject> searchableObjects)
+        public static async Task<bool> PartiallySingleUpdateAsync(string appName, string indexName, UpdateSearchableObjectCore searchableObject)
         {
 
             bool success;
+
             try
             {
                 Initialize(appName, indexName);
 
-                List<JObject> objs = new List<JObject>();
-
-                foreach (SearchableObject searchableObject in searchableObjects)
-                {
-                    JObject currentObj = (JObject)JToken.FromObject(searchableObject);
-                    objs.Add(currentObj);
-                }
-
-                //JObject res = index.AddObjects(objs);
-                // Asynchronous
-                //JObject res = await index.AddObjectsAsync(objs);
-
-                await index.SaveObjectsAsync(objs, autoGenerateObjectId: true);
+                await index.PartialUpdateObjectAsync(searchableObject);
 
                 success = true;
             }
@@ -122,7 +103,7 @@ namespace YOY.ThirdpartyServices.Services.Search.Algolia
             return success;
         }
 
-        public static bool Update(string appName, string indexName, SearchableObjectData searchableObject)
+        public static async Task<bool> UpdateActiveStateAsync(string appName, string indexName, UpdateSearchableObjectActiveState searchableObject)
         {
 
             bool success;
@@ -131,20 +112,7 @@ namespace YOY.ThirdpartyServices.Services.Search.Algolia
             {
                 Initialize(appName, indexName);
 
-                JObject currentObj =  (JObject)JToken.FromObject(searchableObject);
-
-                //JObject res = index.PartialUpdateObject(currentObj, false);
-
-                List<JObject> objs = new List<JObject>
-                {
-                    currentObj
-                };
-
-                index.PartialUpdateObjects(objs);
-
-                // Asynchronous
-                // await index.PartialUpdateObjectAsync(JObject.Parse(@"{""city"":""San Francisco"",
-                //                                                       ""objectID"":""myID""}"), false)
+                await index.PartialUpdateObjectAsync(searchableObject);
 
                 success = true;
             }
@@ -157,7 +125,29 @@ namespace YOY.ThirdpartyServices.Services.Search.Algolia
             return success;
         }
 
-        public static bool Delete(string appName, string indexName, string id)
+        public static async Task<bool> UpdateCategoryDataAsync(string appName, string indexName, UpdateSearchableObjectCategoryData searchableObject)
+        {
+
+            bool success;
+
+            try
+            {
+                Initialize(appName, indexName);
+
+                await index.PartialUpdateObjectAsync(searchableObject);
+
+                success = true;
+            }
+            catch (Exception)
+            {
+                success = false;
+                //TODO ERROR HANDLING
+            }
+
+            return success;
+        }
+
+        public static async Task<bool> SingleDeleteAsync(string appName, string indexName, string id)
         {
             bool success = false;
 
@@ -165,9 +155,8 @@ namespace YOY.ThirdpartyServices.Services.Search.Algolia
             {
                 Initialize(appName, indexName);
 
-                var res = index.DeleteObject(id);
-                // Asynchronous
-                // var res = await index.DeleteObjectAsync(ids);
+                await index.DeleteObjectAsync(id);
+
             }
             catch (Exception)
             {

@@ -162,6 +162,8 @@ namespace YOY.DAO.Entities.DB
         public virtual DbSet<OltpuserInterestsView> OltpuserInterestsView { get; set; }
         public virtual DbSet<OltpuserInviteRelations> OltpuserInviteRelations { get; set; }
         public virtual DbSet<OltpuserLocationLogs> OltpuserLocationLogs { get; set; }
+        public virtual DbSet<OltpuserPersonalIdLinkLogs> OltpuserPersonalIdLinkLogs { get; set; }
+        public virtual DbSet<OltpuserPhoneNumberLinkLogs> OltpuserPhoneNumberLinkLogs { get; set; }
         public virtual DbSet<OltpvalidatePurchaseRegistries> OltpvalidatePurchaseRegistries { get; set; }
         public virtual DbSet<OltpvisitorsLog> OltpvisitorsLog { get; set; }
         public virtual DbSet<RefreshTokens> RefreshTokens { get; set; }
@@ -389,6 +391,10 @@ namespace YOY.DAO.Entities.DB
                 entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
 
                 entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
+
+                entity.Property(e => e.PersonalId)
+                    .HasMaxLength(64)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.ProfilePicUrl)
                     .HasMaxLength(512)
@@ -7266,6 +7272,36 @@ namespace YOY.DAO.Entities.DB
                     .HasConstraintName("FK_OLTPUserLocationLogs_AspNetUsers");
             });
 
+            modelBuilder.Entity<OltpuserPersonalIdLinkLogs>(entity =>
+            {
+                entity.HasKey(e => new { e.UserId, e.PersonalId });
+
+                entity.ToTable("OLTPUserPersonalIdLinkLogs");
+
+                entity.Property(e => e.PersonalId)
+                    .HasMaxLength(64)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getutcdate())");
+            });
+
+            modelBuilder.Entity<OltpuserPhoneNumberLinkLogs>(entity =>
+            {
+                entity.HasKey(e => new { e.UserId, e.PhoneNumber });
+
+                entity.ToTable("OLTPUserPhoneNumberLinkLogs");
+
+                entity.Property(e => e.PhoneNumber)
+                    .HasMaxLength(48)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getutcdate())");
+            });
+
             modelBuilder.Entity<OltpvalidatePurchaseRegistries>(entity =>
             {
                 entity.ToTable("OLTPValidatePurchaseRegistries");
@@ -8656,6 +8692,10 @@ namespace YOY.DAO.Entities.DB
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(30);
+
+                entity.Property(e => e.PersonalId)
+                    .HasMaxLength(64)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.ProfilePicUrl)
                     .HasMaxLength(512)

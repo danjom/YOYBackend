@@ -45,6 +45,8 @@ namespace YOY.UserAPI.Controllers
         private readonly string WhatsappSenderNumber = "+14155238886";
         private readonly int MinsToExpire = 10;
 
+        private const int minPhoneNumberDaysLock = 120;
+
         private const int controllerVersion = 1;
         #endregion
 
@@ -108,64 +110,103 @@ namespace YOY.UserAPI.Controllers
             {
                 try
                 {
-                    bool phoneUniqueness = this._businessObjects.Users.CheckPhoneNumberUniqueness(model.PhoneNumber, model.CountryPhonePrefix);
+                    UserData user = this._businessObjects.Users.Get(model.UserId, UserKeys.UserId);
 
-                    if (phoneUniqueness)
+                    if(user.CountryPhonePrefix == model.CountryPhonePrefix && user.PhoneNumber == model.PhoneNumber && user.PhoneNumberConfirmed)
                     {
-                        Random generator = new Random();
-                        string verificationCode = generator.Next(0, 99999).ToString("D5");
+                        result = new ConflictObjectResult(
+                                    new BasicResponse
+                                    {
+                                        StatusCode = Values.StatusCodes.Conflict,
+                                        CustomAction = UserappErrorCustomActions.None,
+                                        DisplayMsgToUser = true,
+                                        DevError = _localizer["UnchangedPhoneNumber"].Value,
+                                        MsgContent = _localizer["UnchangedPhoneNumber"].Value,
+                                        MsgTitle = _localizer["UnchangedPhoneNumberTitle"].Value,
 
-                        string validationSMS = _localizer["ValidationMsg", ValidationMark + verificationCode, MinsToExpire].Value;
-                        string senderPhoneNumber = "";
-
-                        switch (model.ChannelType)
-                        {
-                            case TextMessageChannels.SMS:
-                                senderPhoneNumber = SMSSenderNumber;
-                                break;
-                            case TextMessageChannels.Whatsapp:
-                                senderPhoneNumber = WhatsappSenderNumber;
-                                break;
-                        }
-
-                        MessageResourceContent resourceContent = TwilioMessageHandler.SendPlainTextMessage(model.ChannelType, validationSMS, senderPhoneNumber, model.CountryPhonePrefix + model.PhoneNumber.Trim(), 180);
-
-                        if (resourceContent !=null)
-                        {
-                            this._businessObjects.TextMsgLogs.Post(model.UserId, new Guid(MembershipConfigValues.BaseCommerceId), TextMessageLogReferenceTypes.None, null, senderPhoneNumber, model.CountryPhonePrefix + model.PhoneNumber,
-                                validationSMS, "", "", verificationCode, TextMessageLogPurposeTypes.AccountValidation, model.ChannelType, TextMessageLogStatuses.SentRequested, TextMessageGateways.Twilio, resourceContent.SId, 
-                                resourceContent.NumMedia, resourceContent.Direction, "OK", null, "", resourceContent.Uri, resourceContent.CreatedDate ?? DateTime.UtcNow, DateTime.UtcNow.AddMinutes(MinsToExpire));
-
-                            result = Ok(
-                                new BasicResponse
-                                {
-                                    StatusCode = Values.StatusCodes.Ok,
-                                    CustomAction = UserappErrorCustomActions.None,
-                                    DisplayMsgToUser = false,
-                                    DevError = "",
-                                    MsgContent = "",
-                                    MsgTitle = "",
-                                });
-                        }
-                        else
-                        {
-                            result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
-                        }
+                                    });
                     }
                     else
                     {
-                        result = new ConflictObjectResult(
-                                new BasicResponse
-                                {
-                                    StatusCode = Values.StatusCodes.Conflict,
-                                    CustomAction = UserappErrorCustomActions.None,
-                                    DisplayMsgToUser = true,
-                                    DevError = _localizer["PhoneNumberAlreadyRegistered"].Value,
-                                    MsgContent = _localizer["RepeatedPhoneNumber"].Value,
-                                    MsgTitle = _localizer["RepeatedPhoneNumberTitle"].Value,
+                        string latestUserId = "";
+                        bool allowedPhone = false;
 
-                                }) ;
+                        //bool phoneUniqueness = this._businessObjects.Users.CheckPhoneNumberUniqueness(model.PhoneNumber, model.CountryPhonePrefix);
+
+                        DateTime? latestUsageDate = this._businessObjects.Users.Get(model.CountryPhonePrefix + " " + model.PhoneNumber, UserIdentityValueTypes.PhoneNumber, ref latestUserId);
+
+                        if (latestUsageDate == null)
+                        {
+                            allowedPhone = true;
+
+                        }
+                        else
+                        {
+
+                            if (latestUserId != null && (((DateTime.UtcNow - (DateTime)latestUsageDate).TotalDays > minPhoneNumberDaysLock) || latestUserId == model.UserId))
+                            {
+                                allowedPhone = true;
+                            }
+                        }
+
+                        if (allowedPhone)
+                        {
+                            Random generator = new Random();
+                            string verificationCode = generator.Next(0, 99999).ToString("D5");
+
+                            string validationSMS = _localizer["ValidationMsg", ValidationMark + verificationCode, MinsToExpire].Value;
+                            string senderPhoneNumber = "";
+
+                            switch (model.ChannelType)
+                            {
+                                case TextMessageChannels.SMS:
+                                    senderPhoneNumber = SMSSenderNumber;
+                                    break;
+                                case TextMessageChannels.Whatsapp:
+                                    senderPhoneNumber = WhatsappSenderNumber;
+                                    break;
+                            }
+
+                            MessageResourceContent resourceContent = TwilioMessageHandler.SendPlainTextMessage(model.ChannelType, validationSMS, senderPhoneNumber, model.CountryPhonePrefix + model.PhoneNumber.Trim(), 180);
+
+                            if (resourceContent != null)
+                            {
+                                this._businessObjects.TextMsgLogs.Post(model.UserId, new Guid(MembershipConfigValues.BaseCommerceId), TextMessageLogReferenceTypes.None, null, senderPhoneNumber, model.CountryPhonePrefix + model.PhoneNumber,
+                                    validationSMS, "", "", verificationCode, TextMessageLogPurposeTypes.AccountValidation, model.ChannelType, TextMessageLogStatuses.SentRequested, TextMessageGateways.Twilio, resourceContent.SId,
+                                    resourceContent.NumMedia, resourceContent.Direction, "OK", null, "", resourceContent.Uri, resourceContent.CreatedDate ?? DateTime.UtcNow, DateTime.UtcNow.AddMinutes(MinsToExpire));
+
+                                result = Ok(
+                                    new BasicResponse
+                                    {
+                                        StatusCode = Values.StatusCodes.Ok,
+                                        CustomAction = UserappErrorCustomActions.None,
+                                        DisplayMsgToUser = false,
+                                        DevError = "",
+                                        MsgContent = "",
+                                        MsgTitle = "",
+                                    });
+                            }
+                            else
+                            {
+                                result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
+                            }
+                        }
+                        else
+                        {
+                            result = new ConflictObjectResult(
+                                    new BasicResponse
+                                    {
+                                        StatusCode = Values.StatusCodes.Conflict,
+                                        CustomAction = UserappErrorCustomActions.None,
+                                        DisplayMsgToUser = true,
+                                        DevError = _localizer["PhoneNumberAlreadyRegistered"].Value,
+                                        MsgContent = _localizer["RepeatedPhoneNumber"].Value,
+                                        MsgTitle = _localizer["RepeatedPhoneNumberTitle"].Value,
+
+                                    });
+                        }
                     }
+
                 }
                 catch (Exception e)
                 {
@@ -226,33 +267,89 @@ namespace YOY.UserAPI.Controllers
 
                     if(smsLog != null)
                     {
-                        //Code is valid, phone needs to be set and marked as confirmed
-                        AppUser u = await _userManager.FindByIdAsync(model.UserId);
+                        //Check if the phone needs to be unlinked from any account
+                        string latestUserId = "";
+                        bool allowedPhone = false;
 
-                        u.CountryPhonePrefix = model.CountryPhonePrefix;
-                        u.PhoneNumber = model.PhoneNumber;
-                        u.PhoneNumberConfirmed = true;
-                        IdentityResult updateUserResult = await _userManager.UpdateAsync(u);
+                        //bool phoneUniqueness = this._businessObjects.Users.CheckPhoneNumberUniqueness(model.PhoneNumber, model.CountryPhonePrefix);
 
-                        this._businessObjects.TextMsgLogs.Put(smsLog.Id, TextMessageLogStatuses.ReadByUser);
+                        DateTime? latestUsageDate = this._businessObjects.Users.Get(model.CountryPhonePrefix + " " + model.PhoneNumber, UserIdentityValueTypes.PhoneNumber, ref latestUserId);
 
-                        if (updateUserResult.Succeeded)
+                        if (latestUsageDate == null)
                         {
-                            result = Ok(
-                                new BasicResponse
+                            allowedPhone = true;
+
+                        }
+                        else
+                        {
+
+                            if (latestUserId != null && (((DateTime.UtcNow - (DateTime)latestUsageDate).TotalDays > minPhoneNumberDaysLock) || latestUserId == model.UserId))
+                            {
+                                allowedPhone = true;
+                            }
+                        }
+
+                        if (allowedPhone)
+                        {
+
+                            //Code is valid, phone needs to be set and marked as confirmed
+                            AppUser u = await _userManager.FindByIdAsync(model.UserId);
+
+                            u.CountryPhonePrefix = model.CountryPhonePrefix;
+                            u.PhoneNumber = model.PhoneNumber;
+                            u.PhoneNumberConfirmed = true;
+                            IdentityResult updateUserResult = await _userManager.UpdateAsync(u);
+
+                            this._businessObjects.TextMsgLogs.Put(smsLog.Id, TextMessageLogStatuses.ReadByUser);
+
+                            if (updateUserResult.Succeeded)
+                            {
+
+                                //Registers the vinculation log
+                                this._businessObjects.Users.Post(model.CountryPhonePrefix + " " + model.PhoneNumber, UserIdentityValueTypes.PhoneNumber, model.UserId);
+
+                                if (!string.IsNullOrWhiteSpace(latestUserId))
                                 {
-                                    StatusCode = Values.StatusCodes.Ok,
-                                    CustomAction = UserappErrorCustomActions.None,
-                                    DisplayMsgToUser = false,
-                                    DevError = "",
-                                    MsgContent = "",
-                                    MsgTitle = "",
-                                });
+                                    AppUser lastOwner = await _userManager.FindByIdAsync(latestUserId);
+
+                                    if (lastOwner != null)
+                                    {
+                                        lastOwner.PhoneNumber = "";
+                                        lastOwner.PhoneNumberConfirmed = false;
+                                        updateUserResult = await _userManager.UpdateAsync(lastOwner);
+
+                                        errorMsg = "Phone number: " + model.CountryPhonePrefix + " " + model.PhoneNumber + " unlink from userId " + latestUserId + " failed" ;
+
+                                        if (!updateUserResult.Succeeded)
+                                        {
+                                            //Registers the invalid call
+                                            this._businessObjects.HttpcallInvokationLogs.Post(model.UserId, this.GetType().Name, callId, controllerVersion,
+                                                                StatusCodes.BadRequest, 0, parameters, 0, 0, false, null, HttpcallTypes.Put, errorMsg);
+                                        }
+                                    }
+                                }
+
+                                result = Ok(
+                                    new BasicResponse
+                                    {
+                                        StatusCode = Values.StatusCodes.Ok,
+                                        CustomAction = UserappErrorCustomActions.None,
+                                        DisplayMsgToUser = false,
+                                        DevError = "",
+                                        MsgContent = "",
+                                        MsgTitle = "",
+                                    });
+                            }
+                            else
+                            {
+                                result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
+                            }
                         }
                         else
                         {
                             result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
                         }
+
                     }
                     else
                     {

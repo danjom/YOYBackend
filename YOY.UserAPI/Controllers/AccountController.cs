@@ -15,6 +15,7 @@ using YOY.DTO.Entities;
 using YOY.UserAPI.Logic.Account;
 using YOY.UserAPI.Models.v1.Miscellaneous.BasicResponse.POCO;
 using Microsoft.Extensions.Localization;
+using System.Reflection;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -43,6 +44,8 @@ namespace YOY.UserAPI.Controllers
 
         private const int controllerVersion = 1;
         private readonly string[] months;
+
+        private const int minPersonalIdDaysLock = 900;
         #endregion
 
         #region METHODS
@@ -675,6 +678,7 @@ namespace YOY.UserAPI.Controllers
             int callId = 4;
             string parameters = model.ToString();
             string errorMsg;
+            string customErroMsg = "";
 
             if (!ModelState.IsValid)
             {
@@ -732,19 +736,35 @@ namespace YOY.UserAPI.Controllers
 
                                         DateTime dateOfBirth = new DateTime(year, month, day);
 
-                                        u.DateOfBirth = dateOfBirth;
-                                        updateUserResult = await _userManager.UpdateAsync(u);
+                                        DateTime now = DateTime.UtcNow;
+                                        int age = now.Year - dateOfBirth.Year;
 
-                                        if (updateUserResult.Succeeded)
-                                            success = true;
+
+                                        if (age > 10 && age < 100)
+                                        {
+                                            u.DateOfBirth = dateOfBirth;
+                                            updateUserResult = await _userManager.UpdateAsync(u);
+
+                                            if (updateUserResult.Succeeded)
+                                                success = true;
+                                            else
+                                            {
+                                                customErroMsg = _localizer["ErrorSettingYear"].Value;
+                                                success = false;
+                                            }
+                                        }
                                         else
-                                            success = false;
+                                        {
+                                            customErroMsg = _localizer["OutOfBirthdateRange"].Value;
+                                        }
+
 
                                     }
 
                                 }
                                 catch (Exception e)
                                 {
+                                    customErroMsg = _localizer["ErrorSettingYear"].Value;
 
                                     success = false;
 
@@ -824,6 +844,8 @@ namespace YOY.UserAPI.Controllers
                                         {
                                             success = false;
 
+                                            customErroMsg = _localizer["InvalidReferenceCode"].Value;
+
                                             errorMsg = "ERROR: Reference Code, invitator relations stablish failed";
                                             //Registers the invalid call
                                             this._businessObjects.HttpcallInvokationLogs.Post(model.UserId, this.GetType().Name, callId, controllerVersion,
@@ -835,21 +857,14 @@ namespace YOY.UserAPI.Controllers
                                     {
                                         success = false;
 
-                                        result = new BadRequestObjectResult(
-                                            new BasicResponse
-                                            {
-                                                StatusCode = Values.StatusCodes.BadRequest,
-                                                CustomAction = UserappErrorCustomActions.None,
-                                                DisplayMsgToUser = true,
-                                                DevError = _localizer["UnexistenRefCode"].Value,
-                                                MsgContent = _localizer["InvalidRefCode"].Value,
-                                                MsgTitle = _localizer["InvalidRefCodeTitle"].Value
-                                            });
+                                        customErroMsg = _localizer["InvalidRefCode"].Value;
                                     }
                                 }
                                 catch (Exception e)
                                 {
                                     success = false;
+
+                                    customErroMsg = _localizer["ErrorSettingReferenceCode"].Value;
 
                                     errorMsg = "ERROR: Reference code set failed " + e.InnerException != null ? e.InnerException.Message : e.Message;
                                     result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
@@ -871,11 +886,16 @@ namespace YOY.UserAPI.Controllers
                                     if (updateUserResult.Succeeded)
                                         success = true;
                                     else
+                                    {
+                                        customErroMsg = _localizer["ErrorSettingState"].Value;
                                         success = false;
+                                    }
                                 }
                                 catch (Exception e)
                                 {
                                     success = false;
+
+                                    customErroMsg = _localizer["ErrorSettingState"].Value;
 
                                     errorMsg = "ERROR: State id set failed " + e.InnerException != null ? e.InnerException.Message : e.Message;
                                     result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
@@ -896,11 +916,16 @@ namespace YOY.UserAPI.Controllers
                                     if (updateUserResult.Succeeded)
                                         success = true;
                                     else
+                                    {
+                                        customErroMsg = _localizer["ErrorSettingProfilePicture"].Value;
                                         success = false;
+                                    }
                                 }
                                 catch (Exception e)
                                 {
                                     success = false;
+
+                                    customErroMsg = _localizer["ErrorSettingProfilePicture"].Value;
 
                                     errorMsg = "ERROR: Profile picture set failed " + e.InnerException != null ? e.InnerException.Message : e.Message;
 
@@ -909,6 +934,125 @@ namespace YOY.UserAPI.Controllers
                                                         StatusCodes.BadRequest, 0, parameters, 0, 0, false, null, HttpcallTypes.Put, errorMsg);
                                 }
 
+
+                                break;
+                            case UserProfileFieldTypes.PersonalId:
+
+                                try
+                                {
+
+                                    if(u != null && string.IsNullOrWhiteSpace(u.PersonalId) && !string.IsNullOrWhiteSpace(model.FieldValue))
+                                    {
+                                        //Needs to link the personalId to user
+                                        UserWithLocationAndMembershipData userWithLocationAndMembershipData = this._businessObjects.Users.Get(model.UserId, false);
+
+                                        if(userWithLocationAndMembershipData != null)
+                                        {
+                                            string latestUserId = "";
+
+                                            DateTime? latestUsageDate = this._businessObjects.Users.Get(model.FieldValue, UserIdentityValueTypes.PersonalId, ref latestUserId);
+
+                                            if(latestUsageDate == null)
+                                            {
+                                                //PersonalId haven't been used before
+                                                u.PersonalId = model.FieldValue;
+                                                updateUserResult = await _userManager.UpdateAsync(u);
+
+                                                if (updateUserResult.Succeeded)
+                                                {
+                                                    success = true;
+                                                }
+                                                else
+                                                {
+                                                    customErroMsg = _localizer["ErrorSettingPersonalId"].Value;
+                                                    success = false;
+                                                }
+
+                                            }
+                                            else
+                                            {
+
+                                                if (latestUserId != null && (((DateTime.UtcNow - (DateTime)latestUsageDate).TotalDays > minPersonalIdDaysLock) || latestUserId == model.UserId))
+                                                {
+                                                    //PersonalId haven't been used for a while enough or was the same user
+                                                    u.PersonalId = model.FieldValue;
+                                                    updateUserResult = await _userManager.UpdateAsync(u);
+
+                                                    if (updateUserResult.Succeeded)
+                                                    {
+                                                        success = true;
+
+                                                        //Registers the vinculation log
+                                                        this._businessObjects.Users.Post(model.FieldValue, UserIdentityValueTypes.PersonalId, model.UserId);
+
+                                                        //Needs to remove the personal id from the last user
+                                                        AppUser lastOwner = await _userManager.FindByIdAsync(latestUserId);
+                                                        
+                                                        if(lastOwner != null)
+                                                        {
+                                                            lastOwner.PersonalId = "";
+                                                            updateUserResult = await _userManager.UpdateAsync(lastOwner);
+
+                                                            if (!updateUserResult.Succeeded)
+                                                            {
+                                                                errorMsg = "PersonalId: " + model.FieldValue + " unlink from userId " + latestUserId + " failed";
+
+                                                                //Registers the invalid call
+                                                                this._businessObjects.HttpcallInvokationLogs.Post(model.UserId, this.GetType().Name, callId, controllerVersion,
+                                                                                    StatusCodes.BadRequest, 0, parameters, 0, 0, false, null, HttpcallTypes.Put, errorMsg);
+                                                            }
+                                                        }
+
+
+                                                    }
+                                                    else
+                                                    {
+                                                        customErroMsg = _localizer["ErrorSettingPersonalId"].Value;
+                                                        success = false;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    customErroMsg = _localizer["PersonalIdRecentlyUsedInOtherAccount"].Value;
+                                                    success = false;
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            success = false;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if(u != null && !string.IsNullOrWhiteSpace(u.PersonalId) && string.IsNullOrWhiteSpace(model.FieldValue))
+                                        {
+                                            //PersonalId haven't been used before
+                                            u.PersonalId = "";
+                                            updateUserResult = await _userManager.UpdateAsync(u);
+
+                                            if (updateUserResult.Succeeded)
+                                                success = true;
+                                            else
+                                            {
+                                                customErroMsg = _localizer["ErrorRemovingPersonalId"].Value;
+                                                success = false;
+                                            }
+                                        }
+                                    }
+                                }
+                                catch(Exception e)
+                                {
+                                    success = false;
+
+                                    customErroMsg = _localizer["ErrorUpdatingProfilePicture"].Value;
+
+                                    errorMsg = "ERROR: Personal Id set failed " + e.InnerException != null ? e.InnerException.Message : e.Message;
+
+                                    //Registers the invalid call
+                                    this._businessObjects.HttpcallInvokationLogs.Post(model.UserId, this.GetType().Name, callId, controllerVersion,
+                                                        StatusCodes.BadRequest, 0, parameters, 0, 0, false, null, HttpcallTypes.Put, errorMsg);
+                                }
 
                                 break;
                             default:
@@ -931,7 +1075,17 @@ namespace YOY.UserAPI.Controllers
                                 MsgTitle = ""
                             });
                         else
-                            result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
+                        {
+                            result = new BadRequestObjectResult(new BasicResponse
+                            {
+                                StatusCode = Values.StatusCodes.BadRequest,
+                                CustomAction = UserappErrorCustomActions.None,
+                                DisplayMsgToUser = true,
+                                DevError = customErroMsg,
+                                MsgContent = customErroMsg,
+                                MsgTitle = _localizer["FailedOperation"].Value
+                            });
+                        }
                     }
                     else
                     {

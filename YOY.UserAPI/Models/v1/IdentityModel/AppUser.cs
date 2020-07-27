@@ -14,6 +14,7 @@ namespace YOY.UserAPI.Models.v1.IdentityModel
 
         [Required]
         public string Name { set; get; }
+        public string PersonalId { set; get; }
         public string ProfilePicUrl { set; get; }
         public string Gender { set; get; }
         public DateTime? DateOfBirth { set; get; }

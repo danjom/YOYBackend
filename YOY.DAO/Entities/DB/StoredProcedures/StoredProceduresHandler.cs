@@ -129,6 +129,37 @@ namespace YOY.DAO.Entities.DB.StoredProcedures
 
         }
 
+
+        public int? GetCashbackIncentivesCountForCommerceByDateRange(Guid tenantId, DateTime minDate, DateTime maxDate)
+        {
+            int? incentivesCount = -1;
+
+            try
+            {
+
+                var tenantIdParam = new SqlParameter("tenantId", tenantId);
+                var minDateParam = new SqlParameter("minDate", minDate);
+                var maxDateParam = new SqlParameter("maxDate", maxDate);
+                var incentivesCountParam = new SqlParameter("incentivesCount", incentivesCount) { Direction = ParameterDirection.Output };
+
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();//This context is created because this method is part of an async logic
+
+                // Processing.  
+                context.Database.ExecuteSqlRaw("EXEC [dbo].[GetCashbackIncentivesCountForCommerceByDateRange] @tenantId, @minDate, @maxDate, @incentivesCount output", new[] { tenantIdParam, minDateParam, maxDateParam, incentivesCountParam });
+                incentivesCount = Convert.ToInt32(incentivesCountParam.Value);
+            }
+            catch (Exception e)
+            {
+                incentivesCount = null;
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return incentivesCount;
+
+        }
+
         public bool? DeleteBranch(Guid id)
         {
             bool? success;
@@ -274,6 +305,36 @@ namespace YOY.DAO.Entities.DB.StoredProcedures
 
         }
 
+        public int? GetOffersCountForCommerceByDateRange(Guid tenantId, DateTime minDate, DateTime maxDate, int offerPurpose)
+        {
+            int? offersCount = -1;
+
+            try
+            {
+
+                var tenantIdParam = new SqlParameter("tenantId", tenantId);
+                var minDateParam = new SqlParameter("minDate", minDate);
+                var maxDateParam = new SqlParameter("maxDate", maxDate);
+                var offerPurposeParam = new SqlParameter("offerPurpose", offerPurpose);
+                var offersCountParam = new SqlParameter("offersCount", offersCount) { Direction = ParameterDirection.Output };
+
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();//This context is created because this method is part of an async logic
+
+                // Processing.  
+                context.Database.ExecuteSqlRaw("EXEC [dbo].[GetOffersCountForCommerceByDateRange] @tenantId, @minDate, @maxDate, @offerPurpose, @offersCount output", new[] { tenantIdParam, minDateParam, maxDateParam, offerPurposeParam, offersCountParam });
+                offersCount = Convert.ToInt32(offersCountParam.Value);
+            }
+            catch (Exception e)
+            {
+                offersCount = null;
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return offersCount;
+
+        }
 
         public int? GetOffersCountForPreference(Guid preferenceId, DateTime dateTime, int offerPurpose)
         {
@@ -554,6 +615,34 @@ namespace YOY.DAO.Entities.DB.StoredProcedures
             }
 
             return validCode;
+
+        }
+
+        public bool? SetUserPersonalId(string userId, Guid countryId, string personalId)
+        {
+            bool? validPersonalId = false;
+
+            try
+            {
+
+                var userIdParam = new SqlParameter("userId", userId);
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var personalIdParam = new SqlParameter("personalId", personalId);
+                var validPersonalIdParam = new SqlParameter("validPersonalId", validPersonalId) { Direction = ParameterDirection.Output };
+
+                // Processing.  
+                _dbContext.Database.ExecuteSqlRaw("EXEC [dbo].[SetUserPersonalId] @userId, @countryId, @personalId, @validPersonalId output", new[] { userIdParam, countryIdParam, personalIdParam, validPersonalIdParam });
+                validPersonalId = Convert.ToBoolean(validPersonalIdParam.Value);
+            }
+            catch (Exception e)
+            {
+                validPersonalId = null;
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return validPersonalId;
 
         }
 

@@ -738,6 +738,32 @@ namespace YOY.DAO.Entities.Manager
             return success;
         }
 
+
+
+        public bool SetUserPersonalId(string userId, Guid countryId, string personalId)
+        {
+            bool success = false;
+
+            try
+            {
+                bool? set = this._businessObjects.StoredProcsHandler.SetUserPersonalId(userId, countryId, personalId);
+
+                if (set == true)
+                {
+                    success = true;
+                }
+            }
+            catch (Exception e)
+            {
+                success = false;
+                //ERROR HANDLING
+                this._businessObjects.StoredProcsHandler.AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return success;
+        }
+
         public bool CheckPhoneNumberUniqueness(string phoneNumber, string countryPhonePrefix)
         {
             bool success = false;
@@ -750,7 +776,6 @@ namespace YOY.DAO.Entities.Manager
                 {
                     success = true;
                 }
-                success = true;//NEEDS TO BE REMOVED!!!
             }
             catch (Exception e)
             {
@@ -970,6 +995,108 @@ namespace YOY.DAO.Entities.Manager
 
         #endregion
 
+        #region IDENTITYLOGS
+
+        public DateTime? Get(string identityValue, int identityType, ref string userId)
+        {
+            DateTime? latestLog = null;
+
+            try
+            {
+                var query = (dynamic)null;
+
+                switch (identityType)
+                {
+                    case UserIdentityValueTypes.PersonalId:
+                        query = (from x in this._businessObjects.Context.OltpuserPersonalIdLinkLogs
+                                where x.PersonalId == identityValue
+                                orderby x.CreatedDate descending
+                                select x).FirstOrDefault();
+
+                        if(query != null)
+                        {
+                            userId = ((OltpuserPersonalIdLinkLogs)query).UserId;
+                            latestLog = ((OltpuserPersonalIdLinkLogs)query).CreatedDate;
+                        }
+
+                        break;
+                    case UserIdentityValueTypes.PhoneNumber:
+                        query = (from x in this._businessObjects.Context.OltpuserPhoneNumberLinkLogs
+                                 where x.PhoneNumber == identityValue
+                                 orderby x.CreatedDate descending
+                                 select x).FirstOrDefault();
+
+                        if (query != null)
+                        {
+                            userId = ((OltpuserPhoneNumberLinkLogs)query).UserId;
+                            latestLog = ((OltpuserPhoneNumberLinkLogs)query).CreatedDate;
+                        }
+
+                        break;
+                }
+            }
+            catch(Exception e)
+            {
+                latestLog = null;
+                //ERROR HANDLING
+                this._businessObjects.StoredProcsHandler.AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return latestLog;
+        }
+
+        public bool Post(string identityValue, int identityType, string userId)
+        {
+            bool added = false;
+
+            try
+            {
+
+                switch (identityType)
+                {
+                    case UserIdentityValueTypes.PersonalId:
+                        OltpuserPersonalIdLinkLogs newLinkPersonalIdLog = new OltpuserPersonalIdLinkLogs
+                        {
+                            PersonalId = identityValue,
+                            UserId = userId,
+                            CreatedDate = DateTime.UtcNow
+                        };
+
+                        this._businessObjects.Context.OltpuserPersonalIdLinkLogs.Add(newLinkPersonalIdLog);
+                        this._businessObjects.Context.SaveChanges();
+
+                        added = true;
+
+                        break;
+                    case UserIdentityValueTypes.PhoneNumber:
+                        OltpuserPhoneNumberLinkLogs newLinkPhoneNumberLog = new OltpuserPhoneNumberLinkLogs
+                        {
+                            PhoneNumber = identityValue,
+                            UserId = userId,
+                            CreatedDate = DateTime.UtcNow
+                        };
+
+                        this._businessObjects.Context.OltpuserPhoneNumberLinkLogs.Add(newLinkPhoneNumberLog);
+                        this._businessObjects.Context.SaveChanges();
+
+                        added = true;
+
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                added = false;
+                //ERROR HANDLING
+                this._businessObjects.StoredProcsHandler.AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return added;
+        }
+
+        #endregion
 
         #region REWARDEDUSERS
 

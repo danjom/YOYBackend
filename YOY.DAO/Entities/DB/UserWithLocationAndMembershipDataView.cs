@@ -6,6 +6,7 @@ namespace YOY.DAO.Entities.DB
     public partial class UserWithLocationAndMembershipDataView
     {
         public string Id { get; set; }
+        public string PersonalId { get; set; }
         public string ProfilePicUrl { get; set; }
         public long AccountNumber { get; set; }
         public string AccountCode { get; set; }
