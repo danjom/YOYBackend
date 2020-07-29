@@ -96,7 +96,7 @@ namespace YOY.BusinessAPI.Models.v1.Deal.POCO
         [AllowNull]
         public string DisplayImageUrl { set; get; }
         [AllowNull]
-        public ExternallyStoredImg DisplayImgData { set; get; }
+        public string DisplayImgData { set; get; }
         [Required]
         public double? RelevanceRate { set; get; }
     }

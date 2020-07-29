@@ -580,7 +580,7 @@ namespace YOY.BusinessAPI.Controllers
                         bool valid = true;
 
 
-                        if (Base64ToImage(model.DisplayImgData.Replace(allowedImgFormats, "")) == null)
+                        if (string.IsNullOrWhiteSpace(model.DisplayImgData) || Base64ToImage(model.DisplayImgData.Replace(allowedImgFormats, "")) == null)
                         {
                             valid = false;
                             dataErrors += "- Debe seleccionarse una imagen válida en formato PNG\n";
@@ -675,14 +675,6 @@ namespace YOY.BusinessAPI.Controllers
                         {
                             valid = false;
                             dataErrors += "-El periodo de validez es incorrecto, la fecha de lanzamiento debe ser menor que la fecha de expiración\n";
-                        }
-
-
-                        if (model.DisplayImgData == null)
-                        {
-                            valid = false;
-                            dataErrors += "-La imagen es requerida\n";
-
                         }
 
                         if (!valid)
@@ -881,111 +873,106 @@ namespace YOY.BusinessAPI.Controllers
             {
                 try
                 {
-                    Employee currenEmployee = this._businessObjects.Employees.Get(model.EmployeeId, false);
+                    Employee currenEmployee = null;
 
-                    if(currenEmployee != null && currenEmployee.TenantId == model.TenantId)
+                    if (model.EmployeeId != Guid.Empty)
+                        currenEmployee = this._businessObjects.Employees.Get(model.EmployeeId, false);
+
+
+                    if (model.EmployeeId == Guid.Empty || (currenEmployee != null && currenEmployee.TenantId == model.TenantId))
                     {
-
                         bool valid = true;
 
 
-                        this.Initialize(currenEmployee.TenantId, currenEmployee.UserId);
-
-                        if (model.MainCategoryId == Guid.Empty)
+                        if (!string.IsNullOrWhiteSpace(model.DisplayImgData) && Base64ToImage(model.DisplayImgData.Replace(allowedImgFormats, "")) == null)
                         {
                             valid = false;
-                            dataErrors = "-Categoría principal debe ser seleccionada\n";
+                            dataErrors += "- Debe seleccionarse una imagen válida en formato PNG\n";
+                        }
+
+                        if (model.MainCategoryId == null || model.MainCategoryId == Guid.Empty)
+                        {
+                            valid = false;
+                            dataErrors += "-Categoría principal debe ser seleccionada\n";
                         }
 
                         if (string.IsNullOrWhiteSpace(model.MainHint) || model.MainHint.Length < mainHintMinLength || model.MainHint.Length > mainHintMaxLength)
                         {
                             valid = false;
-                            dataErrors = "La frase principal debe tener de " + mainHintMinLength + " a " + mainHintMaxLength + " caracteres\n";
+                            dataErrors += "La frase principal debe tener de " + mainHintMinLength + " a " + mainHintMaxLength + " caracteres\n";
                         }
 
                         if (string.IsNullOrWhiteSpace(model.ComplementaryHint) || model.ComplementaryHint.Length < complementaryHintMinLength || model.ComplementaryHint.Length > complementaryHintMaxLength)
                         {
                             valid = false;
-                            dataErrors = "-La frase secundaria debe tener de " + complementaryHintMinLength + " a " + complementaryHintMaxLength + " caracteres\n";
+                            dataErrors += "-La frase secundaria debe tener de " + complementaryHintMinLength + " a " + complementaryHintMaxLength + " caracteres\n";
                         }
 
                         if (string.IsNullOrWhiteSpace(model.Name) || model.Name.Length < nameMinLength || model.Name.Length > nameMaxLength)
                         {
                             valid = false;
-                            dataErrors = "-El nombre debe tener de " + nameMinLength + " a " + nameMaxLength + " caracteres\n";
+                            dataErrors += "-El nombre debe tener de " + nameMinLength + " a " + nameMaxLength + " caracteres\n";
                         }
 
                         if (model.Keywords?.Length > keywordsMaxLength)
                         {
                             valid = false;
-                            dataErrors = "-El total de palabras clave excede la cantidad permitida\n";
+                            dataErrors += "-El total de palabras clave excede la cantidad permitida\n";
                         }
 
                         if (model.Code?.Length > codeMaxLenght)
                         {
                             valid = false;
-                            dataErrors = "-El código debe ser más corto\n";
+                            dataErrors += "-El código debe ser más corto\n";
                         }
 
 
                         if (string.IsNullOrWhiteSpace(model.Description) || model.Description.Length < descriptionMinLength || model.Description.Length > descriptionMaxLength)
                         {
                             valid = false;
-                            dataErrors = "-La descripción debe tener de " + descriptionMinLength + " a " + descriptionMaxLength + " caracteres\n";
+                            dataErrors += "-La descripción debe tener de " + descriptionMinLength + " a " + descriptionMaxLength + " caracteres\n";
                         }
 
                         if (model.AvailableQuantity < infiteAvailableQuantity || model.AvailableQuantity == 0 || model.AvailableQuantity < availableQuantityMinValue)
                         {
                             valid = false;
-                            dataErrors = "-La cantidad disponibles debe ser mayor que " + availableQuantityMinValue + " \n";
+                            dataErrors += "-La cantidad disponibles debe ser mayor que " + availableQuantityMinValue + " \n";
                         }
 
                         if (string.IsNullOrEmpty(model.ClaimLocation))
                         {
                             valid = false;
-                            dataErrors = "-El lugar de retiro debe ser indicarse\n";
+                            dataErrors += "-El lugar de retiro debe ser indicarse\n";
                         }
 
                         if (model.Value <= 0)
                         {
                             valid = false;
-                            dataErrors = "-El precio debe ser mayor o igual que 0\n";
+                            dataErrors += "-El precio debe ser mayor o igual que 0\n";
                         }
 
-                        if (model.RegularValue >= -1 && model.Value >= model.RegularValue)
+                        if (model.RegularValue > -1 && model.Value >= model.RegularValue)
                         {
                             valid = false;
-                            dataErrors = "-El precio regular debe ser menor que el precio promocional\n";
+                            dataErrors += "-El precio regular debe ser menor que el precio promocional\n";
                         }
 
-                        if (model.ExtraBonusType > 0 && model.ExtraBonus <= 0)
+                        if (model.ExtraBonusType > ExtraBonusTypes.None && model.ExtraBonus <= 0)
                         {
                             valid = false;
-                            dataErrors = "-El tipo de incentivo extra debe ser mayor que 0\n";
+                            dataErrors += "-El tipo de incentivo extra debe ser mayor que 0\n";
                         }
 
-                        if (model.StartAgeParam <= model.EndAgeParam)
+                        if (model.StartAgeParam < minEnabledAgeParam || model.EndAgeParam > maxEnabledAgeParam || model.StartAgeParam > model.EndAgeParam)
                         {
                             valid = false;
-                            dataErrors = "-El rango de edad es incorrecto, la edad incial debe ser menor que la edad final\n";
+                            dataErrors += "-El rango de edad es incorrecto, la edad incial debe ser menor que la edad final\n";
                         }
 
-                        if (model.ReleaseDate <= model.ExpirationDate)
+                        if (model.ReleaseDate >= model.ExpirationDate)
                         {
                             valid = false;
-                            dataErrors = "-El periodo de validez es incorrecto, la fecha de lanzamiento debe ser menor que la fecha de expiración\n";
-                        }
-
-                        if (string.IsNullOrWhiteSpace(model.ReleaseHour) || string.IsNullOrWhiteSpace(model.ExpirationHour))
-                        {
-                            valid = false;
-                            dataErrors = "-Las horas de lanzamiento y vencimiento deben ser especificadas";
-                        }
-
-                        if (model.DisplayImgData == null || string.IsNullOrEmpty(model.DisplayImgData.ExternalId))
-                        {
-                            valid = false;
-
+                            dataErrors += "-El periodo de validez es incorrecto, la fecha de lanzamiento debe ser menor que la fecha de expiración\n";
                         }
 
                         if (!valid)
@@ -1051,7 +1038,14 @@ namespace YOY.BusinessAPI.Controllers
 
                                     if (updatedOffer != null)
                                     {
-                                        if(currentMainCategoryId != updatedOffer.MainCategoryId)
+                                        if (!string.IsNullOrWhiteSpace(model.DisplayImgData))
+                                        {
+                                            //Creates and saves the image
+                                            this.SaveImage(model.DisplayImgData, updatedOffer.Id, updatedOffer.OfferType, OfferImgTypes.DisplayImg);
+
+                                        }
+
+                                        if (currentMainCategoryId != updatedOffer.MainCategoryId)
                                         {
                                             //Needs to update the category relation
                                             this._businessObjects.Categories.Delete(offer.MainCategoryId, model.Id, CategoryRelatiomReferenceTypes.Offer);
