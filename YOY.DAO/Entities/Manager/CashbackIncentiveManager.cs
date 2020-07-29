@@ -69,14 +69,14 @@ namespace YOY.DAO.Entities.Manager
             return typeName;
         }
 
-        private string GetBenefitAmountTypeName(int earningType)
+        private string GetTypeName(int earningType)
         {
             string earningTypeName = earningType switch
             {
-                CashIncentiveBenefitAmountTypes.None => Resources.None,
-                CashIncentiveBenefitAmountTypes.Percentage => Resources.Percentage,
-                CashIncentiveBenefitAmountTypes.FixedAmount => Resources.FixedAmount,
-                CashIncentiveBenefitAmountTypes.Points => Resources.Points,
+                CashbackTypes.None => Resources.None,
+                CashbackTypes.Percentage => Resources.Percentage,
+                CashbackTypes.FixedAmount => Resources.FixedAmount,
+                CashbackTypes.Points => Resources.Points,
                 _ => "--",
             };
             return earningTypeName;
@@ -93,12 +93,12 @@ namespace YOY.DAO.Entities.Manager
             return combineTypeName;
         }
 
-        private string GetTypeName(int type)
+        private string GetBenefitAmountTypeName(int type)
         {
             string typeName = type switch
             {
-                CashbackTypes.ByTotalAmount => Resources.ByTotalAmount,
-                CashbackTypes.ByAmountBlock => Resources.ByAmountBlock,
+                CashIncentiveBenefitAmountTypes.ByTotalAmount => Resources.ByTotalAmount,
+                CashIncentiveBenefitAmountTypes.ByAmountBlock => Resources.ByAmountBlock,
                 _ => "--",
             };
             return typeName;

@@ -1002,6 +1002,7 @@
         public const string BTL = "btl";
         public const string Slides = "slide";
         public const string EmailAssets = "email_assets";
+        public const string ProfilePics = "profile_pics";
     }
 
     public static class TimerTypeMinuteRanges
@@ -1216,17 +1217,17 @@
     public static class CashIncentiveBenefitAmountTypes
     {
         public const int All = -1;
-        public const int None = 0;
-        public const int Percentage = 1;
-        public const int FixedAmount = 2;
-        public const int Points = 3;
+        public const int ByTotalAmount = 1;
+        public const int ByAmountBlock = 2;
     }
 
     public static class CashbackTypes
     {
         public const int All = -1;
-        public const int ByTotalAmount = 1;
-        public const int ByAmountBlock = 2;
+        public const int None = 0;
+        public const int Percentage = 1;
+        public const int FixedAmount = 2;
+        public const int Points = 3;
     }
 
     public static class CashbackApplyTypes
@@ -2217,7 +2218,7 @@
         public const int Broadcaster = 2;
     }
 
-    public static class ProductImgTypes
+    public static class OfferImgTypes
     {
         public const int DisplayImg = 0;
         public const int Code = 1;

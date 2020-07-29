@@ -4224,27 +4224,21 @@ namespace YOY.DAO.Entities.Manager
 
             try
             {
-                var query = from x in this._businessObjects.Context.Oltpoffers
-                            where x.OfferType == offerType && x.TenantId == this._businessObjects.Tenant.TenantId && x.Id == id
-                            select x;
-
-                Oltpoffers offer = null;
-                foreach (Oltpoffers item in query)
-                {
-                    offer = item;
-                }
+                Oltpoffers offer = (from x in this._businessObjects.Context.Oltpoffers
+                                    where x.OfferType == offerType && x.TenantId == this._businessObjects.Tenant.TenantId && x.Id == id
+                                    select x).FirstOrDefault();
 
 
                 if (offer != null)
                 {
                     switch (imgType)
                     {
-                        case ProductImgTypes.DisplayImg:
+                        case OfferImgTypes.DisplayImg:
                             currentImg = offer.DisplayImageId;
                             offer.DisplayImageId = imageId;
                             offer.UpdatedDate = DateTime.UtcNow;
                             break;
-                        case ProductImgTypes.Code:
+                        case OfferImgTypes.Code:
                             currentImg = offer.CodeImg;
                             offer.CodeImg = imageId;
                             offer.UpdatedDate = DateTime.UtcNow;

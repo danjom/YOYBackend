@@ -85,14 +85,8 @@ namespace YOY.BusinessAPI.Models.v1.Deal.POCO
         public DateTime ReleaseDate { set; get; }
         [Required]
         [NotNull]
-        public string ReleaseHour { set; get; }
-        [Required]
-        [NotNull]
         [DataType(DataType.DateTime)]
         public DateTime ExpirationDate { set; get; }
-        [Required]
-        [NotNull]
-        public string ExpirationHour { set; get; }
         [NotNull]
         [Required]
         public string DisplayImgData { set; get; }

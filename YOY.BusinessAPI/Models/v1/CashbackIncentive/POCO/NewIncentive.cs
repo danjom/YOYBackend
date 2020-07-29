@@ -11,7 +11,19 @@ namespace YOY.BusinessAPI.Models.v1.CashbackIncentive.POCO
     {
         [NotNull]
         [Required]
-        public int EarningsType { set; get; }
+        public Guid TenantId { set; get; }
+        [NotNull]
+        [Required]
+        public Guid EmployeeId { set; get; }
+        [NotNull]
+        [Required]
+        public string UserId { set; get; }
+        [NotNull]
+        [Required]
+        public int ApplyType { set; get; }
+        [NotNull]
+        [Required]
+        public int BenefitAmountType { set; get; }
         [NotNull]
         [Required]
         public int DisplayType { set; get; }
@@ -23,7 +35,7 @@ namespace YOY.BusinessAPI.Models.v1.CashbackIncentive.POCO
         public int DealType { set; get; }
         [NotNull]
         [Required]
-        public int CombineType { set; get; }
+        public int MaxCombinedIncentives { set; get; }
         [NotNull]
         [Required]
         public double UnitValue { set; get; }

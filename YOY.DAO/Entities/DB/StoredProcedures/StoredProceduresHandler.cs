@@ -198,7 +198,7 @@ namespace YOY.DAO.Entities.DB.StoredProcedures
 
                 var categoryIdParam = new SqlParameter("categoryId", categoryId);
                 var herarchyLevelParam = new SqlParameter("herarchyLevel", herarchyLevel);
-                var keywordsStringParam = new SqlParameter("keywordsString", keywordsString) { Direction = ParameterDirection.Output };
+                var keywordsStringParam = new SqlParameter("keywordsString", SqlDbType.VarChar, 4096) { Direction = ParameterDirection.Output };
 
                 // Processing.  
                 _dbContext.Database.ExecuteSqlRaw("EXEC [dbo].[GetCategoryKeywords] @categoryId, @herarchyLevel, @keywordsString output", new[] { categoryIdParam, herarchyLevelParam, keywordsStringParam });
@@ -366,14 +366,13 @@ namespace YOY.DAO.Entities.DB.StoredProcedures
 
         public string GetParentCategoryName(Guid categoryId, int herarchyLevel)
         {
-            string parentCategoryName = "";
-
+            string parentCategoryName;
             try
             {
 
                 var categoryIdParam = new SqlParameter("categoryId", categoryId);
                 var herarchyLevelParam = new SqlParameter("herarchyLevel", herarchyLevel);
-                var parentCategoryNameParam = new SqlParameter("parentCategoryName", parentCategoryName) { Direction = ParameterDirection.Output };
+                var parentCategoryNameParam = new SqlParameter("parentCategoryName", SqlDbType.VarChar, 120) { Direction = ParameterDirection.Output };
 
                 // Processing.  
                 _dbContext.Database.ExecuteSqlRaw("EXEC [dbo].[GetParentCategoryName] @categoryId, @herarchyLevel, @parentCategoryName output", new[] { categoryIdParam, herarchyLevelParam, parentCategoryNameParam });
@@ -424,14 +423,14 @@ namespace YOY.DAO.Entities.DB.StoredProcedures
 
         public string GetPreferenceNameForCommerceCategory(Guid categoryId, int herarchyLevel)
         {
-            string preferenceName = "";
+            string preferenceName;
 
             try
             {
 
                 var categoryIdParam = new SqlParameter("categoryId", categoryId);
                 var herarchyLevelParam = new SqlParameter("herarchyLevel", herarchyLevel);
-                var preferenceNameParam = new SqlParameter("preferenceName", preferenceName) { Direction = ParameterDirection.Output };
+                var preferenceNameParam = new SqlParameter("preferenceName", SqlDbType.VarChar, 120) { Direction = ParameterDirection.Output };
 
                 // Processing.  
                 _dbContext.Database.ExecuteSqlRaw("EXEC [dbo].[GetPreferenceNameForCommerceCategory] @categoryId, @herarchyLevel, @preferenceName output", new[] { categoryIdParam, herarchyLevelParam, preferenceNameParam });
@@ -481,14 +480,14 @@ namespace YOY.DAO.Entities.DB.StoredProcedures
 
         public string GetPreferenceNameForProductCategory(Guid categoryId, int herarchyLevel)
         {
-            string preferenceName = "";
+            string preferenceName;
 
             try
             {
 
                 var categoryIdParam = new SqlParameter("categoryId", categoryId);
                 var herarchyLevelParam = new SqlParameter("herarchyLevel", herarchyLevel);
-                var preferenceNameParam = new SqlParameter("preferenceName", preferenceName) { Direction = ParameterDirection.Output };
+                var preferenceNameParam = new SqlParameter("preferenceName", SqlDbType.VarChar, 120) { Direction = ParameterDirection.Output };
 
                 // Processing.  
                 _dbContext.Database.ExecuteSqlRaw("EXEC [dbo].[GetPreferenceNameForProductCategory] @categoryId, @herarchyLevel, @preferenceName output", new[] { categoryIdParam, herarchyLevelParam, preferenceNameParam });

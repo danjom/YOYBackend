@@ -14,6 +14,10 @@ using YOY.Values.Strings;
 using YOY.BusinessAPI.Handlers.Search;
 using YOY.DTO.Entities.Misc.ObjectState.POCO;
 using YOY.DTO.Entities.Misc.Category;
+using System.IO;
+using YOY.ThirdpartyServices.ResponseModels.Image;
+using YOY.ThirdpartyServices.Services.Image.Repo;
+using Microsoft.AspNetCore.Hosting;
 
 namespace YOY.BusinessAPI.Controllers
 {
@@ -37,13 +41,17 @@ namespace YOY.BusinessAPI.Controllers
         private BusinessObjects _businessObjects;
         private ImageHandler _imgHandler;
 
+        private readonly IWebHostEnvironment _env;
+
         private const int controllerVersion = 1;
+
+        public string allowedImgFormats = "data:image/png;base64,";
 
         private const int mainHintMinLength = 3;
         private const int mainHintMaxLength = 10;
         private const int complementaryHintMinLength = 3;
         private const int complementaryHintMaxLength = 22;
-        private const int nameMinLength = 10;
+        private const int nameMinLength = 5;
         private const int nameMaxLength = 64;
         private const int keywordsMaxLength = 1000;
         public const int codeMaxLenght = 15;
@@ -240,11 +248,12 @@ namespace YOY.BusinessAPI.Controllers
             return offer;
         }
 
-        public DateTime LocalToUtc(DateTime date, string hourString, int utcTimeDiff)
+        public DateTime LocalToUtc(DateTime date, int utcTimeDiff)
         {
             DateTime finalDate;
             try
             {
+                /*
                 //-------------------------------------------------------------------------------------------------//
                 //Logic to transform schedules to universal format
                 //-------------------------------------------------------------------------------------------------//
@@ -269,9 +278,10 @@ namespace YOY.BusinessAPI.Controllers
 
                 finalDate = date.AddHours(hour);
                 finalDate = finalDate.AddMinutes(mins);
+                */
 
                 //ADDS THE INVERSE OF THE UTC TIME DIFF TO MEET UTC DATE
-                finalDate = finalDate.AddHours(utcTimeDiff * -1);
+                finalDate = date.AddHours(utcTimeDiff * -1);
 
                 //----------------------------------------------------------------------------------------------------//
 
@@ -291,88 +301,6 @@ namespace YOY.BusinessAPI.Controllers
             DateTime finalDate = date.AddHours(utcTimeDiff);
 
             return finalDate;
-        }
-
-        public string ConvertMinutesToTimeLiteral(int totalMinutes)
-        {
-            string timeLiteral = "";
-
-            int remainingMins;
-            int weeks = 0;
-
-
-            //Calculate the days
-            remainingMins = totalMinutes % 1440;
-            int days = totalMinutes / 1440;
-
-            //If it's more then 1 week
-            if (days > 7)
-            {
-                days %= 7;
-                weeks = days / 7;
-            }
-
-            //Gets the hours and minutes
-            int minutes = remainingMins % 60;
-            int hours = remainingMins / 60;
-
-            if (weeks > 0)
-            {
-                timeLiteral = weeks + "";
-
-                if (weeks > 1)
-                {
-                    timeLiteral += " " + Resources.weeks;
-                }
-                else
-                {
-                    timeLiteral += " " + Resources.week;
-                }
-            }
-
-            if (days > 0)
-            {
-                timeLiteral += " " + days;
-
-                if (days > 1)
-                {
-                    timeLiteral += " " + Resources.days;
-                }
-                else
-                {
-                    timeLiteral += " " + Resources.day;
-                }
-            }
-
-            if (hours > 0)
-            {
-                timeLiteral += " " + hours;
-
-                if (days > 1)
-                {
-                    timeLiteral += " " + Resources.hours;
-                }
-                else
-                {
-                    timeLiteral += " " + Resources.hour;
-                }
-            }
-
-            if (minutes > 0)
-            {
-                timeLiteral += " " + minutes;
-
-                if (days > 1)
-                {
-                    timeLiteral += " " + Resources.minutes;
-                }
-                else
-                {
-                    timeLiteral += " " + Resources.minute;
-                }
-            }
-
-            return timeLiteral;
         }
 
 
@@ -429,6 +357,107 @@ namespace YOY.BusinessAPI.Controllers
             }
 
             return count ?? -1;
+        }
+
+        private System.Drawing.Image Base64ToImage(string base64String)
+        {
+            System.Drawing.Image image = null;
+            int callId = 0;
+
+            try
+            {
+                // Convert base 64 string to byte[]
+                byte[] imageBytes = Convert.FromBase64String(base64String);
+                // Convert byte[] to Image
+                using var ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+                image = System.Drawing.Image.FromStream(ms, true, true);
+            }
+            catch(Exception e)
+            {
+                string errorMsg = "Error: An error ocurred while images was being created, " + (e.InnerException != null ? e.InnerException.Message : e.Message);
+
+                //Registers the invalid call
+                this._businessObjects.HttpcallInvokationLogs.Post(this._businessObjects.Tenant.TenantId.ToString(), this.GetType().Name, callId, controllerVersion,
+                                    Values.StatusCodes.InternalServerError, 0, "", 0, 0, false, null, HttpcallTypes.Get, errorMsg);
+            }
+
+            
+            return image;
+
+        }
+
+        private bool SaveImage(string base64String, Guid offerId, int offerType, int imgOfferType)
+        {
+
+            bool success = false ;
+
+            if (base64String.Contains(allowedImgFormats))
+            {
+                base64String = base64String.Replace(allowedImgFormats, "");
+
+                var directoryPath = Path.Combine(_env.WebRootPath, "images");
+                if (!Directory.Exists(directoryPath))
+                    Directory.CreateDirectory(directoryPath);
+
+                string enviromentFolder;
+                if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+                {
+                    enviromentFolder = ImageFolders.DevFolder;
+
+                }
+                else
+                {
+                    enviromentFolder = ImageFolders.ProdFolder;
+                }
+
+                System.Drawing.Image image = this.Base64ToImage(base64String);
+
+                string extension = Path.GetExtension(".png");
+                string path = Path.Combine(directoryPath, Guid.NewGuid().ToString() + extension);
+                image.Save(path); // Save file into disk
+                UploadResponse response = CloudinaryStorage.UploadImage(path, enviromentFolder, ImageFolders.Deals, imgOfferType + "", image.Height, image.Width);
+                FileInfo fileDel = new FileInfo(path);
+                fileDel.Delete();
+                DTO.Entities.Image fcimage = this._businessObjects.Images.Post(this._businessObjects.Tenant.TenantId, offerId, enviromentFolder + ImageFolders.Deals, response.Format, response.Version, response.PublicId, "", "", response.Width, response.Height);
+                
+                if(fcimage != null)
+                {
+                    success = true;
+                    Guid? oldImg = this._businessObjects.Offers.Put(offerId, offerType, (Guid)fcimage.Id, imgOfferType);
+
+
+                    //In case the object already had the image set, needs to delete the old one
+                    if (oldImg != null && oldImg != Guid.Empty)
+                    {
+                        this.DeleteImage((Guid)oldImg);
+                    }
+                }
+            }
+
+
+            return success ;
+        }
+
+        private bool DeleteImage(Guid imgId)
+        {
+            bool success = false;
+
+            try
+            {
+                string publicId = this._businessObjects.Images.Delete(imgId);
+
+                if (!string.IsNullOrWhiteSpace(publicId))
+                {
+                    success = CloudinaryStorage.DeleteImage(publicId);
+                }
+            }
+            catch (Exception e)
+            {
+                success = false;
+                //TODO ERROR HANDLING
+            }
+
+            return success;
         }
 
         /// <summary>
@@ -540,116 +569,119 @@ namespace YOY.BusinessAPI.Controllers
             {
                 try
                 {
+                    Employee currenEmployee = null;
 
-                    Employee currenEmployee = this._businessObjects.Employees.Get(model.EmployeeId, false);
+                    if (model.EmployeeId != Guid.Empty)
+                        currenEmployee = this._businessObjects.Employees.Get(model.EmployeeId, false);
 
-                    if(currenEmployee != null && currenEmployee.TenantId == model.TenantId)
+
+                    if(model.EmployeeId == Guid.Empty || (currenEmployee != null && currenEmployee.TenantId == model.TenantId))
                     {
                         bool valid = true;
 
-                        this.Initialize(currenEmployee.TenantId, currenEmployee.UserId);
+
+                        if (Base64ToImage(model.DisplayImgData.Replace(allowedImgFormats, "")) == null)
+                        {
+                            valid = false;
+                            dataErrors += "- Debe seleccionarse una imagen válida en formato PNG\n";
+                        }
 
                         if (model.MainCategoryId == null || model.MainCategoryId == Guid.Empty)
                         {
                             valid = false;
-                            dataErrors = "-Categoría principal debe ser seleccionada\n";
+                            dataErrors += "-Categoría principal debe ser seleccionada\n";
                         }
 
                         if (!(model.DealType >= DealTypes.InStore && model.DealType <= DealTypes.Phone))
                         {
                             valid = false;
-                            dataErrors = "-Tipo de incentivo debe ser seleccionado\n";
+                            dataErrors += "-Tipo de incentivo debe ser seleccionado\n";
                         }
 
                         if (string.IsNullOrWhiteSpace(model.MainHint) || model.MainHint.Length < mainHintMinLength || model.MainHint.Length > mainHintMaxLength)
                         {
                             valid = false;
-                            dataErrors = "La frase principal debe tener de " + mainHintMinLength + " a " + mainHintMaxLength + " caracteres\n";
+                            dataErrors += "La frase principal debe tener de " + mainHintMinLength + " a " + mainHintMaxLength + " caracteres\n";
                         }
 
                         if (string.IsNullOrWhiteSpace(model.ComplementaryHint) || model.ComplementaryHint.Length < complementaryHintMinLength || model.ComplementaryHint.Length > complementaryHintMaxLength)
                         {
                             valid = false;
-                            dataErrors = "-La frase secundaria debe tener de " + complementaryHintMinLength + " a " + complementaryHintMaxLength + " caracteres\n";
+                            dataErrors += "-La frase secundaria debe tener de " + complementaryHintMinLength + " a " + complementaryHintMaxLength + " caracteres\n";
                         }
 
                         if (string.IsNullOrWhiteSpace(model.Name) || model.Name.Length < nameMinLength || model.Name.Length > nameMaxLength)
                         {
                             valid = false;
-                            dataErrors = "-El nombre debe tener de " + nameMinLength + " a " + nameMaxLength + " caracteres\n";
+                            dataErrors += "-El nombre debe tener de " + nameMinLength + " a " + nameMaxLength + " caracteres\n";
                         }
 
                         if (model.Keywords?.Length > keywordsMaxLength)
                         {
                             valid = false;
-                            dataErrors = "-El total de palabras clave excede la cantidad permitida\n";
+                            dataErrors += "-El total de palabras clave excede la cantidad permitida\n";
                         }
 
                         if (model.Code?.Length > codeMaxLenght)
                         {
                             valid = false;
-                            dataErrors = "-El código debe ser más corto\n";
+                            dataErrors += "-El código debe ser más corto\n";
                         }
 
 
                         if (string.IsNullOrWhiteSpace(model.Description) || model.Description.Length < descriptionMinLength || model.Description.Length > descriptionMaxLength)
                         {
                             valid = false;
-                            dataErrors = "-La descripción debe tener de " + descriptionMinLength + " a " + descriptionMaxLength + " caracteres\n";
+                            dataErrors += "-La descripción debe tener de " + descriptionMinLength + " a " + descriptionMaxLength + " caracteres\n";
                         }
 
                         if (model.AvailableQuantity < infiteAvailableQuantity || model.AvailableQuantity == 0 || model.AvailableQuantity < availableQuantityMinValue)
                         {
                             valid = false;
-                            dataErrors = "-La cantidad disponibles debe ser mayor que " + availableQuantityMinValue + " \n";
+                            dataErrors += "-La cantidad disponibles debe ser mayor que " + availableQuantityMinValue + " \n";
                         }
 
                         if (string.IsNullOrEmpty(model.ClaimLocation))
                         {
                             valid = false;
-                            dataErrors = "-El lugar de retiro debe ser indicarse\n";
+                            dataErrors += "-El lugar de retiro debe ser indicarse\n";
                         }
 
                         if (model.Value <= 0)
                         {
                             valid = false;
-                            dataErrors = "-El precio debe ser mayor o igual que 0\n";
+                            dataErrors += "-El precio debe ser mayor o igual que 0\n";
                         }
 
-                        if (model.RegularValue >= -1 && model.Value >= model.RegularValue)
+                        if (model.RegularValue > -1 && model.Value >= model.RegularValue)
                         {
                             valid = false;
-                            dataErrors = "-El precio regular debe ser menor que el precio promocional\n";
+                            dataErrors += "-El precio regular debe ser menor que el precio promocional\n";
                         }
 
-                        if (model.ExtraBonusType > 0 && model.ExtraBonus <= 0)
+                        if (model.ExtraBonusType > ExtraBonusTypes.None && model.ExtraBonus <= 0)
                         {
                             valid = false;
-                            dataErrors = "-El tipo de incentivo extra debe ser mayor que 0\n";
+                            dataErrors += "-El tipo de incentivo extra debe ser mayor que 0\n";
                         }
 
-                        if (model.StartAgeParam >= minEnabledAgeParam && model.EndAgeParam <= maxEnabledAgeParam && model.StartAgeParam <= model.EndAgeParam)
+                        if (model.StartAgeParam < minEnabledAgeParam || model.EndAgeParam > maxEnabledAgeParam || model.StartAgeParam > model.EndAgeParam)
                         {
                             valid = false;
-                            dataErrors = "-El rango de edad es incorrecto, la edad incial debe ser menor que la edad final\n";
+                            dataErrors += "-El rango de edad es incorrecto, la edad incial debe ser menor que la edad final\n";
                         }
 
-                        if (model.ReleaseDate <= model.ExpirationDate)
+                        if (model.ReleaseDate >= model.ExpirationDate)
                         {
                             valid = false;
-                            dataErrors = "-El periodo de validez es incorrecto, la fecha de lanzamiento debe ser menor que la fecha de expiración\n";
-                        }
-
-                        if (string.IsNullOrWhiteSpace(model.ReleaseHour) || string.IsNullOrWhiteSpace(model.ExpirationHour))
-                        {
-                            valid = false;
-                            dataErrors = "-Las horas de lanzamiento y vencimiento deben ser especificadas";
+                            dataErrors += "-El periodo de validez es incorrecto, la fecha de lanzamiento debe ser menor que la fecha de expiración\n";
                         }
 
 
                         if (model.DisplayImgData == null)
                         {
                             valid = false;
+                            dataErrors += "-La imagen es requerida\n";
 
                         }
 
@@ -668,8 +700,8 @@ namespace YOY.BusinessAPI.Controllers
                         else
                         {
                             //Need to convert dates to UTC
-                            model.ReleaseDate = LocalToUtc(model.ReleaseDate, model.ReleaseHour, this._businessObjects.Tenant.UtcTimeDiff);
-                            model.ExpirationDate = LocalToUtc(model.ExpirationDate, model.ExpirationHour, this._businessObjects.Tenant.UtcTimeDiff);
+                            model.ReleaseDate = LocalToUtc(model.ReleaseDate, this._businessObjects.Tenant.UtcTimeDiff);
+                            model.ExpirationDate = LocalToUtc(model.ExpirationDate, this._businessObjects.Tenant.UtcTimeDiff);
 
                             //Now needs to store the image in database
                             Guid? imgId = null;
@@ -695,8 +727,9 @@ namespace YOY.BusinessAPI.Controllers
                             }
 
                             //When price defines, then it's an offer, otherwise is a coupon
-                            int offerType = model.RegularValue > 0 ? OfferTypes.Offer : OfferTypes.Coupon;
+                            int offerType = model.Value > 0 ? OfferTypes.Offer : OfferTypes.Coupon;
 
+                            model.RegularValue = model.RegularValue <= 0 ? null : model.RegularValue;
 
                             //Retrieve tenant to get the rules and conditions
                             TenantInfo tenantInfo = this._businessObjects.Commerces.Get(model.TenantId, CommerceKeys.TenantKey);
@@ -725,6 +758,9 @@ namespace YOY.BusinessAPI.Controllers
 
                                 if (newOffer != null)
                                 {
+                                    //Creates and saves the image
+                                    this.SaveImage(model.DisplayImgData, newOffer.Id, newOffer.OfferType, OfferImgTypes.DisplayImg);
+
                                     //Creates the category relation
                                     this._businessObjects.Categories.Post(model.MainCategoryId, CategoryHerarchyLevels.ProductCategory, newOffer.Id, CategoryRelatiomReferenceTypes.Offer);
 
@@ -967,8 +1003,8 @@ namespace YOY.BusinessAPI.Controllers
                         else
                         {
                             //Need to convert dates to UTC
-                            model.ReleaseDate = LocalToUtc(model.ReleaseDate, model.ReleaseHour, this._businessObjects.Tenant.UtcTimeDiff);
-                            model.ExpirationDate = LocalToUtc(model.ExpirationDate, model.ExpirationHour, this._businessObjects.Tenant.UtcTimeDiff);
+                            model.ReleaseDate = LocalToUtc(model.ReleaseDate, this._businessObjects.Tenant.UtcTimeDiff);
+                            model.ExpirationDate = LocalToUtc(model.ExpirationDate, this._businessObjects.Tenant.UtcTimeDiff);
 
                             //Now needs to store the image in database
                             Guid? imgId = null;
@@ -1319,8 +1355,13 @@ namespace YOY.BusinessAPI.Controllers
             return result;
         }
 
+        #endregion
 
-
+        #region CONSTRUCTORS
+        public DealController(IWebHostEnvironment env)
+        {
+            this._env = env;
+        }
         #endregion
     }
 }

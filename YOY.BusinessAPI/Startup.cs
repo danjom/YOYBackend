@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -110,6 +111,10 @@ namespace YOY.BusinessAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            // WebRootPath == null workaround.
+            if (string.IsNullOrWhiteSpace(env.WebRootPath))
+                env.WebRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+
             app.UseCors(x => x
                .AllowAnyOrigin()
                .AllowAnyMethod()

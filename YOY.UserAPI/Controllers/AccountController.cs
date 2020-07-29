@@ -53,6 +53,9 @@ namespace YOY.UserAPI.Controllers
         private const int controllerVersion = 1;
         private readonly string[] months;
 
+        private string allowedImgFormats = "data:image/png;base64,";
+        private string baseImgStorageUrl = "https://res.cloudinary.com/yoyimgs/image/upload/v";
+
         private const int minPersonalIdDaysLock = 900;
         #endregion
 
@@ -94,51 +97,70 @@ namespace YOY.UserAPI.Controllers
 
         private System.Drawing.Image Base64ToImage(string base64String)
         {
+            System.Drawing.Image image = null;
+            int callId = 0;
 
-            // Convert base 64 string to byte[]
-            byte[] imageBytes = Convert.FromBase64String(base64String);
-            // Convert byte[] to Image
-            using var ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
-            System.Drawing.Image image = System.Drawing.Image.FromStream(ms, true);
+            try
+            {
+                // Convert base 64 string to byte[]
+                byte[] imageBytes = Convert.FromBase64String(base64String);
+                // Convert byte[] to Image
+                using var ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+                image = System.Drawing.Image.FromStream(ms, true, true);
+            }
+            catch (Exception e)
+            {
+                string errorMsg = "Error: An error ocurred while images was being created, " + (e.InnerException != null ? e.InnerException.Message : e.Message);
+
+                //Registers the invalid call
+                this._businessObjects.HttpcallInvokationLogs.Post(this._businessObjects.Tenant.TenantId.ToString(), this.GetType().Name, callId, controllerVersion,
+                                    Values.StatusCodes.InternalServerError, 0, "", 0, 0, false, null, HttpcallTypes.Get, errorMsg);
+            }
+
+
             return image;
 
         }
 
         private string SaveImage(string base64String)
         {
-            var directoryPath = Path.Combine(_env.WebRootPath, "images");
-            string enviromentFolder = "";
-
-            if (!Directory.Exists(directoryPath))
-                Directory.CreateDirectory(directoryPath);
-
-            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
-            {
-                enviromentFolder = ImageFolders.DevFolder;
-
-            }
-            else
-            {
-                enviromentFolder = ImageFolders.ProdFolder;
-            }
-
-            System.Drawing.Image image = this.Base64ToImage(base64String);
-
-            string extension = Path.GetExtension("png");
-            string path = Path.Combine(directoryPath, Guid.NewGuid().ToString() + extension);
-            image.Save(path); // Save file into disk
-            UploadResponse response = CloudinaryStorage.UploadImage(path, enviromentFolder, ImageFolders.Deals, "0", image.Height, image.Width);
-            FileInfo fileDel = new FileInfo(path);
-            fileDel.Delete();
-
 
             string imgUrl = "";
 
-            if (response != null)
+            if (base64String.Contains(allowedImgFormats))
             {
-                imgUrl = "https://res.cloudinary.com/yoyimgs/image/upload/v" + response.Version + "/" + response.PublicId + "." + response.Format;
-            }
+                var directoryPath = Path.Combine(_env.WebRootPath, "images");
+                string enviromentFolder;
 
+                if (!Directory.Exists(directoryPath))
+                    Directory.CreateDirectory(directoryPath);
+
+                if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+                {
+                    enviromentFolder = ImageFolders.DevFolder;
+
+                }
+                else
+                {
+                    enviromentFolder = ImageFolders.ProdFolder;
+                }
+
+                System.Drawing.Image image = this.Base64ToImage(base64String);
+
+                string extension = Path.GetExtension(".png");
+                string path = Path.Combine(directoryPath, Guid.NewGuid().ToString() + extension);
+                image.Save(path); // Save file into disk
+                UploadResponse response = CloudinaryStorage.UploadImage(path, enviromentFolder, ImageFolders.ProfilePics, "0", image.Height, image.Width);
+                FileInfo fileDel = new FileInfo(path);
+                fileDel.Delete();
+
+
+                if (response != null)
+                {
+                    imgUrl = baseImgStorageUrl + response.Version + "/" + response.PublicId + "." + response.Format;
+                }
+            }
+              
             return imgUrl;
         }
 
