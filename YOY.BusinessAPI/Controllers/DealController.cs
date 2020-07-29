@@ -665,6 +665,12 @@ namespace YOY.BusinessAPI.Controllers
                             dataErrors += "-El tipo de incentivo extra debe ser mayor que 0\n";
                         }
 
+                        if (model.GenderParam == '\0')
+                        {
+                            valid = false;
+                            dataErrors += "-El género debe ser indicado\n";
+                        }
+
                         if (model.StartAgeParam < minEnabledAgeParam || model.EndAgeParam > maxEnabledAgeParam || model.StartAgeParam > model.EndAgeParam)
                         {
                             valid = false;
@@ -737,14 +743,12 @@ namespace YOY.BusinessAPI.Controllers
                                     _ => "--"
                                 };
 
-                                double relevanceRate = model.RelevanceRate ?? -1;
-
 
                                 Offer newOffer = this._businessObjects.Offers.Post(model.MainCategoryId, offerType, model.DealType, RewardTypes.Deal, OfferPurposeTypes.Deal, GeoSegmentationTypes.Country,
                                     DisplayTypes.BroadcastingAndListings, model.Name, model.MainHint, model.ComplementaryHint, model.Keywords, model.Code, null, model.Description, MinsToUnlockByObjectiveTypes.GenericPurpose,
                                     model.IsExclusive, model.IsSponsored, false, model.AvailableQuantity, false, -1, 0, null, model.ClaimLocation, model.Value, model.RegularValue, model.ExtraBonus, model.ExtraBonusType,
                                     model.Value, model.Value, 0, 0, 0, imgId, targettingParams, model.ReleaseDate, model.ExpirationDate, tenantInfo.DealRules, tenantInfo.DealConditions, claimInstructions, ScheduleTypes.Continously, TimerTypes.CountDown,
-                                    BroadcastingTimerByDisplayTypes.BroadcastingAndListings, "", "", relevanceRate);
+                                    BroadcastingTimerByDisplayTypes.BroadcastingAndListings, "", "", model.RelevanceRate ?? -1);
 
 
 
@@ -896,6 +900,12 @@ namespace YOY.BusinessAPI.Controllers
                             dataErrors += "-Categoría principal debe ser seleccionada\n";
                         }
 
+                        if (!(model.DealType >= DealTypes.InStore && model.DealType <= DealTypes.Phone))
+                        {
+                            valid = false;
+                            dataErrors += "-Tipo de incentivo debe ser seleccionado\n";
+                        }
+
                         if (string.IsNullOrWhiteSpace(model.MainHint) || model.MainHint.Length < mainHintMinLength || model.MainHint.Length > mainHintMaxLength)
                         {
                             valid = false;
@@ -1028,11 +1038,9 @@ namespace YOY.BusinessAPI.Controllers
                                 {
                                     currentMainCategoryId = offer.MainCategoryId;
 
-                                    double relevanceRate = model.RelevanceRate ?? -1;
-
-                                    Offer updatedOffer = this._businessObjects.Offers.Put(model.Id, model.OfferType, model.MainCategoryId, model.Name, model.MainHint, model.ComplementaryHint, model.Keywords, model.Code, null, model.Description, (bool)model.IsActive, model.IsExclusive,
+                                    Offer updatedOffer = this._businessObjects.Offers.Put(model.Id, model.MainCategoryId, model.DealType, model.Name, model.MainHint, model.ComplementaryHint, model.Keywords, model.Code, null, model.Description, (bool)model.IsActive, model.IsExclusive,
                                         model.IsSponsored, false, model.AvailableQuantity, -1, 0, null, model.ClaimLocation, model.Value, model.RegularValue, model.ExtraBonus, model.ExtraBonusType, model.Value,
-                                        model.Value, 0, 0, 0, imgId, targettingParams, model.ReleaseDate, model.ExpirationDate, relevanceRate);
+                                        model.Value, 0, 0, 0, imgId, targettingParams, model.ReleaseDate, model.ExpirationDate, model.RelevanceRate ?? -1);
 
 
 
@@ -1116,7 +1124,7 @@ namespace YOY.BusinessAPI.Controllers
                                         ErrorCode = Values.StatusCodes.BadRequest,
                                         ShowErrorToUser = true,
                                         InnerError = "Error at update procceess",
-                                        PublicError = "No hemos podido actualizar este incentivo, por favor revisa el formulario y trata de nuevo"
+                                        PublicError = "No hemos podido actualizar esta promo, por favor revisa el formulario y trata de nuevo"
                                     });
                                 }
 
@@ -1129,7 +1137,7 @@ namespace YOY.BusinessAPI.Controllers
                                         ErrorCode = Values.StatusCodes.BadRequest,
                                         ShowErrorToUser = true,
                                         InnerError = "Error at update procceess",
-                                        PublicError = "No hemos podido actualizar este incentivo, por favor revisa el formulario y trata de nuevo"
+                                        PublicError = "No hemos podido actualizar esta promo, por favor revisa el formulario y trata de nuevo"
                                     });
                             }
                         }
@@ -1142,7 +1150,7 @@ namespace YOY.BusinessAPI.Controllers
                                            ErrorCode = Values.StatusCodes.BadRequest,
                                            ShowErrorToUser = true,
                                            InnerError = "Invalid employee",
-                                           PublicError = "No hemos podido crear este incentivo, por favor revisa el formulario y trata de nuevo"
+                                           PublicError = "No hemos podido crear esta promo, por favor revisa el formulario y trata de nuevo"
                                        });
                     }
 

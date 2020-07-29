@@ -24,7 +24,7 @@ namespace YOY.BusinessAPI.Models.v1.Deal.POCO
         public Guid TenantId { set; get; }
         [Required]
         [NotNull]
-        public int OfferType { set; get; }
+        public int DealType { set; get; }
         [Required]
         [NotNull]
         public Guid MainCategoryId { set; get; }

@@ -3937,7 +3937,7 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="expirationDate"></param>
         /// <param name="relevanceRate"></param>
         /// <returns></returns>
-        public Offer Put(Guid id, int offerType, Guid mainCategoryId, string name, string mainHint, string complementaryHint, string keywords, string code, Guid? codeImg, 
+        public Offer Put(Guid id, Guid mainCategoryId, int dealType, string name, string mainHint, string complementaryHint, string keywords, string code, Guid? codeImg, 
             string description, bool isActive, bool isExclusive, bool isSponsored, bool hasUniqueCodes, int availableQuantity, 
             int maxClaimsPerUser, int minPurchasesCountToRedeem, DateTime? purchasesCountStartDate, string claimLocation, decimal value, 
             decimal? regularValue, double extraBonus, int extraBonusType, decimal minIncentive, decimal maxIncentive, int incentiveVariationType, decimal incentiveVariation, 
@@ -3950,7 +3950,7 @@ namespace YOY.DAO.Entities.Manager
                 Oltpoffers currentOffer = null;
 
                 var query = from x in this._businessObjects.Context.Oltpoffers
-                            where x.OfferType == offerType && x.TenantId == this._businessObjects.Tenant.TenantId && x.Id == id
+                            where x.TenantId == this._businessObjects.Tenant.TenantId && x.Id == id
                             select x;
 
                 foreach (Oltpoffers item in query)
@@ -3961,6 +3961,7 @@ namespace YOY.DAO.Entities.Manager
                 if (currentOffer != null)
                 {
                     currentOffer.MainCategoryId = mainCategoryId;
+                    currentOffer.DealType = dealType;
                     currentOffer.Name = name;
                     currentOffer.MainHint = mainHint;
                     currentOffer.ComplementaryHint = complementaryHint;

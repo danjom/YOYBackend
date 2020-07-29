@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace YOY.BusinessAPI.Models.v1.CashbackIncentive.POCO
 {
-    public class NewIncentive
+    public class UpdateIncentive
     {
         [NotNull]
         [Required]
@@ -18,6 +18,9 @@ namespace YOY.BusinessAPI.Models.v1.CashbackIncentive.POCO
         [NotNull]
         [Required]
         public string UserId { set; get; }
+        [NotNull]
+        [Required]
+        public Guid Id { set; get; }
         [NotNull]
         [Required]
         public int ApplyType { set; get; }
@@ -89,6 +92,5 @@ namespace YOY.BusinessAPI.Models.v1.CashbackIncentive.POCO
         [NotNull]
         [Required]
         public DateTime ExpirationDate { set; get; }
-
     }
 }

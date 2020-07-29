@@ -2564,7 +2564,7 @@ namespace YOY.DAO.Entities.Manager
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ObjectStateUpdate Put(Guid id, int type, int changeType)
+        public ObjectStateUpdate Put(Guid id, int changeType)
         {
             ObjectStateUpdate result = new ObjectStateUpdate();
 
@@ -2573,7 +2573,7 @@ namespace YOY.DAO.Entities.Manager
                 OltpcashbackIncentives incentive = null;
 
                 var query = from x in this._businessObjects.Context.OltpcashbackIncentives
-                            where x.Type == type && x.TenantId == this._businessObjects.Tenant.TenantId && x.Id == id
+                            where x.TenantId == this._businessObjects.Tenant.TenantId && x.Id == id
                             select x;
 
                 foreach (OltpcashbackIncentives item in query)
@@ -2622,7 +2622,7 @@ namespace YOY.DAO.Entities.Manager
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool Put(Guid id, int newUsages)
+        public bool Put(int newUsages, Guid id)
         {
             bool success = false;
 
@@ -2666,15 +2666,15 @@ namespace YOY.DAO.Entities.Manager
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool Delete(Guid id, int type)
+        public Guid? Delete(Guid id)
         {
-            bool success = false;
+            Guid? deletedId = null;
 
             try
             {
 
                 OltpcashbackIncentives cashbackIncentive = (from x in this._businessObjects.Context.OltpcashbackIncentives
-                                                            where x.Type == type && x.TenantId == this._businessObjects.Tenant.TenantId && x.Id == id
+                                                            where x.TenantId == this._businessObjects.Tenant.TenantId && x.Id == id
                                                             select x).FirstOrDefault();
 
 
@@ -2683,22 +2683,21 @@ namespace YOY.DAO.Entities.Manager
                     cashbackIncentive.Deleted = true;
                     cashbackIncentive.UpdatedDate = DateTime.UtcNow;
 
+                    deletedId = cashbackIncentive.Id;
+
                     this._businessObjects.Context.SaveChanges();
-
-
-                    success = true;
                 }
 
             }
             catch (Exception e)
             {
-                success = false;
+                deletedId = null;
                 //ERROR HANDLING
                 this._businessObjects.StoredProcsHandler.AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
 
             }
 
-            return success;
+            return deletedId;
         }//METHOD DELETE ENDS --------------------------------------------------------------------------------------------------------------------------- //
 
 
