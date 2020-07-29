@@ -1466,6 +1466,51 @@ namespace YOY.DAO.Entities.Manager
             return categoryRelations;
         }
 
+        public List<EnabledCategoryForRelation> Gets()
+        {
+            List<EnabledCategoryForRelation> enabledCategories = null;
+
+            try
+            {
+                var query = from x in this._businessObjects.Context.EnabledProductCategoriesForNewOfferView
+                            where x.TenantId == this._businessObjects.Tenant.TenantId
+                            select x;
+
+                if (query != null)
+                {
+                    enabledCategories = new List<EnabledCategoryForRelation>();
+                    EnabledCategoryForRelation enabledCategory;
+
+                    foreach (EnabledProductCategoriesForNewOfferView item in query)
+                    {
+                        enabledCategory = new EnabledCategoryForRelation
+                        {
+                            ReferenceId = Guid.Empty,
+                            ReferenceType = 0,
+                            ReferenceMainCategoryId = Guid.Empty,
+                            TenantId = item.TenantId,
+                            CategoryId = item.CategoryId,
+                            CategoryName = item.CategoryName,
+                            HerarchyLevel = item.HerarchyLevel,
+                            RelationReferenceId = Guid.Empty,
+                            RelationReferenceType = 0
+                        };
+
+                        enabledCategories.Add(enabledCategory);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                enabledCategories = null;
+                //ERROR HANDLING
+                this._businessObjects.StoredProcsHandler.AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return enabledCategories;
+        }
+
         public List<EnabledCategoryForRelation> Gets(int referenceType, Guid referenceId)
         {
             List<EnabledCategoryForRelation> enabledCategories = null;

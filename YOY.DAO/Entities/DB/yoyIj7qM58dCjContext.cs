@@ -77,6 +77,7 @@ namespace YOY.DAO.Entities.DB
         public virtual DbSet<DeftenantsByStateView> DeftenantsByStateView { get; set; }
         public virtual DbSet<DefuserInterestFactors> DefuserInterestFactors { get; set; }
         public virtual DbSet<EnabledProductCategoriesByTenantCategoryRelationView> EnabledProductCategoriesByTenantCategoryRelationView { get; set; }
+        public virtual DbSet<EnabledProductCategoriesForNewOfferView> EnabledProductCategoriesForNewOfferView { get; set; }
         public virtual DbSet<ExceptionLogging> ExceptionLogging { get; set; }
         public virtual DbSet<GeoLocatedTenantsView> GeoLocatedTenantsView { get; set; }
         public virtual DbSet<OltpbroadcastingEvents> OltpbroadcastingEvents { get; set; }
@@ -3099,6 +3100,18 @@ namespace YOY.DAO.Entities.DB
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<EnabledProductCategoriesForNewOfferView>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("EnabledProductCategoriesForNewOfferView");
+
+                entity.Property(e => e.CategoryName)
+                    .IsRequired()
+                    .HasMaxLength(60)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<ExceptionLogging>(entity =>
             {
                 entity.ToTable("_ExceptionLogging");
@@ -4965,7 +4978,7 @@ namespace YOY.DAO.Entities.DB
 
                 entity.Property(e => e.Value)
                     .IsRequired()
-                    .HasMaxLength(100)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Image)
@@ -4996,7 +5009,7 @@ namespace YOY.DAO.Entities.DB
 
                 entity.Property(e => e.Hint)
                     .IsRequired()
-                    .HasMaxLength(100)
+                    .HasMaxLength(30)
                     .IsUnicode(false);
 
                 entity.Property(e => e.IsActive)
@@ -5005,7 +5018,7 @@ namespace YOY.DAO.Entities.DB
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(100)
+                    .HasMaxLength(60)
                     .IsUnicode(false);
 
                 entity.Property(e => e.UpdatedDate)

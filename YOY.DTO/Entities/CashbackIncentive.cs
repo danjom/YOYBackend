@@ -12,14 +12,15 @@ namespace YOY.DTO.Entities
         public Guid TenantId { set; get; }
         public int Type { set; get; }
         public string TypeName { set; get; }
+        public int ApplyType { set; get; }
+        public string ApplyTypeName { set; get; }
         public int DisplayType { set; get; }
         public string DisplayTypeName { set; get; }
-        public int EarningType { set; get; }
-        public string EarningTypeName { set; get; }
+        public int BenefitAmountType { set; get; }
+        public string BenefitAmountTypeName { set; get; }
         public int DealType { set; get; }
         public string DealTypeName { set; get; }
-        public int CombineType { set; get; }
-        public string CombineTypeName { set; get; }
+        public int MaxCombinedIncentives { set; get; }
         public decimal UnitValue { set; get; }
         public decimal PreviousUnitValue { set; get; }
         public int MinMembershipLevel { set; get; }

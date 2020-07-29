@@ -11,11 +11,17 @@ using YOY.Values;
 using YOY.UserAPI.Models.v1.User.POCO;
 using YOY.UserAPI.Models.v1.IdentityModel;
 using Microsoft.AspNetCore.Identity;
-using YOY.DTO.Entities;
 using YOY.UserAPI.Logic.Account;
 using YOY.UserAPI.Models.v1.Miscellaneous.BasicResponse.POCO;
 using Microsoft.Extensions.Localization;
 using System.Reflection;
+using System.IO;
+using YOY.DTO.Entities;
+using Microsoft.AspNetCore.Hosting;
+using YOY.ThirdpartyServices.ResponseModels.Image;
+using YOY.DAO.Entities.Manager.Misc.Image;
+using YOY.ThirdpartyServices.Services.Image.Repo;
+using System.Text;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -39,8 +45,10 @@ namespace YOY.UserAPI.Controllers
         /// </summary>
         private static Tenant _tenant;
         private BusinessObjects _businessObjects;
+        private ImageHandler _imgHandler;
         private UserManager<AppUser> _userManager;
         private readonly IStringLocalizer<SharedResources> _localizer;
+        private readonly IWebHostEnvironment _env;
 
         private const int controllerVersion = 1;
         private readonly string[] months;
@@ -66,6 +74,9 @@ namespace YOY.UserAPI.Controllers
             {
                 _businessObjects = BusinessObjects.GetInstance(_tenant);
             }
+
+            if (_imgHandler == null)
+                _imgHandler = new ImageHandler();
         }
 
         private string GetMembershipLevelName(int level)
@@ -79,6 +90,56 @@ namespace YOY.UserAPI.Controllers
                 MembershipLevels.Diamond => _localizer["Diamond"].Value,
                 _ => "--"
             };
+        }
+
+        private System.Drawing.Image Base64ToImage(string base64String)
+        {
+
+            // Convert base 64 string to byte[]
+            byte[] imageBytes = Convert.FromBase64String(base64String);
+            // Convert byte[] to Image
+            using var ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+            System.Drawing.Image image = System.Drawing.Image.FromStream(ms, true);
+            return image;
+
+        }
+
+        private string SaveImage(string base64String)
+        {
+            var directoryPath = Path.Combine(_env.WebRootPath, "images");
+            string enviromentFolder = "";
+
+            if (!Directory.Exists(directoryPath))
+                Directory.CreateDirectory(directoryPath);
+
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+            {
+                enviromentFolder = ImageFolders.DevFolder;
+
+            }
+            else
+            {
+                enviromentFolder = ImageFolders.ProdFolder;
+            }
+
+            System.Drawing.Image image = this.Base64ToImage(base64String);
+
+            string extension = Path.GetExtension("png");
+            string path = Path.Combine(directoryPath, Guid.NewGuid().ToString() + extension);
+            image.Save(path); // Save file into disk
+            UploadResponse response = CloudinaryStorage.UploadImage(path, enviromentFolder, ImageFolders.Deals, "0", image.Height, image.Width);
+            FileInfo fileDel = new FileInfo(path);
+            fileDel.Delete();
+
+
+            string imgUrl = "";
+
+            if (response != null)
+            {
+                imgUrl = "https://res.cloudinary.com/yoyimgs/image/upload/v" + response.Version + "/" + response.PublicId + "." + response.Format;
+            }
+
+            return imgUrl;
         }
 
         private bool ValidateInput(string input, string regex)
@@ -100,23 +161,26 @@ namespace YOY.UserAPI.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("get")]
-        public IActionResult Get(string username)
+        public IActionResult Get(string userId)
         {
             int callId = 1;
-            string parameters = "Account Username: " + username;
+            string parameters = "Account UserId: " + userId;
             string errorMsg;
             IActionResult result;
             try
             {
                 Initialize(Guid.Empty);
 
-                UserWithLocationAndMembershipData userData = this._businessObjects.Users.Get(username, UserKeys.Username, 0);
+                UserWithLocationAndMembershipData userData = this._businessObjects.Users.Get(userId, UserKeys.UserId, 0);
                 if (userData != null)
                 {
+
                     UserProfile profile = new UserProfile
                     {
                         Id = userData.Id,
                         AccountNumber = userData.AccountNumber,
+                        PersonalId = userData.PersonalId,
+                        PersonalIdLabel = "",
                         Name = userData.Name,
                         ValidBirthDate = userData.DateOfBirth != null && userData.DateOfBirth != DateTime.MinValue,
                         BirthDate = userData.DateOfBirth ?? DateTime.MinValue,
@@ -132,8 +196,18 @@ namespace YOY.UserAPI.Controllers
                         CountryFlag = userData.CountryFlag ?? "",
                         MembershipLevel = userData.MembershipLevel,
                         MembershipLevelName = GetMembershipLevelName(userData.MembershipLevel),
-                        WalletAmount = ""
+                        WalletAmount = "",
                     };
+
+                    switch (userData.CountryCode)
+                    {
+                        case "CRC":
+                            profile.PersonalIdLabel = "Tu cédula";
+                            break;
+                        case "MX":
+                            profile.PersonalIdLabel = "Tu INE";
+                            break;
+                    }
 
                     switch (userData.CurrencyType)
                     {
@@ -212,7 +286,7 @@ namespace YOY.UserAPI.Controllers
                 result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
 
                 //Registers the invalid call
-                this._businessObjects.HttpcallInvokationLogs.Post(username, this.GetType().Name, callId, controllerVersion,
+                this._businessObjects.HttpcallInvokationLogs.Post(userId, this.GetType().Name, callId, controllerVersion,
                                     StatusCodes.InternalServerError, 0, parameters, 0, 0, false, null, HttpcallTypes.Get, errorMsg);
             }
 
@@ -531,7 +605,11 @@ namespace YOY.UserAPI.Controllers
 
                     AppUser u = await _userManager.FindByIdAsync(model.Id);
 
-                    if(u != null)
+                    bool personalIdUpdated = false;
+                    bool errorRelatedToPersonalId = false;
+                    string latestUserId = "";
+
+                    if (u != null)
                     {
                         u.Name = model.Name;
                         u.DateOfBirth = model.BirthDate;
@@ -539,8 +617,88 @@ namespace YOY.UserAPI.Controllers
                         u.Email = model.Email;
                         u.Gender = !string.IsNullOrWhiteSpace(model.Gender) ? model.Gender.ToUpper().ToCharArray()[0] + "" : "-";
 
+                        if(model.PersonalId != u.PersonalId)
+                        {
+                            //In case personal Id is different then previus
+                            if (string.IsNullOrWhiteSpace(u.PersonalId) && !string.IsNullOrWhiteSpace(model.PersonalId))
+                            {
+
+                                DateTime? latestUsageDate = this._businessObjects.Users.Get(model.PersonalId, UserIdentityValueTypes.PersonalId, ref latestUserId);
+
+                                if (latestUsageDate == null)
+                                {
+                                    //PersonalId haven't been used before
+                                    u.PersonalId = model.PersonalId;
+
+                                    personalIdUpdated = true;
+
+                                }
+                                else
+                                {
+
+                                    if (((DateTime.UtcNow - (DateTime)latestUsageDate).TotalDays > minPersonalIdDaysLock) || latestUserId == model.Id)
+                                    {
+                                        //PersonalId haven't been used for a while enough or was the same user
+                                        u.PersonalId = model.PersonalId;
+
+                                        personalIdUpdated = true;
+
+                                    }
+                                    else
+                                    {
+                                        errorRelatedToPersonalId = true;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (u != null && !string.IsNullOrWhiteSpace(u.PersonalId) && string.IsNullOrWhiteSpace(model.PersonalId))
+                                {
+                                    //PersonalId haven't been used before
+                                    u.PersonalId = "";
+
+                                    personalIdUpdated = true;
+                                }
+                                else
+                                {
+                                    if (u != null && !string.IsNullOrWhiteSpace(u.PersonalId) && !string.IsNullOrWhiteSpace(model.PersonalId) && model.PersonalId.CompareTo(u.PersonalId) != 0)
+                                    {
+                                        errorRelatedToPersonalId = true;
+                                    }
+                                }
+                            }
+                        }
 
                         updateUserResult = await _userManager.UpdateAsync(u);
+
+                        if (personalIdUpdated && !string.IsNullOrWhiteSpace(model.PersonalId))
+                        {
+
+                            //Registers the vinculation log
+                            this._businessObjects.Users.Post(model.PersonalId, UserIdentityValueTypes.PersonalId, model.Id);
+
+                            if(!string.IsNullOrWhiteSpace(latestUserId) && latestUserId.CompareTo(model.Id) != 0)
+                            {
+                                //Needs to remove the personal id from the last user
+                                AppUser lastOwner = await _userManager.FindByIdAsync(latestUserId);
+
+                                if (lastOwner != null)
+                                {
+                                    lastOwner.PersonalId = "";
+                                    IdentityResult lastOwnerUpdateResult = await _userManager.UpdateAsync(lastOwner);
+
+                                    if (!lastOwnerUpdateResult.Succeeded)
+                                    {
+                                        errorMsg = "PersonalId: " + model.PersonalId + " unlink from userId " + latestUserId + " failed";
+
+                                        //Registers the invalid call
+                                        this._businessObjects.HttpcallInvokationLogs.Post(model.Id, this.GetType().Name, callId, controllerVersion,
+                                                            StatusCodes.BadRequest, 0, parameters, 0, 0, false, null, HttpcallTypes.Put, errorMsg);
+                                    }
+                                }
+                            }
+
+                        }
 
                         if (updateUserResult.Succeeded)
                         {
@@ -550,6 +708,7 @@ namespace YOY.UserAPI.Controllers
                             {
                                 Id = u.Id,
                                 AccountNumber = userData.AccountNumber,
+                                PersonalId = userData.PersonalId,
                                 Name = userData.Name,
                                 Email = userData.Email,
                                 EmailConfirmed = userData.EmailConfirmed,
@@ -567,6 +726,17 @@ namespace YOY.UserAPI.Controllers
                                 CountryFlag = userData.CountryFlag,
                                 WalletAmount = ""
                             };
+
+
+                            switch (userData.CountryCode)
+                            {
+                                case "CRC":
+                                    profile.PersonalIdLabel = "Tu cédula";
+                                    break;
+                                case "MX":
+                                    profile.PersonalIdLabel = "Tu INE";
+                                    break;
+                            }
 
 
                             profile.FriendlyBirthDate = "";
@@ -619,7 +789,22 @@ namespace YOY.UserAPI.Controllers
                             }
 
 
-                            result = Ok(profile);
+                            SuccessfulUpdatedProfile successfulUpdatedProfile = new SuccessfulUpdatedProfile
+                            {
+                                UserProfile = profile,
+                                DisplayMsg = false,
+                                MsgTitle = "",
+                                MsgContent = ""
+                            };
+
+                            if (errorRelatedToPersonalId)
+                            {
+                                successfulUpdatedProfile.DisplayMsg = true;
+                                successfulUpdatedProfile.MsgTitle = _localizer["AlreadyRegisteredPersonalIdTitle"].Value;
+                                successfulUpdatedProfile.MsgContent = _localizer["AlreadyRegisteredPersonalId"].Value;
+                            }
+
+                            result = Ok(successfulUpdatedProfile);
                         }
                         else
                         {
@@ -910,7 +1095,7 @@ namespace YOY.UserAPI.Controllers
 
                                 try
                                 {
-                                    u.ProfilePicUrl = model.FieldValue;
+                                    u.ProfilePicUrl = this.SaveImage(model.FieldValue);
                                     updateUserResult = await _userManager.UpdateAsync(u);
 
                                     if (updateUserResult.Succeeded)
@@ -1247,10 +1432,11 @@ namespace YOY.UserAPI.Controllers
         #endregion
 
         #region CONSTRUCTORS
-        public AccountController(UserManager<AppUser> userManager, IStringLocalizer<SharedResources> localizer)
+        public AccountController(UserManager<AppUser> userManager, IStringLocalizer<SharedResources> localizer, IWebHostEnvironment env)
         {
             this._userManager = userManager;
             this._localizer = localizer;
+            this._env = env;
 
             this.months = new string[] { _localizer["January"].Value, _localizer["February"].Value,
             _localizer["March"].Value, _localizer["April"].Value, _localizer["May"].Value, _localizer["June"].Value,

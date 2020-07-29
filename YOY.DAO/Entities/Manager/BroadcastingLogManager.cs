@@ -1620,25 +1620,6 @@ namespace YOY.DAO.Entities.Manager
             return typeName;
         }
 
-        private string GetExtraBonusAdditionTypeName(int extraBonusAdditionType)
-        {
-            string extraBonusAdditionTypeName = "";
-
-            switch (extraBonusAdditionType)
-            {
-                case ExtraBonusAdditionTypes.None:
-                    extraBonusAdditionTypeName = Resources.None;
-                    break;
-                case ExtraBonusAdditionTypes.Wallet:
-                    extraBonusAdditionTypeName = Resources.YOYWallet;
-                    break;
-                case ExtraBonusAdditionTypes.Club:
-                    extraBonusAdditionTypeName = Resources.Club;
-                    break;
-            }
-
-            return extraBonusAdditionTypeName;
-        }
 
         private string GetExtraBonusTypeName(int extraBonusType)
         {

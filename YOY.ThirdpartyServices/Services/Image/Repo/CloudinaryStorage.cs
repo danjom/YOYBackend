@@ -33,7 +33,7 @@ namespace YOY.ThirdpartyServices.Services.Image.Repo
             repo = new Cloudinary(account);
         }
 
-        public static UploadResponse UploadImage(string imgUrl, string foldername, string imgType, int width, int height)
+        public static UploadResponse UploadImage(string imgUrl, string enviroment, string foldername, string imgType, int width, int height)
         {
             UploadResponse response;
 
@@ -53,7 +53,7 @@ namespace YOY.ThirdpartyServices.Services.Image.Repo
 
                 if (!string.IsNullOrWhiteSpace(foldername))
                 {
-                    uploadParams.Folder = foldername;
+                    uploadParams.Folder = enviroment + foldername;
                 }
 
                 var uploadResult = repo.Upload(uploadParams);

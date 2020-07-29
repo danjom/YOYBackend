@@ -193,7 +193,10 @@ namespace YOY.DAO.Entities.Manager
                         UserName = item.UserName,
                         Name = item.Name,
                         RoleName = item.RoleName,
+                        TenantName = item.TenantName,
+                        TenantLogo = item.TenantLogo,
                         CurrencySymbol = item.CurrencySymbol,
+                        CurrencyType = item.CurrencyType,
                         CurrencyTypeName = GetCurrencyTypeName(item.CurrencyType),
                         BranchName = item.TenantName + " -- " + item.BrachName
 

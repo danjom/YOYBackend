@@ -219,7 +219,7 @@ namespace YOY.BusinessAPI.Controllers
             Initialize(model.TenantId, "");
             IActionResult result;
 
-            if (!ModelState.IsValid || model.DealId != Guid.Empty || !string.IsNullOrWhiteSpace(model.UserId) || model.InputType <= PreferenceInputTypes.RadioButton || model.InputType >= PreferenceInputTypes.TagsPicker)
+            if (!ModelState.IsValid || model.DealId == Guid.Empty || string.IsNullOrWhiteSpace(model.UserId) || model.InputType < PreferenceInputTypes.RadioButton || model.InputType > PreferenceInputTypes.TagsPicker)
             {
                 errorMsg = "ERROR: Invalid data received, " + parameters;
 

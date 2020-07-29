@@ -995,12 +995,13 @@
 
     public static class ImageFolders
     {
+        public const string ProdFolder = "prod/";
+        public const string DevFolder = "dev/";
         public const string Deals = "deals";
         public const string Logos = "logos";
         public const string BTL = "btl";
-        public const string Receipts = "receipts";
+        public const string Slides = "slide";
         public const string EmailAssets = "email_assets";
-        public const string Carrousels = "carrousels";
     }
 
     public static class TimerTypeMinuteRanges
@@ -1204,14 +1205,6 @@
         public const int Special = 5;
     }
 
-    public static class ExtraBonusAdditionTypes
-    {
-        public const int All = -1;
-        public const int None = 0;
-        public const int Wallet = 1;
-        public const int Club = 2;
-    }
-
     public static class ExtraBonusTypes
     {
         public const int All = -1;
@@ -1220,22 +1213,13 @@
         public const int FixedAmount = 2;
     }
 
-    public static class CashbackEarningTypes
+    public static class CashIncentiveBenefitAmountTypes
     {
         public const int All = -1;
         public const int None = 0;
         public const int Percentage = 1;
         public const int FixedAmount = 2;
         public const int Points = 3;
-    }
-
-    public static class CashbackCombineTypes
-    {
-        public const int All = -1;
-        public const int Standalone = 1;
-        public const int SameTypeCumulative = 2;
-        public const int DiffTypeCumulative = 3;
-        public const int AnyTypeCumulative = 4;
     }
 
     public static class CashbackTypes
@@ -1248,8 +1232,8 @@
     public static class CashbackApplyTypes
     {
         public const int All = -1;
-        public const int AfterPayment = 1;
-        public const int AppliedOnPayment = 2;
+        public const int WalletIncrease = 1;
+        public const int DirectDiscount = 2;
     }
 
     public static class EarningsLimitTypes
@@ -2063,12 +2047,6 @@
         public const int LandingImg = 1;
         public const int EmailBackground = 2;
         public const int CarrousedImg = 3;
-    }
-
-    public static class CharityImgTypes
-    {
-        public const int Logo = 0;
-        public const int DisplayImg = 1;
     }
 
     public static class SavingRouteImgTypes

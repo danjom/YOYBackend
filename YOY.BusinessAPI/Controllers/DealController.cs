@@ -694,6 +694,10 @@ namespace YOY.BusinessAPI.Controllers
                                 targettingParams += TargettingParamMarks.ParamsSeparator + TargettingParamMarks.AgeInterval + TargettingParamMarks.TypeValueSeparator + TargettingParamMarks.AnyValue;
                             }
 
+                            //When price defines, then it's an offer, otherwise is a coupon
+                            int offerType = model.RegularValue > 0 ? OfferTypes.Offer : OfferTypes.Coupon;
+
+
                             //Retrieve tenant to get the rules and conditions
                             TenantInfo tenantInfo = this._businessObjects.Commerces.Get(model.TenantId, CommerceKeys.TenantKey);
 
@@ -711,7 +715,7 @@ namespace YOY.BusinessAPI.Controllers
                                 double relevanceRate = model.RelevanceRate ?? -1;
 
 
-                                Offer newOffer = this._businessObjects.Offers.Post(model.MainCategoryId, model.OfferType, model.DealType, RewardTypes.Deal, OfferPurposeTypes.Deal, GeoSegmentationTypes.Country,
+                                Offer newOffer = this._businessObjects.Offers.Post(model.MainCategoryId, offerType, model.DealType, RewardTypes.Deal, OfferPurposeTypes.Deal, GeoSegmentationTypes.Country,
                                     DisplayTypes.BroadcastingAndListings, model.Name, model.MainHint, model.ComplementaryHint, model.Keywords, model.Code, null, model.Description, MinsToUnlockByObjectiveTypes.GenericPurpose,
                                     model.IsExclusive, model.IsSponsored, false, model.AvailableQuantity, false, -1, 0, null, model.ClaimLocation, model.Value, model.RegularValue, model.ExtraBonus, model.ExtraBonusType,
                                     model.Value, model.Value, 0, 0, 0, imgId, targettingParams, model.ReleaseDate, model.ExpirationDate, tenantInfo.DealRules, tenantInfo.DealConditions, claimInstructions, ScheduleTypes.Continously, TimerTypes.CountDown,

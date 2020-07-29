@@ -944,8 +944,10 @@ namespace YOY.DAO.Entities.Manager
                         userWithLocation = new UserWithLocationAndMembershipData
                         {
                             Id = item.Id,
+                            ProfilePic = item.ProfilePicUrl,
                             AccountNumber = item.AccountNumber,
                             AccountCode = item.AccountCode,
+                            PersonalId = item.PersonalId,
                             Username = item.UserName,
                             CountryPhonePrefix = item.CountryPhonePrefix,
                             PhoneNumber = item.PhoneNumber,
@@ -996,6 +998,55 @@ namespace YOY.DAO.Entities.Manager
         #endregion
 
         #region IDENTITYLOGS
+
+        public DateTime? Get(int identityType, string userId)
+        {
+            DateTime? latestLog = null;
+
+            try
+            {
+                var query = (dynamic)null;
+
+                switch (identityType)
+                {
+                    case UserIdentityValueTypes.PersonalId:
+                        query = (from x in this._businessObjects.Context.OltpuserPersonalIdLinkLogs
+                                 where x.UserId == userId
+                                 orderby x.CreatedDate descending
+                                 select x).FirstOrDefault();
+
+                        if (query != null)
+                        {
+                            userId = ((OltpuserPersonalIdLinkLogs)query).UserId;
+                            latestLog = ((OltpuserPersonalIdLinkLogs)query).CreatedDate;
+                        }
+
+                        break;
+                    case UserIdentityValueTypes.PhoneNumber:
+                        query = (from x in this._businessObjects.Context.OltpuserPhoneNumberLinkLogs
+                                 where x.UserId == userId
+                                 orderby x.CreatedDate descending
+                                 select x).FirstOrDefault();
+
+                        if (query != null)
+                        {
+                            userId = ((OltpuserPhoneNumberLinkLogs)query).UserId;
+                            latestLog = ((OltpuserPhoneNumberLinkLogs)query).CreatedDate;
+                        }
+
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                latestLog = null;
+                //ERROR HANDLING
+                this._businessObjects.StoredProcsHandler.AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return latestLog;
+        }
 
         public DateTime? Get(string identityValue, int identityType, ref string userId)
         {

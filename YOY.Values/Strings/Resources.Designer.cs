@@ -4252,6 +4252,15 @@ namespace YOY.Values.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Descuento directo.
+        /// </summary>
+        public static string DirectDiscount {
+            get {
+                return ResourceManager.GetString("DirectDiscount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Puntos Otorgados Directamente.
         /// </summary>
         public static string DirectlyGranted {
@@ -13473,6 +13482,15 @@ namespace YOY.Values.Strings {
         public static string WalletExtraBonusLabel {
             get {
                 return ResourceManager.GetString("WalletExtraBonusLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incremento en alcancía.
+        /// </summary>
+        public static string WalletIncrease {
+            get {
+                return ResourceManager.GetString("WalletIncrease", resourceCulture);
             }
         }
         

@@ -21,7 +21,10 @@ namespace YOY.DTO.Entities
         public string BranchName { set; get; }
         public string Name { set; get; }
         public string AccessKey { set; get; }
+        public string TenantName { set; get; }
+        public Guid? TenantLogo { set; get; }
         public string CurrencySymbol { set; get; }
+        public int CurrencyType { set; get; }
         public string CurrencyTypeName { set; get; }
     }
 }

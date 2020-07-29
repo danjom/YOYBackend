@@ -9,6 +9,8 @@ namespace YOY.UserAPI.Models.v1.User.POCO
     {
         public string Id { set; get; }
         public long AccountNumber { set; get; }
+        public string PersonalId { set; get; }
+        public string PersonalIdLabel { set; get; }
         public string Name { set; get; }
         public bool ValidBirthDate { set; get; }
         public string FriendlyBirthDate { set; get; }

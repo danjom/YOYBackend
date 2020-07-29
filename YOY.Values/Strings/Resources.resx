@@ -1552,6 +1552,9 @@ Cualquier duda o consulta, escribe a info@clubyoy.com</value>
   <data name="DiffTypeCumulative" xml:space="preserve">
     <value>Acumulativo Distinto</value>
   </data>
+  <data name="DirectDiscount" xml:space="preserve">
+    <value>Descuento directo</value>
+  </data>
   <data name="DirectlyGranted" xml:space="preserve">
     <value>Puntos Otorgados Directamente</value>
   </data>
@@ -4626,6 +4629,9 @@ Cualquier duda o consulta, escribe a info@clubyoy.com</value>
   </data>
   <data name="WalletExtraBonusLabel" xml:space="preserve">
     <value>Gana &lt;Bonus&gt; más en tu Alcancia</value>
+  </data>
+  <data name="WalletIncrease" xml:space="preserve">
+    <value>Incremento en alcancía</value>
   </data>
   <data name="WalletTransferedPoints" xml:space="preserve">
     <value>a tu Alcancía</value>

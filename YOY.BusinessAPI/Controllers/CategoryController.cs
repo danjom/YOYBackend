@@ -97,29 +97,56 @@ namespace YOY.BusinessAPI.Controllers
                     Initialize(tenantId, userId);
                 }
 
-                List<EnabledCategoryForRelation> categoriesForRelation = this._businessObjects.Categories.Gets(CategoryRelationTypes.Offer, dealId);
-
-                if(categoriesForRelation?.Count > 0)
+                if (dealId != Guid.Empty)
                 {
-                    CategoryData categoryData;
+                    List<EnabledCategoryForRelation> categoriesForRelation = this._businessObjects.Categories.Gets(CategoryRelationTypes.Offer, dealId);
 
-                    foreach(EnabledCategoryForRelation item in categoriesForRelation)
+                    if (categoriesForRelation?.Count > 0)
                     {
-                        categoryData = new CategoryData
+                        CategoryData categoryData;
+
+                        foreach (EnabledCategoryForRelation item in categoriesForRelation)
                         {
-                            Id = item.CategoryId,
-                            Name = item.CategoryName,
-                            Selected = false
-                        };
+                            categoryData = new CategoryData
+                            {
+                                Id = item.CategoryId,
+                                Name = item.CategoryName,
+                                Selected = false
+                            };
 
-                        if (item.RelationReferenceId != null)
-                            categoryData.Selected = true;
+                            if (item.RelationReferenceId != null)
+                                categoryData.Selected = true;
 
-                        categories.Categories.Add(categoryData);
+                            categories.Categories.Add(categoryData);
 
+                        }
+
+                        categories.Count = categories.Categories?.Count ?? 0;
                     }
+                }
+                else
+                {
+                    List<EnabledCategoryForRelation> categoriesForRelation = this._businessObjects.Categories.Gets();
 
-                    categories.Count = categories.Categories?.Count ?? 0;
+                    if (categoriesForRelation?.Count > 0)
+                    {
+                        CategoryData categoryData;
+
+                        foreach (EnabledCategoryForRelation item in categoriesForRelation)
+                        {
+                            categoryData = new CategoryData
+                            {
+                                Id = item.CategoryId,
+                                Name = item.CategoryName,
+                                Selected = false
+                            };
+
+                            categories.Categories.Add(categoryData);
+
+                        }
+
+                        categories.Count = categories.Categories?.Count ?? 0;
+                    }
                 }
 
                 result = Ok(categories);

@@ -214,8 +214,7 @@ namespace YOY.BusinessAPI.Controllers
                             userRoles.RemoveAt(i--);
                     }
 
-                    List<MinTenantInfo> enabledTenants = new List<MinTenantInfo>();
-                    MinTenantInfo currentTenant = null;
+                    List<TenantData> enabledTenants = new List<TenantData>();
 
                     if (isMaster)
                     {
@@ -225,9 +224,28 @@ namespace YOY.BusinessAPI.Controllers
                         employeeId = Guid.Empty;
                         accessLevel = BusinessPortalAccessLevels.FullAccess;
 
-                        if(userData != null)
+                        if (userData != null)
+                        {
                             //Since it's a master, all the tenants are accessible
-                            enabledTenants = this._businessObjects.Commerces.Gets((Guid)userData.CountryId, ActiveStates.Active, ReleaseStates.Released, PaginationDefaults.PageSize, PaginationDefaults.PageNumber);
+                            List<MinTenantInfo> allTenants = this._businessObjects.Commerces.Gets((Guid)userData.CountryId, ActiveStates.Active, ReleaseStates.Released, PaginationDefaults.PageSize, PaginationDefaults.PageNumber);
+
+                            if (allTenants?.Count > 0)
+                            {
+                                foreach(MinTenantInfo item in allTenants)
+                                {
+                                    enabledTenants.Add(new TenantData
+                                    {
+                                        TenantId = item.TenantId,
+                                        Name = item.Name,
+                                        Logo = item.Logo,
+                                        CurrencySymbol = item.CurrencySymbol,
+                                        CurrencyType = item.CurrencyType,
+                                        CurrencyTypeName = GetCurrencyTypeName(item.CurrencyType)
+                                    });
+                                }
+                            }
+                        }
+                            
                     }
                     else
                     {
@@ -266,12 +284,14 @@ namespace YOY.BusinessAPI.Controllers
                                         }
                                     }
 
-                                    currentTenant = (MinTenantInfo)this._businessObjects.Commerces.Get(TenantStructureTypes.Min, employeeRoles[i].TenantId, CommerceKeys.TenantKey);
-
-                                    if (currentTenant != null)
+                                    enabledTenants.Add(new TenantData
                                     {
-                                        enabledTenants.Add(currentTenant);
-                                    }
+                                        TenantId = employeeRoles[i].TenantId,
+                                        Name = employeeRoles[i].Name,
+                                        CurrencySymbol = employeeRoles[i].CurrencySymbol,
+                                        CurrencyType = employeeRoles[i].CurrencyType,
+                                        CurrencyTypeName = GetCurrencyTypeName(employeeRoles[i].CurrencyType)
+                                    });
                                 }
                             }
                         }
@@ -286,8 +306,7 @@ namespace YOY.BusinessAPI.Controllers
                     enabledAccesses.HasAccess = false;
                     enabledAccesses.Commerces = new List<CommerceData>();
 
-                    MinTenantInfo currentTenantInfo = null;
-                    Branch currentBranch = null;
+                    TenantData currentTenantData = null;
                     List<Branch> branches = null;
                     CommerceData currentCommerceData = null;
                     Models.v1.Access.POCO.BranchData currentBranchData = null;
@@ -296,18 +315,18 @@ namespace YOY.BusinessAPI.Controllers
                     for (int t = 0; t < enabledTenants.Count; ++t)
                     {
                         validCommerce = false;
-                        currentTenantInfo = enabledTenants[t];
+                        currentTenantData = enabledTenants[t];
 
                         //Creates a commerce data
                         currentCommerceData = new CommerceData
                         {
-                            Id = currentTenantInfo.TenantId,
+                            Id = currentTenantData.TenantId,
                             EmployeeId = employeeId,
-                            Logo = currentTenantInfo.Logo != null ? this._imgHandler.GetImgUrl((Guid)currentTenantInfo.Logo, ImageStorages.Cloudinary, ImageRequesters.App).ImgUrl : "",
-                            Name = currentTenantInfo.Name,
-                            CurrencySymbol = currentTenantInfo.CurrencySymbol,
-                            CurrencyType = currentTenantInfo.CurrencyType,
-                            CurrencyName = GetCurrencyTypeName(currentTenantInfo.CurrencyType),
+                            Logo = currentTenantData.Logo != null ? this._imgHandler.GetImgUrl((Guid)currentTenantData.Logo, ImageStorages.Cloudinary, ImageRequesters.App).ImgUrl : "",
+                            Name = currentTenantData.Name,
+                            CurrencySymbol = currentTenantData.CurrencySymbol,
+                            CurrencyType = currentTenantData.CurrencyType,
+                            CurrencyName = GetCurrencyTypeName(currentTenantData.CurrencyType),
                             Branches = new List<Models.v1.Access.POCO.BranchData>(),
                             RoleName = roleName,
                             AccessLevel = accessLevel
@@ -316,7 +335,7 @@ namespace YOY.BusinessAPI.Controllers
                         //If is Master have access to every brach of every commerce
                         if (isMaster)
                         {
-                            branches = this._businessObjects.Branches.Gets(currentTenantInfo.TenantId, ActiveStates.Active, OpenStates.All, DateTime.UtcNow, PaginationDefaults.PageSize, PaginationDefaults.PageNumber);
+                            branches = this._businessObjects.Branches.Gets(currentTenantData.TenantId, ActiveStates.Active, OpenStates.All, DateTime.UtcNow, PaginationDefaults.PageSize, PaginationDefaults.PageNumber);
 
                             if (branches?.Count > 0)
                             {
@@ -360,18 +379,16 @@ namespace YOY.BusinessAPI.Controllers
                             for (int i = 0; i < employeeRoles.Count; ++i)
                             {
                                 //If it's a employee role on current tenant
-                                if (employeeRoles[i].TenantId == currentTenantInfo.TenantId)
+                                if (employeeRoles[i].TenantId == currentTenantData.TenantId)
                                 {
                                     validCommerce = true;
 
                                     if(employeeRoles[i].BranchId != null)
                                     {
-                                        currentBranch = this._businessObjects.Branches.Get((Guid)employeeRoles[i].BranchId, false, DateTime.UtcNow);
-
                                         currentBranchData = new Models.v1.Access.POCO.BranchData
                                         {
-                                            Id = currentBranch.Id,
-                                            Name = currentBranch.Name,
+                                            Id = (Guid)employeeRoles[i].BranchId,
+                                            Name = employeeRoles[i].BranchName,
                                             AccessKey = employeeRoles[i].AccessKey
                                         };
 
@@ -388,7 +405,7 @@ namespace YOY.BusinessAPI.Controllers
 
                                         currentCommerceData.Branches.Add(currentBranchData);
 
-                                        branches = this._businessObjects.Branches.Gets(currentTenantInfo.TenantId, ActiveStates.Active, OpenStates.All, DateTime.UtcNow, PaginationDefaults.PageSize, PaginationDefaults.PageNumber);
+                                        branches = this._businessObjects.Branches.Gets(currentTenantData.TenantId, ActiveStates.Active, OpenStates.All, DateTime.UtcNow, PaginationDefaults.PageSize, PaginationDefaults.PageNumber);
 
                                         if (branches?.Count > 0)
                                         {

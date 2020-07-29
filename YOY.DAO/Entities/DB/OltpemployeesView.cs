@@ -24,5 +24,6 @@ namespace YOY.DAO.Entities.DB
         public string TenantName { get; set; }
         public string CurrencySymbol { get; set; }
         public int CurrencyType { get; set; }
+        public Guid? TenantLogo { get; set; }
     }
 }

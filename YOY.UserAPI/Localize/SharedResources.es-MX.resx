@@ -135,6 +135,12 @@
   <data name="AlreadyRegisteredEmailTitle" xml:space="preserve">
     <value>Email inválido</value>
   </data>
+  <data name="AlreadyRegisteredPersonalId" xml:space="preserve">
+    <value>Lo sentimos, número de identificación que ingresaste ya está asociada a otra cuenta, si te pertenece, por favor contáctanos</value>
+  </data>
+  <data name="AlreadyRegisteredPersonalIdTitle" xml:space="preserve">
+    <value>Problemas con tu identifición</value>
+  </data>
   <data name="April" xml:space="preserve">
     <value>Abril</value>
   </data>
