@@ -129,12 +129,13 @@ namespace YOY.UserAPI.Controllers
 
             if (base64String.Contains(allowedImgFormats))
             {
-                var directoryPath = Path.Combine(_env.WebRootPath, "images");
-                string enviromentFolder;
+                base64String = base64String.Replace(allowedImgFormats, "");
 
+                var directoryPath = Path.Combine(_env.WebRootPath, "images");
                 if (!Directory.Exists(directoryPath))
                     Directory.CreateDirectory(directoryPath);
 
+                string enviromentFolder;
                 if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
                 {
                     enviromentFolder = ImageFolders.DevFolder;
@@ -144,6 +145,7 @@ namespace YOY.UserAPI.Controllers
                 {
                     enviromentFolder = ImageFolders.ProdFolder;
                 }
+
 
                 System.Drawing.Image image = this.Base64ToImage(base64String);
 

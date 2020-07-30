@@ -60,16 +60,16 @@ namespace YOY.BusinessAPI.Models.v1.Deal.POCO
         public string ClaimLocation { set; get; }
         [Required]
         [NotNull]
-        public decimal Value { set; get; }
+        public string Value { set; get; }
         [AllowNull]
         [Required]
-        public decimal? RegularValue { set; get; }
+        public string RegularValue { set; get; }
         [Required]
         [NotNull]
         public int ExtraBonusType { set; get; }
         [Required]
         [NotNull]
-        public double ExtraBonus { set; get; }
+        public string ExtraBonus { set; get; }
         [Required]
         [NotNull]
         public char GenderParam { set; get; }
@@ -92,6 +92,6 @@ namespace YOY.BusinessAPI.Models.v1.Deal.POCO
         public string DisplayImgData { set; get; }
         [AllowNull]
         [Required]
-        public double? RelevanceRate { set; get; }
+        public string RelevanceRate { set; get; }
     }
 }

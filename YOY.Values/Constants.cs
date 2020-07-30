@@ -1,5 +1,33 @@
 ﻿namespace YOY.Values
 {
+    public static class ContentSetTypes
+    {
+        public const int None = 0;
+        public const int Slider = 1;
+        public const int Carrousel = 2;
+        public const int Grid = 3;
+        public const int List = 4;
+    }
+
+    public static class OnSelectCellActionTypes
+    {
+        public const int None = 0;
+        public const int DisplayPromotionContent = 1;
+        public const int UpdateContentFilterOptions = 2;
+        public const int UpdateDisplayedContent = 3;
+        public const int AccessDealDetailScreen = 4;
+        public const int AccessCashIncentiveDetailScreen = 5;
+    }
+
+    public static class ContentAccessTypes
+    {
+        public const int None = 0;
+        public const int PreferencesList = 1;
+        public const int CommerceList = 2;
+        public const int ShoppingMallList = 3;
+        public const int DealContentList = 4;
+        public const int CashIncentiveContentList = 5;
+    }
 
     public static class UserappErrorCustomActions
     {

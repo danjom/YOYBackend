@@ -609,9 +609,11 @@ namespace YOY.BusinessAPI.Controllers
 
                                         SearchObjectHandler.SetParams(SearchIndexNames.AppName, indexName);
 
+                                        /*
                                         bool success = await SearchObjectHandler.AddGeneralSearchableObjectAsync(newOffer.Id, newOffer.TenantId, tenantInfo.CountryId, newOffer.Keywords, imgHandler.GetImgUrl((Guid)tenantInfo.Logo, ImageStorages.Cloudinary, ImageRequesters.App).ImgUrl, newOffer.IsSponsored, newOffer.IsActive, newOffer.RelevanceRate,
                                             0, newOffer.ReleaseDate, newOffer.ExpirationDate, SearchableObjectTypes.Deal, newOffer.MainHint + " " + newOffer.ComplementaryHint, newOffer.Name, newOffer.MainCategoryName, newOffer.MainCategoryName,
                                             this._businessObjects.Categories.GetParentCategory(newOffer.MainCategoryId, CategoryHerarchyLevels.ProductCategory), newOffer.Value, 1);
+                                        */
                                     }
 
                                     result = Ok(this.GetIncentiveContent(newIncentive));
@@ -914,11 +916,12 @@ namespace YOY.BusinessAPI.Controllers
 
                                             SearchObjectHandler.SetParams(SearchIndexNames.AppName, indexName);
 
-                                            bool success = await SearchObjectHandler.UpdateGeneralSearchableObjectAsync(updatedOffer.Id, updatedOffer.Keywords, updatedOffer.IsSponsored, updatedOffer.IsActive, updatedOffer.RelevanceRate, updatedOffer.ReleaseDate, updatedOffer.ExpirationDate,
+                                           /* bool success = await SearchObjectHandler.UpdateGeneralSearchableObjectAsync(updatedOffer.Id, updatedOffer.Keywords, updatedOffer.IsSponsored, updatedOffer.IsActive, updatedOffer.RelevanceRate, updatedOffer.ReleaseDate, updatedOffer.ExpirationDate,
                                                 updatedOffer.MainHint + " " + updatedOffer.ComplementaryHint, updatedOffer.Name, updatedOffer.MainCategoryName, categories, classifications, updatedOffer.Value, 1);
+                                           */
                                         }
 
-                                        result = Ok(this.GetDealContent(updatedOffer, updatedOffer.OfferType));
+                                        result = Ok(this.GetIncentiveContent(updatedIncentive));
                                     }
                                     else
                                     {

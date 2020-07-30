@@ -327,7 +327,7 @@ namespace YOY.BusinessAPI.Controllers
                     dealsData = new List<DealData>();
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 dealsData = null;
             }
@@ -579,6 +579,31 @@ namespace YOY.BusinessAPI.Controllers
                     {
                         bool valid = true;
 
+                        Decimal.TryParse(model.Value, out decimal value);
+
+                        decimal? regularValue;
+
+                        if (!string.IsNullOrWhiteSpace(model.RegularValue))
+                        {
+
+                            Decimal.TryParse(model.RegularValue, out decimal regularValueAux);
+                            regularValue = regularValueAux;
+                        }
+                        else
+                            regularValue = -1;
+
+                        Double.TryParse(model.ExtraBonus, out double extraBonus);
+
+                        double relevanceRate;
+
+                        if (!string.IsNullOrWhiteSpace(model.ExtraBonus))
+                        {
+                            Double.TryParse(model.ExtraBonus, out relevanceRate);
+
+                        }
+                        else
+                            relevanceRate = -1;
+
 
                         if (string.IsNullOrWhiteSpace(model.DisplayImgData) || Base64ToImage(model.DisplayImgData.Replace(allowedImgFormats, "")) == null)
                         {
@@ -647,22 +672,22 @@ namespace YOY.BusinessAPI.Controllers
                             dataErrors += "-El lugar de retiro debe ser indicarse\n";
                         }
 
-                        if (model.Value <= 0)
+                        if (value <= 0)
                         {
                             valid = false;
                             dataErrors += "-El precio debe ser mayor o igual que 0\n";
                         }
 
-                        if (model.RegularValue > -1 && model.Value >= model.RegularValue)
+                        if (regularValue != null && regularValue > -1 && value >= regularValue)
                         {
                             valid = false;
                             dataErrors += "-El precio regular debe ser menor que el precio promocional\n";
                         }
 
-                        if (model.ExtraBonusType > ExtraBonusTypes.None && model.ExtraBonus <= 0)
+                        if (model.ExtraBonusType > ExtraBonusTypes.None && extraBonus <= 0)
                         {
                             valid = false;
-                            dataErrors += "-El tipo de incentivo extra debe ser mayor que 0\n";
+                            dataErrors += "-El tipo de bonus extra debe ser mayor que 0\n";
                         }
 
                         if (model.GenderParam == '\0')
@@ -715,7 +740,7 @@ namespace YOY.BusinessAPI.Controllers
                                 targettingParams += TargettingParamMarks.Gender + TargettingParamMarks.TypeValueSeparator + GenderParams.Any;
                             }
 
-                            if (model.StartAgeParam < model.EndAgeParam)
+                            if (model.StartAgeParam <= model.EndAgeParam)
                             {
                                 targettingParams += TargettingParamMarks.ParamsSeparator + TargettingParamMarks.AgeInterval + TargettingParamMarks.TypeValueSeparator + model.StartAgeParam + "-" + model.EndAgeParam;
                             }
@@ -725,9 +750,9 @@ namespace YOY.BusinessAPI.Controllers
                             }
 
                             //When price defines, then it's an offer, otherwise is a coupon
-                            int offerType = model.Value > 0 ? OfferTypes.Offer : OfferTypes.Coupon;
+                            int offerType = value > 0 ? OfferTypes.Offer : OfferTypes.Coupon;
 
-                            model.RegularValue = model.RegularValue <= 0 ? null : model.RegularValue;
+                            regularValue = regularValue <= 0 ? null : regularValue;
 
                             //Retrieve tenant to get the rules and conditions
                             TenantInfo tenantInfo = this._businessObjects.Commerces.Get(model.TenantId, CommerceKeys.TenantKey);
@@ -746,9 +771,9 @@ namespace YOY.BusinessAPI.Controllers
 
                                 Offer newOffer = this._businessObjects.Offers.Post(model.MainCategoryId, offerType, model.DealType, RewardTypes.Deal, OfferPurposeTypes.Deal, GeoSegmentationTypes.Country,
                                     DisplayTypes.BroadcastingAndListings, model.Name, model.MainHint, model.ComplementaryHint, model.Keywords, model.Code, null, model.Description, MinsToUnlockByObjectiveTypes.GenericPurpose,
-                                    model.IsExclusive, model.IsSponsored, false, model.AvailableQuantity, false, -1, 0, null, model.ClaimLocation, model.Value, model.RegularValue, model.ExtraBonus, model.ExtraBonusType,
-                                    model.Value, model.Value, 0, 0, 0, imgId, targettingParams, model.ReleaseDate, model.ExpirationDate, tenantInfo.DealRules, tenantInfo.DealConditions, claimInstructions, ScheduleTypes.Continously, TimerTypes.CountDown,
-                                    BroadcastingTimerByDisplayTypes.BroadcastingAndListings, "", "", model.RelevanceRate ?? -1);
+                                    model.IsExclusive, model.IsSponsored, false, model.AvailableQuantity, false, -1, 0, null, model.ClaimLocation, value, regularValue, extraBonus, model.ExtraBonusType,
+                                    value, value, 0, 0, 0, imgId, targettingParams, model.ReleaseDate, model.ExpirationDate, tenantInfo.DealRules, tenantInfo.DealConditions, claimInstructions, ScheduleTypes.Continously, TimerTypes.CountDown,
+                                    BroadcastingTimerByDisplayTypes.BroadcastingAndListings, "", "", relevanceRate);
 
 
 
