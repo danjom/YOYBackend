@@ -1004,7 +1004,7 @@ namespace YOY.DAO.Entities.DB.Functions
         }
 
 
-        public List<Temppreferences> GetTenantPreferencesByGeoLocation(double latitude, double longitude, double radius, string userId, int pageSize, int pageNumber)
+        public List<Temppreferences> GetTenantPreferencesByGeoLocation(double latitude, double longitude, double radius, Guid countryId, string userId, int pageSize, int pageNumber)
         {
             List<Temppreferences> temppreferences;
 
@@ -1013,11 +1013,12 @@ namespace YOY.DAO.Entities.DB.Functions
                 var latitudeParam = new SqlParameter("latitude", latitude);
                 var longitudeParam = new SqlParameter("longitude", longitude);
                 var radiusParam = new SqlParameter("radius", radius);
+                var countryIdParam = new SqlParameter("countryId", countryId);
                 var userIdParam = new SqlParameter("userId", userId);
                 var pageSizeParam = new SqlParameter("pageSize", pageSize);
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
-                temppreferences = dbContext.Set<Temppreferences>().FromSqlRaw("SELECT * FROM [dbo].[GetTenantPreferencesByGeoLocation](@latitude, @longitude, @radius, @userId, @pageSize, @pageNumber)", new[] {latitudeParam, longitudeParam, radiusParam, userIdParam, pageSizeParam, pageNumberParam}).ToList();
+                temppreferences = dbContext.Set<Temppreferences>().FromSqlRaw("SELECT * FROM [dbo].[GetTenantPreferencesByGeoLocation](@latitude, @longitude, @radius, @countryId, @userId, @pageSize, @pageNumber)", new[] {latitudeParam, longitudeParam, radiusParam, countryIdParam, userIdParam, pageSizeParam, pageNumberParam}).ToList();
             }
             catch (Exception e)
             {

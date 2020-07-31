@@ -7,7 +7,7 @@ namespace YOY.UserAPI.Models.v1.Content.POCO
 {
     public class ContentCellDisplayData : CellDisplayData
     {
-        public int ContentType { set; get; }
+        public string CommerceLogo { set; get; }
         public string ImgUrl { set; get; }
         public string MainHint { set; get; }
         public string ComplementaryHint { set; get; }

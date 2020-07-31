@@ -3642,10 +3642,10 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="relevanceRate"></param>
         /// <returns></returns>
         public Offer Post(Guid mainCategoryId, int offerType, int dealType, int rewardType, int purposeType, int geoSegmentationType, int displayType, string name, 
-            string mainHint, string complementaryHint, string keywords, string code, Guid? codeImg, string description, int minsToUnlock, bool isExclusive, bool isSponsored, bool hasUniqueCodes,
+            string mainHint, string complementaryHint, string keywords, string code, string description, int minsToUnlock, bool isExclusive, bool isSponsored, bool hasUniqueCodes,
             int availableQuantity, bool? oneTimeRedemption, int maxClaimsPerUser, int minPurchasesCountToRedeem, DateTime? purchasesCountStartDate,
             string claimLocation, decimal value, decimal? regularValue, double extraBonus, int extraBonusType, decimal minIncentive, decimal maxIncentive, int incentiveVariationType,
-            decimal incentiveVariation, int secondsIncentiveVariationFrame, Guid? imgId, string targettingParams,  DateTime releaseDate, DateTime expirationDate,
+            decimal incentiveVariation, int secondsIncentiveVariationFrame, string targettingParams,  DateTime releaseDate, DateTime expirationDate,
             string rules, string conditions, string claimInstructions, int broadcastingScheduleType, int broadcastingTimerType, int broadcastingMinsToRedeem, string broadcastingTitle,
             string broadcastingMsg, double relevanceRate)
         {
@@ -3671,7 +3671,6 @@ namespace YOY.DAO.Entities.Manager
                     Keywords = keywords,
                     Description = description,
                     Code = code ?? "",
-                    CodeImg = codeImg,
                     MinsToUnlock = minsToUnlock,
                     IsActive = true,
                     IsExclusive = isExclusive,
@@ -3698,7 +3697,6 @@ namespace YOY.DAO.Entities.Manager
                     ReleaseDate = releaseDate,
                     ExpirationDate = expirationDate,
                     TargettingParams = targettingParams,
-                    DisplayImageId = imgId,
                     Rules = rules ?? Resources.NoRulesAvailable,
                     Conditions = conditions ?? Resources.NoConditionsAvailable,
                     ClaimInstructions = claimInstructions ?? Resources.NoClaimInstructionsAvailable,
@@ -3937,26 +3935,19 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="expirationDate"></param>
         /// <param name="relevanceRate"></param>
         /// <returns></returns>
-        public Offer Put(Guid id, Guid mainCategoryId, int dealType, string name, string mainHint, string complementaryHint, string keywords, string code, Guid? codeImg, 
-            string description, bool isActive, bool isExclusive, bool isSponsored, bool hasUniqueCodes, int availableQuantity, 
+        public Offer Put(Guid id, Guid mainCategoryId, int dealType, string name, string mainHint, string complementaryHint, string keywords, string code, 
+            string description, bool isExclusive, bool isSponsored, bool hasUniqueCodes, int availableQuantity, 
             int maxClaimsPerUser, int minPurchasesCountToRedeem, DateTime? purchasesCountStartDate, string claimLocation, decimal value, 
             decimal? regularValue, double extraBonus, int extraBonusType, decimal minIncentive, decimal maxIncentive, int incentiveVariationType, decimal incentiveVariation, 
-            int secondsIncentiveVariationFrame, Guid? imgId, string targettingParams, DateTime releaseDate, DateTime expirationDate, double relevanceRate)
+            int secondsIncentiveVariationFrame, string targettingParams, DateTime releaseDate, DateTime expirationDate, double relevanceRate)
         {
             Offer offer = null;
 
             try
             {
-                Oltpoffers currentOffer = null;
-
-                var query = from x in this._businessObjects.Context.Oltpoffers
-                            where x.TenantId == this._businessObjects.Tenant.TenantId && x.Id == id
-                            select x;
-
-                foreach (Oltpoffers item in query)
-                {
-                    currentOffer = item;
-                }
+                Oltpoffers currentOffer = (from x in this._businessObjects.Context.Oltpoffers
+                                          where x.TenantId == this._businessObjects.Tenant.TenantId && x.Id == id
+                                          select x).FirstOrDefault();
 
                 if (currentOffer != null)
                 {
@@ -3967,9 +3958,7 @@ namespace YOY.DAO.Entities.Manager
                     currentOffer.ComplementaryHint = complementaryHint;
                     currentOffer.Keywords = keywords;
                     currentOffer.Code = code;
-                    currentOffer.CodeImg = codeImg;
                     currentOffer.Description = description;
-                    currentOffer.IsActive = isActive;
                     currentOffer.IsExclusive = isExclusive;
                     currentOffer.IsSponsored = isSponsored;
                     currentOffer.HasUniqueCodes = hasUniqueCodes;
@@ -3986,7 +3975,6 @@ namespace YOY.DAO.Entities.Manager
                     currentOffer.MaxIncentive = maxIncentive;
                     currentOffer.IncentiveVariation = incentiveVariation;
                     currentOffer.SecondsIncentiveVariationFrame = secondsIncentiveVariationFrame;
-                    currentOffer.DisplayImageId = imgId;
                     currentOffer.TargettingParams = targettingParams;
                     currentOffer.ReleaseDate = releaseDate;
                     currentOffer.ExpirationDate = expirationDate;

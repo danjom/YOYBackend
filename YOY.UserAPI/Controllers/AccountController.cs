@@ -1122,13 +1122,21 @@ namespace YOY.UserAPI.Controllers
                                     u.ProfilePicUrl = this.SaveImage(model.FieldValue);
                                     updateUserResult = await _userManager.UpdateAsync(u);
 
-                                    if (updateUserResult.Succeeded)
-                                        success = true;
+                                    if (!string.IsNullOrWhiteSpace(u.ProfilePicUrl))
+                                    {
+                                        if (updateUserResult.Succeeded)
+                                            success = true;
+                                        else
+                                        {
+                                            customErroMsg = _localizer["ErrorSettingProfilePicture"].Value;
+                                            success = false;
+                                        }
+                                    }
                                     else
                                     {
-                                        customErroMsg = _localizer["ErrorSettingProfilePicture"].Value;
                                         success = false;
                                     }
+                                    
                                 }
                                 catch (Exception e)
                                 {

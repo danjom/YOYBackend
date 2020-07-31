@@ -172,7 +172,7 @@ namespace YOY.UserAPI.Controllers
                                 }
                                 else
                                 {//If state isn't in operation, retrieve preferences based 
-                                    tenantPreferences = this._businessObjects.UserInterests.GetPreferences(currentUser.Id, (double)processedLocation.Latitude, (double)processedLocation.Longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, PageSize, 0);
+                                    tenantPreferences = this._businessObjects.UserInterests.GetPreferences(currentUser.Id, userState.CountryId, (double)processedLocation.Latitude, (double)processedLocation.Longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, PageSize, 0);
                                 }
 
                                 if (tenantPreferences?.Count == 0)

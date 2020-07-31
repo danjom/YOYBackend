@@ -1614,6 +1614,8 @@ namespace YOY.DAO.Entities.Manager
                         GeneratorRelationId = newCategoryRelation.Id,
                         CreatedDate = DateTime.UtcNow
                     };
+
+                    this._businessObjects.Context.OltpcategoryRelations.Add(newPreferenceRelation);
                 }
                 
                 this._businessObjects.Context.SaveChanges();

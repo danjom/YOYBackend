@@ -19,14 +19,25 @@
         public const int AccessCashIncentiveDetailScreen = 5;
     }
 
-    public static class ContentAccessTypes
+    public static class ViewAllCellContentAccess
     {
         public const int None = 0;
-        public const int PreferencesList = 1;
+        public const int CategoryList = 1;
         public const int CommerceList = 2;
         public const int ShoppingMallList = 3;
         public const int DealContentList = 4;
         public const int CashIncentiveContentList = 5;
+    }
+
+    public static class CellTypes
+    {
+        public const int None = 0;
+        public const int Filter = 1;
+        public const int Category = 2;
+        public const int Commerce = 3;
+        public const int ShoppingMall = 4;
+        public const int Offer = 5;
+        public const int CashIncentive = 6;
     }
 
     public static class UserappErrorCustomActions

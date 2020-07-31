@@ -141,6 +141,7 @@ namespace YOY.BusinessAPI.Controllers
                         ExtraBonus = data.ExtraBonus,
                         ExtraBonusType = data.ExtraBonusType,
                         ExtraBonusTypeName = data.ExtraBonusTypeName,
+                        RelevanceRate = data.RelevanceRate,
                         ReleaseFullDateTime = UtcToLocal((DateTime)data.ReleaseDate, this._businessObjects.Tenant.UtcTimeDiff),
                         ExpirationFullDateTime = UtcToLocal(data.ExpirationDate, this._businessObjects.Tenant.UtcTimeDiff),
                         DisplayImageUrl = data.DisplayImgId != null ? this._imgHandler.GetImgUrl((Guid)data.DisplayImgId, ImageStorages.Cloudinary, ImageRequesters.Website).ImgUrl : "",
@@ -181,6 +182,7 @@ namespace YOY.BusinessAPI.Controllers
                         ExtraBonus = data.ExtraBonus,
                         ExtraBonusType = data.ExtraBonusType,
                         ExtraBonusTypeName = data.ExtraBonusTypeName,
+                        RelevanceRate = data.RelevanceRate,
                         ReleaseFullDateTime = UtcToLocal((DateTime)data.ReleaseDate, this._businessObjects.Tenant.UtcTimeDiff),
                         ExpirationFullDateTime = UtcToLocal(data.ExpirationDate, this._businessObjects.Tenant.UtcTimeDiff),
                         DisplayImageUrl = data.DisplayImgId != null ? this._imgHandler.GetImgUrl((Guid)data.DisplayImgId, ImageStorages.Cloudinary, ImageRequesters.Website).ImgUrl : "",
@@ -386,10 +388,10 @@ namespace YOY.BusinessAPI.Controllers
 
         }
 
-        private bool SaveImage(string base64String, Guid offerId, int offerType, int imgOfferType)
+        private Guid? SaveImage(string base64String, Guid offerId, int offerType, int imgOfferType)
         {
 
-            bool success = false ;
+            Guid? imgId = null ;
 
             if (base64String.Contains(allowedImgFormats))
             {
@@ -422,7 +424,7 @@ namespace YOY.BusinessAPI.Controllers
                 
                 if(fcimage != null)
                 {
-                    success = true;
+                    imgId = fcimage.Id;
                     Guid? oldImg = this._businessObjects.Offers.Put(offerId, offerType, (Guid)fcimage.Id, imgOfferType);
 
 
@@ -435,7 +437,7 @@ namespace YOY.BusinessAPI.Controllers
             }
 
 
-            return success ;
+            return imgId ;
         }
 
         private bool DeleteImage(Guid imgId)
@@ -726,8 +728,6 @@ namespace YOY.BusinessAPI.Controllers
                             model.ReleaseDate = LocalToUtc(model.ReleaseDate, this._businessObjects.Tenant.UtcTimeDiff);
                             model.ExpirationDate = LocalToUtc(model.ExpirationDate, this._businessObjects.Tenant.UtcTimeDiff);
 
-                            //Now needs to store the image in database
-                            Guid? imgId = null;
 
                             string targettingParams = "";
 
@@ -770,9 +770,9 @@ namespace YOY.BusinessAPI.Controllers
 
 
                                 Offer newOffer = this._businessObjects.Offers.Post(model.MainCategoryId, offerType, model.DealType, RewardTypes.Deal, OfferPurposeTypes.Deal, GeoSegmentationTypes.Country,
-                                    DisplayTypes.BroadcastingAndListings, model.Name, model.MainHint, model.ComplementaryHint, model.Keywords, model.Code, null, model.Description, MinsToUnlockByObjectiveTypes.GenericPurpose,
+                                    DisplayTypes.BroadcastingAndListings, model.Name, model.MainHint, model.ComplementaryHint, model.Keywords, model.Code, model.Description, MinsToUnlockByObjectiveTypes.GenericPurpose,
                                     model.IsExclusive, model.IsSponsored, false, model.AvailableQuantity, false, -1, 0, null, model.ClaimLocation, value, regularValue, extraBonus, model.ExtraBonusType,
-                                    value, value, 0, 0, 0, imgId, targettingParams, model.ReleaseDate, model.ExpirationDate, tenantInfo.DealRules, tenantInfo.DealConditions, claimInstructions, ScheduleTypes.Continously, TimerTypes.CountDown,
+                                    value, value, 0, 0, 0, targettingParams, model.ReleaseDate, model.ExpirationDate, tenantInfo.DealRules, tenantInfo.DealConditions, claimInstructions, ScheduleTypes.Continously, TimerTypes.CountDown,
                                     BroadcastingTimerByDisplayTypes.BroadcastingAndListings, "", "", relevanceRate);
 
 
@@ -780,7 +780,7 @@ namespace YOY.BusinessAPI.Controllers
                                 if (newOffer != null)
                                 {
                                     //Creates and saves the image
-                                    this.SaveImage(model.DisplayImgData, newOffer.Id, newOffer.OfferType, OfferImgTypes.DisplayImg);
+                                   newOffer.DisplayImgId = this.SaveImage(model.DisplayImgData, newOffer.Id, newOffer.OfferType, OfferImgTypes.DisplayImg);
 
                                     //Creates the category relation
                                     this._businessObjects.Categories.Post(model.MainCategoryId, CategoryHerarchyLevels.ProductCategory, newOffer.Id, CategoryRelatiomReferenceTypes.Offer);
@@ -912,12 +912,30 @@ namespace YOY.BusinessAPI.Controllers
                     {
                         bool valid = true;
 
+                        Decimal.TryParse(model.Value, out decimal value);
 
-                        if (!string.IsNullOrWhiteSpace(model.DisplayImgData) && Base64ToImage(model.DisplayImgData.Replace(allowedImgFormats, "")) == null)
+                        decimal? regularValue;
+
+                        if (!string.IsNullOrWhiteSpace(model.RegularValue))
                         {
-                            valid = false;
-                            dataErrors += "- Debe seleccionarse una imagen válida en formato PNG\n";
+
+                            Decimal.TryParse(model.RegularValue, out decimal regularValueAux);
+                            regularValue = regularValueAux;
                         }
+                        else
+                            regularValue = -1;
+
+                        Double.TryParse(model.ExtraBonus, out double extraBonus);
+
+                        double relevanceRate;
+
+                        if (!string.IsNullOrWhiteSpace(model.ExtraBonus))
+                        {
+                            Double.TryParse(model.ExtraBonus, out relevanceRate);
+
+                        }
+                        else
+                            relevanceRate = -1;
 
                         if (model.MainCategoryId == null || model.MainCategoryId == Guid.Empty)
                         {
@@ -980,22 +998,28 @@ namespace YOY.BusinessAPI.Controllers
                             dataErrors += "-El lugar de retiro debe ser indicarse\n";
                         }
 
-                        if (model.Value <= 0)
+                        if (value <= 0)
                         {
                             valid = false;
                             dataErrors += "-El precio debe ser mayor o igual que 0\n";
                         }
 
-                        if (model.RegularValue > -1 && model.Value >= model.RegularValue)
+                        if (regularValue != null && regularValue > -1 && value >= regularValue)
                         {
                             valid = false;
                             dataErrors += "-El precio regular debe ser menor que el precio promocional\n";
                         }
 
-                        if (model.ExtraBonusType > ExtraBonusTypes.None && model.ExtraBonus <= 0)
+                        if (model.ExtraBonusType > ExtraBonusTypes.None && extraBonus <= 0)
                         {
                             valid = false;
-                            dataErrors += "-El tipo de incentivo extra debe ser mayor que 0\n";
+                            dataErrors += "-El tipo de bonus extra debe ser mayor que 0\n";
+                        }
+
+                        if (model.GenderParam == '\0')
+                        {
+                            valid = false;
+                            dataErrors += "-El género debe ser indicado\n";
                         }
 
                         if (model.StartAgeParam < minEnabledAgeParam || model.EndAgeParam > maxEnabledAgeParam || model.StartAgeParam > model.EndAgeParam)
@@ -1028,8 +1052,6 @@ namespace YOY.BusinessAPI.Controllers
                             model.ReleaseDate = LocalToUtc(model.ReleaseDate, this._businessObjects.Tenant.UtcTimeDiff);
                             model.ExpirationDate = LocalToUtc(model.ExpirationDate, this._businessObjects.Tenant.UtcTimeDiff);
 
-                            //Now needs to store the image in database
-                            Guid? imgId = null;
 
                             string targettingParams = "";
 
@@ -1042,7 +1064,7 @@ namespace YOY.BusinessAPI.Controllers
                                 targettingParams += TargettingParamMarks.Gender + TargettingParamMarks.TypeValueSeparator + GenderParams.Any;
                             }
 
-                            if (model.StartAgeParam < model.EndAgeParam)
+                            if (model.StartAgeParam <= model.EndAgeParam)
                             {
                                 targettingParams += TargettingParamMarks.ParamsSeparator + TargettingParamMarks.AgeInterval + TargettingParamMarks.TypeValueSeparator + model.StartAgeParam + "-" + model.EndAgeParam;
                             }
@@ -1050,6 +1072,11 @@ namespace YOY.BusinessAPI.Controllers
                             {
                                 targettingParams += TargettingParamMarks.ParamsSeparator + TargettingParamMarks.AgeInterval + TargettingParamMarks.TypeValueSeparator + TargettingParamMarks.AnyValue;
                             }
+                            
+                            //When price defines, then it's an offer, otherwise is a coupon
+                            int offerType = value > 0 ? OfferTypes.Offer : OfferTypes.Coupon;
+
+                            regularValue = regularValue <= 0 ? null : regularValue;
 
                             //Retrieve tenant to get the rules and conditions
                             TenantInfo tenantInfo = this._businessObjects.Commerces.Get(model.TenantId, CommerceKeys.TenantKey);
@@ -1063,9 +1090,9 @@ namespace YOY.BusinessAPI.Controllers
                                 {
                                     currentMainCategoryId = offer.MainCategoryId;
 
-                                    Offer updatedOffer = this._businessObjects.Offers.Put(model.Id, model.MainCategoryId, model.DealType, model.Name, model.MainHint, model.ComplementaryHint, model.Keywords, model.Code, null, model.Description, (bool)model.IsActive, model.IsExclusive,
-                                        model.IsSponsored, false, model.AvailableQuantity, -1, 0, null, model.ClaimLocation, model.Value, model.RegularValue, model.ExtraBonus, model.ExtraBonusType, model.Value,
-                                        model.Value, 0, 0, 0, imgId, targettingParams, model.ReleaseDate, model.ExpirationDate, model.RelevanceRate ?? -1);
+                                    Offer updatedOffer = this._businessObjects.Offers.Put(model.Id, model.MainCategoryId, model.DealType, model.Name, model.MainHint, model.ComplementaryHint, model.Keywords, model.Code, model.Description, model.IsExclusive,
+                                        model.IsSponsored, false, model.AvailableQuantity, -1, 0, null, model.ClaimLocation, value, regularValue, extraBonus, model.ExtraBonusType, value,
+                                        value, 0, 0, 0, targettingParams, model.ReleaseDate, model.ExpirationDate, relevanceRate);
 
 
 

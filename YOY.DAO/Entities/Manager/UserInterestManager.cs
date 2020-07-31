@@ -1002,11 +1002,11 @@ namespace YOY.DAO.Entities.Manager
             return preferences;
         }
 
-        public List<UserPreferenceData> GetPreferences(string userId, double latitude, double longitude, double radius, int pageSize, int pageNumber)
+        public List<UserPreferenceData> GetPreferences(string userId, Guid countryId, double latitude, double longitude, double radius, int pageSize, int pageNumber)
         {
             List<UserPreferenceData> preferences = null;
 
-            var query = from x in this._businessObjects.FuncsHandler.GetTenantPreferencesByGeoLocation(latitude, longitude, radius, userId, pageSize, pageNumber)
+            var query = from x in this._businessObjects.FuncsHandler.GetTenantPreferencesByGeoLocation(latitude, longitude, radius, countryId, userId, pageSize, pageNumber)
                          orderby x.Relevance descending, x.Name ascending
                          select x;
 

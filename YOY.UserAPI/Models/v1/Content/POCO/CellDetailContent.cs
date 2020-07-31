@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 
 namespace YOY.UserAPI.Models.v1.Content.POCO
 {
-    public class CellDisplayData
+    public class CellDetailContent
     {
-        public int Type { set; get; }
+        public int ContentType { set; get; }
         public Guid Id { set; get; }
         public Guid CommerceId { set; get; }
+        public string CommerceLogo { set; get; }
+        public string ExpirationDate { set; get; }
     }
 }

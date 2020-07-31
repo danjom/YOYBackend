@@ -89,6 +89,8 @@ namespace YOY.BusinessAPI.Models.v1.Deal.POCO
         [AllowNull]
         public int PurchasedCount { set; get; }
         [AllowNull]
+        public double RelevanceRate { set; get; }
+        [AllowNull]
         [DataType(DataType.DateTime)]
         public DateTime CreatedDate { set; get; }
         [AllowNull]

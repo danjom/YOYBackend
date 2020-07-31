@@ -46,8 +46,6 @@ namespace YOY.BusinessAPI.Models.v1.Deal.POCO
         [Required]
         [NotNull]
         public string Description { set; get; }
-        [AllowNull]
-        public bool? IsActive { set; get; }
         [Required]
         [NotNull]
         public bool IsExclusive { set; get; }
@@ -62,13 +60,13 @@ namespace YOY.BusinessAPI.Models.v1.Deal.POCO
         public string ClaimLocation { set; get; }
         [Required]
         [NotNull]
-        public decimal Value { set; get; }
+        public string Value { set; get; }
         [Required]
         [NotNull]
-        public decimal RegularValue { set; get; }
+        public string RegularValue { set; get; }
         [AllowNull]
         [NotNull]
-        public double ExtraBonus { set; get; }
+        public string ExtraBonus { set; get; }
         [AllowNull]
         [NotNull]
         public int ExtraBonusType { set; get; }
@@ -98,6 +96,6 @@ namespace YOY.BusinessAPI.Models.v1.Deal.POCO
         [AllowNull]
         public string DisplayImgData { set; get; }
         [Required]
-        public double? RelevanceRate { set; get; }
+        public string RelevanceRate { set; get; }
     }
 }
