@@ -23,7 +23,7 @@ namespace YOY.BusinessAPI.Controllers
     [Route("api/v{v:apiVersion}/[controller]")]
     [ApiController]
     [Authorize]
-    public class CashbackIncentiveController : ControllerBase
+    public class CashIncentiveController : ControllerBase
     {
         #region PROPERTIES_AND_RESOURCES
         // ---------------------------------------------------------------------------------------------------------------------------------------------- //
@@ -83,7 +83,7 @@ namespace YOY.BusinessAPI.Controllers
             _businessObjects = BusinessObjects.GetInstance(_tenant);
         }
 
-        private IncentiveData GetIncentiveContent(CashbackIncentive data)
+        private IncentiveData GetIncentiveContent(CashIncentive data)
         {
             IncentiveData incentive = null;
 
@@ -191,13 +191,13 @@ namespace YOY.BusinessAPI.Controllers
 
             try
             {
-                List<CashbackIncentive> incentives = this._businessObjects.CashbackIncentives.Gets(ExpiredStates.All, ActiveStates.All, ReleaseStates.All, DateTime.UtcNow, pageSize, pageNumber);
+                List<CashIncentive> incentives = this._businessObjects.CashIncentives.Gets(ExpiredStates.All, ActiveStates.All, ReleaseStates.All, DateTime.UtcNow, pageSize, pageNumber);
 
                 if (incentives?.Count > 0)
                 {
                     incentivesData = new List<IncentiveData>();
 
-                    foreach (CashbackIncentive item in incentives)
+                    foreach (CashIncentive item in incentives)
                     {
                         incentivesData.Add(GetIncentiveContent(item));
                     }
@@ -223,7 +223,7 @@ namespace YOY.BusinessAPI.Controllers
 
             try
             {
-                count = this._businessObjects.CashbackIncentives.GetCashbackIncentivesCountByDateRange(this._businessObjects.Tenant.TenantId, SearchableObjectTypes.Commerce, startDate, endDate);
+                count = this._businessObjects.CashIncentives.GetCashbackIncentivesCountByDateRange(this._businessObjects.Tenant.TenantId, SearchableObjectTypes.Commerce, startDate, endDate);
             }
             catch (Exception e)
             {
@@ -579,7 +579,7 @@ namespace YOY.BusinessAPI.Controllers
                                 double relevanceRate = model.RelevanceRate ?? -1;
 
 
-                                CashbackIncentive newIncentive = this._businessObjects.CashbackIncentives.Post(model.Type, DisplayTypes.BroadcastingAndListings, model.ApplyType, model.BenefitAmountType, model.DealType, model.MaxCombinedIncentives,
+                                CashIncentive newIncentive = this._businessObjects.CashIncentives.Post(model.Type, DisplayTypes.BroadcastingAndListings, model.ApplyType, model.BenefitAmountType, model.DealType, model.MaxCombinedIncentives,
                                     model.UnitValue, model.PreviousUnitValue, model.MinMembershipLevel, model.MinPurchasedAmount, model.PurchasedAmountBlock, model.MaxValue, model.AvailableQuantity, model.Name, model.Description, model.Keywords,
                                     model.IsSponsored, model.ValidWeekDays, validMonthDays, validHours, model.MaxUsagePerUser, model.MinPurchaseCountToUse, GeoSegmentationTypes.Country, tenantInfo.IncentiveRules, tenantInfo.IncentiveConditions,
                                     model.RelevanceRate ?? 1, model.ReleaseDate, model.ExpirationDate);
@@ -888,7 +888,7 @@ namespace YOY.BusinessAPI.Controllers
 
                                     double relevanceRate = model.RelevanceRate ?? -1;
 
-                                    CashbackIncentive updatedIncentive = this._businessObjects.CashbackIncentives.Put(model.Id, model.Type, DisplayTypes.BroadcastingAndListings, model.ApplyType, model.BenefitAmountType, model.DealType, model.MaxCombinedIncentives,
+                                    CashIncentive updatedIncentive = this._businessObjects.CashIncentives.Put(model.Id, model.Type, DisplayTypes.BroadcastingAndListings, model.ApplyType, model.BenefitAmountType, model.DealType, model.MaxCombinedIncentives,
                                     model.UnitValue, model.PreviousUnitValue, model.MinMembershipLevel, model.MinPurchasedAmount, model.PurchasedAmountBlock, model.MaxValue, model.AvailableQuantity, model.Name, model.Description, model.Keywords,
                                     model.IsSponsored, model.ValidWeekDays, validMonthDays, validHours, model.MaxUsagePerUser, model.MinPurchaseCountToUse, GeoSegmentationTypes.Country, tenantInfo.IncentiveRules, tenantInfo.IncentiveConditions,
                                     model.RelevanceRate ?? 1, model.ReleaseDate, model.ExpirationDate);
@@ -1027,11 +1027,11 @@ namespace YOY.BusinessAPI.Controllers
                 try
                 {
 
-                    ObjectStateUpdate stateUpdate = this._businessObjects.CashbackIncentives.Put(model.Id, ChangeTypes.ActiveState);
+                    ObjectStateUpdate stateUpdate = this._businessObjects.CashIncentives.Put(model.Id, ChangeTypes.ActiveState);
 
                     if (stateUpdate != null)
                     {
-                        CashbackIncentive updatedIncentive = this._businessObjects.CashbackIncentives.Get(model.Id, true);
+                        CashIncentive updatedIncentive = this._businessObjects.CashIncentives.Get(model.Id, true);
 
                         //Needs to update it to Algolia
                         if (updatedIncentive.DisplayType < DisplayTypes.BroadcastingOnly)//If the offer will be publicly accessible
@@ -1127,7 +1127,7 @@ namespace YOY.BusinessAPI.Controllers
 
                 try
                 {
-                    Guid? deletedId = this._businessObjects.CashbackIncentives.Delete(model.Id);
+                    Guid? deletedId = this._businessObjects.CashIncentives.Delete(model.Id);
 
                     if (deletedId != null)
                     {

@@ -17,6 +17,7 @@ namespace YOY.DTO.Entities.Misc.Purchase
         public decimal OfferPrice { set; get; }
         public decimal? OfferRegularPrice { set; get; }
         public Guid? OfferImgId { set; get; }
+        public string OfferImgUrl { set; get; }
         public string UserId { set; get; }
         public Guid TenantId { set; get; }
         public Guid ShoppingCartItemId { set; get; }

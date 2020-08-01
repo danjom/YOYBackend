@@ -11,7 +11,6 @@ namespace YOY.DAO.Entities.DB
         public string Name { get; set; }
         public int? Relevance { get; set; }
         public string Icon { get; set; }
-        public Guid? IconId { get; set; }
         public bool? IsActive { get; set; }
         public decimal? Score { get; set; }
         public int? OriginType { get; set; }

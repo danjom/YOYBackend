@@ -12,6 +12,7 @@ namespace YOY.DTO.Entities
         public string Name { set; get; }
         public string Description { set; get; }
         public Guid? ImageId { set; get; }
+        public string ImageUrl { set; get; }
         public Guid? TenantId { set; get; }
         public Guid CountryId { set; get; }
         public Guid? StateId { set; get; }

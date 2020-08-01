@@ -10,8 +10,12 @@ namespace YOY.DAO.Entities.DB
         public string Name { get; set; }
         public bool IsActive { get; set; }
         public Guid? Logo { get; set; }
+        public string LogoUrl { get; set; }
+        public Guid? WhiteLogo { get; set; }
+        public string WhiteLogoUrl { get; set; }
         public Guid? LandingImg { get; set; }
         public Guid? CarrouselImg { get; set; }
+        public string CarrouselImgUrl { get; set; }
         public Guid CountryId { get; set; }
         public Guid StateId { get; set; }
         public string CurrencySymbol { get; set; }

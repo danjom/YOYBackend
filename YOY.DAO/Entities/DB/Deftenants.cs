@@ -20,7 +20,7 @@ namespace YOY.DAO.Entities.DB
             DeftenantMembershipLevels = new HashSet<DeftenantMembershipLevels>();
             OltpbroadcastingLogs = new HashSet<OltpbroadcastingLogs>();
             Oltpbtlcontents = new HashSet<Oltpbtlcontents>();
-            OltpcashbackIncentives = new HashSet<OltpcashbackIncentives>();
+            OltpcashIncentives = new HashSet<OltpcashIncentives>();
             Oltpcheckins = new HashSet<Oltpcheckins>();
             OltpexternallyStoredFiles = new HashSet<OltpexternallyStoredFiles>();
             Oltpfiles = new HashSet<Oltpfiles>();
@@ -65,7 +65,7 @@ namespace YOY.DAO.Entities.DB
         public virtual ICollection<DeftenantMembershipLevels> DeftenantMembershipLevels { get; set; }
         public virtual ICollection<OltpbroadcastingLogs> OltpbroadcastingLogs { get; set; }
         public virtual ICollection<Oltpbtlcontents> Oltpbtlcontents { get; set; }
-        public virtual ICollection<OltpcashbackIncentives> OltpcashbackIncentives { get; set; }
+        public virtual ICollection<OltpcashIncentives> OltpcashIncentives { get; set; }
         public virtual ICollection<Oltpcheckins> Oltpcheckins { get; set; }
         public virtual ICollection<OltpexternallyStoredFiles> OltpexternallyStoredFiles { get; set; }
         public virtual ICollection<Oltpfiles> Oltpfiles { get; set; }

@@ -41,7 +41,6 @@ namespace YOY.UserAPI.Controllers
         /// </summary>
         private static Tenant _tenant;
         private BusinessObjects _businessObjects;
-        private ImageHandler _imgHandler;
         private readonly IStringLocalizer<SharedResources> _localizer;
 
 
@@ -60,8 +59,6 @@ namespace YOY.UserAPI.Controllers
         /// <param name="commerceId"></param>
         private void Initialize(Guid commerceId)
         {
-            if (_imgHandler == null)
-                _imgHandler = new ImageHandler();
 
             if (_tenant == null || _tenant.TenantId != commerceId)
             {
@@ -198,15 +195,13 @@ namespace YOY.UserAPI.Controllers
                         if (tenantPreferences?.Count > 0)
                         {
                             preferences.Commerces = tenantPreferences;
-                            Guid commerceLogo;
 
                             foreach (UserPreferenceData item in preferences.Commerces)
                             {
                                 if (!string.IsNullOrWhiteSpace(item.BaseImgUrl))
                                 {
-                                    commerceLogo = new Guid(item.BaseImgUrl);
 
-                                    imgUrl = this._imgHandler.GetImgUrl((Guid)commerceLogo, ImageStorages.Cloudinary, ImageRequesters.App).ImgUrl;
+                                    imgUrl = item.BaseImgUrl;
                                 }
                                 else
                                 {
@@ -220,7 +215,7 @@ namespace YOY.UserAPI.Controllers
 
 
                                 item.UnSeletedImgUrl = imgUrl;
-                                item.SelectedImgUrl += imgUrl;
+                                item.SelectedImgUrl = imgUrl;
 
                                 item.BaseImgUrl = null;//to avoid it to go in the payload
                             }
@@ -257,15 +252,13 @@ namespace YOY.UserAPI.Controllers
                         if (tenantPreferences?.Count > 0)
                         {
                             preferences.Commerces = tenantPreferences;
-                            Guid commerceLogo;
 
                             foreach (UserPreferenceData item in preferences.Commerces)
                             {
                                 if (!string.IsNullOrWhiteSpace(item.BaseImgUrl))
                                 {
-                                    commerceLogo = new Guid(item.BaseImgUrl);
 
-                                    imgUrl = this._imgHandler.GetImgUrl((Guid)commerceLogo, ImageStorages.Cloudinary, ImageRequesters.App).ImgUrl;
+                                    imgUrl = item.BaseImgUrl;
                                 }
                                 else
                                 {

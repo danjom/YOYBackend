@@ -118,7 +118,7 @@ namespace YOY.DAO.Entities
         /// <summary>
         /// This property provides functionality to manage the cashback incentives. Each tenants uses 
         /// </summary>
-        private CashbackIncentiveManager _cashbackIncentiveManager;
+        private CashIncentiveManager _cashIncentiveManager;
 
         // PRODUCT CATEGORY MANAGER --------------------------------------------------------------------------------------------------------------------------------- //
         /// <summary>
@@ -736,16 +736,16 @@ namespace YOY.DAO.Entities
         /// <summary>
         /// This dynamic loader exposes the  cashback incentive resource
         /// </summary>
-        public CashbackIncentiveManager CashbackIncentives
+        public CashIncentiveManager CashIncentives
         {
             get
             {
-                if (this._cashbackIncentiveManager != null)
-                    return _cashbackIncentiveManager;
+                if (this._cashIncentiveManager != null)
+                    return _cashIncentiveManager;
                 else
                 {
-                    this._cashbackIncentiveManager = new CashbackIncentiveManager(this);
-                    return _cashbackIncentiveManager;
+                    this._cashIncentiveManager = new CashIncentiveManager(this);
+                    return _cashIncentiveManager;
                 } // ELSE ENDS
             } // GET ENDS
         } // PROPERTY CASHBACK INCENTIVES ENDS ------------------------------------------------------------------------------------------------------------------------ //

@@ -420,6 +420,7 @@ namespace YOY.DAO.Entities.Manager
                             ExpirationDate = item.ExpirationDate,
                             TargettingParams = item.TargettingParams,
                             DisplayImgId = item.DisplayImageId,
+                            DisplayImgUrl = item.DisplayImageUrl,
                             Rules = item.Rules ?? Resources.NoRulesAvailable,
                             Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
                             ClaimInstructions = item.ClaimInstructions ?? Resources.NoClaimInstructionsAvailable,
@@ -562,6 +563,7 @@ namespace YOY.DAO.Entities.Manager
                             ExpirationDate = item.ExpirationDate,
                             TargettingParams = item.TargettingParams,
                             DisplayImgId = item.DisplayImageId,
+                            DisplayImgUrl = item.DisplayImageUrl,
                             Rules = item.Rules ?? Resources.NoRulesAvailable,
                             Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
                             ClaimInstructions = item.ClaimInstructions ?? Resources.NoClaimInstructionsAvailable,
@@ -1508,6 +1510,7 @@ namespace YOY.DAO.Entities.Manager
                             ExpirationDate = item.ExpirationDate,
                             TargettingParams = item.TargettingParams,
                             DisplayImgId = item.DisplayImageId,
+                            DisplayImgUrl = item.DisplayImageUrl,
                             Rules = item.Rules ?? Resources.NoRulesAvailable,
                             Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
                             ClaimInstructions = item.ClaimInstructions ?? Resources.NoClaimInstructionsAvailable,
@@ -2460,6 +2463,7 @@ namespace YOY.DAO.Entities.Manager
                             ExpirationDate = item.ExpirationDate,
                             TargettingParams = item.TargettingParams,
                             DisplayImgId = item.DisplayImageId,
+                            DisplayImgUrl = item.DisplayImageUrl,
                             Rules = item.Rules ?? Resources.NoRulesAvailable,
                             Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
                             ClaimInstructions = item.ClaimInstructions ?? Resources.NoClaimInstructionsAvailable,
@@ -2760,6 +2764,7 @@ namespace YOY.DAO.Entities.Manager
                             ExpirationDate = item.ExpirationDate,
                             TargettingParams = item.TargettingParams,
                             DisplayImgId = item.DisplayImageId,
+                            DisplayImgUrl = item.DisplayImageUrl,
                             Rules = item.Rules ?? Resources.NoRulesAvailable,
                             Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
                             ClaimInstructions = item.ClaimInstructions ?? Resources.NoClaimInstructionsAvailable,
@@ -2898,6 +2903,7 @@ namespace YOY.DAO.Entities.Manager
                             ExpirationDate = item.ExpirationDate,
                             TargettingParams = item.TargettingParams,
                             DisplayImgId = item.DisplayImageId,
+                            DisplayImgUrl = item.DisplayImageUrl,
                             Rules = item.Rules ?? Resources.NoRulesAvailable,
                             Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
                             ClaimInstructions = item.ClaimInstructions ?? Resources.NoClaimInstructionsAvailable,
@@ -3031,6 +3037,7 @@ namespace YOY.DAO.Entities.Manager
                             ExpirationDate = item.ExpirationDate,
                             TargettingParams = item.TargettingParams,
                             DisplayImgId = item.DisplayImageId,
+                            DisplayImgUrl = item.DisplayImageUrl,
                             Rules = item.Rules ?? Resources.NoRulesAvailable,
                             Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
                             ClaimInstructions = item.ClaimInstructions ?? Resources.NoClaimInstructionsAvailable,
@@ -3323,6 +3330,7 @@ namespace YOY.DAO.Entities.Manager
                             ExpirationDate = item.ExpirationDate,
                             TargettingParams = item.TargettingParams,
                             DisplayImgId = item.DisplayImageId,
+                            DisplayImgUrl = item.DisplayImageUrl,
                             Rules = item.Rules ?? Resources.NoRulesAvailable,
                             Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
                             ClaimInstructions = item.ClaimInstructions ?? Resources.NoClaimInstructionsAvailable,
@@ -3444,6 +3452,7 @@ namespace YOY.DAO.Entities.Manager
                         ExpirationDate = item.ExpirationDate,
                         TargettingParams = item.TargettingParams,
                         DisplayImgId = item.DisplayImageId,
+                        DisplayImgUrl = item.DisplayImageUrl,
                         Rules = item.Rules ?? Resources.NoRulesAvailable,
                         Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
                         ClaimInstructions = item.ClaimInstructions ?? Resources.NoClaimInstructionsAvailable,
@@ -3555,6 +3564,7 @@ namespace YOY.DAO.Entities.Manager
                         ExpirationDate = item.ExpirationDate,
                         TargettingParams = item.TargettingParams,
                         DisplayImgId = item.DisplayImageId,
+                        DisplayImgUrl = item.DisplayImageUrl,
                         Rules = item.Rules ?? Resources.NoRulesAvailable,
                         Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
                         ClaimInstructions = item.ClaimInstructions ?? Resources.NoClaimInstructionsAvailable,
@@ -3792,6 +3802,7 @@ namespace YOY.DAO.Entities.Manager
                         ExpirationDate = newOfferView.ExpirationDate,
                         TargettingParams = newOfferView.TargettingParams,
                         DisplayImgId = newOfferView.DisplayImageId,
+                        DisplayImgUrl = newOffer.DisplayImageUrl,
                         Rules = newOfferView.Rules ?? Resources.NoRulesAvailable,
                         Conditions = newOfferView.Conditions ?? Resources.NoConditionsAvailable,
                         ClaimInstructions = newOfferView.ClaimInstructions ?? Resources.NoClaimInstructionsAvailable,
@@ -4043,6 +4054,7 @@ namespace YOY.DAO.Entities.Manager
                             ExpirationDate = currentOfferView.ExpirationDate,
                             TargettingParams = currentOfferView.TargettingParams,
                             DisplayImgId = currentOfferView.DisplayImageId,
+                            DisplayImgUrl = currentOffer.DisplayImageUrl,
                             Rules = currentOfferView.Rules ?? Resources.NoRulesAvailable,
                             Conditions = currentOfferView.Conditions ?? Resources.NoConditionsAvailable,
                             ClaimInstructions = currentOfferView.ClaimInstructions ?? Resources.NoClaimInstructionsAvailable,
@@ -4207,7 +4219,7 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="contentType"></param>
         /// <param name="imgType"></param>
         /// <returns></returns>
-        public Guid? Put(Guid id, int offerType, Guid imageId, int imgType)
+        public Guid? Put(Guid id, int offerType, Guid imageId, string imageUrl, int imgType)
         {
             Guid? currentImg = null;
 
@@ -4225,6 +4237,7 @@ namespace YOY.DAO.Entities.Manager
                         case OfferImgTypes.DisplayImg:
                             currentImg = offer.DisplayImageId;
                             offer.DisplayImageId = imageId;
+                            offer.DisplayImageUrl = imageUrl;
                             offer.UpdatedDate = DateTime.UtcNow;
                             break;
                         case OfferImgTypes.Code:
@@ -4293,6 +4306,7 @@ namespace YOY.DAO.Entities.Manager
 
         #endregion
 
+/*
         #region OFFERSFULLDATA
 
         /// <summary>
@@ -4403,7 +4417,7 @@ namespace YOY.DAO.Entities.Manager
                                             ReleaseDate = item.ReleaseDate,
                                             ExpirationDate = item.ExpirationDate,
                                             TargettingParams = item.TargettingParams,
-                                            DisplayImgId = item.DisplayImageId,
+                                            DisplayImgId = item.DisplayImageUrl,
                                             Rules = item.Rules ?? Resources.NoRulesAvailable,
                                             Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
                                             ClaimInstructions = item.ClaimInstructions ?? Resources.NoClaimInstructionsAvailable,
@@ -6016,6 +6030,7 @@ namespace YOY.DAO.Entities.Manager
         }
 
         #endregion
+        */
 
         #region OFFERS METRICS
 

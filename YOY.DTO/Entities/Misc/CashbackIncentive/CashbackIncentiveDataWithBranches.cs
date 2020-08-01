@@ -7,7 +7,7 @@ namespace YOY.DTO.Entities.Misc.CashbackIncentive
 {
     public class CashbackIncentiveDataWithBranches
     {
-        public Entities.CashbackIncentive CashbackIncentive { set; get; }
+        public Entities.CashIncentive CashbackIncentive { set; get; }
         public BasicTenantData Tenant { set; get;}
         public List<BasicBranchData> Branches { set; get; }
         public BasicUserPreferenceData Preference { set; get; }

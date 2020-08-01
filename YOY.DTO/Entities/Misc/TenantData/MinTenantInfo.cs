@@ -12,7 +12,11 @@ namespace YOY.DTO.Entities.Misc.TenantData
         public Guid CountryId { set; get; }
         public string CountryName { set; get; }
         public Guid? Logo { set; get; }
+        public string LogoUrl { set; get; }
+        public Guid? WhiteLogo { set; get; }
+        public string WhiteLogoUrl { set; get; }
         public Guid? CarrouselImgId { set; get; }
+        public string CarrouselImgUrl { set; get; }
         public Guid? LandingImg { set; get; }
         public string Name { set; get; }
         public string CategoryName { set; get; }

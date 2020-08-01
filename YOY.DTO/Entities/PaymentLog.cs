@@ -21,8 +21,8 @@ namespace YOY.DTO.Entities
         public decimal PaymentAmount { set; get; }
         public decimal DebitedAmount { set; get; }
         public bool CashbackUsedAsPayment { set; get; }
-        public bool CashbackIncentiveApplied { set; get; }
-        public Guid? AppliedCashbackIncentiveId { set; get; }
+        public bool CashIncentiveApplied { set; get; }
+        public Guid? AppliedCashIncentiveId { set; get; }
         public bool UserEarningsIncreaserApplied { set; get; }
         public Guid? AppliedUserEarningsIncreaserId { set; get; }
         public decimal? EarningsIncreasementAmount { set; get; }

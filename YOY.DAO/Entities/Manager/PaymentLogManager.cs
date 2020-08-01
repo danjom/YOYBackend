@@ -109,14 +109,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -126,14 +126,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -186,14 +186,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -203,14 +203,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -266,14 +266,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -283,14 +283,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -343,14 +343,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -360,14 +360,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.UserId == userId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -427,14 +427,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -444,14 +444,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -504,14 +504,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -521,14 +521,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -584,14 +584,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -601,14 +601,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -661,14 +661,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -678,14 +678,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.BranchId == branchId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -747,14 +747,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -764,14 +764,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -824,14 +824,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -841,14 +841,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -904,14 +904,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -921,14 +921,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -981,14 +981,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.UserId == userId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.UserId == userId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.UserId == userId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.UserId == userId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -998,14 +998,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.UserId == userId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.UserId == userId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.UserId == userId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.UserId == userId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1064,14 +1064,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1081,14 +1081,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1141,14 +1141,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1158,14 +1158,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1221,14 +1221,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1238,14 +1238,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1298,14 +1298,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1315,14 +1315,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.TenantId == tenantId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.TenantId == tenantId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1387,14 +1387,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1404,14 +1404,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1464,14 +1464,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1481,14 +1481,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1544,14 +1544,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1561,14 +1561,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1621,14 +1621,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.UserId == userId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.UserId == userId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.UserId == userId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.UserId == userId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1638,14 +1638,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.UserId == userId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.UserId == userId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.UserId == userId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.UserId == userId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1705,14 +1705,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1722,14 +1722,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1782,14 +1782,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1799,14 +1799,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1862,14 +1862,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1879,14 +1879,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1939,14 +1939,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -1956,14 +1956,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.BranchId == branchId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.BranchId == branchId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -2025,14 +2025,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -2042,14 +2042,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -2102,14 +2102,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -2119,14 +2119,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.UserId == userId && x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -2182,14 +2182,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -2199,14 +2199,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -2259,14 +2259,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.UserId == userId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.UserId == userId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.UserId == userId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.UserId == userId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -2276,14 +2276,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.UserId == userId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.UserId == userId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.UserId == userId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.UserId == userId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -2342,14 +2342,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -2359,14 +2359,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.LiquidationMoneyTransferId == transferId && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -2419,14 +2419,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -2436,14 +2436,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.LiquidationMoneyTransferId == transferId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.LiquidationMoneyTransferId == transferId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -2499,14 +2499,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -2516,14 +2516,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -2576,14 +2576,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.AppliedCashbackIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.AppliedCashIncentiveId == appliedCashbackId && x.AppliedUserEarningsIncreaserId == appliedUserIncreaserEarningsId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -2593,14 +2593,14 @@ namespace YOY.DAO.Entities.Manager
                                             if (status != PaymentStatuses.All)
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.AppliedCashbackIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.AppliedCashIncentiveId == appliedCashbackId && x.Status == status && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
                                                 query = (from x in this._businessObjects.Context.OltppaymentLogs
-                                                         where x.AppliedCashbackIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
+                                                         where x.AppliedCashIncentiveId == appliedCashbackId && x.CreatedDate >= minDate && x.CreatedDate <= maxDate
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
@@ -2671,8 +2671,8 @@ namespace YOY.DAO.Entities.Manager
                             PaymentAmount = item.PaymentAmount,
                             DebitedAmount = item.DebitedAmount,
                             CashbackUsedAsPayment = item.CashbackUsedAsPayment,
-                            CashbackIncentiveApplied = item.CashbackIncentiveApplied,
-                            AppliedCashbackIncentiveId = item.AppliedCashbackIncentiveId,
+                            CashIncentiveApplied = item.CashIncentiveApplied,
+                            AppliedCashIncentiveId = item.AppliedCashIncentiveId,
                             UserEarningsIncreaserApplied = item.UserEarningsIncreaserApplied,
                             AppliedUserEarningsIncreaserId = item.AppliedUserEarningsIncreaserId,
                             EarningsIncreasementAmount = item.EarningsIncreasementAmount,
@@ -2734,8 +2734,8 @@ namespace YOY.DAO.Entities.Manager
                             PaymentAmount = item.PaymentAmount,
                             DebitedAmount = item.DebitedAmount,
                             CashbackUsedAsPayment = item.CashbackUsedAsPayment,
-                            CashbackIncentiveApplied = item.CashbackIncentiveApplied,
-                            AppliedCashbackIncentiveId = item.AppliedCashbackIncentiveId,
+                            CashIncentiveApplied = item.CashIncentiveApplied,
+                            AppliedCashIncentiveId = item.AppliedCashIncentiveId,
                             UserEarningsIncreaserApplied = item.UserEarningsIncreaserApplied,
                             AppliedUserEarningsIncreaserId = item.AppliedUserEarningsIncreaserId,
                             EarningsIncreasementAmount = item.EarningsIncreasementAmount,
@@ -2768,7 +2768,7 @@ namespace YOY.DAO.Entities.Manager
         }
 
         public PaymentLog Post(Guid tenantId, Guid? branchId, string userId, Guid? liquidationMoneyTransferId, Guid? referenceId, int referenceType, int currencyType, decimal paymentAmount,
-            decimal debitedAmount, bool cashbackUsedAsPayment, bool cashbackIncentiveApplied, Guid? appliedCashbackIncentiveId, bool userEarningsApplied, Guid? appliedUserEarningsIncreaserId,
+            decimal debitedAmount, bool cashbackUsedAsPayment, bool cashIncentiveApplied, Guid? appliedCashIncentiveId, bool userEarningsApplied, Guid? appliedUserEarningsIncreaserId,
             decimal earningsIncreasementAmount, double cashbackPercentage, decimal cashbackTotalAmount, int status, int resultCode, string resultMsg, DateTime? liquidationDate, int paymentGateway, Guid? paymentInfoId)
         {
             PaymentLog paymentLog;
@@ -2787,8 +2787,8 @@ namespace YOY.DAO.Entities.Manager
                     PaymentAmount = paymentAmount,
                     DebitedAmount = debitedAmount,
                     CashbackUsedAsPayment = cashbackUsedAsPayment,
-                    CashbackIncentiveApplied = cashbackIncentiveApplied,
-                    AppliedCashbackIncentiveId = appliedCashbackIncentiveId,
+                    CashIncentiveApplied = cashIncentiveApplied,
+                    AppliedCashIncentiveId = appliedCashIncentiveId,
                     UserEarningsIncreaserApplied = userEarningsApplied,
                     AppliedUserEarningsIncreaserId = appliedUserEarningsIncreaserId,
                     EarningsIncreasementAmount = earningsIncreasementAmount,
@@ -2822,8 +2822,8 @@ namespace YOY.DAO.Entities.Manager
                     PaymentAmount = newPaymentLog.PaymentAmount,
                     DebitedAmount = newPaymentLog.DebitedAmount,
                     CashbackUsedAsPayment = newPaymentLog.CashbackUsedAsPayment,
-                    CashbackIncentiveApplied = newPaymentLog.CashbackIncentiveApplied,
-                    AppliedCashbackIncentiveId = newPaymentLog.AppliedCashbackIncentiveId,
+                    CashIncentiveApplied = newPaymentLog.CashIncentiveApplied,
+                    AppliedCashIncentiveId = newPaymentLog.AppliedCashIncentiveId,
                     UserEarningsIncreaserApplied = newPaymentLog.UserEarningsIncreaserApplied,
                     AppliedUserEarningsIncreaserId = newPaymentLog.AppliedUserEarningsIncreaserId,
                     EarningsIncreasementAmount = newPaymentLog.EarningsIncreasementAmount,

@@ -11,7 +11,7 @@ using YOY.DTO.Entities.Misc.Branch;
 
 namespace YOY.DAO.Entities.Manager
 {
-    public class CashbackIncentiveManager
+    public class CashIncentiveManager
     {
         #region PROPERTIES_AND_RESOURCES
 
@@ -138,9 +138,9 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="releaseState"></param>
         /// <param name="dateTime"></param>
         /// <returns></returns>
-        public List<CashbackIncentive> Gets(int expiredState, int activeState, int releaseState, DateTime dateTime, int pageSize, int pageNumber)
+        public List<CashIncentive> Gets(int expiredState, int activeState, int releaseState, DateTime dateTime, int pageSize, int pageNumber)
         {
-            List<CashbackIncentive> cashbackIncentives = new List<CashbackIncentive>();
+            List<CashIncentive> cashbackIncentives = new List<CashIncentive>();
 
             yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();//this context is created because this call is part of an async logic
 
@@ -157,19 +157,19 @@ namespace YOY.DAO.Entities.Manager
                                 switch (releaseState)
                                 {
                                     case ReleaseStates.All:
-                                        query = (from x in context.OltpcashbackIncentives
+                                        query = (from x in context.OltpcashIncentives
                                                  where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.Released:
-                                        query = (from x in context.OltpcashbackIncentives
+                                        query = (from x in context.OltpcashIncentives
                                                  where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.ReleaseDate <= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.NotReleased:
-                                        query = (from x in context.OltpcashbackIncentives
+                                        query = (from x in context.OltpcashIncentives
                                                  where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.ReleaseDate > dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -181,19 +181,19 @@ namespace YOY.DAO.Entities.Manager
                                 switch (releaseState)
                                 {
                                     case ReleaseStates.All:
-                                        query = (from x in context.OltpcashbackIncentives
+                                        query = (from x in context.OltpcashIncentives
                                                  where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.Released:
-                                        query = (from x in context.OltpcashbackIncentives
+                                        query = (from x in context.OltpcashIncentives
                                                  where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ReleaseDate <= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.NotReleased:
-                                        query = (from x in context.OltpcashbackIncentives
+                                        query = (from x in context.OltpcashIncentives
                                                  where x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ReleaseDate.Date > dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -205,19 +205,19 @@ namespace YOY.DAO.Entities.Manager
                                 switch (releaseState)
                                 {
                                     case ReleaseStates.All:
-                                        query = (from x in context.OltpcashbackIncentives
+                                        query = (from x in context.OltpcashIncentives
                                                  where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.Released:
-                                        query = (from x in context.OltpcashbackIncentives
+                                        query = (from x in context.OltpcashIncentives
                                                  where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ReleaseDate <= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.NotReleased:
-                                        query = (from x in context.OltpcashbackIncentives
+                                        query = (from x in context.OltpcashIncentives
                                                  where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ReleaseDate > dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -232,19 +232,19 @@ namespace YOY.DAO.Entities.Manager
                         switch (activeState)
                         {
                             case ActiveStates.All:
-                                query = (from x in context.OltpcashbackIncentives
+                                query = (from x in context.OltpcashIncentives
                                          where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate < dateTime
                                          orderby x.CreatedDate descending
                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                 break;
                             case ActiveStates.Active:
-                                query = (from x in context.OltpcashbackIncentives
+                                query = (from x in context.OltpcashIncentives
                                          where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate < dateTime
                                          orderby x.CreatedDate descending
                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                 break;
                             case ActiveStates.Inactive:
-                                query = (from x in context.OltpcashbackIncentives
+                                query = (from x in context.OltpcashIncentives
                                          where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate < dateTime
                                          orderby x.CreatedDate descending
                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -259,19 +259,19 @@ namespace YOY.DAO.Entities.Manager
                                 switch (releaseState)
                                 {
                                     case ReleaseStates.All:
-                                        query = (from x in context.OltpcashbackIncentives
+                                        query = (from x in context.OltpcashIncentives
                                                  where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.Released:
-                                        query = (from x in context.OltpcashbackIncentives
+                                        query = (from x in context.OltpcashIncentives
                                                  where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime && x.ReleaseDate <= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.NotReleased:
-                                        query = (from x in context.OltpcashbackIncentives
+                                        query = (from x in context.OltpcashIncentives
                                                  where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime && x.ReleaseDate > dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -283,19 +283,19 @@ namespace YOY.DAO.Entities.Manager
                                 switch (releaseState)
                                 {
                                     case ReleaseStates.All:
-                                        query = (from x in context.OltpcashbackIncentives
+                                        query = (from x in context.OltpcashIncentives
                                                  where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.Released:
-                                        query = (from x in context.OltpcashbackIncentives
+                                        query = (from x in context.OltpcashIncentives
                                                  where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime && x.ReleaseDate <= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.NotReleased:
-                                        query = (from x in context.OltpcashbackIncentives
+                                        query = (from x in context.OltpcashIncentives
                                                  where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime && x.ReleaseDate.Date > dateTime.Date
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -307,19 +307,19 @@ namespace YOY.DAO.Entities.Manager
                                 switch (releaseState)
                                 {
                                     case ReleaseStates.All:
-                                        query = (from x in context.OltpcashbackIncentives
+                                        query = (from x in context.OltpcashIncentives
                                                  where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.Released:
-                                        query = (from x in context.OltpcashbackIncentives
+                                        query = (from x in context.OltpcashIncentives
                                                  where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate.Date >= dateTime && x.ReleaseDate <= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.NotReleased:
-                                        query = (from x in context.OltpcashbackIncentives
+                                        query = (from x in context.OltpcashIncentives
                                                  where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime && x.ReleaseDate > dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -335,11 +335,11 @@ namespace YOY.DAO.Entities.Manager
 
                 if (query != null)
                 {
-                    CashbackIncentive cashbackIncentive = null;
-                    foreach (OltpcashbackIncentives item in query)
+                    CashIncentive cashbackIncentive = null;
+                    foreach (OltpcashIncentives item in query)
                     {
 
-                        cashbackIncentive = new CashbackIncentive
+                        cashbackIncentive = new CashIncentive
                         {
                             Id = item.Id,
                             TenantId = item.TenantId,
@@ -416,9 +416,9 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="activeState"></param>
         /// <param name="releaseState"></param>
         /// <returns></returns>
-        public List<CashbackIncentive> Gets(int dealType, int expiredState, int activeState, int releaseState, DateTime dateTime, bool filterByTenant, int pageSize, int pageNumber)
+        public List<CashIncentive> Gets(int dealType, int expiredState, int activeState, int releaseState, DateTime dateTime, bool filterByTenant, int pageSize, int pageNumber)
         {
-            List<CashbackIncentive> cashbackIncentives = new List<CashbackIncentive>();
+            List<CashIncentive> cashbackIncentives = new List<CashIncentive>();
 
             try
             {
@@ -437,14 +437,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.DealType == dealType
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -454,14 +454,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.DealType == dealType
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -475,14 +475,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.DealType == dealType && x.ReleaseDate <= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.ReleaseDate <= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -492,14 +492,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.DealType == dealType && x.ReleaseDate <= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.ReleaseDate <= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -512,14 +512,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.DealType == dealType && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -529,14 +529,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.DealType == dealType && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -555,14 +555,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.DealType == dealType
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -572,14 +572,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive && x.DealType == dealType
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -592,14 +592,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.DealType == dealType && x.ReleaseDate <= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ReleaseDate <= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -609,14 +609,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive && x.DealType == dealType && x.ReleaseDate <= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive && x.ReleaseDate <= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -630,14 +630,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.DealType == dealType && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -647,14 +647,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive && x.DealType == dealType && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -674,14 +674,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.DealType == dealType
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -691,14 +691,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive && x.DealType == dealType
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -711,14 +711,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.DealType == dealType && x.ReleaseDate <= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ReleaseDate <= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -728,14 +728,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive && x.DealType == dealType && x.ReleaseDate <= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive && x.ReleaseDate <= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -748,14 +748,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.DealType == dealType && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -765,14 +765,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive && x.DealType == dealType && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -794,14 +794,14 @@ namespace YOY.DAO.Entities.Manager
                                 {
                                     if (dealType != DealTypes.All)
                                     {
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.DealType == dealType && x.ExpirationDate < dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                     }
                                     else
                                     {
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate < dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -811,14 +811,14 @@ namespace YOY.DAO.Entities.Manager
                                 {
                                     if (dealType != DealTypes.All)
                                     {
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.DealType == dealType && x.ExpirationDate < dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                     }
                                     else
                                     {
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.ExpirationDate < dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -830,14 +830,14 @@ namespace YOY.DAO.Entities.Manager
                                 {
                                     if (dealType != DealTypes.All)
                                     {
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.DealType == dealType && x.ExpirationDate < dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                     }
                                     else
                                     {
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate < dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -847,14 +847,14 @@ namespace YOY.DAO.Entities.Manager
                                 {
                                     if (dealType != DealTypes.All)
                                     {
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.IsActive && x.DealType == dealType && x.ExpirationDate < dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                     }
                                     else
                                     {
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.IsActive && x.ExpirationDate < dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -867,14 +867,14 @@ namespace YOY.DAO.Entities.Manager
                                 {
                                     if (dealType != DealTypes.All)
                                     {
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.DealType == dealType && x.ExpirationDate < dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                     }
                                     else
                                     {
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate < dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -884,14 +884,14 @@ namespace YOY.DAO.Entities.Manager
                                 {
                                     if (dealType != DealTypes.All)
                                     {
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && !x.IsActive && x.DealType == dealType && x.ExpirationDate < dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                     }
                                     else
                                     {
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && !x.IsActive && x.ExpirationDate < dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -913,14 +913,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.DealType == dealType && x.ExpirationDate >= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -930,14 +930,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.DealType == dealType && x.ExpirationDate >= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.ExpirationDate >= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -950,14 +950,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.DealType == dealType && x.ExpirationDate >= dateTime && x.ReleaseDate <= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime && x.ReleaseDate <= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -967,14 +967,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.DealType == dealType && x.ExpirationDate >= dateTime && x.ReleaseDate <= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.ExpirationDate >= dateTime && x.ReleaseDate <= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -987,14 +987,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.DealType == dealType && x.ExpirationDate >= dateTime && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1004,14 +1004,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.DealType == dealType && x.ExpirationDate >= dateTime && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.ExpirationDate >= dateTime && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1030,14 +1030,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.DealType == dealType && x.ExpirationDate >= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1047,14 +1047,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive && x.DealType == dealType && x.ExpirationDate >= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive && x.ExpirationDate >= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1067,14 +1067,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.DealType == dealType && x.ExpirationDate >= dateTime && x.ReleaseDate <= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime && x.ReleaseDate <= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1084,14 +1084,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive && x.DealType == dealType && x.ExpirationDate >= dateTime && x.ReleaseDate <= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive && x.ExpirationDate >= dateTime && x.ReleaseDate <= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1104,14 +1104,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.DealType == dealType && x.ExpirationDate >= dateTime && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1121,14 +1121,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive && x.DealType == dealType && x.ExpirationDate >= dateTime && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && x.IsActive && x.ExpirationDate >= dateTime && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1147,14 +1147,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.DealType == dealType && x.ExpirationDate >= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1164,14 +1164,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive && x.DealType == dealType && x.ExpirationDate >= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive && x.ExpirationDate >= dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1184,14 +1184,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.DealType == dealType && x.ExpirationDate >= dateTime && x.ReleaseDate.Date <= dateTime.Date
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime && x.ReleaseDate.Date <= dateTime.Date
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1201,14 +1201,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive && x.DealType == dealType && x.ExpirationDate >= dateTime && x.ReleaseDate.Date <= dateTime.Date
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive && x.ExpirationDate >= dateTime && x.ReleaseDate.Date <= dateTime.Date
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1221,14 +1221,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.DealType == dealType && x.ExpirationDate >= dateTime && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1238,14 +1238,14 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             if (dealType != DealTypes.All)
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive && x.DealType == dealType && x.ExpirationDate >= dateTime && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                             }
                                             else
                                             {
-                                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                          where !x.Deleted && !x.IsActive && x.ExpirationDate >= dateTime && x.ReleaseDate > dateTime
                                                          orderby x.CreatedDate descending
                                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1264,10 +1264,10 @@ namespace YOY.DAO.Entities.Manager
 
                 if (query != null)
                 {
-                    CashbackIncentive cashbackIncentive = null;
-                    foreach (OltpcashbackIncentives item in query)
+                    CashIncentive cashbackIncentive = null;
+                    foreach (OltpcashIncentives item in query)
                     {
-                        cashbackIncentive = new CashbackIncentive
+                        cashbackIncentive = new CashIncentive
                         {
                             Id = item.Id,
                             TenantId = item.TenantId,
@@ -1343,9 +1343,9 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="activeState"></param>
         /// <param name="releaseState"></param>
         /// <returns></returns>
-        public List<CashbackIncentive> Gets(Guid tenantId, int expiredState, int activeState, int releaseState, DateTime dateTime, int pageSize, int pageNumber)
+        public List<CashIncentive> Gets(Guid tenantId, int expiredState, int activeState, int releaseState, DateTime dateTime, int pageSize, int pageNumber)
         {
-            List<CashbackIncentive> cashbackIncentives = new List<CashbackIncentive>();
+            List<CashIncentive> cashbackIncentives = new List<CashIncentive>();
 
             try
             {
@@ -1360,19 +1360,19 @@ namespace YOY.DAO.Entities.Manager
                                 switch (releaseState)
                                 {
                                     case ReleaseStates.All:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.TenantId == tenantId
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.Released:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where x.TenantId == tenantId && x.ReleaseDate <= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.NotReleased:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.TenantId == tenantId && x.ReleaseDate > dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1384,19 +1384,19 @@ namespace YOY.DAO.Entities.Manager
                                 switch (releaseState)
                                 {
                                     case ReleaseStates.All:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.TenantId == tenantId && x.IsActive
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.Released:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.TenantId == tenantId && x.IsActive && x.ReleaseDate <= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.NotReleased:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.TenantId == tenantId && x.IsActive && x.ReleaseDate > dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1408,19 +1408,19 @@ namespace YOY.DAO.Entities.Manager
                                 switch (releaseState)
                                 {
                                     case ReleaseStates.All:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && !x.IsActive && x.TenantId == tenantId
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.Released:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && !x.IsActive && x.TenantId == tenantId && x.ReleaseDate <= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.NotReleased:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && !x.IsActive && x.TenantId == tenantId && x.ReleaseDate > dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1435,19 +1435,19 @@ namespace YOY.DAO.Entities.Manager
                         switch (activeState)
                         {
                             case ActiveStates.All:
-                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                          where !x.Deleted && x.TenantId == tenantId && x.ExpirationDate < dateTime
                                          orderby x.CreatedDate descending
                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                 break;
                             case ActiveStates.Active:
-                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                          where !x.Deleted && x.IsActive && x.TenantId == tenantId && x.ExpirationDate < dateTime
                                          orderby x.CreatedDate descending
                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                 break;
                             case ActiveStates.Inactive:
-                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                          where !x.Deleted && !x.IsActive && x.TenantId == tenantId && x.ExpirationDate < dateTime
                                          orderby x.CreatedDate descending
                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1462,19 +1462,19 @@ namespace YOY.DAO.Entities.Manager
                                 switch (releaseState)
                                 {
                                     case ReleaseStates.All:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.TenantId == tenantId && x.ExpirationDate >= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.Released:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.TenantId == tenantId && x.ExpirationDate >= dateTime && x.ReleaseDate <= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.NotReleased:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.TenantId == tenantId && x.ExpirationDate >= dateTime && x.ReleaseDate > dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1486,19 +1486,19 @@ namespace YOY.DAO.Entities.Manager
                                 switch (releaseState)
                                 {
                                     case ReleaseStates.All:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.IsActive && x.TenantId == tenantId && x.ExpirationDate >= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.Released:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.IsActive && x.TenantId == tenantId && x.ExpirationDate >= dateTime && x.ReleaseDate <= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.NotReleased:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.IsActive && x.TenantId == tenantId && x.ExpirationDate >= dateTime && (DateTime)x.ReleaseDate > dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1510,19 +1510,19 @@ namespace YOY.DAO.Entities.Manager
                                 switch (releaseState)
                                 {
                                     case ReleaseStates.All:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && !x.IsActive && x.TenantId == tenantId && x.ExpirationDate >= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.Released:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && !x.IsActive && x.TenantId == tenantId && x.ExpirationDate >= dateTime && x.ReleaseDate <= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.NotReleased:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && !x.IsActive && x.TenantId == tenantId && x.ExpirationDate >= dateTime && x.ReleaseDate > dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1538,10 +1538,10 @@ namespace YOY.DAO.Entities.Manager
 
                 if (query != null)
                 {
-                    CashbackIncentive cashbackIncentive = null;
-                    foreach (OltpcashbackIncentives item in query)
+                    CashIncentive cashbackIncentive = null;
+                    foreach (OltpcashIncentives item in query)
                     {
-                        cashbackIncentive = new CashbackIncentive
+                        cashbackIncentive = new CashIncentive
                         {
                             Id = item.Id,
                             TenantId = item.TenantId,
@@ -1617,9 +1617,9 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="activeState"></param>
         /// <param name="dateTime"></param>
         /// <returns></returns>
-        public List<CashbackIncentive> Gets(decimal value, int activeState, DateTime dateTime, int pageSize, int pageNumber)
+        public List<CashIncentive> Gets(decimal value, int activeState, DateTime dateTime, int pageSize, int pageNumber)
         {
-            List<CashbackIncentive> cashbackIncentives = new List<CashbackIncentive>();
+            List<CashIncentive> cashbackIncentives = new List<CashIncentive>();
 
             try
             {
@@ -1629,19 +1629,19 @@ namespace YOY.DAO.Entities.Manager
                 switch (activeState)
                 {
                     case ActiveStates.All:
-                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                  where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.UnitValue <= value && x.ExpirationDate >= dateTime.Date && x.ReleaseDate <= dateTime
                                  orderby x.CreatedDate descending
                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                         break;
                     case ActiveStates.Active:
-                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                  where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.UnitValue <= value && x.ExpirationDate >= dateTime && x.ReleaseDate <= dateTime
                                  orderby x.CreatedDate descending
                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                         break;
                     case ActiveStates.Inactive:
-                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                  where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.UnitValue <= value && x.ExpirationDate >= dateTime && x.ReleaseDate <= dateTime
                                  orderby x.CreatedDate descending
                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1651,10 +1651,10 @@ namespace YOY.DAO.Entities.Manager
 
                 if (query != null)
                 {
-                    CashbackIncentive cashbackIncentive = null;
-                    foreach (OltpcashbackIncentives item in query)
+                    CashIncentive cashbackIncentive = null;
+                    foreach (OltpcashIncentives item in query)
                     {
-                        cashbackIncentive = new CashbackIncentive
+                        cashbackIncentive = new CashIncentive
                         {
                             Id = item.Id,
                             TenantId = item.TenantId,
@@ -1724,9 +1724,9 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="activeState"></param>
         /// <param name="dateTime"></param>
         /// <returns></returns>
-        public List<CashbackIncentive> Gets(int activeState, DateTime dateTime, int pageSize, int pageNumber)
+        public List<CashIncentive> Gets(int activeState, DateTime dateTime, int pageSize, int pageNumber)
         {
-            List<CashbackIncentive> cashbackIncentives = new List<CashbackIncentive>();
+            List<CashIncentive> cashbackIncentives = new List<CashIncentive>();
 
             try
             {
@@ -1736,19 +1736,19 @@ namespace YOY.DAO.Entities.Manager
                 switch (activeState)
                 {
                     case ActiveStates.All:
-                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                  where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime && x.ReleaseDate <= dateTime
                                  orderby x.CreatedDate descending
                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                         break;
                     case ActiveStates.Active:
-                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                  where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime && x.ReleaseDate <= dateTime
                                  orderby x.CreatedDate descending
                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                         break;
                     case ActiveStates.Inactive:
-                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                  where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime && x.ReleaseDate <= dateTime
                                  orderby x.CreatedDate descending
                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1758,10 +1758,10 @@ namespace YOY.DAO.Entities.Manager
 
                 if (query != null)
                 {
-                    CashbackIncentive cashbackIncentive = null;
-                    foreach (OltpcashbackIncentives item in query)
+                    CashIncentive cashbackIncentive = null;
+                    foreach (OltpcashIncentives item in query)
                     {
-                        cashbackIncentive = new CashbackIncentive
+                        cashbackIncentive = new CashIncentive
                         {
                             Id = item.Id,
                             TenantId = item.TenantId,
@@ -1830,9 +1830,9 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="activeState"></param>
         /// <param name="releaseState"></param>
         /// <returns></returns>
-        public List<CashbackIncentive> Gets(int expiredState, int activeState, int releaseState, DateTime dateTime, int pageSize, int pageNumber, int nothing)
+        public List<CashIncentive> Gets(int expiredState, int activeState, int releaseState, DateTime dateTime, int pageSize, int pageNumber, int nothing)
         {
-            List<CashbackIncentive> cashbackIncentives = new List<CashbackIncentive>();
+            List<CashIncentive> cashbackIncentives = new List<CashIncentive>();
 
             try
             {
@@ -1847,19 +1847,19 @@ namespace YOY.DAO.Entities.Manager
                                 switch (releaseState)
                                 {
                                     case ReleaseStates.All:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.Released:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.ReleaseDate <= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.NotReleased:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.ReleaseDate > dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1871,19 +1871,19 @@ namespace YOY.DAO.Entities.Manager
                                 switch (releaseState)
                                 {
                                     case ReleaseStates.All:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.Released:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ReleaseDate <= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.NotReleased:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ReleaseDate > dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1895,19 +1895,19 @@ namespace YOY.DAO.Entities.Manager
                                 switch (releaseState)
                                 {
                                     case ReleaseStates.All:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.Released:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ReleaseDate <= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.NotReleased:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ReleaseDate > dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1922,19 +1922,19 @@ namespace YOY.DAO.Entities.Manager
                         switch (activeState)
                         {
                             case ActiveStates.All:
-                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                          where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate < dateTime
                                          orderby x.CreatedDate descending
                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                 break;
                             case ActiveStates.Active:
-                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                          where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate < dateTime
                                          orderby x.CreatedDate descending
                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
                                 break;
                             case ActiveStates.Inactive:
-                                query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                query = (from x in this._businessObjects.Context.OltpcashIncentives
                                          where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate < dateTime
                                          orderby x.CreatedDate descending
                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1949,19 +1949,19 @@ namespace YOY.DAO.Entities.Manager
                                 switch (releaseState)
                                 {
                                     case ReleaseStates.All:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.Released:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime && x.ReleaseDate <= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.NotReleased:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime && x.ReleaseDate > dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1973,19 +1973,19 @@ namespace YOY.DAO.Entities.Manager
                                 switch (releaseState)
                                 {
                                     case ReleaseStates.All:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.Released:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime && x.ReleaseDate <= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.NotReleased:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime && x.ReleaseDate > dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -1997,19 +1997,19 @@ namespace YOY.DAO.Entities.Manager
                                 switch (releaseState)
                                 {
                                     case ReleaseStates.All:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.Released:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime && x.ReleaseDate <= dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
                                         break;
                                     case ReleaseStates.NotReleased:
-                                        query = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                                        query = (from x in this._businessObjects.Context.OltpcashIncentives
                                                  where !x.Deleted && !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.ExpirationDate >= dateTime && x.ReleaseDate > dateTime
                                                  orderby x.CreatedDate descending
                                                  select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -2024,10 +2024,10 @@ namespace YOY.DAO.Entities.Manager
 
                 if (query != null)
                 {
-                    CashbackIncentive cashbackIncentive = null;
-                    foreach (OltpcashbackIncentives item in query)
+                    CashIncentive cashbackIncentive = null;
+                    foreach (OltpcashIncentives item in query)
                     {
-                        cashbackIncentive = new CashbackIncentive
+                        cashbackIncentive = new CashIncentive
                         {
                             Id = item.Id,
                             TenantId = item.TenantId,
@@ -2096,9 +2096,9 @@ namespace YOY.DAO.Entities.Manager
         }//GETS METHOD ENDS ----------------------------------------------------------------------------------------------------------------------------- //
 
 
-        public CashbackIncentive Get(Guid id, int type, bool filterByTenant)
+        public CashIncentive Get(Guid id, int type, bool filterByTenant)
         {
-            CashbackIncentive cashbackIncentive = null;
+            CashIncentive cashbackIncentive = null;
 
             try
             {
@@ -2107,21 +2107,21 @@ namespace YOY.DAO.Entities.Manager
 
                 if (filterByTenant)
                 {
-                    query = from x in this._businessObjects.Context.OltpcashbackIncentives
+                    query = from x in this._businessObjects.Context.OltpcashIncentives
                             where !x.Deleted && x.Type == type && x.TenantId == this._businessObjects.Tenant.TenantId && x.Id == id
                             select x;
                 }
                 else
                 {
-                    query = from x in this._businessObjects.Context.OltpcashbackIncentives
+                    query = from x in this._businessObjects.Context.OltpcashIncentives
                             where !x.Deleted && x.Type == type && x.Id == id
                             select x;
                 }
 
 
-                foreach (OltpcashbackIncentives item in query)
+                foreach (OltpcashIncentives item in query)
                 {
-                    cashbackIncentive = new CashbackIncentive
+                    cashbackIncentive = new CashIncentive
                     {
                         Id = item.Id,
                         TenantId = item.TenantId,
@@ -2182,9 +2182,9 @@ namespace YOY.DAO.Entities.Manager
             return cashbackIncentive;
         }//METHOD GET ENDS ------------------------------------------------------------------------------------------------------------------------------ //        
 
-        public CashbackIncentive Get(Guid id, bool filterByTenant)
+        public CashIncentive Get(Guid id, bool filterByTenant)
         {
-            CashbackIncentive cashbackIncentive = null;
+            CashIncentive cashbackIncentive = null;
 
             try
             {
@@ -2193,21 +2193,21 @@ namespace YOY.DAO.Entities.Manager
 
                 if (filterByTenant)
                 {
-                    query = from x in this._businessObjects.Context.OltpcashbackIncentives
+                    query = from x in this._businessObjects.Context.OltpcashIncentives
                             where !x.Deleted && x.TenantId == this._businessObjects.Tenant.TenantId && x.Id == id
                             select x;
                 }
                 else
                 {
-                    query = from x in this._businessObjects.Context.OltpcashbackIncentives
+                    query = from x in this._businessObjects.Context.OltpcashIncentives
                             where !x.Deleted && x.Id == id
                             select x;
                 }
 
 
-                foreach (OltpcashbackIncentives item in query)
+                foreach (OltpcashIncentives item in query)
                 {
-                    cashbackIncentive = new CashbackIncentive
+                    cashbackIncentive = new CashIncentive
                     {
                         Id = item.Id,
                         TenantId = item.TenantId,
@@ -2300,16 +2300,16 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="releaseDate"></param>
         /// <param name="expirationDate"></param>
         /// <returns></returns>
-        public CashbackIncentive Post(int type, int displayType, int applyType, int benefitAmountType, int dealType, int maxCombinedIncentives, decimal unitValue, decimal previousUnitValue, int minMembershipLevel, decimal minPurchasedAmount, 
+        public CashIncentive Post(int type, int displayType, int applyType, int benefitAmountType, int dealType, int maxCombinedIncentives, decimal unitValue, decimal previousUnitValue, int minMembershipLevel, decimal minPurchasedAmount, 
             decimal purchasedAmountBlock, decimal maxValue, int availableQuantity, string name, string description, string keywords, bool isSponsored, string validWeekDays, 
             string validMonthDays, string validHours, int maxUsagesPerUser, int minPurchasesCountToUse, int geoSegmentationType, string rules, string conditions, double relevanceRate, DateTime releaseDate, DateTime expirationDate)
         {
-            CashbackIncentive cashbackIncentive;
-            OltpcashbackIncentives newCashbackIncentive = null;
+            CashIncentive cashbackIncentive;
+            OltpcashIncentives newCashbackIncentive = null;
 
             try
             {
-                newCashbackIncentive = new OltpcashbackIncentives
+                newCashbackIncentive = new OltpcashIncentives
                 {
                     Id = Guid.NewGuid(),
                     TenantId = _businessObjects.Tenant.TenantId,
@@ -2348,10 +2348,10 @@ namespace YOY.DAO.Entities.Manager
                     Deleted = false
                 };
 
-                this._businessObjects.Context.OltpcashbackIncentives.Add(newCashbackIncentive);
+                this._businessObjects.Context.OltpcashIncentives.Add(newCashbackIncentive);
                 this._businessObjects.Context.SaveChanges();
 
-                cashbackIncentive = new CashbackIncentive
+                cashbackIncentive = new CashIncentive
                 {
                     Id = newCashbackIncentive.Id,
                     TenantId = newCashbackIncentive.TenantId,
@@ -2404,7 +2404,7 @@ namespace YOY.DAO.Entities.Manager
             }
             catch (Exception e)
             {
-                this._businessObjects.Context.OltpcashbackIncentives.Remove(newCashbackIncentive);
+                this._businessObjects.Context.OltpcashIncentives.Remove(newCashbackIncentive);
                 this._businessObjects.Context.SaveChanges();
 
                 cashbackIncentive = null;
@@ -2449,16 +2449,16 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="commissionFeeValue"></param>
         /// <param name="minCommissionFeeAmount"></param>
         /// <returns></returns>
-        public CashbackIncentive Put(Guid id, int type, int displayType, int applyType, int benefitAmountType, int dealType, int maxCombinedIncentives, decimal unitValue, decimal previousUnitValue, int minMembershipLevel, decimal minPurchasedAmount, 
+        public CashIncentive Put(Guid id, int type, int displayType, int applyType, int benefitAmountType, int dealType, int maxCombinedIncentives, decimal unitValue, decimal previousUnitValue, int minMembershipLevel, decimal minPurchasedAmount, 
             decimal purchasedAmountBlock, decimal maxValue, int availableQuantity, string name, string description, string keywords, bool isSponsored, string validWeekDays, 
             string validMonthDays, string validHours, int maxUsagesPerUser, int minPurchasesCountToUse, int geoSegmentationType, string rules, string conditions, 
             double relevanceRate, DateTime releaseDate, DateTime expirationDate)
         {
-            CashbackIncentive cashbackIncentive = null;
+            CashIncentive cashbackIncentive = null;
 
             try
             {
-                OltpcashbackIncentives currentCashbackIncentive = (from x in _businessObjects.Context.OltpcashbackIncentives
+                OltpcashIncentives currentCashbackIncentive = (from x in _businessObjects.Context.OltpcashIncentives
                                                                     where x.Type == type && x.TenantId == _businessObjects.Tenant.TenantId && x.Id == id
                                                                     select x).FirstOrDefault();
 
@@ -2496,7 +2496,7 @@ namespace YOY.DAO.Entities.Manager
 
                     this._businessObjects.Context.SaveChanges();
 
-                    cashbackIncentive = new CashbackIncentive
+                    cashbackIncentive = new CashIncentive
                     {
                         Id = currentCashbackIncentive.Id,
                         TenantId = currentCashbackIncentive.TenantId,
@@ -2570,13 +2570,13 @@ namespace YOY.DAO.Entities.Manager
 
             try
             {
-                OltpcashbackIncentives incentive = null;
+                OltpcashIncentives incentive = null;
 
-                var query = from x in this._businessObjects.Context.OltpcashbackIncentives
+                var query = from x in this._businessObjects.Context.OltpcashIncentives
                             where x.TenantId == this._businessObjects.Tenant.TenantId && x.Id == id
                             select x;
 
-                foreach (OltpcashbackIncentives item in query)
+                foreach (OltpcashIncentives item in query)
                 {
                     incentive = item;
                 }
@@ -2628,13 +2628,13 @@ namespace YOY.DAO.Entities.Manager
 
             try
             {
-                OltpcashbackIncentives incentive = null;
+                OltpcashIncentives incentive = null;
 
-                var query = from x in this._businessObjects.Context.OltpcashbackIncentives
+                var query = from x in this._businessObjects.Context.OltpcashIncentives
                             where x.TenantId == this._businessObjects.Tenant.TenantId && x.Id == id
                             select x;
 
-                foreach (OltpcashbackIncentives item in query)
+                foreach (OltpcashIncentives item in query)
                 {
                     incentive = item;
                 }
@@ -2673,7 +2673,7 @@ namespace YOY.DAO.Entities.Manager
             try
             {
 
-                OltpcashbackIncentives cashbackIncentive = (from x in this._businessObjects.Context.OltpcashbackIncentives
+                OltpcashIncentives cashbackIncentive = (from x in this._businessObjects.Context.OltpcashIncentives
                                                             where x.TenantId == this._businessObjects.Tenant.TenantId && x.Id == id
                                                             select x).FirstOrDefault();
 
@@ -2722,7 +2722,7 @@ namespace YOY.DAO.Entities.Manager
                 {
                     case ProductOperations.Increase:
 
-                        availableQuantity = this._businessObjects.StoredProcsHandler.UpdateCashbackIncentiveQuantity(id, quantity);
+                        availableQuantity = this._businessObjects.StoredProcsHandler.UpdateCashIncentiveQuantity(id, quantity);
 
                         if (availableQuantity != null)
                             success = true;
@@ -2731,11 +2731,11 @@ namespace YOY.DAO.Entities.Manager
                         break;
                     case ProductOperations.Claim:
 
-                        bool? result = this._businessObjects.StoredProcsHandler.UpdateCashbackIncentiveUsageCount(id, quantity);
+                        bool? result = this._businessObjects.StoredProcsHandler.UpdateCashIncentiveUsageCount(id, quantity);
 
                         if (result == true)
                         {
-                            availableQuantity = this._businessObjects.StoredProcsHandler.UpdateCashbackIncentiveQuantity(id, -1 * quantity);
+                            availableQuantity = this._businessObjects.StoredProcsHandler.UpdateCashIncentiveQuantity(id, -1 * quantity);
 
                             if (availableQuantity != null)
                                 success = true;
@@ -2819,7 +2819,7 @@ namespace YOY.DAO.Entities.Manager
                                     incentiveData = new FlattenedCashbackIncentiveData
                                     {
                                         SelectorType = selectorType,
-                                        CashbackIncentive = new CashbackIncentive
+                                        CashbackIncentive = new CashIncentive
                                         {
                                             Id = item.Id,
                                             TenantId = item.TenantId,
@@ -2970,7 +2970,7 @@ namespace YOY.DAO.Entities.Manager
                                     incentiveData = new FlattenedCashbackIncentiveData
                                     {
                                         SelectorType = selectorType,
-                                        CashbackIncentive = new CashbackIncentive
+                                        CashbackIncentive = new CashIncentive
                                         {
                                             Id = item.Id,
                                             TenantId = item.TenantId,
@@ -3963,7 +3963,7 @@ namespace YOY.DAO.Entities.Manager
                         //PENDING
                         break;
                     case SearchableObjectTypes.Commerce:
-                        count = this._businessObjects.StoredProcsHandler.GetCashbackIncentivesCountForCommerceByDateRange(refId, minDate, maxDate);
+                        count = this._businessObjects.StoredProcsHandler.GetCashIncentivesCountForCommerceByDateRange(refId, minDate, maxDate);
                         break;
                 }
 
@@ -3990,7 +3990,7 @@ namespace YOY.DAO.Entities.Manager
         /// </summary>
         /// <param name="businessObjects"></param>
         /// <exception cref="ArgumentNullException">businessObjects is not set to an instance of an object</exception>
-        public CashbackIncentiveManager(BusinessObjects businessObjects)
+        public CashIncentiveManager(BusinessObjects businessObjects)
         {
             if (businessObjects != null)
                 this._businessObjects = businessObjects;

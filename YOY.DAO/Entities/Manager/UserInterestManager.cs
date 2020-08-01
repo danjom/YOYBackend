@@ -228,20 +228,9 @@ namespace YOY.DAO.Entities.Manager
                             Score = item.Score != null ? (decimal)item.Score : -1,
                             OriginType = (int)item.OriginType,
                             HerarchyLevel = (int)item.HerarchyLevel,
-                            InterestName = item.Name
+                            InterestName = item.Name,
+                            Icon = item.Icon
                         };
-
-                        switch (item.InterestType)
-                        {
-                            case InterestTypes.Category:
-                                currentInterest.Icon = item.Icon;
-
-                                break;
-                            case InterestTypes.Tenant:
-                                currentInterest.Icon = item.IconId + "";
-
-                                break;
-                        }
 
                         interests.Add(currentInterest);
 
@@ -417,20 +406,9 @@ namespace YOY.DAO.Entities.Manager
                             Score = item.Score != null ? (decimal)item.Score : -1,
                             OriginType = (int)item.OriginType,
                             HerarchyLevel = (int)item.HerarchyLevel,
-                            InterestName = item.Name
+                            InterestName = item.Name,
+                            Icon = item.Icon
                         };
-
-                        switch (item.InterestType)
-                        {
-                            case InterestTypes.Category:
-                                interest.Icon = item.Icon;
-
-                                break;
-                            case InterestTypes.Tenant:
-                                interest.Icon = item.IconId + "";
-
-                                break;
-                        }
 
                     }
                 }
@@ -584,20 +562,9 @@ namespace YOY.DAO.Entities.Manager
                             Score = item.Score != null ? (decimal)item.Score : -1,
                             OriginType = (int)item.OriginType,
                             HerarchyLevel = (int)item.HerarchyLevel,
-                            InterestName = item.Name
+                            InterestName = item.Name,
+                            Icon = item.Icon
                         };
-
-                        switch (item.InterestType)
-                        {
-                            case InterestTypes.Category:
-                                interest.Icon = item.Icon;
-
-                                break;
-                            case InterestTypes.Tenant:
-                                interest.Icon = item.IconId + "";
-
-                                break;
-                        }
 
                     }
                 }
@@ -939,7 +906,7 @@ namespace YOY.DAO.Entities.Manager
                             OriginType = (int)item.OriginType,
                             HerarchyLevel = (int)item.HerarchyLevel,
                             InterestName = item.Name,
-                            Icon = item.IconId + ""
+                            Icon = item.Icon
                         };
 
                         interests.Add(currentInterest);
@@ -1020,7 +987,7 @@ namespace YOY.DAO.Entities.Manager
                     {
                         Id = item.InterestId,
                         Name = item.Name,
-                        BaseImgUrl = item.IconId + "",
+                        BaseImgUrl = item.Icon,
                         Type = InterestTypes.Tenant,
                     };
 
@@ -1070,7 +1037,7 @@ namespace YOY.DAO.Entities.Manager
                     {
                         Id = item.InterestId,
                         Name = item.Name,
-                        BaseImgUrl = item.IconId + "",
+                        BaseImgUrl = item.Icon,
                         Type = InterestTypes.Tenant,
                     };
 
@@ -1122,7 +1089,7 @@ namespace YOY.DAO.Entities.Manager
                     {
                         Id = item.InterestId,
                         Name = item.Name,
-                        BaseImgUrl = item.IconId + "",
+                        BaseImgUrl = item.Icon,
                         Type = InterestTypes.Tenant,
                     };
 

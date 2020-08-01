@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace YOY.DTO.Entities
 {
-    public class CashbackIncentive
+    public class CashIncentive
     {
         public Guid Id { set; get; }
         public Guid TenantId { set; get; }

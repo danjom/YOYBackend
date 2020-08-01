@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace YOY.DAO.Entities.DB
 {
-    public partial class OltpcashbackIncentives
+    public partial class OltpcashIncentives
     {
-        public OltpcashbackIncentives()
+        public OltpcashIncentives()
         {
             OltppaymentLogs = new HashSet<OltppaymentLogs>();
         }
@@ -40,8 +40,8 @@ namespace YOY.DAO.Entities.DB
         public int GeoSegmentationType { get; set; }
         public string Rules { get; set; }
         public string Conditions { get; set; }
-        public double RelevanceRate { get; set; }
         public DateTime ReleaseDate { get; set; }
+        public double RelevanceRate { get; set; }
         public DateTime ExpirationDate { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }

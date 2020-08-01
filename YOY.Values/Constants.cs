@@ -39,6 +39,13 @@
         public const int Offer = 5;
         public const int CashIncentive = 6;
     }
+    public static class FilterTypes
+    {
+        public const int None = 0;
+        public const int Category = 1;
+        public const int Commerce = 2;
+        public const int ShoppingMall = 3;
+    }
 
     public static class UserappErrorCustomActions
     {
@@ -2087,6 +2094,7 @@
         public const int LandingImg = 1;
         public const int EmailBackground = 2;
         public const int CarrousedImg = 3;
+        public const int WhiteLogo = 4;
     }
 
     public static class SavingRouteImgTypes

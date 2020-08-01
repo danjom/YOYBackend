@@ -19,6 +19,7 @@ namespace YOY.DAO.Entities.DB
         public decimal? OfferRegularPrice { get; set; }
         public int OfferPurchasedQuantity { get; set; }
         public Guid? OfferImg { get; set; }
+        public string OfferImgUrl { get; set; }
         public bool UserEarningsIncreaserApplied { get; set; }
         public Guid? AppliedUserEarningsIncreaserId { get; set; }
         public decimal? IncreasementAmount { get; set; }

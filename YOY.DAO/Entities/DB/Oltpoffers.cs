@@ -55,6 +55,7 @@ namespace YOY.DAO.Entities.DB
         public int RedeemCount { get; set; }
         public int ClaimCount { get; set; }
         public Guid? DisplayImageId { get; set; }
+        public string DisplayImageUrl { get; set; }
         public string TargettingParams { get; set; }
         public DateTime ReleaseDate { get; set; }
         public DateTime ExpirationDate { get; set; }

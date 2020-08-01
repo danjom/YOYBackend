@@ -130,7 +130,7 @@ namespace YOY.DAO.Entities.DB.StoredProcedures
         }
 
 
-        public int? GetCashbackIncentivesCountForCommerceByDateRange(Guid tenantId, DateTime minDate, DateTime maxDate)
+        public int? GetCashIncentivesCountForCommerceByDateRange(Guid tenantId, DateTime minDate, DateTime maxDate)
         {
             int? incentivesCount = -1;
 
@@ -145,7 +145,7 @@ namespace YOY.DAO.Entities.DB.StoredProcedures
                 yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();//This context is created because this method is part of an async logic
 
                 // Processing.  
-                context.Database.ExecuteSqlRaw("EXEC [dbo].[GetCashbackIncentivesCountForCommerceByDateRange] @tenantId, @minDate, @maxDate, @incentivesCount output", new[] { tenantIdParam, minDateParam, maxDateParam, incentivesCountParam });
+                context.Database.ExecuteSqlRaw("EXEC [dbo].[GetCashIncentivesCountForCommerceByDateRange] @tenantId, @minDate, @maxDate, @incentivesCount output", new[] { tenantIdParam, minDateParam, maxDateParam, incentivesCountParam });
                 incentivesCount = Convert.ToInt32(incentivesCountParam.Value);
             }
             catch (Exception e)
@@ -723,7 +723,7 @@ namespace YOY.DAO.Entities.DB.StoredProcedures
 
         }
 
-        public int? UpdateCashbackIncentiveQuantity(Guid id, int quantity)
+        public int? UpdateCashIncentiveQuantity(Guid id, int quantity)
         {
             int? incentiveQuantity = -1;
             try
@@ -734,7 +734,7 @@ namespace YOY.DAO.Entities.DB.StoredProcedures
                 var incentiveQuantityParam = new SqlParameter("incentiveQuantity", incentiveQuantity) { Direction = ParameterDirection.Output };
 
                 // Processing.  
-                int result = _dbContext.Database.ExecuteSqlRaw("EXEC [dbo].[UpdateCashbackIncentiveQuantity] @id, @quantity, @incentiveQuantity", new[] { idParam, quantityParam, incentiveQuantityParam });
+                int result = _dbContext.Database.ExecuteSqlRaw("EXEC [dbo].[UpdateCashIncentiveQuantity] @id, @quantity, @incentiveQuantity", new[] { idParam, quantityParam, incentiveQuantityParam });
                 incentiveQuantity = Convert.ToInt32(incentiveQuantityParam.Value);
             }
             catch (Exception e)
@@ -749,7 +749,7 @@ namespace YOY.DAO.Entities.DB.StoredProcedures
 
         }
 
-        public bool? UpdateCashbackIncentiveUsageCount(Guid id, int quantity)
+        public bool? UpdateCashIncentiveUsageCount(Guid id, int quantity)
         {
             bool? success;
             try
@@ -759,7 +759,7 @@ namespace YOY.DAO.Entities.DB.StoredProcedures
                 var quantityParam = new SqlParameter("quantity", quantity);
                 
                 // Processing.  
-                int result = _dbContext.Database.ExecuteSqlRaw("EXEC [dbo].[UpdateCashbackIncentiveUsageCount] @id, @quantity", new[] { idParam, quantityParam });
+                int result = _dbContext.Database.ExecuteSqlRaw("EXEC [dbo].[UpdateCashIncentiveUsageCount] @id, @quantity", new[] { idParam, quantityParam });
 
                 if (result > 0)
                     success = true;

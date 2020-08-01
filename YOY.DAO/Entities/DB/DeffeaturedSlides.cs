@@ -14,6 +14,7 @@ namespace YOY.DAO.Entities.DB
         public string Name { get; set; }
         public string Description { get; set; }
         public Guid? ImageId { get; set; }
+        public string ImageUrl { get; set; }
         public Guid? TenantId { get; set; }
         public Guid CountryId { get; set; }
         public Guid? StateId { get; set; }

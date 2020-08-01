@@ -21,6 +21,7 @@ namespace YOY.DTO.Entities.Misc.Purchase
         public decimal OfferPrice { set; get; }
         public decimal? OfferRegularPrice { set; get; }
         public Guid? OfferImgId { set; get; }
+        public string OfferImgUrl { set; get; }
         public bool UserEarningsIncreserApplied { set; get; }
         public Guid? AppliedUserEarningsIncreaserId { set; get; }
         public decimal? IncreasementAmount { set; get; }

@@ -46,6 +46,7 @@ namespace YOY.BusinessAPI.Controllers
         private const int controllerVersion = 1;
 
         public string allowedImgFormats = "data:image/png;base64,";
+        private string baseImgStorageUrl = "https://res.cloudinary.com/yoyimgs/image/upload/v";
 
         private const int mainHintMinLength = 3;
         private const int mainHintMaxLength = 10;
@@ -329,7 +330,7 @@ namespace YOY.BusinessAPI.Controllers
                     dealsData = new List<DealData>();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 dealsData = null;
             }
@@ -424,8 +425,11 @@ namespace YOY.BusinessAPI.Controllers
                 
                 if(fcimage != null)
                 {
+
+                    string imgUrl = baseImgStorageUrl + response.Version + "/" + response.PublicId + "." + response.Format;
+
                     imgId = fcimage.Id;
-                    Guid? oldImg = this._businessObjects.Offers.Put(offerId, offerType, (Guid)fcimage.Id, imgOfferType);
+                    Guid? oldImg = this._businessObjects.Offers.Put(offerId, offerType, (Guid)fcimage.Id, imgUrl, imgOfferType);
 
 
                     //In case the object already had the image set, needs to delete the old one
@@ -453,7 +457,7 @@ namespace YOY.BusinessAPI.Controllers
                     success = CloudinaryStorage.DeleteImage(publicId);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 success = false;
                 //TODO ERROR HANDLING

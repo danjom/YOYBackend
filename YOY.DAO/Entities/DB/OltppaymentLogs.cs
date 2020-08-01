@@ -24,8 +24,8 @@ namespace YOY.DAO.Entities.DB
         public decimal PaymentAmount { get; set; }
         public decimal DebitedAmount { get; set; }
         public bool CashbackUsedAsPayment { get; set; }
-        public bool CashbackIncentiveApplied { get; set; }
-        public Guid? AppliedCashbackIncentiveId { get; set; }
+        public bool CashIncentiveApplied { get; set; }
+        public Guid? AppliedCashIncentiveId { get; set; }
         public bool UserEarningsIncreaserApplied { get; set; }
         public Guid? AppliedUserEarningsIncreaserId { get; set; }
         public decimal? EarningsIncreasementAmount { get; set; }
@@ -39,7 +39,7 @@ namespace YOY.DAO.Entities.DB
         public DateTime? LiquidationDate { get; set; }
         public int PaymentGateway { get; set; }
 
-        public virtual OltpcashbackIncentives AppliedCashbackIncentive { get; set; }
+        public virtual OltpcashIncentives AppliedCashIncentive { get; set; }
         public virtual DefearningsIncreasers AppliedUserEarningsIncreaser { get; set; }
         public virtual Defbranches Branch { get; set; }
         public virtual OltpmoneyTransfers LiquidationMoneyTransfer { get; set; }

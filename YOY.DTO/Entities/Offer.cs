@@ -64,6 +64,7 @@ namespace YOY.DTO.Entities
         public int RedeemCount { set; get; }
         public int ClaimCount { set; get; }
         public Guid? DisplayImgId { set; get; }
+        public string DisplayImgUrl { set; get; }
         public string TargettingParams { set; get; }
 
         //SCHEDULING COMPONENTS

@@ -16,6 +16,7 @@ namespace YOY.DAO.Entities.DB
         public decimal OfferPrice { get; set; }
         public decimal? OfferRegularPrice { get; set; }
         public Guid? OfferImg { get; set; }
+        public string OfferImgUrl { get; set; }
         public string UserId { get; set; }
         public Guid TenantId { get; set; }
         public Guid ShoppingCartItemId { get; set; }

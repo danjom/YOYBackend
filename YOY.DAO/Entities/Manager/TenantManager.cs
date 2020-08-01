@@ -380,7 +380,11 @@ namespace YOY.DAO.Entities.Manager
                                         AdditionalNotes = tenant.AdditionalNotes,
                                         Description = tenant.Description,
                                         Logo = tenant.Logo,
+                                        LogoUrl = tenant.LogoUrl,
+                                        WhiteLogo = tenant.WhiteLogo,
+                                        WhiteLogoUrl = tenant.WhiteLogoUrl,
                                         CarrouselImgId = tenant.CarrouselImg,
+                                        CarrouselImgUrl = tenant.CarrouselImgUrl,
                                         EmailsBackground = tenant.EmailBg,
                                         LandingImg = tenant.LandingImg,
                                         CountryId = tenant.CountryId,
@@ -458,7 +462,11 @@ namespace YOY.DAO.Entities.Manager
                                         Name = tenant.Name,
                                         IsActive = tenant.IsActive,
                                         Logo = tenant.Logo,
+                                        LogoUrl = tenant.LogoUrl,
+                                        WhiteLogo = tenant.WhiteLogo,
+                                        WhiteLogoUrl = tenant.WhiteLogoUrl,
                                         CarrouselImgId = tenant.CarrouselImg,
+                                        CarrouselImgUrl = tenant.CarrouselImgUrl,
                                         LandingImg = tenant.LandingImg,
                                         CountryId = tenant.CountryId,
                                         CountryName = tenant.CountryName,
@@ -756,7 +764,11 @@ namespace YOY.DAO.Entities.Manager
                             Name = tenant.Name,
                             IsActive = tenant.IsActive,
                             Logo = tenant.Logo,
+                            LogoUrl = tenant.LogoUrl,
+                            WhiteLogo = tenant.WhiteLogo,
+                            WhiteLogoUrl = tenant.WhiteLogoUrl,
                             CarrouselImgId = tenant.CarrouselImg,
+                            CarrouselImgUrl = tenant.CarrouselImgUrl,
                             LandingImg = tenant.LandingImg,
                             CountryId = tenant.CountryId,
                             CountryName = tenant.CountryName,
@@ -847,7 +859,11 @@ namespace YOY.DAO.Entities.Manager
                             Name = tenant.Name,
                             IsActive = tenant.IsActive,
                             Logo = tenant.Logo,
+                            LogoUrl = tenant.LogoUrl,
+                            WhiteLogo = tenant.WhiteLogo,
+                            WhiteLogoUrl = tenant.WhiteLogoUrl,
                             CarrouselImgId = tenant.CarrouselImg,
+                            CarrouselImgUrl = tenant.CarrouselImgUrl,
                             LandingImg = tenant.LandingImg,
                             CountryId = tenant.CountryId,
                             CountryName = tenant.CountryName,
@@ -992,7 +1008,11 @@ namespace YOY.DAO.Entities.Manager
                             Name = tenant.Name,
                             IsActive = tenant.IsActive,
                             Logo = tenant.Logo,
+                            LogoUrl = tenant.LogoUrl,
+                            WhiteLogo = tenant.WhiteLogo,
+                            WhiteLogoUrl = tenant.WhiteLogoUrl,
                             CarrouselImgId = tenant.CarrouselImg,
+                            CarrouselImgUrl = tenant.CarrouselImgUrl,
                             LandingImg = tenant.LandingImg,
                             CountryId = tenant.CountryId,
                             CountryName = tenant.CountryName,
@@ -1139,7 +1159,11 @@ namespace YOY.DAO.Entities.Manager
                             Name = tenant.Name,
                             IsActive = tenant.IsActive,
                             Logo = tenant.Logo,
+                            LogoUrl = tenant.LogoUrl,
+                            WhiteLogo = tenant.WhiteLogo,
+                            WhiteLogoUrl = tenant.WhiteLogoUrl,
                             CarrouselImgId = tenant.CarrouselImg,
+                            CarrouselImgUrl = tenant.CarrouselImgUrl,
                             LandingImg = tenant.LandingImg,
                             CountryId = tenant.CountryId,
                             CountryName = tenant.CountryName,
@@ -1231,7 +1255,11 @@ namespace YOY.DAO.Entities.Manager
                                 AdditionalNotes = tenant.AdditionalNotes,
                                 Description = tenant.Description,
                                 Logo = tenant.Logo,
+                                LogoUrl = tenant.LogoUrl,
+                                WhiteLogo = tenant.WhiteLogo,
+                                WhiteLogoUrl = tenant.WhiteLogoUrl,
                                 CarrouselImgId = tenant.CarrouselImg,
+                                CarrouselImgUrl = tenant.CarrouselImgUrl,
                                 EmailsBackground = tenant.EmailBg,
                                 LandingImg = tenant.LandingImg,
                                 CountryId = tenant.CountryId,
@@ -1325,7 +1353,11 @@ namespace YOY.DAO.Entities.Manager
                                 AdditionalNotes = tenant.AdditionalNotes,
                                 Description = tenant.Description,
                                 Logo = tenant.Logo,
+                                LogoUrl = tenant.LogoUrl,
+                                WhiteLogo = tenant.WhiteLogo,
+                                WhiteLogoUrl = tenant.WhiteLogoUrl,
                                 CarrouselImgId = tenant.CarrouselImg,
+                                CarrouselImgUrl = tenant.CarrouselImgUrl,
                                 EmailsBackground = tenant.EmailBg,
                                 LandingImg = tenant.LandingImg,
                                 CountryId = tenant.CountryId,
@@ -1447,7 +1479,11 @@ namespace YOY.DAO.Entities.Manager
                                     AdditionalNotes = tenant.AdditionalNotes,
                                     Description = tenant.Description,
                                     Logo = tenant.Logo,
+                                    LogoUrl = tenant.LogoUrl,
+                                    WhiteLogo = tenant.WhiteLogo,
+                                    WhiteLogoUrl = tenant.WhiteLogoUrl,
                                     CarrouselImgId = tenant.CarrouselImg,
+                                    CarrouselImgUrl = tenant.CarrouselImgUrl,
                                     EmailsBackground = tenant.EmailBg,
                                     LandingImg = tenant.LandingImg,
                                     CountryId = tenant.CountryId,
@@ -1515,7 +1551,11 @@ namespace YOY.DAO.Entities.Manager
                                     Name = tenant.Name,
                                     IsActive = tenant.IsActive,
                                     Logo = tenant.Logo,
+                                    LogoUrl = tenant.LogoUrl,
+                                    WhiteLogo = tenant.WhiteLogo,
+                                    WhiteLogoUrl = tenant.WhiteLogoUrl,
                                     CarrouselImgId = tenant.CarrouselImg,
+                                    CarrouselImgUrl = tenant.CarrouselImgUrl,
                                     LandingImg = tenant.LandingImg,
                                     CurrencySymbol = tenant.CurrencySymbol,
                                     CurrencyType = tenant.CurrencyType,
@@ -1586,7 +1626,11 @@ namespace YOY.DAO.Entities.Manager
                                     AdditionalNotes = tenant.AdditionalNotes,
                                     Description = tenant.Description,
                                     Logo = tenant.Logo,
+                                    LogoUrl = tenant.LogoUrl,
+                                    WhiteLogo = tenant.WhiteLogo,
+                                    WhiteLogoUrl = tenant.WhiteLogoUrl,
                                     CarrouselImgId = tenant.CarrouselImg,
+                                    CarrouselImgUrl = tenant.CarrouselImgUrl,
                                     EmailsBackground = tenant.EmailBg,
                                     LandingImg = tenant.LandingImg,
                                     CountryId = tenant.CountryId,
@@ -1654,7 +1698,11 @@ namespace YOY.DAO.Entities.Manager
                                     Name = tenant.Name,
                                     IsActive = true,//NOT NEEDED
                                     Logo = tenant.Logo,
+                                    LogoUrl = tenant.LogoUrl,
+                                    WhiteLogo = tenant.WhiteLogo,
+                                    WhiteLogoUrl = tenant.WhiteLogoUrl,
                                     CarrouselImgId = tenant.CarrouselImg,
+                                    CarrouselImgUrl = tenant.CarrouselImgUrl,
                                     LandingImg = tenant.LandingImg,
                                     CurrencySymbol = tenant.CurrencySymbol,
                                     CurrencyType = tenant.CurrencyType,
@@ -1862,7 +1910,11 @@ namespace YOY.DAO.Entities.Manager
                             AdditionalNotes = tenant.AdditionalNotes,
                             Description = tenant.Description,
                             Logo = tenant.Logo,
+                            LogoUrl = tenant.LogoUrl,
+                            WhiteLogo = tenant.WhiteLogo,
+                            WhiteLogoUrl = tenant.WhiteLogoUrl,
                             CarrouselImgId = tenant.CarrouselImg,
+                            CarrouselImgUrl = tenant.CarrouselImgUrl,
                             EmailsBackground = tenant.EmailBg,
                             LandingImg = tenant.LandingImg,
                             CountryId = tenant.CountryId,
@@ -2050,7 +2102,11 @@ namespace YOY.DAO.Entities.Manager
                                 AdditionalNotes = tenant.AdditionalNotes,
                                 Description = tenant.Description,
                                 Logo = tenant.Logo,
+                                LogoUrl = tenant.LogoUrl,
+                                WhiteLogo = tenant.WhiteLogo,
+                                WhiteLogoUrl = tenant.WhiteLogoUrl,
                                 CarrouselImgId = tenant.CarrouselImg,
+                                CarrouselImgUrl = tenant.CarrouselImgUrl,
                                 EmailsBackground = tenant.EmailBg,
                                 LandingImg = tenant.LandingImg,
                                 CountryId = tenant.CountryId,
@@ -2188,7 +2244,7 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="imgType"></param>
         /// <param name="contentType"></param>
         /// <returns></returns>
-        public Guid? Put(Guid id, Guid imgId, int imgType)
+        public Guid? Put(Guid id, Guid imgId, string imgUrl, int imgType)
         {
             Guid? currentImgId = null;
 
@@ -2213,6 +2269,7 @@ namespace YOY.DAO.Entities.Manager
 
                             currentImgId = tenant.Logo;
                             tenant.Logo = imgId;
+                            tenant.LogoUrl = imgUrl;
                             tenant.UpdatedDate = DateTime.UtcNow;
 
                             break;
@@ -2234,6 +2291,15 @@ namespace YOY.DAO.Entities.Manager
 
                             currentImgId = tenant.CarrouselImg;
                             tenant.CarrouselImg = imgId;
+                            tenant.CarrouselImgUrl = imgUrl;
+                            tenant.UpdatedDate = DateTime.UtcNow;
+
+                            break;
+                        case TenantImgTypes.WhiteLogo:
+
+                            currentImgId = tenant.WhiteLogo;
+                            tenant.WhiteLogo = imgId;
+                            tenant.WhiteLogoUrl = imgUrl;
                             tenant.UpdatedDate = DateTime.UtcNow;
 
                             break;

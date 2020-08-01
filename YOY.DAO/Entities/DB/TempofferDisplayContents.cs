@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace YOY.DAO.Entities.DB
 {
-    public partial class TempoffersPreferenceBranches
+    public partial class TempofferDisplayContents
     {
         public Guid Id { get; set; }
         public Guid TenantId { get; set; }
@@ -33,7 +33,6 @@ namespace YOY.DAO.Entities.DB
         public int MaxClaimsPerUser { get; set; }
         public int MinPurchasesCountToRedeem { get; set; }
         public DateTime? PurchasesCountStartDate { get; set; }
-        public int RedeemCount { get; set; }
         public int ClaimCount { get; set; }
         public string ClaimLocation { get; set; }
         public string DisplayImageUrl { get; set; }
@@ -52,19 +51,9 @@ namespace YOY.DAO.Entities.DB
         public Guid TenantCountryId { get; set; }
         public int TenantType { get; set; }
         public Guid TenantCategoryId { get; set; }
-        public string TenantCategoryName { get; set; }
         public int TenantRelevanceStatus { get; set; }
         public string CurrencySymbol { get; set; }
         public decimal? TenantScore { get; set; }
-        public Guid BranchId { get; set; }
-        public string BranchName { get; set; }
-        public string BranchInquiriesPhoneNumber { get; set; }
-        public string BranchDescriptiveAddress { get; set; }
-        public Guid BranchCityId { get; set; }
-        public Guid BranchStateId { get; set; }
-        public decimal BranchLatitude { get; set; }
-        public decimal BranchLongitude { get; set; }
-        public double? Distance { get; set; }
         public Guid PreferenceId { get; set; }
         public string PreferenceName { get; set; }
         public string PreferenceIcon { get; set; }

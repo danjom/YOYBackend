@@ -227,6 +227,7 @@ namespace YOY.DAO.Entities.Manager
                             Name = item.Description,
                             Description = item.Description,
                             ImageId = item.ImageId,
+                            ImageUrl = item.ImageUrl,
                             TenantId = item.TenantId,
                             CountryId = item.CountryId,
                             StateId = item.StateId,
@@ -1519,6 +1520,7 @@ namespace YOY.DAO.Entities.Manager
                             Name = item.Description,
                             Description = item.Description,
                             ImageId = item.ImageId,
+                            ImageUrl = item.ImageUrl,
                             TenantId = item.TenantId,
                             CountryId = item.CountryId,
                             StateId = item.StateId,
@@ -1566,6 +1568,7 @@ namespace YOY.DAO.Entities.Manager
                             Name = item.Description,
                             Description = item.Description,
                             ImageId = item.ImageId,
+                            ImageUrl = item.ImageUrl,
                             TenantId = item.TenantId,
                             CountryId = item.CountryId,
                             StateId = item.StateId,
@@ -1592,7 +1595,7 @@ namespace YOY.DAO.Entities.Manager
             return featuredSlide;
         }
 
-        public FeaturedSlide Post(Guid countryId, Guid? state, Guid? tenantId, Guid? imageId, string name, string description, int type, int maxViews, DateTime releaseDate, DateTime expirationDate)
+        public FeaturedSlide Post(Guid countryId, Guid? state, Guid? tenantId, string name, string description, int type, int maxViews, DateTime releaseDate, DateTime expirationDate)
         {
             FeaturedSlide featuredSlide;
 
@@ -1604,7 +1607,6 @@ namespace YOY.DAO.Entities.Manager
                     CountryId = countryId,
                     StateId = state,
                     TenantId = tenantId,
-                    ImageId = imageId,
                     Name = name,
                     Description = description,
                     Type = type,
@@ -1625,6 +1627,7 @@ namespace YOY.DAO.Entities.Manager
                     Name = newFeaturedSlide.Description,
                     Description = newFeaturedSlide.Description,
                     ImageId = newFeaturedSlide.ImageId,
+                    ImageUrl = newFeaturedSlide.ImageUrl,
                     TenantId = newFeaturedSlide.TenantId,
                     CountryId = newFeaturedSlide.CountryId,
                     StateId = newFeaturedSlide.StateId,
@@ -1686,6 +1689,7 @@ namespace YOY.DAO.Entities.Manager
                             Name = currentFeaturedSlide.Description,
                             Description = currentFeaturedSlide.Description,
                             ImageId = currentFeaturedSlide.ImageId,
+                            ImageUrl = currentFeaturedSlide.ImageUrl,
                             TenantId = currentFeaturedSlide.TenantId,
                             CountryId = currentFeaturedSlide.CountryId,
                             StateId = currentFeaturedSlide.StateId,
@@ -1752,34 +1756,25 @@ namespace YOY.DAO.Entities.Manager
             return success;
         }
 
-        public bool Put(Guid id, Guid imgId)
+        public bool Put(Guid id, Guid imgId, string imgUrl)
         {
             bool success = false;
 
             try
             {
-                var query = from x in this._businessObjects.Context.DeffeaturedSlides
-                            where x.Id == id
-                            select x;
+                DeffeaturedSlides currenctFeaturedSlide = (from x in this._businessObjects.Context.DeffeaturedSlides
+                                                            where x.Id == id
+                                                            select x).FirstOrDefault();
 
-                if (query != null)
+                if (currenctFeaturedSlide != null)
                 {
-                    DeffeaturedSlides currenctFeaturedSlide = null;
+                    currenctFeaturedSlide.ImageId = imgId;
+                    currenctFeaturedSlide.ImageUrl = imgUrl;
+                    currenctFeaturedSlide.UpdatedDate = DateTime.UtcNow;
 
-                    foreach (DeffeaturedSlides item in query)
-                    {
-                        currenctFeaturedSlide = item;
-                    }
+                    this._businessObjects.Context.SaveChanges();
 
-                    if (currenctFeaturedSlide != null)
-                    {
-                        currenctFeaturedSlide.ImageId = imgId;
-                        currenctFeaturedSlide.UpdatedDate = DateTime.UtcNow;
-
-                        this._businessObjects.Context.SaveChanges();
-
-                        success = true;
-                    }
+                    success = true;
                 }
             }
             catch (Exception e)

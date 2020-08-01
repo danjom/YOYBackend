@@ -19,7 +19,11 @@ namespace YOY.DAO.Entities.DB
         public string Description { get; set; }
         public string Keywords { get; set; }
         public Guid? Logo { get; set; }
+        public string LogoUrl { get; set; }
+        public Guid? WhiteLogo { get; set; }
+        public string WhiteLogoUrl { get; set; }
         public Guid? CarrouselImg { get; set; }
+        public string CarrouselImgUrl { get; set; }
         public Guid? EmailBg { get; set; }
         public Guid? LandingImg { get; set; }
         public int RelevanceStatus { get; set; }
