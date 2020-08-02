@@ -150,6 +150,15 @@
   <data name="Bronze" xml:space="preserve">
     <value>Bronze</value>
   </data>
+  <data name="ByCategory" xml:space="preserve">
+    <value>By Category</value>
+  </data>
+  <data name="ByCommerce" xml:space="preserve">
+    <value>By Commerce</value>
+  </data>
+  <data name="ByShoppingMall" xml:space="preserve">
+    <value>By Shopping Mall</value>
+  </data>
   <data name="December" xml:space="preserve">
     <value>December</value>
   </data>
@@ -191,6 +200,9 @@
   </data>
   <data name="February" xml:space="preserve">
     <value>February</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter by</value>
   </data>
   <data name="Gold" xml:space="preserve">
     <value>Gold</value>

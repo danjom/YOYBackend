@@ -1,6 +1,35 @@
 ﻿namespace YOY.Values
 {
-    public static class ContentSetTypes
+    public static class ContentFeedTypes
+    {
+        public const int None = 0;
+        public const int MainFeed = 1;
+        public const int CommerceList = 2;
+        public const int CategoryList = 3;
+        public const int ShoppingMallList = 4;
+        public const int PromotionalContent = 5;
+        public const int ByCommerceContent = 6;
+        public const int ByCategoryContent = 7;
+        public const int ByShoppingMallContent = 8;
+    }
+
+    public static class ContentFeedReferenceTypes
+    {
+        public const int None = 0;
+        public const int Slider = 1;
+        public const int Category = 2;
+        public const int Commerce = 3;
+        public const int ShoppingMall = 4;
+    }
+
+    public static class ContentRetrieveTypes
+    {
+        public const int None = 0;
+        public const int CompleRetreive = 1;
+        public const int ContentSection = 2;
+    }
+
+    public static class ContentStructureTypes
     {
         public const int None = 0;
         public const int Slider = 1;
@@ -12,11 +41,11 @@
     public static class OnSelectCellActionTypes
     {
         public const int None = 0;
-        public const int DisplayPromotionContent = 1;
+        public const int DisplayPromotionalContent = 1;
         public const int UpdateContentFilterOptions = 2;
         public const int UpdateDisplayedContent = 3;
-        public const int AccessDealDetailScreen = 4;
-        public const int AccessCashIncentiveDetailScreen = 5;
+        public const int DisplayDealDetailScreen = 4;
+        public const int DisplayCashIncentiveDetailScreen = 5;
     }
 
     public static class ViewAllCellContentAccess
@@ -32,14 +61,16 @@
     public static class CellTypes
     {
         public const int None = 0;
-        public const int Filter = 1;
-        public const int Category = 2;
-        public const int Commerce = 3;
-        public const int ShoppingMall = 4;
-        public const int Offer = 5;
-        public const int CashIncentive = 6;
+        public const int Slide = 1;
+        public const int FilterType = 2;
+        public const int Category = 3;
+        public const int Commerce = 4;
+        public const int ShoppingMall = 5;
+        public const int Offer = 6;
+        public const int CashIncentive = 7;
     }
-    public static class FilterTypes
+
+    public static class ContentFilterTypes
     {
         public const int None = 0;
         public const int Category = 1;

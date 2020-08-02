@@ -615,6 +615,113 @@ namespace YOY.DAO.Entities.DB.Functions
 
         }
 
+
+        public List<TemptenantDisplayContents> GetBranchHoldersByCountry(Guid countryId, int pageSize, int pageNumber)
+        {
+            List<TemptenantDisplayContents> temptenants;
+
+            try
+            {
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
+
+                temptenants = dbContext.Set<TemptenantDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetBranchHoldersByCountry](@countryId, @pageSize, @pageNumber)", new[] { countryIdParam, pageSizeParam, pageNumberParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                temptenants = null;
+
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return temptenants;
+        }
+
+
+        public List<TemptenantDisplayContents> GetBranchHoldersByCountryAndLocation(double latitude, double longitude, double radius, Guid countryId, int pageSize, int pageNumber)
+        {
+            List<TemptenantDisplayContents> temptenants;
+
+            try
+            {
+                var latitudeParam = new SqlParameter("latitude", latitude);
+                var longitudeParam = new SqlParameter("longitude", longitude);
+                var radiusParam = new SqlParameter("radius", radius);
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
+
+                temptenants = dbContext.Set<TemptenantDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetBranchHoldersByCountryAndLocation](@latitude, @longitude, @radius, @countryId, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, pageSizeParam, pageNumberParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                temptenants = null;
+
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return temptenants;
+        }
+
+        public List<TemptenantDisplayContents> GetBranchHoldersByState(Guid countryId, Guid stateId, int pageSize, int pageNumber)
+        {
+            List<TemptenantDisplayContents> temptenants;
+
+            try
+            {
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var stateIdParam = new SqlParameter("stateId", stateId);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
+
+                temptenants = dbContext.Set<TemptenantDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetBranchHoldersByState](@countryId, @stateId, @pageSize, @pageNumber)", new[] { countryIdParam, stateIdParam, pageSizeParam, pageNumberParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                temptenants = null;
+
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return temptenants;
+        }
+
+        public List<TemptenantDisplayContents> GetBranchHolderByStateAndLocation(double latitude, double longitude, double radius, Guid countryId, Guid stateId, int pageSize, int pageNumber)
+        {
+            List<TemptenantDisplayContents> temptenants;
+
+            try
+            {
+                var latitudeParam = new SqlParameter("latitude", latitude);
+                var longitudeParam = new SqlParameter("longitude", longitude);
+                var radiusParam = new SqlParameter("radius", radius);
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var stateIdParam = new SqlParameter("stateId", stateId);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
+
+                temptenants = dbContext.Set<TemptenantDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetBranchHolderByStateAndLocation](@latitude, @longitude, @radius, @countryId, @stateId, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, stateIdParam, pageSizeParam, pageNumberParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                temptenants = null;
+
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return temptenants;
+        }
+
+
         public List<TempbroadcastingOffersLogs> GetBroadcastingOfferLogsWithLocation(decimal latitude, decimal longitude, double radius, string userId, DateTime dateTime)
         {
             List<TempbroadcastingOffersLogs> offersLogs;
@@ -1032,18 +1139,19 @@ namespace YOY.DAO.Entities.DB.Functions
             return temppreferences;
         }
 
-        public List<Temppreferences> GetTenantPreferencesByState(string userId, Guid stateId, int pageSize, int pageNumber)
+        public List<Temppreferences> GetTenantPreferencesByState(string userId, Guid countryId, Guid stateId, int pageSize, int pageNumber)
         {
             List<Temppreferences> temppreferences;
 
             try
             {
                 var userIdParam = new SqlParameter("userId", userId);
+                var countryIdParam = new SqlParameter("countryId", countryId);
                 var stateIdParam = new SqlParameter("stateId", stateId);
                 var pageSizeParam = new SqlParameter("pageSize", pageSize);
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
-                temppreferences = dbContext.Set<Temppreferences>().FromSqlRaw("SELECT * FROM [dbo].[GetTenantPreferencesByState](@userId, @stateId, @pageSize, @pageNumber)", new[] { userIdParam, stateIdParam, pageSizeParam, pageNumberParam }).ToList();
+                temppreferences = dbContext.Set<Temppreferences>().FromSqlRaw("SELECT * FROM [dbo].[GetTenantPreferencesByState](@userId, @countryId, @stateId, @pageSize, @pageNumber)", new[] { userIdParam, countryIdParam, stateIdParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -1057,7 +1165,7 @@ namespace YOY.DAO.Entities.DB.Functions
             return temppreferences;
         }
 
-        public List<Temppreferences> GetTenantPreferencesByStateAndLocation(double latitude, double longitude, double radius, string userId, Guid stateId, int pageSize, int pageNumber)
+        public List<Temppreferences> GetTenantPreferencesByStateAndLocation(double latitude, double longitude, double radius, string userId, Guid countryId, Guid stateId, int pageSize, int pageNumber)
         {
             List<Temppreferences> temppreferences;
 
@@ -1068,10 +1176,11 @@ namespace YOY.DAO.Entities.DB.Functions
                 var radiusParam = new SqlParameter("radius", radius);
                 var userIdParam = new SqlParameter("userId", userId);
                 var stateIdParam = new SqlParameter("stateId", stateId);
+                var countryIdParam = new SqlParameter("countryId", countryId);
                 var pageSizeParam = new SqlParameter("pageSize", pageSize);
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
-                temppreferences = dbContext.Set<Temppreferences>().FromSqlRaw("SELECT * FROM [dbo].[GetTenantPreferencesByStateAndLocation](@latitude, @longitude, @radius, @userId, @stateId, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, userIdParam, stateIdParam, pageSizeParam, pageNumberParam }).ToList();
+                temppreferences = dbContext.Set<Temppreferences>().FromSqlRaw("SELECT * FROM [dbo].[GetTenantPreferencesByStateAndLocation](@latitude, @longitude, @radius, @userId, @countryId, @stateId, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, userIdParam, countryIdParam, stateIdParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -1084,6 +1193,146 @@ namespace YOY.DAO.Entities.DB.Functions
 
             return temppreferences;
         }
+
+
+
+        public List<TemptenantDisplayContents> GetTenantsForUserByCountry(string userId, Guid countryId, int pageSize, int pageNumber)
+        {
+            List<TemptenantDisplayContents> temptenants;
+
+            try
+            {
+                var userIdParam = new SqlParameter("userId", userId);
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
+
+                temptenants = dbContext.Set<TemptenantDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetTenantsForUserByCountry](@userId, @countryId, @pageSize, @pageNumber)", new[] { userIdParam, countryIdParam, pageSizeParam, pageNumberParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                temptenants = null;
+
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return temptenants;
+        }
+
+
+        public List<TemptenantDisplayContents> GetTenantsForUserByCountryAndLocation(double latitude, double longitude, double radius, string userId, Guid countryId, int pageSize, int pageNumber)
+        {
+            List<TemptenantDisplayContents> temptenants;
+
+            try
+            {
+                var latitudeParam = new SqlParameter("latitude", latitude);
+                var longitudeParam = new SqlParameter("longitude", longitude);
+                var radiusParam = new SqlParameter("radius", radius);
+                var userIdParam = new SqlParameter("userId", userId);
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
+
+                temptenants = dbContext.Set<TemptenantDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetTenantsForUserByCountryAndLocation](@latitude, @longitude, @radius, @userId, @countryId, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, userIdParam, countryIdParam, pageSizeParam, pageNumberParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                temptenants = null;
+
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return temptenants;
+        }
+
+        public List<TemptenantDisplayContents> GetTenantsForUserByGeoLocation(double latitude, double longitude, double radius, Guid countryId, string userId, int pageSize, int pageNumber)
+        {
+            List<TemptenantDisplayContents> temptenants;
+
+            try
+            {
+                var latitudeParam = new SqlParameter("latitude", latitude);
+                var longitudeParam = new SqlParameter("longitude", longitude);
+                var radiusParam = new SqlParameter("radius", radius);
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var userIdParam = new SqlParameter("userId", userId);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
+
+                temptenants = dbContext.Set<TemptenantDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetTenantsForUserByGeoLocation](@latitude, @longitude, @radius, @countryId, @userId, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, userIdParam, pageSizeParam, pageNumberParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                temptenants = null;
+
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return temptenants;
+        }
+
+        public List<TemptenantDisplayContents> GetTenantsForUserByState(string userId, Guid countryId, Guid stateId, int pageSize, int pageNumber)
+        {
+            List<TemptenantDisplayContents> temptenants;
+
+            try
+            {
+                var userIdParam = new SqlParameter("userId", userId);
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var stateIdParam = new SqlParameter("stateId", stateId);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
+
+                temptenants = dbContext.Set<TemptenantDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetTenantsForUserByState](@userId, @countryId, @stateId, @pageSize, @pageNumber)", new[] { userIdParam, countryIdParam, stateIdParam, pageSizeParam, pageNumberParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                temptenants = null;
+
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return temptenants;
+        }
+
+        public List<TemptenantDisplayContents> GetTenantsForUserByStateAndLocation(double latitude, double longitude, double radius, string userId, Guid countryId, Guid stateId, int pageSize, int pageNumber)
+        {
+            List<TemptenantDisplayContents> temptenants;
+
+            try
+            {
+                var latitudeParam = new SqlParameter("latitude", latitude);
+                var longitudeParam = new SqlParameter("longitude", longitude);
+                var radiusParam = new SqlParameter("radius", radius);
+                var userIdParam = new SqlParameter("userId", userId);
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var stateIdParam = new SqlParameter("stateId", stateId);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
+
+                temptenants = dbContext.Set<TemptenantDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetTenantsForUserByStateAndLocation](@latitude, @longitude, @radius, @userId, @countryId, @stateId, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, userIdParam, countryIdParam, stateIdParam, pageSizeParam, pageNumberParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                temptenants = null;
+
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return temptenants;
+        }
+
         public List<TempclaimableTransactions> GetTransactionDetailsWithLocations(Guid transactionId, string userId)
         {
             List<TempclaimableTransactions> tempclaimableTransactions;

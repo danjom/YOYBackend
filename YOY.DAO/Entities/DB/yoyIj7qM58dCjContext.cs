@@ -185,6 +185,7 @@ namespace YOY.DAO.Entities.DB
         public virtual DbSet<TemprewardOverviews> TemprewardOverviews { get; set; }
         public virtual DbSet<TempsearchableLogs> TempsearchableLogs { get; set; }
         public virtual DbSet<Tempstates> Tempstates { get; set; }
+        public virtual DbSet<TemptenantDisplayContents> TemptenantDisplayContents { get; set; }
         public virtual DbSet<TempuserInterestsWithFactor> TempuserInterestsWithFactor { get; set; }
         public virtual DbSet<UserDataForTokenView> UserDataForTokenView { get; set; }
         public virtual DbSet<UserDataView> UserDataView { get; set; }
@@ -8728,6 +8729,28 @@ namespace YOY.DAO.Entities.DB
                     .IsRequired()
                     .HasMaxLength(80)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<TemptenantDisplayContents>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("TEMPTenantDisplayContents");
+
+                entity.Property(e => e.CarrouselImgUrl)
+                    .HasMaxLength(512)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LogoUrl)
+                    .HasMaxLength(512)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(120)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Score).HasColumnType("decimal(16, 3)");
             });
 
             modelBuilder.Entity<TempuserInterestsWithFactor>(entity =>

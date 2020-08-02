@@ -7,7 +7,7 @@ using YOY.UserAPI.Models.v1.Miscellaneous.Location.POCO;
 
 namespace YOY.UserAPI.Logic.Location
 {
-    public class LocationProcessor
+    public static class LocationProcessor
     {
         //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         //:::                                                                         :::

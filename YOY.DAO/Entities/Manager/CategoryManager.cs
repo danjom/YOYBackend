@@ -706,27 +706,29 @@ namespace YOY.DAO.Entities.Manager
             {
                 var query = (dynamic)null;
 
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 switch (purposeType)
                 {
                     case CategoryTypes.All:
                         switch (activeState)
                         {
                             case ActiveStates.Active:
-                                query = (from x in this._businessObjects.Context.OltpcategoriesView
+                                query = (from x in context.OltpcategoriesView
                                          where x.HerarchyLevel == herarchyLevel && x.PurposeType == purposeType && x.IsActive
                                          orderby x.Name ascending
                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
 
                                 break;
                             case ActiveStates.Inactive:
-                                query = (from x in this._businessObjects.Context.OltpcategoriesView
+                                query = (from x in context.OltpcategoriesView
                                          where x.HerarchyLevel == herarchyLevel && x.PurposeType == purposeType && !x.IsActive
                                          orderby x.Name ascending
                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
 
                                 break;
                             case ActiveStates.All:
-                                query = (from x in this._businessObjects.Context.OltpcategoriesView
+                                query = (from x in context.OltpcategoriesView
                                          where x.HerarchyLevel == herarchyLevel && x.PurposeType == purposeType
                                          orderby x.Name ascending
                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -740,21 +742,21 @@ namespace YOY.DAO.Entities.Manager
                         switch (activeState)
                         {
                             case ActiveStates.Active:
-                                query = (from x in this._businessObjects.Context.OltpcategoriesView
+                                query = (from x in context.OltpcategoriesView
                                          where x.HerarchyLevel == herarchyLevel && x.PurposeType == purposeType && !x.IsSystemCategory && x.IsActive
                                          orderby x.Name ascending
                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
 
                                 break;
                             case ActiveStates.Inactive:
-                                query = (from x in this._businessObjects.Context.OltpcategoriesView
+                                query = (from x in context.OltpcategoriesView
                                          where x.HerarchyLevel == herarchyLevel && x.PurposeType == purposeType && !x.IsSystemCategory && !x.IsActive
                                          orderby x.Name ascending
                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
 
                                 break;
                             case ActiveStates.All:
-                                query = (from x in this._businessObjects.Context.OltpcategoriesView
+                                query = (from x in context.OltpcategoriesView
                                          where x.HerarchyLevel == herarchyLevel && x.PurposeType == purposeType && !x.IsSystemCategory
                                          orderby x.Name ascending
                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
@@ -768,21 +770,21 @@ namespace YOY.DAO.Entities.Manager
                         switch (activeState)
                         {
                             case ActiveStates.Active:
-                                query = (from x in this._businessObjects.Context.OltpcategoriesView
+                                query = (from x in context.OltpcategoriesView
                                          where x.HerarchyLevel == herarchyLevel && x.PurposeType == purposeType && x.IsSystemCategory && x.IsActive
                                          orderby x.Name ascending
                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
 
                                 break;
                             case ActiveStates.Inactive:
-                                query = (from x in this._businessObjects.Context.OltpcategoriesView
+                                query = (from x in context.OltpcategoriesView
                                          where x.HerarchyLevel == herarchyLevel && x.PurposeType == purposeType && x.IsSystemCategory && !x.IsActive
                                          orderby x.Name ascending
                                          select x).Skip(pageSize * pageNumber).Take(pageSize);
 
                                 break;
                             case ActiveStates.All:
-                                query = (from x in this._businessObjects.Context.OltpcategoriesView
+                                query = (from x in context.OltpcategoriesView
                                          where x.HerarchyLevel == herarchyLevel && x.PurposeType == purposeType && x.IsSystemCategory
                                          orderby x.Name ascending
                                          select x).Skip(pageSize * pageNumber).Take(pageSize);

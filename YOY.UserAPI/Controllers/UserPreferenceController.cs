@@ -13,6 +13,7 @@ using YOY.DTO.Entities;
 using YOY.DTO.Entities.Manager.Misc.InterestPreference;
 using YOY.DTO.Entities.Misc.Location;
 using YOY.DTO.Entities.Misc.User;
+using YOY.UserAPI.Logic.Image;
 using YOY.UserAPI.Logic.Location;
 using YOY.UserAPI.Models.v1.Miscellaneous.BasicResponse.POCO;
 using YOY.UserAPI.Models.v1.Miscellaneous.Location.POCO;
@@ -48,6 +49,7 @@ namespace YOY.UserAPI.Controllers
         private readonly int PageSize = 48;
         private readonly string CategorySelectedAppend = "w";
         private readonly string CategoryUnSelectedAppend = "b";
+        private const double ImgWidthProp = 1;
 
         #endregion
 
@@ -79,12 +81,8 @@ namespace YOY.UserAPI.Controllers
         {
             IActionResult result;
             int callId = 1;
-            string erroMsg;
+            string errorMsg;
             string parameters = "UserId: " + userId + ", Location: " + location;
-
-            StringBuilder sb = new StringBuilder();
-            string transformation = "/w_" + imgHeight + ",h_" + imgHeight + ",c_scale";
-            string toBeSearched = "upload";
 
             try
             {
@@ -95,9 +93,7 @@ namespace YOY.UserAPI.Controllers
                 if (currentUser != null)
                 {
 
-                    ProcessedLocation processedLocation = null;
-
-                    processedLocation = LocationProcessor.ProcessLocation(location);
+                    ProcessedLocation processedLocation = LocationProcessor.ProcessLocation(location);
 
 
                     EnabledPreferences preferences = new EnabledPreferences
@@ -116,10 +112,8 @@ namespace YOY.UserAPI.Controllers
                     {
                         foreach (UserPreferenceData item in categoryPreferences)
                         {
-                            sb.Append(item.BaseImgUrl);
-                            sb.Insert(item.BaseImgUrl.IndexOf(toBeSearched) + toBeSearched.Length, transformation);
-                            item.BaseImgUrl = sb.ToString();
-                            sb.Clear();
+
+                            item.BaseImgUrl = ImageAdapter.TransformImg(item.BaseImgUrl, imgHeight, (int)Math.Ceiling(imgHeight*ImgWidthProp));
 
 
                             item.UnSeletedImgUrl = item.BaseImgUrl + CategoryUnSelectedAppend;
@@ -136,7 +130,7 @@ namespace YOY.UserAPI.Controllers
                     List<UserPreferenceData> tenantPreferences = null;
                     bool currentStateAlreadyTried = false;
 
-                    //If we can determin user location and based on it show him contextual commerces
+                    //If we can determine user location and based on it show him contextual commerces
                     if (processedLocation.ValidLocation)
                     {
                         //COMMERCE PREFERENCES
@@ -145,12 +139,12 @@ namespace YOY.UserAPI.Controllers
                         {
                             case GeoSegmentationTypes.Country:
 
-                                tenantPreferences = this._businessObjects.UserInterests.GetPreferences(currentUser.Id, (Guid)currentUser.CountryId, GeoSegmentationTypes.Country, (double)processedLocation.Latitude, (double)processedLocation.Longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, PageSize, 0 );
+                                tenantPreferences = this._businessObjects.UserInterests.GetPreferences(currentUser.Id, (Guid)currentUser.CountryId, Guid.Empty, GeoSegmentationTypes.Country, (double)processedLocation.Latitude, (double)processedLocation.Longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, PageSize, 0 );
 
                                 if (tenantPreferences?.Count == 0)//If no tenants nearby, then retrieve from the country
                                 {
                                     
-                                    tenantPreferences = this._businessObjects.UserInterests.GetPreferences(currentUser.Id, (Guid)currentUser.CountryId, GeoSegmentationTypes.Country, PageSize, 0);
+                                    tenantPreferences = this._businessObjects.UserInterests.GetPreferences(currentUser.Id, (Guid)currentUser.CountryId, Guid.Empty, GeoSegmentationTypes.Country, PageSize, 0);
                                 }
 
                                 break;
@@ -165,10 +159,10 @@ namespace YOY.UserAPI.Controllers
                                     stateId = userState.Id;
                                     currentStateAlreadyTried = true;
 
-                                    tenantPreferences = this._businessObjects.UserInterests.GetPreferences(currentUser.Id, stateId, GeoSegmentationTypes.State, (double)processedLocation.Latitude, (double)processedLocation.Longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, PageSize, 0);
+                                    tenantPreferences = this._businessObjects.UserInterests.GetPreferences(currentUser.Id, userState.CountryId, stateId, GeoSegmentationTypes.State, (double)processedLocation.Latitude, (double)processedLocation.Longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, PageSize, 0);
                                 }
                                 else
-                                {//If state isn't in operation, retrieve preferences based 
+                                {//If state isn't in operation, retrieve preferences based in country and geolocation
                                     tenantPreferences = this._businessObjects.UserInterests.GetPreferences(currentUser.Id, userState.CountryId, (double)processedLocation.Latitude, (double)processedLocation.Longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, PageSize, 0);
                                 }
 
@@ -185,7 +179,7 @@ namespace YOY.UserAPI.Controllers
                                             stateId = (Guid)userState.NearestStateId;
                                     }
 
-                                    tenantPreferences = this._businessObjects.UserInterests.GetPreferences(currentUser.Id, stateId, GeoSegmentationTypes.State, PageSize, 0);
+                                    tenantPreferences = this._businessObjects.UserInterests.GetPreferences(currentUser.Id, userState.CountryId, stateId, GeoSegmentationTypes.State, PageSize, 0);
                                 }
 
                                 break;
@@ -208,10 +202,7 @@ namespace YOY.UserAPI.Controllers
                                     imgUrl = "";
                                 }
 
-                                sb.Append(item.BaseImgUrl);
-                                sb.Insert(item.BaseImgUrl.IndexOf(toBeSearched) + toBeSearched.Length, transformation);
-                                item.BaseImgUrl = sb.ToString();
-                                sb.Clear();
+                                item.BaseImgUrl = ImageAdapter.TransformImg(item.BaseImgUrl, imgHeight, (int)Math.Ceiling(imgHeight * ImgWidthProp));
 
 
                                 item.UnSeletedImgUrl = imgUrl;
@@ -227,7 +218,7 @@ namespace YOY.UserAPI.Controllers
                         {
                             case GeoSegmentationTypes.Country:
 
-                                tenantPreferences = this._businessObjects.UserInterests.GetPreferences(currentUser.Id, (Guid)currentUser.CountryId, GeoSegmentationTypes.Country, PageSize, 0);
+                                tenantPreferences = this._businessObjects.UserInterests.GetPreferences(currentUser.Id, (Guid)currentUser.CountryId, Guid.Empty, GeoSegmentationTypes.Country, PageSize, 0);
 
                                 break;
                             case GeoSegmentationTypes.State:
@@ -245,7 +236,7 @@ namespace YOY.UserAPI.Controllers
                                         stateId = (Guid)userState.NearestStateId;
                                 }
 
-                                tenantPreferences = this._businessObjects.UserInterests.GetPreferences(currentUser.Id, stateId, GeoSegmentationTypes.State, PageSize, 0);
+                                tenantPreferences = this._businessObjects.UserInterests.GetPreferences(currentUser.Id, userState.CountryId, stateId, GeoSegmentationTypes.State, PageSize, 0);
                                 break;
                         }
 
@@ -294,7 +285,7 @@ namespace YOY.UserAPI.Controllers
                 }
                 else
                 {
-                    erroMsg = "Error: Invalid user or location";
+                    errorMsg = "Error: Invalid user or location";
 
                     result = new BadRequestObjectResult(
                                 new BasicResponse
@@ -309,19 +300,19 @@ namespace YOY.UserAPI.Controllers
 
                     //Registers the invalid call
                     this._businessObjects.HttpcallInvokationLogs.Post(userId, this.GetType().Name, callId, controllerVersion,
-                                        Values.StatusCodes.BadRequest, 0, parameters, 0, 0, false, null, HttpcallTypes.Get, erroMsg);
+                                        Values.StatusCodes.BadRequest, 0, parameters, 0, 0, false, null, HttpcallTypes.Get, errorMsg);
                 }
 
 
             }
             catch (Exception e)
             {
-                erroMsg = "Error: An unexpected issue at preferences retrieving: " + e.Message;
+                errorMsg = "Error: An unexpected issue at preferences retrieving: " + e.Message;
                 result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
 
                 //Registers the invalid call
                 this._businessObjects.HttpcallInvokationLogs.Post(userId, this.GetType().Name, callId, controllerVersion,
-                                        Values.StatusCodes.InternalServerError, 0, parameters, 0, 0, false, null, HttpcallTypes.Get, erroMsg);
+                                        Values.StatusCodes.InternalServerError, 0, parameters, 0, 0, false, null, HttpcallTypes.Get, errorMsg);
             }
 
             return result;

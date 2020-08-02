@@ -932,7 +932,7 @@ namespace YOY.DAO.Entities.Manager
             List<UserPreferenceData> preferences = null;
 
             var query = from x in this._businessObjects.FuncsHandler.GetCategoryPreferences(userId)
-                        orderby x.Relevance descending, x.Name ascending
+                        orderby x.Score descending, x.Relevance descending, x.Name ascending
                         select x;
 
             if (query != null)
@@ -974,7 +974,7 @@ namespace YOY.DAO.Entities.Manager
             List<UserPreferenceData> preferences = null;
 
             var query = from x in this._businessObjects.FuncsHandler.GetTenantPreferencesByGeoLocation(latitude, longitude, radius, countryId, userId, pageSize, pageNumber)
-                         orderby x.Relevance descending, x.Name ascending
+                         orderby x.Score descending, x.Relevance descending, x.Name ascending
                          select x;
 
             if (query != null)
@@ -1007,7 +1007,7 @@ namespace YOY.DAO.Entities.Manager
             return preferences;
         }
 
-        public List<UserPreferenceData> GetPreferences(string userId, Guid regionId, int contentSegmentationType, int pageSize, int pageNumber)
+        public List<UserPreferenceData> GetPreferences(string userId, Guid countryId, Guid stateId, int contentSegmentationType, int pageSize, int pageNumber)
         {
             List<UserPreferenceData> preferences = null;
 
@@ -1016,13 +1016,13 @@ namespace YOY.DAO.Entities.Manager
             switch (contentSegmentationType)
             {
                 case GeoSegmentationTypes.Country:
-                    query = from x in this._businessObjects.FuncsHandler.GetTenantPreferencesByCountry(userId, regionId, pageSize, pageNumber)
-                             orderby x.Relevance descending, x.Name ascending
+                    query = from x in this._businessObjects.FuncsHandler.GetTenantPreferencesByCountry(userId, countryId, pageSize, pageNumber)
+                             orderby x.Score descending, x.Relevance descending, x.Name ascending
                              select x;
                     break;
                 case GeoSegmentationTypes.State:
-                    query = from x in this._businessObjects.FuncsHandler.GetTenantPreferencesByState(userId, regionId, pageSize, pageNumber)
-                             orderby x.Relevance descending, x.Name ascending
+                    query = from x in this._businessObjects.FuncsHandler.GetTenantPreferencesByState(userId, countryId, stateId, pageSize, pageNumber)
+                             orderby x.Score descending, x.Relevance descending, x.Name ascending
                              select x;
                     break;
             }
@@ -1057,7 +1057,7 @@ namespace YOY.DAO.Entities.Manager
             return preferences;
         }
 
-        public List<UserPreferenceData> GetPreferences(string userId, Guid regionId, int contentSegmentationType, double latitude, double longitude, double radius, int pageSize, int pageNumber)
+        public List<UserPreferenceData> GetPreferences(string userId, Guid countryId, Guid stateId, int contentSegmentationType, double latitude, double longitude, double radius, int pageSize, int pageNumber)
         {
             List<UserPreferenceData> preferences = null;
 
@@ -1067,14 +1067,14 @@ namespace YOY.DAO.Entities.Manager
             {
                 case GeoSegmentationTypes.Country:
 
-                    query = from x in this._businessObjects.FuncsHandler.GetTenantPreferencesByCountryAndLocation(latitude, longitude, radius, userId, regionId, pageSize, pageNumber)
-                             orderby x.Relevance descending, x.Name ascending
+                    query = from x in this._businessObjects.FuncsHandler.GetTenantPreferencesByCountryAndLocation(latitude, longitude, radius, userId, stateId, pageSize, pageNumber)
+                             orderby x.Score descending, x.Relevance descending, x.Name ascending
                              select x;
                     break;
                 case GeoSegmentationTypes.State:
 
-                    query = from x in this._businessObjects.FuncsHandler.GetTenantPreferencesByStateAndLocation(latitude, longitude, radius, userId, regionId, pageSize, pageNumber)
-                             orderby x.Relevance descending, x.Name ascending
+                    query = from x in this._businessObjects.FuncsHandler.GetTenantPreferencesByStateAndLocation(latitude, longitude, radius, userId, countryId, stateId, pageSize, pageNumber)
+                             orderby x.Score descending, x.Relevance descending, x.Name ascending
                              select x;
                     break;
             }
