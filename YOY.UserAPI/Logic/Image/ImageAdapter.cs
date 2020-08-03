@@ -8,7 +8,6 @@ namespace YOY.UserAPI.Logic.Image
 {
     public static class ImageAdapter
     {
-        private static StringBuilder stringBuilder = new StringBuilder();
         private const string toBeSearched = "upload";
 
         public static string TransformImg(string url, int imgHeight, int imgWidth)
@@ -17,7 +16,10 @@ namespace YOY.UserAPI.Logic.Image
 
             try
             {
-                string transformation = "/w_" + imgHeight + ",h_" + imgHeight + ",c_scale";
+                
+                StringBuilder stringBuilder = new StringBuilder();
+
+                string transformation = "/w_" + imgWidth + ",h_" + imgHeight + ",c_scale";
 
                 stringBuilder.Append(url);
                 stringBuilder.Insert(url.IndexOf(toBeSearched) + toBeSearched.Length, transformation);

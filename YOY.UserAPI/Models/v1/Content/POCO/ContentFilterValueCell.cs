@@ -10,6 +10,8 @@ namespace YOY.UserAPI.Models.v1.Content.POCO
         public string Name { set; get; }
         public string UnselectedImgUrl { set; get; }
         public string SelectedImgUrl { set; get; }
+        public string UnselectedIcon { set; get; }
+        public string SelectedIcon { set; get; }
 
     }
 }

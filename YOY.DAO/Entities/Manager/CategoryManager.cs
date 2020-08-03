@@ -1606,18 +1606,33 @@ namespace YOY.DAO.Entities.Manager
 
                 if(preferenceId != Guid.Empty)
                 {
-                    OltpcategoryRelations newPreferenceRelation = new OltpcategoryRelations
-                    {
-                        Id = Guid.NewGuid(),
-                        CategoryId = preferenceId,
-                        HerarchyLevel = CategoryHerarchyLevels.Preference,
-                        ReferenceId = referenceId,
-                        ReferenceType = referenceType,
-                        GeneratorRelationId = newCategoryRelation.Id,
-                        CreatedDate = DateTime.UtcNow
-                    };
+                    //Needs to check if the preference relation already exists
 
-                    this._businessObjects.Context.OltpcategoryRelations.Add(newPreferenceRelation);
+                    OltpcategoryRelations preferenceRelation = (from x in this._businessObjects.Context.OltpcategoryRelations
+                                                                 where x.HerarchyLevel == 0 && x.ReferenceType == referenceType && x.ReferenceId == referenceId && x.CategoryId == preferenceId
+                                                                 select x).FirstOrDefault();
+
+                    if(preferenceRelation == null)
+                    {
+                        OltpcategoryRelations newPreferenceRelation = new OltpcategoryRelations
+                        {
+                            Id = Guid.NewGuid(),
+                            CategoryId = preferenceId,
+                            HerarchyLevel = CategoryHerarchyLevels.Preference,
+                            ReferenceId = referenceId,
+                            ReferenceType = referenceType,
+                            GeneratorRelationId = newCategoryRelation.Id,
+                            CreatedDate = DateTime.UtcNow
+                        };
+
+                        this._businessObjects.Context.OltpcategoryRelations.Add(newPreferenceRelation);
+                    }
+                    else
+                    {
+                        preferenceRelation.GeneratorRelationId = newCategoryRelation.Id;
+                        preferenceRelation.CreatedDate = DateTime.UtcNow;
+                    }
+                    
                 }
                 
                 this._businessObjects.Context.SaveChanges();
@@ -1655,9 +1670,12 @@ namespace YOY.DAO.Entities.Manager
                                 where x.GeneratorRelationId == categoryRelation.Id
                                 select x;
 
-                    foreach (OltpcategoryRelations item in query)
+                    if(query != null)
                     {
-                        this._businessObjects.Context.OltpcategoryRelations.Remove(item);
+                        foreach (OltpcategoryRelations item in query)
+                        {
+                            this._businessObjects.Context.OltpcategoryRelations.Remove(item);
+                        }
                     }
 
                     this._businessObjects.Context.OltpcategoryRelations.Remove(categoryRelation);

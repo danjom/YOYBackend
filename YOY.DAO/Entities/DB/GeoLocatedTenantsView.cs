@@ -15,7 +15,8 @@ namespace YOY.DAO.Entities.DB
         public string WhiteLogoUrl { get; set; }
         public Guid? CarrouselImg { get; set; }
         public string CarrouselImgUrl { get; set; }
-        public Guid? LandingImg { get; set; }
+        public Guid? Thumbnail { get; set; }
+        public string ThumbnailUrl { get; set; }
         public Guid CountryId { get; set; }
         public int RelevanceStatus { get; set; }
         public Guid StateId { get; set; }

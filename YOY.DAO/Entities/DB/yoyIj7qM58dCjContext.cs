@@ -492,7 +492,7 @@ namespace YOY.DAO.Entities.DB
             {
                 entity.ToTable("DEFAlliances");
 
-                entity.HasIndex(e => new { e.SponsorId, e.SponsoredId })
+                entity.HasIndex(e => new { e.FirstPurchaseTenantId, e.SecondPurchaseTenantId })
                     .HasName("IX_DEFAlliances_Tenants");
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
@@ -509,15 +509,15 @@ namespace YOY.DAO.Entities.DB
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getutcdate())");
 
-                entity.HasOne(d => d.Sponsor)
-                    .WithMany(p => p.DefalliancesSponsor)
-                    .HasForeignKey(d => d.SponsorId)
+                entity.HasOne(d => d.FirstPurchaseTenant)
+                    .WithMany(p => p.DefalliancesFirstPurchaseTenant)
+                    .HasForeignKey(d => d.FirstPurchaseTenantId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DEFAlliances_SponsorDEFTenants");
 
-                entity.HasOne(d => d.Sponsored)
-                    .WithMany(p => p.DefalliancesSponsored)
-                    .HasForeignKey(d => d.SponsoredId)
+                entity.HasOne(d => d.SecondPurchaseTenant)
+                    .WithMany(p => p.DefalliancesSecondPurchaseTenant)
+                    .HasForeignKey(d => d.SecondPurchaseTenantId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DEFAlliances_SponsoredDEFTenants");
             });
@@ -2666,7 +2666,9 @@ namespace YOY.DAO.Entities.DB
                     .HasMaxLength(512)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ConsumerCashbackPercentage).HasColumnType("decimal(19, 2)");
+                entity.Property(e => e.CashbackHint)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.ContactEmail)
                     .IsRequired()
@@ -2700,11 +2702,13 @@ namespace YOY.DAO.Entities.DB
                     .HasMaxLength(2048)
                     .IsUnicode(false);
 
-                entity.Property(e => e.DefaultCommissionFeePercentage).HasColumnType("decimal(19, 2)");
-
                 entity.Property(e => e.Description)
                     .IsRequired()
                     .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DiscountHint)
+                    .HasMaxLength(30)
                     .IsUnicode(false);
 
                 entity.Property(e => e.InStoreDealClaimInstructions)
@@ -2770,6 +2774,10 @@ namespace YOY.DAO.Entities.DB
                     .HasMaxLength(24)
                     .IsUnicode(false);
 
+                entity.Property(e => e.ThumbnailUrl)
+                    .HasMaxLength(512)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.TrialExpiration).HasColumnType("datetime");
 
                 entity.Property(e => e.TypeId).HasDefaultValueSql("((1))");
@@ -2786,6 +2794,11 @@ namespace YOY.DAO.Entities.DB
                     .HasMaxLength(512)
                     .IsUnicode(false);
 
+                entity.HasOne(d => d.CarrouselImgNavigation)
+                    .WithMany(p => p.DeftenantInformationsCarrouselImgNavigation)
+                    .HasForeignKey(d => d.CarrouselImg)
+                    .HasConstraintName("FK_DEFTenantInformations_OLTPImagesCarrouselImg");
+
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.DeftenantInformations)
                     .HasForeignKey(d => d.CategoryId)
@@ -2798,16 +2811,6 @@ namespace YOY.DAO.Entities.DB
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DEFTenantInformations_DEFCountries");
 
-                entity.HasOne(d => d.EmailBgNavigation)
-                    .WithMany(p => p.DeftenantInformationsEmailBgNavigation)
-                    .HasForeignKey(d => d.EmailBg)
-                    .HasConstraintName("FK_DEFTenantInformations_OLTPImagesEmailBg");
-
-                entity.HasOne(d => d.LandingImgNavigation)
-                    .WithMany(p => p.DeftenantInformationsLandingImgNavigation)
-                    .HasForeignKey(d => d.LandingImg)
-                    .HasConstraintName("FK_DEFTenantInformations_OLTPImagesLanding");
-
                 entity.HasOne(d => d.LogoNavigation)
                     .WithMany(p => p.DeftenantInformationsLogoNavigation)
                     .HasForeignKey(d => d.Logo)
@@ -2817,6 +2820,11 @@ namespace YOY.DAO.Entities.DB
                     .WithMany(p => p.DeftenantInformations)
                     .HasForeignKey(d => d.TenantId)
                     .HasConstraintName("FK_DEFTenantInformations_DEFTenants");
+
+                entity.HasOne(d => d.ThumbnailNavigation)
+                    .WithMany(p => p.DeftenantInformationsThumbnailNavigation)
+                    .HasForeignKey(d => d.Thumbnail)
+                    .HasConstraintName("FK_DEFTenantInformations_OLTPImagesThumbnail");
             });
 
             modelBuilder.Entity<DeftenantInfosView>(entity =>
@@ -2841,6 +2849,10 @@ namespace YOY.DAO.Entities.DB
                     .HasMaxLength(512)
                     .IsUnicode(false);
 
+                entity.Property(e => e.CashbackHint)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.CommerceCategoryName)
                     .IsRequired()
                     .HasMaxLength(60)
@@ -2849,8 +2861,6 @@ namespace YOY.DAO.Entities.DB
                 entity.Property(e => e.CommerceClassificationName)
                     .HasMaxLength(60)
                     .IsUnicode(false);
-
-                entity.Property(e => e.ConsumerCashbackPercentage).HasColumnType("decimal(19, 2)");
 
                 entity.Property(e => e.ContactEmail)
                     .IsRequired()
@@ -2887,11 +2897,13 @@ namespace YOY.DAO.Entities.DB
                     .HasMaxLength(2048)
                     .IsUnicode(false);
 
-                entity.Property(e => e.DefaultCommissionFeePercentage).HasColumnType("decimal(19, 2)");
-
                 entity.Property(e => e.Description)
                     .IsRequired()
                     .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DiscountHint)
+                    .HasMaxLength(30)
                     .IsUnicode(false);
 
                 entity.Property(e => e.InStoreDealClaimInstructions)
@@ -2949,6 +2961,10 @@ namespace YOY.DAO.Entities.DB
 
                 entity.Property(e => e.TaxId)
                     .HasMaxLength(24)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ThumbnailUrl)
+                    .HasMaxLength(512)
                     .IsUnicode(false);
 
                 entity.Property(e => e.TrialExpiration).HasColumnType("datetime");
@@ -3087,6 +3103,10 @@ namespace YOY.DAO.Entities.DB
                     .HasMaxLength(60)
                     .IsUnicode(false);
 
+                entity.Property(e => e.ThumbnailUrl)
+                    .HasMaxLength(512)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.WhiteLogoUrl)
                     .HasMaxLength(512)
                     .IsUnicode(false);
@@ -3215,6 +3235,10 @@ namespace YOY.DAO.Entities.DB
                 entity.Property(e => e.State)
                     .IsRequired()
                     .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ThumbnailUrl)
+                    .HasMaxLength(512)
                     .IsUnicode(false);
 
                 entity.Property(e => e.WhiteLogoUrl)
@@ -3635,6 +3659,11 @@ namespace YOY.DAO.Entities.DB
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
+                entity.Property(e => e.ComplementaryHint)
+                    .IsRequired()
+                    .HasMaxLength(22)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Conditions)
                     .HasMaxLength(1024)
                     .IsUnicode(false);
@@ -3653,6 +3682,11 @@ namespace YOY.DAO.Entities.DB
                 entity.Property(e => e.Keywords)
                     .IsRequired()
                     .HasMaxLength(512)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MainHint)
+                    .IsRequired()
+                    .HasMaxLength(10)
                     .IsUnicode(false);
 
                 entity.Property(e => e.MaxValue).HasColumnType("decimal(19, 2)");
@@ -7732,6 +7766,11 @@ namespace YOY.DAO.Entities.DB
 
                 entity.ToTable("TEMPCashIncentivesDisplayContents");
 
+                entity.Property(e => e.ComplementaryHint)
+                    .IsRequired()
+                    .HasMaxLength(22)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Conditions)
                     .HasMaxLength(1024)
                     .IsUnicode(false);
@@ -7753,6 +7792,11 @@ namespace YOY.DAO.Entities.DB
                 entity.Property(e => e.Keywords)
                     .IsRequired()
                     .HasMaxLength(512)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MainHint)
+                    .IsRequired()
+                    .HasMaxLength(10)
                     .IsUnicode(false);
 
                 entity.Property(e => e.MaxValue).HasColumnType("decimal(19, 2)");
@@ -8741,8 +8785,17 @@ namespace YOY.DAO.Entities.DB
                     .HasMaxLength(512)
                     .IsUnicode(false);
 
-                entity.Property(e => e.LogoUrl)
-                    .HasMaxLength(512)
+                entity.Property(e => e.CashbackHint)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CategoryName)
+                    .IsRequired()
+                    .HasMaxLength(60)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DiscountHint)
+                    .HasMaxLength(30)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Name)
@@ -8751,6 +8804,14 @@ namespace YOY.DAO.Entities.DB
                     .IsUnicode(false);
 
                 entity.Property(e => e.Score).HasColumnType("decimal(16, 3)");
+
+                entity.Property(e => e.ThumbnailUrl)
+                    .HasMaxLength(512)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.WhiteLogoUrl)
+                    .HasMaxLength(512)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<TempuserInterestsWithFactor>(entity =>

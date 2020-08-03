@@ -70,6 +70,17 @@
         public const int CashIncentive = 7;
     }
 
+    public static class CellDetailTypes
+    {
+        public const int None = 0;
+        public const int Slide = 1;
+        public const int Category = 2;
+        public const int Commerce = 3;
+        public const int ShoppingMall = 4;
+        public const int Offer = 5;
+        public const int CashIncentive = 6;
+    }
+
     public static class ContentFilterTypes
     {
         public const int None = 0;
@@ -2122,10 +2133,9 @@
     public static class TenantImgTypes
     {
         public const int Logo = 0;
-        public const int LandingImg = 1;
-        public const int EmailBackground = 2;
-        public const int CarrousedImg = 3;
-        public const int WhiteLogo = 4;
+        public const int WhiteLogo = 1;
+        public const int CarrousedImg = 2;
+        public const int Thumbnail = 3;
     }
 
     public static class SavingRouteImgTypes

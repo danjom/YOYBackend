@@ -23,7 +23,7 @@ namespace YOY.DAO.Entities
         private readonly int _utcTimeDiff;
 
         // The unique Id of the fee percentage the tenant has
-        private readonly decimal _feePercentage;
+        private readonly double _feePercentage;
 
         // Instance of Business Objects DAO
         private BusinessObjects _businessObjs;
@@ -54,7 +54,7 @@ namespace YOY.DAO.Entities
             get { return this._utcTimeDiff; } // METHOD GET ENDS
         } // METHOD TENANT ID ----------------------------------------------------------------------------------------------------------------------------------- //
 
-        public decimal FeePercentage
+        public double FeePercentage
         {
             get { return this._feePercentage; } // METHOD GET ENDS
         } // METHOD FEE PERCENTAGE ----------------------------------------------------------------------------------------------------------------------------------- //
@@ -79,7 +79,7 @@ namespace YOY.DAO.Entities
         /// Creates instances of a tenant based on its id.
         /// </summary>
         /// <param name="id"></param>
-        protected Tenant(Guid id, Guid categoryId, string currencySymbol, int timeDiff, decimal feePercentage)
+        protected Tenant(Guid id, Guid categoryId, string currencySymbol, int timeDiff, double feePercentage)
         {
             this._tenantId = id;
             this._tenantCategoryId = categoryId;
@@ -96,7 +96,7 @@ namespace YOY.DAO.Entities
         /// 
         /// </summary>
         /// <returns></returns>
-        public static Tenant GetInstance(Guid tenantId, Guid categoryId, string currencySymbol, int timeDiff, decimal feePercentage)
+        public static Tenant GetInstance(Guid tenantId, Guid categoryId, string currencySymbol, int timeDiff, double feePercentage)
         {
             return new Tenant(tenantId, categoryId, currencySymbol, timeDiff, feePercentage);
         } // METHOD GET INSTANCE ENDS --------------------------------------------------------------------------------------------------------------------------- //

@@ -19,6 +19,8 @@ namespace YOY.DAO.Entities.DB
         public int DealType { get; set; }
         public int MaxCombinedIncentives { get; set; }
         public decimal UnitValue { get; set; }
+        public string MainHint { get; set; }
+        public string ComplementaryHint { get; set; }
         public decimal PreviousUnitValue { get; set; }
         public int MinMembershipLevel { get; set; }
         public decimal MinPurchasedAmount { get; set; }

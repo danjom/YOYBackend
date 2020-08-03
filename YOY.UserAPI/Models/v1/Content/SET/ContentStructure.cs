@@ -8,6 +8,9 @@ namespace YOY.UserAPI.Models.v1.Content.SET
 {
     public class ContentStructure
     {
+        public bool StoreLocally { set; get; }
+        public int MaxMinsToKeepStored { set; get; }
+        public int MaxMetersToKeepStored { set; get; }
         public bool HasOwner { set; get; }
         public Guid CellOwnerId { set; get; }
         public int CellsCount { set; get; }

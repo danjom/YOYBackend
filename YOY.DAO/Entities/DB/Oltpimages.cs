@@ -8,9 +8,9 @@ namespace YOY.DAO.Entities.DB
         public Oltpimages()
         {
             DeffeaturedSlides = new HashSet<DeffeaturedSlides>();
-            DeftenantInformationsEmailBgNavigation = new HashSet<DeftenantInformations>();
-            DeftenantInformationsLandingImgNavigation = new HashSet<DeftenantInformations>();
+            DeftenantInformationsCarrouselImgNavigation = new HashSet<DeftenantInformations>();
             DeftenantInformationsLogoNavigation = new HashSet<DeftenantInformations>();
+            DeftenantInformationsThumbnailNavigation = new HashSet<DeftenantInformations>();
             Oltpbtlcontents = new HashSet<Oltpbtlcontents>();
             OltpofferPreferenceOptions = new HashSet<OltpofferPreferenceOptions>();
             OltpoffersCodeImgNavigation = new HashSet<Oltpoffers>();
@@ -36,9 +36,9 @@ namespace YOY.DAO.Entities.DB
 
         public virtual Deftenants Tenant { get; set; }
         public virtual ICollection<DeffeaturedSlides> DeffeaturedSlides { get; set; }
-        public virtual ICollection<DeftenantInformations> DeftenantInformationsEmailBgNavigation { get; set; }
-        public virtual ICollection<DeftenantInformations> DeftenantInformationsLandingImgNavigation { get; set; }
+        public virtual ICollection<DeftenantInformations> DeftenantInformationsCarrouselImgNavigation { get; set; }
         public virtual ICollection<DeftenantInformations> DeftenantInformationsLogoNavigation { get; set; }
+        public virtual ICollection<DeftenantInformations> DeftenantInformationsThumbnailNavigation { get; set; }
         public virtual ICollection<Oltpbtlcontents> Oltpbtlcontents { get; set; }
         public virtual ICollection<OltpofferPreferenceOptions> OltpofferPreferenceOptions { get; set; }
         public virtual ICollection<Oltpoffers> OltpoffersCodeImgNavigation { get; set; }

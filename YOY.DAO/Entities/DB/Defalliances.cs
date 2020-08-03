@@ -6,16 +6,18 @@ namespace YOY.DAO.Entities.DB
     public partial class Defalliances
     {
         public Guid Id { get; set; }
-        public Guid SponsorId { get; set; }
-        public Guid SponsoredId { get; set; }
-        public int Type { get; set; }
+        public Guid FirstPurchaseTenantId { get; set; }
+        public Guid SecondPurchaseTenantId { get; set; }
+        public int FirstPurchaseReferenceType { get; set; }
+        public Guid FirstPurchaseReferenceId { get; set; }
+        public int SecondPurchaseReferenceType { get; set; }
+        public Guid SecondPurchaseReferenceId { get; set; }
         public bool IsActive { get; set; }
-        public bool Bidirectional { get; set; }
+        public DateTime ExpirationDate { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
-        public DateTime ExpirationDate { get; set; }
 
-        public virtual Deftenants Sponsor { get; set; }
-        public virtual Deftenants Sponsored { get; set; }
+        public virtual Deftenants FirstPurchaseTenant { get; set; }
+        public virtual Deftenants SecondPurchaseTenant { get; set; }
     }
 }

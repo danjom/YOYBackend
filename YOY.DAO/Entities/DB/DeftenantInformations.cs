@@ -18,14 +18,16 @@ namespace YOY.DAO.Entities.DB
         public string AdditionalNotes { get; set; }
         public string Description { get; set; }
         public string Keywords { get; set; }
+        public string DiscountHint { get; set; }
+        public string CashbackHint { get; set; }
         public Guid? Logo { get; set; }
         public string LogoUrl { get; set; }
         public Guid? WhiteLogo { get; set; }
         public string WhiteLogoUrl { get; set; }
         public Guid? CarrouselImg { get; set; }
         public string CarrouselImgUrl { get; set; }
-        public Guid? EmailBg { get; set; }
-        public Guid? LandingImg { get; set; }
+        public Guid? Thumbnail { get; set; }
+        public string ThumbnailUrl { get; set; }
         public int RelevanceStatus { get; set; }
         public Guid CountryId { get; set; }
         public DateTime CreatedDate { get; set; }
@@ -57,16 +59,16 @@ namespace YOY.DAO.Entities.DB
         public int DealsClaimMethod { get; set; }
         public int CheckInType { get; set; }
         public int ReferenceCodeType { get; set; }
-        public decimal DefaultCommissionFeePercentage { get; set; }
-        public decimal ConsumerCashbackPercentage { get; set; }
+        public double DefaultCommissionFeePercentage { get; set; }
+        public double ConsumerCashbackPercentage { get; set; }
         public int ReceiptClaimMarkType { get; set; }
         public bool Deleted { get; set; }
 
+        public virtual Oltpimages CarrouselImgNavigation { get; set; }
         public virtual Oltpcategories Category { get; set; }
         public virtual Defcountries Country { get; set; }
-        public virtual Oltpimages EmailBgNavigation { get; set; }
-        public virtual Oltpimages LandingImgNavigation { get; set; }
         public virtual Oltpimages LogoNavigation { get; set; }
         public virtual Deftenants Tenant { get; set; }
+        public virtual Oltpimages ThumbnailNavigation { get; set; }
     }
 }

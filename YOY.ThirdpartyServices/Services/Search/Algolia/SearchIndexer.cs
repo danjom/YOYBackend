@@ -125,6 +125,28 @@ namespace YOY.ThirdpartyServices.Services.Search.Algolia
             return success;
         }
 
+        public static async Task<bool> UpdateDateRangeAsync(string appName, string indexName, UpdateSearchableObjectDateRange searchableObject)
+        {
+
+            bool success;
+
+            try
+            {
+                Initialize(appName, indexName);
+
+                await index.PartialUpdateObjectAsync(searchableObject);
+
+                success = true;
+            }
+            catch (Exception)
+            {
+                success = false;
+                //TODO ERROR HANDLING
+            }
+
+            return success;
+        }
+
         public static async Task<bool> UpdateCategoryDataAsync(string appName, string indexName, UpdateSearchableObjectCategoryData searchableObject)
         {
 

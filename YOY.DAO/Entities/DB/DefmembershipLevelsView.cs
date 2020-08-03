@@ -8,7 +8,7 @@ namespace YOY.DAO.Entities.DB
         public Guid TenantId { get; set; }
         public string TenantName { get; set; }
         public Guid? TenantLogo { get; set; }
-        public Guid? TenantLandingImg { get; set; }
+        public Guid? TenantThumbnail { get; set; }
         public bool HasMembershipLevels { get; set; }
         public string CurrencySymbol { get; set; }
         public bool AcceptsCommunityPointsAsPayment { get; set; }

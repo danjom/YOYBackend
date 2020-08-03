@@ -14,14 +14,16 @@ namespace YOY.DAO.Entities.DB
         public string PaymentSubject { get; set; }
         public string AdditionalNotes { get; set; }
         public string Description { get; set; }
+        public string DiscountHint { get; set; }
+        public string CashbackHint { get; set; }
         public Guid? Logo { get; set; }
         public string LogoUrl { get; set; }
         public Guid? WhiteLogo { get; set; }
         public string WhiteLogoUrl { get; set; }
         public Guid? CarrouselImg { get; set; }
         public string CarrouselImgUrl { get; set; }
-        public Guid? EmailBg { get; set; }
-        public Guid? LandingImg { get; set; }
+        public Guid? Thumbnail { get; set; }
+        public string ThumbnailUrl { get; set; }
         public Guid CountryId { get; set; }
         public int RelevanceStatus { get; set; }
         public string CountryName { get; set; }
@@ -60,8 +62,8 @@ namespace YOY.DAO.Entities.DB
         public int DealsClaimMethod { get; set; }
         public int CheckInType { get; set; }
         public int ReferenceCodeType { get; set; }
-        public decimal DefaultCommissionFeePercentage { get; set; }
-        public decimal ConsumerCashbackPercentage { get; set; }
+        public double DefaultCommissionFeePercentage { get; set; }
+        public double ConsumerCashbackPercentage { get; set; }
         public bool Released { get; set; }
         public int InstanceType { get; set; }
         public Guid? CommerceClassificationId { get; set; }

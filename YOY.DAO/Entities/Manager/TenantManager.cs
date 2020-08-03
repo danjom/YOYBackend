@@ -385,8 +385,8 @@ namespace YOY.DAO.Entities.Manager
                                         WhiteLogoUrl = tenant.WhiteLogoUrl,
                                         CarrouselImgId = tenant.CarrouselImg,
                                         CarrouselImgUrl = tenant.CarrouselImgUrl,
-                                        EmailsBackground = tenant.EmailBg,
-                                        LandingImg = tenant.LandingImg,
+                                        Thumbnail = tenant.Thumbnail,
+                                        ThumbnailUrl = tenant.ThumbnailUrl,
                                         CountryId = tenant.CountryId,
                                         CountryName = tenant.CountryName,
                                         RelevanceStatus = tenant.RelevanceStatus,
@@ -467,7 +467,8 @@ namespace YOY.DAO.Entities.Manager
                                         WhiteLogoUrl = tenant.WhiteLogoUrl,
                                         CarrouselImgId = tenant.CarrouselImg,
                                         CarrouselImgUrl = tenant.CarrouselImgUrl,
-                                        LandingImg = tenant.LandingImg,
+                                        Thumbnail = tenant.Thumbnail,
+                                        ThumbnailUrl = tenant.ThumbnailUrl,
                                         CountryId = tenant.CountryId,
                                         CountryName = tenant.CountryName,
                                         CurrencySymbol = tenant.CurrencySymbol,
@@ -769,7 +770,8 @@ namespace YOY.DAO.Entities.Manager
                             WhiteLogoUrl = tenant.WhiteLogoUrl,
                             CarrouselImgId = tenant.CarrouselImg,
                             CarrouselImgUrl = tenant.CarrouselImgUrl,
-                            LandingImg = tenant.LandingImg,
+                            Thumbnail = tenant.Thumbnail,
+                            ThumbnailUrl = tenant.ThumbnailUrl,
                             CountryId = tenant.CountryId,
                             CountryName = tenant.CountryName,
                             CurrencySymbol = tenant.CurrencySymbol,
@@ -864,7 +866,8 @@ namespace YOY.DAO.Entities.Manager
                             WhiteLogoUrl = tenant.WhiteLogoUrl,
                             CarrouselImgId = tenant.CarrouselImg,
                             CarrouselImgUrl = tenant.CarrouselImgUrl,
-                            LandingImg = tenant.LandingImg,
+                            Thumbnail = tenant.Thumbnail,
+                            ThumbnailUrl = tenant.ThumbnailUrl,
                             CountryId = tenant.CountryId,
                             CountryName = tenant.CountryName,
                             CurrencySymbol = tenant.CurrencySymbol,
@@ -1013,7 +1016,8 @@ namespace YOY.DAO.Entities.Manager
                             WhiteLogoUrl = tenant.WhiteLogoUrl,
                             CarrouselImgId = tenant.CarrouselImg,
                             CarrouselImgUrl = tenant.CarrouselImgUrl,
-                            LandingImg = tenant.LandingImg,
+                            Thumbnail = tenant.Thumbnail,
+                            ThumbnailUrl = tenant.ThumbnailUrl,
                             CountryId = tenant.CountryId,
                             CountryName = tenant.CountryName,
                             CurrencySymbol = tenant.CurrencySymbol,
@@ -1164,7 +1168,8 @@ namespace YOY.DAO.Entities.Manager
                             WhiteLogoUrl = tenant.WhiteLogoUrl,
                             CarrouselImgId = tenant.CarrouselImg,
                             CarrouselImgUrl = tenant.CarrouselImgUrl,
-                            LandingImg = tenant.LandingImg,
+                            Thumbnail = tenant.Thumbnail,
+                            ThumbnailUrl = tenant.ThumbnailUrl,
                             CountryId = tenant.CountryId,
                             CountryName = tenant.CountryName,
                             CurrencySymbol = tenant.CurrencySymbol,
@@ -1260,8 +1265,8 @@ namespace YOY.DAO.Entities.Manager
                                 WhiteLogoUrl = tenant.WhiteLogoUrl,
                                 CarrouselImgId = tenant.CarrouselImg,
                                 CarrouselImgUrl = tenant.CarrouselImgUrl,
-                                EmailsBackground = tenant.EmailBg,
-                                LandingImg = tenant.LandingImg,
+                                Thumbnail = tenant.Thumbnail,
+                                ThumbnailUrl = tenant.ThumbnailUrl,
                                 CountryId = tenant.CountryId,
                                 CountryName = tenant.CountryName,
                                 RelevanceStatus = tenant.RelevanceStatus,
@@ -1358,8 +1363,8 @@ namespace YOY.DAO.Entities.Manager
                                 WhiteLogoUrl = tenant.WhiteLogoUrl,
                                 CarrouselImgId = tenant.CarrouselImg,
                                 CarrouselImgUrl = tenant.CarrouselImgUrl,
-                                EmailsBackground = tenant.EmailBg,
-                                LandingImg = tenant.LandingImg,
+                                Thumbnail = tenant.Thumbnail,
+                                ThumbnailUrl = tenant.ThumbnailUrl,
                                 CountryId = tenant.CountryId,
                                 CountryName = "",//NOT NEEDED
                                 RelevanceStatus = TenantRelevanceStatuses.None,
@@ -1484,8 +1489,8 @@ namespace YOY.DAO.Entities.Manager
                                     WhiteLogoUrl = tenant.WhiteLogoUrl,
                                     CarrouselImgId = tenant.CarrouselImg,
                                     CarrouselImgUrl = tenant.CarrouselImgUrl,
-                                    EmailsBackground = tenant.EmailBg,
-                                    LandingImg = tenant.LandingImg,
+                                    Thumbnail = tenant.Thumbnail,
+                                    ThumbnailUrl = tenant.ThumbnailUrl,
                                     CountryId = tenant.CountryId,
                                     CountryName = tenant.CountryName,
                                     RelevanceStatus = tenant.RelevanceStatus,
@@ -1556,7 +1561,8 @@ namespace YOY.DAO.Entities.Manager
                                     WhiteLogoUrl = tenant.WhiteLogoUrl,
                                     CarrouselImgId = tenant.CarrouselImg,
                                     CarrouselImgUrl = tenant.CarrouselImgUrl,
-                                    LandingImg = tenant.LandingImg,
+                                    Thumbnail = tenant.Thumbnail,
+                                    ThumbnailUrl = tenant.ThumbnailUrl,
                                     CurrencySymbol = tenant.CurrencySymbol,
                                     CurrencyType = tenant.CurrencyType,
                                     CurrencyTypeName = this.GetCurrencyTypeName(tenant.CurrencyType),
@@ -1631,8 +1637,8 @@ namespace YOY.DAO.Entities.Manager
                                     WhiteLogoUrl = tenant.WhiteLogoUrl,
                                     CarrouselImgId = tenant.CarrouselImg,
                                     CarrouselImgUrl = tenant.CarrouselImgUrl,
-                                    EmailsBackground = tenant.EmailBg,
-                                    LandingImg = tenant.LandingImg,
+                                    Thumbnail = tenant.Thumbnail,
+                                    ThumbnailUrl = tenant.ThumbnailUrl,
                                     CountryId = tenant.CountryId,
                                     CountryName = "",//NOT NEEDED
                                     RelevanceStatus = TenantRelevanceStatuses.None,
@@ -1703,7 +1709,8 @@ namespace YOY.DAO.Entities.Manager
                                     WhiteLogoUrl = tenant.WhiteLogoUrl,
                                     CarrouselImgId = tenant.CarrouselImg,
                                     CarrouselImgUrl = tenant.CarrouselImgUrl,
-                                    LandingImg = tenant.LandingImg,
+                                    Thumbnail = tenant.Thumbnail,
+                                    ThumbnailUrl = tenant.ThumbnailUrl,
                                     CurrencySymbol = tenant.CurrencySymbol,
                                     CurrencyType = tenant.CurrencyType,
                                     CurrencyTypeName = this.GetCurrencyTypeName(tenant.CurrencyType),
@@ -1829,8 +1836,8 @@ namespace YOY.DAO.Entities.Manager
             string incentiveRules, string incentiveConditions, string instoreDealClaimInstructions, string onlineDealClaimInstructions, 
             string phoneDealClaimInstructions, string incentiveClaimInstructions, bool hasMembershipLevels, int typeId, int businessStructureType, 
             int payerType, int referenceCodeType, int language, string website, string campaignTitle, string campaignMsg, int loyaltyProgramType, 
-            bool acceptsCommunityPointsAsPayment, bool acceptsSelfPointsAsPayment, int checkInType, decimal defaultCommissionFeePercentage, 
-            decimal consumerCashbackPercentage, int dealClaimMethod, int relevanceStatus)
+            bool acceptsCommunityPointsAsPayment, bool acceptsSelfPointsAsPayment, int checkInType, double defaultCommissionFeePercentage, 
+            double consumerCashbackPercentage, int dealClaimMethod, int relevanceStatus)
         {
             DeftenantInformations info = null;
             TenantInfo tenantInfo = null;
@@ -1915,8 +1922,8 @@ namespace YOY.DAO.Entities.Manager
                             WhiteLogoUrl = tenant.WhiteLogoUrl,
                             CarrouselImgId = tenant.CarrouselImg,
                             CarrouselImgUrl = tenant.CarrouselImgUrl,
-                            EmailsBackground = tenant.EmailBg,
-                            LandingImg = tenant.LandingImg,
+                            Thumbnail = tenant.Thumbnail,
+                            ThumbnailUrl = tenant.ThumbnailUrl,
                             CountryId = tenant.CountryId,
                             CountryName = tenant.CountryName,
                             RelevanceStatus = tenant.RelevanceStatus,
@@ -2023,7 +2030,7 @@ namespace YOY.DAO.Entities.Manager
             string dealRules, string dealConditions, string incentiveRules, string incentiveConditions, string instoreDealClaimInstructions, string onlineDealClaimInstructions, 
             string phoneDealClaimInstructions, string incentiveClaimInstructions, bool hasMembershipLevel, int typeId, int businessStructureType, int payerType, 
             int referenceCodeType, string campaignTitle, string campaignMsg, int loyaltyProgramType, bool acceptsCommunityPointsAsPayment, bool acceptsSelfPointsAsPayment, 
-            int checkInType, decimal defaultCommissionFeePercentage, decimal consumerCashbackPercentage, int dealClaimMethod, int relevanceStatus)
+            int checkInType, double defaultCommissionFeePercentage, double consumerCashbackPercentage, int dealClaimMethod, int relevanceStatus)
         {
             DeftenantInformations info = null;
             TenantInfo tenantInfo = null;
@@ -2107,8 +2114,8 @@ namespace YOY.DAO.Entities.Manager
                                 WhiteLogoUrl = tenant.WhiteLogoUrl,
                                 CarrouselImgId = tenant.CarrouselImg,
                                 CarrouselImgUrl = tenant.CarrouselImgUrl,
-                                EmailsBackground = tenant.EmailBg,
-                                LandingImg = tenant.LandingImg,
+                                Thumbnail = tenant.Thumbnail,
+                                ThumbnailUrl = tenant.ThumbnailUrl,
                                 CountryId = tenant.CountryId,
                                 CountryName = tenant.CountryName,
                                 RelevanceStatus = tenant.RelevanceStatus,
@@ -2273,17 +2280,11 @@ namespace YOY.DAO.Entities.Manager
                             tenant.UpdatedDate = DateTime.UtcNow;
 
                             break;
-                        case TenantImgTypes.LandingImg:
+                        case TenantImgTypes.WhiteLogo:
 
-                            currentImgId = tenant.LandingImg;
-                            tenant.LandingImg = imgId;
-                            tenant.UpdatedDate = DateTime.UtcNow;
-
-                            break;
-                        case TenantImgTypes.EmailBackground:
-
-                            currentImgId = tenant.EmailBg;
-                            tenant.EmailBg = imgId;
+                            currentImgId = tenant.WhiteLogo;
+                            tenant.WhiteLogo = imgId;
+                            tenant.WhiteLogoUrl = imgUrl;
                             tenant.UpdatedDate = DateTime.UtcNow;
 
                             break;
@@ -2295,11 +2296,11 @@ namespace YOY.DAO.Entities.Manager
                             tenant.UpdatedDate = DateTime.UtcNow;
 
                             break;
-                        case TenantImgTypes.WhiteLogo:
+                        case TenantImgTypes.Thumbnail:
 
-                            currentImgId = tenant.WhiteLogo;
-                            tenant.WhiteLogo = imgId;
-                            tenant.WhiteLogoUrl = imgUrl;
+                            currentImgId = tenant.Thumbnail;
+                            tenant.Thumbnail = imgId;
+                            tenant.ThumbnailUrl = imgUrl;
                             tenant.UpdatedDate = DateTime.UtcNow;
 
                             break;
@@ -2359,6 +2360,159 @@ namespace YOY.DAO.Entities.Manager
             return success;
         }
 
+
+        #endregion
+
+        #region TENANTDISPLAY
+
+        public List<TenantDisplayData> GetTenantsDisplayData(string userId, Guid countryId, double latitude, double longitude, double radius, int pageSize, int pageNumber)
+        {
+            List<TenantDisplayData> displayData = null;
+
+            var query = from x in this._businessObjects.FuncsHandler.GetTenantsForUserByGeoLocation(latitude, longitude, radius, countryId, userId, pageSize, pageNumber)
+                        orderby x.Score descending, x.Relevance descending, x.Name ascending
+                        select x;
+
+            if (query != null)
+            {
+                displayData = new List<TenantDisplayData>();
+                TenantDisplayData tenant = null;
+                foreach (TemptenantDisplayContents item in query)
+                {
+                    tenant = new TenantDisplayData()
+                    {
+                        TenantId = item.TenantId,
+                        Name = item.Name,
+                        CategoryName = item.CategoryName,
+                        WhiteLogoUrl = item.WhiteLogoUrl,
+                        CarrouselImgUrl = item.CarrouselImgUrl,
+                        ThumbnailUrl = item.ThumbnailUrl,
+                        DiscountHint = item.DiscountHint
+                    };
+
+                    if (!string.IsNullOrWhiteSpace(item.CashbackHint))
+                    {
+                        tenant.CashbackHint = item.CashbackHint;
+                    }
+                    else
+                    {
+                        tenant.CashbackHint = item.PurchaseCashback + "% CASHBACK";
+                    }
+
+                    displayData.Add(tenant);
+                }
+            }
+
+            return displayData;
+        }
+
+        public List<TenantDisplayData> GetTenantsDisplayData(string userId, Guid countryId, Guid stateId, int contentSegmentationType, int pageSize, int pageNumber)
+        {
+            List<TenantDisplayData> displayData = null;
+
+            var query = (dynamic)null;
+
+            switch (contentSegmentationType)
+            {
+                case GeoSegmentationTypes.Country:
+                    query = from x in this._businessObjects.FuncsHandler.GetTenantsForUserByCountry(userId, countryId, pageSize, pageNumber)
+                            orderby x.Score descending, x.Relevance descending, x.Name ascending
+                            select x;
+                    break;
+                case GeoSegmentationTypes.State:
+                    query = from x in this._businessObjects.FuncsHandler.GetTenantsForUserByState(userId, countryId, stateId, pageSize, pageNumber)
+                            orderby x.Score descending, x.Relevance descending, x.Name ascending
+                            select x;
+                    break;
+            }
+
+            if (query != null)
+            {
+                displayData = new List<TenantDisplayData>();
+                TenantDisplayData tenant = null;
+                foreach (TemptenantDisplayContents item in query)
+                {
+                    tenant = new TenantDisplayData()
+                    {
+                        TenantId = item.TenantId,
+                        Name = item.Name,
+                        CategoryName = item.CategoryName,
+                        WhiteLogoUrl = item.WhiteLogoUrl,
+                        CarrouselImgUrl = item.CarrouselImgUrl,
+                        ThumbnailUrl = item.ThumbnailUrl,
+                        DiscountHint = item.DiscountHint
+                    };
+
+                    if (!string.IsNullOrWhiteSpace(item.CashbackHint))
+                    {
+                        tenant.CashbackHint = item.CashbackHint;
+                    }
+                    else
+                    {
+                        tenant.CashbackHint = item.PurchaseCashback + "% CASHBACK";
+                    }
+
+                    displayData.Add(tenant);
+                }
+            }
+
+            return displayData;
+        }
+
+        public List<TenantDisplayData> GetTenantsDisplayData(string userId, Guid countryId, Guid stateId, int contentSegmentationType, double latitude, double longitude, double radius, int pageSize, int pageNumber)
+        {
+            List<TenantDisplayData> displayData = null;
+
+            var query = (dynamic)null;
+
+            switch (contentSegmentationType)
+            {
+                case GeoSegmentationTypes.Country:
+
+                    query = from x in this._businessObjects.FuncsHandler.GetTenantsForUserByCountryAndLocation(latitude, longitude, radius, userId, stateId, pageSize, pageNumber)
+                            orderby x.Score descending, x.Relevance descending, x.Name ascending
+                            select x;
+                    break;
+                case GeoSegmentationTypes.State:
+
+                    query = from x in this._businessObjects.FuncsHandler.GetTenantsForUserByStateAndLocation(latitude, longitude, radius, userId, countryId, stateId, pageSize, pageNumber)
+                            orderby x.Score descending, x.Relevance descending, x.Name ascending
+                            select x;
+                    break;
+            }
+
+            if (query != null)
+            {
+                displayData = new List<TenantDisplayData>();
+                TenantDisplayData tenant = null;
+                foreach (TemptenantDisplayContents item in query)
+                {
+                    tenant = new TenantDisplayData()
+                    {
+                        TenantId = item.TenantId,
+                        Name = item.Name,
+                        CategoryName = item.CategoryName,
+                        WhiteLogoUrl = item.WhiteLogoUrl,
+                        CarrouselImgUrl = item.CarrouselImgUrl,
+                        ThumbnailUrl = item.ThumbnailUrl,
+                        DiscountHint = item.DiscountHint
+                    };
+
+                    if (!string.IsNullOrWhiteSpace(item.CashbackHint))
+                    {
+                        tenant.CashbackHint = item.CashbackHint;
+                    }
+                    else
+                    {
+                        tenant.CashbackHint = item.PurchaseCashback + "% CASHBACK";
+                    }
+
+                    displayData.Add(tenant);
+                }
+            }
+
+            return displayData;
+        }
 
         #endregion
 

@@ -1306,7 +1306,7 @@ namespace YOY.BusinessAPI.Controllers
                             response.MessageToDisplay = "La promo ha sido desactivada éxitosamente";
                         }
 
-                        result = Ok(response);
+                        result = Ok(this.GetDealContent(updatedOffer, updatedOffer.OfferType));
                     }
                     else
                     {
@@ -1327,13 +1327,137 @@ namespace YOY.BusinessAPI.Controllers
             return result;
         }
 
+        [Route("putDates")]
+        [HttpPut]
+        [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status200OK)]
+        [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> PutDatesAsync([FromBody] DealDatesModifier model)
+        {
+            int callId = 5;
+            string parameters = model.ToString();
+            string errorMsg;
+
+            IActionResult result;
+
+            Initialize(model.TenantId, model.UserId);
+
+            if (!ModelState.IsValid)
+            {
+                errorMsg = "ERROR: Invalid data received, " + parameters;
+
+                //Registers the invalid call
+                this._businessObjects.HttpcallInvokationLogs.Post(model.EmployeeId.ToString(), this.GetType().Name, callId, controllerVersion,
+                                    Values.StatusCodes.BadRequest, 0, parameters, 0, 0, false, null, HttpcallTypes.Put, errorMsg);
+
+                result = new BadRequestObjectResult(
+                                new ErrorResponse
+                                {
+                                    ErrorCode = Values.StatusCodes.BadRequest,
+                                    ShowErrorToUser = false,
+                                    InnerError = "Invalid Payload",
+                                    PublicError = ""
+                                });
+
+            }
+            else
+            {
+
+                try
+                {
+                    bool valid = true;
+                    string dataErrors = "";
+
+                    if (model.ReleaseDate >= model.ExpirationDate)
+                    {
+                        valid = false;
+                        dataErrors += "-El periodo de validez es incorrecto, la fecha de lanzamiento debe ser menor que la fecha de expiración\n";
+                    }
+
+                    if (valid)
+                    {
+                        //Need to convert dates to UTC
+                        model.ReleaseDate = LocalToUtc(model.ReleaseDate, this._businessObjects.Tenant.UtcTimeDiff);
+                        model.ExpirationDate = LocalToUtc(model.ExpirationDate, this._businessObjects.Tenant.UtcTimeDiff);
+
+                        bool datesUpdated = this._businessObjects.Offers.Put(model.Id, model.OfferType, model.ReleaseDate, model.ExpirationDate);
+
+                        if (datesUpdated)
+                        {
+                            Offer updatedOffer = this._businessObjects.Offers.Get(model.Id, model.OfferType, true);
+
+                            //Needs to update it to Algolia
+                            if (updatedOffer.DisplayType < DisplayTypes.BroadcastingOnly)//If the offer will be publicly accessible
+                            {
+
+                                string indexName;
+
+                                if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+                                {
+                                    indexName = SearchIndexNames.DevAppend + SearchIndexNames.GeneralContent;
+
+                                }
+                                else
+                                {
+                                    indexName = SearchIndexNames.ProdAppend + SearchIndexNames.GeneralContent;
+                                }
+
+                                SearchObjectHandler.SetParams(SearchIndexNames.AppName, indexName);
+
+                                bool success = await SearchObjectHandler.UpdateSearchableObjectDateRangeAsync(updatedOffer.Id, updatedOffer.ReleaseDate, updatedOffer.ExpirationDate);
+                            }
+
+                            SuccessResponse response = new SuccessResponse
+                            {
+                                StatusCode = Values.StatusCodes.Ok,
+                                ShowMsgToUser = true,
+                            };
+
+                            if (datesUpdated)
+                            {
+                                response.MessageToDisplay = "Las fechas de vigencia se actualizaron éxitosamente";
+                            }
+
+                            result = Ok(this.GetDealContent(updatedOffer, updatedOffer.OfferType));
+                        }
+                        else
+                        {
+                            result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
+                        }
+                    }
+                    else
+                    {
+                        result = new BadRequestObjectResult(
+                                    new ErrorResponse
+                                    {
+                                        ErrorCode = Values.StatusCodes.BadRequest,
+                                        ShowErrorToUser = false,
+                                        InnerError = "Invalid Payload",
+                                        PublicError = dataErrors
+                                    });
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
+
+                    //Registers the invalid call
+                    this._businessObjects.HttpcallInvokationLogs.Post(model.EmployeeId.ToString(), this.GetType().Name, callId, controllerVersion,
+                                        Values.StatusCodes.InternalServerError, 0, parameters, 0, 0, false, null, HttpcallTypes.Put, e.InnerException != null ? e.InnerException.Message : e.Message);
+                }
+
+            }
+
+            return result;
+        }
+
         [Route("delete")]
         [HttpDelete]
         [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status200OK)]
         [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeleteAsync([FromBody] DealModifierById model)
         {
-            int callId = 5;
+            int callId = 6;
             string parameters = model.ToString();
             string errorMsg;
 

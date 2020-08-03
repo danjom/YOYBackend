@@ -7,8 +7,8 @@ namespace YOY.DAO.Entities.DB
     {
         public Deftenants()
         {
-            DefalliancesSponsor = new HashSet<Defalliances>();
-            DefalliancesSponsored = new HashSet<Defalliances>();
+            DefalliancesFirstPurchaseTenant = new HashSet<Defalliances>();
+            DefalliancesSecondPurchaseTenant = new HashSet<Defalliances>();
             DefbankingInfos = new HashSet<DefbankingInfos>();
             Defbranches = new HashSet<Defbranches>();
             Defbroadcasters = new HashSet<Defbroadcasters>();
@@ -52,8 +52,8 @@ namespace YOY.DAO.Entities.DB
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
 
-        public virtual ICollection<Defalliances> DefalliancesSponsor { get; set; }
-        public virtual ICollection<Defalliances> DefalliancesSponsored { get; set; }
+        public virtual ICollection<Defalliances> DefalliancesFirstPurchaseTenant { get; set; }
+        public virtual ICollection<Defalliances> DefalliancesSecondPurchaseTenant { get; set; }
         public virtual ICollection<DefbankingInfos> DefbankingInfos { get; set; }
         public virtual ICollection<Defbranches> Defbranches { get; set; }
         public virtual ICollection<Defbroadcasters> Defbroadcasters { get; set; }

@@ -17,7 +17,8 @@ namespace YOY.DTO.Entities.Misc.TenantData
         public string WhiteLogoUrl { set; get; }
         public Guid? CarrouselImgId { set; get; }
         public string CarrouselImgUrl { set; get; }
-        public Guid? LandingImg { set; get; }
+        public Guid? Thumbnail { set; get; }
+        public string ThumbnailUrl { set; get; }
         public string Name { set; get; }
         public string CategoryName { set; get; }
         public bool IsActive { set; get; }
@@ -39,8 +40,8 @@ namespace YOY.DTO.Entities.Misc.TenantData
         public bool AcceptsSelfPointsAsPayment { set; get; }
         public int CheckInType { set; get; }
         public int ReferenceCodeType { set; get; }
-        public decimal DefaultCommissionFeePercentage { set; get; }
-        public decimal ConsumerCashbackPercentage { set; get; }
+        public double DefaultCommissionFeePercentage { set; get; }
+        public double ConsumerCashbackPercentage { set; get; }
         public int DealClaimMethod { set; get; }
     }
 }

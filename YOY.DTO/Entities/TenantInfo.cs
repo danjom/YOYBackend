@@ -22,8 +22,8 @@ namespace YOY.DTO.Entities
         public string WhiteLogoUrl { set; get; }
         public Guid? CarrouselImgId { set; get; }
         public string CarrouselImgUrl { set; get; }
-        public Guid? EmailsBackground { set; get; }
-        public Guid? LandingImg { set; get; }
+        public Guid? Thumbnail { set; get; }
+        public string ThumbnailUrl { set; get; }
         public Guid CountryId { set; get; }
         public string CountryName { set; get; }
         public int RelevanceStatus { set; get; }
@@ -74,8 +74,8 @@ namespace YOY.DTO.Entities
         public string CheckInTypeName { set; get; }
         public int ReferenceCodeType { set; get; }
         public string ReferenceCodeTypeName { set; get; }
-        public decimal DefaultCommissionFeePercentage { set; get; }
-        public decimal ConsumerCashbackPercentage { set; get; }
+        public double DefaultCommissionFeePercentage { set; get; }
+        public double ConsumerCashbackPercentage { set; get; }
         public int DealClaimMethod { set; get; }
         public string DealClaimMethodName { set; get; }
     }

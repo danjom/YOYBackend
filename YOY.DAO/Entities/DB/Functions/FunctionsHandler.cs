@@ -847,9 +847,12 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                //An independen context is created beacuse this is part of a multithreading logic
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var userIdParam = new SqlParameter("userId", userId);
 
-                temppreferences = dbContext.Set<Temppreferences>().FromSqlRaw("SELECT * FROM [dbo].[GetCategoryPreferences](@userId)", new[] { userIdParam }).ToList();
+                temppreferences = context.Set<Temppreferences>().FromSqlRaw("SELECT * FROM [dbo].[GetCategoryPreferences](@userId)", new[] { userIdParam }).ToList();
             }
             catch (Exception e)
             {
@@ -1202,12 +1205,15 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                //An independen context is created beacuse this is part of a multithreading logic
+                yoyIj7qM58dCjContext context  = new yoyIj7qM58dCjContext();
+
                 var userIdParam = new SqlParameter("userId", userId);
                 var countryIdParam = new SqlParameter("countryId", countryId);
                 var pageSizeParam = new SqlParameter("pageSize", pageSize);
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
-                temptenants = dbContext.Set<TemptenantDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetTenantsForUserByCountry](@userId, @countryId, @pageSize, @pageNumber)", new[] { userIdParam, countryIdParam, pageSizeParam, pageNumberParam }).ToList();
+                temptenants = context.Set<TemptenantDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetTenantsForUserByCountry](@userId, @countryId, @pageSize, @pageNumber)", new[] { userIdParam, countryIdParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -1228,6 +1234,9 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                //An independen context is created beacuse this is part of a multithreading logic
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var latitudeParam = new SqlParameter("latitude", latitude);
                 var longitudeParam = new SqlParameter("longitude", longitude);
                 var radiusParam = new SqlParameter("radius", radius);
@@ -1236,7 +1245,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageSizeParam = new SqlParameter("pageSize", pageSize);
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
-                temptenants = dbContext.Set<TemptenantDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetTenantsForUserByCountryAndLocation](@latitude, @longitude, @radius, @userId, @countryId, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, userIdParam, countryIdParam, pageSizeParam, pageNumberParam }).ToList();
+                temptenants = context.Set<TemptenantDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetTenantsForUserByCountryAndLocation](@latitude, @longitude, @radius, @userId, @countryId, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, userIdParam, countryIdParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -1256,6 +1265,9 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                //An independen context is created beacuse this is part of a multithreading logic
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var latitudeParam = new SqlParameter("latitude", latitude);
                 var longitudeParam = new SqlParameter("longitude", longitude);
                 var radiusParam = new SqlParameter("radius", radius);
@@ -1264,7 +1276,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageSizeParam = new SqlParameter("pageSize", pageSize);
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
-                temptenants = dbContext.Set<TemptenantDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetTenantsForUserByGeoLocation](@latitude, @longitude, @radius, @countryId, @userId, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, userIdParam, pageSizeParam, pageNumberParam }).ToList();
+                temptenants = context.Set<TemptenantDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetTenantsForUserByGeoLocation](@latitude, @longitude, @radius, @countryId, @userId, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, userIdParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -1284,13 +1296,16 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                //An independen context is created beacuse this is part of a multithreading logic
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var userIdParam = new SqlParameter("userId", userId);
                 var countryIdParam = new SqlParameter("countryId", countryId);
                 var stateIdParam = new SqlParameter("stateId", stateId);
                 var pageSizeParam = new SqlParameter("pageSize", pageSize);
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
-                temptenants = dbContext.Set<TemptenantDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetTenantsForUserByState](@userId, @countryId, @stateId, @pageSize, @pageNumber)", new[] { userIdParam, countryIdParam, stateIdParam, pageSizeParam, pageNumberParam }).ToList();
+                temptenants = context.Set<TemptenantDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetTenantsForUserByState](@userId, @countryId, @stateId, @pageSize, @pageNumber)", new[] { userIdParam, countryIdParam, stateIdParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -1310,6 +1325,9 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                //An independen context is created beacuse this is part of a multithreading logic
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var latitudeParam = new SqlParameter("latitude", latitude);
                 var longitudeParam = new SqlParameter("longitude", longitude);
                 var radiusParam = new SqlParameter("radius", radius);
@@ -1319,7 +1337,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageSizeParam = new SqlParameter("pageSize", pageSize);
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
-                temptenants = dbContext.Set<TemptenantDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetTenantsForUserByStateAndLocation](@latitude, @longitude, @radius, @userId, @countryId, @stateId, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, userIdParam, countryIdParam, stateIdParam, pageSizeParam, pageNumberParam }).ToList();
+                temptenants = context.Set<TemptenantDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetTenantsForUserByStateAndLocation](@latitude, @longitude, @radius, @userId, @countryId, @stateId, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, userIdParam, countryIdParam, stateIdParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {

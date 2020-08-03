@@ -143,6 +143,34 @@ namespace YOY.BusinessAPI.Handlers.Search
             return success;
         }
 
+
+
+        public static async Task<bool> UpdateSearchableObjectDateRangeAsync(Guid id, DateTime releaseDate, DateTime? expirationDate)
+        {
+            bool success = false;
+
+            try
+            {
+
+                UpdateSearchableObjectDateRange obj = new UpdateSearchableObjectDateRange
+                {
+                    ObjectID = id + "",
+                    ReleaseDate = DateTimeToUnixTimestamp(releaseDate),
+                    ExpirationDate = expirationDate != null ? DateTimeToUnixTimestamp((DateTime)expirationDate) : DateTimeToUnixTimestamp(DateTime.MaxValue)
+                };
+
+                if (!string.IsNullOrEmpty(appName) && !string.IsNullOrEmpty(indexName))
+                    success = await SearchIndexer.UpdateDateRangeAsync(appName, indexName, obj);
+            }
+            catch (Exception)
+            {
+                success = false;
+                //TODO ERROR HANDLER
+            }
+
+            return success;
+        }
+
         public static async Task<bool> UpdateSearchableObjectCategoryDataAsync(Guid id, string categories, string classifications)
         {
             bool success = false;

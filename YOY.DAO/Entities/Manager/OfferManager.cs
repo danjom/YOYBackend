@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YOY.DAO.Entities.DB;
+using Org.BouncyCastle.Math.EC.Rfc7748;
 
 namespace YOY.DAO.Entities.Manager
 {
@@ -4166,6 +4167,59 @@ namespace YOY.DAO.Entities.Manager
 
             return result;
         }//METHOD PUT ENDS ------------------------------------------------------------------------------------------------------------------------------ //
+
+        public bool Put(Guid id, int offerType, DateTime releaseDate, DateTime expirationDate)
+        {
+            bool success = false;
+
+            try
+            {
+                Oltpoffers offer = (from x in this._businessObjects.Context.Oltpoffers
+                                    where x.OfferType == offerType && x.TenantId == this._businessObjects.Tenant.TenantId && x.Id == id
+                                    select x).FirstOrDefault();
+
+                if (offer != null)
+                {
+
+                    if (offer.ReleaseDate > DateTime.UtcNow && offer.ExpirationDate > DateTime.UtcNow)
+                    {
+                        offer.ReleaseDate = releaseDate;
+                        offer.ExpirationDate = expirationDate;
+                    }
+                    else
+                    {
+                        if (offer.ReleaseDate <= DateTime.UtcNow && offer.ExpirationDate > DateTime.UtcNow)
+                        {
+                            offer.ExpirationDate = expirationDate;
+                        }
+                        else
+                        {
+                            if (offer.ExpirationDate <= DateTime.UtcNow)
+                            {
+                                offer.ReleaseDate = releaseDate;
+                                offer.ExpirationDate = expirationDate;
+                            }
+                        }
+
+                    }
+
+                    this._businessObjects.Context.SaveChanges();
+
+                    success = true;
+                }
+
+            }
+            catch (Exception e)
+            {
+                success = false;
+                //ERROR HANDLING
+                this._businessObjects.StoredProcsHandler.AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return success;
+        }//METHOD PUT ENDS ------------------------------------------------------------------------------------------------------------------------------ //
+
 
         /// <summary>
         /// Changes a state
