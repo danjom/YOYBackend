@@ -183,9 +183,68 @@ namespace YOY.DAO.Entities.DB.Functions
 
         }
 
-        public List<TempoffersPreferenceBranches> GetAvailableOffersByCountryForPreference(Guid countryId, string userId, Guid preferenceId, int offerPurpose, DateTime dateTime)
+        public List<TempofferDisplayContents> GetAvailableOffersByCountryBranchHolderFocus(Guid countryId, string userId, int offerPurpose, DateTime dateTime, int pageSize, int pageNumber)
         {
-            List<TempoffersPreferenceBranches> tempoffers;
+            List<TempofferDisplayContents> tempoffers;
+
+            try
+            {
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var userIdParam = new SqlParameter("userId", userId);
+                var offerPurposeParam = new SqlParameter("offerPurpose", offerPurpose);
+                var dateTimeParam = new SqlParameter("dateTime", dateTime);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
+
+                //Processing
+                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryBranchHolderFocus]( @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                tempoffers = null;
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return tempoffers;
+
+
+        }
+
+        public List<TempofferDisplayContents> GetAvailableOffersByCountryForBranchHolder(Guid countryId, string userId, Guid branchHolderId, int offerPurpose, DateTime dateTime, int pageSize, int pageNumber)
+        {
+            List<TempofferDisplayContents> tempoffers;
+
+            try
+            {
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var userIdParam = new SqlParameter("userId", userId);
+                var branchHolderIdParam = new SqlParameter("branchHolderId", branchHolderId);
+                var offerPurposeParam = new SqlParameter("offerPurpose", offerPurpose);
+                var dateTimeParam = new SqlParameter("dateTime", dateTime);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
+
+                //Processing
+                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryForBranchHolder]( @countryId, @userId, @branchHolderId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, branchHolderIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                tempoffers = null;
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return tempoffers;
+
+
+        }
+
+        public List<TempofferDisplayContents> GetAvailableOffersByCountryForPreference(Guid countryId, string userId, Guid preferenceId, int offerPurpose, DateTime dateTime, int pageSize, int pageNumber)
+        {
+            List<TempofferDisplayContents> tempoffers;
 
             try
             {
@@ -194,9 +253,11 @@ namespace YOY.DAO.Entities.DB.Functions
                 var preferenceIdParam = new SqlParameter("preferenceId", preferenceId);
                 var offerPurposeParam = new SqlParameter("offerPurpose", offerPurpose);
                 var dateTimeParam = new SqlParameter("dateTime", dateTime);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempoffers = dbContext.Set<TempoffersPreferenceBranches>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryForPreference]( @countryId, @userId, @preferenceId, @offerPurpose, @dateTime)", new[] { countryIdParam, userIdParam, preferenceIdParam, offerPurposeParam, dateTimeParam }).ToList();
+                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryForPreference]( @countryId, @userId, @preferenceId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, preferenceIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -211,9 +272,9 @@ namespace YOY.DAO.Entities.DB.Functions
 
         }
 
-        public List<TempoffersPreferenceBranches> GetAvailableOffersByCountryForTenant(Guid countryId, string userId, Guid tenantId, int offerPurpose, DateTime dateTime)
+        public List<TempofferDisplayContents> GetAvailableOffersByCountryForTenant(Guid countryId, string userId, Guid tenantId, int offerPurpose, DateTime dateTime, int pageSize, int pageNumber)
         {
-            List<TempoffersPreferenceBranches> tempoffers;
+            List<TempofferDisplayContents> tempoffers;
 
             try
             {
@@ -222,9 +283,11 @@ namespace YOY.DAO.Entities.DB.Functions
                 var tenantIdParam = new SqlParameter("tenantId", tenantId);
                 var offerPurposeParam = new SqlParameter("offerPurpose", offerPurpose);
                 var dateTimeParam = new SqlParameter("dateTime", dateTime);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempoffers = dbContext.Set<TempoffersPreferenceBranches>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryForTenant]( @countryId, @userId, @tenantId, @offerPurpose, @dateTime)", new[] { countryIdParam, userIdParam, tenantIdParam, offerPurposeParam, dateTimeParam }).ToList();
+                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryForTenant]( @countryId, @userId, @tenantId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, tenantIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -239,9 +302,9 @@ namespace YOY.DAO.Entities.DB.Functions
 
         }
 
-        public List<TempoffersPreferenceBranches> GetAvailableOffersByCountryPreferenceFocus(Guid countryId, string userId, int offerPurpose, DateTime dateTime)
+        public List<TempofferDisplayContents> GetAvailableOffersByCountryPreferenceFocus(Guid countryId, string userId, int offerPurpose, DateTime dateTime, int pageSize, int pageNumber)
         {
-            List<TempoffersPreferenceBranches> tempoffers;
+            List<TempofferDisplayContents> tempoffers;
 
             try
             {
@@ -249,9 +312,71 @@ namespace YOY.DAO.Entities.DB.Functions
                 var userIdParam = new SqlParameter("userId", userId);
                 var offerPurposeParam = new SqlParameter("offerPurpose", offerPurpose);
                 var dateTimeParam = new SqlParameter("dateTime", dateTime);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempoffers = dbContext.Set<TempoffersPreferenceBranches>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryPreferenceFocus]( @countryId, @userId, @offerPurpose, @dateTime)", new[] { countryIdParam, userIdParam, offerPurposeParam, dateTimeParam }).ToList();
+                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryPreferenceFocus]( @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                tempoffers = null;
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return tempoffers;
+
+        }
+
+        public List<TempofferDisplayContents> GetAvailableOffersByCountryTenantFocus(Guid countryId, string userId, int offerPurpose, DateTime dateTime, int pageSize, int pageNumber)
+        {
+            List<TempofferDisplayContents> tempoffers;
+
+            try
+            {
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var userIdParam = new SqlParameter("userId", userId);
+                var offerPurposeParam = new SqlParameter("offerPurpose", offerPurpose);
+                var dateTimeParam = new SqlParameter("dateTime", dateTime);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
+
+                //Processing
+                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryTenantFocus]( @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                tempoffers = null;
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return tempoffers;
+
+
+        }
+
+        public List<TempofferDisplayContents> GetAvailableOffersByCountryWithLocationBranchHolderFocus(decimal latitude, decimal longitude, double radius, Guid countryId, string userId, int offerPurpose, DateTime dateTime, int pageSize, int pageNumber)
+        {
+            List<TempofferDisplayContents> tempoffers;
+
+            try
+            {
+                var latitudeParam = new SqlParameter("latitude", latitude);
+                var longitudeParam = new SqlParameter("longitude", longitude);
+                var radiusParam = new SqlParameter("radius", radius);
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var userIdParam = new SqlParameter("userId", userId);
+                var offerPurposeParam = new SqlParameter("offerPurpose", offerPurpose);
+                var dateTimeParam = new SqlParameter("dateTime", dateTime);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
+
+                //Processing
+                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryWithLocationBranchHolderFocus](@latitude, @longitude, @radius, @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -282,33 +407,6 @@ namespace YOY.DAO.Entities.DB.Functions
 
                 //Processing
                 tempoffers = dbContext.Set<TempoffersPreferenceBranches>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryWithLocationPreferenceFocus](@latitude, @longitude, @radius, @countryId, @userId, @offerPurpose, @dateTime)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, userIdParam, offerPurposeParam, dateTimeParam }).ToList();
-            }
-            catch (Exception e)
-            {
-                tempoffers = null;
-                //ERROR HANDLING
-                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
-
-            }
-
-            return tempoffers;
-
-
-        }
-
-        public List<TempoffersPreferenceBranches> GetAvailableOffersByCountryTenantFocus(Guid countryId, string userId, int offerPurpose, DateTime dateTime)
-        {
-            List<TempoffersPreferenceBranches> tempoffers;
-
-            try
-            {
-                var countryIdParam = new SqlParameter("countryId", countryId);
-                var userIdParam = new SqlParameter("userId", userId);
-                var offerPurposeParam = new SqlParameter("offerPurpose", offerPurpose);
-                var dateTimeParam = new SqlParameter("dateTime", dateTime);
-
-                //Processing
-                tempoffers = dbContext.Set<TempoffersPreferenceBranches>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryTenantFocus]( @countryId, @userId, @offerPurpose, @dateTime)", new[] { countryIdParam, userIdParam, offerPurposeParam, dateTimeParam }).ToList();
             }
             catch (Exception e)
             {
@@ -616,9 +714,9 @@ namespace YOY.DAO.Entities.DB.Functions
         }
 
 
-        public List<TemptenantDisplayContents> GetBranchHoldersByCountry(Guid countryId, int pageSize, int pageNumber)
+        public List<TempbranchHolderDisplayContents> GetBranchHoldersByCountry(Guid countryId, int pageSize, int pageNumber)
         {
-            List<TemptenantDisplayContents> temptenants;
+            List<TempbranchHolderDisplayContents> tempbranchHolders;
 
             try
             {
@@ -626,24 +724,24 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageSizeParam = new SqlParameter("pageSize", pageSize);
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
-                temptenants = dbContext.Set<TemptenantDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetBranchHoldersByCountry](@countryId, @pageSize, @pageNumber)", new[] { countryIdParam, pageSizeParam, pageNumberParam }).ToList();
+                tempbranchHolders = dbContext.Set<TempbranchHolderDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetBranchHoldersByCountry](@countryId, @pageSize, @pageNumber)", new[] { countryIdParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
-                temptenants = null;
+                tempbranchHolders = null;
 
                 //ERROR HANDLING
                 AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
 
             }
 
-            return temptenants;
+            return tempbranchHolders;
         }
 
 
-        public List<TemptenantDisplayContents> GetBranchHoldersByCountryAndLocation(double latitude, double longitude, double radius, Guid countryId, int pageSize, int pageNumber)
+        public List<TempbranchHolderDisplayContents> GetBranchHoldersByCountryAndLocation(double latitude, double longitude, double radius, Guid countryId, int pageSize, int pageNumber)
         {
-            List<TemptenantDisplayContents> temptenants;
+            List<TempbranchHolderDisplayContents> tempbranchHolders;
 
             try
             {
@@ -654,18 +752,18 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageSizeParam = new SqlParameter("pageSize", pageSize);
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
-                temptenants = dbContext.Set<TemptenantDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetBranchHoldersByCountryAndLocation](@latitude, @longitude, @radius, @countryId, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, pageSizeParam, pageNumberParam }).ToList();
+                tempbranchHolders = dbContext.Set<TempbranchHolderDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetBranchHoldersByCountryAndLocation](@latitude, @longitude, @radius, @countryId, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
-                temptenants = null;
+                tempbranchHolders = null;
 
                 //ERROR HANDLING
                 AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
 
             }
 
-            return temptenants;
+            return tempbranchHolders;
         }
 
         public List<TemptenantDisplayContents> GetBranchHoldersByState(Guid countryId, Guid stateId, int pageSize, int pageNumber)
@@ -693,9 +791,9 @@ namespace YOY.DAO.Entities.DB.Functions
             return temptenants;
         }
 
-        public List<TemptenantDisplayContents> GetBranchHolderByStateAndLocation(double latitude, double longitude, double radius, Guid countryId, Guid stateId, int pageSize, int pageNumber)
+        public List<TempbranchHolderDisplayContents> GetBranchHolderByStateAndLocation(double latitude, double longitude, double radius, Guid countryId, Guid stateId, int pageSize, int pageNumber)
         {
-            List<TemptenantDisplayContents> temptenants;
+            List<TempbranchHolderDisplayContents> tempbranchHolders;
 
             try
             {
@@ -707,18 +805,18 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageSizeParam = new SqlParameter("pageSize", pageSize);
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
-                temptenants = dbContext.Set<TemptenantDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetBranchHolderByStateAndLocation](@latitude, @longitude, @radius, @countryId, @stateId, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, stateIdParam, pageSizeParam, pageNumberParam }).ToList();
+                tempbranchHolders = dbContext.Set<TempbranchHolderDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetBranchHolderByStateAndLocation](@latitude, @longitude, @radius, @countryId, @stateId, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, stateIdParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
-                temptenants = null;
+                tempbranchHolders = null;
 
                 //ERROR HANDLING
                 AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
 
             }
 
-            return temptenants;
+            return tempbranchHolders;
         }
 
 

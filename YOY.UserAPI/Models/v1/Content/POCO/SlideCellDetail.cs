@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace YOY.UserAPI.Models.v1.Content.POCO
 {
-    public class SlideCellDetailContent : CellDetailContent
+    public class SlideCellDetail : CellContainedObject
     {
         public string Title { set; get; }
         public string Description { set; get; }

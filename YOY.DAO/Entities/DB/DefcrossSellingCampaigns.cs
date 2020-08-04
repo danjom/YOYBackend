@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace YOY.DAO.Entities.DB
 {
-    public partial class Defalliances
+    public partial class DefcrossSellingCampaigns
     {
         public Guid Id { get; set; }
         public Guid FirstPurchaseTenantId { get; set; }
@@ -13,6 +13,7 @@ namespace YOY.DAO.Entities.DB
         public int SecondPurchaseReferenceType { get; set; }
         public Guid SecondPurchaseReferenceId { get; set; }
         public bool IsActive { get; set; }
+        public DateTime ReleaseDate { get; set; }
         public DateTime ExpirationDate { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }

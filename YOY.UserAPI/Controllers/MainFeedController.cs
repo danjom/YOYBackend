@@ -31,7 +31,7 @@ namespace YOY.UserAPI.Controllers
     [Authorize]
     [ApiVersion("1.0")]
     [Route("api/v{v:apiVersion}/[controller]")]
-    public class ContentController : ControllerBase
+    public class MainFeedController : ControllerBase
     {
         #region PROPERTIES
         // ---------------------------------------------------------------------------------------------------------------------------------------------- //
@@ -61,7 +61,7 @@ namespace YOY.UserAPI.Controllers
 
         private const int MaxFilterValueCellsOnCarrousel = 8;
         private const int MaxContentCellsOnCarrousel = 8;
-        private const int MacContentCellsOnGrid = 16;
+        private const int MaxContentCellsOnGrid = 16;
 
         private const int controllerVersion = 1;
         #endregion
@@ -99,6 +99,7 @@ namespace YOY.UserAPI.Controllers
                 //Build the slider
                 slider = new ContentStructure
                 {
+                    FeedSection = ContentFeedSectionTypes.Header,
                     HasOwner = false,
                     CellOwnerId = Guid.Empty,
                     DisplayStructureTitle = false,
@@ -135,7 +136,7 @@ namespace YOY.UserAPI.Controllers
 
                 slideCell.DisplayData = currentSlide;
 
-                SlideCellDetailContent slideCellDetailContent = new SlideCellDetailContent
+                SlideCellDetail slideCellDetailContent = new SlideCellDetail
                 {
                     Id = slideCell.Id,
                     ContentType = CellDetailTypes.Slide,
@@ -155,7 +156,7 @@ namespace YOY.UserAPI.Controllers
                     Id = Guid.NewGuid(),
                     Type = CellTypes.Slide,
                     OnSelectAction = OnSelectCellActionTypes.DisplayPromotionalContent,
-                    DetailedContent = new CellDetailContent()
+                    DetailedContent = new CellContainedObject()
                 };
 
                 currentSlide = new Slide
@@ -171,7 +172,7 @@ namespace YOY.UserAPI.Controllers
 
                 slideCell.DisplayData = currentSlide;
 
-                slideCellDetailContent = new SlideCellDetailContent
+                slideCellDetailContent = new SlideCellDetail
                 {
                     Id = slideCell.Id,
                     ContentType = CellDetailTypes.Slide,
@@ -191,7 +192,7 @@ namespace YOY.UserAPI.Controllers
                     Id = Guid.NewGuid(),
                     Type = CellTypes.Slide,
                     OnSelectAction = OnSelectCellActionTypes.DisplayPromotionalContent,
-                    DetailedContent = new CellDetailContent()
+                    DetailedContent = new CellContainedObject()
                 };
 
                 currentSlide = new Slide
@@ -207,7 +208,7 @@ namespace YOY.UserAPI.Controllers
 
                 slideCell.DisplayData = currentSlide;
 
-                slideCellDetailContent = new SlideCellDetailContent
+                slideCellDetailContent = new SlideCellDetail
                 {
                     Id = slideCell.Id,
                     ContentType = CellDetailTypes.Slide,
@@ -253,6 +254,7 @@ namespace YOY.UserAPI.Controllers
 
                 filterTypes = new ContentStructure
                 {
+                    FeedSection = ContentFeedSectionTypes.Header,
                     HasOwner = false,
                     CellOwnerId = Guid.Empty,
                     DisplayStructureTitle = true,
@@ -274,7 +276,7 @@ namespace YOY.UserAPI.Controllers
                     Id = byCategoryFilterId,
                     Type = CellTypes.FilterType,
                     OnSelectAction = OnSelectCellActionTypes.DisplayPromotionalContent,
-                    DetailedContent = new CellDetailContent(),
+                    DetailedContent = new CellContainedObject(),
                 };
 
                 ContentFilterTypeCell filterTypeCell = new ContentFilterTypeCell
@@ -297,7 +299,7 @@ namespace YOY.UserAPI.Controllers
                     Id = byCommerceFilterId,
                     Type = CellTypes.FilterType,
                     OnSelectAction = OnSelectCellActionTypes.DisplayPromotionalContent,
-                    DetailedContent = new CellDetailContent(),
+                    DetailedContent = new CellContainedObject(),
                 };
 
                 filterTypeCell = new ContentFilterTypeCell
@@ -320,7 +322,7 @@ namespace YOY.UserAPI.Controllers
                     Id = byShoppingMallId,
                     Type = CellTypes.FilterType,
                     OnSelectAction = OnSelectCellActionTypes.DisplayPromotionalContent,
-                    DetailedContent = new CellDetailContent(),
+                    DetailedContent = new CellContainedObject(),
                 };
 
                 filterTypeCell = new ContentFilterTypeCell
@@ -366,6 +368,7 @@ namespace YOY.UserAPI.Controllers
 
                 categoryOptions = new ContentStructure
                 {
+                    FeedSection = ContentFeedSectionTypes.Header,
                     HasOwner = true,
                     CellOwnerId = byCategoryFilterId,
                     DisplayStructureTitle = false,
@@ -389,7 +392,7 @@ namespace YOY.UserAPI.Controllers
                     
                     Cell filterTypeValue;
                     ContentFilterValueCell categoryCell;
-                    CategoryCellDetailContent cellDetailContent;
+                    CategoryCellDetail cellDetailContent;
                     string imgUrl;
 
                     foreach(UserPreferenceData item in categoryPreferences)
@@ -417,7 +420,7 @@ namespace YOY.UserAPI.Controllers
 
                         filterTypeValue.DisplayData = categoryCell;
 
-                        cellDetailContent = new CategoryCellDetailContent
+                        cellDetailContent = new CategoryCellDetail
                         {
                             Id = item.Id,
                             ContentType = CellDetailTypes.Category,
@@ -458,6 +461,7 @@ namespace YOY.UserAPI.Controllers
 
                 commerceOptions = new ContentStructure
                 {
+                    FeedSection = ContentFeedSectionTypes.Header,
                     HasOwner = true,
                     CellOwnerId = byCommerceFilterId,
                     DisplayStructureTitle = false,
@@ -478,7 +482,7 @@ namespace YOY.UserAPI.Controllers
 
                 Cell filterTypeValue;
                 ContentFilterValueCell commerceFilterValueCell;
-                CommerceCellDetailContent commerceDetailContent;
+                CommerceCellDetail commerceDetailContent;
                 string carrouselImgUrl;
                 string thumbnailUrl;
                 string logoUrl;
@@ -570,7 +574,7 @@ namespace YOY.UserAPI.Controllers
                             filterTypeValue.DisplayData = commerceFilterValueCell;
 
                             //Now creates the commerce detail cell
-                            commerceDetailContent = new CommerceCellDetailContent
+                            commerceDetailContent = new CommerceCellDetail
                             {
                                 Id = item.TenantId,
                                 Name = item.Name,
@@ -646,7 +650,7 @@ namespace YOY.UserAPI.Controllers
                             filterTypeValue.DisplayData = commerceFilterValueCell;
 
                             //Now creates the commerce detail cell
-                            commerceDetailContent = new CommerceCellDetailContent
+                            commerceDetailContent = new CommerceCellDetail
                             {
                                 Id = item.TenantId,
                                 ContentType = CellDetailTypes.Commerce,
@@ -684,7 +688,7 @@ namespace YOY.UserAPI.Controllers
 
             int callId = 5;
             int pageSize = 36;
-            string LogoUrl = "";
+            string logoUrl = "";
             string parameters = "UserId: " + userId + ", ImgHeight: " + carrouselHeight + ", ValidLocation: " + validLocation + ", GeoSegmentationType:" + geoSegmentationType;
 
             try
@@ -692,6 +696,7 @@ namespace YOY.UserAPI.Controllers
                 //Build the slider
                 shoppingMallOptions = new ContentStructure
                 {
+                    FeedSection = ContentFeedSectionTypes.Header,
                     HasOwner = true,
                     CellOwnerId = byShoppingFilterId,
                     DisplayStructureTitle = false,
@@ -715,7 +720,7 @@ namespace YOY.UserAPI.Controllers
                     OnSelectAction = OnSelectCellActionTypes.UpdateDisplayedContent
                 };
 
-                LogoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596433873/dev/testing/logoSM1.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
+                logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596433873/dev/testing/logoSM1.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
 
                 ContentFilterValueCell shoppingMallFilterValueCell = new ContentFilterValueCell
                 {
@@ -723,19 +728,19 @@ namespace YOY.UserAPI.Controllers
                     Type = CellTypes.ShoppingMall,
                     CommerceId = Guid.NewGuid(),
                     Name = "Express",
-                    SelectedIcon = LogoUrl,
-                    UnselectedIcon = LogoUrl,
+                    SelectedIcon = logoUrl,
+                    UnselectedIcon = logoUrl,
                     SelectedImgUrl = "",
                     UnselectedImgUrl = ""
                 };
 
                 filterTypeValue.DisplayData = shoppingMallFilterValueCell;
 
-                ShoppingMallCellDetailContent shoppingMallDetailContent = new ShoppingMallCellDetailContent
+                ShoppingMallCellDetail shoppingMallDetailContent = new ShoppingMallCellDetail
                 {
                     ContentType = CellDetailTypes.ShoppingMall,
                     Id = shoppingMallFilterValueCell.Id,
-                    ImgUrl = LogoUrl,
+                    ImgUrl = logoUrl,
                     MainName = "Alamada",
                     BranchName = "Express"
                 };
@@ -753,7 +758,7 @@ namespace YOY.UserAPI.Controllers
                     OnSelectAction = OnSelectCellActionTypes.UpdateDisplayedContent
                 };
 
-                LogoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596433873/dev/testing/logoSM2.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
+                logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596433873/dev/testing/logoSM2.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
 
                 shoppingMallFilterValueCell = new ContentFilterValueCell
                 {
@@ -761,19 +766,19 @@ namespace YOY.UserAPI.Controllers
                     Type = CellTypes.ShoppingMall,
                     CommerceId = Guid.NewGuid(),
                     Name = "Plaza Norte",
-                    SelectedIcon = LogoUrl,
-                    UnselectedIcon = LogoUrl,
+                    SelectedIcon = logoUrl,
+                    UnselectedIcon = logoUrl,
                     SelectedImgUrl = "",
                     UnselectedImgUrl = ""
                 };
 
                 filterTypeValue.DisplayData = shoppingMallFilterValueCell;
 
-                shoppingMallDetailContent = new ShoppingMallCellDetailContent
+                shoppingMallDetailContent = new ShoppingMallCellDetail
                 {
                     ContentType = CellDetailTypes.ShoppingMall,
                     Id = shoppingMallFilterValueCell.Id,
-                    ImgUrl = LogoUrl,
+                    ImgUrl = logoUrl,
                     MainName = "Hyatt",
                     BranchName = "Plaza Norte"
                 };
@@ -791,7 +796,7 @@ namespace YOY.UserAPI.Controllers
                     OnSelectAction = OnSelectCellActionTypes.UpdateDisplayedContent
                 };
 
-                LogoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596433873/dev/testing/logoSM3.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
+                logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596433873/dev/testing/logoSM3.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
 
                 shoppingMallFilterValueCell = new ContentFilterValueCell
                 {
@@ -799,19 +804,19 @@ namespace YOY.UserAPI.Controllers
                     Type = CellTypes.ShoppingMall,
                     CommerceId = Guid.NewGuid(),
                     Name = "Metropoli",
-                    SelectedIcon = LogoUrl,
-                    UnselectedIcon = LogoUrl,
+                    SelectedIcon = logoUrl,
+                    UnselectedIcon = logoUrl,
                     SelectedImgUrl = "",
                     UnselectedImgUrl = ""
                 };
 
                 filterTypeValue.DisplayData = shoppingMallFilterValueCell;
 
-                shoppingMallDetailContent = new ShoppingMallCellDetailContent
+                shoppingMallDetailContent = new ShoppingMallCellDetail
                 {
                     ContentType = CellDetailTypes.ShoppingMall,
                     Id = shoppingMallFilterValueCell.Id,
-                    ImgUrl = LogoUrl,
+                    ImgUrl = logoUrl,
                     MainName = "AEON",
                     BranchName = "Metropoli"
                 };
@@ -842,10 +847,512 @@ namespace YOY.UserAPI.Controllers
             return shoppingMallOptions;
         }
 
+        public List<ContentStructure> BuildMainContentDeals(string userId, Guid byFilterOwnerId, bool validLocation, Guid countryId, Guid userStateId, double latitude, double longitude, int geoSegmentationType, int logoHeight, int dealImgHeight)
+        {
+            List<ContentStructure> contentStructures;
+
+            int callId = 6;
+            int pageSize = 150;
+            string LogoUrl = "";
+            string parameters = "UserId: " + userId + ", ImgHeight: " + dealImgHeight + ", ValidLocation: " + validLocation + ", GeoSegmentationType:" + geoSegmentationType;
+
+
+            try
+            {
+                contentStructures = new List<ContentStructure>();
+
+                List<Cell> contentCells = new List<Cell>();
+                Cell currentCell;
+                ContentCellDisplayData displayData;
+                DealContentCellDetail cellDetail;
+
+                string logoUrl;
+                string imgUrl;
+
+                //1st deal cell
+
+                currentCell = new Cell
+                {
+                    Id = Guid.NewGuid(),
+                    OnSelectAction = OnSelectCellActionTypes.DisplayDealDetailScreen,
+                    Type = CellTypes.Offer
+                };
+
+                logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596430960/dev/testing/whiteLogo3.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
+                imgUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596269574/dev/testing/offer3.jpg", dealImgHeight, (int)Math.Ceiling(dealImgHeight / dealImgWidthProp));
+
+                displayData = new ContentCellDisplayData
+                {
+                    Id = currentCell.Id,
+                    CommerceId = Guid.NewGuid(),
+                    Type = CellTypes.Offer,
+                    DealType = DealTypes.InStore,
+                    CommerceLogo = logoUrl,
+                    ImgUrl = imgUrl,
+                    MainHint = "Compra 2",
+                    ComplementaryHint = "Paga 1",
+                    ExtraHint = "",
+                    AvailableQuantityHint = 25,
+                    DisplayAvailableQuantityHint = true,
+                    Favorite = true,
+                    DisplayExpirationHint = false,
+                    ExpirationDate = DateTime.UtcNow.AddDays(14).ToString("yyyy-MM-dd HH':'mm':'ss")
+                };
+
+                currentCell.DisplayData = displayData;
+
+                logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596430630/dev/testing/logo3.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
+
+
+                cellDetail = new DealContentCellDetail
+                {
+                    Id = currentCell.Id,
+                    CommerceId = displayData.CommerceId,
+                    ContentType = CellDetailTypes.Offer,
+                    DealType = displayData.DealType,
+                    CommerceLogo = logoUrl,
+                    ImgUrl = imgUrl,
+                    CurrencySymbol = "₡",
+                    Price = 10.550M,
+                    DisplayPrice = true,
+                    RegularPrice = 0M,
+                    DisplayRegularPrice = false,
+                    HasPreferences = false,
+                    CashbackHint = "Recibe ₡400 de cashback",
+                    MainHint = "Compra 2",
+                    ComplementaryHint = "Paga 1",
+                    AvailableQuantityHint = 25,
+                    DisplayAvailableQuantityHint = true,
+                    Favorite = true,
+                    DisplayExpirationHint = false,
+                    ExpirationDate = DateTime.UtcNow.AddDays(14).ToString("yyyy-MM-dd HH':'mm':'ss")
+                };
+
+                currentCell.DetailedContent = cellDetail;
+
+                contentCells.Add(currentCell);
+
+                //2nd deal cell
+
+                currentCell = new Cell
+                {
+                    Id = Guid.NewGuid(),
+                    OnSelectAction = OnSelectCellActionTypes.DisplayDealDetailScreen,
+                    Type = CellTypes.Offer
+                };
+
+                logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596430960/dev/testing/whiteLogo1.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
+                imgUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596269574/dev/testing/offer2.jpg", dealImgHeight, (int)Math.Ceiling(dealImgHeight / dealImgWidthProp));
+
+                displayData = new ContentCellDisplayData
+                {
+                    Id = currentCell.Id,
+                    CommerceId = Guid.NewGuid(),
+                    Type = CellTypes.Offer,
+                    DealType = DealTypes.InStore,
+                    CommerceLogo = logoUrl,
+                    ImgUrl = imgUrl,
+                    MainHint = "35%",
+                    ComplementaryHint = "De descuento",
+                    ExtraHint = "",
+                    AvailableQuantityHint = 45,
+                    DisplayAvailableQuantityHint = false,
+                    Favorite = true,
+                    DisplayExpirationHint = true,
+                    ExpirationDate = DateTime.UtcNow.AddDays(2).ToString("yyyy-MM-dd HH':'mm':'ss")
+                };
+
+                currentCell.DisplayData = displayData;
+
+                logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596430630/dev/testing/logo3.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
+
+
+                cellDetail = new DealContentCellDetail
+                {
+                    Id = currentCell.Id,
+                    CommerceId = displayData.CommerceId,
+                    ContentType = CellDetailTypes.Offer,
+                    DealType = displayData.DealType,
+                    CommerceLogo = logoUrl,
+                    ImgUrl = imgUrl,
+                    CurrencySymbol = "₡",
+                    Price = 10.550M,
+                    DisplayPrice = true,
+                    RegularPrice = 0M,
+                    DisplayRegularPrice = false,
+                    HasPreferences = false,
+                    CashbackHint = "Recibe ₡400 de cashback",
+                    MainHint = "Compra 2",
+                    ComplementaryHint = "Paga 1",
+                    AvailableQuantityHint = 45,
+                    DisplayAvailableQuantityHint = false,
+                    Favorite = true,
+                    DisplayExpirationHint = false,
+                    ExpirationDate = DateTime.UtcNow.AddDays(2).ToString("yyyy-MM-dd HH':'mm':'ss")
+                };
+
+                currentCell.DetailedContent = cellDetail;
+
+                contentCells.Add(currentCell);
+
+                //3rd deal cell
+
+                currentCell = new Cell
+                {
+                    Id = Guid.NewGuid(),
+                    OnSelectAction = OnSelectCellActionTypes.DisplayDealDetailScreen,
+                    Type = CellTypes.Offer
+                };
+
+                logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596430960/dev/testing/whiteLogo2.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
+                imgUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596269574/dev/testing/offer2.jpg", dealImgHeight, (int)Math.Ceiling(dealImgHeight / dealImgWidthProp));
+
+                displayData = new ContentCellDisplayData
+                {
+                    Id = currentCell.Id,
+                    CommerceId = Guid.NewGuid(),
+                    Type = CellTypes.Offer,
+                    DealType = DealTypes.Online,
+                    CommerceLogo = logoUrl,
+                    ImgUrl = imgUrl,
+                    MainHint = "35% menos",
+                    ComplementaryHint = "En donas",
+                    ExtraHint = "",
+                    AvailableQuantityHint = 15,
+                    DisplayAvailableQuantityHint = true,
+                    Favorite = true,
+                    DisplayExpirationHint = true,
+                    ExpirationDate = DateTime.UtcNow.AddHours(5).ToString("yyyy-MM-dd HH':'mm':'ss")
+                };
+
+                currentCell.DisplayData = displayData;
+
+                logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596430630/dev/testing/logo3.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
+
+
+                cellDetail = new DealContentCellDetail
+                {
+                    Id = currentCell.Id,
+                    CommerceId = displayData.CommerceId,
+                    ContentType = CellDetailTypes.Offer,
+                    DealType = displayData.DealType,
+                    CommerceLogo = logoUrl,
+                    ImgUrl = imgUrl,
+                    CurrencySymbol = "₡",
+                    Price = 10.550M,
+                    DisplayPrice = true,
+                    RegularPrice = 0M,
+                    DisplayRegularPrice = false,
+                    HasPreferences = false,
+                    CashbackHint = "Recibe ₡400 de cashback",
+                    MainHint = "Compra 2",
+                    ComplementaryHint = "Paga 1",
+                    AvailableQuantityHint = 25,
+                    DisplayAvailableQuantityHint = true,
+                    Favorite = true,
+                    DisplayExpirationHint = true,
+                    ExpirationDate = DateTime.UtcNow.AddHours(5).ToString("yyyy-MM-dd HH':'mm':'ss")
+                };
+
+                currentCell.DetailedContent = cellDetail;
+
+                contentCells.Add(currentCell);
+
+                //Build featured deals
+
+                ContentStructure currentStructure = new ContentStructure
+                {
+                    FeedSection = ContentFeedSectionTypes.Header,
+                    HasOwner = false,
+                    CellOwnerId = Guid.Empty,
+                    DisplayStructureTitle = true,
+                    StructureTitle = "Destacados",
+                    MaxDisplayedCellsOnInitialStructure = MaxContentCellsOnCarrousel,
+                    MaxMinsToKeepStored = MaxMinsToStoreHeaderContent,
+                    MaxMetersToKeepStored = MaxMetersToStoreContent,
+                    OnSelectMemberActionType = OnSelectCellActionTypes.DisplayDealDetailScreen,
+                    ViewAllAccessType = ViewAllCellContentAccess.DealContentList,
+                    StoreLocally = true,
+                    StructureType = ContentStructureTypes.Carrousel,
+                    CellsCount = 16,
+                    Cells = new List<Cell>()
+                };
+
+                Random random = new Random();
+
+                for (int i=0; i < currentStructure.CellsCount; ++i)
+                {
+                    currentStructure.Cells.Add(contentCells[random.Next(0, 1000) % contentCells.Count]);
+                }
+
+                contentStructures.Add(currentStructure);
+
+                //Now will add the 1st grid, owned by byFilterOwnerId
+                currentStructure = new ContentStructure
+                {
+                    FeedSection = ContentFeedSectionTypes.Content,
+                    HasOwner = true,
+                    CellOwnerId = byFilterOwnerId,
+                    DisplayStructureTitle = true,
+                    StructureTitle = "Todo",
+                    MaxDisplayedCellsOnInitialStructure = MaxContentCellsOnGrid,
+                    MaxMinsToKeepStored = MaxMinsToStoreHeaderContent,
+                    MaxMetersToKeepStored = MaxMetersToStoreContent,
+                    OnSelectMemberActionType = OnSelectCellActionTypes.DisplayDealDetailScreen,
+                    ViewAllAccessType = ViewAllCellContentAccess.DealContentList,
+                    StoreLocally = true,
+                    StructureType = ContentStructureTypes.Carrousel,
+                    CellsCount = 32,
+                    Cells = new List<Cell>()
+                };
+
+                random = new Random();
+
+                for (int i = 0; i < currentStructure.CellsCount; ++i)
+                {
+                    currentStructure.Cells.Add(contentCells[random.Next(0, 1000) % contentCells.Count]);
+                }
+
+                contentStructures.Add(currentStructure);
+
+                //Now will add the favorites carrousel
+                currentStructure = new ContentStructure
+                {
+                    FeedSection = ContentFeedSectionTypes.Content,
+                    HasOwner = true,
+                    CellOwnerId = byFilterOwnerId,
+                    DisplayStructureTitle = true,
+                    StructureTitle = "Mis Favoritos",
+                    MaxDisplayedCellsOnInitialStructure = MaxContentCellsOnCarrousel,
+                    MaxMinsToKeepStored = MaxMinsToStoreHeaderContent,
+                    MaxMetersToKeepStored = MaxMetersToStoreContent,
+                    OnSelectMemberActionType = OnSelectCellActionTypes.DisplayDealDetailScreen,
+                    ViewAllAccessType = ViewAllCellContentAccess.FavoriteContentList,
+                    StoreLocally = true,
+                    StructureType = ContentStructureTypes.Carrousel,
+                    CellsCount = 32,
+                    Cells = new List<Cell>()
+                };
+
+                random = new Random();
+
+                for (int i = 0; i < currentStructure.CellsCount; ++i)
+                {
+                    currentStructure.Cells.Add(contentCells[random.Next(0, 1000) % contentCells.Count]);
+                    ((ContentCellDisplayData)currentStructure.Cells[i].DisplayData).Favorite = true;
+
+                }
+
+                contentStructures.Add(currentStructure);
+
+                //Now will add the cash incentives
+
+                contentCells = new List<Cell>();
+
+                CashIncentiveContentCellDetail cashCellDetail;
+
+                //1st cash incentive cell
+
+                currentCell = new Cell
+                {
+                    Id = Guid.NewGuid(),
+                    OnSelectAction = OnSelectCellActionTypes.DisplayCashIncentiveDetailScreen,
+                    Type = CellTypes.CashIncentive
+                };
+
+                logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596430629/dev/testing/logo5.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
+                imgUrl = "";
+
+                displayData = new ContentCellDisplayData
+                {
+                    Id = currentCell.Id,
+                    CommerceId = Guid.NewGuid(),
+                    Type = CellTypes.CashIncentive,
+                    DealType = DealTypes.Online,
+                    CommerceLogo = logoUrl,
+                    ImgUrl = imgUrl,
+                    MainHint = "7% Cashback",
+                    ComplementaryHint = "Antes 3%",
+                    ExtraHint = "Compras +₡10,000",
+                    AvailableQuantityHint = -1,
+                    DisplayAvailableQuantityHint = false,
+                    Favorite = true,
+                    DisplayExpirationHint = false,
+                    ExpirationDate = DateTime.UtcNow.AddDays(14).ToString("yyyy-MM-dd HH':'mm':'ss")
+                };
+
+                currentCell.DisplayData = displayData;
+
+                cashCellDetail = new CashIncentiveContentCellDetail
+                {
+                    Id = currentCell.Id,
+                    CommerceId = displayData.CommerceId,
+                    ContentType = CellDetailTypes.CashIncentive
+                };
+
+                currentCell.DetailedContent = cashCellDetail;
+
+                contentCells.Add(currentCell);
+
+                //2nd deal cell
+
+                currentCell = new Cell
+                {
+                    Id = Guid.NewGuid(),
+                    OnSelectAction = OnSelectCellActionTypes.DisplayDealDetailScreen,
+                    Type = CellTypes.Offer
+                };
+
+                logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596430629/dev/testing/logo2.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
+                imgUrl = "";
+
+                displayData = new ContentCellDisplayData
+                {
+                    Id = currentCell.Id,
+                    CommerceId = Guid.NewGuid(),
+                    Type = CellTypes.Offer,
+                    DealType = DealTypes.InStore,
+                    CommerceLogo = logoUrl,
+                    ImgUrl = imgUrl,
+                    MainHint = "₡1000",
+                    ComplementaryHint = "En cada ₡10,000",
+                    ExtraHint = "10% cashback",
+                    AvailableQuantityHint = 45,
+                    DisplayAvailableQuantityHint = false,
+                    Favorite = true,
+                    DisplayExpirationHint = true,
+                    ExpirationDate = DateTime.UtcNow.AddDays(2).ToString("yyyy-MM-dd HH':'mm':'ss")
+                };
+
+                currentCell.DisplayData = displayData;
+
+                cashCellDetail = new CashIncentiveContentCellDetail
+                {
+                    Id = currentCell.Id,
+                    CommerceId = displayData.CommerceId,
+                    ContentType = CellDetailTypes.CashIncentive
+                };
+
+                currentCell.DetailedContent = cellDetail;
+
+                contentCells.Add(currentCell);
+
+                //3rd deal cell
+
+                currentCell = new Cell
+                {
+                    Id = Guid.NewGuid(),
+                    OnSelectAction = OnSelectCellActionTypes.DisplayDealDetailScreen,
+                    Type = CellTypes.Offer
+                };
+
+                logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596430629/dev/testing/logo2.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
+                imgUrl = "";
+
+                displayData = new ContentCellDisplayData
+                {
+                    Id = currentCell.Id,
+                    CommerceId = Guid.NewGuid(),
+                    Type = CellTypes.CashIncentive,
+                    DealType = DealTypes.Phone,
+                    CommerceLogo = logoUrl,
+                    ImgUrl = imgUrl,
+                    MainHint = "Helado gratis",
+                    ComplementaryHint = "Compras +₡3,000",
+                    ExtraHint = "",
+                    AvailableQuantityHint = 15,
+                    DisplayAvailableQuantityHint = true,
+                    Favorite = true,
+                    DisplayExpirationHint = true,
+                    ExpirationDate = DateTime.UtcNow.AddHours(5).ToString("yyyy-MM-dd HH':'mm':'ss")
+                };
+
+                currentCell.DisplayData = displayData;
+
+                cashCellDetail = new CashIncentiveContentCellDetail
+                {
+                    Id = currentCell.Id,
+                    CommerceId = displayData.CommerceId,
+                    ContentType = CellDetailTypes.CashIncentive
+                };
+
+                currentCell.DetailedContent = cellDetail;
+
+                contentCells.Add(currentCell);
+
+                //Build featured cash incentives carrousel
+
+                currentStructure = new ContentStructure
+                {
+                    FeedSection = ContentFeedSectionTypes.Content,
+                    HasOwner = true,
+                    CellOwnerId = byFilterOwnerId,
+                    DisplayStructureTitle = true,
+                    StructureTitle = "Cashbacks Populares",
+                    MaxDisplayedCellsOnInitialStructure = MaxContentCellsOnCarrousel,
+                    MaxMinsToKeepStored = MaxMinsToStoreBodyContent,
+                    MaxMetersToKeepStored = MaxMetersToStoreContent,
+                    OnSelectMemberActionType = OnSelectCellActionTypes.DisplayCashIncentiveDetailScreen,
+                    ViewAllAccessType = ViewAllCellContentAccess.CashIncentiveContentList,
+                    StoreLocally = true,
+                    StructureType = ContentStructureTypes.Carrousel,
+                    CellsCount = 16,
+                    Cells = new List<Cell>()
+                };
+
+                random = new Random();
+
+                for (int i = 0; i < currentStructure.CellsCount; ++i)
+                {
+                    currentStructure.Cells.Add(contentCells[random.Next(0, 1000) % contentCells.Count]);
+                }
+
+                contentStructures.Add(currentStructure);
+
+                //Build cash incentives grid
+                currentStructure = new ContentStructure
+                {
+                    FeedSection = ContentFeedSectionTypes.Content,
+                    HasOwner = true,
+                    CellOwnerId = byFilterOwnerId,
+                    DisplayStructureTitle = true,
+                    StructureTitle = "Gana cashback",
+                    MaxDisplayedCellsOnInitialStructure = MaxContentCellsOnGrid,
+                    MaxMinsToKeepStored = MaxMinsToStoreBodyContent,
+                    MaxMetersToKeepStored = MaxMetersToStoreContent,
+                    OnSelectMemberActionType = OnSelectCellActionTypes.DisplayCashIncentiveDetailScreen,
+                    ViewAllAccessType = ViewAllCellContentAccess.CashIncentiveContentList,
+                    StoreLocally = true,
+                    StructureType = ContentStructureTypes.Grid,
+                    CellsCount = 32,
+                    Cells = new List<Cell>()
+                };
+
+                random = new Random();
+
+                for (int i = 0; i < currentStructure.CellsCount; ++i)
+                {
+                    currentStructure.Cells.Add(contentCells[random.Next(0, 1000) % contentCells.Count]);
+                }
+
+                contentStructures.Add(currentStructure);
+
+            }
+            catch (Exception e)
+            {
+                contentStructures = null;
+
+                //Registers the invalid call
+                this._businessObjects.HttpcallInvokationLogs.Post(userId, this.GetType().Name, callId, controllerVersion,
+                                    Values.StatusCodes.InternalServerError, 0, parameters, 0, 0, false, null, HttpcallTypes.Get, e.InnerException != null ? e.InnerException.Message : e.Message);
+            }
+
+            return contentStructures;
+        }
+
 
         [Route("gets")]
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IActionResult> GetsAsync(string userId, string location, int sliderHeight, int dealImgHeight, int logoImgHeight, int featuredImgHeight, int thumbnailHeight)
         {
             IActionResult result;
@@ -923,51 +1430,76 @@ namespace YOY.UserAPI.Controllers
                     buildShoppingMallCarrousel.Start();
 
 
+                    //Task to build shopping mall filter options
+                    Task<List<ContentStructure>> buildBuildContentStructures = new Task<List<ContentStructure>>(() => this.BuildMainContentDeals(currentUser.Id, byCategoryFilterId, processedLocation.ValidLocation, (Guid)currentUser.CountryId, (Guid)currentUser.StateId,
+                        processedLocation.Latitude ?? 0, processedLocation.Longitude ?? 0, currentUser.ContentSegmentationType ?? GeoSegmentationTypes.Country, logoImgHeight, dealImgHeight));
+                    buildBuildContentStructures.Start();
+
                     //-----------------------------------------------TASKS CONTENT STRUCTURES RETRIEVAL----------------------------------------------------------------
 
                     //Add the slider to the content feed
                     ContentStructure slider =  await buildSlider; //this.BuildSlider(currentUser.Id, contentStateId, (Guid)currentUser.CountryId, sliderHeight);//
 
-                    if (slider != null && slider.Cells?.Count > 0)
-                    {
-                        contentFeed.ContentStructures.Add(slider);
-                    }
-
 
                     //Add the filter types to the content feed
                     ContentStructure filterTypes = await buildFilterTypes; // this.BuildFilterTypes(currentUser.Id, contentStateId, (Guid)currentUser.CountryId, byCategoryFilterId, byCommerceFilterId, byShoppingMallId);//
 
-                    if(filterTypes != null && filterTypes.Cells?.Count > 0)
-                    {
-                        contentFeed.ContentStructures.Add(filterTypes);
-                    }
-
 
                     //Add the category carrousel to the content feed
                     ContentStructure categoryCarrousel = await buildCategoryCarrousel; // this.BuildByCategoryFilterOptions(currentUser.Id, logoImgHeight, byCategoryFilterId);//
+
+
+                    //Add the commerce carrousel to the content feed
+                    ContentStructure commerceCarrousel = await buildCommerceCarrousel;// this.BuildByCommerceFilterOptions(currentUser.Id, byCommerceFilterId, processedLocation.ValidLocation, (Guid)currentUser.CountryId, (Guid)currentUser.StateId,
+                        //processedLocation.Latitude ?? 0, processedLocation.Longitude ?? 0, currentUser.ContentSegmentationType ?? GeoSegmentationTypes.Country, logoImgHeight, featuredImgHeight, thumbnailHeight, 0);//
+
+
+                    //Add the commerce carrousel to the content feed
+                    ContentStructure shoppingMallCarrousel = await buildShoppingMallCarrousel;// this.BuildByCommerceFilterOptions(currentUser.Id, byCommerceFilterId, processedLocation.ValidLocation, (Guid)currentUser.CountryId, (Guid)currentUser.StateId,
+                                                                                              //processedLocation.Latitude ?? 0, processedLocation.Longitude ?? 0, currentUser.ContentSegmentationType ?? GeoSegmentationTypes.Country, logoImgHeight, featuredImgHeight, thumbnailHeight, 0);//
+
+                    List<ContentStructure> contentStructures = await buildBuildContentStructures;
+
+
+                    if (slider != null && slider.Cells?.Count > 0)
+                    {
+                        contentFeed.ContentStructures.Add(slider);
+                    }
+                    
+                    //In here goes the header content structures
+                    foreach(ContentStructure item in contentStructures)
+                    {
+                        if(item.FeedSection == ContentFeedSectionTypes.Header)
+                        {
+                            contentFeed.ContentStructures.Add(item);
+                        }
+                    }
+
+                    contentStructures = contentStructures.Where(x => x.FeedSection == ContentFeedSectionTypes.Content).ToList();
+
+                    if (filterTypes != null && filterTypes.Cells?.Count > 0)
+                    {
+                        contentFeed.ContentStructures.Add(filterTypes);
+                    }
 
                     if (categoryCarrousel != null && categoryCarrousel.Cells?.Count > 0)
                     {
                         contentFeed.ContentStructures.Add(categoryCarrousel);
                     }
 
-                    //Add the commerce carrousel to the content feed
-                    ContentStructure commerceCarrousel = await buildCommerceCarrousel;// this.BuildByCommerceFilterOptions(currentUser.Id, byCommerceFilterId, processedLocation.ValidLocation, (Guid)currentUser.CountryId, (Guid)currentUser.StateId,
-                        //processedLocation.Latitude ?? 0, processedLocation.Longitude ?? 0, currentUser.ContentSegmentationType ?? GeoSegmentationTypes.Country, logoImgHeight, featuredImgHeight, thumbnailHeight, 0);//
-
                     if (commerceCarrousel != null && commerceCarrousel.Cells?.Count > 0)
                     {
                         contentFeed.ContentStructures.Add(commerceCarrousel);
                     }
 
-                    //Add the commerce carrousel to the content feed
-                    ContentStructure shoppingMallCarrousel = await buildShoppingMallCarrousel;// this.BuildByCommerceFilterOptions(currentUser.Id, byCommerceFilterId, processedLocation.ValidLocation, (Guid)currentUser.CountryId, (Guid)currentUser.StateId,
-                                                                                      //processedLocation.Latitude ?? 0, processedLocation.Longitude ?? 0, currentUser.ContentSegmentationType ?? GeoSegmentationTypes.Country, logoImgHeight, featuredImgHeight, thumbnailHeight, 0);//
-
                     if (shoppingMallCarrousel != null && shoppingMallCarrousel.Cells?.Count > 0)
                     {
                         contentFeed.ContentStructures.Add(shoppingMallCarrousel);
                     }
+
+                    contentFeed.ContentStructures.AddRange(contentStructures);
+
+
 
                     //NOW WILL SEND THE RESPONDE
                     contentFeed.StructresCount = contentFeed.ContentStructures?.Count ?? 0;
@@ -1035,7 +1567,7 @@ namespace YOY.UserAPI.Controllers
         #endregion
 
         #region CONSTRUCTORS
-        public ContentController(IStringLocalizer<SharedResources> localizer)
+        public MainFeedController(IStringLocalizer<SharedResources> localizer)
         {
             this._localizer = localizer;
         }

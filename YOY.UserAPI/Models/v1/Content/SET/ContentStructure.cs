@@ -8,6 +8,7 @@ namespace YOY.UserAPI.Models.v1.Content.SET
 {
     public class ContentStructure
     {
+        public int FeedSection { set; get; }
         public bool StoreLocally { set; get; }
         public int MaxMinsToKeepStored { set; get; }
         public int MaxMetersToKeepStored { set; get; }

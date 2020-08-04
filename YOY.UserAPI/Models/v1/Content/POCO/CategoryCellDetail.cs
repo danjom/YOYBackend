@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace YOY.UserAPI.Models.v1.Content.POCO
 {
-    public class CellDetailContent
+    public class CategoryCellDetail : CellContainedObject
     {
-        public int ContentType { set; get; }
-        public Guid Id { set; get; }
+        public string Name { set; get; }
+        public string ImgUrl { set; get; }
     }
 }

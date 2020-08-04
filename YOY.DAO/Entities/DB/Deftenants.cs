@@ -7,11 +7,11 @@ namespace YOY.DAO.Entities.DB
     {
         public Deftenants()
         {
-            DefalliancesFirstPurchaseTenant = new HashSet<Defalliances>();
-            DefalliancesSecondPurchaseTenant = new HashSet<Defalliances>();
             DefbankingInfos = new HashSet<DefbankingInfos>();
             Defbranches = new HashSet<Defbranches>();
             Defbroadcasters = new HashSet<Defbroadcasters>();
+            DefcrossSellingCampaignsFirstPurchaseTenant = new HashSet<DefcrossSellingCampaigns>();
+            DefcrossSellingCampaignsSecondPurchaseTenant = new HashSet<DefcrossSellingCampaigns>();
             DefdepartmentCategories = new HashSet<DefdepartmentCategories>();
             Defdepartments = new HashSet<Defdepartments>();
             DefearningsIncreasers = new HashSet<DefearningsIncreasers>();
@@ -52,11 +52,11 @@ namespace YOY.DAO.Entities.DB
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
 
-        public virtual ICollection<Defalliances> DefalliancesFirstPurchaseTenant { get; set; }
-        public virtual ICollection<Defalliances> DefalliancesSecondPurchaseTenant { get; set; }
         public virtual ICollection<DefbankingInfos> DefbankingInfos { get; set; }
         public virtual ICollection<Defbranches> Defbranches { get; set; }
         public virtual ICollection<Defbroadcasters> Defbroadcasters { get; set; }
+        public virtual ICollection<DefcrossSellingCampaigns> DefcrossSellingCampaignsFirstPurchaseTenant { get; set; }
+        public virtual ICollection<DefcrossSellingCampaigns> DefcrossSellingCampaignsSecondPurchaseTenant { get; set; }
         public virtual ICollection<DefdepartmentCategories> DefdepartmentCategories { get; set; }
         public virtual ICollection<Defdepartments> Defdepartments { get; set; }
         public virtual ICollection<DefearningsIncreasers> DefearningsIncreasers { get; set; }

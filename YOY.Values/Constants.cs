@@ -1,5 +1,12 @@
 ﻿namespace YOY.Values
 {
+    public static class ContentFeedSectionTypes
+    {
+        public const int None = 0;
+        public const int Header = 1;
+        public const int Content = 2;
+    }
+
     public static class ContentFeedTypes
     {
         public const int None = 0;
@@ -56,6 +63,7 @@
         public const int ShoppingMallList = 3;
         public const int DealContentList = 4;
         public const int CashIncentiveContentList = 5;
+        public const int FavoriteContentList = 6;
     }
 
     public static class CellTypes

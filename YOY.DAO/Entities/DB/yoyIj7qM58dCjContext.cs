@@ -25,7 +25,6 @@ namespace YOY.DAO.Entities.DB
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<BranchesRelationData> BranchesRelationData { get; set; }
         public virtual DbSet<Defaffinities> Defaffinities { get; set; }
-        public virtual DbSet<Defalliances> Defalliances { get; set; }
         public virtual DbSet<DefappInstallations> DefappInstallations { get; set; }
         public virtual DbSet<DefappInstallationsView> DefappInstallationsView { get; set; }
         public virtual DbSet<DefbankingInfos> DefbankingInfos { get; set; }
@@ -41,6 +40,7 @@ namespace YOY.DAO.Entities.DB
         public virtual DbSet<Defcities> Defcities { get; set; }
         public virtual DbSet<DefconfigValues> DefconfigValues { get; set; }
         public virtual DbSet<Defcountries> Defcountries { get; set; }
+        public virtual DbSet<DefcrossSellingCampaigns> DefcrossSellingCampaigns { get; set; }
         public virtual DbSet<DefdeliveryMethods> DefdeliveryMethods { get; set; }
         public virtual DbSet<DefdeliveryMethodsView> DefdeliveryMethodsView { get; set; }
         public virtual DbSet<DefdepartmentCategories> DefdepartmentCategories { get; set; }
@@ -169,6 +169,7 @@ namespace YOY.DAO.Entities.DB
         public virtual DbSet<OltpvalidatePurchaseRegistries> OltpvalidatePurchaseRegistries { get; set; }
         public virtual DbSet<OltpvisitorsLog> OltpvisitorsLog { get; set; }
         public virtual DbSet<RefreshTokens> RefreshTokens { get; set; }
+        public virtual DbSet<TempbranchHolderDisplayContents> TempbranchHolderDisplayContents { get; set; }
         public virtual DbSet<TempbroadcasterBranchesRelatedData> TempbroadcasterBranchesRelatedData { get; set; }
         public virtual DbSet<TempbroadcastingOffersLogs> TempbroadcastingOffersLogs { get; set; }
         public virtual DbSet<TempcashIncentivesDisplayContents> TempcashIncentivesDisplayContents { get; set; }
@@ -486,40 +487,6 @@ namespace YOY.DAO.Entities.DB
                 entity.Property(e => e.IsActive)
                     .IsRequired()
                     .HasDefaultValueSql("((1))");
-            });
-
-            modelBuilder.Entity<Defalliances>(entity =>
-            {
-                entity.ToTable("DEFAlliances");
-
-                entity.HasIndex(e => new { e.FirstPurchaseTenantId, e.SecondPurchaseTenantId })
-                    .HasName("IX_DEFAlliances_Tenants");
-
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedDate)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getutcdate())");
-
-                entity.Property(e => e.ExpirationDate)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getutcdate())");
-
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getutcdate())");
-
-                entity.HasOne(d => d.FirstPurchaseTenant)
-                    .WithMany(p => p.DefalliancesFirstPurchaseTenant)
-                    .HasForeignKey(d => d.FirstPurchaseTenantId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_DEFAlliances_SponsorDEFTenants");
-
-                entity.HasOne(d => d.SecondPurchaseTenant)
-                    .WithMany(p => p.DefalliancesSecondPurchaseTenant)
-                    .HasForeignKey(d => d.SecondPurchaseTenantId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_DEFAlliances_SponsoredDEFTenants");
             });
 
             modelBuilder.Entity<DefappInstallations>(entity =>
@@ -1398,6 +1365,40 @@ namespace YOY.DAO.Entities.DB
                     .IsRequired()
                     .HasMaxLength(5)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<DefcrossSellingCampaigns>(entity =>
+            {
+                entity.ToTable("DEFCrossSellingCampaigns");
+
+                entity.HasIndex(e => new { e.FirstPurchaseTenantId, e.SecondPurchaseTenantId })
+                    .HasName("IX_DEFCrossSellingCampaigns_Tenants");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getutcdate())");
+
+                entity.Property(e => e.ExpirationDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ReleaseDate).HasColumnType("datetime");
+
+                entity.Property(e => e.UpdatedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getutcdate())");
+
+                entity.HasOne(d => d.FirstPurchaseTenant)
+                    .WithMany(p => p.DefcrossSellingCampaignsFirstPurchaseTenant)
+                    .HasForeignKey(d => d.FirstPurchaseTenantId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_DEFCrossSellingCampaigns_SponsorDEFTenants");
+
+                entity.HasOne(d => d.SecondPurchaseTenant)
+                    .WithMany(p => p.DefcrossSellingCampaignsSecondPurchaseTenant)
+                    .HasForeignKey(d => d.SecondPurchaseTenantId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_DEFCrossSellingCampaigns_SponsoredDEFTenants");
             });
 
             modelBuilder.Entity<DefdeliveryMethods>(entity =>
@@ -7575,6 +7576,31 @@ namespace YOY.DAO.Entities.DB
                 entity.Property(e => e.Username)
                     .IsRequired()
                     .HasMaxLength(256)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<TempbranchHolderDisplayContents>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("TEMPBranchHolderDisplayContents");
+
+                entity.Property(e => e.BranchName)
+                    .IsRequired()
+                    .HasMaxLength(120)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CarrouselImgUrl)
+                    .HasMaxLength(512)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LogoUrl)
+                    .HasMaxLength(512)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TenantName)
+                    .IsRequired()
+                    .HasMaxLength(120)
                     .IsUnicode(false);
             });
 

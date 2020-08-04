@@ -46,6 +46,7 @@ namespace YOY.DAO.Entities.DB
         public DateTime CreatedDate { get; set; }
         public decimal? RelevanceScore { get; set; }
         public string TenantName { get; set; }
+        public double TenantCashbackPercentage { get; set; }
         public string TenantLogoUrl { get; set; }
         public string TenantWhiteLogoUrl { get; set; }
         public Guid TenantCountryId { get; set; }

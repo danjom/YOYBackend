@@ -11,6 +11,6 @@ namespace YOY.UserAPI.Models.v1.Content.POCO
         public int OnSelectAction { set; get; }
         public Guid Id { set; get; }
         public CellDisplayData DisplayData { set; get; }
-        public CellDetailContent DetailedContent { set; get; }
+        public CellContainedObject DetailedContent { set; get; }
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace YOY.UserAPI.Models.v1.Content.POCO
 {
-    public class ShoppingMallCellDetailContent : CellDetailContent
+    public class ShoppingMallCellDetail : CellContainedObject
     {
         public string ImgUrl { set; get; }
         public string MainName { set; get; }
