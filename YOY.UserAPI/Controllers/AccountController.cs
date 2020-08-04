@@ -175,7 +175,17 @@ namespace YOY.UserAPI.Controllers
             else
                 return (false);
         }
+        private async Task<AppUser> ValidateUser(string email, string password)
+        {
+            var identityUser = await _userManager.FindByNameAsync(email);
+            if (identityUser != null)
+            {
+                var result = _userManager.PasswordHasher.VerifyHashedPassword(identityUser, identityUser.PasswordHash, password);
+                return (result == PasswordVerificationResult.Failed ? null : identityUser);
+            }
 
+            return null;
+        }
 
         /// <summary>
         /// Retrieve user profile information
@@ -319,6 +329,71 @@ namespace YOY.UserAPI.Controllers
             return result;
 
         }//GET ENDS -------------------------------------------------------------------------------------------------------//
+
+
+
+
+        /// <summary>
+        /// Retrieve user profile information
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("retrieveId")]
+        public async Task<IActionResult> RetrieveIdAsync([FromBody] UserCredentials model)
+        {
+            int callId = 1;
+            string parameters = "Email: " + model.Email + ", Password: "+ model.Password;
+            string errorMsg;
+            IActionResult result;
+            try
+            {
+                Initialize(Guid.Empty);
+
+
+                AppUser user = await ValidateUser(model.Email, model.Password);
+
+                if(user != null)
+                {
+                    result = Ok(new UserId { Id = user.Id });
+                }
+                else
+                {
+                    errorMsg = "Error: Invalid user";
+
+                    result = new NotFoundObjectResult(
+                                new BasicResponse
+                                {
+                                    StatusCode = Values.StatusCodes.NotFound,
+                                    CustomAction = UserappErrorCustomActions.None,
+                                    DisplayMsgToUser = false,
+                                    DevError = _localizer["UserNotFound"].Value,
+                                    MsgContent = "",
+                                    MsgTitle = ""
+                                });
+
+                    //Registers the invalid call
+                    this._businessObjects.HttpcallInvokationLogs.Post(model.Email, this.GetType().Name, callId, controllerVersion,
+                                        StatusCodes.InternalServerError, 0, parameters, 0, 0, false, null, HttpcallTypes.Get, errorMsg);
+                }
+            }
+            catch (Exception e)
+            {
+                errorMsg = "Error: An error ocurred while data was being retrieved, " + e.InnerException != null ? e.InnerException.Message : e.Message;
+                result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
+
+                //Registers the invalid call
+                this._businessObjects.HttpcallInvokationLogs.Post(model.Email, this.GetType().Name, callId, controllerVersion,
+                                    StatusCodes.InternalServerError, 0, parameters, 0, 0, false, null, HttpcallTypes.Get, errorMsg);
+            }
+
+
+
+            return result;
+
+        }//GET ENDS -------------------------------------------------------------------------------------------------------//
+
 
         /// <summary>
         /// Creates a new user account and retrieve the profile created

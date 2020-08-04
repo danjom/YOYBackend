@@ -100,6 +100,7 @@ namespace YOY.UserAPI.Controllers
                 slider = new ContentStructure
                 {
                     FeedSection = ContentFeedSectionTypes.Header,
+                    ContentLevel = FeedContentLevels.Level0,
                     HasOwner = false,
                     CellOwnerId = Guid.Empty,
                     DisplayStructureTitle = false,
@@ -255,6 +256,7 @@ namespace YOY.UserAPI.Controllers
                 filterTypes = new ContentStructure
                 {
                     FeedSection = ContentFeedSectionTypes.Header,
+                    ContentLevel = FeedContentLevels.Level0,
                     HasOwner = false,
                     CellOwnerId = Guid.Empty,
                     DisplayStructureTitle = true,
@@ -369,6 +371,7 @@ namespace YOY.UserAPI.Controllers
                 categoryOptions = new ContentStructure
                 {
                     FeedSection = ContentFeedSectionTypes.Header,
+                    ContentLevel = FeedContentLevels.Level1,
                     HasOwner = true,
                     CellOwnerId = byCategoryFilterId,
                     DisplayStructureTitle = false,
@@ -462,6 +465,7 @@ namespace YOY.UserAPI.Controllers
                 commerceOptions = new ContentStructure
                 {
                     FeedSection = ContentFeedSectionTypes.Header,
+                    ContentLevel = FeedContentLevels.Level1,
                     HasOwner = true,
                     CellOwnerId = byCommerceFilterId,
                     DisplayStructureTitle = false,
@@ -697,6 +701,7 @@ namespace YOY.UserAPI.Controllers
                 shoppingMallOptions = new ContentStructure
                 {
                     FeedSection = ContentFeedSectionTypes.Header,
+                    ContentLevel = FeedContentLevels.Level1,
                     HasOwner = true,
                     CellOwnerId = byShoppingFilterId,
                     DisplayStructureTitle = false,
@@ -1063,6 +1068,7 @@ namespace YOY.UserAPI.Controllers
                 ContentStructure currentStructure = new ContentStructure
                 {
                     FeedSection = ContentFeedSectionTypes.Header,
+                    ContentLevel = FeedContentLevels.Level0,
                     HasOwner = false,
                     CellOwnerId = Guid.Empty,
                     DisplayStructureTitle = true,
@@ -1091,6 +1097,7 @@ namespace YOY.UserAPI.Controllers
                 currentStructure = new ContentStructure
                 {
                     FeedSection = ContentFeedSectionTypes.Content,
+                    ContentLevel = FeedContentLevels.Level2,
                     HasOwner = true,
                     CellOwnerId = byFilterOwnerId,
                     DisplayStructureTitle = true,
@@ -1119,6 +1126,7 @@ namespace YOY.UserAPI.Controllers
                 currentStructure = new ContentStructure
                 {
                     FeedSection = ContentFeedSectionTypes.Content,
+                    ContentLevel = FeedContentLevels.Level2,
                     HasOwner = true,
                     CellOwnerId = byFilterOwnerId,
                     DisplayStructureTitle = true,
@@ -1285,6 +1293,7 @@ namespace YOY.UserAPI.Controllers
                 currentStructure = new ContentStructure
                 {
                     FeedSection = ContentFeedSectionTypes.Content,
+                    ContentLevel = FeedContentLevels.Level2,
                     HasOwner = true,
                     CellOwnerId = byFilterOwnerId,
                     DisplayStructureTitle = true,
@@ -1313,6 +1322,7 @@ namespace YOY.UserAPI.Controllers
                 currentStructure = new ContentStructure
                 {
                     FeedSection = ContentFeedSectionTypes.Content,
+                    ContentLevel = FeedContentLevels.Level2,
                     HasOwner = true,
                     CellOwnerId = byFilterOwnerId,
                     DisplayStructureTitle = true,

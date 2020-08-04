@@ -7,6 +7,13 @@
         public const int Content = 2;
     }
 
+    public static class FeedContentLevels
+    {
+        public const int Level0 = 0;
+        public const int Level1 = 1;
+        public const int Level2 = 2;
+    }
+
     public static class ContentFeedTypes
     {
         public const int None = 0;
