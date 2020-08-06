@@ -259,7 +259,14 @@ namespace YOY.BusinessAPI.Controllers
 
                         }
 
-                        result = Ok();
+                        SuccessResponse response = new SuccessResponse
+                        {
+                            StatusCode = Values.StatusCodes.Ok,
+                            ShowMsgToUser = true,
+                            MessageToDisplay = "Agregación completada éxitosamente"
+                        };
+
+                        result = Ok(response);
                     }
                     else
                         result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
@@ -373,7 +380,15 @@ namespace YOY.BusinessAPI.Controllers
 
                         }
 
-                        result = Ok();
+                        SuccessResponse response = new SuccessResponse
+                        {
+                            StatusCode = Values.StatusCodes.Ok,
+                            ShowMsgToUser = true,
+                            MessageToDisplay = "Eliminación completada éxitosamente"
+                        };
+
+
+                        result = Ok(response);
                     }
                     else
                         result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);

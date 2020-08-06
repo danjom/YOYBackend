@@ -1417,7 +1417,7 @@ namespace YOY.DAO.Entities.Manager
             return reward;
         }
 
-
+        /*
         private List<FlattenedRewardData> GetsRewardsDataForUser(string userId, Guid stateId, DateTime dateTime, int offerPurpose, int raffleUsageType)
         {
             List<FlattenedRewardData> rewards = null;
@@ -2405,6 +2405,7 @@ namespace YOY.DAO.Entities.Manager
 
         }
 
+        */
         #endregion
 
         #region CONSTRUCTORS

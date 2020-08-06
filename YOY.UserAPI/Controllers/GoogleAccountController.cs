@@ -71,17 +71,17 @@ namespace YOY.UserAPI.Controllers
             {
                 payload = await ValidateAsync(accessToken, new ValidationSettings
                 {
-                    Audience = new[] { "YOUR_CLIENT_ID" }
+                    Audience = new[] { "461831000716-mvqgvkpc9m47jo1q302d9ptp7l0misc7.apps.googleusercontent.com" }
                 });
                 // It is important to add your ClientId as an audience in order to make sure
                 // that the token is for your application!
 
-                if(payload != null && !string.IsNullOrWhiteSpace(payload.JwtId))
+                if(payload != null)
                 {
                     googleUser = new GoogleUserViewModel
                     {
                         JwtId = payload.JwtId,
-                        FirstName = payload.GivenName,
+                        FirstName = payload.GivenName + payload.FamilyName,
                         Email = payload.Email,
                         VerifiedEmail = payload.EmailVerified,
                         Picture = payload.Picture
@@ -255,7 +255,7 @@ namespace YOY.UserAPI.Controllers
 
                             GoogleUserExtractedData userModel = new GoogleUserExtractedData
                             {
-                                GoogleId = googleUser.JwtId,
+                                GoogleId = googleUser.JwtId ?? "",
                                 Email = googleUser.Email,
                                 VerifiedEmail = googleUser.VerifiedEmail ?? false,
                                 Password = randomPassword,
@@ -296,7 +296,7 @@ namespace YOY.UserAPI.Controllers
                             if (string.IsNullOrWhiteSpace(u.GoogleId) || u.GoogleId.CompareTo(model.GoogleToken) != 0)
                             {
                                 if (!string.IsNullOrWhiteSpace(model.GoogleToken))
-                                    u.GoogleId = model.GoogleToken;
+                                    u.GoogleId = model.GoogleToken ?? "";
                             }
 
                             if (!updateUserResult.Succeeded)

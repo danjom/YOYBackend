@@ -340,6 +340,7 @@ namespace YOY.UserAPI.Controllers
         /// <param name="type"></param>
         /// <returns></returns>
         [HttpPost]
+        [AllowAnonymous]
         [Route("retrieveId")]
         public async Task<IActionResult> RetrieveIdAsync([FromBody] UserCredentials model)
         {

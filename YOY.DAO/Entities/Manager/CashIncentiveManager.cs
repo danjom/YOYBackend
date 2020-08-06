@@ -2759,7 +2759,7 @@ namespace YOY.DAO.Entities.Manager
 
 
         #endregion
-
+        /*
         #region CASHBACKINCENTIVESFULLDATA
         /// <summary>
         /// Retrieve cashback incentive flattened data about all the offers that are potencially
@@ -2786,12 +2786,12 @@ namespace YOY.DAO.Entities.Manager
 
                 switch (selectorType)
                 {
-                    case ContentFilters.Category:
+                    case ContentFilterTypes.Category:
 
                         //Nothing for now
 
                         break;
-                    case ContentFilters.Tenant:
+                    case ContentFilterTypes.Commerce:
 
                         switch (contentSegmentationType)
                         {
@@ -2937,12 +2937,12 @@ namespace YOY.DAO.Entities.Manager
 
                 switch (selectorType)
                 {
-                    case ContentFilters.Category:
+                    case ContentFilterTypes.Category:
 
                         //NOTHING FOR NOW
 
                         break;
-                    case ContentFilters.Tenant:
+                    case ContentFilterTypes.Commerce:
 
                         switch (contentSegmentationType)
                         {
@@ -3364,7 +3364,7 @@ namespace YOY.DAO.Entities.Manager
 
             return cashbackIncentives;
         }
-        */
+        
 
         private void BuildFullOfferList(ref List<FullCashbackIncentiveData> offersData, ref List<CashbackIncentiveDataWithBranches> enabledIncentives, bool includeBranchList, bool includeNearestBranch)
         {
@@ -3947,6 +3947,7 @@ namespace YOY.DAO.Entities.Manager
 
 
         #endregion
+        */
 
         #region INCENTIVE METRICS
 

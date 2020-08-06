@@ -1832,6 +1832,7 @@ namespace YOY.DAO.Entities.Manager
 
                         nearestBranch = enabledBranches.ElementAt(0);
 
+                        /*
                         if (nearestBranch != null)
                         {
                             currentContent.Tenant.NearestBranchId = nearestBranch.Id;
@@ -1839,6 +1840,7 @@ namespace YOY.DAO.Entities.Manager
                             currentContent.Tenant.NearestBranchLatitude = nearestBranch.Latitude;
                             currentContent.Tenant.NearestBranchLongitude = nearestBranch.Longitude;
                         }
+                        */
 
                         contentsData.Add(new BroadcastingLogContentFullData
                         {
@@ -1952,6 +1954,7 @@ namespace YOY.DAO.Entities.Manager
 
                     nearestBranch = enabledBranches.ElementAt(0);
 
+                    /*
                     if (includeNearestBranch && nearestBranch != null)
                     {
                         currentContent.Tenant.NearestBranchId = nearestBranch.Id;
@@ -1960,6 +1963,7 @@ namespace YOY.DAO.Entities.Manager
                         currentContent.Tenant.NearestBranchLongitude = nearestBranch.Longitude;
                         currentContent.Tenant.NearesBranchDistance = nearestBranch.Distance;
                     }
+                    */
 
                     if (includeBranchList)
                     {
@@ -1997,6 +2001,7 @@ namespace YOY.DAO.Entities.Manager
             }
         }
 
+        /*
         private List<FlattenedBroadcastingLogData> GetBroadcastingOffersDataWithLocation(string userId, decimal latitude, decimal longitude, double radius, DateTime dateTime)
         {
             List<FlattenedBroadcastingLogData> broadcastingLogOffers = null;
@@ -2414,7 +2419,7 @@ namespace YOY.DAO.Entities.Manager
             return broadcastingLogsData;
 
         }
-
+        */
 
         public List<FullBroadcastingLogData> GetBroadcastingLogData(string userId, DateTime dateTime, bool includeBranchList)
         {
@@ -2422,7 +2427,7 @@ namespace YOY.DAO.Entities.Manager
 
             try
             {
-                List<FlattenedBroadcastingLogData> flattenedBroadcastingOfferLogs = this.GetBroadcastingOffers(userId, dateTime);
+                List<FlattenedBroadcastingLogData> flattenedBroadcastingOfferLogs = null;// this.GetBroadcastingOffers(userId, dateTime);
 
                 if (flattenedBroadcastingOfferLogs?.Count > 0)
                 {

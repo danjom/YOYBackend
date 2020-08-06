@@ -1067,13 +1067,7 @@
         public const int OpenWebView = 3;
     }
 
-    public static class ContentFilters
-    {
-        public const int NoFilter = 0;
-        public const int Tenant = 1;
-        public const int Category = 2;
-        public const int Recommended = 3;
-    }
+    
 
     public static class ImageDimensions
     {

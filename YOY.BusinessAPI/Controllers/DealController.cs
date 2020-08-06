@@ -307,13 +307,13 @@ namespace YOY.BusinessAPI.Controllers
         }
 
 
-        private List<DealData> GetDealsData(int pageSize, int pageNumber)
+        private List<DealData> GetDealsData(int pageSize, int pageNumber, DateTime start, DateTime end)
         {
             List<DealData> dealsData;
 
             try
             {
-                List<Offer> offers = this._businessObjects.Offers.Gets(ExpiredStates.All, ActiveStates.All, ReleaseStates.All, DateTime.UtcNow, pageSize, pageNumber);
+                List<Offer> offers = this._businessObjects.Offers.Gets(start, end, DateTime.UtcNow, ActiveStates.All, pageSize, pageNumber);
 
                 if (offers?.Count > 0)
                 {
@@ -508,7 +508,7 @@ namespace YOY.BusinessAPI.Controllers
                 if (this._businessObjects.Tenant.TenantId != Guid.Empty)
                 {
 
-                    Task<List<DealData>> getDealsDataTask = new Task<List<DealData>>(() => this.GetDealsData(pageSize, pageNumber));
+                    Task<List<DealData>> getDealsDataTask = new Task<List<DealData>>(() => this.GetDealsData(pageSize, pageNumber, startDate, endDate));
                     getDealsDataTask.Start();
 
                     Task<int> getDealsCountTask = new Task<int>(() => this.GetTotalDealsCount(startDate, endDate));

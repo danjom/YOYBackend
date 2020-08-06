@@ -467,6 +467,141 @@ namespace YOY.DAO.Entities.Manager
         }//GETS METHOD ENDS ----------------------------------------------------------------------------------------------------------------------------- //
 
         /// <summary>
+        ///  Returns all the promos in a date range
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <param name="dateTime"></param>
+        /// <param name="activeState"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="pageNumber"></param>
+        /// <returns></returns>
+        public List<Offer> Gets(DateTime startDate, DateTime endDate, DateTime dateTime, int activeState, int pageSize, int pageNumber)
+        {
+            List<Offer> offers = new List<Offer>();
+
+            try
+            {
+
+                var query = (dynamic)null;
+
+                switch (activeState)
+                {
+                    case ActiveStates.All:
+                        query = (from x in this._businessObjects.Context.OltpoffersView
+                                 where x.TenantId == this._businessObjects.Tenant.TenantId && x.CreatedDate >= startDate && x.CreatedDate <= endDate
+                                 orderby x.CreatedDate descending
+                                 select x).Skip(pageSize * pageNumber).Take(pageSize);
+                        break;
+                    case ActiveStates.Active:
+                        query = (from x in this._businessObjects.Context.OltpoffersView
+                                 where x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.CreatedDate >= startDate && x.CreatedDate <= endDate
+                                 orderby x.CreatedDate descending
+                                 select x).Skip(pageSize * pageNumber).Take(pageSize);
+                        break;
+                    case ActiveStates.Inactive:
+                        query = (from x in this._businessObjects.Context.OltpoffersView
+                                 where !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.CreatedDate >= startDate && x.CreatedDate <= endDate
+                                 orderby x.CreatedDate descending
+                                 select x).Skip(pageSize * pageNumber).Take(pageSize);
+                        break;
+                }
+
+
+                if (query != null)
+                {
+                    Offer offer = null;
+                    foreach (OltpoffersView item in query)
+                    {
+                        offer = new Offer
+                        {
+                            Id = item.Id,
+                            TenantId = item.TenantId,
+                            MainCategoryId = item.MainCategoryId,
+                            MainCategoryName = item.CategoryName,
+                            OfferType = item.OfferType,
+                            OfferTypeName = GetOfferTypeName(item.OfferType),
+                            DealType = item.DealType,
+                            DealTypeName = GetDealTypeName(item.DealType),
+                            RewardType = item.RewardType,
+                            RewardTypeName = GetRewardTypeName(item.RewardType),
+                            PurposeType = item.PurposeType,
+                            PurposeTypeName = this.GetPurposeTypeName(item.PurposeType),
+                            GeoSegmentationType = item.GeoSegmentationType,
+                            GeoSegmentationTypeName = GetGeoSegmentationTypeName(item.GeoSegmentationType),
+                            DisplayType = item.DisplayType,
+                            DisplayTypeName = GetDisplayTypeName(item.DisplayType),
+                            Name = item.Name,
+                            MainHint = item.MainHint,
+                            ComplementaryHint = item.ComplementaryHint,
+                            Keywords = item.Keywords,
+                            Description = item.Description,
+                            Code = item.Code ?? "",
+                            CodeImg = item.CodeImg,
+                            MinsToUnlock = item.MinsToUnlock,
+                            IsActive = item.IsActive,
+                            IsExclusive = item.IsExclusive,
+                            IsSponsored = item.IsSponsored,
+                            HasUniqueCodes = item.HasUniqueCodes,
+                            HasPreferences = item.HasPreferences,
+                            AvailableQuantity = item.AvailableQuantity,
+                            OneTimeRedemption = item.OneTimeRedemption,
+                            MaxClaimsPerUser = item.MaxClaimsPerUser,
+                            MinPurchasesCountToRedeem = item.MinPurchasesCountToRedeem,
+                            PurchasesCountStartDate = item.PurchasesCountStartDate,
+                            ClaimLocation = item.ClaimLocation,
+                            Value = item.Value,
+                            RegularValue = item.RegularValue,
+                            ExtraBonus = item.ExtraBonus,
+                            ExtraBonusType = item.ExtraBonusType,
+                            ExtraBonusTypeName = this.GetExtraBonusTypeName(item.ExtraBonusType),
+                            MinIncentive = item.MinIncentive,
+                            MaxIncentive = item.MaxIncentive,
+                            IncentiveVariationType = item.IncentiveVariationType,
+                            //IncentiveVarationTypeName = GetIncentiveVariationTypeName(item.IncentiveVariationType),
+                            IncentiveVariation = item.IncentiveVariation,
+                            //SecondsIncentiveVariationFrame = item.SecondsIncentiveVariationFrame,
+                            RedeemCount = item.RedeemCount,
+                            ClaimCount = item.ClaimCount,
+                            ReleaseDate = item.ReleaseDate,
+                            ExpirationDate = item.ExpirationDate,
+                            TargettingParams = item.TargettingParams,
+                            DisplayImgId = item.DisplayImageId,
+                            DisplayImgUrl = item.DisplayImageUrl,
+                            Rules = item.Rules ?? Resources.NoRulesAvailable,
+                            Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
+                            ClaimInstructions = item.ClaimInstructions ?? Resources.NoClaimInstructionsAvailable,
+                            LastBroadcastingUsage = item.LastBroadcastingUsage,
+                            BroadcastingTimerType = item.BroadcastingTimerType,
+                            BroadcastingTimerTypeName = this.GetBroadcastingTimerTypeName(item.BroadcastingTimerType),
+                            BroadcastingScheduleType = item.BroadcastingScheduleType,
+                            BroadcastingScheduleTypeName = this.GetBroadcastingScheduleTypeName(item.BroadcastingScheduleType),
+                            BroadcastingMinsToRedeem = item.BroadcastingMinsToRedeem,
+                            BroadcastingTitle = item.BroadcastingTitle,
+                            BroadcastingMsg = item.BroadcastingMsg,
+                            RelevanceRate = item.RelevanceRate,
+                            CreatedDate = item.CreatedDate,
+                            UpdatedDate = item.UpdatedDate
+                        };
+
+                        offer.PublishState = this.GetPublishState((DateTime)offer.ReleaseDate, offer.ExpirationDate, dateTime);
+
+                        offers.Add(offer);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                offers = null;
+                //ERROR HANDLING
+                this._businessObjects.StoredProcsHandler.AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return offers;
+        }
+
+        /// <summary>
         /// Returns all the promos in a range range
         /// </summary>
         /// <param name="minPrice"></param>
@@ -4360,7 +4495,7 @@ namespace YOY.DAO.Entities.Manager
 
         #endregion
 
-/*
+
         #region OFFERSFULLDATA
 
         /// <summary>
@@ -4378,7 +4513,7 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="radius"></param>
         /// <param name="dateTime"></param>
         /// <returns></returns>
-        private List<FlattenedOfferData> GetOffersDataByRegionWithLocation(Guid countryId, Guid stateId, int contentSegmentationType, string userId, decimal latitude, decimal longitude, double radius, DateTime dateTime, int selectorType, int offerPurpose)
+        private List<FlattenedOfferData> GetOffersDataByRegionWithLocation(Guid countryId, Guid stateId, int contentSegmentationType, string userId, decimal latitude, decimal longitude, double radius, DateTime dateTime, int selectorType, int offerPurpose, int pageSize, int pageNumber)
         {
             List<FlattenedOfferData> offers = null;
 
@@ -4388,19 +4523,19 @@ namespace YOY.DAO.Entities.Manager
 
                 switch (selectorType)
                 {
-                    case ContentFilters.Category:
+                    case ContentFilterTypes.Category:
 
                         switch (contentSegmentationType)
                         {
                             case GeoSegmentationTypes.Country:
 
-                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByCountryWithLocationPreferenceFocus(latitude, longitude, radius * DistanceLimits.MaxKMRangeForMainOffersByCountryFactor, countryId, userId, offerPurpose, dateTime)
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByCountryWithLocationPreferenceFocus(latitude, longitude, radius * DistanceLimits.MaxKMRangeForMainOffersByCountryFactor, countryId, userId, offerPurpose, dateTime, pageSize, pageNumber)
                                         where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
                                         select x;
                                 break;
                             case GeoSegmentationTypes.State:
 
-                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByStateWithLocationPreferenceFocus(latitude, longitude, radius, stateId, countryId, userId, offerPurpose, dateTime)
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByStateWithLocationPreferenceFocus(latitude, longitude, radius, stateId, countryId, userId, offerPurpose, dateTime, pageSize, pageNumber)
                                         where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
                                         select x;
                                 break;
@@ -4411,112 +4546,69 @@ namespace YOY.DAO.Entities.Manager
                             FlattenedOfferData offer;
                             offers = new List<FlattenedOfferData>();
 
-                            foreach (TempoffersPreferenceBranches item in query)
+                            foreach (TempofferDisplayContents item in query)
                             {
                                 if (item.AvailableQuantity == -1 || item.AvailableQuantity > 0)
                                 {
                                     offer = new FlattenedOfferData
                                     {
                                         SelectorType = selectorType,
-                                        Offer = new Offer
+                                        Offer = new BasicOfferData
                                         {
                                             Id = item.Id,
                                             TenantId = item.TenantId,
                                             MainCategoryId = item.MainCategoryId,
-                                            MainCategoryName = "",//Not needed
                                             OfferType = item.OfferType,
-                                            OfferTypeName = "",//Not needed
                                             DealType = item.DealType,
-                                            DealTypeName = "",//Not needed
-                                            RewardType = item.RewardType,
-                                            RewardTypeName = "",//Not needed
                                             PurposeType = item.PurposeType,
-                                            PurposeTypeName = "",//Not needed
+                                            RewardType = item.RewardType,
                                             GeoSegmentationType = item.GeoSegmentationType,
-                                            GeoSegmentationTypeName = "",//Not needed
                                             DisplayType = item.DisplayType,
-                                            DisplayTypeName = "",//Not needed
                                             Name = item.Name,
                                             MainHint = item.MainHint,
                                             ComplementaryHint = item.ComplementaryHint,
                                             Keywords = item.Keywords,
                                             Description = item.Description,
-                                            Code = "",//Not needed
-                                            CodeImg = null,//Not needed
                                             MinsToUnlock = item.MinsToUnlock,
                                             IsActive = item.IsActive,
-                                            IsExclusive = item.IsExclusive,
                                             IsSponsored = item.IsSponsored,
-                                            HasUniqueCodes = false,//Not needed
+                                            IsExclusive = item.IsExclusive,
                                             HasPreferences = item.HasPreferences,
-                                            AvailableQuantity = item.AvailableQuantity,
-                                            OneTimeRedemption = item.OneTimeRedemption,
-                                            MaxClaimsPerUser = item.MaxClaimsPerUser,
-                                            MinPurchasesCountToRedeem = item.MinPurchasesCountToRedeem,
-                                            PurchasesCountStartDate = item.PurchasesCountStartDate,
-                                            ClaimLocation = item.ClaimLocation,
                                             Value = item.Value,
                                             RegularValue = item.RegularValue,
                                             ExtraBonus = item.ExtraBonus,
                                             ExtraBonusType = item.ExtraBonusType,
-                                            ExtraBonusTypeName = "",//Not needed
-                                            MinIncentive = -1,//Not needed
-                                            MaxIncentive = -1,//Not needed
-                                            IncentiveVariationType = -1,//Not needed
-                                            IncentiveVarationTypeName = "",//Not needed
-                                            IncentiveVariation = -1,//Not needed
-                                            SecondsIncentiveVariationFrame = -1,//Not needed
-                                            RedeemCount = item.RedeemCount,
+                                            AvailableQuantity = item.AvailableQuantity,
+                                            OneTimeRedemption = item.OneTimeRedemption,
+                                            MaxClaimsPerUser = item.MaxClaimsPerUser,
+                                            MinPurchasesCountToRedeem  = item.MinPurchasesCountToRedeem,
+                                            PurchasesCountStartDate = item.PurchasesCountStartDate,
                                             ClaimCount = item.ClaimCount,
+                                            ClaimLocation = item.ClaimLocation,
+                                            DisplayImgUrl = item.DisplayImageUrl,
+                                            Rules = item.Rules,
+                                            Conditions = item.Conditions,
+                                            ClaimInstructions = item.ClaimInstructions,
+                                            RelevanceRate = item.RelevanceRate,
+                                            TargettingParams = item.TargettingParams,
                                             ReleaseDate = item.ReleaseDate,
                                             ExpirationDate = item.ExpirationDate,
-                                            TargettingParams = item.TargettingParams,
-                                            DisplayImgId = item.DisplayImageUrl,
-                                            Rules = item.Rules ?? Resources.NoRulesAvailable,
-                                            Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
-                                            ClaimInstructions = item.ClaimInstructions ?? Resources.NoClaimInstructionsAvailable,
-                                            LastBroadcastingUsage = null,//Not needed
-                                            BroadcastingTimerType = -1,//Not needed
-                                            BroadcastingTimerTypeName = "",//Not needed
-                                            BroadcastingScheduleType = -1,//Not needed
-                                            BroadcastingScheduleTypeName = "",//Not needed
-                                            BroadcastingMinsToRedeem = -1,//Not needed
-                                            BroadcastingTitle = "",//Not needed
-                                            BroadcastingMsg = "",//Not needed
-                                            RelevanceRate = item.RelevanceRate,
-                                            CreatedDate = item.CreatedDate,
-                                            UpdatedDate = DateTime.UtcNow,//Not needed
-                                            SatisfactionScore = item.SatisfactionScore,
-                                            RelevanceScore = item.RelevanceScore
+                                            CreatedDate = item.CreatedDate
                                         },
                                         Tenant = new DTO.Entities.Misc.TenantData.BasicTenantData
                                         {
                                             Id = item.TenantId,
                                             Name = item.TenantName,
-                                            Logo = item.TenantLogo,
+                                            LogoUrl = item.TenantLogoUrl,
+                                            WhiteLogoUrl = item.TenantWhiteLogoUrl,
                                             CountryId = item.TenantCountryId,
                                             CurrencySymbol = item.CurrencySymbol,
+                                            CashbackPercentage = item.TenantCashbackPercentage,
+                                            RelevanceStatus = item.TenantRelevanceStatus,
                                             Type = item.TenantType,
                                             CategoryId = item.TenantCategoryId,
-                                            CategoryName = "",
                                             RelevanceScore = null,//When its selector is category, there is no info about tenant relevance
-                                            NearestBranchId = Guid.Empty,
-                                            NearestBranchName = "",
-                                            NearestBranchLatitude = null,
-                                            NearestBranchLongitude = null,
-                                        },
-                                        Branch = new BasicBranchData
-                                        {
-                                            Id = item.BranchId,
-                                            Name = item.BranchName,
-                                            DescriptiveAddress = item.BranchDescriptiveAddress,
-                                            InquiriesPhoneNumber = item.BranchInquiriesPhoneNumber,
-                                            Latitude = item.BranchLatitude,
-                                            Longitude = item.BranchLongitude,
-                                            Distance = Math.Round(((double)item.Distance / 1000), 2, MidpointRounding.AwayFromZero),//Is originally in meters, it's passed to kilometers
-                                            CityId = item.BranchCityId,
-                                            StateId = item.BranchStateId,
-                                            Enabled = false
+                                            
                                         },
                                         Preference = new DTO.Entities.Misc.InterestPreference.BasicUserPreferenceData
                                         {
@@ -4534,17 +4626,17 @@ namespace YOY.DAO.Entities.Manager
                         }
 
                         break;
-                    case ContentFilters.Tenant:
+                    case ContentFilterTypes.Commerce:
 
                         switch (contentSegmentationType)
                         {
                             case GeoSegmentationTypes.Country:
-                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByCountryWithLocationTenantFocus(latitude, longitude, radius * DistanceLimits.MaxKMRangeForMainOffersByCountryFactor, countryId, userId, offerPurpose, dateTime)
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByCountryWithLocationTenantFocus(latitude, longitude, radius * DistanceLimits.MaxKMRangeForMainOffersByCountryFactor, countryId, userId, offerPurpose, dateTime, pageSize, pageNumber)
                                         where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
                                         select x;
                                 break;
                             case GeoSegmentationTypes.State:
-                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByStateWithLocationTenantFocus(latitude, longitude, radius, stateId, countryId, userId, offerPurpose, dateTime)
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByStateWithLocationTenantFocus(latitude, longitude, radius, stateId, countryId, userId, offerPurpose, dateTime, pageSize, pageNumber)
                                         where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
                                         select x;
                                 break;
@@ -4555,112 +4647,170 @@ namespace YOY.DAO.Entities.Manager
                             FlattenedOfferData offer;
                             offers = new List<FlattenedOfferData>();
 
-                            foreach (TempoffersPreferenceBranches item in query)
+                            foreach (TempofferDisplayContents item in query)
                             {
                                 if (item.AvailableQuantity == -1 || item.AvailableQuantity > 0)
                                 {
                                     offer = new FlattenedOfferData
                                     {
                                         SelectorType = selectorType,
-                                        Offer = new Offer
+                                        Offer = new BasicOfferData
                                         {
                                             Id = item.Id,
                                             TenantId = item.TenantId,
                                             MainCategoryId = item.MainCategoryId,
-                                            MainCategoryName = "",//Not needed
                                             OfferType = item.OfferType,
-                                            OfferTypeName = "",//Not needed
                                             DealType = item.DealType,
-                                            DealTypeName = "",//Not needed
-                                            RewardType = item.RewardType,
-                                            RewardTypeName = "",//Not needed
                                             PurposeType = item.PurposeType,
-                                            PurposeTypeName = "",//Not needed
+                                            RewardType = item.RewardType,
                                             GeoSegmentationType = item.GeoSegmentationType,
-                                            GeoSegmentationTypeName = "",//Not needed
                                             DisplayType = item.DisplayType,
-                                            DisplayTypeName = "",//Not needed
                                             Name = item.Name,
                                             MainHint = item.MainHint,
                                             ComplementaryHint = item.ComplementaryHint,
                                             Keywords = item.Keywords,
                                             Description = item.Description,
-                                            Code = "",//Not needed
-                                            CodeImg = null,//Not needed
                                             MinsToUnlock = item.MinsToUnlock,
                                             IsActive = item.IsActive,
-                                            IsExclusive = item.IsExclusive,
                                             IsSponsored = item.IsSponsored,
-                                            HasUniqueCodes = false,//Not needed
+                                            IsExclusive = item.IsExclusive,
                                             HasPreferences = item.HasPreferences,
+                                            Value = item.Value,
+                                            RegularValue = item.RegularValue,
+                                            ExtraBonus = item.ExtraBonus,
+                                            ExtraBonusType = item.ExtraBonusType,
                                             AvailableQuantity = item.AvailableQuantity,
                                             OneTimeRedemption = item.OneTimeRedemption,
                                             MaxClaimsPerUser = item.MaxClaimsPerUser,
                                             MinPurchasesCountToRedeem = item.MinPurchasesCountToRedeem,
                                             PurchasesCountStartDate = item.PurchasesCountStartDate,
-                                            ClaimLocation = item.ClaimLocation,
-                                            Value = item.Value,
-                                            RegularValue = item.RegularValue,
-                                            ExtraBonus = item.ExtraBonus,
-                                            ExtraBonusType = item.ExtraBonusType,
-                                            ExtraBonusTypeName = "",//Not needed
-                                            MinIncentive = -1,//Not needed
-                                            MaxIncentive = -1,//Not needed
-                                            IncentiveVariationType = -1,//Not needed
-                                            IncentiveVarationTypeName = "",//Not needed
-                                            IncentiveVariation = -1,//Not needed
-                                            SecondsIncentiveVariationFrame = -1,//Not needed
-                                            RedeemCount = item.RedeemCount,
                                             ClaimCount = item.ClaimCount,
+                                            ClaimLocation = item.ClaimLocation,
+                                            DisplayImgUrl = item.DisplayImageUrl,
+                                            Rules = item.Rules,
+                                            Conditions = item.Conditions,
+                                            ClaimInstructions = item.ClaimInstructions,
+                                            RelevanceRate = item.RelevanceRate,
+                                            TargettingParams = item.TargettingParams,
                                             ReleaseDate = item.ReleaseDate,
                                             ExpirationDate = item.ExpirationDate,
-                                            TargettingParams = item.TargettingParams,
-                                            DisplayImgId = item.DisplayImageId,
-                                            Rules = item.Rules ?? Resources.NoRulesAvailable,
-                                            Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
-                                            ClaimInstructions = item.ClaimInstructions ?? Resources.NoClaimInstructionsAvailable,
-                                            LastBroadcastingUsage = null,//Not needed
-                                            BroadcastingTimerType = -1,//Not needed
-                                            BroadcastingTimerTypeName = "",//Not needed
-                                            BroadcastingScheduleType = -1,//Not needed
-                                            BroadcastingScheduleTypeName = "",//Not needed
-                                            BroadcastingMinsToRedeem = -1,//Not needed
-                                            BroadcastingTitle = "",//Not needed
-                                            BroadcastingMsg = "",//Not needed
-                                            RelevanceRate = item.RelevanceRate,
-                                            CreatedDate = item.CreatedDate,
-                                            UpdatedDate = DateTime.UtcNow,//Not needed
-                                            SatisfactionScore = item.SatisfactionScore,
-                                            RelevanceScore = item.RelevanceScore
+                                            CreatedDate = item.CreatedDate
                                         },
                                         Tenant = new DTO.Entities.Misc.TenantData.BasicTenantData
                                         {
                                             Id = item.TenantId,
                                             Name = item.TenantName,
-                                            Logo = item.TenantLogo,
+                                            LogoUrl = item.TenantLogoUrl,
+                                            WhiteLogoUrl = item.TenantWhiteLogoUrl,
                                             CountryId = item.TenantCountryId,
                                             CurrencySymbol = item.CurrencySymbol,
+                                            CashbackPercentage = item.TenantCashbackPercentage,
                                             CategoryId = item.TenantCategoryId,
-                                            CategoryName = item.TenantCategoryName,
+                                            RelevanceStatus = item.TenantRelevanceStatus,
                                             Type = item.TenantType,
                                             RelevanceScore = item.TenantScore,
-                                            NearestBranchId = Guid.Empty,
-                                            NearestBranchName = "",
-                                            NearestBranchLatitude = null,
-                                            NearestBranchLongitude = null,
                                         },
-                                        Branch = new BasicBranchData
+                                        //When its selector is tenant, there is no data about the preference
+                                        Preference = new DTO.Entities.Misc.InterestPreference.BasicUserPreferenceData
                                         {
-                                            Id = item.BranchId,
-                                            Name = item.BranchName,
-                                            DescriptiveAddress = item.BranchDescriptiveAddress,
-                                            InquiriesPhoneNumber = item.BranchInquiriesPhoneNumber,
-                                            Latitude = item.BranchLatitude,
-                                            Longitude = item.BranchLongitude,
-                                            Distance = Math.Round(((double)item.Distance / 1000), 2, MidpointRounding.AwayFromZero),//Is originally in meters, it's passed to kilometers
-                                            CityId = item.BranchCityId,
-                                            StateId = item.BranchStateId,
-                                            Enabled = false
+                                            Id = Guid.Empty,
+                                            Name = "",
+                                            Icon = "",
+                                            RelevanceScore = -1
+                                        },
+                                        ExactLocationBased = true
+                                    };
+
+                                    offers.Add(offer);
+                                }
+
+                            }
+                        }
+
+                        break;
+                    case ContentFilterTypes.ShoppingMall:
+
+                        switch (contentSegmentationType)
+                        {
+                            case GeoSegmentationTypes.Country:
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByCountryWithLocationBranchHolderFocus(latitude, longitude, radius * DistanceLimits.MaxKMRangeForMainOffersByCountryFactor, countryId, userId, offerPurpose, dateTime, pageSize, pageNumber)
+                                        where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
+                                        select x;
+                                break;
+                            case GeoSegmentationTypes.State:
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByStateWithLocationBranchHolderFocus(latitude, longitude, radius, stateId, countryId, userId, offerPurpose, dateTime, pageSize, pageNumber)
+                                        where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
+                                        select x;
+                                break;
+                        }
+
+                        if (query != null)
+                        {
+                            FlattenedOfferData offer;
+                            offers = new List<FlattenedOfferData>();
+
+                            foreach (TempofferDisplayContents item in query)
+                            {
+                                if (item.AvailableQuantity == -1 || item.AvailableQuantity > 0)
+                                {
+                                    offer = new FlattenedOfferData
+                                    {
+                                        SelectorType = selectorType,
+                                        Offer = new BasicOfferData
+                                        {
+                                            Id = item.Id,
+                                            TenantId = item.TenantId,
+                                            MainCategoryId = item.MainCategoryId,
+                                            OfferType = item.OfferType,
+                                            DealType = item.DealType,
+                                            PurposeType = item.PurposeType,
+                                            RewardType = item.RewardType,
+                                            GeoSegmentationType = item.GeoSegmentationType,
+                                            DisplayType = item.DisplayType,
+                                            Name = item.Name,
+                                            MainHint = item.MainHint,
+                                            ComplementaryHint = item.ComplementaryHint,
+                                            Keywords = item.Keywords,
+                                            Description = item.Description,
+                                            MinsToUnlock = item.MinsToUnlock,
+                                            IsActive = item.IsActive,
+                                            IsSponsored = item.IsSponsored,
+                                            IsExclusive = item.IsExclusive,
+                                            HasPreferences = item.HasPreferences,
+                                            Value = item.Value,
+                                            RegularValue = item.RegularValue,
+                                            ExtraBonus = item.ExtraBonus,
+                                            ExtraBonusType = item.ExtraBonusType,
+                                            AvailableQuantity = item.AvailableQuantity,
+                                            OneTimeRedemption = item.OneTimeRedemption,
+                                            MaxClaimsPerUser = item.MaxClaimsPerUser,
+                                            MinPurchasesCountToRedeem = item.MinPurchasesCountToRedeem,
+                                            PurchasesCountStartDate = item.PurchasesCountStartDate,
+                                            ClaimCount = item.ClaimCount,
+                                            ClaimLocation = item.ClaimLocation,
+                                            DisplayImgUrl = item.DisplayImageUrl,
+                                            Rules = item.Rules,
+                                            Conditions = item.Conditions,
+                                            ClaimInstructions = item.ClaimInstructions,
+                                            RelevanceRate = item.RelevanceRate,
+                                            TargettingParams = item.TargettingParams,
+                                            ReleaseDate = item.ReleaseDate,
+                                            ExpirationDate = item.ExpirationDate,
+                                            CreatedDate = item.CreatedDate
+                                        },
+                                        Tenant = new DTO.Entities.Misc.TenantData.BasicTenantData
+                                        {
+                                            Id = item.TenantId,
+                                            Name = item.TenantName,
+                                            LogoUrl = item.TenantLogoUrl,
+                                            WhiteLogoUrl = item.TenantWhiteLogoUrl,
+                                            CountryId = item.TenantCountryId,
+                                            CurrencySymbol = item.CurrencySymbol,
+                                            CashbackPercentage = item.TenantCashbackPercentage,
+                                            CategoryId = item.TenantCategoryId,
+                                            RelevanceStatus = item.TenantRelevanceStatus,
+                                            Type = item.TenantType,
+                                            RelevanceScore = item.TenantScore,
                                         },
                                         //When its selector is tenant, there is no data about the preference
                                         Preference = new DTO.Entities.Misc.InterestPreference.BasicUserPreferenceData
@@ -4705,7 +4855,7 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="stateId"></param>
         /// <param name="dateTime"></param>
         /// <returns></returns>
-        private List<FlattenedOfferData> GetOffersDataByRegion(Guid stateId, Guid countryId, int contentSegmentationType, string userId, DateTime dateTime, int selectorType, int offerPurpose)
+        private List<FlattenedOfferData> GetOffersDataByRegion(Guid stateId, Guid countryId, int contentSegmentationType, string userId, DateTime dateTime, int selectorType, int offerPurpose, int pageSize, int pageNumber)
         {
             List<FlattenedOfferData> offers = null;
 
@@ -4715,17 +4865,17 @@ namespace YOY.DAO.Entities.Manager
 
                 switch (selectorType)
                 {
-                    case ContentFilters.Category:
+                    case ContentFilterTypes.Category:
 
                         switch (contentSegmentationType)
                         {
                             case GeoSegmentationTypes.Country:
-                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByCountryPreferenceFocus(countryId, userId, offerPurpose, dateTime)
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByCountryPreferenceFocus(countryId, userId, offerPurpose, dateTime, pageSize, pageNumber)
                                         where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
                                         select x;
                                 break;
                             case GeoSegmentationTypes.State:
-                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByStatePreferenceFocus(stateId, countryId, userId, offerPurpose, dateTime)
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByStatePreferenceFocus(stateId, countryId, userId, offerPurpose, dateTime, pageSize, pageNumber)
                                         where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
                                         select x;
                                 break;
@@ -4736,112 +4886,68 @@ namespace YOY.DAO.Entities.Manager
                             FlattenedOfferData offer;
                             offers = new List<FlattenedOfferData>();
 
-                            foreach (TempoffersPreferenceBranches item in query)
+                            foreach (TempofferDisplayContents item in query)
                             {
                                 if (item.AvailableQuantity == -1 || item.AvailableQuantity > 0)
                                 {
                                     offer = new FlattenedOfferData
                                     {
                                         SelectorType = selectorType,
-                                        Offer = new Offer
+                                        Offer = new BasicOfferData
                                         {
                                             Id = item.Id,
                                             TenantId = item.TenantId,
                                             MainCategoryId = item.MainCategoryId,
-                                            MainCategoryName = "",//Not needed
                                             OfferType = item.OfferType,
-                                            OfferTypeName = "",//Not needed
                                             DealType = item.DealType,
-                                            DealTypeName = "",//Not needed
-                                            RewardType = item.RewardType,
-                                            RewardTypeName = "",//Not needed
                                             PurposeType = item.PurposeType,
-                                            PurposeTypeName = "",//Not needed
+                                            RewardType = item.RewardType,
                                             GeoSegmentationType = item.GeoSegmentationType,
-                                            GeoSegmentationTypeName = "",//Not needed
                                             DisplayType = item.DisplayType,
-                                            DisplayTypeName = "",//Not needed
                                             Name = item.Name,
                                             MainHint = item.MainHint,
                                             ComplementaryHint = item.ComplementaryHint,
                                             Keywords = item.Keywords,
                                             Description = item.Description,
-                                            Code = "",//Not needed
-                                            CodeImg = null,//Not needed
                                             MinsToUnlock = item.MinsToUnlock,
                                             IsActive = item.IsActive,
-                                            IsExclusive = item.IsExclusive,
                                             IsSponsored = item.IsSponsored,
-                                            HasUniqueCodes = false,//Not needed
+                                            IsExclusive = item.IsExclusive,
                                             HasPreferences = item.HasPreferences,
+                                            Value = item.Value,
+                                            RegularValue = item.RegularValue,
+                                            ExtraBonus = item.ExtraBonus,
+                                            ExtraBonusType = item.ExtraBonusType,
                                             AvailableQuantity = item.AvailableQuantity,
                                             OneTimeRedemption = item.OneTimeRedemption,
                                             MaxClaimsPerUser = item.MaxClaimsPerUser,
                                             MinPurchasesCountToRedeem = item.MinPurchasesCountToRedeem,
                                             PurchasesCountStartDate = item.PurchasesCountStartDate,
-                                            ClaimLocation = item.ClaimLocation,
-                                            Value = item.Value,
-                                            RegularValue = item.RegularValue,
-                                            ExtraBonus = item.ExtraBonus,
-                                            ExtraBonusType = item.ExtraBonusType,
-                                            ExtraBonusTypeName = "",//Not needed
-                                            MinIncentive = -1,//Not needed
-                                            MaxIncentive = -1,//Not needed
-                                            IncentiveVariationType = -1,//Not needed
-                                            IncentiveVarationTypeName = "",//Not needed
-                                            IncentiveVariation = -1,//Not needed
-                                            SecondsIncentiveVariationFrame = -1,//Not needed
-                                            RedeemCount = item.RedeemCount,
                                             ClaimCount = item.ClaimCount,
+                                            ClaimLocation = item.ClaimLocation,
+                                            DisplayImgUrl = item.DisplayImageUrl,
+                                            Rules = item.Rules,
+                                            Conditions = item.Conditions,
+                                            ClaimInstructions = item.ClaimInstructions,
+                                            RelevanceRate = item.RelevanceRate,
+                                            TargettingParams = item.TargettingParams,
                                             ReleaseDate = item.ReleaseDate,
                                             ExpirationDate = item.ExpirationDate,
-                                            TargettingParams = item.TargettingParams,
-                                            DisplayImgId = item.DisplayImageId,
-                                            Rules = item.Rules ?? Resources.NoRulesAvailable,
-                                            Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
-                                            ClaimInstructions = item.ClaimInstructions ?? Resources.NoClaimInstructionsAvailable,
-                                            LastBroadcastingUsage = null,//Not needed
-                                            BroadcastingTimerType = -1,//Not needed
-                                            BroadcastingTimerTypeName = "",//Not needed
-                                            BroadcastingScheduleType = -1,//Not needed
-                                            BroadcastingScheduleTypeName = "",//Not needed
-                                            BroadcastingMinsToRedeem = -1,//Not needed
-                                            BroadcastingTitle = "",//Not needed
-                                            BroadcastingMsg = "",//Not needed
-                                            RelevanceRate = item.RelevanceRate,
-                                            CreatedDate = item.CreatedDate,
-                                            UpdatedDate = DateTime.UtcNow,//Not needed
-                                            SatisfactionScore = item.SatisfactionScore,
-                                            RelevanceScore = item.RelevanceScore
+                                            CreatedDate = item.CreatedDate
                                         },
                                         Tenant = new DTO.Entities.Misc.TenantData.BasicTenantData
                                         {
                                             Id = item.TenantId,
                                             Name = item.TenantName,
-                                            Logo = item.TenantLogo,
+                                            LogoUrl = item.TenantLogoUrl,
+                                            WhiteLogoUrl = item.TenantWhiteLogoUrl,
                                             CountryId = item.TenantCountryId,
                                             CurrencySymbol = item.CurrencySymbol,
+                                            CashbackPercentage = item.TenantCashbackPercentage,
                                             CategoryId = item.TenantCategoryId,
-                                            CategoryName = "",
                                             Type = item.TenantType,
-                                            RelevanceScore = null,//When its selector is category, there is tenant score
-                                            NearestBranchId = Guid.Empty,
-                                            NearestBranchName = "",
-                                            NearestBranchLatitude = null,
-                                            NearestBranchLongitude = null,
-                                        },
-                                        Branch = new BasicBranchData
-                                        {
-                                            Id = item.BranchId,
-                                            Name = item.BranchName,
-                                            Latitude = item.BranchLatitude,
-                                            Longitude = item.BranchLongitude,
-                                            DescriptiveAddress = item.BranchDescriptiveAddress,
-                                            InquiriesPhoneNumber = item.BranchInquiriesPhoneNumber,
-                                            Distance = null,//In this case there is no way to define distance
-                                            CityId = item.BranchCityId,
-                                            StateId = item.BranchStateId,
-                                            Enabled = false
+                                            RelevanceStatus = item.TenantRelevanceStatus,
+                                            RelevanceScore = null//When its selector is category, there is tenant score
                                         },
                                         Preference = new DTO.Entities.Misc.InterestPreference.BasicUserPreferenceData
                                         {
@@ -4859,17 +4965,17 @@ namespace YOY.DAO.Entities.Manager
                         }
 
                         break;
-                    case ContentFilters.Tenant:
+                    case ContentFilterTypes.Commerce:
 
                         switch (contentSegmentationType)
                         {
                             case GeoSegmentationTypes.Country:
-                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByCountryTenantFocus(countryId, userId, offerPurpose, dateTime)
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByCountryTenantFocus(countryId, userId, offerPurpose, dateTime, pageSize, pageNumber)
                                         where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
                                         select x;
                                 break;
                             case GeoSegmentationTypes.State:
-                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByStateTenantFocus(stateId, countryId, userId, offerPurpose, dateTime)
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByStateTenantFocus(stateId, countryId, userId, offerPurpose, dateTime, pageSize, pageNumber)
                                         where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
                                         select x;
                                 break;
@@ -4880,112 +4986,170 @@ namespace YOY.DAO.Entities.Manager
                             FlattenedOfferData offer;
                             offers = new List<FlattenedOfferData>();
 
-                            foreach (TempoffersPreferenceBranches item in query)
+                            foreach (TempofferDisplayContents item in query)
                             {
                                 if (item.AvailableQuantity == -1 || item.AvailableQuantity > 0)
                                 {
                                     offer = new FlattenedOfferData
                                     {
                                         SelectorType = selectorType,
-                                        Offer = new Offer
+                                        Offer = new BasicOfferData
                                         {
                                             Id = item.Id,
                                             TenantId = item.TenantId,
                                             MainCategoryId = item.MainCategoryId,
-                                            MainCategoryName = "",//Not needed
                                             OfferType = item.OfferType,
-                                            OfferTypeName = "",//Not needed
                                             DealType = item.DealType,
-                                            DealTypeName = "",//Not needed
-                                            RewardType = item.RewardType,
-                                            RewardTypeName = "",//Not needed
                                             PurposeType = item.PurposeType,
-                                            PurposeTypeName = "",//Not needed
+                                            RewardType = item.RewardType,
                                             GeoSegmentationType = item.GeoSegmentationType,
-                                            GeoSegmentationTypeName = "",//Not needed
                                             DisplayType = item.DisplayType,
-                                            DisplayTypeName = "",//Not needed
                                             Name = item.Name,
                                             MainHint = item.MainHint,
                                             ComplementaryHint = item.ComplementaryHint,
                                             Keywords = item.Keywords,
                                             Description = item.Description,
-                                            Code = "",//Not needed
-                                            CodeImg = null,//Not needed
                                             MinsToUnlock = item.MinsToUnlock,
                                             IsActive = item.IsActive,
-                                            IsExclusive = item.IsExclusive,
                                             IsSponsored = item.IsSponsored,
-                                            HasUniqueCodes = false,//Not needed
+                                            IsExclusive = item.IsExclusive,
                                             HasPreferences = item.HasPreferences,
+                                            Value = item.Value,
+                                            RegularValue = item.RegularValue,
+                                            ExtraBonus = item.ExtraBonus,
+                                            ExtraBonusType = item.ExtraBonusType,
                                             AvailableQuantity = item.AvailableQuantity,
                                             OneTimeRedemption = item.OneTimeRedemption,
                                             MaxClaimsPerUser = item.MaxClaimsPerUser,
                                             MinPurchasesCountToRedeem = item.MinPurchasesCountToRedeem,
                                             PurchasesCountStartDate = item.PurchasesCountStartDate,
-                                            ClaimLocation = item.ClaimLocation,
-                                            Value = item.Value,
-                                            RegularValue = item.RegularValue,
-                                            ExtraBonus = item.ExtraBonus,
-                                            ExtraBonusType = item.ExtraBonusType,
-                                            ExtraBonusTypeName = "",//Not needed
-                                            MinIncentive = -1,//Not needed
-                                            MaxIncentive = -1,//Not needed
-                                            IncentiveVariationType = -1,//Not needed
-                                            IncentiveVarationTypeName = "",//Not needed
-                                            IncentiveVariation = -1,//Not needed
-                                            SecondsIncentiveVariationFrame = -1,//Not needed
-                                            RedeemCount = item.RedeemCount,
                                             ClaimCount = item.ClaimCount,
+                                            ClaimLocation = item.ClaimLocation,
+                                            DisplayImgUrl = item.DisplayImageUrl,
+                                            Rules = item.Rules,
+                                            Conditions = item.Conditions,
+                                            ClaimInstructions = item.ClaimInstructions,
+                                            RelevanceRate = item.RelevanceRate,
+                                            TargettingParams = item.TargettingParams,
                                             ReleaseDate = item.ReleaseDate,
                                             ExpirationDate = item.ExpirationDate,
-                                            TargettingParams = item.TargettingParams,
-                                            DisplayImgId = item.DisplayImageId,
-                                            Rules = item.Rules ?? Resources.NoRulesAvailable,
-                                            Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
-                                            ClaimInstructions = item.ClaimInstructions ?? Resources.NoClaimInstructionsAvailable,
-                                            LastBroadcastingUsage = null,//Not needed
-                                            BroadcastingTimerType = -1,//Not needed
-                                            BroadcastingTimerTypeName = "",//Not needed
-                                            BroadcastingScheduleType = -1,//Not needed
-                                            BroadcastingScheduleTypeName = "",//Not needed
-                                            BroadcastingMinsToRedeem = -1,//Not needed
-                                            BroadcastingTitle = "",//Not needed
-                                            BroadcastingMsg = "",//Not needed
-                                            RelevanceRate = item.RelevanceRate,
-                                            CreatedDate = item.CreatedDate,
-                                            UpdatedDate = DateTime.UtcNow,//Not needed
-                                            SatisfactionScore = item.SatisfactionScore,
-                                            RelevanceScore = item.RelevanceScore
+                                            CreatedDate = item.CreatedDate
                                         },
                                         Tenant = new DTO.Entities.Misc.TenantData.BasicTenantData
                                         {
                                             Id = item.TenantId,
                                             Name = item.TenantName,
-                                            Logo = item.TenantLogo,
+                                            LogoUrl = item.TenantLogoUrl,
+                                            WhiteLogoUrl = item.TenantWhiteLogoUrl,
                                             CountryId = item.TenantCountryId,
                                             CurrencySymbol = item.CurrencySymbol,
+                                            CashbackPercentage = item.TenantCashbackPercentage,
                                             CategoryId = item.TenantCategoryId,
-                                            CategoryName = item.TenantCategoryName,
                                             Type = item.TenantType,
-                                            RelevanceScore = item.TenantScore,
-                                            NearestBranchId = Guid.Empty,
-                                            NearestBranchName = "",
-                                            NearestBranchLatitude = null,
-                                            NearestBranchLongitude = null,
+                                            RelevanceStatus = item.TenantRelevanceStatus,
+                                            RelevanceScore = item.TenantScore
                                         },
-                                        Branch = new BasicBranchData
+                                        //When selector is tenant, there is no preference data
+                                        Preference = new DTO.Entities.Misc.InterestPreference.BasicUserPreferenceData
                                         {
-                                            Id = item.BranchId,
-                                            Name = item.BranchName,
-                                            DescriptiveAddress = item.BranchDescriptiveAddress,
-                                            InquiriesPhoneNumber = item.BranchInquiriesPhoneNumber,
-                                            Latitude = item.BranchLatitude,
-                                            Longitude = item.BranchLongitude,
-                                            Distance = null,//In this case there is no way to define distance
-                                            CityId = item.BranchCityId,
-                                            StateId = item.BranchStateId,
-                                            Enabled = false
+                                            Id = Guid.Empty,
+                                            Name = "",
+                                            Icon = "",
+                                            RelevanceScore = -1
+                                        },
+                                        ExactLocationBased = false
+                                    };
+
+                                    offers.Add(offer);
+                                }
+
+                            }
+                        }
+
+                        break;
+                    case ContentFilterTypes.ShoppingMall:
+
+                        switch (contentSegmentationType)
+                        {
+                            case GeoSegmentationTypes.Country:
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByCountryBranchHolderFocus(countryId, userId, offerPurpose, dateTime, pageSize, pageNumber)
+                                        where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
+                                        select x;
+                                break;
+                            case GeoSegmentationTypes.State:
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByStateBranchHolderFocus(stateId, countryId, userId, offerPurpose, dateTime, pageSize, pageNumber)
+                                        where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
+                                        select x;
+                                break;
+                        }
+
+                        if (query != null)
+                        {
+                            FlattenedOfferData offer;
+                            offers = new List<FlattenedOfferData>();
+
+                            foreach (TempofferDisplayContents item in query)
+                            {
+                                if (item.AvailableQuantity == -1 || item.AvailableQuantity > 0)
+                                {
+                                    offer = new FlattenedOfferData
+                                    {
+                                        SelectorType = selectorType,
+                                        Offer = new BasicOfferData
+                                        {
+                                            Id = item.Id,
+                                            TenantId = item.TenantId,
+                                            MainCategoryId = item.MainCategoryId,
+                                            OfferType = item.OfferType,
+                                            DealType = item.DealType,
+                                            PurposeType = item.PurposeType,
+                                            RewardType = item.RewardType,
+                                            GeoSegmentationType = item.GeoSegmentationType,
+                                            DisplayType = item.DisplayType,
+                                            Name = item.Name,
+                                            MainHint = item.MainHint,
+                                            ComplementaryHint = item.ComplementaryHint,
+                                            Keywords = item.Keywords,
+                                            Description = item.Description,
+                                            MinsToUnlock = item.MinsToUnlock,
+                                            IsActive = item.IsActive,
+                                            IsSponsored = item.IsSponsored,
+                                            IsExclusive = item.IsExclusive,
+                                            HasPreferences = item.HasPreferences,
+                                            Value = item.Value,
+                                            RegularValue = item.RegularValue,
+                                            ExtraBonus = item.ExtraBonus,
+                                            ExtraBonusType = item.ExtraBonusType,
+                                            AvailableQuantity = item.AvailableQuantity,
+                                            OneTimeRedemption = item.OneTimeRedemption,
+                                            MaxClaimsPerUser = item.MaxClaimsPerUser,
+                                            MinPurchasesCountToRedeem = item.MinPurchasesCountToRedeem,
+                                            PurchasesCountStartDate = item.PurchasesCountStartDate,
+                                            ClaimCount = item.ClaimCount,
+                                            ClaimLocation = item.ClaimLocation,
+                                            DisplayImgUrl = item.DisplayImageUrl,
+                                            Rules = item.Rules,
+                                            Conditions = item.Conditions,
+                                            ClaimInstructions = item.ClaimInstructions,
+                                            RelevanceRate = item.RelevanceRate,
+                                            TargettingParams = item.TargettingParams,
+                                            ReleaseDate = item.ReleaseDate,
+                                            ExpirationDate = item.ExpirationDate,
+                                            CreatedDate = item.CreatedDate
+                                        },
+                                        Tenant = new DTO.Entities.Misc.TenantData.BasicTenantData
+                                        {
+                                            Id = item.TenantId,
+                                            Name = item.TenantName,
+                                            LogoUrl = item.TenantLogoUrl,
+                                            WhiteLogoUrl = item.TenantWhiteLogoUrl,
+                                            CountryId = item.TenantCountryId,
+                                            CurrencySymbol = item.CurrencySymbol,
+                                            CashbackPercentage = item.TenantCashbackPercentage,
+                                            CategoryId = item.TenantCategoryId,
+                                            Type = item.TenantType,
+                                            RelevanceStatus = item.TenantRelevanceStatus,
+                                            RelevanceScore = item.TenantScore
                                         },
                                         //When selector is tenant, there is no preference data
                                         Preference = new DTO.Entities.Misc.InterestPreference.BasicUserPreferenceData
@@ -5030,7 +5194,7 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="stateId"></param>
         /// <param name="dateTime"></param>
         /// <returns></returns>
-        private List<FlattenedOfferData> GetOffersDataByRegionForReference(Guid stateId, Guid countryId, int contentSegmentationType, string userId, DateTime dateTime, int referenceType, Guid referenceId, int offerPurpose)
+        private List<FlattenedOfferData> GetOffersDataByRegionForReference(Guid stateId, Guid countryId, int contentSegmentationType, string userId, DateTime dateTime, int referenceType, Guid referenceId, int offerPurpose, int pageSize, int pageNumber)
         {
             List<FlattenedOfferData> offers = null;
 
@@ -5040,16 +5204,16 @@ namespace YOY.DAO.Entities.Manager
 
                 switch (referenceType)
                 {
-                    case ContentFilters.Category:
+                    case ContentFilterTypes.Category:
                         switch (contentSegmentationType)
                         {
                             case GeoSegmentationTypes.Country:
-                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByCountryForPreference(countryId, userId, referenceId, offerPurpose, dateTime)
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByCountryForPreference(countryId, userId, referenceId, offerPurpose, dateTime, pageSize, pageNumber)
                                         where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
                                         select x;
                                 break;
                             case GeoSegmentationTypes.State:
-                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByStateForPreference(stateId, countryId, userId, referenceId, offerPurpose, dateTime)
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByStateForPreference(stateId, countryId, userId, referenceId, offerPurpose, dateTime, pageSize, pageNumber)
                                         where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
                                         select x;
                                 break;
@@ -5061,112 +5225,68 @@ namespace YOY.DAO.Entities.Manager
 
                             offers = new List<FlattenedOfferData>();
 
-                            foreach (TempoffersPreferenceBranches item in query)
+                            foreach (TempofferDisplayContents item in query)
                             {
                                 if (item.AvailableQuantity == -1 || item.AvailableQuantity > 0)
                                 {
                                     offer = new FlattenedOfferData
                                     {
                                         SelectorType = referenceType,
-                                        Offer = new Offer
+                                        Offer = new BasicOfferData
                                         {
                                             Id = item.Id,
                                             TenantId = item.TenantId,
                                             MainCategoryId = item.MainCategoryId,
-                                            MainCategoryName = "",//Not needed
                                             OfferType = item.OfferType,
-                                            OfferTypeName = "",//Not needed
                                             DealType = item.DealType,
-                                            DealTypeName = "",//Not needed
-                                            RewardType = item.RewardType,
-                                            RewardTypeName = "",//Not needed
                                             PurposeType = item.PurposeType,
-                                            PurposeTypeName = "",//Not needed
+                                            RewardType = item.RewardType,
                                             GeoSegmentationType = item.GeoSegmentationType,
-                                            GeoSegmentationTypeName = "",//Not needed
                                             DisplayType = item.DisplayType,
-                                            DisplayTypeName = "",//Not needed
                                             Name = item.Name,
                                             MainHint = item.MainHint,
                                             ComplementaryHint = item.ComplementaryHint,
                                             Keywords = item.Keywords,
                                             Description = item.Description,
-                                            Code = "",//Not needed
-                                            CodeImg = null,//Not needed
                                             MinsToUnlock = item.MinsToUnlock,
                                             IsActive = item.IsActive,
-                                            IsExclusive = item.IsExclusive,
                                             IsSponsored = item.IsSponsored,
-                                            HasUniqueCodes = false,//Not needed
+                                            IsExclusive = item.IsExclusive,
                                             HasPreferences = item.HasPreferences,
+                                            Value = item.Value,
+                                            RegularValue = item.RegularValue,
+                                            ExtraBonus = item.ExtraBonus,
+                                            ExtraBonusType = item.ExtraBonusType,
                                             AvailableQuantity = item.AvailableQuantity,
                                             OneTimeRedemption = item.OneTimeRedemption,
                                             MaxClaimsPerUser = item.MaxClaimsPerUser,
                                             MinPurchasesCountToRedeem = item.MinPurchasesCountToRedeem,
                                             PurchasesCountStartDate = item.PurchasesCountStartDate,
-                                            ClaimLocation = item.ClaimLocation,
-                                            Value = item.Value,
-                                            RegularValue = item.RegularValue,
-                                            ExtraBonus = item.ExtraBonus,
-                                            ExtraBonusType = item.ExtraBonusType,
-                                            ExtraBonusTypeName = "",//Not needed
-                                            MinIncentive = -1,//Not needed
-                                            MaxIncentive = -1,//Not needed
-                                            IncentiveVariationType = -1,//Not needed
-                                            IncentiveVarationTypeName = "",//Not needed
-                                            IncentiveVariation = -1,//Not needed
-                                            SecondsIncentiveVariationFrame = -1,//Not needed
-                                            RedeemCount = item.RedeemCount,
                                             ClaimCount = item.ClaimCount,
+                                            ClaimLocation = item.ClaimLocation,
+                                            DisplayImgUrl = item.DisplayImageUrl,
+                                            Rules = item.Rules,
+                                            Conditions = item.Conditions,
+                                            ClaimInstructions = item.ClaimInstructions,
+                                            RelevanceRate = item.RelevanceRate,
+                                            TargettingParams = item.TargettingParams,
                                             ReleaseDate = item.ReleaseDate,
                                             ExpirationDate = item.ExpirationDate,
-                                            TargettingParams = item.TargettingParams,
-                                            DisplayImgId = item.DisplayImageId,
-                                            Rules = item.Rules ?? Resources.NoRulesAvailable,
-                                            Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
-                                            ClaimInstructions = item.ClaimInstructions ?? Resources.NoClaimInstructionsAvailable,
-                                            LastBroadcastingUsage = null,//Not needed
-                                            BroadcastingTimerType = -1,//Not needed
-                                            BroadcastingTimerTypeName = "",//Not needed
-                                            BroadcastingScheduleType = -1,//Not needed
-                                            BroadcastingScheduleTypeName = "",//Not needed
-                                            BroadcastingMinsToRedeem = -1,//Not needed
-                                            BroadcastingTitle = "",//Not needed
-                                            BroadcastingMsg = "",//Not needed
-                                            RelevanceRate = item.RelevanceRate,
-                                            CreatedDate = item.CreatedDate,
-                                            UpdatedDate = DateTime.UtcNow,//Not needed
-                                            SatisfactionScore = item.SatisfactionScore,
-                                            RelevanceScore = item.RelevanceScore
+                                            CreatedDate = item.CreatedDate
                                         },
                                         Tenant = new DTO.Entities.Misc.TenantData.BasicTenantData
                                         {
                                             Id = item.TenantId,
                                             Name = item.TenantName,
-                                            Logo = item.TenantLogo,
+                                            LogoUrl = item.TenantLogoUrl,
+                                            WhiteLogoUrl = item.TenantWhiteLogoUrl,
                                             CountryId = item.TenantCountryId,
                                             CurrencySymbol = item.CurrencySymbol,
+                                            CashbackPercentage = item.TenantCashbackPercentage,
                                             CategoryId = item.TenantCountryId,
-                                            CategoryName = "",
                                             Type = item.TenantType,
                                             RelevanceScore = null,//When its selector is category, there is no tenant score
-                                            NearestBranchId = Guid.Empty,
-                                            NearestBranchName = "",
-                                            NearestBranchLatitude = null,
-                                            NearestBranchLongitude = null,
-                                        },
-                                        Branch = new BasicBranchData
-                                        {
-                                            Id = item.BranchId,
-                                            Name = item.BranchName,
-                                            DescriptiveAddress = item.BranchDescriptiveAddress,
-                                            InquiriesPhoneNumber = item.BranchInquiriesPhoneNumber,
-                                            Latitude = item.BranchLatitude,
-                                            Longitude = item.BranchLongitude,
-                                            Distance = null,//In this case there is no way to define distance
-                                            CityId = item.BranchCityId,
-                                            StateId = item.BranchStateId,
-                                            Enabled = false
+                                            RelevanceStatus = item.TenantRelevanceStatus
                                         },
                                         Preference = new DTO.Entities.Misc.InterestPreference.BasicUserPreferenceData
                                         {
@@ -5184,16 +5304,16 @@ namespace YOY.DAO.Entities.Manager
                         }
 
                         break;
-                    case ContentFilters.Tenant:
+                    case ContentFilterTypes.Commerce:
                         switch (contentSegmentationType)
                         {
                             case GeoSegmentationTypes.Country:
-                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByCountryForTenant(countryId, userId, referenceId, offerPurpose, dateTime)
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByCountryForTenant(countryId, userId, referenceId, offerPurpose, dateTime, pageSize, pageNumber)
                                         where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
                                         select x;
                                 break;
                             case GeoSegmentationTypes.State:
-                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByStateForTenant(stateId, countryId, userId, referenceId, offerPurpose, dateTime)
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByStateForTenant(stateId, countryId, userId, referenceId, offerPurpose, dateTime, pageSize, pageNumber)
                                         where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
                                         select x;
                                 break;
@@ -5205,112 +5325,169 @@ namespace YOY.DAO.Entities.Manager
 
                             offers = new List<FlattenedOfferData>();
 
-                            foreach (TempoffersPreferenceBranches item in query)
+                            foreach (TempofferDisplayContents item in query)
                             {
                                 if (item.AvailableQuantity == -1 || item.AvailableQuantity > 0)
                                 {
                                     offer = new FlattenedOfferData
                                     {
                                         SelectorType = referenceType,
-                                        Offer = new Offer
+                                        Offer = new BasicOfferData
                                         {
                                             Id = item.Id,
                                             TenantId = item.TenantId,
                                             MainCategoryId = item.MainCategoryId,
-                                            MainCategoryName = "",//Not needed
                                             OfferType = item.OfferType,
-                                            OfferTypeName = "",//Not needed
                                             DealType = item.DealType,
-                                            DealTypeName = "",//Not needed
-                                            RewardType = item.RewardType,
-                                            RewardTypeName = "",//Not needed
                                             PurposeType = item.PurposeType,
-                                            PurposeTypeName = "",//Not needed
+                                            RewardType = item.RewardType,
                                             GeoSegmentationType = item.GeoSegmentationType,
-                                            GeoSegmentationTypeName = "",//Not needed
                                             DisplayType = item.DisplayType,
-                                            DisplayTypeName = "",//Not needed
                                             Name = item.Name,
                                             MainHint = item.MainHint,
                                             ComplementaryHint = item.ComplementaryHint,
                                             Keywords = item.Keywords,
                                             Description = item.Description,
-                                            Code = "",//Not needed
-                                            CodeImg = null,//Not needed
                                             MinsToUnlock = item.MinsToUnlock,
                                             IsActive = item.IsActive,
-                                            IsExclusive = item.IsExclusive,
                                             IsSponsored = item.IsSponsored,
-                                            HasUniqueCodes = false,//Not needed
+                                            IsExclusive = item.IsExclusive,
                                             HasPreferences = item.HasPreferences,
+                                            Value = item.Value,
+                                            RegularValue = item.RegularValue,
+                                            ExtraBonus = item.ExtraBonus,
+                                            ExtraBonusType = item.ExtraBonusType,
                                             AvailableQuantity = item.AvailableQuantity,
                                             OneTimeRedemption = item.OneTimeRedemption,
                                             MaxClaimsPerUser = item.MaxClaimsPerUser,
                                             MinPurchasesCountToRedeem = item.MinPurchasesCountToRedeem,
                                             PurchasesCountStartDate = item.PurchasesCountStartDate,
-                                            ClaimLocation = item.ClaimLocation,
-                                            Value = item.Value,
-                                            RegularValue = item.RegularValue,
-                                            ExtraBonus = item.ExtraBonus,
-                                            ExtraBonusType = item.ExtraBonusType,
-                                            ExtraBonusTypeName = "",//Not needed
-                                            MinIncentive = -1,//Not needed
-                                            MaxIncentive = -1,//Not needed
-                                            IncentiveVariationType = -1,//Not needed
-                                            IncentiveVarationTypeName = "",//Not needed
-                                            IncentiveVariation = -1,//Not needed
-                                            SecondsIncentiveVariationFrame = -1,//Not needed
-                                            RedeemCount = item.RedeemCount,
                                             ClaimCount = item.ClaimCount,
+                                            ClaimLocation = item.ClaimLocation,
+                                            DisplayImgUrl = item.DisplayImageUrl,
+                                            Rules = item.Rules,
+                                            Conditions = item.Conditions,
+                                            ClaimInstructions = item.ClaimInstructions,
+                                            RelevanceRate = item.RelevanceRate,
+                                            TargettingParams = item.TargettingParams,
                                             ReleaseDate = item.ReleaseDate,
                                             ExpirationDate = item.ExpirationDate,
-                                            TargettingParams = item.TargettingParams,
-                                            DisplayImgId = item.DisplayImageId,
-                                            Rules = item.Rules ?? Resources.NoRulesAvailable,
-                                            Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
-                                            ClaimInstructions = item.ClaimInstructions ?? Resources.NoClaimInstructionsAvailable,
-                                            LastBroadcastingUsage = null,//Not needed
-                                            BroadcastingTimerType = -1,//Not needed
-                                            BroadcastingTimerTypeName = "",//Not needed
-                                            BroadcastingScheduleType = -1,//Not needed
-                                            BroadcastingScheduleTypeName = "",//Not needed
-                                            BroadcastingMinsToRedeem = -1,//Not needed
-                                            BroadcastingTitle = "",//Not needed
-                                            BroadcastingMsg = "",//Not needed
-                                            RelevanceRate = item.RelevanceRate,
-                                            CreatedDate = item.CreatedDate,
-                                            UpdatedDate = DateTime.UtcNow,//Not needed
-                                            SatisfactionScore = item.SatisfactionScore,
-                                            RelevanceScore = item.RelevanceScore
+                                            CreatedDate = item.CreatedDate
                                         },
                                         Tenant = new DTO.Entities.Misc.TenantData.BasicTenantData
                                         {
                                             Id = item.TenantId,
                                             Name = item.TenantName,
-                                            Logo = item.TenantLogo,
+                                            LogoUrl = item.TenantWhiteLogoUrl,
+                                            WhiteLogoUrl = item.TenantWhiteLogoUrl,
                                             CountryId = item.TenantCountryId,
                                             CurrencySymbol = item.CurrencySymbol,
+                                            CashbackPercentage = item.TenantCashbackPercentage,
                                             CategoryId = item.TenantCategoryId,
-                                            CategoryName = item.TenantCategoryName,
                                             Type = item.TenantType,
-                                            RelevanceScore = item.TenantScore,
-                                            NearestBranchId = Guid.Empty,
-                                            NearestBranchName = "",
-                                            NearestBranchLatitude = null,
-                                            NearestBranchLongitude = null,
+                                            RelevanceStatus = item.TenantRelevanceStatus,
+                                            RelevanceScore = item.TenantScore
                                         },
-                                        Branch = new BasicBranchData
+                                        //When selector is tenant, there is no preference data
+                                        Preference = new DTO.Entities.Misc.InterestPreference.BasicUserPreferenceData
                                         {
-                                            Id = item.BranchId,
-                                            Name = item.BranchName,
-                                            DescriptiveAddress = item.BranchDescriptiveAddress,
-                                            InquiriesPhoneNumber = item.BranchInquiriesPhoneNumber,
-                                            Latitude = item.BranchLatitude,
-                                            Longitude = item.BranchLongitude,
-                                            Distance = null,//In this case there is no way to define distance
-                                            CityId = item.BranchCityId,
-                                            StateId = item.BranchStateId,
-                                            Enabled = false
+                                            Id = Guid.Empty,
+                                            Name = "",
+                                            Icon = "",
+                                            RelevanceScore = -1
+                                        },
+                                        ExactLocationBased = false
+                                    };
+
+                                    offers.Add(offer);
+                                }
+                            }
+                        }
+
+                        break;
+                    case ContentFilterTypes.ShoppingMall:
+                        switch (contentSegmentationType)
+                        {
+                            case GeoSegmentationTypes.Country:
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByCountryForBranchHolder(countryId, userId, referenceId, offerPurpose, dateTime, pageSize, pageNumber)
+                                        where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
+                                        select x;
+                                break;
+                            case GeoSegmentationTypes.State:
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableOffersByStateForBranchHolder(stateId, countryId, userId, referenceId, offerPurpose, dateTime, pageSize, pageNumber)
+                                        where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
+                                        select x;
+                                break;
+                        }
+
+                        if (query != null)
+                        {
+                            FlattenedOfferData offer;
+
+                            offers = new List<FlattenedOfferData>();
+
+                            foreach (TempofferDisplayContents item in query)
+                            {
+                                if (item.AvailableQuantity == -1 || item.AvailableQuantity > 0)
+                                {
+                                    offer = new FlattenedOfferData
+                                    {
+                                        SelectorType = referenceType,
+                                        Offer = new BasicOfferData
+                                        {
+                                            Id = item.Id,
+                                            TenantId = item.TenantId,
+                                            MainCategoryId = item.MainCategoryId,
+                                            OfferType = item.OfferType,
+                                            DealType = item.DealType,
+                                            PurposeType = item.PurposeType,
+                                            RewardType = item.RewardType,
+                                            GeoSegmentationType = item.GeoSegmentationType,
+                                            DisplayType = item.DisplayType,
+                                            Name = item.Name,
+                                            MainHint = item.MainHint,
+                                            ComplementaryHint = item.ComplementaryHint,
+                                            Keywords = item.Keywords,
+                                            Description = item.Description,
+                                            MinsToUnlock = item.MinsToUnlock,
+                                            IsActive = item.IsActive,
+                                            IsSponsored = item.IsSponsored,
+                                            IsExclusive = item.IsExclusive,
+                                            HasPreferences = item.HasPreferences,
+                                            Value = item.Value,
+                                            RegularValue = item.RegularValue,
+                                            ExtraBonus = item.ExtraBonus,
+                                            ExtraBonusType = item.ExtraBonusType,
+                                            AvailableQuantity = item.AvailableQuantity,
+                                            OneTimeRedemption = item.OneTimeRedemption,
+                                            MaxClaimsPerUser = item.MaxClaimsPerUser,
+                                            MinPurchasesCountToRedeem = item.MinPurchasesCountToRedeem,
+                                            PurchasesCountStartDate = item.PurchasesCountStartDate,
+                                            ClaimCount = item.ClaimCount,
+                                            ClaimLocation = item.ClaimLocation,
+                                            DisplayImgUrl = item.DisplayImageUrl,
+                                            Rules = item.Rules,
+                                            Conditions = item.Conditions,
+                                            ClaimInstructions = item.ClaimInstructions,
+                                            RelevanceRate = item.RelevanceRate,
+                                            TargettingParams = item.TargettingParams,
+                                            ReleaseDate = item.ReleaseDate,
+                                            ExpirationDate = item.ExpirationDate,
+                                            CreatedDate = item.CreatedDate
+                                        },
+                                        Tenant = new DTO.Entities.Misc.TenantData.BasicTenantData
+                                        {
+                                            Id = item.TenantId,
+                                            Name = item.TenantName,
+                                            LogoUrl = item.TenantWhiteLogoUrl,
+                                            WhiteLogoUrl = item.TenantWhiteLogoUrl,
+                                            CountryId = item.TenantCountryId,
+                                            CurrencySymbol = item.CurrencySymbol,
+                                            CashbackPercentage = item.TenantCashbackPercentage,
+                                            CategoryId = item.TenantCategoryId,
+                                            Type = item.TenantType,
+                                            RelevanceStatus = item.TenantRelevanceStatus,
+                                            RelevanceScore = item.TenantScore
                                         },
                                         //When selector is tenant, there is no preference data
                                         Preference = new DTO.Entities.Misc.InterestPreference.BasicUserPreferenceData
@@ -5376,7 +5553,7 @@ namespace YOY.DAO.Entities.Manager
                         {
                             offer = new FlattenedOfferData
                             {
-                                SelectorType = ContentFilters.Category,
+                                SelectorType = ContentFilterTypes.Category,
                                 Offer = new Offer
                                 {
                                     Id = item.Id,
@@ -6084,7 +6261,7 @@ namespace YOY.DAO.Entities.Manager
         }
 
         #endregion
-        */
+        
 
         #region OFFERS METRICS
 

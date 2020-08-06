@@ -2286,6 +2286,7 @@ namespace YOY.DAO.Entities.Manager
 
         #endregion
 
+        /*
         #region FULLDATA
 
         private List<FlattenedTransactionData> GetClaimableTransactionsDataForUser(string userId, Guid countryId, Guid stateId, DateTime dateTime)
@@ -2965,6 +2966,7 @@ namespace YOY.DAO.Entities.Manager
         }
 
         #endregion
+        */
 
         #region CONSTRUCTORS
         // ---------------------------------------------------------------------------------------------------------------------------------------------- //
