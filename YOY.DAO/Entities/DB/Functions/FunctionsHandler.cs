@@ -71,35 +71,123 @@ namespace YOY.DAO.Entities.DB.Functions
             return temprewards;
         }
 
-        public List<TempcashbackIncentivesPreferenceBranches> GetAvailableCashbackIncentivesByCountryTenantFocus(Guid countryId, string userId, DateTime dateTime)
+        public List<TempcashIncentivesDisplayContents> GetAvailableCashIncentivesByCountryBranchHolderFocus(Guid countryId, string userId, DateTime dateTime, int pageSize, int pageNumber)
         {
-            List<TempcashbackIncentivesPreferenceBranches> tempcashbacks;
+            List<TempcashIncentivesDisplayContents> tempcashIncentives;
 
             try
             {
                 var userIdParam = new SqlParameter("userId", userId);
                 var countryIdParam = new SqlParameter("countryId", countryId);
                 var dateTimeParam = new SqlParameter("dateTime", dateTime);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempcashbacks = dbContext.Set<TempcashbackIncentivesPreferenceBranches>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashbackIncentivesByCountryTenantFocus](@countryId, @userId, @dateTime)", new[] { countryIdParam, userIdParam, dateTimeParam }).ToList();
+                tempcashIncentives = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByCountryBranchHolderFocus](@countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
-                tempcashbacks = null;
+                tempcashIncentives = null;
                 //ERROR HANDLING
                 AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
 
             }
 
-            return tempcashbacks;
+            return tempcashIncentives;
 
 
         }
 
-        public List<TempcashbackIncentivesPreferenceBranches> GetAvailableCashbackIncentivesByCountryWithLocationTenantFocus(decimal latitude, decimal longitude, double radius, Guid countryId, string userId, DateTime dateTime)
+        public List<TempcashIncentivesDisplayContents> GetAvailableCashIncentivesByCountryForBranchHolder(Guid countryId, string userId, Guid branchHolderId, DateTime dateTime, int pageSize, int pageNumber)
         {
-            List<TempcashbackIncentivesPreferenceBranches> tempcashbacks;
+            List<TempcashIncentivesDisplayContents> tempcashIncentives;
+
+            try
+            {
+                var userIdParam = new SqlParameter("userId", userId);
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var branchHolderIdParam = new SqlParameter("branchHolderId", branchHolderId);
+                var dateTimeParam = new SqlParameter("dateTime", dateTime);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
+
+                //Processing
+                tempcashIncentives = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByCountryForBranchHolder](@countryId, @userId, @branchHolderId, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, branchHolderIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                tempcashIncentives = null;
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return tempcashIncentives;
+
+
+        }
+
+        public List<TempcashIncentivesDisplayContents> GetAvailableCashIncentivesByCountryForTenant(Guid countryId, string userId, Guid tenantId, DateTime dateTime, int pageSize, int pageNumber)
+        {
+            List<TempcashIncentivesDisplayContents> tempcashIncentives;
+
+            try
+            {
+                var userIdParam = new SqlParameter("userId", userId);
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var tenantIdParam = new SqlParameter("tenantId", tenantId);
+                var dateTimeParam = new SqlParameter("dateTime", dateTime);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
+
+                //Processing
+                tempcashIncentives = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByCountryForTenant](@countryId, @userId, @tenantId, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, tenantIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                tempcashIncentives = null;
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return tempcashIncentives;
+
+
+        }
+
+        public List<TempcashIncentivesDisplayContents> GetAvailableCashIncentivesByCountryTenantFocus(Guid countryId, string userId, DateTime dateTime, int pageSize, int pageNumber)
+        {
+            List<TempcashIncentivesDisplayContents> tempcashIncentives;
+
+            try
+            {
+                var userIdParam = new SqlParameter("userId", userId);
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var dateTimeParam = new SqlParameter("dateTime", dateTime);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
+
+                //Processing
+                tempcashIncentives = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByCountryTenantFocus](@countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                tempcashIncentives = null;
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return tempcashIncentives;
+
+
+        }
+
+        public List<TempcashIncentivesDisplayContents> GetAvailableCashIncentivesByCountryWithLocationBranchHolderFocus(decimal latitude, decimal longitude, double radius, Guid countryId, string userId, DateTime dateTime, int pageSize, int pageNumber)
+        {
+            List<TempcashIncentivesDisplayContents> tempcashIncentive;
 
             try
             {
@@ -109,26 +197,59 @@ namespace YOY.DAO.Entities.DB.Functions
                 var userIdParam = new SqlParameter("userId", userId);
                 var countryIdParam = new SqlParameter("countryId", countryId);
                 var dateTimeParam = new SqlParameter("dateTime", dateTime);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempcashbacks = dbContext.Set<TempcashbackIncentivesPreferenceBranches>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashbackIncentivesByCountryWithLocationTenantFocus](@latitude, @longitude, @radius, @countryId, @userId, @dateTime)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, userIdParam, dateTimeParam }).ToList();
+                tempcashIncentive = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByCountryWithLocationBranchHolderFocus](@latitude, @longitude, @radius, @countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
-                tempcashbacks = null;
+                tempcashIncentive = null;
                 //ERROR HANDLING
                 AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
 
             }
 
-            return tempcashbacks;
+            return tempcashIncentive;
 
 
         }
 
-        public List<TempcashbackIncentivesPreferenceBranches> GetAvailableCashbackIncentivesByStateTenantFocus(Guid stateId, Guid countryId, string userId, DateTime dateTime)
+        public List<TempcashIncentivesDisplayContents> GetAvailableCashIncentivesByCountryWithLocationTenantFocus(decimal latitude, decimal longitude, double radius, Guid countryId, string userId, DateTime dateTime, int pageSize, int pageNumber)
         {
-            List<TempcashbackIncentivesPreferenceBranches> tempcashbacks;
+            List<TempcashIncentivesDisplayContents> tempcashIncentives;
+
+            try
+            {
+                var latitudeParam = new SqlParameter("latitude", latitude);
+                var longitudeParam = new SqlParameter("longitude", longitude);
+                var radiusParam = new SqlParameter("radius", radius);
+                var userIdParam = new SqlParameter("userId", userId);
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var dateTimeParam = new SqlParameter("dateTime", dateTime);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
+
+                //Processing
+                tempcashIncentives = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashbackIncentivesByCountryWithLocationTenantFocus](@latitude, @longitude, @radius, @countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                tempcashIncentives = null;
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return tempcashIncentives;
+
+
+        }
+
+        public List<TempcashIncentivesDisplayContents> GetAvailableCashIncentivesByStateBranchHolderFocus(Guid stateId, Guid countryId, string userId, DateTime dateTime, int pageSize, int pageNumber)
+        {
+            List<TempcashIncentivesDisplayContents> tempcashIncentives;
 
             try
             {
@@ -136,26 +257,149 @@ namespace YOY.DAO.Entities.DB.Functions
                 var stateIdParam = new SqlParameter("stateId", stateId);
                 var countryIdParam = new SqlParameter("countryId", countryId);
                 var dateTimeParam = new SqlParameter("dateTime", dateTime);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempcashbacks = dbContext.Set<TempcashbackIncentivesPreferenceBranches>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashbackIncentivesByStateTenantFocus](@stateId, @countryId, @userId, @dateTime)", new[] { stateIdParam, countryIdParam, userIdParam, dateTimeParam }).ToList();
+                tempcashIncentives = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByStateBranchHolderFocus](@stateId, @countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
-                tempcashbacks = null;
+                tempcashIncentives = null;
                 //ERROR HANDLING
                 AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
 
             }
 
-            return tempcashbacks;
+            return tempcashIncentives;
 
 
         }
 
-        public List<TempcashbackIncentivesPreferenceBranches> GetAvailableCashbackIncentivesByStateWithLocationTenantFocus(decimal latitude, decimal longitude, double radius, Guid stateId, Guid countryId, string userId, DateTime dateTime)
+        public List<TempcashIncentivesDisplayContents> GetAvailableCashIncentivesByStateForBranchHolder(Guid stateId, Guid countryId, string userId, Guid branchHolderId, DateTime dateTime, int pageSize, int pageNumber)
         {
-            List<TempcashbackIncentivesPreferenceBranches> tempcashbacks;
+            List<TempcashIncentivesDisplayContents> tempcashIncentives;
+
+            try
+            {
+                var userIdParam = new SqlParameter("userId", userId);
+                var stateIdParam = new SqlParameter("stateId", stateId);
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var branchHolderIdParam = new SqlParameter(" branchHolderId", branchHolderId);
+                var dateTimeParam = new SqlParameter("dateTime", dateTime);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
+
+                //Processing
+                tempcashIncentives = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByStateForBranchHolder](@stateId, @countryId, @userId, @branchHolderId, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, branchHolderIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                tempcashIncentives = null;
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return tempcashIncentives;
+
+
+        }
+
+        public List<TempcashIncentivesDisplayContents> GetAvailableCashIncentivesByStateForTenant(Guid stateId, Guid countryId, string userId, Guid tenantId, DateTime dateTime, int pageSize, int pageNumber)
+        {
+            List<TempcashIncentivesDisplayContents> tempcashIncentives;
+
+            try
+            {
+                var userIdParam = new SqlParameter("userId", userId);
+                var stateIdParam = new SqlParameter("stateId", stateId);
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var tenantIdParam = new SqlParameter("tenantId", tenantId);
+                var dateTimeParam = new SqlParameter("dateTime", dateTime);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
+
+                //Processing
+                tempcashIncentives = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByStateForTenant](@stateId, @countryId, @userId, @tenantId, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, tenantIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                tempcashIncentives = null;
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return tempcashIncentives;
+
+
+        }
+
+        public List<TempcashIncentivesDisplayContents> GetAvailableCashIncentivesByStateTenantFocus(Guid stateId, Guid countryId, string userId, DateTime dateTime, int pageSize, int pageNumber)
+        {
+            List<TempcashIncentivesDisplayContents> tempcashIncentives;
+
+            try
+            {
+                var userIdParam = new SqlParameter("userId", userId);
+                var stateIdParam = new SqlParameter("stateId", stateId);
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var dateTimeParam = new SqlParameter("dateTime", dateTime);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
+
+                //Processing
+                tempcashIncentives = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByStateTenantFocus](@stateId, @countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                tempcashIncentives = null;
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return tempcashIncentives;
+
+
+        }
+
+        public List<TempcashIncentivesDisplayContents> GetAvailableCashIncentivesByStateWithLocationBranchHolderFocus(decimal latitude, decimal longitude, double radius, Guid stateId, Guid countryId, string userId, DateTime dateTime, int pageSize, int pageNumber)
+        {
+            List<TempcashIncentivesDisplayContents> tempcashIncentive;
+
+            try
+            {
+                var latitudeParam = new SqlParameter("latitude", latitude);
+                var longitudeParam = new SqlParameter("longitude", longitude);
+                var radiusParam = new SqlParameter("radius", radius);
+                var userIdParam = new SqlParameter("userId", userId);
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var stateIdParam = new SqlParameter(" stateId", stateId);
+                var dateTimeParam = new SqlParameter("dateTime", dateTime);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
+
+                //Processing
+                tempcashIncentive = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByStateWithLocationBranchHolderFocus](@latitude, @longitude, @radius, @stateId, @countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, stateIdParam, countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                tempcashIncentive = null;
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return tempcashIncentive;
+
+
+        }
+
+        public List<TempcashIncentivesDisplayContents> GetAvailableCashIncentivesByStateWithLocationTenantFocus(decimal latitude, decimal longitude, double radius, Guid stateId, Guid countryId, string userId, DateTime dateTime, int pageSize, int pageNumber)
+        {
+            List<TempcashIncentivesDisplayContents> tempcashIncentives;
 
             try
             {
@@ -166,19 +410,21 @@ namespace YOY.DAO.Entities.DB.Functions
                 var stateIdParam = new SqlParameter("stateId", stateId);
                 var countryIdParam = new SqlParameter("countryId", countryId);
                 var dateTimeParam = new SqlParameter("dateTime", dateTime);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempcashbacks = dbContext.Set<TempcashbackIncentivesPreferenceBranches>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashbackIncentivesByStateWithLocationTenantFocus](@latitude, @longitude, @radius, @stateId, @countryId, @userId, @dateTime)", new[] { latitudeParam, longitudeParam, radiusParam, stateIdParam, countryIdParam, userIdParam, dateTimeParam }).ToList();
+                tempcashIncentives = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByStateWithLocationTenantFocus](@latitude, @longitude, @radius, @stateId, @countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, stateIdParam, countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
-                tempcashbacks = null;
+                tempcashIncentives = null;
                 //ERROR HANDLING
                 AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
 
             }
 
-            return tempcashbacks;
+            return tempcashIncentives;
 
 
         }
@@ -982,6 +1228,32 @@ namespace YOY.DAO.Entities.DB.Functions
 
         }
 
+        public List<TempcashIncentivesDisplayContents> GetCashIncentiveDisplayContent(Guid incentiveId, string userId, DateTime dateTime)
+        {
+            List<TempcashIncentivesDisplayContents> tempcashIncentives;
+
+            try
+            {
+                var incentiveIdParam = new SqlParameter("incentiveId", incentiveId);
+                var userIdParam = new SqlParameter("userId", userId);
+                var dateTimeParam = new SqlParameter("dateTime", dateTime);
+
+                //Processing
+                tempcashIncentives = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetCashIncentiveDisplayContent](@incentiveId, @userId, @dateTime)", new[] { incentiveIdParam, userIdParam, dateTimeParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                tempcashIncentives = null;
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return tempcashIncentives;
+
+
+        }
+
         public List<Temppreferences> GetCategoryInterestForUser(string userId, Guid categoryId)
         {
             List<Temppreferences> temppreferences;
@@ -1099,9 +1371,9 @@ namespace YOY.DAO.Entities.DB.Functions
             return tempclaimableTransactions;
         }
 
-        public List<TempoffersPreferenceBranches> GetOfferDetailsWithLocations(Guid offerId, string userId, int offerPurpose, DateTime dateTime)
+        public List<TempofferDisplayContents> GetOfferDisplayContent(Guid offerId, string userId, int offerPurpose, DateTime dateTime)
         {
-            List<TempoffersPreferenceBranches> tempoffers;
+            List<TempofferDisplayContents> tempoffers;
 
             try
             {
@@ -1111,7 +1383,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var dateTimeParam = new SqlParameter("dateTime", dateTime);
 
                 //Processing
-                tempoffers = dbContext.Set<TempoffersPreferenceBranches>().FromSqlRaw("SELECT * FROM [dbo].[GetOfferDetailsWithLocations](@offerId, @userId, @offerPurpose, @dateTime)", new[] { offerIdParam, userIdParam, offerPurposeParam, dateTimeParam }).ToList();
+                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetOfferDisplayContent](@offerId, @userId, @offerPurpose, @dateTime)", new[] { offerIdParam, userIdParam, offerPurposeParam, dateTimeParam }).ToList();
             }
             catch (Exception e)
             {
