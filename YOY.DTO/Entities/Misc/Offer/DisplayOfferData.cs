@@ -4,7 +4,7 @@ using System.Text;
 
 namespace YOY.DTO.Entities.Misc.Offer
 {
-    public class BasicOfferData
+    public class DisplayOfferData
     {
         public Guid Id { set; get; }
         public Guid TenantId { set; get; }

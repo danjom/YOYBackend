@@ -8,6 +8,7 @@ using YOY.DAO.Entities.DB;
 using YOY.DTO.Entities.Misc.ObjectState.POCO;
 using YOY.DTO.Entities.Misc.CashbackIncentive;
 using YOY.DTO.Entities.Misc.Branch;
+using YOY.DTO.Entities.Misc.CashIncentive;
 
 namespace YOY.DAO.Entities.Manager
 {
@@ -363,6 +364,8 @@ namespace YOY.DAO.Entities.Manager
                             MaxValue = item.MaxValue,
                             AvailableQuantity = item.AvailableQuantity,
                             Name = item.Name,
+                            MainHint = item.MainHint,
+                            ComplementaryHint = item.ComplementaryHint,
                             Description = item.Description,
                             Keywords = item.Keywords,
                             IsActive = item.IsActive,
@@ -371,7 +374,9 @@ namespace YOY.DAO.Entities.Manager
                             ValidMonthDays = item.ValidMonthDays,
                             ValidHours = item.ValidHours,
                             MaxUsagePerUser = item.MaxUsagesPerUser,
+                            PurchasesCountStartDate = item.PurchasesCountStartDate,
                             MinPurchasesCountToUse = item.MinPurchasesCountToUse,
+                            MinPurchasedTotalAmount = item.MinPurchasedTotalAmount,
                             UsageCount = item.UsageCount,
                             GeoSegmentationType = item.GeoSegmentationType,
                             GeoSegmentationTypeName = GetGeoSegmentationTypeName(item.GeoSegmentationType),
@@ -1291,6 +1296,8 @@ namespace YOY.DAO.Entities.Manager
                             MaxValue = item.MaxValue,
                             AvailableQuantity = item.AvailableQuantity,
                             Name = item.Name,
+                            MainHint = item.MainHint,
+                            ComplementaryHint = item.ComplementaryHint,
                             Description = item.Description,
                             Keywords = item.Keywords,
                             IsActive = item.IsActive,
@@ -1299,7 +1306,9 @@ namespace YOY.DAO.Entities.Manager
                             ValidMonthDays = item.ValidMonthDays,
                             ValidHours = item.ValidHours,
                             MaxUsagePerUser = item.MaxUsagesPerUser,
+                            PurchasesCountStartDate = item.PurchasesCountStartDate,
                             MinPurchasesCountToUse = item.MinPurchasesCountToUse,
+                            MinPurchasedTotalAmount = item.MinPurchasedTotalAmount,
                             UsageCount = item.UsageCount,
                             GeoSegmentationType = item.GeoSegmentationType,
                             GeoSegmentationTypeName = GetGeoSegmentationTypeName(item.GeoSegmentationType),
@@ -1565,6 +1574,8 @@ namespace YOY.DAO.Entities.Manager
                             MaxValue = item.MaxValue,
                             AvailableQuantity = item.AvailableQuantity,
                             Name = item.Name,
+                            MainHint = item.MainHint,
+                            ComplementaryHint = item.ComplementaryHint,
                             Description = item.Description,
                             Keywords = item.Keywords,
                             IsActive = item.IsActive,
@@ -1573,7 +1584,9 @@ namespace YOY.DAO.Entities.Manager
                             ValidMonthDays = item.ValidMonthDays,
                             ValidHours = item.ValidHours,
                             MaxUsagePerUser = item.MaxUsagesPerUser,
+                            PurchasesCountStartDate = item.PurchasesCountStartDate,
                             MinPurchasesCountToUse = item.MinPurchasesCountToUse,
+                            MinPurchasedTotalAmount = item.MinPurchasedTotalAmount,
                             UsageCount = item.UsageCount,
                             GeoSegmentationType = item.GeoSegmentationType,
                             GeoSegmentationTypeName = GetGeoSegmentationTypeName(item.GeoSegmentationType),
@@ -1678,6 +1691,8 @@ namespace YOY.DAO.Entities.Manager
                             MaxValue = item.MaxValue,
                             AvailableQuantity = item.AvailableQuantity,
                             Name = item.Name,
+                            MainHint = item.MainHint,
+                            ComplementaryHint = item.ComplementaryHint,
                             Description = item.Description,
                             Keywords = item.Keywords,
                             IsActive = item.IsActive,
@@ -1686,7 +1701,9 @@ namespace YOY.DAO.Entities.Manager
                             ValidMonthDays = item.ValidMonthDays,
                             ValidHours = item.ValidHours,
                             MaxUsagePerUser = item.MaxUsagesPerUser,
+                            PurchasesCountStartDate = item.PurchasesCountStartDate,
                             MinPurchasesCountToUse = item.MinPurchasesCountToUse,
+                            MinPurchasedTotalAmount = item.MinPurchasedTotalAmount,
                             UsageCount = item.UsageCount,
                             GeoSegmentationType = item.GeoSegmentationType,
                             GeoSegmentationTypeName = GetGeoSegmentationTypeName(item.GeoSegmentationType),
@@ -1785,6 +1802,8 @@ namespace YOY.DAO.Entities.Manager
                             MaxValue = item.MaxValue,
                             AvailableQuantity = item.AvailableQuantity,
                             Name = item.Name,
+                            MainHint = item.MainHint,
+                            ComplementaryHint = item.ComplementaryHint,
                             Description = item.Description,
                             Keywords = item.Keywords,
                             IsActive = item.IsActive,
@@ -1793,7 +1812,9 @@ namespace YOY.DAO.Entities.Manager
                             ValidMonthDays = item.ValidMonthDays,
                             ValidHours = item.ValidHours,
                             MaxUsagePerUser = item.MaxUsagesPerUser,
+                            PurchasesCountStartDate = item.PurchasesCountStartDate,
                             MinPurchasesCountToUse = item.MinPurchasesCountToUse,
+                            MinPurchasedTotalAmount = item.MinPurchasedTotalAmount,
                             UsageCount = item.UsageCount,
                             GeoSegmentationType = item.GeoSegmentationType,
                             GeoSegmentationTypeName = GetGeoSegmentationTypeName(item.GeoSegmentationType),
@@ -2051,6 +2072,8 @@ namespace YOY.DAO.Entities.Manager
                             MaxValue = item.MaxValue,
                             AvailableQuantity = item.AvailableQuantity,
                             Name = item.Name,
+                            MainHint = item.MainHint,
+                            ComplementaryHint = item.ComplementaryHint,
                             Description = item.Description,
                             Keywords = item.Keywords,
                             IsActive = item.IsActive,
@@ -2059,7 +2082,9 @@ namespace YOY.DAO.Entities.Manager
                             ValidMonthDays = item.ValidMonthDays,
                             ValidHours = item.ValidHours,
                             MaxUsagePerUser = item.MaxUsagesPerUser,
+                            PurchasesCountStartDate = item.PurchasesCountStartDate,
                             MinPurchasesCountToUse = item.MinPurchasesCountToUse,
+                            MinPurchasedTotalAmount = item.MinPurchasedTotalAmount,
                             UsageCount = item.UsageCount,
                             GeoSegmentationType = item.GeoSegmentationType,
                             GeoSegmentationTypeName = GetGeoSegmentationTypeName(item.GeoSegmentationType),
@@ -2145,6 +2170,8 @@ namespace YOY.DAO.Entities.Manager
                         MaxValue = item.MaxValue,
                         AvailableQuantity = item.AvailableQuantity,
                         Name = item.Name,
+                        MainHint = item.MainHint,
+                        ComplementaryHint = item.ComplementaryHint,
                         Description = item.Description,
                         Keywords = item.Keywords,
                         IsActive = item.IsActive,
@@ -2153,7 +2180,9 @@ namespace YOY.DAO.Entities.Manager
                         ValidMonthDays = item.ValidMonthDays,
                         ValidHours = item.ValidHours,
                         MaxUsagePerUser = item.MaxUsagesPerUser,
+                        PurchasesCountStartDate = item.PurchasesCountStartDate,
                         MinPurchasesCountToUse = item.MinPurchasesCountToUse,
+                        MinPurchasedTotalAmount = item.MinPurchasedTotalAmount,
                         UsageCount = item.UsageCount,
                         GeoSegmentationType = item.GeoSegmentationType,
                         GeoSegmentationTypeName = GetGeoSegmentationTypeName(item.GeoSegmentationType),
@@ -2231,6 +2260,8 @@ namespace YOY.DAO.Entities.Manager
                         MaxValue = item.MaxValue,
                         AvailableQuantity = item.AvailableQuantity,
                         Name = item.Name,
+                        MainHint = item.MainHint,
+                        ComplementaryHint = item.ComplementaryHint,
                         Description = item.Description,
                         Keywords = item.Keywords,
                         IsActive = item.IsActive,
@@ -2239,7 +2270,9 @@ namespace YOY.DAO.Entities.Manager
                         ValidMonthDays = item.ValidMonthDays,
                         ValidHours = item.ValidHours,
                         MaxUsagePerUser = item.MaxUsagesPerUser,
+                        PurchasesCountStartDate = item.PurchasesCountStartDate,
                         MinPurchasesCountToUse = item.MinPurchasesCountToUse,
+                        MinPurchasedTotalAmount = item.MinPurchasedTotalAmount,
                         UsageCount = item.UsageCount,
                         GeoSegmentationType = item.GeoSegmentationType,
                         GeoSegmentationTypeName = GetGeoSegmentationTypeName(item.GeoSegmentationType),
@@ -2301,8 +2334,9 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="expirationDate"></param>
         /// <returns></returns>
         public CashIncentive Post(int type, int displayType, int applyType, int benefitAmountType, int dealType, int maxCombinedIncentives, decimal unitValue, decimal previousUnitValue, int minMembershipLevel, decimal minPurchasedAmount, 
-            decimal purchasedAmountBlock, decimal maxValue, int availableQuantity, string name, string description, string keywords, bool isSponsored, string validWeekDays, 
-            string validMonthDays, string validHours, int maxUsagesPerUser, int minPurchasesCountToUse, int geoSegmentationType, string rules, string conditions, double relevanceRate, DateTime releaseDate, DateTime expirationDate)
+            decimal purchasedAmountBlock, decimal maxValue, int availableQuantity, string name, string mainHint, string complementaryHint, string description, string keywords, bool isSponsored, string validWeekDays, 
+            string validMonthDays, string validHours, int maxUsagesPerUser, DateTime? purchasesCountStartDate, int minPurchasesCountToUse, decimal minPurchasedTotalAmount, int geoSegmentationType, string rules, 
+            string conditions, double relevanceRate, DateTime releaseDate, DateTime expirationDate)
         {
             CashIncentive cashbackIncentive;
             OltpcashIncentives newCashbackIncentive = null;
@@ -2327,6 +2361,8 @@ namespace YOY.DAO.Entities.Manager
                     MaxValue = maxValue,
                     AvailableQuantity = availableQuantity,
                     Name = name,
+                    MainHint = mainHint,
+                    ComplementaryHint = complementaryHint,
                     Description = description,
                     Keywords = keywords,
                     IsActive = true,
@@ -2335,7 +2371,9 @@ namespace YOY.DAO.Entities.Manager
                     ValidMonthDays = validMonthDays,
                     ValidHours = validHours,
                     MaxUsagesPerUser = maxUsagesPerUser,
+                    PurchasesCountStartDate = purchasesCountStartDate,
                     MinPurchasesCountToUse = minPurchasesCountToUse,
+                    MinPurchasedTotalAmount = minPurchasedTotalAmount,
                     UsageCount = 0,
                     GeoSegmentationType = geoSegmentationType,
                     Rules = rules,
@@ -2375,6 +2413,8 @@ namespace YOY.DAO.Entities.Manager
                     MaxValue = newCashbackIncentive.MaxValue,
                     AvailableQuantity = newCashbackIncentive.AvailableQuantity,
                     Name = newCashbackIncentive.Name,
+                    MainHint = newCashbackIncentive.MainHint,
+                    ComplementaryHint = newCashbackIncentive.ComplementaryHint,
                     Description = newCashbackIncentive.Description,
                     Keywords = newCashbackIncentive.Keywords,
                     IsActive = newCashbackIncentive.IsActive,
@@ -2383,7 +2423,9 @@ namespace YOY.DAO.Entities.Manager
                     ValidMonthDays = newCashbackIncentive.ValidMonthDays,
                     ValidHours = newCashbackIncentive.ValidHours,
                     MaxUsagePerUser = newCashbackIncentive.MaxUsagesPerUser,
+                    PurchasesCountStartDate = newCashbackIncentive.PurchasesCountStartDate,
                     MinPurchasesCountToUse = newCashbackIncentive.MinPurchasesCountToUse,
+                    MinPurchasedTotalAmount = newCashbackIncentive.MinPurchasedTotalAmount,
                     UsageCount = newCashbackIncentive.UsageCount,
                     GeoSegmentationType = newCashbackIncentive.GeoSegmentationType,
                     GeoSegmentationTypeName = GetGeoSegmentationTypeName(newCashbackIncentive.GeoSegmentationType),
@@ -2449,10 +2491,10 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="commissionFeeValue"></param>
         /// <param name="minCommissionFeeAmount"></param>
         /// <returns></returns>
-        public CashIncentive Put(Guid id, int type, int displayType, int applyType, int benefitAmountType, int dealType, int maxCombinedIncentives, decimal unitValue, decimal previousUnitValue, int minMembershipLevel, decimal minPurchasedAmount, 
-            decimal purchasedAmountBlock, decimal maxValue, int availableQuantity, string name, string description, string keywords, bool isSponsored, string validWeekDays, 
-            string validMonthDays, string validHours, int maxUsagesPerUser, int minPurchasesCountToUse, int geoSegmentationType, string rules, string conditions, 
-            double relevanceRate, DateTime releaseDate, DateTime expirationDate)
+        public CashIncentive Put(Guid id, int type, int displayType, int applyType, int benefitAmountType, int dealType, int maxCombinedIncentives, decimal unitValue, decimal previousUnitValue, int minMembershipLevel, decimal minPurchasedAmount,
+            decimal purchasedAmountBlock, decimal maxValue, int availableQuantity, string name, string mainHint, string complementaryHint, string description, string keywords, bool isSponsored, string validWeekDays,
+            string validMonthDays, string validHours, int maxUsagesPerUser, DateTime? purchasesCountStartDate, int minPurchasesCountToUse, decimal minPurchasedTotalAmount, int geoSegmentationType, string rules,
+            string conditions, double relevanceRate, DateTime releaseDate, DateTime expirationDate)
         {
             CashIncentive cashbackIncentive = null;
 
@@ -2465,8 +2507,8 @@ namespace YOY.DAO.Entities.Manager
                 if (currentCashbackIncentive != null)
                 {
                     currentCashbackIncentive.Type = type;
-                    currentCashbackIncentive.DisplayType = displayType;
                     currentCashbackIncentive.ApplyType = applyType;
+                    currentCashbackIncentive.DisplayType = displayType;
                     currentCashbackIncentive.BenefitAmountType = benefitAmountType;
                     currentCashbackIncentive.DealType = dealType;
                     currentCashbackIncentive.MaxCombinedIncentives = maxCombinedIncentives;
@@ -2478,6 +2520,8 @@ namespace YOY.DAO.Entities.Manager
                     currentCashbackIncentive.MaxValue = maxValue;
                     currentCashbackIncentive.AvailableQuantity = availableQuantity;
                     currentCashbackIncentive.Name = name;
+                    currentCashbackIncentive.MainHint = mainHint;
+                    currentCashbackIncentive.ComplementaryHint = complementaryHint;
                     currentCashbackIncentive.Description = description;
                     currentCashbackIncentive.Keywords = keywords;
                     currentCashbackIncentive.IsSponsored = isSponsored;
@@ -2485,7 +2529,9 @@ namespace YOY.DAO.Entities.Manager
                     currentCashbackIncentive.ValidMonthDays = validMonthDays;
                     currentCashbackIncentive.ValidHours = validHours;
                     currentCashbackIncentive.MaxUsagesPerUser = maxUsagesPerUser;
+                    currentCashbackIncentive.PurchasesCountStartDate = purchasesCountStartDate;
                     currentCashbackIncentive.MinPurchasesCountToUse = minPurchasesCountToUse;
+                    currentCashbackIncentive.MinPurchasedTotalAmount = minPurchasedTotalAmount;
                     currentCashbackIncentive.GeoSegmentationType = geoSegmentationType;
                     currentCashbackIncentive.Rules = rules;
                     currentCashbackIncentive.Conditions = conditions;
@@ -2520,6 +2566,8 @@ namespace YOY.DAO.Entities.Manager
                         MaxValue = currentCashbackIncentive.MaxValue,
                         AvailableQuantity = currentCashbackIncentive.AvailableQuantity,
                         Name = currentCashbackIncentive.Name,
+                        MainHint = currentCashbackIncentive.MainHint,
+                        ComplementaryHint = currentCashbackIncentive.ComplementaryHint,
                         Description = currentCashbackIncentive.Description,
                         Keywords = currentCashbackIncentive.Keywords,
                         IsActive = currentCashbackIncentive.IsActive,
@@ -2528,7 +2576,9 @@ namespace YOY.DAO.Entities.Manager
                         ValidMonthDays = currentCashbackIncentive.ValidMonthDays,
                         ValidHours = currentCashbackIncentive.ValidHours,
                         MaxUsagePerUser = currentCashbackIncentive.MaxUsagesPerUser,
+                        PurchasesCountStartDate = currentCashbackIncentive.PurchasesCountStartDate,
                         MinPurchasesCountToUse = currentCashbackIncentive.MinPurchasesCountToUse,
+                        MinPurchasedTotalAmount = currentCashbackIncentive.MinPurchasedTotalAmount,
                         UsageCount = currentCashbackIncentive.UsageCount,
                         GeoSegmentationType = currentCashbackIncentive.GeoSegmentationType,
                         GeoSegmentationTypeName = GetGeoSegmentationTypeName(currentCashbackIncentive.GeoSegmentationType),
@@ -2660,6 +2710,58 @@ namespace YOY.DAO.Entities.Manager
             return success;
         }//METHOD PUT ENDS ------------------------------------------------------------------------------------------------------------------------------ //
 
+        public bool Put(Guid id, DateTime releaseDate, DateTime expirationDate)
+        {
+            bool success = false;
+
+            try
+            {
+                OltpcashIncentives incentive = (from x in this._businessObjects.Context.OltpcashIncentives
+                                                where x.TenantId == this._businessObjects.Tenant.TenantId && x.Id == id
+                                                select x).FirstOrDefault();
+
+                if (incentive != null)
+                {
+
+                    if (incentive.ReleaseDate > DateTime.UtcNow && incentive.ExpirationDate > DateTime.UtcNow)
+                    {
+                        incentive.ReleaseDate = releaseDate;
+                        incentive.ExpirationDate = expirationDate;
+                    }
+                    else
+                    {
+                        if (incentive.ReleaseDate <= DateTime.UtcNow && incentive.ExpirationDate > DateTime.UtcNow)
+                        {
+                            incentive.ExpirationDate = expirationDate;
+                        }
+                        else
+                        {
+                            if (incentive.ExpirationDate <= DateTime.UtcNow)
+                            {
+                                incentive.ReleaseDate = releaseDate;
+                                incentive.ExpirationDate = expirationDate;
+                            }
+                        }
+
+                    }
+
+                    this._businessObjects.Context.SaveChanges();
+
+                    success = true;
+                }
+
+            }
+            catch (Exception e)
+            {
+                success = false;
+                //ERROR HANDLING
+                this._businessObjects.StoredProcsHandler.AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return success;
+        }//METHOD PUT ENDS ------------------------------------------------------------------------------------------------------------------------------ //
+
 
         /// <summary>
         /// Deletes a cashback incentive
@@ -2759,7 +2861,7 @@ namespace YOY.DAO.Entities.Manager
 
 
         #endregion
-        /*
+        
         #region CASHBACKINCENTIVESFULLDATA
         /// <summary>
         /// Retrieve cashback incentive flattened data about all the offers that are potencially
@@ -2776,9 +2878,9 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="radius"></param>
         /// <param name="dateTime"></param>
         /// <returns></returns>
-        private List<FlattenedCashbackIncentiveData> GetCashbackIncentivesDataByRegionWithLocation(Guid countryId, Guid stateId, int contentSegmentationType, string userId, decimal latitude, decimal longitude, double radius, DateTime dateTime, int selectorType)
+        private List<FlattenedCashIncentiveData> GetCashbackIncentivesDataByRegionWithLocation(Guid countryId, Guid stateId, int contentSegmentationType, string userId, decimal latitude, decimal longitude, double radius, DateTime dateTime, int selectorType, int pageSize, int pageNumber)
         {
-            List<FlattenedCashbackIncentiveData> cashbackIncentives = null;
+            List<FlattenedCashIncentiveData> cashbackIncentives = null;
 
             try
             {
@@ -2786,22 +2888,17 @@ namespace YOY.DAO.Entities.Manager
 
                 switch (selectorType)
                 {
-                    case ContentFilterTypes.Category:
-
-                        //Nothing for now
-
-                        break;
                     case ContentFilterTypes.Commerce:
 
                         switch (contentSegmentationType)
                         {
                             case GeoSegmentationTypes.Country:
-                                query = from x in this._businessObjects.FuncsHandler.GetAvailableCashbackIncentivesByCountryWithLocationTenantFocus(latitude, longitude, radius * DistanceLimits.MaxKMRangeForMainOffersByCountryFactor, countryId, userId, dateTime)
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableCashIncentivesByCountryWithLocationTenantFocus(latitude, longitude, radius * DistanceLimits.MaxKMRangeForMainOffersByCountryFactor, countryId, userId, dateTime, pageSize, pageNumber)
                                         where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
                                         select x;
                                 break;
                             case GeoSegmentationTypes.State:
-                                query = from x in this._businessObjects.FuncsHandler.GetAvailableCashbackIncentivesByStateWithLocationTenantFocus(latitude, longitude, radius, stateId, countryId, userId, dateTime)
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableCashIncentivesByStateWithLocationTenantFocus(latitude, longitude, radius, stateId, countryId, userId, dateTime, pageSize, pageNumber)
                                         where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
                                         select x;
                                 break;
@@ -2809,26 +2906,28 @@ namespace YOY.DAO.Entities.Manager
 
                         if (query != null)
                         {
-                            FlattenedCashbackIncentiveData incentiveData;
-                            cashbackIncentives = new List<FlattenedCashbackIncentiveData>();
+                            FlattenedCashIncentiveData incentiveData;
+                            cashbackIncentives = new List<FlattenedCashIncentiveData>();
 
-                            foreach (TempcashbackIncentivesPreferenceBranches item in query)
+                            foreach (TempcashIncentivesDisplayContents item in query)
                             {
                                 if (item.AvailableQuantity == -1 || item.AvailableQuantity > 0)
                                 {
-                                    incentiveData = new FlattenedCashbackIncentiveData
+                                    incentiveData = new FlattenedCashIncentiveData
                                     {
                                         SelectorType = selectorType,
-                                        CashbackIncentive = new CashIncentive
+                                        CashIncentive = new DisplayCashIncentiveData
                                         {
                                             Id = item.Id,
                                             TenantId = item.TenantId,
-                                            Type = item.Type,
                                             ApplyType = item.ApplyType,
-                                            DisplayType = item.DisplayType,
                                             BenefitAmountType = item.BenefitAmountType,
+                                            DisplayType = item.DisplayType,
+                                            Type = item.Type,
                                             DealType = item.DealType,
                                             MaxCombinedIncentives = item.MaxCombinedIncentives,
+                                            MainHint = item.MainHint,
+                                            ComplementaryHint = item.ComplementaryHint,
                                             UnitValue = item.UnitValue,
                                             PreviousUnitValue = item.PreviousUnitValue,
                                             MinMembershipLevel = item.MinMembershipLevel,
@@ -2839,18 +2938,20 @@ namespace YOY.DAO.Entities.Manager
                                             Name = item.Name,
                                             Description = item.Description,
                                             Keywords = item.Keywords,
-                                            IsActive = item.IsActive,
                                             IsSponsored = item.IsSponsored,
+                                            IsActive = item.IsActive,
                                             ValidWeekDays = item.ValidWeekDays,
                                             ValidMonthDays = item.ValidMonthDays,
                                             ValidHours = item.ValidHours,
                                             MaxUsagePerUser = item.MaxUsagesPerUser,
+                                            PurchasesCountStartDate = item.PurchasesCountStartDate,
                                             MinPurchasesCountToUse = item.MinPurchasesCountToUse,
+                                            MinPurchasedTotalAmount = item.MinPurchasedTotalAmount,
                                             UsageCount = item.UsageCount,
+                                            RelevanceRate = item.RelevanceRate,
                                             GeoSegmentationType = item.GeoSegmentationType,
                                             Rules = item.Rules ?? Resources.NoRulesAvailable,
                                             Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
-                                            RelevanceRate = item.RelevanceRate,
                                             ReleaseDate = item.ReleaseDate,
                                             ExpirationDate = item.ExpirationDate,
                                             CreatedDate = item.CreatedDate,
@@ -2859,38 +2960,121 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             Id = item.TenantId,
                                             Name = item.TenantName,
-                                            Logo = item.TenantLogo,
+                                            LogoUrl = item.TenantLogoUrl,
+                                            WhiteLogoUrl = "",
                                             CountryId = item.TenantCountryId,
                                             CurrencySymbol = item.CurrencySymbol,
+                                            CashbackPercentage = 0,
                                             CategoryId = item.TenantCategoryId,
-                                            CategoryName = item.TenantCategoryName,
                                             Type = item.TenantType,
-                                            RelevanceScore = item.TenantScore,
-                                            NearestBranchId = Guid.Empty,
-                                            NearestBranchName = "",
-                                            NearestBranchLatitude = null,
-                                            NearestBranchLongitude = null,
+                                            RelevanceStatus = item.TenantRelevanceStatus,
+                                            RelevanceScore = item.TenantScore
                                         },
-                                        Branch = new BasicBranchData
-                                        {
-                                            Id = item.BranchId,
-                                            Name = item.BranchName,
-                                            DescriptiveAddress = item.BranchDescriptiveAddress,
-                                            InquiriesPhoneNumber = item.BranchInquiriesPhoneNumber,
-                                            Latitude = item.BranchLatitude,
-                                            Longitude = item.BranchLongitude,
-                                            Distance = Math.Round(((double)item.Distance / 1000), 2, MidpointRounding.AwayFromZero),//Is originally in meters, it's passed to kilometers
-                                            CityId = item.BranchCityId,
-                                            StateId = item.BranchStateId,
-                                            Enabled = false
-                                        },
-                                        //When its selector is tenant, there is no data about the preference
-                                        Preference = new DTO.Entities.Misc.InterestPreference.BasicUserPreferenceData
+                                        BranchHolder = new BasicBranchHolderData//In this case is irrelevant
                                         {
                                             Id = Guid.Empty,
                                             Name = "",
-                                            Icon = "",
-                                            RelevanceScore = -1
+                                            TenantName = "",
+                                            RelevanceStatus = -1
+                                        },
+                                        ExactLocationBased = true
+                                    };
+
+                                    cashbackIncentives.Add(incentiveData);
+                                }
+
+                            }
+                        }
+
+                        break;
+                    case ContentFilterTypes.ShoppingMall:
+
+                        switch (contentSegmentationType)
+                        {
+                            case GeoSegmentationTypes.Country:
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableCashIncentivesByCountryWithLocationBranchHolderFocus(latitude, longitude, radius * DistanceLimits.MaxKMRangeForMainOffersByCountryFactor, countryId, userId, dateTime, pageSize, pageNumber)
+                                        where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
+                                        select x;
+                                break;
+                            case GeoSegmentationTypes.State:
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableCashIncentivesByStateWithLocationBranchHolderFocus(latitude, longitude, radius, stateId, countryId, userId, dateTime, pageSize, pageNumber)
+                                        where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
+                                        select x;
+                                break;
+                        }
+
+                        if (query != null)
+                        {
+                            FlattenedCashIncentiveData incentiveData;
+                            cashbackIncentives = new List<FlattenedCashIncentiveData>();
+
+                            foreach (TempcashIncentivesDisplayContents item in query)
+                            {
+                                if (item.AvailableQuantity == -1 || item.AvailableQuantity > 0)
+                                {
+                                    incentiveData = new FlattenedCashIncentiveData
+                                    {
+                                        SelectorType = selectorType,
+                                        CashIncentive = new DisplayCashIncentiveData
+                                        {
+                                            Id = item.Id,
+                                            TenantId = item.TenantId,
+                                            ApplyType = item.ApplyType,
+                                            BenefitAmountType = item.BenefitAmountType,
+                                            DisplayType = item.DisplayType,
+                                            Type = item.Type,
+                                            DealType = item.DealType,
+                                            MaxCombinedIncentives = item.MaxCombinedIncentives,
+                                            MainHint = item.MainHint,
+                                            ComplementaryHint = item.ComplementaryHint,
+                                            UnitValue = item.UnitValue,
+                                            PreviousUnitValue = item.PreviousUnitValue,
+                                            MinMembershipLevel = item.MinMembershipLevel,
+                                            MinPurchasedAmount = item.MinPurchasedAmount,
+                                            PurchasedAmountBlock = item.PurchasedAmountBlock,
+                                            MaxValue = item.MaxValue,
+                                            AvailableQuantity = item.AvailableQuantity,
+                                            Name = item.Name,
+                                            Description = item.Description,
+                                            Keywords = item.Keywords,
+                                            IsSponsored = item.IsSponsored,
+                                            IsActive = item.IsActive,
+                                            ValidWeekDays = item.ValidWeekDays,
+                                            ValidMonthDays = item.ValidMonthDays,
+                                            ValidHours = item.ValidHours,
+                                            MaxUsagePerUser = item.MaxUsagesPerUser,
+                                            PurchasesCountStartDate = item.PurchasesCountStartDate,
+                                            MinPurchasesCountToUse = item.MinPurchasesCountToUse,
+                                            MinPurchasedTotalAmount = item.MinPurchasedTotalAmount,
+                                            UsageCount = item.UsageCount,
+                                            RelevanceRate = item.RelevanceRate,
+                                            GeoSegmentationType = item.GeoSegmentationType,
+                                            Rules = item.Rules ?? Resources.NoRulesAvailable,
+                                            Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
+                                            ReleaseDate = item.ReleaseDate,
+                                            ExpirationDate = item.ExpirationDate,
+                                            CreatedDate = item.CreatedDate,
+                                        },
+                                        Tenant = new DTO.Entities.Misc.TenantData.BasicTenantData
+                                        {
+                                            Id = item.TenantId,
+                                            Name = item.TenantName,
+                                            LogoUrl = item.TenantLogoUrl,
+                                            WhiteLogoUrl = "",
+                                            CountryId = item.TenantCountryId,
+                                            CurrencySymbol = item.CurrencySymbol,
+                                            CashbackPercentage = 0,
+                                            CategoryId = item.TenantCategoryId,
+                                            Type = item.TenantType,
+                                            RelevanceStatus = item.TenantRelevanceStatus,
+                                            RelevanceScore = item.TenantScore
+                                        },
+                                        BranchHolder = new BasicBranchHolderData
+                                        {
+                                            Id = item.BranchHolderId ?? Guid.Empty,
+                                            Name = item.BranchHolderName ?? "",
+                                            TenantName = item.TenantHolderName ?? "",
+                                            RelevanceStatus = item.TenantHolderRelevanceStatus ?? -1
                                         },
                                         ExactLocationBased = true
                                     };
@@ -2927,9 +3111,9 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="stateId"></param>
         /// <param name="dateTime"></param>
         /// <returns></returns>
-        private List<FlattenedCashbackIncentiveData> GetCashbackIncentivesDataByRegion(Guid stateId, Guid countryId, int contentSegmentationType, string userId, DateTime dateTime, int selectorType)
+        private List<FlattenedCashIncentiveData> GetCashbackIncentivesDataByRegion(Guid stateId, Guid countryId, int contentSegmentationType, string userId, DateTime dateTime, int selectorType, int pageSize, int pageNumber)
         {
-            List<FlattenedCashbackIncentiveData> cashbackIncentives = null;
+            List<FlattenedCashIncentiveData> cashbackIncentives = null;
 
             try
             {
@@ -2937,22 +3121,17 @@ namespace YOY.DAO.Entities.Manager
 
                 switch (selectorType)
                 {
-                    case ContentFilterTypes.Category:
-
-                        //NOTHING FOR NOW
-
-                        break;
                     case ContentFilterTypes.Commerce:
 
                         switch (contentSegmentationType)
                         {
                             case GeoSegmentationTypes.Country:
-                                query = from x in this._businessObjects.FuncsHandler.GetAvailableCashbackIncentivesByCountryTenantFocus(countryId, userId, dateTime)
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableCashIncentivesByCountryTenantFocus(countryId, userId, dateTime, pageSize, pageNumber)
                                         where (x.AvailableQuantity == -1 || x.AvailableQuantity > 0)
                                         select x;
                                 break;
                             case GeoSegmentationTypes.State:
-                                query = from x in this._businessObjects.FuncsHandler.GetAvailableCashbackIncentivesByStateTenantFocus(stateId, countryId, userId, dateTime)
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableCashIncentivesByStateTenantFocus(stateId, countryId, userId, dateTime, pageSize, pageNumber)
                                         where (x.AvailableQuantity == -1 || x.AvailableQuantity > 0)
                                         select x;
                                 break;
@@ -2960,26 +3139,28 @@ namespace YOY.DAO.Entities.Manager
 
                         if (query != null)
                         {
-                            FlattenedCashbackIncentiveData incentiveData;
-                            cashbackIncentives = new List<FlattenedCashbackIncentiveData>();
+                            FlattenedCashIncentiveData incentiveData;
+                            cashbackIncentives = new List<FlattenedCashIncentiveData>();
 
-                            foreach (TempcashbackIncentivesPreferenceBranches item in query)
+                            foreach (TempcashIncentivesDisplayContents item in query)
                             {
                                 if (item.AvailableQuantity == -1 || item.AvailableQuantity > 0)
                                 {
-                                    incentiveData = new FlattenedCashbackIncentiveData
+                                    incentiveData = new FlattenedCashIncentiveData
                                     {
                                         SelectorType = selectorType,
-                                        CashbackIncentive = new CashIncentive
+                                        CashIncentive = new DisplayCashIncentiveData
                                         {
                                             Id = item.Id,
                                             TenantId = item.TenantId,
-                                            Type = item.Type,
                                             ApplyType = item.ApplyType,
-                                            DisplayType = item.DisplayType,
                                             BenefitAmountType = item.BenefitAmountType,
+                                            DisplayType = item.DisplayType,
+                                            Type = item.Type,
                                             DealType = item.DealType,
                                             MaxCombinedIncentives = item.MaxCombinedIncentives,
+                                            MainHint = item.MainHint,
+                                            ComplementaryHint = item.ComplementaryHint,
                                             UnitValue = item.UnitValue,
                                             PreviousUnitValue = item.PreviousUnitValue,
                                             MinMembershipLevel = item.MinMembershipLevel,
@@ -2990,18 +3171,20 @@ namespace YOY.DAO.Entities.Manager
                                             Name = item.Name,
                                             Description = item.Description,
                                             Keywords = item.Keywords,
-                                            IsActive = item.IsActive,
                                             IsSponsored = item.IsSponsored,
+                                            IsActive = item.IsActive,
                                             ValidWeekDays = item.ValidWeekDays,
                                             ValidMonthDays = item.ValidMonthDays,
                                             ValidHours = item.ValidHours,
                                             MaxUsagePerUser = item.MaxUsagesPerUser,
+                                            PurchasesCountStartDate = item.PurchasesCountStartDate,
                                             MinPurchasesCountToUse = item.MinPurchasesCountToUse,
+                                            MinPurchasedTotalAmount = item.MinPurchasedTotalAmount,
                                             UsageCount = item.UsageCount,
+                                            RelevanceRate = item.RelevanceRate,
                                             GeoSegmentationType = item.GeoSegmentationType,
                                             Rules = item.Rules ?? Resources.NoRulesAvailable,
                                             Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
-                                            RelevanceRate = item.RelevanceRate,
                                             ReleaseDate = item.ReleaseDate,
                                             ExpirationDate = item.ExpirationDate,
                                             CreatedDate = item.CreatedDate,
@@ -3010,38 +3193,121 @@ namespace YOY.DAO.Entities.Manager
                                         {
                                             Id = item.TenantId,
                                             Name = item.TenantName,
-                                            Logo = item.TenantLogo,
+                                            LogoUrl = item.TenantLogoUrl,
+                                            WhiteLogoUrl = "",
                                             CountryId = item.TenantCountryId,
                                             CurrencySymbol = item.CurrencySymbol,
+                                            CashbackPercentage = 0,
                                             CategoryId = item.TenantCategoryId,
-                                            CategoryName = item.TenantCategoryName,
                                             Type = item.TenantType,
-                                            RelevanceScore = item.TenantScore,
-                                            NearestBranchId = Guid.Empty,
-                                            NearestBranchName = "",
-                                            NearestBranchLatitude = null,
-                                            NearestBranchLongitude = null,
+                                            RelevanceStatus = item.TenantRelevanceStatus,
+                                            RelevanceScore = item.TenantScore
                                         },
-                                        Branch = new BasicBranchData
-                                        {
-                                            Id = item.BranchId,
-                                            Name = item.BranchName,
-                                            DescriptiveAddress = item.BranchDescriptiveAddress,
-                                            InquiriesPhoneNumber = item.BranchInquiriesPhoneNumber,
-                                            Latitude = item.BranchLatitude,
-                                            Longitude = item.BranchLongitude,
-                                            Distance = null,//In this case there is no way to define distance
-                                            CityId = item.BranchCityId,
-                                            StateId = item.BranchStateId,
-                                            Enabled = false
-                                        },
-                                        //When selector is tenant, there is no preference data
-                                        Preference = new DTO.Entities.Misc.InterestPreference.BasicUserPreferenceData
+                                        BranchHolder = new BasicBranchHolderData//In this case is irrelevant
                                         {
                                             Id = Guid.Empty,
                                             Name = "",
-                                            Icon = "",
-                                            RelevanceScore = -1
+                                            TenantName = "",
+                                            RelevanceStatus = -1
+                                        },
+                                        ExactLocationBased = false
+                                    };
+
+                                    cashbackIncentives.Add(incentiveData);
+                                }
+
+                            }
+                        }
+
+                        break;
+                    case ContentFilterTypes.ShoppingMall:
+
+                        switch (contentSegmentationType)
+                        {
+                            case GeoSegmentationTypes.Country:
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableCashIncentivesByCountryBranchHolderFocus(countryId, userId, dateTime, pageSize, pageNumber)
+                                        where (x.AvailableQuantity == -1 || x.AvailableQuantity > 0)
+                                        select x;
+                                break;
+                            case GeoSegmentationTypes.State:
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableCashIncentivesByStateBranchHolderFocus(stateId, countryId, userId, dateTime, pageSize, pageNumber)
+                                        where (x.AvailableQuantity == -1 || x.AvailableQuantity > 0)
+                                        select x;
+                                break;
+                        }
+
+                        if (query != null)
+                        {
+                            FlattenedCashIncentiveData incentiveData;
+                            cashbackIncentives = new List<FlattenedCashIncentiveData>();
+
+                            foreach (TempcashIncentivesDisplayContents item in query)
+                            {
+                                if (item.AvailableQuantity == -1 || item.AvailableQuantity > 0)
+                                {
+                                    incentiveData = new FlattenedCashIncentiveData
+                                    {
+                                        SelectorType = selectorType,
+                                        CashIncentive = new DisplayCashIncentiveData
+                                        {
+                                            Id = item.Id,
+                                            TenantId = item.TenantId,
+                                            ApplyType = item.ApplyType,
+                                            BenefitAmountType = item.BenefitAmountType,
+                                            DisplayType = item.DisplayType,
+                                            Type = item.Type,
+                                            DealType = item.DealType,
+                                            MaxCombinedIncentives = item.MaxCombinedIncentives,
+                                            MainHint = item.MainHint,
+                                            ComplementaryHint = item.ComplementaryHint,
+                                            UnitValue = item.UnitValue,
+                                            PreviousUnitValue = item.PreviousUnitValue,
+                                            MinMembershipLevel = item.MinMembershipLevel,
+                                            MinPurchasedAmount = item.MinPurchasedAmount,
+                                            PurchasedAmountBlock = item.PurchasedAmountBlock,
+                                            MaxValue = item.MaxValue,
+                                            AvailableQuantity = item.AvailableQuantity,
+                                            Name = item.Name,
+                                            Description = item.Description,
+                                            Keywords = item.Keywords,
+                                            IsSponsored = item.IsSponsored,
+                                            IsActive = item.IsActive,
+                                            ValidWeekDays = item.ValidWeekDays,
+                                            ValidMonthDays = item.ValidMonthDays,
+                                            ValidHours = item.ValidHours,
+                                            MaxUsagePerUser = item.MaxUsagesPerUser,
+                                            PurchasesCountStartDate = item.PurchasesCountStartDate,
+                                            MinPurchasesCountToUse = item.MinPurchasesCountToUse,
+                                            MinPurchasedTotalAmount = item.MinPurchasedTotalAmount,
+                                            UsageCount = item.UsageCount,
+                                            RelevanceRate = item.RelevanceRate,
+                                            GeoSegmentationType = item.GeoSegmentationType,
+                                            Rules = item.Rules ?? Resources.NoRulesAvailable,
+                                            Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
+                                            ReleaseDate = item.ReleaseDate,
+                                            ExpirationDate = item.ExpirationDate,
+                                            CreatedDate = item.CreatedDate,
+                                        },
+                                        Tenant = new DTO.Entities.Misc.TenantData.BasicTenantData
+                                        {
+                                            Id = item.TenantId,
+                                            Name = item.TenantName,
+                                            LogoUrl = item.TenantLogoUrl,
+                                            WhiteLogoUrl = "",
+                                            CountryId = item.TenantCountryId,
+                                            CurrencySymbol = item.CurrencySymbol,
+                                            CashbackPercentage = 0,
+                                            CategoryId = item.TenantCategoryId,
+                                            Type = item.TenantType,
+                                            RelevanceStatus = item.TenantRelevanceStatus,
+                                            RelevanceScore = item.TenantScore
+                                        },
+                                        BranchHolder = new BasicBranchHolderData
+                                        {
+                                            Id = item.BranchHolderId ?? Guid.Empty,
+                                            Name = item.BranchHolderName ?? "",
+                                            TenantName = item.TenantHolderName ?? "",
+                                            RelevanceStatus = item.TenantHolderRelevanceStatus ?? -1
                                         },
                                         ExactLocationBased = false
                                     };
@@ -3067,7 +3333,7 @@ namespace YOY.DAO.Entities.Manager
             return cashbackIncentives;
         }
 
-        /*
+        
         /// <summary>
         /// Retrieve cashback incentive flattened data about all the offers that are potencially
         /// available in a given state. At this point there is no certainity that 
@@ -3079,9 +3345,9 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="stateId"></param>
         /// <param name="dateTime"></param>
         /// <returns></returns>
-        private List<FlattenedCashbackIncentiveData> GetOffersDataByRegionForReference(Guid stateId, Guid countryId, int contentSegmentationType, string userId, DateTime dateTime, int referenceType, Guid referenceId)
+        private List<FlattenedCashIncentiveData> GetCashIncentivesDataByRegionForReference(Guid stateId, Guid countryId, int contentSegmentationType, string userId, DateTime dateTime, int referenceType, Guid referenceId, int pageSize, int pageNumber)
         {
-            List<FlattenedCashbackIncentiveData> cashbackIncentives = null;
+            List<FlattenedCashIncentiveData> cashbackIncentives = null;
 
             try
             {
@@ -3089,21 +3355,16 @@ namespace YOY.DAO.Entities.Manager
 
                 switch (referenceType)
                 {
-                    case ContentFilters.Category:
-                        
-                        //NOTHING FOR NOW
-
-                        break;
-                    case ContentFilters.Tenant:
+                    case ContentFilterTypes.Commerce:
                         switch (contentSegmentationType)
                         {
                             case GeoSegmentationTypes.Country:
-                                query = from x in this._businessObjects.Context.GetAvailableCashbackIncentivesByCountryForTenant(countryId, userId, referenceId, dateTime)
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableCashIncentivesByCountryForTenant(countryId, userId, referenceId, dateTime, pageSize, pageNumber)
                                         where (x.AvailableQuantity == -1 || x.AvailableQuantity > 0)
                                         select x;
                                 break;
                             case GeoSegmentationTypes.State:
-                                query = from x in this._businessObjects.Context.GetAvailableCashbackIncentivesByStateForTenant(stateId, countryId, userId, referenceId, dateTime)
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableCashIncentivesByStateForTenant(stateId, countryId, userId, referenceId, dateTime, pageSize, pageNumber)
                                         where (x.AvailableQuantity == -1 || x.AvailableQuantity > 0)
                                         select x;
                                 break;
@@ -3111,101 +3372,175 @@ namespace YOY.DAO.Entities.Manager
 
                         if (query != null)
                         {
-                            FlattenedCashbackIncentiveData incentiveData;
+                            FlattenedCashIncentiveData incentiveData;
 
-                            cashbackIncentives = new List<FlattenedCashbackIncentiveData>();
+                            cashbackIncentives = new List<FlattenedCashIncentiveData>();
 
-                            foreach (TEMPCashbackIncentivesPreferenceBranch item in query)
+                            foreach (TempcashIncentivesDisplayContents item in query)
                             {
                                 if (item.AvailableQuantity == -1 || item.AvailableQuantity > 0)
                                 {
-                                    incentiveData = new FlattenedCashbackIncentiveData
+                                    incentiveData = new FlattenedCashIncentiveData
                                     {
                                         SelectorType = referenceType,
-                                        CashbackIncentive = new CashbackIncentive
+                                        CashIncentive = new DisplayCashIncentiveData
                                         {
                                             Id = item.Id,
                                             TenantId = item.TenantId,
+                                            ApplyType = item.ApplyType,
+                                            BenefitAmountType = item.BenefitAmountType,
+                                            DisplayType = item.DisplayType,
                                             Type = item.Type,
-                                            TypeName = GetTypeName(item.Type),
-                                            EarningType = item.EarningType,
-                                            EarningTypeName = GetEarningTypeName(item.EarningType),
                                             DealType = item.DealType,
-                                            DealTypeName = GetDealTypeName(item.DealType),
-                                            CombineType = item.CombineType,
-                                            CombineTypeName = GetCombineTypeName(item.CombineType),
+                                            MaxCombinedIncentives = item.MaxCombinedIncentives,
+                                            MainHint = item.MainHint,
+                                            ComplementaryHint = item.ComplementaryHint,
                                             UnitValue = item.UnitValue,
                                             PreviousUnitValue = item.PreviousUnitValue,
+                                            MinMembershipLevel = item.MinMembershipLevel,
                                             MinPurchasedAmount = item.MinPurchasedAmount,
                                             PurchasedAmountBlock = item.PurchasedAmountBlock,
                                             MaxValue = item.MaxValue,
                                             AvailableQuantity = item.AvailableQuantity,
                                             Name = item.Name,
                                             Description = item.Description,
-                                            RegexToMatchInReceipt = item.RegexToMatchInReceipt,
                                             Keywords = item.Keywords,
-                                            RequiresReferenceCode = item.RequiresReferenceCode,
-                                            IsActive = item.IsActive,
                                             IsSponsored = item.IsSponsored,
-                                            CreationDate = item.CreationDate,
-                                            ReleaseDate = item.ReleaseDate,
-                                            ExpirationDate = item.ExpirationDate,
+                                            IsActive = item.IsActive,
                                             ValidWeekDays = item.ValidWeekDays,
                                             ValidMonthDays = item.ValidMonthDays,
                                             ValidHours = item.ValidHours,
                                             MaxUsagePerUser = item.MaxUsagesPerUser,
+                                            PurchasesCountStartDate = item.PurchasesCountStartDate,
+                                            MinPurchasesCountToUse = item.MinPurchasesCountToUse,
+                                            MinPurchasedTotalAmount = item.MinPurchasedTotalAmount,
                                             UsageCount = item.UsageCount,
                                             RelevanceRate = item.RelevanceRate,
                                             GeoSegmentationType = item.GeoSegmentationType,
-                                            GeoSegmentationTypeName = GetGeoSegmentationTypeName(item.GeoSegmentationType),
                                             Rules = item.Rules ?? Resources.NoRulesAvailable,
                                             Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
-                                            ClaimInstructions = item.ClaimInstructions ?? Resources.DefaultIncentiveClaimInstructions,
-                                            OneTimeUsagePerUser = item.OneTimeUsagePerUser,
-                                            MinPurchasesCountToUse = item.MinPurchasesCountToUse,
-                                            MinPurchasesHoursTimeoutToUse = item.MinPurchasesHoursTimeoutToUse,
-                                            MaxPurchasesDaysTimeoutToUse = item.MaxPurchasesDaysTimeoutToUse,
-                                            CommissionFeeType = item.CommissionFeeType,
-                                            CommissionFeeTypeName = GetCommissionTypeName(item.CommissionFeeType),
-                                            CommissionFeeValue = item.CommissionFeeValue,
-                                            MinCommissionFeeAmount = item.MinCommissionFeeAmount
+                                            ReleaseDate = item.ReleaseDate,
+                                            ExpirationDate = item.ExpirationDate,
+                                            CreatedDate = item.CreatedDate,
                                         },
                                         Tenant = new DTO.Entities.Misc.TenantData.BasicTenantData
                                         {
                                             Id = item.TenantId,
                                             Name = item.TenantName,
-                                            Logo = item.TenantLogo,
+                                            LogoUrl = item.TenantLogoUrl,
+                                            WhiteLogoUrl = "",
                                             CountryId = item.TenantCountryId,
                                             CurrencySymbol = item.CurrencySymbol,
+                                            CashbackPercentage = 0,
                                             CategoryId = item.TenantCategoryId,
-                                            CategoryName = item.TenantCategoryName,
                                             Type = item.TenantType,
-                                            RelevanceScore = item.TenantScore,
-                                            NearestBranchId = Guid.Empty,
-                                            NearestBranchName = "",
-                                            NearestBranchLatitude = null,
-                                            NearestBranchLongitude = null,
+                                            RelevanceStatus = item.TenantRelevanceStatus,
+                                            RelevanceScore = item.TenantScore
                                         },
-                                        Branch = new BasicBranchData
-                                        {
-                                            Id = item.BranchId,
-                                            Name = item.BranchName,
-                                            DescriptiveAddress = item.BranchDescriptiveAddress,
-                                            InquiriesPhoneNumber = item.BranchInquiriesPhoneNumber,
-                                            Latitude = item.BranchLatitude,
-                                            Longitude = item.BranchLongitude,
-                                            Distance = null,//In this case there is no way to define distance
-                                            CityId = item.BranchCityId,
-                                            StateId = item.BranchStateId,
-                                            Enabled = false
-                                        },
-                                        //When selector is tenant, there is no preference data
-                                        Preference = new DTO.Entities.Misc.Preference.BasicPreferenceData
+                                        BranchHolder = new BasicBranchHolderData//In this case is irrelevant
                                         {
                                             Id = Guid.Empty,
                                             Name = "",
-                                            Icon = "",
-                                            RelevanceScore = -1
+                                            TenantName = "",
+                                            RelevanceStatus = -1
+                                        },
+                                        ExactLocationBased = false
+                                    };
+
+                                    cashbackIncentives.Add(incentiveData);
+                                }
+                            }
+                        }
+
+                        break;
+                    case ContentFilterTypes.ShoppingMall:
+                        switch (contentSegmentationType)
+                        {
+                            case GeoSegmentationTypes.Country:
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableCashIncentivesByCountryForBranchHolder(countryId, userId, referenceId, dateTime, pageSize, pageNumber)
+                                        where (x.AvailableQuantity == -1 || x.AvailableQuantity > 0)
+                                        select x;
+                                break;
+                            case GeoSegmentationTypes.State:
+                                query = from x in this._businessObjects.FuncsHandler.GetAvailableCashIncentivesByStateForBranchHolder(stateId, countryId, userId, referenceId, dateTime, pageSize, pageNumber)
+                                        where (x.AvailableQuantity == -1 || x.AvailableQuantity > 0)
+                                        select x;
+                                break;
+                        }
+
+                        if (query != null)
+                        {
+                            FlattenedCashIncentiveData incentiveData;
+
+                            cashbackIncentives = new List<FlattenedCashIncentiveData>();
+
+                            foreach (TempcashIncentivesDisplayContents item in query)
+                            {
+                                if (item.AvailableQuantity == -1 || item.AvailableQuantity > 0)
+                                {
+                                    incentiveData = new FlattenedCashIncentiveData
+                                    {
+                                        SelectorType = referenceType,
+                                        CashIncentive = new DisplayCashIncentiveData
+                                        {
+                                            Id = item.Id,
+                                            TenantId = item.TenantId,
+                                            ApplyType = item.ApplyType,
+                                            BenefitAmountType = item.BenefitAmountType,
+                                            DisplayType = item.DisplayType,
+                                            Type = item.Type,
+                                            DealType = item.DealType,
+                                            MaxCombinedIncentives = item.MaxCombinedIncentives,
+                                            MainHint = item.MainHint,
+                                            ComplementaryHint = item.ComplementaryHint,
+                                            UnitValue = item.UnitValue,
+                                            PreviousUnitValue = item.PreviousUnitValue,
+                                            MinMembershipLevel = item.MinMembershipLevel,
+                                            MinPurchasedAmount = item.MinPurchasedAmount,
+                                            PurchasedAmountBlock = item.PurchasedAmountBlock,
+                                            MaxValue = item.MaxValue,
+                                            AvailableQuantity = item.AvailableQuantity,
+                                            Name = item.Name,
+                                            Description = item.Description,
+                                            Keywords = item.Keywords,
+                                            IsSponsored = item.IsSponsored,
+                                            IsActive = item.IsActive,
+                                            ValidWeekDays = item.ValidWeekDays,
+                                            ValidMonthDays = item.ValidMonthDays,
+                                            ValidHours = item.ValidHours,
+                                            MaxUsagePerUser = item.MaxUsagesPerUser,
+                                            PurchasesCountStartDate = item.PurchasesCountStartDate,
+                                            MinPurchasesCountToUse = item.MinPurchasesCountToUse,
+                                            MinPurchasedTotalAmount = item.MinPurchasedTotalAmount,
+                                            UsageCount = item.UsageCount,
+                                            RelevanceRate = item.RelevanceRate,
+                                            GeoSegmentationType = item.GeoSegmentationType,
+                                            Rules = item.Rules ?? Resources.NoRulesAvailable,
+                                            Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
+                                            ReleaseDate = item.ReleaseDate,
+                                            ExpirationDate = item.ExpirationDate,
+                                            CreatedDate = item.CreatedDate,
+                                        },
+                                        Tenant = new DTO.Entities.Misc.TenantData.BasicTenantData
+                                        {
+                                            Id = item.TenantId,
+                                            Name = item.TenantName,
+                                            LogoUrl = item.TenantLogoUrl,
+                                            WhiteLogoUrl = "",
+                                            CountryId = item.TenantCountryId,
+                                            CurrencySymbol = item.CurrencySymbol,
+                                            CashbackPercentage = 0,
+                                            CategoryId = item.TenantCategoryId,
+                                            Type = item.TenantType,
+                                            RelevanceStatus = item.TenantRelevanceStatus,
+                                            RelevanceScore = item.TenantScore
+                                        },
+                                        BranchHolder = new BasicBranchHolderData
+                                        {
+                                            Id = item.BranchHolderId ?? Guid.Empty,
+                                            Name = item.BranchHolderName ?? "",
+                                            TenantName = item.TenantHolderName ?? "",
+                                            RelevanceStatus = item.TenantHolderRelevanceStatus ?? -1
                                         },
                                         ExactLocationBased = false
                                     };
@@ -3226,9 +3561,9 @@ namespace YOY.DAO.Entities.Manager
             }
 
             return cashbackIncentives;
-        }*/
+        }
 
-        /*
+        
         /// <summary>
         /// Retrieve cashback incentive flattened data about all the offers that are potencially
         /// available in a given state. At this point there is no certainity that 
@@ -3240,112 +3575,89 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="stateId"></param>
         /// <param name="dateTime"></param>
         /// <returns></returns>
-        private List<FlattenedCashbackIncentiveData> GetCashbackIncentiveDetails(Guid offerId, string userId, DateTime dateTime)
+        private List<FlattenedCashIncentiveData> GetCashIncentiveDisplayContent(Guid offerId, string userId, DateTime dateTime)
         {
-            List<FlattenedCashbackIncentiveData> cashbackIncentives = null;
+            List<FlattenedCashIncentiveData> cashbackIncentives = null;
 
             try
             {
-                var query = from x in this._businessObjects.Context.GetCashbackIncentiveDetailsWithLocations(offerId, userId, dateTime)
+                var query = from x in this._businessObjects.FuncsHandler.GetCashIncentiveDisplayContent(offerId, userId, dateTime)
                             where (x.AvailableQuantity == -1 || x.AvailableQuantity > 0)
                             select x;
 
                 if (query != null)
                 {
-                    FlattenedCashbackIncentiveData incentiveData;
+                    FlattenedCashIncentiveData incentiveData;
 
-                    cashbackIncentives = new List<FlattenedCashbackIncentiveData>();
+                    cashbackIncentives = new List<FlattenedCashIncentiveData>();
 
-                    foreach (TEMPCashbackIncentivesPreferenceBranch item in query)
+                    foreach (TempcashIncentivesDisplayContents item in query)
                     {
                         if (item.AvailableQuantity == -1 || item.AvailableQuantity > 0)
                         {
-                            incentiveData = new FlattenedCashbackIncentiveData
+                            incentiveData = new FlattenedCashIncentiveData
                             {
-                                SelectorType = ContentFilters.Category,
-                                CashbackIncentive = new CashbackIncentive
+                                SelectorType = ContentFilterTypes.None,
+                                CashIncentive = new DisplayCashIncentiveData
                                 {
                                     Id = item.Id,
                                     TenantId = item.TenantId,
+                                    ApplyType = item.ApplyType,
+                                    BenefitAmountType = item.BenefitAmountType,
+                                    DisplayType = item.DisplayType,
                                     Type = item.Type,
-                                    TypeName = GetTypeName(item.Type),
-                                    EarningType = item.EarningType,
-                                    EarningTypeName = GetEarningTypeName(item.EarningType),
                                     DealType = item.DealType,
-                                    DealTypeName = GetDealTypeName(item.DealType),
-                                    CombineType = item.CombineType,
-                                    CombineTypeName = GetCombineTypeName(item.CombineType),
+                                    MaxCombinedIncentives = item.MaxCombinedIncentives,
+                                    MainHint = item.MainHint,
+                                    ComplementaryHint = item.ComplementaryHint,
                                     UnitValue = item.UnitValue,
                                     PreviousUnitValue = item.PreviousUnitValue,
+                                    MinMembershipLevel = item.MinMembershipLevel,
                                     MinPurchasedAmount = item.MinPurchasedAmount,
                                     PurchasedAmountBlock = item.PurchasedAmountBlock,
                                     MaxValue = item.MaxValue,
                                     AvailableQuantity = item.AvailableQuantity,
                                     Name = item.Name,
                                     Description = item.Description,
-                                    RegexToMatchInReceipt = item.RegexToMatchInReceipt,
                                     Keywords = item.Keywords,
-                                    RequiresReferenceCode = item.RequiresReferenceCode,
-                                    IsActive = item.IsActive,
                                     IsSponsored = item.IsSponsored,
-                                    CreationDate = item.CreationDate,
-                                    ReleaseDate = item.ReleaseDate,
-                                    ExpirationDate = item.ExpirationDate,
+                                    IsActive = item.IsActive,
                                     ValidWeekDays = item.ValidWeekDays,
                                     ValidMonthDays = item.ValidMonthDays,
                                     ValidHours = item.ValidHours,
                                     MaxUsagePerUser = item.MaxUsagesPerUser,
+                                    PurchasesCountStartDate = item.PurchasesCountStartDate,
+                                    MinPurchasesCountToUse = item.MinPurchasesCountToUse,
+                                    MinPurchasedTotalAmount = item.MinPurchasedTotalAmount,
                                     UsageCount = item.UsageCount,
                                     RelevanceRate = item.RelevanceRate,
                                     GeoSegmentationType = item.GeoSegmentationType,
-                                    GeoSegmentationTypeName = GetGeoSegmentationTypeName(item.GeoSegmentationType),
                                     Rules = item.Rules ?? Resources.NoRulesAvailable,
                                     Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
-                                    ClaimInstructions = item.ClaimInstructions ?? Resources.DefaultIncentiveClaimInstructions,
-                                    OneTimeUsagePerUser = item.OneTimeUsagePerUser,
-                                    MinPurchasesCountToUse = item.MinPurchasesCountToUse,
-                                    MinPurchasesHoursTimeoutToUse = item.MinPurchasesHoursTimeoutToUse,
-                                    MaxPurchasesDaysTimeoutToUse = item.MaxPurchasesDaysTimeoutToUse,
-                                    CommissionFeeType = item.CommissionFeeType,
-                                    CommissionFeeTypeName = GetCommissionTypeName(item.CommissionFeeType),
-                                    CommissionFeeValue = item.CommissionFeeValue,
-                                    MinCommissionFeeAmount = item.MinCommissionFeeAmount
+                                    ReleaseDate = item.ReleaseDate,
+                                    ExpirationDate = item.ExpirationDate,
+                                    CreatedDate = item.CreatedDate,
                                 },
                                 Tenant = new DTO.Entities.Misc.TenantData.BasicTenantData
                                 {
                                     Id = item.TenantId,
                                     Name = item.TenantName,
-                                    Logo = item.TenantLogo,
+                                    LogoUrl = item.TenantLogoUrl,
+                                    WhiteLogoUrl = "",
                                     CountryId = item.TenantCountryId,
                                     CurrencySymbol = item.CurrencySymbol,
-                                    CategoryId = item.TenantCountryId,
-                                    CategoryName = "",
+                                    CashbackPercentage = 0,
+                                    CategoryId = item.TenantCategoryId,
                                     Type = item.TenantType,
-                                    RelevanceScore = null,//When its selector is category, there is no tenant score
-                                    NearestBranchId = Guid.Empty,
-                                    NearestBranchName = "",
-                                    NearestBranchLatitude = null,
-                                    NearestBranchLongitude = null,
+                                    RelevanceStatus = item.TenantRelevanceStatus,
+                                    RelevanceScore = item.TenantScore
                                 },
-                                Branch = new BasicBranchData
+                                BranchHolder = new BasicBranchHolderData//In this case is irrelevant
                                 {
-                                    Id = item.BranchId,
-                                    Name = item.BranchName,
-                                    InquiriesPhoneNumber = item.BranchInquiriesPhoneNumber,
-                                    DescriptiveAddress = item.BranchDescriptiveAddress,
-                                    Latitude = item.BranchLatitude,
-                                    Longitude = item.BranchLongitude,
-                                    Distance = null,//In this case there is no way to define distance
-                                    CityId = item.BranchCityId,
-                                    StateId = item.BranchStateId,
-                                    Enabled = false
-                                },
-                                Preference = new DTO.Entities.Misc.Preference.BasicPreferenceData
-                                {
-                                    Id = item.PreferenceId,
-                                    Name = item.PreferenceName,
-                                    Icon = item.PreferenceIcon,
-                                    RelevanceScore = item.PreferenceScore
+                                    Id = Guid.Empty,
+                                    Name = "",
+                                    TenantName = "",
+                                    RelevanceStatus = -1
                                 },
                                 ExactLocationBased = false
                             };
@@ -3365,8 +3677,8 @@ namespace YOY.DAO.Entities.Manager
             return cashbackIncentives;
         }
         
-
-        private void BuildFullOfferList(ref List<FullCashbackIncentiveData> offersData, ref List<CashbackIncentiveDataWithBranches> enabledIncentives, bool includeBranchList, bool includeNearestBranch)
+        /*
+        private void BuildFullOfferList(ref List<FullCashIncentiveData> offersData, ref List<CashbackIncentiveDataWithBranches> enabledIncentives, bool includeBranchList, bool includeNearestBranch)
         {
             CashbackIncentiveDataWithBranches currentIncentive;
             List<DTO.Entities.Misc.Structure.POCO.Pair<int, Guid>> enabledLocations = null;
@@ -3471,7 +3783,7 @@ namespace YOY.DAO.Entities.Manager
 
                     if (includeBranchList)
                     {
-                        offersData.Add(new FullCashbackIncentiveData
+                        offersData.Add(new FullCashIncentiveData
                         {
                             SelectorType = currentIncentive.SelectorType,
                             CashbackIncentive = currentIncentive.CashbackIncentive,
@@ -3483,7 +3795,7 @@ namespace YOY.DAO.Entities.Manager
                     }
                     else
                     {
-                        offersData.Add(new FullCashbackIncentiveData
+                        offersData.Add(new FullCashIncentiveData
                         {
                             SelectorType = currentIncentive.SelectorType,
                             CashbackIncentive = currentIncentive.CashbackIncentive,
@@ -3499,7 +3811,7 @@ namespace YOY.DAO.Entities.Manager
             }
         }
 
-        private void BuildFullOfferList(ref List<FullCashbackIncentiveData> offersData, ref List<CashbackIncentiveDataWithBranches> enabledIncentives, bool includeBranchList)
+        private void BuildFullOfferList(ref List<FullCashIncentiveData> offersData, ref List<CashbackIncentiveDataWithBranches> enabledIncentives, bool includeBranchList)
         {
             CashbackIncentiveDataWithBranches currentIncentive;
             List<DTO.Entities.Misc.Structure.POCO.Pair<int, Guid>> enabledLocations = null;
@@ -3607,7 +3919,7 @@ namespace YOY.DAO.Entities.Manager
                     if (locationMatch)
                     {
 
-                        offersData.Add(new FullCashbackIncentiveData
+                        offersData.Add(new FullCashIncentiveData
                         {
                             SelectorType = currentIncentive.SelectorType,
                             CashbackIncentive = currentIncentive.CashbackIncentive,
@@ -3700,7 +4012,7 @@ namespace YOY.DAO.Entities.Manager
                     }
 
 
-                    offersData.Add(new FullCashbackIncentiveData
+                    offersData.Add(new FullCashIncentiveData
                     {
                         SelectorType = currentIncentive.SelectorType,
                         CashbackIncentive = currentIncentive.CashbackIncentive,
@@ -3714,23 +4026,23 @@ namespace YOY.DAO.Entities.Manager
             }
         }
 
-        public List<FullCashbackIncentiveData> GetEnabledCashbackIncentivesByRegionWithLocation(Guid countryId, Guid stateId, int contentSegmentationType, string userId, decimal latitude, decimal longitude, double radius, DateTime dateTime, int selectorType, bool includeBranchList, bool includeNearestBranch)
+        public List<FullCashIncentiveData> GetEnabledCashbackIncentivesByRegionWithLocation(Guid countryId, Guid stateId, int contentSegmentationType, string userId, decimal latitude, decimal longitude, double radius, DateTime dateTime, int selectorType, bool includeBranchList, bool includeNearestBranch)
         {
-            List<FullCashbackIncentiveData> incentivesData = new List<FullCashbackIncentiveData>();
+            List<FullCashIncentiveData> incentivesData = new List<FullCashIncentiveData>();
 
             try
             {
                 //For large countries segmentation is by state, for small ones by country
-                List<FlattenedCashbackIncentiveData> flattenedIncentives = this.GetCashbackIncentivesDataByRegionWithLocation(countryId, stateId, contentSegmentationType, userId, latitude, longitude, radius, dateTime, selectorType);
+                List<FlattenedCashIncentiveData> flattenedIncentives = this.GetCashbackIncentivesDataByRegionWithLocation(countryId, stateId, contentSegmentationType, userId, latitude, longitude, radius, dateTime, selectorType);
 
                 if (flattenedIncentives?.Count > 0)
                 {
                     CashbackIncentiveDataWithBranches currentIncentive;
-                    IEnumerable<IGrouping<Guid, FlattenedCashbackIncentiveData>> groupedByIncentiveId = flattenedIncentives.GroupBy(x => x.CashbackIncentive.Id);
+                    IEnumerable<IGrouping<Guid, FlattenedCashIncentiveData>> groupedByIncentiveId = flattenedIncentives.GroupBy(x => x.CashbackIncentive.Id);
                     List<CashbackIncentiveDataWithBranches> enabledIncentives = new List<CashbackIncentiveDataWithBranches>();
-                    FlattenedCashbackIncentiveData[] incentivesGroup = null;
+                    FlattenedCashIncentiveData[] incentivesGroup = null;
 
-                    foreach (IGrouping<Guid, FlattenedCashbackIncentiveData> incentiveDataGroup in groupedByIncentiveId)
+                    foreach (IGrouping<Guid, FlattenedCashIncentiveData> incentiveDataGroup in groupedByIncentiveId)
                     {
                         incentivesGroup = incentiveDataGroup.ToArray();
 
@@ -3774,23 +4086,23 @@ namespace YOY.DAO.Entities.Manager
 
         }
 
-        public List<FullCashbackIncentiveData> GetEnabledCashbackIncentivesByRegion(Guid stateId, Guid countryId, int contentSegmentationType, string userId, DateTime dateTime, int selectorType, bool includeBranchList)
+        public List<FullCashIncentiveData> GetEnabledCashbackIncentivesByRegion(Guid stateId, Guid countryId, int contentSegmentationType, string userId, DateTime dateTime, int selectorType, bool includeBranchList)
         {
-            List<FullCashbackIncentiveData> incentivesData = new List<FullCashbackIncentiveData>();
+            List<FullCashIncentiveData> incentivesData = new List<FullCashIncentiveData>();
 
             try
             {
                 //For large countries segmentation is by state, for small ones by country
-                List<FlattenedCashbackIncentiveData> flattenedIncentives = this.GetCashbackIncentivesDataByRegion(stateId, countryId, contentSegmentationType, userId, dateTime, selectorType);
+                List<FlattenedCashIncentiveData> flattenedIncentives = this.GetCashbackIncentivesDataByRegion(stateId, countryId, contentSegmentationType, userId, dateTime, selectorType);
 
                 if (flattenedIncentives?.Count > 0)
                 {
                     CashbackIncentiveDataWithBranches currentIncentive;
-                    IEnumerable<IGrouping<Guid, FlattenedCashbackIncentiveData>> groupedByIncentiveId = flattenedIncentives.GroupBy(x => x.CashbackIncentive.Id);
+                    IEnumerable<IGrouping<Guid, FlattenedCashIncentiveData>> groupedByIncentiveId = flattenedIncentives.GroupBy(x => x.CashbackIncentive.Id);
                     List<CashbackIncentiveDataWithBranches> enabledIncentives = new List<CashbackIncentiveDataWithBranches>();
-                    FlattenedCashbackIncentiveData[] incentivesGroup = null;
+                    FlattenedCashIncentiveData[] incentivesGroup = null;
 
-                    foreach (IGrouping<Guid, FlattenedCashbackIncentiveData> incentiveDataGroup in groupedByIncentiveId)
+                    foreach (IGrouping<Guid, FlattenedCashIncentiveData> incentiveDataGroup in groupedByIncentiveId)
                     {
                         incentivesGroup = incentiveDataGroup.ToArray();
 
@@ -3831,22 +4143,22 @@ namespace YOY.DAO.Entities.Manager
 
         }
 
-        public List<FullCashbackIncentiveData> GetEnabledIncentivesByRegionForReference(Guid stateId, Guid countryId, int contentSegmentationType, string userId, DateTime dateTime, int referenceType, Guid referenceId, bool includeBranchList)
+        public List<FullCashIncentiveData> GetEnabledIncentivesByRegionForReference(Guid stateId, Guid countryId, int contentSegmentationType, string userId, DateTime dateTime, int referenceType, Guid referenceId, bool includeBranchList)
         {
-            List<FullCashbackIncentiveData> offersData = new List<FullCashbackIncentiveData>();
+            List<FullCashIncentiveData> offersData = new List<FullCashIncentiveData>();
 
             try
             {
-                List<FlattenedCashbackIncentiveData> flattenedIncentives = null; // this.GetCashbackIncentivesDataByRegionForReference(stateId, countryId, contentSegmentationType, userId, dateTime, referenceType, referenceId);
+                List<FlattenedCashIncentiveData> flattenedIncentives = null; // this.GetCashbackIncentivesDataByRegionForReference(stateId, countryId, contentSegmentationType, userId, dateTime, referenceType, referenceId);
 
                 if (flattenedIncentives?.Count > 0)
                 {
                     CashbackIncentiveDataWithBranches currentIncentive;
-                    IEnumerable<IGrouping<Guid, FlattenedCashbackIncentiveData>> groupedByIncentiveId = flattenedIncentives.GroupBy(x => x.CashbackIncentive.Id);
+                    IEnumerable<IGrouping<Guid, FlattenedCashIncentiveData>> groupedByIncentiveId = flattenedIncentives.GroupBy(x => x.CashbackIncentive.Id);
                     List<CashbackIncentiveDataWithBranches> enabledIncentives = new List<CashbackIncentiveDataWithBranches>();
-                    FlattenedCashbackIncentiveData[] incentivesGroup = null;
+                    FlattenedCashIncentiveData[] incentivesGroup = null;
 
-                    foreach (IGrouping<Guid, FlattenedCashbackIncentiveData> incentiveDataGroup in groupedByIncentiveId)
+                    foreach (IGrouping<Guid, FlattenedCashIncentiveData> incentiveDataGroup in groupedByIncentiveId)
                     {
                         incentivesGroup = incentiveDataGroup.ToArray();
 
@@ -3886,22 +4198,22 @@ namespace YOY.DAO.Entities.Manager
 
         }
 
-        public FullCashbackIncentiveData GetCashbackIncentiveData(Guid id, string userId, bool includeBranchList, int purposeType, DateTime dateTime)
+        public FullCashIncentiveData GetCashbackIncentiveData(Guid id, string userId, bool includeBranchList, int purposeType, DateTime dateTime)
         {
-            FullCashbackIncentiveData cashbackIncentive = null;
+            FullCashIncentiveData cashbackIncentive = null;
 
             try
             {
-                List<FlattenedCashbackIncentiveData> flattenedIncentives = null;// this.GetOfferDetails(id, userId, purposeType, dateTime);
+                List<FlattenedCashIncentiveData> flattenedIncentives = null;// this.GetOfferDetails(id, userId, purposeType, dateTime);
 
                 if (flattenedIncentives?.Count > 0)
                 {
                     CashbackIncentiveDataWithBranches currentIncentive;
-                    IEnumerable<IGrouping<Guid, FlattenedCashbackIncentiveData>> groupedByIncentiveId = flattenedIncentives.GroupBy(x => x.CashbackIncentive.Id);
+                    IEnumerable<IGrouping<Guid, FlattenedCashIncentiveData>> groupedByIncentiveId = flattenedIncentives.GroupBy(x => x.CashbackIncentive.Id);
                     List<CashbackIncentiveDataWithBranches> enabledIncentives = new List<CashbackIncentiveDataWithBranches>();
-                    FlattenedCashbackIncentiveData[] incentivesGroup = null;
+                    FlattenedCashIncentiveData[] incentivesGroup = null;
 
-                    foreach (IGrouping<Guid, FlattenedCashbackIncentiveData> offerDataGroup in groupedByIncentiveId)
+                    foreach (IGrouping<Guid, FlattenedCashIncentiveData> offerDataGroup in groupedByIncentiveId)
                     {
                         incentivesGroup = offerDataGroup.ToArray();
 
@@ -3924,7 +4236,7 @@ namespace YOY.DAO.Entities.Manager
 
                     //At this point the offers have all the branches where it can be enabled, now it's time to verify in which branches
                     //each offer can be actually enabled
-                    List<FullCashbackIncentiveData> incentivesData = new List<FullCashbackIncentiveData>();
+                    List<FullCashIncentiveData> incentivesData = new List<FullCashIncentiveData>();
 
                     this.BuildFullOfferList(ref incentivesData, ref enabledIncentives, includeBranchList);
 
@@ -3944,10 +4256,10 @@ namespace YOY.DAO.Entities.Manager
 
             return cashbackIncentive;
         }
-
+        */
 
         #endregion
-        */
+        
 
         #region INCENTIVE METRICS
 

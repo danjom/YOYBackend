@@ -37,7 +37,9 @@ namespace YOY.DAO.Entities.DB
         public string ValidMonthDays { get; set; }
         public string ValidHours { get; set; }
         public int MaxUsagesPerUser { get; set; }
+        public DateTime? PurchasesCountStartDate { get; set; }
         public int MinPurchasesCountToUse { get; set; }
+        public decimal MinPurchasedTotalAmount { get; set; }
         public int UsageCount { get; set; }
         public int GeoSegmentationType { get; set; }
         public string Rules { get; set; }

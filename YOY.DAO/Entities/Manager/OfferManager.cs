@@ -4553,7 +4553,7 @@ namespace YOY.DAO.Entities.Manager
                                     offer = new FlattenedOfferData
                                     {
                                         SelectorType = selectorType,
-                                        Offer = new BasicOfferData
+                                        Offer = new DisplayOfferData
                                         {
                                             Id = item.Id,
                                             TenantId = item.TenantId,
@@ -4581,7 +4581,7 @@ namespace YOY.DAO.Entities.Manager
                                             AvailableQuantity = item.AvailableQuantity,
                                             OneTimeRedemption = item.OneTimeRedemption,
                                             MaxClaimsPerUser = item.MaxClaimsPerUser,
-                                            MinPurchasesCountToRedeem  = item.MinPurchasesCountToRedeem,
+                                            MinPurchasesCountToRedeem = item.MinPurchasesCountToRedeem,
                                             PurchasesCountStartDate = item.PurchasesCountStartDate,
                                             ClaimCount = item.ClaimCount,
                                             ClaimLocation = item.ClaimLocation,
@@ -4608,7 +4608,7 @@ namespace YOY.DAO.Entities.Manager
                                             Type = item.TenantType,
                                             CategoryId = item.TenantCategoryId,
                                             RelevanceScore = null,//When its selector is category, there is no info about tenant relevance
-                                            
+
                                         },
                                         Preference = new DTO.Entities.Misc.InterestPreference.BasicUserPreferenceData
                                         {
@@ -4616,6 +4616,13 @@ namespace YOY.DAO.Entities.Manager
                                             Name = item.PreferenceName,
                                             Icon = item.PreferenceIcon,
                                             RelevanceScore = item.PreferenceScore
+                                        },
+                                        BranchHolder = new BasicBranchHolderData//In this case is irrelevant
+                                        {
+                                            Id = Guid.Empty,
+                                            Name = "",
+                                            TenantName = "",
+                                            RelevanceStatus = -1
                                         },
                                         ExactLocationBased = true
                                     };
@@ -4654,7 +4661,7 @@ namespace YOY.DAO.Entities.Manager
                                     offer = new FlattenedOfferData
                                     {
                                         SelectorType = selectorType,
-                                        Offer = new BasicOfferData
+                                        Offer = new DisplayOfferData
                                         {
                                             Id = item.Id,
                                             TenantId = item.TenantId,
@@ -4717,6 +4724,13 @@ namespace YOY.DAO.Entities.Manager
                                             Name = "",
                                             Icon = "",
                                             RelevanceScore = -1
+                                        },
+                                        BranchHolder = new BasicBranchHolderData//In this case is irrelevant
+                                        {
+                                            Id = Guid.Empty,
+                                            Name = "",
+                                            TenantName = "",
+                                            RelevanceStatus = -1
                                         },
                                         ExactLocationBased = true
                                     };
@@ -4756,7 +4770,7 @@ namespace YOY.DAO.Entities.Manager
                                     offer = new FlattenedOfferData
                                     {
                                         SelectorType = selectorType,
-                                        Offer = new BasicOfferData
+                                        Offer = new DisplayOfferData
                                         {
                                             Id = item.Id,
                                             TenantId = item.TenantId,
@@ -4819,6 +4833,13 @@ namespace YOY.DAO.Entities.Manager
                                             Name = "",
                                             Icon = "",
                                             RelevanceScore = -1
+                                        },
+                                        BranchHolder = new BasicBranchHolderData
+                                        {
+                                            Id = item.BranchHolderId ?? Guid.Empty,
+                                            Name = item.BranchHolderName ?? "",
+                                            TenantName = item.TenantHolderName ?? "",
+                                            RelevanceStatus = item.TenantHolderRelevanceStatus ?? -1
                                         },
                                         ExactLocationBased = true
                                     };
@@ -4893,7 +4914,7 @@ namespace YOY.DAO.Entities.Manager
                                     offer = new FlattenedOfferData
                                     {
                                         SelectorType = selectorType,
-                                        Offer = new BasicOfferData
+                                        Offer = new DisplayOfferData
                                         {
                                             Id = item.Id,
                                             TenantId = item.TenantId,
@@ -4956,6 +4977,13 @@ namespace YOY.DAO.Entities.Manager
                                             Icon = item.PreferenceIcon,
                                             RelevanceScore = item.PreferenceScore
                                         },
+                                        BranchHolder = new BasicBranchHolderData//In this case is irrelevant
+                                        {
+                                            Id = Guid.Empty,
+                                            Name = "",
+                                            TenantName = "",
+                                            RelevanceStatus = -1
+                                        },
                                         ExactLocationBased = false
                                     };
 
@@ -4993,7 +5021,7 @@ namespace YOY.DAO.Entities.Manager
                                     offer = new FlattenedOfferData
                                     {
                                         SelectorType = selectorType,
-                                        Offer = new BasicOfferData
+                                        Offer = new DisplayOfferData
                                         {
                                             Id = item.Id,
                                             TenantId = item.TenantId,
@@ -5056,6 +5084,13 @@ namespace YOY.DAO.Entities.Manager
                                             Name = "",
                                             Icon = "",
                                             RelevanceScore = -1
+                                        },
+                                        BranchHolder = new BasicBranchHolderData//In this case is irrelevant
+                                        {
+                                            Id = Guid.Empty,
+                                            Name = "",
+                                            TenantName = "",
+                                            RelevanceStatus = -1
                                         },
                                         ExactLocationBased = false
                                     };
@@ -5095,7 +5130,7 @@ namespace YOY.DAO.Entities.Manager
                                     offer = new FlattenedOfferData
                                     {
                                         SelectorType = selectorType,
-                                        Offer = new BasicOfferData
+                                        Offer = new DisplayOfferData
                                         {
                                             Id = item.Id,
                                             TenantId = item.TenantId,
@@ -5158,6 +5193,13 @@ namespace YOY.DAO.Entities.Manager
                                             Name = "",
                                             Icon = "",
                                             RelevanceScore = -1
+                                        },
+                                        BranchHolder = new BasicBranchHolderData
+                                        {
+                                            Id = item.BranchHolderId ?? Guid.Empty,
+                                            Name = item.BranchHolderName ?? "",
+                                            TenantName = item.TenantHolderName ?? "",
+                                            RelevanceStatus = item.TenantHolderRelevanceStatus ?? -1
                                         },
                                         ExactLocationBased = false
                                     };
@@ -5232,7 +5274,7 @@ namespace YOY.DAO.Entities.Manager
                                     offer = new FlattenedOfferData
                                     {
                                         SelectorType = referenceType,
-                                        Offer = new BasicOfferData
+                                        Offer = new DisplayOfferData
                                         {
                                             Id = item.Id,
                                             TenantId = item.TenantId,
@@ -5295,6 +5337,13 @@ namespace YOY.DAO.Entities.Manager
                                             Icon = item.PreferenceIcon,
                                             RelevanceScore = item.PreferenceScore
                                         },
+                                        BranchHolder = new BasicBranchHolderData//In this case is irrelevant
+                                        {
+                                            Id = Guid.Empty,
+                                            Name = "",
+                                            TenantName = "",
+                                            RelevanceStatus = -1
+                                        },
                                         ExactLocationBased = false
                                     };
 
@@ -5332,7 +5381,7 @@ namespace YOY.DAO.Entities.Manager
                                     offer = new FlattenedOfferData
                                     {
                                         SelectorType = referenceType,
-                                        Offer = new BasicOfferData
+                                        Offer = new DisplayOfferData
                                         {
                                             Id = item.Id,
                                             TenantId = item.TenantId,
@@ -5395,6 +5444,13 @@ namespace YOY.DAO.Entities.Manager
                                             Name = "",
                                             Icon = "",
                                             RelevanceScore = -1
+                                        },
+                                        BranchHolder = new BasicBranchHolderData//In this case is irrelevant
+                                        {
+                                            Id = Guid.Empty,
+                                            Name = "",
+                                            TenantName = "",
+                                            RelevanceStatus = -1
                                         },
                                         ExactLocationBased = false
                                     };
@@ -5433,7 +5489,7 @@ namespace YOY.DAO.Entities.Manager
                                     offer = new FlattenedOfferData
                                     {
                                         SelectorType = referenceType,
-                                        Offer = new BasicOfferData
+                                        Offer = new DisplayOfferData
                                         {
                                             Id = item.Id,
                                             TenantId = item.TenantId,
@@ -5497,6 +5553,13 @@ namespace YOY.DAO.Entities.Manager
                                             Icon = "",
                                             RelevanceScore = -1
                                         },
+                                        BranchHolder = new BasicBranchHolderData
+                                        {
+                                            Id = item.BranchHolderId ?? Guid.Empty,
+                                            Name = item.BranchHolderName ?? "",
+                                            TenantName = item.TenantHolderName ?? "",
+                                            RelevanceStatus = item.TenantHolderRelevanceStatus ?? -1
+                                        },
                                         ExactLocationBased = false
                                     };
 
@@ -5531,7 +5594,7 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="stateId"></param>
         /// <param name="dateTime"></param>
         /// <returns></returns>
-        private List<FlattenedOfferData> GetOfferDetails(Guid offerId, string userId, int offerPurpose, DateTime dateTime)
+        private List<FlattenedOfferData> GetOfferDisplayContent(Guid offerId, string userId, int offerPurpose, DateTime dateTime)
         {
             List<FlattenedOfferData> offers = null;
 
@@ -5553,8 +5616,8 @@ namespace YOY.DAO.Entities.Manager
                         {
                             offer = new FlattenedOfferData
                             {
-                                SelectorType = ContentFilterTypes.Category,
-                                Offer = new BasicOfferData
+                                SelectorType = ContentFilterTypes.None,
+                                Offer = new DisplayOfferData
                                 {
                                     Id = item.Id,
                                     TenantId = item.TenantId,
@@ -5616,6 +5679,13 @@ namespace YOY.DAO.Entities.Manager
                                     Name = item.PreferenceName,
                                     Icon = item.PreferenceIcon,
                                     RelevanceScore = item.PreferenceScore
+                                },
+                                BranchHolder = new BasicBranchHolderData//In this case is irrelevant
+                                {
+                                    Id = Guid.Empty,
+                                    Name = "",
+                                    TenantName = "",
+                                    RelevanceStatus = -1
                                 },
                                 ExactLocationBased = false
                             };

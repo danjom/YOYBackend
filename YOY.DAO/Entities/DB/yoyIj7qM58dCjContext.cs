@@ -3696,6 +3696,8 @@ namespace YOY.DAO.Entities.DB
 
                 entity.Property(e => e.MinPurchasedAmount).HasColumnType("decimal(19, 2)");
 
+                entity.Property(e => e.MinPurchasedTotalAmount).HasColumnType("decimal(19, 2)");
+
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(60)
@@ -3704,6 +3706,8 @@ namespace YOY.DAO.Entities.DB
                 entity.Property(e => e.PreviousUnitValue).HasColumnType("decimal(19, 2)");
 
                 entity.Property(e => e.PurchasedAmountBlock).HasColumnType("decimal(19, 2)");
+
+                entity.Property(e => e.PurchasesCountStartDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ReleaseDate).HasColumnType("datetime");
 
@@ -7792,6 +7796,10 @@ namespace YOY.DAO.Entities.DB
 
                 entity.ToTable("TEMPCashIncentivesDisplayContents");
 
+                entity.Property(e => e.BranchHolderName)
+                    .HasMaxLength(60)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.ComplementaryHint)
                     .IsRequired()
                     .HasMaxLength(22)
@@ -7829,6 +7837,8 @@ namespace YOY.DAO.Entities.DB
 
                 entity.Property(e => e.MinPurchasedAmount).HasColumnType("decimal(19, 2)");
 
+                entity.Property(e => e.MinPurchasedTotalAmount).HasColumnType("decimal(19, 2)");
+
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(60)
@@ -7838,10 +7848,16 @@ namespace YOY.DAO.Entities.DB
 
                 entity.Property(e => e.PurchasedAmountBlock).HasColumnType("decimal(19, 2)");
 
+                entity.Property(e => e.PurchasesCountStartDate).HasColumnType("datetime");
+
                 entity.Property(e => e.ReleaseDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Rules)
                     .HasMaxLength(1024)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TenantHolderName)
+                    .HasMaxLength(60)
                     .IsUnicode(false);
 
                 entity.Property(e => e.TenantLogoUrl)
@@ -7851,7 +7867,7 @@ namespace YOY.DAO.Entities.DB
 
                 entity.Property(e => e.TenantName)
                     .IsRequired()
-                    .HasMaxLength(50)
+                    .HasMaxLength(60)
                     .IsUnicode(false);
 
                 entity.Property(e => e.TenantScore).HasColumnType("decimal(16, 3)");
@@ -8314,6 +8330,10 @@ namespace YOY.DAO.Entities.DB
 
                 entity.ToTable("TEMPOfferDisplayContents");
 
+                entity.Property(e => e.BranchHolderName)
+                    .HasMaxLength(60)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.ClaimInstructions)
                     .HasMaxLength(2000)
                     .IsUnicode(false);
@@ -8390,6 +8410,10 @@ namespace YOY.DAO.Entities.DB
                     .HasMaxLength(512)
                     .IsUnicode(false);
 
+                entity.Property(e => e.TenantHolderName)
+                    .HasMaxLength(60)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.TenantLogoUrl)
                     .IsRequired()
                     .HasMaxLength(512)
@@ -8397,7 +8421,7 @@ namespace YOY.DAO.Entities.DB
 
                 entity.Property(e => e.TenantName)
                     .IsRequired()
-                    .HasMaxLength(50)
+                    .HasMaxLength(60)
                     .IsUnicode(false);
 
                 entity.Property(e => e.TenantScore).HasColumnType("decimal(16, 3)");

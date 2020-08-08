@@ -31,7 +31,9 @@ namespace YOY.DAO.Entities.DB
         public string ValidMonthDays { get; set; }
         public string ValidHours { get; set; }
         public int MaxUsagesPerUser { get; set; }
+        public DateTime? PurchasesCountStartDate { get; set; }
         public int MinPurchasesCountToUse { get; set; }
+        public decimal MinPurchasedTotalAmount { get; set; }
         public int UsageCount { get; set; }
         public double RelevanceRate { get; set; }
         public int GeoSegmentationType { get; set; }
@@ -48,5 +50,9 @@ namespace YOY.DAO.Entities.DB
         public int TenantRelevanceStatus { get; set; }
         public string CurrencySymbol { get; set; }
         public decimal? TenantScore { get; set; }
+        public Guid? BranchHolderId { get; set; }
+        public string TenantHolderName { get; set; }
+        public string BranchHolderName { get; set; }
+        public int? TenantHolderRelevanceStatus { get; set; }
     }
 }

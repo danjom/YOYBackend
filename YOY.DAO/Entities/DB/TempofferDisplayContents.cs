@@ -59,5 +59,9 @@ namespace YOY.DAO.Entities.DB
         public string PreferenceName { get; set; }
         public string PreferenceIcon { get; set; }
         public decimal? PreferenceScore { get; set; }
+        public Guid? BranchHolderId { get; set; }
+        public string TenantHolderName { get; set; }
+        public string BranchHolderName { get; set; }
+        public int? TenantHolderRelevanceStatus { get; set; }
     }
 }
