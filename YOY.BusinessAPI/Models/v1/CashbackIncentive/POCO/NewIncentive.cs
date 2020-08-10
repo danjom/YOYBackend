@@ -56,6 +56,12 @@ namespace YOY.BusinessAPI.Models.v1.CashbackIncentive.POCO
         public int AvailableQuantity { set; get; }
         [NotNull]
         [Required]
+        public string MainHint { set; get; }
+        [NotNull]
+        [Required]
+        public string ComplementaryHint { set; get; }
+        [NotNull]
+        [Required]
         public string Name { set; get; }
         [NotNull]
         [Required]
@@ -78,9 +84,14 @@ namespace YOY.BusinessAPI.Models.v1.CashbackIncentive.POCO
         [NotNull]
         [Required]
         public int MaxUsagePerUser { set; get; }
+        [AllowNull]
+        public DateTime? PurchasesCountStartDate { set; get; }
         [NotNull]
         [Required]
         public int MinPurchaseCountToUse { set; get; }
+        [NotNull]
+        [Required]
+        public decimal MinPurchasedTotalAmount { set; get; }
         [AllowNull]
         public int? RelevanceRate { set; get; }
         [NotNull]

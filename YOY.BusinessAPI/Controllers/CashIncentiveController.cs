@@ -580,9 +580,9 @@ namespace YOY.BusinessAPI.Controllers
 
 
                                 CashIncentive newIncentive = this._businessObjects.CashIncentives.Post(model.Type, DisplayTypes.BroadcastingAndListings, model.ApplyType, model.BenefitAmountType, model.DealType, model.MaxCombinedIncentives,
-                                    model.UnitValue, model.PreviousUnitValue, model.MinMembershipLevel, model.MinPurchasedAmount, model.PurchasedAmountBlock, model.MaxValue, model.AvailableQuantity, model.Name, model.Description, model.Keywords,
-                                    model.IsSponsored, model.ValidWeekDays, validMonthDays, validHours, model.MaxUsagePerUser, model.MinPurchaseCountToUse, GeoSegmentationTypes.Country, tenantInfo.IncentiveRules, tenantInfo.IncentiveConditions,
-                                    model.RelevanceRate ?? 1, model.ReleaseDate, model.ExpirationDate);
+                                    model.UnitValue, model.PreviousUnitValue, model.MinMembershipLevel, model.MinPurchasedAmount, model.PurchasedAmountBlock, model.MaxValue, model.AvailableQuantity, model.Name, model.MainHint, model.ComplementaryHint,
+                                    model.Description, model.Keywords, model.IsSponsored, model.ValidWeekDays, validMonthDays, validHours, model.MaxUsagePerUser, model.PurchasesCountStartDate, model.MinPurchaseCountToUse, model.MinPurchasedTotalAmount,
+                                    GeoSegmentationTypes.Country, tenantInfo.IncentiveRules, tenantInfo.IncentiveConditions, model.RelevanceRate ?? 1, model.ReleaseDate, model.ExpirationDate);
 
 
 
@@ -889,9 +889,9 @@ namespace YOY.BusinessAPI.Controllers
                                     double relevanceRate = model.RelevanceRate ?? -1;
 
                                     CashIncentive updatedIncentive = this._businessObjects.CashIncentives.Put(model.Id, model.Type, DisplayTypes.BroadcastingAndListings, model.ApplyType, model.BenefitAmountType, model.DealType, model.MaxCombinedIncentives,
-                                    model.UnitValue, model.PreviousUnitValue, model.MinMembershipLevel, model.MinPurchasedAmount, model.PurchasedAmountBlock, model.MaxValue, model.AvailableQuantity, model.Name, model.Description, model.Keywords,
-                                    model.IsSponsored, model.ValidWeekDays, validMonthDays, validHours, model.MaxUsagePerUser, model.MinPurchaseCountToUse, GeoSegmentationTypes.Country, tenantInfo.IncentiveRules, tenantInfo.IncentiveConditions,
-                                    model.RelevanceRate ?? 1, model.ReleaseDate, model.ExpirationDate);
+                                    model.UnitValue, model.PreviousUnitValue, model.MinMembershipLevel, model.MinPurchasedAmount, model.PurchasedAmountBlock, model.MaxValue, model.AvailableQuantity, model.Name, model.MainHint, model.ComplementaryHint, model.Description, model.Keywords,
+                                    model.IsSponsored, model.ValidWeekDays, validMonthDays, validHours, model.MaxUsagePerUser, model.PurchasesCountStartDate, model.MinPurchaseCountToUse, model.MinPurchasedTotalAmount, GeoSegmentationTypes.Country, tenantInfo.IncentiveRules, 
+                                    tenantInfo.IncentiveConditions, model.RelevanceRate ?? 1, model.ReleaseDate, model.ExpirationDate);
 
 
 
