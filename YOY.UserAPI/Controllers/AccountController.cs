@@ -1460,49 +1460,32 @@ namespace YOY.UserAPI.Controllers
                     if (await _userManager.CheckPasswordAsync(u, model.CurrentPassword))
                     {
 
-                        if (model.NewPassword.CompareTo(model.ConfirmNewPassword) == 0)
+                        //Removes all password
+                        updateUserResult = await _userManager.RemovePasswordAsync(u);
+
+                        if (updateUserResult.Succeeded)
                         {
-                            //Removes all password
-                            updateUserResult = await _userManager.RemovePasswordAsync(u);
+                            //Removed Password Success, sets the new password
+                            updateUserResult = await _userManager.AddPasswordAsync(u, model.NewPassword);
 
                             if (updateUserResult.Succeeded)
                             {
-                                //Removed Password Success, sets the new password
-                                updateUserResult = await _userManager.AddPasswordAsync(u, model.NewPassword);
-
-                                if (updateUserResult.Succeeded)
+                                result = Ok(new BasicResponse
                                 {
-                                    result = Ok(new BasicResponse
-                                    {
-                                        StatusCode = Values.StatusCodes.Ok,
-                                        CustomAction = UserappErrorCustomActions.None,
-                                        DisplayMsgToUser = false,
-                                        DevError = "",
-                                        MsgTitle = "",
-                                        MsgContent = ""
-                                    });
-                                }
-                                else
-                                {
-                                    result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
-                                }
+                                    StatusCode = Values.StatusCodes.Ok,
+                                    CustomAction = UserappErrorCustomActions.None,
+                                    DisplayMsgToUser = false,
+                                    DevError = "",
+                                    MsgTitle = "",
+                                    MsgContent = ""
+                                });
+                            }
+                            else
+                            {
+                                result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
                             }
                         }
-                        else
-                        {
-                            errorMsg = "ERROR: New password doesn't match its confirmation ";
-                            result = new BadRequestObjectResult(
-                                new BasicResponse
-                                {
-                                    StatusCode = Values.StatusCodes.BadRequest,
-                                    CustomAction = UserappErrorCustomActions.None,
-                                    DisplayMsgToUser = true,
-                                    DevError = _localizer["PasswordMismatch"].Value,
-                                    MsgContent = _localizer["PasswordMistach"].Value,
-                                    MsgTitle = _localizer["PasswordMistachTitle"].Value,
-                                });
-                        }
-                            
+
 
                     }
                     else

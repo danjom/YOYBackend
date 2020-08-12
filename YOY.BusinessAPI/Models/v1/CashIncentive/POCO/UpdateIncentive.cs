@@ -5,9 +5,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace YOY.BusinessAPI.Models.v1.CashbackIncentive.POCO
+namespace YOY.BusinessAPI.Models.v1.CashIncentive.POCO
 {
-    public class NewIncentive
+    public class UpdateIncentive
     {
         [NotNull]
         [Required]
@@ -18,6 +18,9 @@ namespace YOY.BusinessAPI.Models.v1.CashbackIncentive.POCO
         [NotNull]
         [Required]
         public string UserId { set; get; }
+        [NotNull]
+        [Required]
+        public Guid Id { set; get; }
         [NotNull]
         [Required]
         public int ApplyType { set; get; }
@@ -35,22 +38,19 @@ namespace YOY.BusinessAPI.Models.v1.CashbackIncentive.POCO
         public int MaxCombinedIncentives { set; get; }
         [NotNull]
         [Required]
-        public decimal UnitValue { set; get; }
+        public string UnitValue { set; get; }
         [NotNull]
         [Required]
-        public decimal PreviousUnitValue { set; get; }
+        public string PreviousUnitValue { set; get; }
         [NotNull]
         [Required]
         public int MinMembershipLevel { set; get; }
         [NotNull]
         [Required]
-        public decimal MinPurchasedAmount { set; get; }
+        public string MinPurchasedAmount { set; get; }
         [NotNull]
         [Required]
-        public decimal PurchasedAmountBlock { set; get; }
-        [NotNull]
-        [Required]
-        public decimal MaxValue { set; get; }
+        public string PurchasedAmountBlock { set; get; }
         [NotNull]
         [Required]
         public int AvailableQuantity { set; get; }
@@ -74,7 +74,7 @@ namespace YOY.BusinessAPI.Models.v1.CashbackIncentive.POCO
         public bool IsSponsored { set; get; }
         [NotNull]
         [Required]
-        public string ValidWeekDays { set; get; }
+        public List<string> ValidWeekDays { set; get; }
         [NotNull]
         [Required]
         public List<string> ValidMonthDays { set; get; }
@@ -91,15 +91,14 @@ namespace YOY.BusinessAPI.Models.v1.CashbackIncentive.POCO
         public int MinPurchaseCountToUse { set; get; }
         [NotNull]
         [Required]
-        public decimal MinPurchasedTotalAmount { set; get; }
+        public string MinPurchasedTotalAmount { set; get; }
         [AllowNull]
-        public int? RelevanceRate { set; get; }
+        public string RelevanceRate { set; get; }
         [NotNull]
         [Required]
         public DateTime ReleaseDate { set; get; }
         [NotNull]
         [Required]
         public DateTime ExpirationDate { set; get; }
-
     }
 }

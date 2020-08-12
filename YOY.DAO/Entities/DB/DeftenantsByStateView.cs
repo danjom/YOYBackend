@@ -22,10 +22,7 @@ namespace YOY.DAO.Entities.DB
         public string CurrencySymbol { get; set; }
         public int CurrencyType { get; set; }
         public bool HasMembershipLevels { get; set; }
-        public int LoyaltyProgramType { get; set; }
-        public bool AcceptsCommunityPointsAsPayment { get; set; }
-        public bool AcceptsSelfPointsAsPayment { get; set; }
-        public int CheckInType { get; set; }
+        public bool AcceptsPay { get; set; }
         public string ContactPhone { get; set; }
         public Guid CategoryId { get; set; }
         public int RelevanceStatus { get; set; }

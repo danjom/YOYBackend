@@ -92,8 +92,8 @@ namespace YOY.UserAPI.Controllers
             {
                 // Invalid token
                 //Registers the invalid call
-                this._businessObjects.HttpcallInvokationLogs.Post(accessToken, this.GetType().Name, callId, controllerVersion,
-                                    Values.StatusCodes.InternalServerError, 0, accessToken, 0, 0, false, null, HttpcallTypes.Post, "Google user validatio failed: " + e.InnerException != null ? e.InnerException.Message : e.Message);
+                this._businessObjects.HttpcallInvokationLogs.Post("", this.GetType().Name, callId, controllerVersion,
+                                    Values.StatusCodes.InternalServerError, 0, accessToken, 0, 0, false, null, HttpcallTypes.Post, "Google user validatio failed: " + e.Message);
             }
 
             return googleUser;

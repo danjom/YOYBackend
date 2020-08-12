@@ -428,18 +428,11 @@ namespace YOY.DAO.Entities.Manager
                                         CampaignDefaultTitleMsg = tenant.CampaignDefaultTitleMsg,
                                         CampaignDefaultContentMsg = tenant.CampaignDefaultContentMsg,
                                         HasMembershipLevels = tenant.HasMembershipLevels,
-                                        LoyaltyProgramType = tenant.LoyaltyProgramType,
-                                        LoyaltyProgramTypeName = this.GetLoyaltyProgramTypeName(tenant.LoyaltyProgramType),
-                                        AcceptsCommunityPointsAsPayment = tenant.AcceptsCommunityPointsAsPayment,
-                                        AcceptsSelfPointsAsPayment = tenant.AcceptsSelfPointsAsPayment,
-                                        CheckInType = tenant.CheckInType,
-                                        CheckInTypeName = this.GetCheckInTypeName(tenant.CheckInType),
+                                        AcceptsPay = tenant.AcceptsPay,
                                         ReferenceCodeType = tenant.ReferenceCodeType,
                                         ReferenceCodeTypeName = this.GetReferenceCodeTypeName(tenant.ReferenceCodeType),
                                         DefaultCommissionFeePercentage = tenant.DefaultCommissionFeePercentage,
-                                        ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage,
-                                        DealClaimMethod = tenant.DealsClaimMethod,
-                                        DealClaimMethodName = this.GetClaimMethodName(tenant.DealsClaimMethod),
+                                        ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage
                                     };
 
                                     tenants.Add(currentTenant);
@@ -483,18 +476,14 @@ namespace YOY.DAO.Entities.Manager
                                         BusinessStructureType = tenant.BusinessStructureType,
                                         PayerType = tenant.PayerType,
                                         HasMembershipLevels = tenant.HasMembershipLevels,
-                                        LoyaltyProgramType = tenant.LoyaltyProgramType,
                                         Language = tenant.Language,
                                         Released = tenant.Released,
                                         CampaignDefaultTitleMsg = tenant.CampaignDefaultTitleMsg,
                                         CampaignDefaultContentMsg = tenant.CampaignDefaultContentMsg,
-                                        AcceptsCommunityPointsAsPayment = tenant.AcceptsCommunityPointsAsPayment,
-                                        AcceptsSelfPointsAsPayment = tenant.AcceptsSelfPointsAsPayment,
-                                        CheckInType = tenant.CheckInType,
+                                        AcceptsPay = tenant.AcceptsPay,
                                         ReferenceCodeType = tenant.ReferenceCodeType,
                                         DefaultCommissionFeePercentage = tenant.DefaultCommissionFeePercentage,
-                                        ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage,
-                                        DealClaimMethod = tenant.DealsClaimMethod
+                                        ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage
                                     };
 
                                     tenants.Add(currentTenantMin);
@@ -786,18 +775,14 @@ namespace YOY.DAO.Entities.Manager
                             BusinessStructureType = tenant.BusinessStructureType,
                             PayerType = tenant.PayerType,
                             HasMembershipLevels = tenant.HasMembershipLevels,
-                            LoyaltyProgramType = tenant.LoyaltyProgramType,
                             Language = tenant.Language,
                             Released = tenant.Released,
                             CampaignDefaultTitleMsg = tenant.CampaignDefaultTitleMsg,
                             CampaignDefaultContentMsg = tenant.CampaignDefaultContentMsg,
-                            AcceptsCommunityPointsAsPayment = tenant.AcceptsCommunityPointsAsPayment,
-                            AcceptsSelfPointsAsPayment = tenant.AcceptsSelfPointsAsPayment,
-                            CheckInType = tenant.CheckInType,
+                            AcceptsPay = tenant.AcceptsPay,
                             ReferenceCodeType = tenant.ReferenceCodeType,
                             DefaultCommissionFeePercentage = tenant.DefaultCommissionFeePercentage,
-                            ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage,
-                            DealClaimMethod = tenant.DealsClaimMethod
+                            ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage
                         };
 
                         tenants.Add(currentTenant);
@@ -882,18 +867,14 @@ namespace YOY.DAO.Entities.Manager
                             BusinessStructureType = tenant.BusinessStructureType,
                             PayerType = tenant.PayerType,
                             HasMembershipLevels = tenant.HasMembershipLevels,
-                            LoyaltyProgramType = tenant.LoyaltyProgramType,
                             Language = tenant.Language,
                             Released = tenant.Released,
                             CampaignDefaultTitleMsg = tenant.CampaignDefaultTitleMsg,
                             CampaignDefaultContentMsg = tenant.CampaignDefaultContentMsg,
-                            AcceptsCommunityPointsAsPayment = tenant.AcceptsCommunityPointsAsPayment,
-                            AcceptsSelfPointsAsPayment = tenant.AcceptsSelfPointsAsPayment,
-                            CheckInType = tenant.CheckInType,
+                            AcceptsPay = tenant.AcceptsPay,
                             ReferenceCodeType = tenant.ReferenceCodeType,
                             DefaultCommissionFeePercentage = tenant.DefaultCommissionFeePercentage,
-                            ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage,
-                            DealClaimMethod = tenant.DealsClaimMethod
+                            ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage
                         };
 
                         tenants.Add(currentTenant);
@@ -1032,18 +1013,14 @@ namespace YOY.DAO.Entities.Manager
                             BusinessStructureType = tenant.BusinessStructureType,
                             PayerType = tenant.PayerType,
                             HasMembershipLevels = tenant.HasMembershipLevels,
-                            LoyaltyProgramType = tenant.LoyaltyProgramType,
                             Language = tenant.Language,
                             Released = tenant.Released,
                             CampaignDefaultTitleMsg = tenant.CampaignDefaultTitleMsg,
                             CampaignDefaultContentMsg = tenant.CampaignDefaultContentMsg,
-                            AcceptsCommunityPointsAsPayment = tenant.AcceptsCommunityPointsAsPayment,
-                            AcceptsSelfPointsAsPayment = tenant.AcceptsSelfPointsAsPayment,
-                            CheckInType = tenant.CheckInType,
+                            AcceptsPay = tenant.AcceptsPay,
                             ReferenceCodeType = tenant.ReferenceCodeType,
                             DefaultCommissionFeePercentage = tenant.DefaultCommissionFeePercentage,
-                            ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage,
-                            DealClaimMethod = tenant.DealsClaimMethod
+                            ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage
                         };
 
                         tenants.Add(currentTenant);
@@ -1184,18 +1161,14 @@ namespace YOY.DAO.Entities.Manager
                             BusinessStructureType = tenant.BusinessStructureType,
                             PayerType = tenant.PayerType,
                             HasMembershipLevels = tenant.HasMembershipLevels,
-                            LoyaltyProgramType = tenant.LoyaltyProgramType,
                             Language = tenant.Language,
                             Released = tenant.Released,
                             CampaignDefaultTitleMsg = tenant.CampaignDefaultTitleMsg,
                             CampaignDefaultContentMsg = tenant.CampaignDefaultContentMsg,
-                            AcceptsCommunityPointsAsPayment = tenant.AcceptsCommunityPointsAsPayment,
-                            AcceptsSelfPointsAsPayment = tenant.AcceptsSelfPointsAsPayment,
-                            CheckInType = tenant.CheckInType,
+                            AcceptsPay = tenant.AcceptsPay,
                             ReferenceCodeType = tenant.ReferenceCodeType,
                             DefaultCommissionFeePercentage = tenant.DefaultCommissionFeePercentage,
-                            ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage,
-                            DealClaimMethod = tenant.DealsClaimMethod
+                            ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage
                         };
 
                         tenants.Add(currentTenant);
@@ -1308,18 +1281,11 @@ namespace YOY.DAO.Entities.Manager
                                 CampaignDefaultTitleMsg = tenant.CampaignDefaultTitleMsg,
                                 CampaignDefaultContentMsg = tenant.CampaignDefaultContentMsg,
                                 HasMembershipLevels = tenant.HasMembershipLevels,
-                                LoyaltyProgramType = tenant.LoyaltyProgramType,
-                                LoyaltyProgramTypeName = this.GetLoyaltyProgramTypeName(tenant.LoyaltyProgramType),
-                                AcceptsCommunityPointsAsPayment = tenant.AcceptsCommunityPointsAsPayment,
-                                AcceptsSelfPointsAsPayment = tenant.AcceptsSelfPointsAsPayment,
-                                CheckInType = tenant.CheckInType,
-                                CheckInTypeName = this.GetCheckInTypeName(tenant.CheckInType),
+                                AcceptsPay = tenant.AcceptsPay,
                                 ReferenceCodeType = tenant.ReferenceCodeType,
                                 ReferenceCodeTypeName = this.GetReferenceCodeTypeName(tenant.ReferenceCodeType),
                                 DefaultCommissionFeePercentage = tenant.DefaultCommissionFeePercentage,
-                                ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage,
-                                DealClaimMethod = tenant.DealsClaimMethod,
-                                DealClaimMethodName = this.GetClaimMethodName(tenant.DealsClaimMethod)
+                                ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage
                             };
 
                         }
@@ -1406,18 +1372,11 @@ namespace YOY.DAO.Entities.Manager
                                 CampaignDefaultTitleMsg = tenant.CampaignDefaultTitleMsg,
                                 CampaignDefaultContentMsg = tenant.CampaignDefaultContentMsg,
                                 HasMembershipLevels = tenant.HasMembershipLevels,
-                                LoyaltyProgramType = tenant.LoyaltyProgramType,
-                                LoyaltyProgramTypeName = this.GetLoyaltyProgramTypeName(tenant.LoyaltyProgramType),
-                                AcceptsCommunityPointsAsPayment = tenant.AcceptsCommunityPointsAsPayment,
-                                AcceptsSelfPointsAsPayment = tenant.AcceptsSelfPointsAsPayment,
-                                CheckInType = tenant.CheckInType,
-                                CheckInTypeName = this.GetCheckInTypeName(tenant.CheckInType),
+                                AcceptsPay = tenant.AcceptsPay,
                                 ReferenceCodeType = tenant.ReferenceCodeType,
                                 ReferenceCodeTypeName = this.GetReferenceCodeTypeName(tenant.ReferenceCodeType),
                                 DefaultCommissionFeePercentage = tenant.DefaultCommissionFeePercentage,
-                                ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage,
-                                DealClaimMethod = tenant.DealsClaimMethod,
-                                DealClaimMethodName = this.GetClaimMethodName(tenant.DealsClaimMethod)
+                                ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage
                             };
 
                         }
@@ -1532,18 +1491,11 @@ namespace YOY.DAO.Entities.Manager
                                     CampaignDefaultTitleMsg = tenant.CampaignDefaultTitleMsg,
                                     CampaignDefaultContentMsg = tenant.CampaignDefaultContentMsg,
                                     HasMembershipLevels = tenant.HasMembershipLevels,
-                                    LoyaltyProgramType = tenant.LoyaltyProgramType,
-                                    LoyaltyProgramTypeName = this.GetLoyaltyProgramTypeName(tenant.LoyaltyProgramType),
-                                    AcceptsCommunityPointsAsPayment = tenant.AcceptsCommunityPointsAsPayment,
-                                    AcceptsSelfPointsAsPayment = tenant.AcceptsSelfPointsAsPayment,
-                                    CheckInType = tenant.CheckInType,
-                                    CheckInTypeName = this.GetCheckInTypeName(tenant.CheckInType),
+                                    AcceptsPay = tenant.AcceptsPay,
                                     ReferenceCodeType = tenant.ReferenceCodeType,
                                     ReferenceCodeTypeName = this.GetReferenceCodeTypeName(tenant.ReferenceCodeType),
                                     DefaultCommissionFeePercentage = tenant.DefaultCommissionFeePercentage,
-                                    ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage,
-                                    DealClaimMethod = tenant.DealsClaimMethod,
-                                    DealClaimMethodName = this.GetClaimMethodName(tenant.DealsClaimMethod)
+                                    ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage
                                 };
 
                                 data = currentTenant;
@@ -1577,18 +1529,14 @@ namespace YOY.DAO.Entities.Manager
                                     BusinessStructureType = tenant.BusinessStructureType,
                                     PayerType = tenant.PayerType,
                                     HasMembershipLevels = tenant.HasMembershipLevels,
-                                    LoyaltyProgramType = tenant.LoyaltyProgramType,
                                     Language = tenant.Language,
                                     Released = tenant.Released,
                                     CampaignDefaultTitleMsg = tenant.CampaignDefaultTitleMsg,
                                     CampaignDefaultContentMsg = tenant.CampaignDefaultContentMsg,
-                                    AcceptsCommunityPointsAsPayment = tenant.AcceptsCommunityPointsAsPayment,
-                                    AcceptsSelfPointsAsPayment = tenant.AcceptsSelfPointsAsPayment,
-                                    CheckInType = tenant.CheckInType,
+                                    AcceptsPay = tenant.AcceptsPay,
                                     ReferenceCodeType = tenant.ReferenceCodeType,
                                     DefaultCommissionFeePercentage = tenant.DefaultCommissionFeePercentage,
-                                    ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage,
-                                    DealClaimMethod = tenant.DealsClaimMethod
+                                    ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage
                                 };
 
                                 data = currentTenantMin;
@@ -1680,18 +1628,11 @@ namespace YOY.DAO.Entities.Manager
                                     CampaignDefaultTitleMsg = tenant.CampaignDefaultTitleMsg,
                                     CampaignDefaultContentMsg = tenant.CampaignDefaultContentMsg,
                                     HasMembershipLevels = tenant.HasMembershipLevels,
-                                    LoyaltyProgramType = tenant.LoyaltyProgramType,
-                                    LoyaltyProgramTypeName = this.GetLoyaltyProgramTypeName(tenant.LoyaltyProgramType),
-                                    AcceptsCommunityPointsAsPayment = tenant.AcceptsCommunityPointsAsPayment,
-                                    AcceptsSelfPointsAsPayment = tenant.AcceptsSelfPointsAsPayment,
-                                    CheckInType = tenant.CheckInType,
-                                    CheckInTypeName = this.GetCheckInTypeName(tenant.CheckInType),
+                                    AcceptsPay = tenant.AcceptsPay,
                                     ReferenceCodeType = tenant.ReferenceCodeType,
                                     ReferenceCodeTypeName = this.GetReferenceCodeTypeName(tenant.ReferenceCodeType),
                                     DefaultCommissionFeePercentage = tenant.DefaultCommissionFeePercentage,
-                                    ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage,
-                                    DealClaimMethod = tenant.DealsClaimMethod,
-                                    DealClaimMethodName = this.GetClaimMethodName(tenant.DealsClaimMethod)
+                                    ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage
                                 };
 
                                 data = currentTenant;
@@ -1725,18 +1666,14 @@ namespace YOY.DAO.Entities.Manager
                                     BusinessStructureType = tenant.BusinessStructureType,
                                     PayerType = tenant.PayerType,
                                     HasMembershipLevels = tenant.HasMembershipLevels,
-                                    LoyaltyProgramType = tenant.LoyaltyProgramType,
                                     Language = tenant.Language,
                                     Released = true,//NOT NEEDED
                                     CampaignDefaultTitleMsg = tenant.CampaignDefaultTitleMsg,
                                     CampaignDefaultContentMsg = tenant.CampaignDefaultContentMsg,
-                                    AcceptsCommunityPointsAsPayment = tenant.AcceptsCommunityPointsAsPayment,
-                                    AcceptsSelfPointsAsPayment = tenant.AcceptsSelfPointsAsPayment,
-                                    CheckInType = tenant.CheckInType,
+                                    AcceptsPay = tenant.AcceptsPay,
                                     ReferenceCodeType = tenant.ReferenceCodeType,
                                     DefaultCommissionFeePercentage = tenant.DefaultCommissionFeePercentage,
-                                    ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage,
-                                    DealClaimMethod = tenant.DealsClaimMethod
+                                    ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage
                                 };
 
                                 data = currentTenantMin;
@@ -1835,9 +1772,8 @@ namespace YOY.DAO.Entities.Manager
             string contactEmail, string contactPhone, Guid categoryId, DateTime? trialExpiration, string dealRules, string dealConditions, 
             string incentiveRules, string incentiveConditions, string instoreDealClaimInstructions, string onlineDealClaimInstructions, 
             string phoneDealClaimInstructions, string incentiveClaimInstructions, bool hasMembershipLevels, int typeId, int businessStructureType, 
-            int payerType, int referenceCodeType, int language, string website, string campaignTitle, string campaignMsg, int loyaltyProgramType, 
-            bool acceptsCommunityPointsAsPayment, bool acceptsSelfPointsAsPayment, int checkInType, double defaultCommissionFeePercentage, 
-            double consumerCashbackPercentage, int dealClaimMethod, int relevanceStatus)
+            int payerType, int referenceCodeType, int language, string website, string campaignTitle, string campaignMsg, 
+            bool acceptsPay, double defaultCommissionFeePercentage, double consumerCashbackPercentage, int relevanceStatus)
         {
             DeftenantInformations info = null;
             TenantInfo tenantInfo = null;
@@ -1884,14 +1820,10 @@ namespace YOY.DAO.Entities.Manager
                     CampaignDefaultTitleMsg = campaignTitle,
                     CampaignDefaultContentMsg = campaignMsg,
                     HasMembershipLevels = hasMembershipLevels,
-                    LoyaltyProgramType = loyaltyProgramType,
-                    AcceptsCommunityPointsAsPayment = acceptsCommunityPointsAsPayment,
-                    AcceptsSelfPointsAsPayment = acceptsCommunityPointsAsPayment,
-                    CheckInType = checkInType,
+                    AcceptsPay = acceptsPay,
                     ReferenceCodeType = referenceCodeType,
                     DefaultCommissionFeePercentage = defaultCommissionFeePercentage,
-                    ConsumerCashbackPercentage = consumerCashbackPercentage,
-                    DealsClaimMethod = dealClaimMethod
+                    ConsumerCashbackPercentage = consumerCashbackPercentage
                 };
 
                 this._businessObjects.Context.DeftenantInformations.Add(info);
@@ -1965,18 +1897,11 @@ namespace YOY.DAO.Entities.Manager
                             CampaignDefaultTitleMsg = tenant.CampaignDefaultTitleMsg,
                             CampaignDefaultContentMsg = tenant.CampaignDefaultContentMsg,
                             HasMembershipLevels = tenant.HasMembershipLevels,
-                            LoyaltyProgramType = tenant.LoyaltyProgramType,
-                            LoyaltyProgramTypeName = this.GetLoyaltyProgramTypeName(tenant.LoyaltyProgramType),
-                            AcceptsCommunityPointsAsPayment = tenant.AcceptsCommunityPointsAsPayment,
-                            AcceptsSelfPointsAsPayment = tenant.AcceptsSelfPointsAsPayment,
-                            CheckInType = tenant.CheckInType,
-                            CheckInTypeName = this.GetCheckInTypeName(tenant.CheckInType),
+                            AcceptsPay = tenant.AcceptsPay,
                             ReferenceCodeType = tenant.ReferenceCodeType,
                             ReferenceCodeTypeName = this.GetReferenceCodeTypeName(tenant.ReferenceCodeType),
                             DefaultCommissionFeePercentage = tenant.DefaultCommissionFeePercentage,
-                            ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage,
-                            DealClaimMethod = tenant.DealsClaimMethod,
-                            DealClaimMethodName = this.GetClaimMethodName(tenant.DealsClaimMethod)
+                            ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage
                         };
                     }
                 }
@@ -2029,8 +1954,8 @@ namespace YOY.DAO.Entities.Manager
             string currencySymbol, int currencyType, string contactName, string contactEmail, string contactPhone, string website, Guid categoryId, DateTime? trialExpiration, 
             string dealRules, string dealConditions, string incentiveRules, string incentiveConditions, string instoreDealClaimInstructions, string onlineDealClaimInstructions, 
             string phoneDealClaimInstructions, string incentiveClaimInstructions, bool hasMembershipLevel, int typeId, int businessStructureType, int payerType, 
-            int referenceCodeType, string campaignTitle, string campaignMsg, int loyaltyProgramType, bool acceptsCommunityPointsAsPayment, bool acceptsSelfPointsAsPayment, 
-            int checkInType, double defaultCommissionFeePercentage, double consumerCashbackPercentage, int dealClaimMethod, int relevanceStatus)
+            int referenceCodeType, string campaignTitle, string campaignMsg, bool acceptsPay, 
+            double defaultCommissionFeePercentage, double consumerCashbackPercentage, int relevanceStatus)
         {
             DeftenantInformations info = null;
             TenantInfo tenantInfo = null;
@@ -2075,14 +2000,10 @@ namespace YOY.DAO.Entities.Manager
                     info.CampaignDefaultTitleMsg = campaignTitle;
                     info.CampaignDefaultContentMsg = campaignMsg;
                     info.HasMembershipLevels = hasMembershipLevel;
-                    info.LoyaltyProgramType = loyaltyProgramType;
-                    info.AcceptsCommunityPointsAsPayment = acceptsCommunityPointsAsPayment;
-                    info.AcceptsSelfPointsAsPayment = acceptsSelfPointsAsPayment;
-                    info.CheckInType = checkInType;
+                    info.AcceptsPay = acceptsPay;
                     info.ReferenceCodeType = referenceCodeType;
                     info.DefaultCommissionFeePercentage = defaultCommissionFeePercentage;
                     info.ConsumerCashbackPercentage = consumerCashbackPercentage;
-                    info.DealsClaimMethod = dealClaimMethod;
                     info.RelevanceStatus = relevanceStatus;
                     info.UpdatedDate = DateTime.UtcNow;
 
@@ -2157,18 +2078,11 @@ namespace YOY.DAO.Entities.Manager
                                 CampaignDefaultTitleMsg = tenant.CampaignDefaultTitleMsg,
                                 CampaignDefaultContentMsg = tenant.CampaignDefaultContentMsg,
                                 HasMembershipLevels = tenant.HasMembershipLevels,
-                                LoyaltyProgramType = tenant.LoyaltyProgramType,
-                                LoyaltyProgramTypeName = this.GetLoyaltyProgramTypeName(tenant.LoyaltyProgramType),
-                                AcceptsCommunityPointsAsPayment = tenant.AcceptsCommunityPointsAsPayment,
-                                AcceptsSelfPointsAsPayment = tenant.AcceptsSelfPointsAsPayment,
-                                CheckInType = tenant.CheckInType,
-                                CheckInTypeName = this.GetCheckInTypeName(tenant.CheckInType),
+                                AcceptsPay = tenant.AcceptsPay,
                                 ReferenceCodeType = tenant.ReferenceCodeType,
                                 ReferenceCodeTypeName = this.GetReferenceCodeTypeName(tenant.ReferenceCodeType),
                                 DefaultCommissionFeePercentage = tenant.DefaultCommissionFeePercentage,
-                                ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage,
-                                DealClaimMethod = tenant.DealsClaimMethod,
-                                DealClaimMethodName = this.GetClaimMethodName(tenant.DealsClaimMethod)
+                                ConsumerCashbackPercentage = tenant.ConsumerCashbackPercentage
                             };
                         }
                     }
@@ -2243,6 +2157,42 @@ namespace YOY.DAO.Entities.Manager
             return result;
         }
 
+        public bool Put(Guid tenantId, Guid categoryId)
+        {
+            bool success = false ;
+
+            try
+            {
+                var query = from x in this._businessObjects.Context.DeftenantInformations
+                            where x.TenantId == tenantId
+                            select x;
+
+                DeftenantInformations tenant = null;
+                foreach (DeftenantInformations item in query)
+                {
+                    tenant = item;
+                }
+
+                if (tenant != null)
+                {
+                    tenant.CategoryId = categoryId;
+                    this._businessObjects.Context.SaveChanges();
+
+                    success = true;
+
+                }
+            }
+            catch (Exception e)
+            {
+                success = false;
+                //ERROR HANDLING
+                this._businessObjects.StoredProcsHandler.AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return success;
+        }
+
         /// <summary>
         /// Sets tenant's images
         /// </summary>
@@ -2251,22 +2201,15 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="imgType"></param>
         /// <param name="contentType"></param>
         /// <returns></returns>
-        public Guid? Put(Guid id, Guid imgId, string imgUrl, int imgType)
+        public Guid? Put(Guid id, Guid? imgId, string imgUrl, int imgType)
         {
             Guid? currentImgId = null;
 
             try
             {
-                var query = from x in this._businessObjects.Context.DeftenantInformations
-                            where x.Id == id
-                            select x;
-
-                DeftenantInformations tenant = null;
-                
-                foreach (DeftenantInformations item in query)
-                {
-                    tenant = item;
-                }
+                DeftenantInformations tenant = (from x in this._businessObjects.Context.DeftenantInformations
+                                                where x.Id == id
+                                                select x).FirstOrDefault();
 
                 if (tenant != null)
                 {

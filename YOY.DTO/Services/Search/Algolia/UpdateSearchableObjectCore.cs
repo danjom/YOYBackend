@@ -10,6 +10,7 @@ namespace YOY.DTO.Services.Search.Algolia
         public string Keywords { set; get; }
         public bool IsSponsored { set; get; }
         public bool IsActive { set; get; }
+        public int DealType { set; get; }
         public double RelevanceRate { set; get; }
         public int ReleaseDate { set; get; }
         public int ExpirationDate { set; get; }

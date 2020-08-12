@@ -87,8 +87,8 @@ namespace YOY.DAO.Entities.Manager
         {
             string combineTypeName = combineType switch
             {
-                CashbackApplyTypes.WalletIncrease => Resources.WalletIncrease,
-                CashbackApplyTypes.DirectDiscount => Resources.DirectDiscount,
+                CashIncentiveApplyTypes.WalletIncrease => Resources.WalletIncrease,
+                CashIncentiveApplyTypes.DirectDiscount => Resources.DirectDiscount,
                 _ => "--",
             };
             return combineTypeName;
@@ -2094,7 +2094,7 @@ namespace YOY.DAO.Entities.Manager
                             ReleaseDate = item.ReleaseDate,
                             ExpirationDate = item.ExpirationDate,
                             UpdatedDate = item.UpdatedDate,
-                            CreatedDate = item.CreatedDate,
+                            CreatedDate = item.CreatedDate
                         };
 
                         cashbackIncentive.PublishState = this.GetPublishState((DateTime)cashbackIncentive.ReleaseDate, cashbackIncentive.ExpirationDate, dateTime);
@@ -2120,6 +2120,119 @@ namespace YOY.DAO.Entities.Manager
             return cashbackIncentives;
         }//GETS METHOD ENDS ----------------------------------------------------------------------------------------------------------------------------- //
 
+
+        /// <summary>
+        ///  Returns all the promos in a date range
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <param name="dateTime"></param>
+        /// <param name="activeState"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="pageNumber"></param>
+        /// <returns></returns>
+        public List<CashIncentive> Gets(DateTime startDate, DateTime endDate, DateTime dateTime, int activeState, int pageSize, int pageNumber)
+        {
+            List<CashIncentive> incentives = new List<CashIncentive>();
+
+            try
+            {
+
+                var query = (dynamic)null;
+
+                switch (activeState)
+                {
+                    case ActiveStates.All:
+                        query = (from x in this._businessObjects.Context.OltpcashIncentives
+                                 where x.TenantId == this._businessObjects.Tenant.TenantId && x.CreatedDate >= startDate && x.CreatedDate <= endDate
+                                 orderby x.CreatedDate descending
+                                 select x).Skip(pageSize * pageNumber).Take(pageSize);
+                        break;
+                    case ActiveStates.Active:
+                        query = (from x in this._businessObjects.Context.OltpcashIncentives
+                                 where x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.CreatedDate >= startDate && x.CreatedDate <= endDate
+                                 orderby x.CreatedDate descending
+                                 select x).Skip(pageSize * pageNumber).Take(pageSize);
+                        break;
+                    case ActiveStates.Inactive:
+                        query = (from x in this._businessObjects.Context.OltpcashIncentives
+                                 where !x.IsActive && x.TenantId == this._businessObjects.Tenant.TenantId && x.CreatedDate >= startDate && x.CreatedDate <= endDate
+                                 orderby x.CreatedDate descending
+                                 select x).Skip(pageSize * pageNumber).Take(pageSize);
+                        break;
+                }
+
+
+                if (query != null)
+                {
+                    CashIncentive incentive = null;
+                    foreach (OltpcashIncentives item in query)
+                    {
+                        incentive = new CashIncentive
+                        {
+                            Id = item.Id,
+                            TenantId = item.TenantId,
+                            Type = item.Type,
+                            TypeName = GetTypeName(item.Type),
+                            ApplyType = item.ApplyType,
+                            ApplyTypeName = GetApplyTypeName(item.ApplyType),
+                            DisplayType = item.DisplayType,
+                            DisplayTypeName = GetDisplayTypeName(item.DisplayType),
+                            BenefitAmountType = item.BenefitAmountType,
+                            BenefitAmountTypeName = GetBenefitAmountTypeName(item.BenefitAmountType),
+                            DealType = item.DealType,
+                            DealTypeName = GetDealTypeName(item.DealType),
+                            MaxCombinedIncentives = item.MaxCombinedIncentives,
+                            UnitValue = item.UnitValue,
+                            PreviousUnitValue = item.PreviousUnitValue,
+                            MinMembershipLevel = item.MinMembershipLevel,
+                            MinMembershipLevelName = GetMembershipLevelName(item.MinMembershipLevel),
+                            MinPurchasedAmount = item.MinPurchasedAmount,
+                            PurchasedAmountBlock = item.PurchasedAmountBlock,
+                            MaxValue = item.MaxValue,
+                            AvailableQuantity = item.AvailableQuantity,
+                            Name = item.Name,
+                            MainHint = item.MainHint,
+                            ComplementaryHint = item.ComplementaryHint,
+                            Description = item.Description,
+                            Keywords = item.Keywords,
+                            IsActive = item.IsActive,
+                            IsSponsored = item.IsSponsored,
+                            ValidWeekDays = item.ValidWeekDays,
+                            ValidMonthDays = item.ValidMonthDays,
+                            ValidHours = item.ValidHours,
+                            MaxUsagePerUser = item.MaxUsagesPerUser,
+                            PurchasesCountStartDate = item.PurchasesCountStartDate,
+                            MinPurchasesCountToUse = item.MinPurchasesCountToUse,
+                            MinPurchasedTotalAmount = item.MinPurchasedTotalAmount,
+                            UsageCount = item.UsageCount,
+                            GeoSegmentationType = item.GeoSegmentationType,
+                            GeoSegmentationTypeName = GetGeoSegmentationTypeName(item.GeoSegmentationType),
+                            Rules = item.Rules ?? Resources.NoRulesAvailable,
+                            Conditions = item.Conditions ?? Resources.NoConditionsAvailable,
+                            RelevanceRate = item.RelevanceRate,
+                            ReleaseDate = item.ReleaseDate,
+                            ExpirationDate = item.ExpirationDate,
+                            UpdatedDate = item.UpdatedDate,
+                            CreatedDate = item.CreatedDate
+                        };
+
+                        incentive.PublishState = this.GetPublishState((DateTime)incentive.ReleaseDate, incentive.ExpirationDate, dateTime);
+
+                        incentives.Add(incentive);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                incentives = null;
+                //ERROR HANDLING
+                this._businessObjects.StoredProcsHandler.AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return incentives;
+        }
 
         public CashIncentive Get(Guid id, int type, bool filterByTenant)
         {

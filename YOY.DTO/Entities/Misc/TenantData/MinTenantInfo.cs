@@ -34,14 +34,10 @@ namespace YOY.DTO.Entities.Misc.TenantData
         public decimal? RelevanceScore { set; get; }
         public string CampaignDefaultTitleMsg { set; get; }
         public string CampaignDefaultContentMsg { set; get; }
-        public int LoyaltyProgramType { set; get; }
         public bool HasMembershipLevels { set; get; }
-        public bool AcceptsCommunityPointsAsPayment { set; get; }
-        public bool AcceptsSelfPointsAsPayment { set; get; }
-        public int CheckInType { set; get; }
+        public bool AcceptsPay { set; get; }
         public int ReferenceCodeType { set; get; }
         public double DefaultCommissionFeePercentage { set; get; }
         public double ConsumerCashbackPercentage { set; get; }
-        public int DealClaimMethod { set; get; }
     }
 }

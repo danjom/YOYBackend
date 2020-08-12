@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using YOY.BusinessAPI.Models.v1.CashbackIncentive.POCO;
+using YOY.BusinessAPI.Models.v1.CashIncentive.POCO;
 
-namespace YOY.BusinessAPI.Models.v1.CashbackIncentive.SET
+namespace YOY.BusinessAPI.Models.v1.CashIncentive.SET
 {
     public class IncentiveDataSet
     {

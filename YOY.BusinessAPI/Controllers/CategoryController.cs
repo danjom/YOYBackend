@@ -37,6 +37,8 @@ namespace YOY.BusinessAPI.Controllers
 
         private const int controllerVersion = 1;
 
+        private const int maxRetrievedCategories = 300;
+
         #endregion
 
         #region METHODS
@@ -99,7 +101,7 @@ namespace YOY.BusinessAPI.Controllers
 
                 if (dealId != Guid.Empty)
                 {
-                    List<EnabledCategoryForRelation> categoriesForRelation = this._businessObjects.Categories.Gets(CategoryRelationTypes.Offer, dealId);
+                    List<EnabledCategoryForRelation> categoriesForRelation = this._businessObjects.Categories.Gets(CategoryRelationTypes.Offer, dealId, maxRetrievedCategories);
 
                     if (categoriesForRelation?.Count > 0)
                     {
@@ -209,7 +211,7 @@ namespace YOY.BusinessAPI.Controllers
 
                     foreach(CategoryOpData item in model.Categories)
                     {
-                        success = this._businessObjects.Categories.Post(item.Id, CategoryHerarchyLevels.ProductCategory, model.DealId, CategoryRelatiomReferenceTypes.Offer);
+                        success = this._businessObjects.Categories.Post(item.Id, CategoryHerarchyLevels.ProductCategory, model.DealId, CategoryRelationReferenceTypes.Offer);
 
                         if (!success)
                             valid = false;
@@ -255,7 +257,7 @@ namespace YOY.BusinessAPI.Controllers
 
                             SearchObjectHandler.SetParams(SearchIndexNames.AppName, indexName);
 
-                            await SearchObjectHandler.UpdateSearchableObjectCategoryDataAsync(updatedOffer.Id, categories, classifications);
+                            await SearchObjectHandler.UpdateGeneralSearchableObjectCategoryDataAsync(updatedOffer.Id, categories, classifications);
 
                         }
 
@@ -330,7 +332,7 @@ namespace YOY.BusinessAPI.Controllers
 
                     foreach (CategoryOpData item in model.Categories)
                     {
-                        success = this._businessObjects.Categories.Delete(item.Id, model.DealId, CategoryRelatiomReferenceTypes.Offer);
+                        success = this._businessObjects.Categories.Delete(item.Id, model.DealId, CategoryRelationReferenceTypes.Offer);
 
                         if (!success)
                             valid = false;
@@ -376,7 +378,7 @@ namespace YOY.BusinessAPI.Controllers
 
                             SearchObjectHandler.SetParams(SearchIndexNames.AppName, indexName);
 
-                            await SearchObjectHandler.UpdateSearchableObjectCategoryDataAsync(updatedOffer.Id, categories, classifications);
+                            await SearchObjectHandler.UpdateGeneralSearchableObjectCategoryDataAsync(updatedOffer.Id, categories, classifications);
 
                         }
 

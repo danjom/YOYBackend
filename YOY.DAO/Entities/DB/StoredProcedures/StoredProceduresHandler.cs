@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Data;
+using System.Data.SqlTypes;
 using System.Xml.Linq;
 using YOY.Values;
 
@@ -515,11 +516,11 @@ namespace YOY.DAO.Entities.DB.StoredProcedures
             {
                 var idParam = new SqlParameter("id", id);
                 var tenantIdParam = new SqlParameter("tenantId", tenantId);
-                var franchiseeIdParam = new SqlParameter("franchiseeId", franchiseeId);
+                var franchiseeIdParam = new SqlParameter("franchiseeId", (object)franchiseeId ?? DBNull.Value);
                 var stateIdParam = new SqlParameter("stateId", stateId);
                 var cityIdParam = new SqlParameter("cityId", cityId);
-                var branchHolderIdParam = new SqlParameter("branchHolderId", branchHolderId);
-                var branchHolderDepartmentIdParam = new SqlParameter("branchHolderDepartmentId", branchHolderDepartmentId);
+                var branchHolderIdParam = new SqlParameter("branchHolderId", (object)branchHolderId ?? DBNull.Value);
+                var branchHolderDepartmentIdParam = new SqlParameter("branchHolderDepartmentId", (object)branchHolderDepartmentId ?? DBNull.Value);
                 var typeParam = new SqlParameter("type", type);
                 var nameParam = new SqlParameter("name", name);
                 var postCodeParam = new SqlParameter("postCode", postCode);
@@ -531,15 +532,25 @@ namespace YOY.DAO.Entities.DB.StoredProcedures
                 var independantOwnerParam = new SqlParameter("independantOwner", independantOwner);
                 var latitudeParam = new SqlParameter("latitude", latitude);
                 var longitudeParam = new SqlParameter("longitude", longitude);
-                var locationAddressParam = new SqlParameter("locationAddress", locationAddress);
+                var locationAddressParam = new SqlParameter
+                {
+                    ParameterName = "locationAddress",
+                    SqlDbType = SqlDbType.Xml,
+                    Value = new SqlXml(locationAddress.CreateReader())
+                };
                 var descriptiveAddressParam = new SqlParameter("descriptiveAddress", descriptiveAddress);
                 var orderTakingTypeParam = new SqlParameter("orderTakingType", orderTakingType);
-                var geofenceIdParam = new SqlParameter("geofenceId", geofenceId);
+                var geofenceIdParam = new SqlParameter("geofenceId", (object)geofenceId ?? DBNull.Value);
                 var hashedCodeParam = new SqlParameter("hashedCode", hashedCode);
 
+                int result = -1;
+                var resultParam = new SqlParameter("result", result) { Direction = ParameterDirection.Output };
+
                 // Processing.  
-                int result = _dbContext.Database.ExecuteSqlRaw("EXEC [dbo].[InsertBranch] @id, @tenantId, @franchiseeId, @stateId, @cityId, @branchHolderId, @branchHolderDepartmentId, @type, @name, @postCode, @email, @contactName, @contactPhone, @contactEmail, @orderPhoe, @independantOwner, @latitude, @longitude, @locationAddress, @descriptiveAddress, @orderTakingType, @geofenceId, @hashedCode", 
-                    new[] { idParam, tenantIdParam, franchiseeIdParam, stateIdParam, cityIdParam, branchHolderIdParam, branchHolderDepartmentIdParam, typeParam, nameParam, postCodeParam, emailParam, contactNameParam, contactPhoneParam, contactEmailParam, ordersPhoneParam, independantOwnerParam, latitudeParam, longitudeParam, locationAddressParam, descriptiveAddressParam, orderTakingTypeParam, geofenceIdParam, hashedCodeParam});
+                 _dbContext.Database.ExecuteSqlRaw("EXEC [dbo].[InsertBranch] @id, @tenantId, @franchiseeId, @stateId, @cityId, @branchHolderId, @branchHolderDepartmentId, @type, @name, @postCode, @email, @contactName, @contactPhone, @contactEmail, @ordersPhone, @independantOwner, @latitude, @longitude, @locationAddress, @descriptiveAddress, @orderTakingType, @geofenceId, @hashedCode, @result OUTPUT", 
+                    new[] { idParam, tenantIdParam, franchiseeIdParam, stateIdParam, cityIdParam, branchHolderIdParam, branchHolderDepartmentIdParam, typeParam, nameParam, postCodeParam, emailParam, contactNameParam, contactPhoneParam, contactEmailParam, ordersPhoneParam, independantOwnerParam, latitudeParam, longitudeParam, locationAddressParam, descriptiveAddressParam, orderTakingTypeParam, geofenceIdParam, hashedCodeParam, resultParam});
+
+                result = Convert.ToInt32(resultParam.Value);
 
                 if (result > 0)
                     created = true;
@@ -655,9 +666,9 @@ namespace YOY.DAO.Entities.DB.StoredProcedures
             try
             {
                 var idParam = new SqlParameter("id", id);
-                var franchiseeIdParam = new SqlParameter("franchiseeId", franchiseeId);
-                var branchHolderIdParam = new SqlParameter("branchHolderId", branchHolderId);
-                var branchHolderDepartmentIdParam = new SqlParameter("branchHolderDepartmentId", branchHolderDepartmentId);
+                var franchiseeIdParam = new SqlParameter("franchiseeId", (object)franchiseeId ?? DBNull.Value);
+                var branchHolderIdParam = new SqlParameter("branchHolderId", (object)branchHolderId ?? DBNull.Value);
+                var branchHolderDepartmentIdParam = new SqlParameter("branchHolderDepartmentId", (object)branchHolderDepartmentId ?? DBNull.Value);
                 var nameParam = new SqlParameter("name", name);
                 var postCodeParam = new SqlParameter("postCode", postCode);
                 var emailParam = new SqlParameter("email", email);
@@ -668,14 +679,24 @@ namespace YOY.DAO.Entities.DB.StoredProcedures
                 var independantOwnerParam = new SqlParameter("independantOwner", independantOwner);
                 var latitudeParam = new SqlParameter("latitude", latitude);
                 var longitudeParam = new SqlParameter("longitude", longitude);
-                var locationAddressParam = new SqlParameter("locationAddress", locationAddress);
+                var locationAddressParam = new SqlParameter
+                {
+                    ParameterName = "locationAddress",
+                    SqlDbType = SqlDbType.Xml,
+                    Value = new SqlXml(locationAddress.CreateReader())
+                };
                 var descriptiveAddressParam = new SqlParameter("descriptiveAddress", descriptiveAddress);
                 var orderTakingTypeParam = new SqlParameter("orderTakingType", orderTakingType);
-                var geofenceIdParam = new SqlParameter("geofenceId", geofenceId);
+                var geofenceIdParam = new SqlParameter("geofenceId", (object)geofenceId ?? DBNull.Value);
+
+                int result = -1;
+                var resultParam = new SqlParameter("result", result) { Direction = ParameterDirection.Output };
 
                 // Processing.  
-                int result = _dbContext.Database.ExecuteSqlRaw("EXEC [dbo].[InsertBranch] @id, @franchiseeId, @branchHolderId, @branchHolderDepartmentId, @name, @postCode, @email, @contactName, @contactPhone, @contactEmail, @orderPhoe, @independantOwner, @latitude, @longitude, @locationAddress, @descriptiveAddress, @orderTakingType, @geofenceId",
-                    new[] { idParam, franchiseeIdParam, branchHolderIdParam, branchHolderDepartmentIdParam, nameParam, postCodeParam, emailParam, contactNameParam, contactPhoneParam, contactEmailParam, ordersPhoneParam, independantOwnerParam, latitudeParam, longitudeParam, locationAddressParam, descriptiveAddressParam, orderTakingTypeParam, geofenceIdParam });
+                _dbContext.Database.ExecuteSqlRaw("EXEC [dbo].[UpdateBranch] @id, @franchiseeId, @branchHolderId, @branchHolderDepartmentId, @name, @postCode, @email, @contactName, @contactPhone, @contactEmail, @ordersPhone, @independantOwner, @latitude, @longitude, @locationAddress, @descriptiveAddress, @orderTakingType, @geofenceId, @result OUTPUT",
+                    new[] { idParam, franchiseeIdParam, branchHolderIdParam, branchHolderDepartmentIdParam, nameParam, postCodeParam, emailParam, contactNameParam, contactPhoneParam, contactEmailParam, ordersPhoneParam, independantOwnerParam, latitudeParam, longitudeParam, locationAddressParam, descriptiveAddressParam, orderTakingTypeParam, geofenceIdParam, resultParam });
+
+                result = Convert.ToInt32(resultParam.Value);
 
                 if (result > 0)
                     created = true;

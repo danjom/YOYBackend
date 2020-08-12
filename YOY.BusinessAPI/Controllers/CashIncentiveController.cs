@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using YOY.BusinessAPI.Handlers.Search;
-using YOY.BusinessAPI.Models.v1.CashbackIncentive.POCO;
-using YOY.BusinessAPI.Models.v1.CashbackIncentive.SET;
+using YOY.BusinessAPI.Models.v1.CashIncentive.POCO;
+using YOY.BusinessAPI.Models.v1.CashIncentive.SET;
 using YOY.BusinessAPI.Models.v1.Misc.BasicResponse.POCO;
 using YOY.DAO.Entities;
 using YOY.DAO.Entities.Manager.Misc.Image;
@@ -39,7 +39,10 @@ namespace YOY.BusinessAPI.Controllers
 
         private const int controllerVersion = 1;
 
-
+        private const int mainHintMinLength = 3;
+        private const int mainHintMaxLength = 10;
+        private const int complementaryHintMinLength = 3;
+        private const int complementaryHintMaxLength = 22;
         private const int nameMinLength = 5;
         private const int nameMaxLength = 60;
         private const int descriptionMinLength = 10;
@@ -85,9 +88,7 @@ namespace YOY.BusinessAPI.Controllers
 
         private IncentiveData GetIncentiveContent(CashIncentive data)
         {
-            IncentiveData incentive = null;
-
-            incentive = new IncentiveData
+            IncentiveData incentive = new IncentiveData
             {
                 Id = data.Id,
                 TenantId = data.TenantId,
@@ -110,6 +111,8 @@ namespace YOY.BusinessAPI.Controllers
                 MaxValue = data.MaxValue,
                 AvailableQuantity = data.AvailableQuantity,
                 Name = data.Name,
+                MainHint = data.MainHint,
+                ComplementaryHint = data.ComplementaryHint,
                 Description = data.Description,
                 Keywords = data.Keywords,
                 IsActive = data.IsActive,
@@ -119,6 +122,7 @@ namespace YOY.BusinessAPI.Controllers
                 ValidMonthDays = data.ValidMonthDays,
                 MaxUsagePerUser = data.MaxUsagePerUser,
                 MinPurchasesCountToUse = data.MinPurchasesCountToUse,
+                MinPurchasedTotalAmount = data.MinPurchasedTotalAmount,
                 UsageCount = data.UsageCount,
                 GeoSegmentationType = data.GeoSegmentationType,
                 GeoSegmentationTypeName = data.GeoSegmentationTypeName,
@@ -139,39 +143,9 @@ namespace YOY.BusinessAPI.Controllers
             return incentive;
         }
 
-        public DateTime LocalToUtc(DateTime date, string hourString, int utcTimeDiff)
+        public DateTime LocalToUtc(DateTime date, int utcTimeDiff)
         {
-            DateTime finalDate = DateTime.MinValue;
-
-            //-------------------------------------------------------------------------------------------------//
-            //Logic to transform schedules to universal format
-            //-------------------------------------------------------------------------------------------------//
-            //START HOUR
-            string[] timeComponents = hourString.Split(':');
-            int hour = -1;
-            int mins = -1;
-            int.TryParse(timeComponents[0], out hour);
-            string minutes = timeComponents[1].Substring(0, 2);
-            int.TryParse(minutes, out mins);
-            string meridian = timeComponents[1].Substring(2);
-
-            switch (meridian)
-            {
-                case "AM":
-                    //Nothing
-                    break;
-                case "PM":
-                    hour += 12;
-                    break;
-            }
-
-            finalDate = date.AddHours(hour);
-            finalDate = finalDate.AddMinutes(mins);
-
-            //ADDS THE INVERSE OF THE UTC TIME DIFF TO MEET UTC DATE
-            finalDate = finalDate.AddHours(utcTimeDiff * -1);
-
-            //----------------------------------------------------------------------------------------------------//
+            DateTime finalDate = date.AddHours(utcTimeDiff * -1);
 
 
             return finalDate;
@@ -185,7 +159,7 @@ namespace YOY.BusinessAPI.Controllers
             return finalDate;
         }
 
-        private List<IncentiveData> GetIncentivesData(int pageSize, int pageNumber)
+        private List<IncentiveData> GetIncentivesData(int pageSize, int pageNumber, DateTime start, DateTime end)
         {
             List<IncentiveData> incentivesData;
 
@@ -241,7 +215,7 @@ namespace YOY.BusinessAPI.Controllers
 
 
         /// <summary>
-        /// Retrieve all the offer from a given tenant
+        /// Retrieve all the cash incentives from a given tenant
         /// </summary>
         /// <param name="employeeId"></param>
         /// <param name="userId"></param>
@@ -282,16 +256,16 @@ namespace YOY.BusinessAPI.Controllers
                 if (this._businessObjects.Tenant.TenantId != Guid.Empty)
                 {
 
-                    Task<List<IncentiveData>> getIncentivesDataTask = new Task<List<IncentiveData>>(() => this.GetIncentivesData(pageSize, pageNumber));
-                    getIncentivesDataTask.Start();
+                    Task<List<IncentiveData>> getDealsDataTask = new Task<List<IncentiveData>>(() => this.GetIncentivesData(pageSize, pageNumber, startDate, endDate));
+                    getDealsDataTask.Start();
 
-                    Task<int> getIncentivesCountTask = new Task<int>(() => this.GetTotalIncentivesCount(startDate, endDate));
-                    getIncentivesCountTask.Start();
+                    Task<int> getDealsCountTask = new Task<int>(() => this.GetTotalIncentivesCount(startDate, endDate));
+                    getDealsCountTask.Start();
 
-                    incentives.Incentives = await getIncentivesDataTask;
+                    incentives.Incentives = await getDealsDataTask;
                     incentives.Count = incentives.Incentives?.Count ?? 0;
 
-                    incentives.TotalRecords = await getIncentivesCountTask;
+                    incentives.TotalRecords = await getDealsCountTask;
 
                     result = Ok(incentives);
 
@@ -312,52 +286,6 @@ namespace YOY.BusinessAPI.Controllers
             return result;
         }
 
-        public DateTime LocalToUtc(DateTime date, int utcTimeDiff)
-        {
-            DateTime finalDate;
-            try
-            {
-                /*
-                //-------------------------------------------------------------------------------------------------//
-                //Logic to transform schedules to universal format
-                //-------------------------------------------------------------------------------------------------//
-                //START HOUR
-                string[] timeComponents = hourString.Split(':');
-                int hour = -1;
-                int mins = -1;
-                int.TryParse(timeComponents[0], out hour);
-                string minutes = timeComponents[1].Substring(0, 2);
-                int.TryParse(minutes, out mins);
-                string meridian = timeComponents[1].Substring(2);
-
-                switch (meridian)
-                {
-                    case "AM":
-                        //Nothing
-                        break;
-                    case "PM":
-                        hour += 12;
-                        break;
-                }
-
-                finalDate = date.AddHours(hour);
-                finalDate = finalDate.AddMinutes(mins);
-                */
-
-                //ADDS THE INVERSE OF THE UTC TIME DIFF TO MEET UTC DATE
-                finalDate = date.AddHours(utcTimeDiff * -1);
-
-                //----------------------------------------------------------------------------------------------------//
-
-            }
-            catch (Exception)
-            {
-                finalDate = DateTime.MinValue;
-            }
-
-
-            return finalDate;
-        }
 
         [Route("post")]
         [HttpPost]
@@ -405,23 +333,33 @@ namespace YOY.BusinessAPI.Controllers
                     {
                         bool valid = true;
 
-                        if (!(model.ApplyType >= CashbackApplyTypes.WalletIncrease && model.ApplyType <= CashbackApplyTypes.DirectDiscount))
-                        {
-                            valid = false;
-                            dataErrors += "-El tipo de aplicación debe ser seleccionado\n";
-                        }
+                        Decimal.TryParse(model.UnitValue, out decimal unitValue);
 
-                        if (!(model.BenefitAmountType >= CashIncentiveBenefitAmountTypes.ByTotalAmount && model.BenefitAmountType <= CashIncentiveBenefitAmountTypes.ByAmountBlock))
-                        {
-                            valid = false;
-                            dataErrors += "-Tipo de monto debe ser seleccionado\n";
-                        }
+                        decimal? previousUnitValue;
 
-                        if (!(model.Type >= CashbackTypes.Percentage && model.Type <= CashbackTypes.Points))
+                        if (!string.IsNullOrWhiteSpace(model.PreviousUnitValue))
                         {
-                            valid = false;
-                            dataErrors += "-Tipo debe ser seleccionado\n";
+
+                            Decimal.TryParse(model.PreviousUnitValue, out decimal previousUnitValueAux);
+                            previousUnitValue = previousUnitValueAux;
                         }
+                        else
+                            previousUnitValue = -1;
+
+                        Decimal.TryParse(model.MinPurchasedAmount, out decimal minPurchasedAmount);
+                        Decimal.TryParse(model.MinPurchasedTotalAmount, out decimal minPurchasedTotalAmount);
+                        Decimal.TryParse(model.PurchasedAmountBlock, out decimal purchasedAmountBlock);
+
+                        double relevanceRate;
+
+                        if (!string.IsNullOrWhiteSpace(model.RelevanceRate))
+                        {
+                            Double.TryParse(model.RelevanceRate, out relevanceRate);
+
+                        }
+                        else
+                            relevanceRate = -1;
+
 
                         if (!(model.DealType >= DealTypes.InStore && model.DealType <= DealTypes.Phone))
                         {
@@ -429,52 +367,58 @@ namespace YOY.BusinessAPI.Controllers
                             dataErrors += "-Tipo de incentivo debe ser seleccionado\n";
                         }
 
+                        if (!(model.ApplyType >= CashIncentiveApplyTypes.WalletIncrease && model.ApplyType <= CashIncentiveApplyTypes.DirectDiscount))
+                        {
+                            valid = false;
+                            dataErrors += "- La forma de aplicación debe ser seleccionado\n";
+                        }
+
+                        if (!(model.BenefitAmountType >= CashIncentiveBenefitAmountTypes.ByTotalAmount && model.BenefitAmountType <= CashIncentiveBenefitAmountTypes.ByAmountBlock))
+                        {
+                            valid = false;
+                            dataErrors += "- La forma de calculo debe ser seleccionado\n";
+                        }
+
+                        if (!(model.Type >= CashbackTypes.Percentage && model.Type <= CashbackTypes.Points))
+                        {
+                            valid = false;
+                            dataErrors += "- El tipo de incentivo debe ser seleccionado\n";
+                        }
+
                         if (model.MaxCombinedIncentives < 0)
                         {
                             valid = false;
-                            dataErrors += "-El máximo de incentivos con el que se puede combinar debe ser mayor que 0\n";
-                        }
-
-                        if (model.UnitValue < 0)
-                        {
-                            valid = false;
-                            dataErrors += "-El valor del incentivo debe ser mayor que 0\n";
-                        }
-
-                        if (model.PreviousUnitValue > -1 && model.UnitValue >= model.PreviousUnitValue)
-                        {
-                            valid = false;
-                            dataErrors += "-El valor del incentivo debe ser mayor que el valor previo\n";
+                            dataErrors += "- Máximo de incentivos acumulables debe ser mayor o igual a 0\n";
                         }
 
                         if (model.MinMembershipLevel < MembershipLevels.Bronze || model.MinMembershipLevel > MembershipLevels.Diamond)
                         {
                             valid = false;
-                            dataErrors += "-El mínimo nivel de lealtad debe ser seleccionado\n";
+                            dataErrors += "- El mínimo nivel de lealtad debe ser seleccionado\n";
                         }
 
-                        if (model.MinPurchasedAmount < 0)
+                        if (minPurchasedAmount < 0)
                         {
                             valid = false;
-                            dataErrors += "-El monto mínimo de compra debe ser mayor que 0\n";
+                            dataErrors += "- El monto mínimo de compra debe ser mayor que 0\n";
                         }
 
-                        if (model.PurchasedAmountBlock < -1 || model.PurchasedAmountBlock == 0)
+                        if (purchasedAmountBlock < 0)
                         {
                             valid = false;
-                            dataErrors += "-El bloque de monto para cálculo debe ser mayor que 0\n";
+                            dataErrors += "- El bloque de compra debe ser mayor que 0\n";
                         }
 
-                        if (model.MaxValue < -1 || model.MaxValue == 0)
+                        if (string.IsNullOrWhiteSpace(model.MainHint) || model.MainHint.Length < mainHintMinLength || model.MainHint.Length > mainHintMaxLength)
                         {
                             valid = false;
-                            dataErrors += "-El monto máximo aplicable debe ser mayor que 0\n";
+                            dataErrors += "La frase principal debe tener de " + mainHintMinLength + " a " + mainHintMaxLength + " caracteres\n";
                         }
 
-                        if (model.AvailableQuantity < infiteAvailableQuantity || model.AvailableQuantity == 0 || model.AvailableQuantity < availableQuantityMinValue)
+                        if (string.IsNullOrWhiteSpace(model.ComplementaryHint) || model.ComplementaryHint.Length < complementaryHintMinLength || model.ComplementaryHint.Length > complementaryHintMaxLength)
                         {
                             valid = false;
-                            dataErrors += "-La cantidad disponibles debe ser mayor que " + availableQuantityMinValue + " \n";
+                            dataErrors += "-La frase secundaria debe tener de " + complementaryHintMinLength + " a " + complementaryHintMaxLength + " caracteres\n";
                         }
 
                         if (string.IsNullOrWhiteSpace(model.Name) || model.Name.Length < nameMinLength || model.Name.Length > nameMaxLength)
@@ -483,46 +427,76 @@ namespace YOY.BusinessAPI.Controllers
                             dataErrors += "-El nombre debe tener de " + nameMinLength + " a " + nameMaxLength + " caracteres\n";
                         }
 
-                        if (string.IsNullOrWhiteSpace(model.Description) || model.Description.Length < descriptionMinLength || model.Description.Length > descriptionMaxLength)
-                        {
-                            valid = false;
-                            dataErrors += "-La descripción debe tener de " + descriptionMinLength + " a " + descriptionMaxLength + " caracteres\n";
-                        }
-
                         if (model.Keywords?.Length > keywordsMaxLength)
                         {
                             valid = false;
                             dataErrors += "-El total de palabras clave excede la cantidad permitida\n";
                         }
 
-                        if (model.ValidMonthDays?.Count > 0)
+                        if (string.IsNullOrWhiteSpace(model.Description) || model.Description.Length < descriptionMinLength || model.Description.Length > descriptionMaxLength)
                         {
                             valid = false;
-                            dataErrors += "-Los días válidos del mes deben ser indicados\n";
+                            dataErrors += "-La descripción debe tener de " + descriptionMinLength + " a " + descriptionMaxLength + " caracteres\n";
                         }
 
-                        if (string.IsNullOrWhiteSpace(model.ValidWeekDays))
+                        if (model.AvailableQuantity < infiteAvailableQuantity || model.AvailableQuantity == 0 || model.AvailableQuantity < availableQuantityMinValue)
                         {
                             valid = false;
-                            dataErrors += "-Los días válidos de la semana deben ser indicados\n";
+                            dataErrors += "-La cantidad disponibles debe ser mayor que " + availableQuantityMinValue + " \n";
                         }
 
-                        if (model.ValidHours?.Count > 0)
+                        if (unitValue <= 0)
                         {
                             valid = false;
-                            dataErrors += "-Las horas válidas del día deben ser indicadas\n";
+                            dataErrors += "-El monto del beneficio debe ser mayor o igual que 0\n";
                         }
 
-                        if (model.MaxUsagePerUser < - 1 || model.MaxUsagePerUser == 0)
+                        if (previousUnitValue != null && previousUnitValue > -1 && unitValue >= previousUnitValue)
+                        {
+                            valid = false;
+                            dataErrors += "-El beneficio anterior debe ser menor que el monto del beneficio\n";
+                        }
+
+                        if (model.ValidMonthDays?.Count == 0)
+                        {
+                            valid = false;
+                            dataErrors += "-Las fechas de validez deben ser indicadas\n";
+                        }
+
+                        if (model.ValidWeekDays?.Count == 0)
+                        {
+                            valid = false;
+                            dataErrors += "-Los días de la semana válidos deben ser indicados\n";
+                        }
+
+                        if (model.ValidHours?.Count == 0)
+                        {
+                            valid = false;
+                            dataErrors += "-Las horas de validez deben ser indicadas\n";
+                        }
+
+                        if (model.MaxUsagePerUser < -1)
                         {
                             valid = false;
                             dataErrors += "-El máximo de usos por usuario debe ser indicado\n";
                         }
 
-                        if (model.MinPurchaseCountToUse < -1 || model.MinPurchaseCountToUse == 0)
+                        if (model.MinPurchaseCountToUse < -1)
                         {
                             valid = false;
-                            dataErrors += "-El mínimo de compras para accederse debe ser indicado\n";
+                            dataErrors += "-El mínimo de compras realizadas debe ser indicado\n";
+                        }
+
+                        if (minPurchasedTotalAmount < 0)
+                        {
+                            valid = false;
+                            dataErrors += "-El mínimo total de pagos debe ser indicado\n";
+                        }
+
+                        if (relevanceRate < 0)
+                        {
+                            valid = false;
+                            dataErrors += "-El nivel de relevancia debe ser indicado\n";
                         }
 
                         if (model.ReleaseDate >= model.ExpirationDate)
@@ -549,18 +523,29 @@ namespace YOY.BusinessAPI.Controllers
                             model.ReleaseDate = LocalToUtc(model.ReleaseDate, this._businessObjects.Tenant.UtcTimeDiff);
                             model.ExpirationDate = LocalToUtc(model.ExpirationDate, this._businessObjects.Tenant.UtcTimeDiff);
 
+
                             string validMonthDays = "";
-                            string validHours = "";
 
                             foreach(string item in model.ValidMonthDays)
                             {
-                                validMonthDays += item + "*";
+                                validMonthDays = item + "*";
                             }
+
+                            string validWeekDays = "";
+
+                            foreach (string item in model.ValidWeekDays)
+                            {
+                                validWeekDays = item + "*";
+                            }
+
+                            string validHours = "";
 
                             foreach (string item in model.ValidHours)
                             {
-                                validHours += item + "*";
+                                validHours = item + "*";
                             }
+
+                            previousUnitValue = previousUnitValue <= 0 ? null : previousUnitValue;
 
                             //Retrieve tenant to get the rules and conditions
                             TenantInfo tenantInfo = this._businessObjects.Commerces.Get(model.TenantId, CommerceKeys.TenantKey);
@@ -576,19 +561,15 @@ namespace YOY.BusinessAPI.Controllers
                                     _ => "--"
                                 };
 
-                                double relevanceRate = model.RelevanceRate ?? -1;
 
-
-                                CashIncentive newIncentive = this._businessObjects.CashIncentives.Post(model.Type, DisplayTypes.BroadcastingAndListings, model.ApplyType, model.BenefitAmountType, model.DealType, model.MaxCombinedIncentives,
-                                    model.UnitValue, model.PreviousUnitValue, model.MinMembershipLevel, model.MinPurchasedAmount, model.PurchasedAmountBlock, model.MaxValue, model.AvailableQuantity, model.Name, model.MainHint, model.ComplementaryHint,
-                                    model.Description, model.Keywords, model.IsSponsored, model.ValidWeekDays, validMonthDays, validHours, model.MaxUsagePerUser, model.PurchasesCountStartDate, model.MinPurchaseCountToUse, model.MinPurchasedTotalAmount,
-                                    GeoSegmentationTypes.Country, tenantInfo.IncentiveRules, tenantInfo.IncentiveConditions, model.RelevanceRate ?? 1, model.ReleaseDate, model.ExpirationDate);
+                                CashIncentive newIncentive = this._businessObjects.CashIncentives.Post(model.Type, DisplayTypes.BroadcastingAndListings, model.ApplyType, model.BenefitAmountType, model.DealType, model.MaxCombinedIncentives, unitValue, previousUnitValue ?? -1, model.MinMembershipLevel,
+                                    minPurchasedAmount, purchasedAmountBlock, -1, model.AvailableQuantity, model.Name, model.MainHint, model.ComplementaryHint, model.Description, model.Keywords, model.IsSponsored, validWeekDays, validMonthDays, validHours, model.MaxUsagePerUser, null, model.MinPurchaseCountToUse,
+                                    minPurchasedTotalAmount, GeoSegmentationTypes.Country, tenantInfo.IncentiveRules, tenantInfo.IncentiveConditions, relevanceRate, model.ReleaseDate, model.ExpirationDate);
 
 
 
                                 if (newIncentive != null)
-                                {;
-
+                                {
                                     //Needs to add it to Algolia 1st
                                     if (newIncentive.DisplayType < DisplayTypes.BroadcastingOnly)//If the offer will be publicly accessible
                                     {
@@ -608,12 +589,16 @@ namespace YOY.BusinessAPI.Controllers
                                         }
 
                                         SearchObjectHandler.SetParams(SearchIndexNames.AppName, indexName);
+                                        
+                                        string applyTypeName = newIncentive.ApplyType switch
+                                        {
+                                            CashIncentiveApplyTypes.WalletIncrease => "Cashback, Devolucion, Retorno",
+                                            CashIncentiveApplyTypes.DirectDiscount => "Descuento, Discount",
+                                            _ => "",
+                                        };
 
-                                        /*
-                                        bool success = await SearchObjectHandler.AddGeneralSearchableObjectAsync(newOffer.Id, newOffer.TenantId, tenantInfo.CountryId, newOffer.Keywords, imgHandler.GetImgUrl((Guid)tenantInfo.Logo, ImageStorages.Cloudinary, ImageRequesters.App).ImgUrl, newOffer.IsSponsored, newOffer.IsActive, newOffer.RelevanceRate,
-                                            0, newOffer.ReleaseDate, newOffer.ExpirationDate, SearchableObjectTypes.Deal, newOffer.MainHint + " " + newOffer.ComplementaryHint, newOffer.Name, newOffer.MainCategoryName, newOffer.MainCategoryName,
-                                            this._businessObjects.Categories.GetParentCategory(newOffer.MainCategoryId, CategoryHerarchyLevels.ProductCategory), newOffer.Value, 1);
-                                        */
+                                        bool success = await SearchObjectHandler.AddCashIncentiveSearchableObjectAsync(newIncentive.Id, newIncentive.TenantId, tenantInfo.CountryId, newIncentive.Keywords, imgHandler.GetImgUrl((Guid)tenantInfo.Logo, ImageStorages.Cloudinary, ImageRequesters.App).ImgUrl, newIncentive.IsSponsored, newIncentive.IsActive, newIncentive.DealType, newIncentive.RelevanceRate,
+                                            0, newIncentive.ReleaseDate, newIncentive.ExpirationDate, SearchableObjectTypes.CashbackIncentive, newIncentive.ApplyType, applyTypeName, newIncentive.MainHint + " " + newIncentive.ComplementaryHint, newIncentive.Name, (double)newIncentive.UnitValue, (double)newIncentive.PreviousUnitValue);
                                     }
 
                                     result = Ok(this.GetIncentiveContent(newIncentive));
@@ -718,23 +703,33 @@ namespace YOY.BusinessAPI.Controllers
                     {
                         bool valid = true;
 
-                        if (!(model.ApplyType >= CashbackApplyTypes.WalletIncrease && model.ApplyType <= CashbackApplyTypes.DirectDiscount))
-                        {
-                            valid = false;
-                            dataErrors += "-El tipo de aplicación debe ser seleccionado\n";
-                        }
+                        Decimal.TryParse(model.UnitValue, out decimal unitValue);
 
-                        if (!(model.BenefitAmountType >= CashIncentiveBenefitAmountTypes.ByTotalAmount && model.BenefitAmountType <= CashIncentiveBenefitAmountTypes.ByAmountBlock))
-                        {
-                            valid = false;
-                            dataErrors += "-Tipo de monto debe ser seleccionado\n";
-                        }
+                        decimal? previousUnitValue;
 
-                        if (!(model.Type >= CashbackTypes.Percentage && model.Type <= CashbackTypes.Points))
+                        if (!string.IsNullOrWhiteSpace(model.PreviousUnitValue))
                         {
-                            valid = false;
-                            dataErrors += "-Tipo debe ser seleccionado\n";
+
+                            Decimal.TryParse(model.PreviousUnitValue, out decimal previousUnitValueAux);
+                            previousUnitValue = previousUnitValueAux;
                         }
+                        else
+                            previousUnitValue = -1;
+
+                        Decimal.TryParse(model.MinPurchasedAmount, out decimal minPurchasedAmount);
+                        Decimal.TryParse(model.MinPurchasedTotalAmount, out decimal minPurchasedTotalAmount);
+                        Decimal.TryParse(model.PurchasedAmountBlock, out decimal purchasedAmountBlock);
+
+                        double relevanceRate;
+
+                        if (!string.IsNullOrWhiteSpace(model.RelevanceRate))
+                        {
+                            Double.TryParse(model.RelevanceRate, out relevanceRate);
+
+                        }
+                        else
+                            relevanceRate = -1;
+
 
                         if (!(model.DealType >= DealTypes.InStore && model.DealType <= DealTypes.Phone))
                         {
@@ -742,52 +737,58 @@ namespace YOY.BusinessAPI.Controllers
                             dataErrors += "-Tipo de incentivo debe ser seleccionado\n";
                         }
 
+                        if (!(model.ApplyType >= CashIncentiveApplyTypes.WalletIncrease && model.ApplyType <= CashIncentiveApplyTypes.DirectDiscount))
+                        {
+                            valid = false;
+                            dataErrors += "- La forma de aplicación debe ser seleccionado\n";
+                        }
+
+                        if (!(model.BenefitAmountType >= CashIncentiveBenefitAmountTypes.ByTotalAmount && model.BenefitAmountType <= CashIncentiveBenefitAmountTypes.ByAmountBlock))
+                        {
+                            valid = false;
+                            dataErrors += "- La forma de calculo debe ser seleccionado\n";
+                        }
+
+                        if (!(model.Type >= CashbackTypes.Percentage && model.Type <= CashbackTypes.Points))
+                        {
+                            valid = false;
+                            dataErrors += "- El tipo de incentivo debe ser seleccionado\n";
+                        }
+
                         if (model.MaxCombinedIncentives < 0)
                         {
                             valid = false;
-                            dataErrors += "-El máximo de incentivos con el que se puede combinar debe ser mayor que 0\n";
-                        }
-
-                        if (model.UnitValue < 0)
-                        {
-                            valid = false;
-                            dataErrors += "-El valor del incentivo debe ser mayor que 0\n";
-                        }
-
-                        if (model.PreviousUnitValue > -1 && model.UnitValue >= model.PreviousUnitValue)
-                        {
-                            valid = false;
-                            dataErrors += "-El valor del incentivo debe ser mayor que el valor previo\n";
+                            dataErrors += "- Máximo de incentivos acumulables debe ser mayor o igual a 0\n";
                         }
 
                         if (model.MinMembershipLevel < MembershipLevels.Bronze || model.MinMembershipLevel > MembershipLevels.Diamond)
                         {
                             valid = false;
-                            dataErrors += "-El mínimo nivel de lealtad debe ser seleccionado\n";
+                            dataErrors += "- El mínimo nivel de lealtad debe ser seleccionado\n";
                         }
 
-                        if (model.MinPurchasedAmount < 0)
+                        if (minPurchasedAmount < 0)
                         {
                             valid = false;
-                            dataErrors += "-El monto mínimo de compra debe ser mayor que 0\n";
+                            dataErrors += "- El monto mínimo de compra debe ser mayor que 0\n";
                         }
 
-                        if (model.PurchasedAmountBlock < -1 || model.PurchasedAmountBlock == 0)
+                        if (purchasedAmountBlock < 0)
                         {
                             valid = false;
-                            dataErrors += "-El bloque de monto para cálculo debe ser mayor que 0\n";
+                            dataErrors += "- El bloque de compra debe ser mayor que 0\n";
                         }
 
-                        if (model.MaxValue < -1 || model.MaxValue == 0)
+                        if (string.IsNullOrWhiteSpace(model.MainHint) || model.MainHint.Length < mainHintMinLength || model.MainHint.Length > mainHintMaxLength)
                         {
                             valid = false;
-                            dataErrors += "-El monto máximo aplicable debe ser mayor que 0\n";
+                            dataErrors += "La frase principal debe tener de " + mainHintMinLength + " a " + mainHintMaxLength + " caracteres\n";
                         }
 
-                        if (model.AvailableQuantity < infiteAvailableQuantity || model.AvailableQuantity == 0 || model.AvailableQuantity < availableQuantityMinValue)
+                        if (string.IsNullOrWhiteSpace(model.ComplementaryHint) || model.ComplementaryHint.Length < complementaryHintMinLength || model.ComplementaryHint.Length > complementaryHintMaxLength)
                         {
                             valid = false;
-                            dataErrors += "-La cantidad disponibles debe ser mayor que " + availableQuantityMinValue + " \n";
+                            dataErrors += "-La frase secundaria debe tener de " + complementaryHintMinLength + " a " + complementaryHintMaxLength + " caracteres\n";
                         }
 
                         if (string.IsNullOrWhiteSpace(model.Name) || model.Name.Length < nameMinLength || model.Name.Length > nameMaxLength)
@@ -796,46 +797,76 @@ namespace YOY.BusinessAPI.Controllers
                             dataErrors += "-El nombre debe tener de " + nameMinLength + " a " + nameMaxLength + " caracteres\n";
                         }
 
-                        if (string.IsNullOrWhiteSpace(model.Description) || model.Description.Length < descriptionMinLength || model.Description.Length > descriptionMaxLength)
-                        {
-                            valid = false;
-                            dataErrors += "-La descripción debe tener de " + descriptionMinLength + " a " + descriptionMaxLength + " caracteres\n";
-                        }
-
                         if (model.Keywords?.Length > keywordsMaxLength)
                         {
                             valid = false;
                             dataErrors += "-El total de palabras clave excede la cantidad permitida\n";
                         }
 
-                        if (model.ValidMonthDays?.Count > 0)
+                        if (string.IsNullOrWhiteSpace(model.Description) || model.Description.Length < descriptionMinLength || model.Description.Length > descriptionMaxLength)
                         {
                             valid = false;
-                            dataErrors += "-Los días válidos del mes deben ser indicados\n";
+                            dataErrors += "-La descripción debe tener de " + descriptionMinLength + " a " + descriptionMaxLength + " caracteres\n";
                         }
 
-                        if (string.IsNullOrWhiteSpace(model.ValidWeekDays))
+                        if (model.AvailableQuantity < infiteAvailableQuantity || model.AvailableQuantity == 0 || model.AvailableQuantity < availableQuantityMinValue)
                         {
                             valid = false;
-                            dataErrors += "-Los días válidos de la semana deben ser indicados\n";
+                            dataErrors += "-La cantidad disponibles debe ser mayor que " + availableQuantityMinValue + " \n";
                         }
 
-                        if (model.ValidHours?.Count > 0)
+                        if (unitValue <= 0)
                         {
                             valid = false;
-                            dataErrors += "-Las horas válidas del día deben ser indicadas\n";
+                            dataErrors += "-El monto del beneficio debe ser mayor o igual que 0\n";
                         }
 
-                        if (model.MaxUsagePerUser < -1 || model.MaxUsagePerUser == 0)
+                        if (previousUnitValue != null && previousUnitValue > -1 && unitValue >= previousUnitValue)
+                        {
+                            valid = false;
+                            dataErrors += "-El beneficio anterior debe ser menor que el monto del beneficio\n";
+                        }
+
+                        if (model.ValidMonthDays?.Count == 0)
+                        {
+                            valid = false;
+                            dataErrors += "-Las fechas de validez deben ser indicadas\n";
+                        }
+
+                        if (model.ValidWeekDays?.Count == 0)
+                        {
+                            valid = false;
+                            dataErrors += "-Los días de la semana válidos deben ser indicados\n";
+                        }
+
+                        if (model.ValidHours?.Count == 0)
+                        {
+                            valid = false;
+                            dataErrors += "-Las horas de validez deben ser indicadas\n";
+                        }
+
+                        if (model.MaxUsagePerUser < -1)
                         {
                             valid = false;
                             dataErrors += "-El máximo de usos por usuario debe ser indicado\n";
                         }
 
-                        if (model.MinPurchaseCountToUse < -1 || model.MinPurchaseCountToUse == 0)
+                        if (model.MinPurchaseCountToUse < -1)
                         {
                             valid = false;
-                            dataErrors += "-El mínimo de compras para accederse debe ser indicado\n";
+                            dataErrors += "-El mínimo de compras realizadas debe ser indicado\n";
+                        }
+
+                        if (minPurchasedTotalAmount < 0)
+                        {
+                            valid = false;
+                            dataErrors += "-El mínimo total de pagos debe ser indicado\n";
+                        }
+
+                        if (relevanceRate < 0)
+                        {
+                            valid = false;
+                            dataErrors += "-El nivel de relevancia debe ser indicado\n";
                         }
 
                         if (model.ReleaseDate >= model.ExpirationDate)
@@ -862,44 +893,52 @@ namespace YOY.BusinessAPI.Controllers
                             model.ReleaseDate = LocalToUtc(model.ReleaseDate, this._businessObjects.Tenant.UtcTimeDiff);
                             model.ExpirationDate = LocalToUtc(model.ExpirationDate, this._businessObjects.Tenant.UtcTimeDiff);
 
+
                             string validMonthDays = "";
-                            string validHours = "";
 
                             foreach (string item in model.ValidMonthDays)
                             {
-                                validMonthDays += item + "*";
+                                validMonthDays = item + "*";
                             }
+
+                            string validWeekDays = "";
+
+                            foreach (string item in model.ValidWeekDays)
+                            {
+                                validWeekDays = item + "*";
+                            }
+
+                            string validHours = "";
 
                             foreach (string item in model.ValidHours)
                             {
-                                validHours += item + "*";
+                                validHours = item + "*";
                             }
+
+                            previousUnitValue = previousUnitValue <= 0 ? null : previousUnitValue;
 
                             //Retrieve tenant to get the rules and conditions
                             TenantInfo tenantInfo = this._businessObjects.Commerces.Get(model.TenantId, CommerceKeys.TenantKey);
 
                             if (tenantInfo != null)
                             {
-                                Offer offer = this._businessObjects.Offers.Get(model.Id, false);
-                                Guid currentMainCategoryId;
+                                CashIncentive incentive = this._businessObjects.CashIncentives.Get(model.Id, false);
 
-                                if (offer != null)
+                                if (incentive != null)
                                 {
 
-                                    double relevanceRate = model.RelevanceRate ?? -1;
-
-                                    CashIncentive updatedIncentive = this._businessObjects.CashIncentives.Put(model.Id, model.Type, DisplayTypes.BroadcastingAndListings, model.ApplyType, model.BenefitAmountType, model.DealType, model.MaxCombinedIncentives,
-                                    model.UnitValue, model.PreviousUnitValue, model.MinMembershipLevel, model.MinPurchasedAmount, model.PurchasedAmountBlock, model.MaxValue, model.AvailableQuantity, model.Name, model.MainHint, model.ComplementaryHint, model.Description, model.Keywords,
-                                    model.IsSponsored, model.ValidWeekDays, validMonthDays, validHours, model.MaxUsagePerUser, model.PurchasesCountStartDate, model.MinPurchaseCountToUse, model.MinPurchasedTotalAmount, GeoSegmentationTypes.Country, tenantInfo.IncentiveRules, 
-                                    tenantInfo.IncentiveConditions, model.RelevanceRate ?? 1, model.ReleaseDate, model.ExpirationDate);
+                                    CashIncentive updatedCashIncentive = this._businessObjects.CashIncentives.Put(model.Id, model.Type, DisplayTypes.BroadcastingAndListings, model.ApplyType, model.BenefitAmountType, model.DealType, model.MaxCombinedIncentives,
+                                        unitValue, previousUnitValue ?? -1, model.MinMembershipLevel, minPurchasedAmount, purchasedAmountBlock, -1, model.AvailableQuantity, model.Name, model.MainHint, model.ComplementaryHint, model.Description, model.Keywords, model.IsSponsored,
+                                        validWeekDays, validMonthDays, validHours, model.MaxUsagePerUser, null, model.MinPurchaseCountToUse, minPurchasedTotalAmount, GeoSegmentationTypes.Country, tenantInfo.IncentiveRules, tenantInfo.IncentiveConditions,
+                                        relevanceRate, model.ReleaseDate, model.ExpirationDate);
 
 
 
-                                    if (updatedIncentive != null)
+                                    if (updatedCashIncentive != null)
                                     {
 
                                         //Needs to update it to Algolia
-                                        if (updatedIncentive.DisplayType < DisplayTypes.BroadcastingOnly)//If the offer will be publicly accessible
+                                        if (updatedCashIncentive.DisplayType < DisplayTypes.BroadcastingOnly)//If the offer will be publicly accessible
                                         {
 
                                             string indexName;
@@ -916,12 +955,18 @@ namespace YOY.BusinessAPI.Controllers
 
                                             SearchObjectHandler.SetParams(SearchIndexNames.AppName, indexName);
 
-                                           /* bool success = await SearchObjectHandler.UpdateGeneralSearchableObjectAsync(updatedOffer.Id, updatedOffer.Keywords, updatedOffer.IsSponsored, updatedOffer.IsActive, updatedOffer.RelevanceRate, updatedOffer.ReleaseDate, updatedOffer.ExpirationDate,
-                                                updatedOffer.MainHint + " " + updatedOffer.ComplementaryHint, updatedOffer.Name, updatedOffer.MainCategoryName, categories, classifications, updatedOffer.Value, 1);
-                                           */
+                                            string applyTypeName = updatedCashIncentive.ApplyType switch
+                                            {
+                                                CashIncentiveApplyTypes.WalletIncrease => "Cashback, Devolucion, Retorno",
+                                                CashIncentiveApplyTypes.DirectDiscount => "Descuento, Discount",
+                                                _ => "",
+                                            };
+
+                                            bool success = await SearchObjectHandler.UpdateCashIncentiveSearchableObjectAsync(updatedCashIncentive.Id, updatedCashIncentive.Keywords, updatedCashIncentive.IsSponsored, updatedCashIncentive.IsActive, updatedCashIncentive.DealType, updatedCashIncentive.RelevanceRate, updatedCashIncentive.ReleaseDate, updatedCashIncentive.ExpirationDate,
+                                                updatedCashIncentive.ApplyType, applyTypeName, updatedCashIncentive.MainHint + " " + updatedCashIncentive.ComplementaryHint, updatedCashIncentive.Name, (double)updatedCashIncentive.UnitValue, (double)updatedCashIncentive.PreviousUnitValue);
                                         }
 
-                                        result = Ok(this.GetIncentiveContent(updatedIncentive));
+                                        result = Ok(this.GetIncentiveContent(updatedCashIncentive));
                                     }
                                     else
                                     {
@@ -1069,12 +1114,136 @@ namespace YOY.BusinessAPI.Controllers
                             response.MessageToDisplay = "El incentivo ha sido desactivada éxitosamente";
                         }
 
-                        result = Ok(response);
+                        result = Ok(this.GetIncentiveContent(updatedIncentive));
                     }
                     else
                     {
                         result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
                     }
+                }
+                catch (Exception e)
+                {
+                    result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
+
+                    //Registers the invalid call
+                    this._businessObjects.HttpcallInvokationLogs.Post(model.EmployeeId.ToString(), this.GetType().Name, callId, controllerVersion,
+                                        Values.StatusCodes.InternalServerError, 0, parameters, 0, 0, false, null, HttpcallTypes.Put, e.InnerException != null ? e.InnerException.Message : e.Message);
+                }
+
+            }
+
+            return result;
+        }
+
+        [Route("putDates")]
+        [HttpPut]
+        [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status200OK)]
+        [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> PutDatesAsync([FromBody] IncentiveDatesModifier model)
+        {
+            int callId = 5;
+            string parameters = model.ToString();
+            string errorMsg;
+
+            IActionResult result;
+
+            Initialize(model.TenantId, model.UserId);
+
+            if (!ModelState.IsValid)
+            {
+                errorMsg = "ERROR: Invalid data received, " + parameters;
+
+                //Registers the invalid call
+                this._businessObjects.HttpcallInvokationLogs.Post(model.EmployeeId.ToString(), this.GetType().Name, callId, controllerVersion,
+                                    Values.StatusCodes.BadRequest, 0, parameters, 0, 0, false, null, HttpcallTypes.Put, errorMsg);
+
+                result = new BadRequestObjectResult(
+                                new ErrorResponse
+                                {
+                                    ErrorCode = Values.StatusCodes.BadRequest,
+                                    ShowErrorToUser = false,
+                                    InnerError = "Invalid Payload",
+                                    PublicError = ""
+                                });
+
+            }
+            else
+            {
+
+                try
+                {
+                    bool valid = true;
+                    string dataErrors = "";
+
+                    if (model.ReleaseDate >= model.ExpirationDate)
+                    {
+                        valid = false;
+                        dataErrors += "-El periodo de validez es incorrecto, la fecha de lanzamiento debe ser menor que la fecha de expiración\n";
+                    }
+
+                    if (valid)
+                    {
+                        //Need to convert dates to UTC
+                        model.ReleaseDate = LocalToUtc(model.ReleaseDate, this._businessObjects.Tenant.UtcTimeDiff);
+                        model.ExpirationDate = LocalToUtc(model.ExpirationDate, this._businessObjects.Tenant.UtcTimeDiff);
+
+                        bool datesUpdated = this._businessObjects.CashIncentives.Put(model.Id, model.ReleaseDate, model.ExpirationDate);
+
+                        if (datesUpdated)
+                        {
+                            CashIncentive updatedIncentive = this._businessObjects.CashIncentives.Get(model.Id, true);
+
+                            //Needs to update it to Algolia
+                            if (updatedIncentive.DisplayType < DisplayTypes.BroadcastingOnly)//If the offer will be publicly accessible
+                            {
+
+                                string indexName;
+
+                                if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+                                {
+                                    indexName = SearchIndexNames.DevAppend + SearchIndexNames.CashbackIncentives;
+
+                                }
+                                else
+                                {
+                                    indexName = SearchIndexNames.ProdAppend + SearchIndexNames.CashbackIncentives;
+                                }
+
+                                SearchObjectHandler.SetParams(SearchIndexNames.AppName, indexName);
+
+                                bool success = await SearchObjectHandler.UpdateSearchableObjectDateRangeAsync(updatedIncentive.Id, updatedIncentive.ReleaseDate, updatedIncentive.ExpirationDate);
+                            }
+
+                            SuccessResponse response = new SuccessResponse
+                            {
+                                StatusCode = Values.StatusCodes.Ok,
+                                ShowMsgToUser = true,
+                            };
+
+                            if (datesUpdated)
+                            {
+                                response.MessageToDisplay = "Las fechas de vigencia se actualizaron éxitosamente";
+                            }
+
+                            result = Ok(this.GetIncentiveContent(updatedIncentive));
+                        }
+                        else
+                        {
+                            result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
+                        }
+                    }
+                    else
+                    {
+                        result = new BadRequestObjectResult(
+                                    new ErrorResponse
+                                    {
+                                        ErrorCode = Values.StatusCodes.BadRequest,
+                                        ShowErrorToUser = false,
+                                        InnerError = "Invalid Payload",
+                                        PublicError = dataErrors
+                                    });
+                    }
+
                 }
                 catch (Exception e)
                 {
@@ -1096,7 +1265,7 @@ namespace YOY.BusinessAPI.Controllers
         [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeleteAsync([FromBody] IncentiveModifierById model)
         {
-            int callId = 5;
+            int callId = 6;
             string parameters = model.ToString();
             string errorMsg;
 
@@ -1152,7 +1321,7 @@ namespace YOY.BusinessAPI.Controllers
                         {
                             StatusCode = Values.StatusCodes.Ok,
                             ShowMsgToUser = true,
-                            MessageToDisplay = "La promo se ha eliminado éxitosamente"
+                            MessageToDisplay = "El incentivo se ha eliminado éxitosamente"
                         };
 
                         result = Ok(response);

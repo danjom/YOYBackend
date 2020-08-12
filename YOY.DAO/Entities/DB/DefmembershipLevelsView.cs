@@ -11,9 +11,7 @@ namespace YOY.DAO.Entities.DB
         public Guid? TenantThumbnail { get; set; }
         public bool HasMembershipLevels { get; set; }
         public string CurrencySymbol { get; set; }
-        public bool AcceptsCommunityPointsAsPayment { get; set; }
-        public bool AcceptsSelfPointsAsPayment { get; set; }
-        public int LoyaltyProgramType { get; set; }
+        public bool AcceptsPay { get; set; }
         public int TenantType { get; set; }
         public Guid TenantCategoryId { get; set; }
         public Guid LevelId { get; set; }

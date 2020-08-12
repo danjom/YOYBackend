@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace YOY.BusinessAPI.Models.v1.CashbackIncentive.POCO
+namespace YOY.BusinessAPI.Models.v1.CashIncentive.POCO
 {
     public class IncentiveData
     {
@@ -52,6 +52,10 @@ namespace YOY.BusinessAPI.Models.v1.CashbackIncentive.POCO
         [Required]
         public string Name { set; get; }
         [Required]
+        public string MainHint { set; get; }
+        [Required]
+        public string ComplementaryHint { set; get; }
+        [Required]
         public string Description { set; get; }
         [Required]
         public string Keywords { set; get; }
@@ -69,6 +73,8 @@ namespace YOY.BusinessAPI.Models.v1.CashbackIncentive.POCO
         public int MaxUsagePerUser { set; get; }
         [Required]
         public int MinPurchasesCountToUse { set; get; }
+        [Required]
+        public decimal MinPurchasedTotalAmount { set; get; }
         [Required]
         public int UsageCount { set; get; }
         [Required]

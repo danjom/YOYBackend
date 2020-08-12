@@ -13,6 +13,7 @@ namespace YOY.DTO.Services.Search.Algolia
         public string ImgUrl { set; get; }
         public bool IsSponsored { set; get; }
         public bool IsActive { set; get; }
+        public int DealType { set; get; }
         public double RelevanceRate { set; get; }
         public int UsageCount { set; get; }
         public int ReleaseDate { set; get; }

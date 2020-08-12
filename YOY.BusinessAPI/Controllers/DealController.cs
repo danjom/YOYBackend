@@ -18,6 +18,9 @@ using System.IO;
 using YOY.ThirdpartyServices.ResponseModels.Image;
 using YOY.ThirdpartyServices.Services.Image.Repo;
 using Microsoft.AspNetCore.Hosting;
+using System.Runtime.InteropServices.ComTypes;
+using YOY.DTO.Entities.Misc.TenantData;
+using System.Linq;
 
 namespace YOY.BusinessAPI.Controllers
 {
@@ -466,6 +469,50 @@ namespace YOY.BusinessAPI.Controllers
             return success;
         }
 
+        [Route("test")]
+        [AllowAnonymous]
+        [HttpGet]
+        [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status200OK)]
+        [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Test()
+        {
+
+            Initialize(Guid.Empty, "b5094a32-1c06-475d-87c0-0ed574df5274");
+
+            List<MinTenantInfo> tenantInfos = this._businessObjects.Commerces.Gets(ActiveStates.Active, 100, 0);
+            TenantInfo info;
+            Guid? tenantId;
+            Guid categoryId;
+
+            Random random = new Random();
+
+            string[] whiteLogos = { "https://res.cloudinary.com/yoyimgs/image/upload/v1596430960/dev/testing/whiteLogo1.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596430960/dev/testing/whiteLogo2.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596430960/dev/testing/whiteLogo3.png" };
+            string[] logos = { "https://res.cloudinary.com/yoyimgs/image/upload/v1596430630/dev/testing/logo1.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596430629/dev/testing/logo2.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596430629/dev/testing/logo3.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596430629/dev/testing/logo4.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596430629/dev/testing/logo5.png" };
+            string[] carrouselImgs = { "https://res.cloudinary.com/yoyimgs/image/upload/v1596429105/dev/testing/carrousel.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596429105/dev/testing/carrousel2.jpg", "https://res.cloudinary.com/yoyimgs/image/upload/v1596429106/dev/testing/carrousel3.jpg", "https://res.cloudinary.com/yoyimgs/image/upload/v1596429108/dev/testing/carrousel4.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596429105/dev/testing/carrousel5.jpg" };
+            string[] thumbnailsImgs = { "https://res.cloudinary.com/yoyimgs/image/upload/v1596432237/dev/testing/thumbnail1.jpg", "https://res.cloudinary.com/yoyimgs/image/upload/v1596432236/dev/testing/thumbnail2.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596432237/dev/testing/thumbnail3.jpg", "https://res.cloudinary.com/yoyimgs/image/upload/v1596432235/dev/testing/thumbnail4.jpg", "https://res.cloudinary.com/yoyimgs/image/upload/v1596432236/dev/testing/thumbnail5.jpg", "https://res.cloudinary.com/yoyimgs/image/upload/v1596432236/dev/testing/thumbnail6.jpg" };
+
+
+            if (tenantInfos?.Count > 0)
+            {
+                foreach(MinTenantInfo item in tenantInfos)
+                {
+                    if(item.Name.Any(c => char.IsDigit(c)) && item.InstanceType == TenantInstanceTypes.Business)
+                    {
+                        this._businessObjects.Commerces.Put(item.Id, null, whiteLogos[random.Next(3)], TenantImgTypes.WhiteLogo);
+
+                        this._businessObjects.Commerces.Put(item.Id, null, logos[random.Next(5)], TenantImgTypes.Logo);
+
+                        this._businessObjects.Commerces.Put(item.Id, null, carrouselImgs[random.Next(5)], TenantImgTypes.CarrousedImg);
+
+                        this._businessObjects.Commerces.Put(item.Id, null, thumbnailsImgs[random.Next(6)], TenantImgTypes.Thumbnail);
+                    }
+                }
+            }
+
+            return Ok();
+        }
+
+
         /// <summary>
         /// Retrieve all the offer from a given tenant
         /// </summary>
@@ -602,9 +649,9 @@ namespace YOY.BusinessAPI.Controllers
 
                         double relevanceRate;
 
-                        if (!string.IsNullOrWhiteSpace(model.ExtraBonus))
+                        if (!string.IsNullOrWhiteSpace(model.RelevanceRate))
                         {
-                            Double.TryParse(model.ExtraBonus, out relevanceRate);
+                            Double.TryParse(model.RelevanceRate, out relevanceRate);
 
                         }
                         else
@@ -714,6 +761,12 @@ namespace YOY.BusinessAPI.Controllers
                             dataErrors += "-El periodo de validez es incorrecto, la fecha de lanzamiento debe ser menor que la fecha de expiración\n";
                         }
 
+                        if(relevanceRate < 0)
+                        {
+                            valid = false;
+                            dataErrors += "-El nivel de relevancia debe ser indicado\n";
+                        }
+
                         if (!valid)
                         {
 
@@ -787,7 +840,7 @@ namespace YOY.BusinessAPI.Controllers
                                    newOffer.DisplayImgId = this.SaveImage(model.DisplayImgData, newOffer.Id, newOffer.OfferType, OfferImgTypes.DisplayImg);
 
                                     //Creates the category relation
-                                    this._businessObjects.Categories.Post(model.MainCategoryId, CategoryHerarchyLevels.ProductCategory, newOffer.Id, CategoryRelatiomReferenceTypes.Offer);
+                                    this._businessObjects.Categories.Post(model.MainCategoryId, CategoryHerarchyLevels.ProductCategory, newOffer.Id, CategoryRelationReferenceTypes.Offer);
 
                                     //Needs to add it to Algolia 1st
                                     if (newOffer.DisplayType < DisplayTypes.BroadcastingOnly)//If the offer will be publicly accessible
@@ -809,8 +862,8 @@ namespace YOY.BusinessAPI.Controllers
 
                                         SearchObjectHandler.SetParams(SearchIndexNames.AppName, indexName);
 
-                                        bool success = await SearchObjectHandler.AddGeneralSearchableObjectAsync(newOffer.Id, newOffer.TenantId, tenantInfo.CountryId, newOffer.Keywords, imgHandler.GetImgUrl((Guid)tenantInfo.Logo, ImageStorages.Cloudinary, ImageRequesters.App).ImgUrl, newOffer.IsSponsored, newOffer.IsActive, newOffer.RelevanceRate,
-                                            0, newOffer.ReleaseDate, newOffer.ExpirationDate, SearchableObjectTypes.Deal, newOffer.MainHint + " " + newOffer.ComplementaryHint, newOffer.Name, newOffer.MainCategoryName, newOffer.MainCategoryName,
+                                        bool success = await SearchObjectHandler.AddGeneralSearchableObjectAsync(newOffer.Id, newOffer.TenantId, tenantInfo.CountryId, newOffer.Keywords, imgHandler.GetImgUrl((Guid)tenantInfo.Logo, ImageStorages.Cloudinary, ImageRequesters.App).ImgUrl, newOffer.IsSponsored, newOffer.IsActive, newOffer.DealType, 
+                                            newOffer.RelevanceRate, 0, newOffer.ReleaseDate, newOffer.ExpirationDate, SearchableObjectTypes.Deal, newOffer.MainHint + " " + newOffer.ComplementaryHint, newOffer.Name, newOffer.MainCategoryName, newOffer.MainCategoryName,
                                             this._businessObjects.Categories.GetParentCategory(newOffer.MainCategoryId, CategoryHerarchyLevels.ProductCategory), newOffer.Value, 1);
                                     }
 
@@ -1032,6 +1085,12 @@ namespace YOY.BusinessAPI.Controllers
                             dataErrors += "-El rango de edad es incorrecto, la edad incial debe ser menor que la edad final\n";
                         }
 
+                        if (relevanceRate < 0)
+                        {
+                            valid = false;
+                            dataErrors += "-El nivel de relevancia debe ser indicado\n";
+                        }
+
                         if (model.ReleaseDate >= model.ExpirationDate)
                         {
                             valid = false;
@@ -1112,10 +1171,10 @@ namespace YOY.BusinessAPI.Controllers
                                         if (currentMainCategoryId != updatedOffer.MainCategoryId)
                                         {
                                             //Needs to update the category relation
-                                            this._businessObjects.Categories.Delete(offer.MainCategoryId, model.Id, CategoryRelatiomReferenceTypes.Offer);
+                                            this._businessObjects.Categories.Delete(offer.MainCategoryId, model.Id, CategoryRelationReferenceTypes.Offer);
 
                                             //Creates the category relation
-                                            this._businessObjects.Categories.Post(model.MainCategoryId, CategoryHerarchyLevels.ProductCategory, updatedOffer.Id, CategoryRelatiomReferenceTypes.Offer);
+                                            this._businessObjects.Categories.Post(model.MainCategoryId, CategoryHerarchyLevels.ProductCategory, updatedOffer.Id, CategoryRelationReferenceTypes.Offer);
                                         }
 
                                         //Needs to update it to Algolia
@@ -1154,8 +1213,8 @@ namespace YOY.BusinessAPI.Controllers
 
                                             SearchObjectHandler.SetParams(SearchIndexNames.AppName, indexName);
 
-                                            bool success = await SearchObjectHandler.UpdateGeneralSearchableObjectAsync(updatedOffer.Id, updatedOffer.Keywords, updatedOffer.IsSponsored, updatedOffer.IsActive, updatedOffer.RelevanceRate, updatedOffer.ReleaseDate, updatedOffer.ExpirationDate, 
-                                                updatedOffer.MainHint + " " + updatedOffer.ComplementaryHint, updatedOffer.Name, updatedOffer.MainCategoryName, categories, classifications, updatedOffer.Value, 1 );
+                                            bool success = await SearchObjectHandler.UpdateGeneralSearchableObjectAsync(updatedOffer.Id, updatedOffer.Keywords, updatedOffer.IsSponsored, updatedOffer.IsActive, updatedOffer.DealType, 
+                                                updatedOffer.RelevanceRate, updatedOffer.ReleaseDate, updatedOffer.ExpirationDate, updatedOffer.MainHint + " " + updatedOffer.ComplementaryHint, updatedOffer.Name, updatedOffer.MainCategoryName, categories, classifications, updatedOffer.Value, 1 );
                                         }
 
                                         result = Ok(this.GetDealContent(updatedOffer, updatedOffer.OfferType));

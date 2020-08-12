@@ -2742,8 +2742,6 @@ namespace YOY.DAO.Entities.DB
                     .HasMaxLength(512)
                     .IsUnicode(false);
 
-                entity.Property(e => e.LoyaltyProgramType).HasDefaultValueSql("((1))");
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(60)

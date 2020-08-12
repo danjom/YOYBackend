@@ -19,7 +19,9 @@ namespace YOY.UserAPI.Models.v1.Content.POCO
         public string CurrencySymbol { set; get; }
         public decimal RegularPrice { set; get; }
         public string CashbackHint { set; get; }
-        public int AvailableQuantityHint { set; get; }
+        public bool DisplayCashbackHint { set; get; }
+        public int AvailableQuantity { set; get; }
+        public string AvailableQuantityHint { set; get; }
         public bool DisplayAvailableQuantityHint { set; get; }
         public string ExpirationDate { set; get; }
         public bool DisplayExpirationHint { set; get; }

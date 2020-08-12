@@ -9,6 +9,7 @@ namespace YOY.DAO.Entities.DB
         public Guid ReferenceId { get; set; }
         public int ReferenceType { get; set; }
         public int HerarchyLevel { get; set; }
+        public Guid? PreferenceId { get; set; }
         public Guid? GeneratorRelationId { get; set; }
         public Guid CategoryId { get; set; }
         public string CategoryName { get; set; }

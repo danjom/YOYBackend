@@ -1448,6 +1448,7 @@ namespace YOY.DAO.Entities.Manager
                             CategoryName = item.CategoryName,
                             HerarchyLevel = item.HerarchyLevel,
                             ParentCategoryId = item.ParentCategoryId,
+                            PreferenceId = item.PreferenceId,
                             ReferenceId = item.ReferenceId,
                             ReferenceType = item.ReferenceType,
                             GeneratorRelationId = item.GeneratorRelationId
@@ -1513,7 +1514,7 @@ namespace YOY.DAO.Entities.Manager
             return enabledCategories;
         }
 
-        public List<EnabledCategoryForRelation> Gets(int referenceType, Guid referenceId)
+        public List<EnabledCategoryForRelation> Gets(int referenceType, Guid referenceId, int max)
         {
             List<EnabledCategoryForRelation> enabledCategories = null;
 
@@ -1527,9 +1528,9 @@ namespace YOY.DAO.Entities.Manager
                         //PENDING!!!!!!
                         break;
                     case CategoryRelationTypes.Offer:
-                        query = from x in this._businessObjects.Context.EnabledProductCategoriesByTenantCategoryRelationView
+                        query = (from x in this._businessObjects.Context.EnabledProductCategoriesByTenantCategoryRelationView
                                 where x.ReferenceType == referenceType && x.ReferenceId == referenceId
-                                select x;
+                                select x).Take(max);
                         break;
                 }
 
@@ -1591,12 +1592,12 @@ namespace YOY.DAO.Entities.Manager
 
                 switch (referenceType)
                 {
-                    case CategoryRelatiomReferenceTypes.Tenant:
+                    case CategoryRelationReferenceTypes.Tenant:
 
                         preferenceId = this._businessObjects.StoredProcsHandler.GetPreferenceIdForCommerceCategory(categoryId, herarchyLevel) ;
 
                         break;
-                    case CategoryRelatiomReferenceTypes.Offer:
+                    case CategoryRelationReferenceTypes.Offer:
 
                         preferenceId = this._businessObjects.StoredProcsHandler.GetPreferenceIdForProductCategory(categoryId, herarchyLevel);
 
@@ -1606,6 +1607,8 @@ namespace YOY.DAO.Entities.Manager
 
                 if(preferenceId != Guid.Empty)
                 {
+                    newCategoryRelation.PreferenceId = preferenceId;
+
                     //Needs to check if the preference relation already exists
 
                     OltpcategoryRelations preferenceRelation = (from x in this._businessObjects.Context.OltpcategoryRelations
@@ -1672,9 +1675,25 @@ namespace YOY.DAO.Entities.Manager
 
                     if(query != null)
                     {
+                        OltpcategoryRelations relation = null;
+
                         foreach (OltpcategoryRelations item in query)
                         {
-                            this._businessObjects.Context.OltpcategoryRelations.Remove(item);
+                            //Needs to check if other category relation references the preference
+
+                            relation = (from x in this._businessObjects.Context.OltpcategoryRelations
+                                        where x.PreferenceId != null && x.PreferenceId == item.CategoryId
+                                        select x).FirstOrDefault();
+
+                            if(relation != null)
+                            {
+                                item.GeneratorRelationId = relation.Id;
+                            }
+                            else
+                            {
+                                this._businessObjects.Context.OltpcategoryRelations.Remove(item);
+                            }
+
                         }
                     }
 

@@ -35,7 +35,7 @@ namespace YOY.AdminCore.Miscellaneous.Logic.Search
             indexName = index;
         }
 
-        public static async Task<bool> AddGeneralSearchableObjectAsync(Guid id, Guid tenantId, Guid countryId, string keywords, string imgUrl, bool isSponsored, bool isActive, double relevanceRate, int usageCount, DateTime releaseDate, DateTime expirationDate, int searchableType, string searchableMainKey, string details, string mainCategory, string relatedCategories, string classifications, decimal value, double cashbackPercentage)
+        public static async Task<bool> AddGeneralSearchableObjectAsync(Guid id, Guid tenantId, Guid countryId, string keywords, string imgUrl, bool isSponsored, bool isActive, double relevanceRate, int usageCount, DateTime releaseDate, DateTime expirationDate, int searchableType, string searchableClueKey, string details, string mainCategory, string relatedCategories, string classifications, decimal value, double cashbackPercentage)
         {
             bool success = false;
 
@@ -57,7 +57,7 @@ namespace YOY.AdminCore.Miscellaneous.Logic.Search
                     ExpirationDate = DateTimeToUnixTimestamp(DateTime.MaxValue),
                     //GENERAL CONTENT DATA
                     SearchableObjectType = searchableType,
-                    SearchMainKey = searchableMainKey,
+                    SearchClueKey = searchableClueKey,
                     Details = details,
                     MainCategory = mainCategory,
                     Categories = relatedCategories,
@@ -78,7 +78,7 @@ namespace YOY.AdminCore.Miscellaneous.Logic.Search
             return success;
         }
 
-        public static async Task<bool> UpdateGeneralSearchableObjectAsync(Guid id, string keywords, bool isSponsored, bool isActive, double relevanceRate, DateTime releaseDate, DateTime? expirationDate, string searchKey, string details, string mainCategory, string categories, string classifications, decimal value, double cashbackPercentage)
+        public static async Task<bool> UpdateGeneralSearchableObjectAsync(Guid id, string keywords, bool isSponsored, bool isActive, double relevanceRate, DateTime releaseDate, DateTime? expirationDate, string searchClueKey, string details, string mainCategory, string categories, string classifications, decimal value, double cashbackPercentage)
         {
             bool success = false;
 
@@ -96,7 +96,7 @@ namespace YOY.AdminCore.Miscellaneous.Logic.Search
                     ReleaseDate = DateTimeToUnixTimestamp(releaseDate),
                     ExpirationDate = expirationDate != null ? DateTimeToUnixTimestamp((DateTime)expirationDate) : DateTimeToUnixTimestamp(DateTime.MaxValue),
                     //GENERAL CONTENT DATA
-                    SearchKey = searchKey,
+                    SearchClueKey = searchClueKey,
                     Details = details,
                     MainCategory = mainCategory,
                     Categories = categories,

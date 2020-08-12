@@ -16,9 +16,7 @@ namespace YOY.DTO.Entities
         public string CurrencySymbol { set; get; }
         public Guid LevelId { set; get; }
         public string LevelName { set; get; }
-        public bool AcceptCommunityPointsAsPayment { set; get; }
-        public bool AcceptsSelfPointsAsPayment { set; get; }
-        public int LoyaltyProgramType { set; get; }
+        public bool AcceptsPay { set; get; }
         public int LevelPos { set; get; }
         public string IconUrl { set; get; }
         public string EnabledActions { set; get; }

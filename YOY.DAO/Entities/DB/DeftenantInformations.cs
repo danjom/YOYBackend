@@ -40,9 +40,7 @@ namespace YOY.DAO.Entities.DB
         public string ContactEmail { get; set; }
         public Guid CategoryId { get; set; }
         public bool HasMembershipLevels { get; set; }
-        public int LoyaltyProgramType { get; set; }
-        public bool AcceptsCommunityPointsAsPayment { get; set; }
-        public bool AcceptsSelfPointsAsPayment { get; set; }
+        public bool AcceptsPay { get; set; }
         public DateTime? TrialExpiration { get; set; }
         public string DealRules { get; set; }
         public string DealConditions { get; set; }
@@ -56,8 +54,6 @@ namespace YOY.DAO.Entities.DB
         public string CampaignDefaultContentMsg { get; set; }
         public int Language { get; set; }
         public string Website { get; set; }
-        public int DealsClaimMethod { get; set; }
-        public int CheckInType { get; set; }
         public int ReferenceCodeType { get; set; }
         public double DefaultCommissionFeePercentage { get; set; }
         public double ConsumerCashbackPercentage { get; set; }

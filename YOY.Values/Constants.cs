@@ -60,6 +60,9 @@
         public const int UpdateDisplayedContent = 3;
         public const int DisplayDealDetailScreen = 4;
         public const int DisplayCashIncentiveDetailScreen = 5;
+        public const int GoToDealsListForCategory = 6;
+        public const int GoToDealsListForCommerce = 7;
+        public const int GoToDealsListForShoppingMall = 8;
     }
 
     public static class ViewAllCellContentAccess
@@ -1327,7 +1330,7 @@
         public const int Points = 3;
     }
 
-    public static class CashbackApplyTypes
+    public static class CashIncentiveApplyTypes
     {
         public const int All = -1;
         public const int WalletIncrease = 1;
@@ -1428,7 +1431,7 @@
         public const int CashbackIncentive = 3;
     }
 
-    public static class CategoryRelatiomReferenceTypes
+    public static class CategoryRelationReferenceTypes
     {
         public const int Tenant = 1;
         public const int Offer = 2;

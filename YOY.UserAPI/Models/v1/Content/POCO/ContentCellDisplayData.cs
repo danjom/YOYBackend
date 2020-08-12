@@ -14,7 +14,9 @@ namespace YOY.UserAPI.Models.v1.Content.POCO
         public string MainHint { set; get; }
         public string ComplementaryHint { set; get; }
         public string ExtraHint { set; get; }
-        public int AvailableQuantityHint { set; get; }
+        public bool DisplayExtraHint { set; get; }
+        public int AvailableQuantity { set; get; }
+        public string AvailableQuantityHint { set; get; }
         public bool DisplayAvailableQuantityHint { set; get; }
         public string ExpirationDate { set; get; }
         public bool DisplayExpirationHint { set; get; }

@@ -17,7 +17,9 @@ namespace YOY.DTO.Entities
         [RegularExpression(".+@.+\\..+", ErrorMessageResourceType = typeof(Resources),
                                      ErrorMessageResourceName = "InvalidEmail")]
         public string Email { set; get; }
+        public string ContactName { set; get; }
         public string ContactPhoneNumber { set; get; }
+        public string ContactEmail { set; get; }
         public string OrderInquiriesPhoneNumber { set; get; }
         public bool IsActive { set; get; }
         public DateTime CreatedDate { set; get; }

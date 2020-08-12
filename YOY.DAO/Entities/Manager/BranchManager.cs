@@ -502,7 +502,9 @@ namespace YOY.DAO.Entities.Manager
                         Name = item.Name,
                         PostCode = item.PostCode,
                         Email = item.Email,
+                        ContactName = item.ContactName,
                         ContactPhoneNumber = item.ContactPhoneNumber,
+                        ContactEmail = item.ContactEmail,
                         OrderInquiriesPhoneNumber = item.OrdersPhoneNumber,
                         IsActive = item.IsActive,
                         CreatedDate = item.CreatedDate,
@@ -640,7 +642,9 @@ namespace YOY.DAO.Entities.Manager
                         Name = item.Name,
                         PostCode = item.PostCode,
                         Email = item.Email,
+                        ContactName = item.ContactName,
                         ContactPhoneNumber = item.ContactPhoneNumber,
+                        ContactEmail = item.ContactEmail,
                         OrderInquiriesPhoneNumber = item.OrdersPhoneNumber,
                         IsActive = item.IsActive,
                         CreatedDate = item.CreatedDate,
@@ -809,7 +813,9 @@ namespace YOY.DAO.Entities.Manager
                         Name = item.Name,
                         PostCode = item.PostCode,
                         Email = item.Email,
+                        ContactName = item.ContactName,
                         ContactPhoneNumber = item.ContactPhoneNumber,
+                        ContactEmail = item.ContactEmail,
                         OrderInquiriesPhoneNumber = item.OrdersPhoneNumber,
                         IsActive = item.IsActive,
                         CreatedDate = item.CreatedDate,
@@ -947,7 +953,9 @@ namespace YOY.DAO.Entities.Manager
                         Name = item.Name,
                         PostCode = item.PostCode,
                         Email = item.Email,
+                        ContactName = item.ContactName,
                         ContactPhoneNumber = item.ContactPhoneNumber,
+                        ContactEmail = item.ContactEmail,
                         OrderInquiriesPhoneNumber = item.OrdersPhoneNumber,
                         IsActive = item.IsActive,
                         CreatedDate = item.CreatedDate,
@@ -1083,7 +1091,9 @@ namespace YOY.DAO.Entities.Manager
                         Name = item.Name,
                         PostCode = item.PostCode,
                         Email = item.Email,
+                        ContactName = item.ContactName,
                         ContactPhoneNumber = item.ContactPhoneNumber,
+                        ContactEmail = item.ContactEmail,
                         OrderInquiriesPhoneNumber = item.OrdersPhoneNumber,
                         IsActive = item.IsActive,
                         CreatedDate = item.CreatedDate,
@@ -1164,7 +1174,9 @@ namespace YOY.DAO.Entities.Manager
                         Name = item.Name,
                         PostCode = item.PostCode,
                         Email = item.Email,
+                        ContactName = item.ContactName,
                         ContactPhoneNumber = item.ContactPhoneNumber,
+                        ContactEmail = item.ContactEmail,
                         OrderInquiriesPhoneNumber = item.OrdersPhoneNumber,
                         IsActive = item.IsActive,
                         CreatedDate = item.CreatedDate,
@@ -1209,7 +1221,7 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="descriptiveAddress"></param>
         /// <param name="locationAddress"></param>
         /// <returns></returns>
-        public Branch Post(Guid? franchiseeId, Guid stateId, Guid cityId, Guid? branchHolderId, Guid? branchHolderDepartmentId, int type, string name, string postCode, string email, string contactName, string contactPhone,
+        public Branch Post(Guid tenantId, Guid? franchiseeId, Guid stateId, Guid cityId, Guid? branchHolderId, Guid? branchHolderDepartmentId, int type, string name, string postCode, string email, string contactName, string contactPhone,
             string contactEmail, string ordersPhone, bool independantOwner, decimal latitude, decimal longitude, XElement locationAddress, string descriptiveAddress, int orderTakingType, Guid? geofenceId)//XElement locationAddress
         {
             Branch currentBranch = null;
@@ -1225,7 +1237,7 @@ namespace YOY.DAO.Entities.Manager
 
                 bool? success = this._businessObjects.StoredProcsHandler.InsertBranch(
                                 newId,
-                                this._businessObjects.Tenant.TenantId,
+                                tenantId,
                                 franchiseeId,
                                 stateId,
                                 cityId,
@@ -1256,14 +1268,9 @@ namespace YOY.DAO.Entities.Manager
 
                 if (success == true)
                 {
-                    var query = from x in this._businessObjects.Context.DefbranchesView
-                                where x.Id == newId
-                                select x;
-
-                    foreach (DefbranchesView item in query)
-                    {
-                        branch = item;
-                    }
+                    branch = (from x in this._businessObjects.Context.DefbranchesView
+                              where x.Id == newId
+                              select x).FirstOrDefault();
 
                     if (branch != null)
                     {
@@ -1284,7 +1291,9 @@ namespace YOY.DAO.Entities.Manager
                             Name = branch.Name,
                             PostCode = branch.PostCode,
                             Email = branch.Email,
+                            ContactName = branch.ContactName,
                             ContactPhoneNumber = branch.ContactPhoneNumber,
+                            ContactEmail = branch.ContactEmail,
                             OrderInquiriesPhoneNumber = branch.OrdersPhoneNumber,
                             IsActive = branch.IsActive,
                             CreatedDate = branch.CreatedDate,
@@ -1338,13 +1347,11 @@ namespace YOY.DAO.Entities.Manager
         {
             Branch currentBranch = new Branch();
 
-            //XElement element = new XElement("elementName", "This address doesnt exist");
-
             try
             {
 
 
-                this._businessObjects.StoredProcsHandler.UpdateBranch(id,
+             bool? success =   this._businessObjects.StoredProcsHandler.UpdateBranch(id,
                                                                       franchiseeId,
                                                                       branchHolderId,
                                                                       branchHolderDepartmentId,
@@ -1362,6 +1369,60 @@ namespace YOY.DAO.Entities.Manager
                                                                       descriptiveAddress,
                                                                       orderTakingType,
                                                                       geofenceId);
+
+                this._businessObjects.Context.SaveChanges();
+
+                DefbranchesView branch;
+
+                if (success == true)
+                {
+                    branch = (from x in this._businessObjects.Context.DefbranchesView
+                              where x.Id == id
+                              select x).FirstOrDefault();
+
+                    if (branch != null)
+                    {
+                        currentBranch = new Branch
+                        {
+                            Id = branch.Id,
+                            TenantId = branch.TenantId,
+                            Type = branch.Type,
+                            TypeName = this.GetTypeName(branch.Type),
+                            BranchHolderId = branch.BranchHolderId,
+                            BranchHolderName = branch.BranchHolderName,
+                            BranchHolderContactPhoneNumber = branch.BranchHolderContactPhoneNumber,
+                            BranchHolderEmail = branch.BranchHolderEmail,
+                            BranchHolderActiveState = branch.BranchHolderActiveState,
+                            BrachHolderDepartmentId = branch.BranchHolderDepartmentId,
+                            BranchHolderDepartmentName = branch.BranchHolderDepartmentName,
+                            BranchHolderDepartmentActiveState = branch.BranchHolderDepartmentActiveState,
+                            Name = branch.Name,
+                            PostCode = branch.PostCode,
+                            Email = branch.Email,
+                            ContactName = branch.ContactName,
+                            ContactPhoneNumber = branch.ContactPhoneNumber,
+                            ContactEmail = branch.ContactEmail,
+                            OrderInquiriesPhoneNumber = branch.OrdersPhoneNumber,
+                            IsActive = branch.IsActive,
+                            CreatedDate = branch.CreatedDate,
+                            UpdatedDate = branch.UpdatedDate,
+                            Latitude = branch.Latitude,
+                            Longitude = branch.Longitude,
+                            LocationAddress = XElement.Parse(branch.LocationAddress),
+                            DescriptiveAddress = branch.DescriptiveAddress,
+                            OrderTakingType = branch.OrderTakingType,
+                            GeofenceId = branch.GeofenceId,
+                            GeofenceName = branch.GeofenceName,
+                            UtcTimeZone = branch.UtcTimeZone,
+                            StateId = branch.StateId,
+                            StateName = branch.StateName,
+                            CityId = branch.CityId,
+                            CityName = branch.CityName,
+                            HashedCode = branch.HashedCode
+                        };
+                    }
+
+                }
 
             }
             catch (Exception e)

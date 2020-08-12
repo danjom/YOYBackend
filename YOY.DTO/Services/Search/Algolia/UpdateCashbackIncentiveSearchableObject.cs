@@ -6,8 +6,11 @@ namespace YOY.DTO.Services.Search.Algolia
 {
     public class UpdateCashbackIncentiveSearchableObject : UpdateSearchableObjectCore
     {
-        public string SearchKey { set; get; }
+        public int ApplyType { set; get; }
+        public string ApplyTypeName { set; get; }
+        public string SearchClueKey { set; get; }
         public string Details { set; get; }
-        public double CashbackPercentage { set; get; }
+        public double IncentiveAmount { set; get; }
+        public double PreviousAmount { set; get; }
     }
 }
