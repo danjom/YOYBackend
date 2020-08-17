@@ -989,6 +989,90 @@ namespace YOY.DAO.Entities.Manager
             return businessBranches;
         }//GETS ENDS ------------------------------------------------------------------------------------------------------------------------------------ //
 
+        public List<Branch> Gets(int type)
+        {
+            List<Branch> businessBranches = new List<Branch>();
+
+            try
+            {
+
+                List<DefbranchesView> branches = new List<DefbranchesView>();
+
+                var query = (dynamic)null;
+
+                switch (type)
+                {
+                    case 1:
+
+                        query = from x in this._businessObjects.Context.DefbranchesView
+                                 where x.Type == BranchTypes.Holder
+                                 select x;
+                        break;
+                    case 2:
+
+                        query = from x in this._businessObjects.Context.DefbranchesView
+                                 where x.BranchHolderId != null
+                                 select x;
+                        break;
+                    
+
+                }
+
+                foreach (DefbranchesView item in query)
+                {
+                    Branch currentBranch = new Branch
+                    {
+                        Id = item.Id,
+                        TenantId = item.TenantId,
+                        Type = item.Type,
+                        TypeName = this.GetTypeName(item.Type),
+                        BranchHolderId = item.BranchHolderId,
+                        BranchHolderName = item.BranchHolderName,
+                        BranchHolderContactPhoneNumber = item.BranchHolderContactPhoneNumber,
+                        BranchHolderEmail = item.BranchHolderEmail,
+                        BranchHolderActiveState = item.BranchHolderActiveState,
+                        BrachHolderDepartmentId = item.BranchHolderDepartmentId,
+                        BranchHolderDepartmentName = item.BranchHolderDepartmentName,
+                        BranchHolderDepartmentActiveState = item.BranchHolderDepartmentActiveState,
+                        Name = item.Name,
+                        PostCode = item.PostCode,
+                        Email = item.Email,
+                        ContactName = item.ContactName,
+                        ContactPhoneNumber = item.ContactPhoneNumber,
+                        ContactEmail = item.ContactEmail,
+                        OrderInquiriesPhoneNumber = item.OrdersPhoneNumber,
+                        IsActive = item.IsActive,
+                        CreatedDate = item.CreatedDate,
+                        UpdatedDate = item.UpdatedDate,
+                        Latitude = item.Latitude,
+                        Longitude = item.Longitude,
+                        LocationAddress = XElement.Parse(item.LocationAddress),
+                        DescriptiveAddress = item.DescriptiveAddress,
+                        UtcTimeZone = item.UtcTimeZone,
+                        StateId = item.StateId,
+                        StateName = item.StateName,
+                        CityId = item.CityId,
+                        CityName = item.CityName,
+                        OrderTakingType = item.OrderTakingType,
+                        GeofenceId = item.GeofenceId,
+                        HashedCode = item.HashedCode
+                    };
+
+
+                    businessBranches.Add(currentBranch);
+                }
+            }
+            catch (Exception e)
+            {
+                businessBranches = null;
+                // ERROR HANDLING
+                this._businessObjects.StoredProcsHandler.AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+            }
+
+            return businessBranches;
+        }//GETS ENDS ------------------------------------------------------------------------------------------------------------------------------------ //
+
+
         public List<Pair<Guid, string>> Gets(Guid tenantId, int activeState)
         {
             List<Pair<Guid, string>> branches = null;
@@ -1468,27 +1552,21 @@ namespace YOY.DAO.Entities.Manager
         /// </summary>
         /// <param name="branhchId"></param>
         /// <returns></returns>
-        public bool Put(Guid branhchId, Guid geofenceId)
+        public bool Put(Guid branhchId, Guid holderId)
         {
             bool sucess;
 
 
             try
             {
-                DefbranchesView branch = new DefbranchesView();
+                Defbranches branch = (from x in this._businessObjects.Context.Defbranches
+                                     where x.Id == branhchId
+                                     select x).FirstOrDefault();
 
-                var query = from x in this._businessObjects.Context.DefbranchesView
-                            where x.TenantId == this._businessObjects.Tenant.TenantId && x.Id == branhchId
-                            select x;
-
-                foreach (var item in query)
-                {
-                    branch = item;
-                }
 
                 if (branch != null)
                 {
-                    branch.GeofenceId = geofenceId;
+                    branch.BranchHolderId = holderId;
                     branch.UpdatedDate = DateTime.UtcNow;
 
                     this._businessObjects.Context.SaveChanges();

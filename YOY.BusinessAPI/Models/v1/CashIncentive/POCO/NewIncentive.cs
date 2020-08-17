@@ -20,6 +20,9 @@ namespace YOY.BusinessAPI.Models.v1.CashIncentive.POCO
         public string UserId { set; get; }
         [NotNull]
         [Required]
+        public Guid BranchId { set; get; }
+        [NotNull]
+        [Required]
         public int ApplyType { set; get; }
         [NotNull]
         [Required]
@@ -81,11 +84,9 @@ namespace YOY.BusinessAPI.Models.v1.CashIncentive.POCO
         [NotNull]
         [Required]
         public int MaxUsagePerUser { set; get; }
-        [AllowNull]
-        public DateTime? PurchasesCountStartDate { set; get; }
         [NotNull]
         [Required]
-        public int MinPurchaseCountToUse { set; get; }
+        public int MinPurchasesCountToUse { set; get; }
         [NotNull]
         [Required]
         public string MinPurchasedTotalAmount { set; get; }

@@ -8,6 +8,7 @@ namespace YOY.UserAPI.Models.v1.Content.POCO
     public class ContentCellDisplayData : CellDisplayData
     {
         public int DealType { set; get; }
+        public string DealTypeName { set; get; }
         public bool Favorite { set; get; }
         public string CommerceLogo { set; get; }
         public string ImgUrl { set; get; }

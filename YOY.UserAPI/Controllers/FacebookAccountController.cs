@@ -354,7 +354,7 @@ namespace YOY.UserAPI.Controllers
             }
             catch (Exception e)
             {
-                errorMsg = "Error: An exception has occured, " + e.Message;
+                errorMsg = "Error: An exception has occured, " + e.InnerException != null ? e.InnerException.Message : e.Message;
                 result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
 
                 //Registers the invalid call

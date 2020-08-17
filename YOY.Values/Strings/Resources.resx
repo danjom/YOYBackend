@@ -619,10 +619,10 @@
     <value>Estructura Comercial</value>
   </data>
   <data name="ByAmountBlock" xml:space="preserve">
-    <value>Por Bloque de Monto</value>
+    <value>Por bloque de monto</value>
   </data>
   <data name="ByAmountBlockPurchaseFrequency" xml:space="preserve">
-    <value>Por Frecuencia y Bloque de Monto</value>
+    <value>Por frecuencia y bloque de monto</value>
   </data>
   <data name="ByDirectAmount" xml:space="preserve">
     <value>Por monto directo</value>
@@ -646,10 +646,10 @@
     <value>Por unirte a YOY</value>
   </data>
   <data name="ByTotalAmount" xml:space="preserve">
-    <value>Por Monto Total</value>
+    <value>Por monto total</value>
   </data>
   <data name="ByTotalAmountPurchaseFrequency" xml:space="preserve">
-    <value>Por Frecuencia y Monto Total</value>
+    <value>Por frecuencia y monto total</value>
   </data>
   <data name="Calendar" xml:space="preserve">
     <value>Calendario</value>
@@ -4631,7 +4631,7 @@ Cualquier duda o consulta, escribe a info@clubyoy.com</value>
     <value>Gana &lt;Bonus&gt; más en tu Alcancia</value>
   </data>
   <data name="WalletIncrease" xml:space="preserve">
-    <value>Incremento en alcancía</value>
+    <value>Retorno de dinero</value>
   </data>
   <data name="WalletTransferedPoints" xml:space="preserve">
     <value>a tu Alcancía</value>

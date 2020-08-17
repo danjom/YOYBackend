@@ -159,6 +159,21 @@
   <data name="ByShoppingMall" xml:space="preserve">
     <value>Por Centro Comercial</value>
   </data>
+  <data name="CartItemAddedSuccessfully" xml:space="preserve">
+    <value>Agregado al carrito</value>
+  </data>
+  <data name="CartItemDeletedSuccessfully" xml:space="preserve">
+    <value>Eliminado del carrito</value>
+  </data>
+  <data name="CartItemMovedToFavoritesFailed" xml:space="preserve">
+    <value>Eliminado del carrito. No guardado en favoritos</value>
+  </data>
+  <data name="CartItemMovedToFavoritesSuccessfully" xml:space="preserve">
+    <value>Pasado a favoritos</value>
+  </data>
+  <data name="CartItemUpdatedSuccessfully" xml:space="preserve">
+    <value>Carrito actualizado</value>
+  </data>
   <data name="December" xml:space="preserve">
     <value>Diciembre</value>
   </data>
@@ -198,6 +213,12 @@
   <data name="FailedOperation" xml:space="preserve">
     <value>Operación fallida</value>
   </data>
+  <data name="FavedContentAddedSuccessfully" xml:space="preserve">
+    <value>Agregado a favoritos</value>
+  </data>
+  <data name="FavedContentDeletedSuccessfully" xml:space="preserve">
+    <value>Eliminado de favoritos</value>
+  </data>
   <data name="February" xml:space="preserve">
     <value>Febrero</value>
   </data>
@@ -209,6 +230,9 @@
   </data>
   <data name="GoogleAccountNotFound" xml:space="preserve">
     <value>Cuenta de Google no encontrada</value>
+  </data>
+  <data name="InStore" xml:space="preserve">
+    <value>En tienda</value>
   </data>
   <data name="InvalidAppleId" xml:space="preserve">
     <value>Appler User ID inválido</value>
@@ -294,11 +318,20 @@
   <data name="October" xml:space="preserve">
     <value>Octubre</value>
   </data>
+  <data name="Online" xml:space="preserve">
+    <value>Web</value>
+  </data>
   <data name="OpenWalletRewardDescription" xml:space="preserve">
     <value>Abriste you alcancía YOY, ¡con ella ganas dinero real!</value>
   </data>
   <data name="OpenWalletRewardTitle" xml:space="preserve">
     <value>+{0} YOYs como regalor por unirte a YOY</value>
+  </data>
+  <data name="OperationFailed" xml:space="preserve">
+    <value>Operación fallida</value>
+  </data>
+  <data name="OperationFailedMsg" xml:space="preserve">
+    <value>Ups, algo salió mal</value>
   </data>
   <data name="OutOfBirthdateRange" xml:space="preserve">
     <value>El rango de edad aceptado va de los 10 a los 100 años</value>
@@ -311,6 +344,9 @@
   </data>
   <data name="PersonalIdRecentlyUsedInOtherAccount" xml:space="preserve">
     <value>Este id se ha asociado recientemente a otra cuenta</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Express</value>
   </data>
   <data name="PhoneNumberAlreadyRegistered" xml:space="preserve">
     <value>Este número ya está asociado a otra cuenta, por favor ingresa otro</value>

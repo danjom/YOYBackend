@@ -3787,7 +3787,7 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="broadcastingMsg"></param>
         /// <param name="relevanceRate"></param>
         /// <returns></returns>
-        public Offer Post(Guid mainCategoryId, int offerType, int dealType, int rewardType, int purposeType, int geoSegmentationType, int displayType, string name, 
+        public Offer Post(Guid tenantId, Guid mainCategoryId, int offerType, int dealType, int rewardType, int purposeType, int geoSegmentationType, int displayType, string name, 
             string mainHint, string complementaryHint, string keywords, string code, string description, int minsToUnlock, bool isExclusive, bool isSponsored, bool hasUniqueCodes,
             int availableQuantity, bool? oneTimeRedemption, int maxClaimsPerUser, int minPurchasesCountToRedeem, DateTime? purchasesCountStartDate,
             string claimLocation, decimal value, decimal? regularValue, double extraBonus, int extraBonusType, decimal minIncentive, decimal maxIncentive, int incentiveVariationType,
@@ -3803,7 +3803,7 @@ namespace YOY.DAO.Entities.Manager
                 newOffer = new Oltpoffers
                 {
                     Id = Guid.NewGuid(),
-                    TenantId = this._businessObjects.Tenant.TenantId,
+                    TenantId = tenantId,
                     MainCategoryId = mainCategoryId,
                     OfferType = offerType,
                     DealType = dealType,
@@ -4408,7 +4408,7 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="contentType"></param>
         /// <param name="imgType"></param>
         /// <returns></returns>
-        public Guid? Put(Guid id, int offerType, Guid imageId, string imageUrl, int imgType)
+        public Guid? Put(Guid id, int offerType, Guid? imageId, string imageUrl, int imgType)
         {
             Guid? currentImg = null;
 
@@ -4513,7 +4513,7 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="radius"></param>
         /// <param name="dateTime"></param>
         /// <returns></returns>
-        private List<FlattenedOfferData> GetOffersDataByRegionWithLocation(Guid countryId, Guid stateId, int contentSegmentationType, string userId, decimal latitude, decimal longitude, double radius, DateTime dateTime, int selectorType, int offerPurpose, int pageSize, int pageNumber)
+        public List<FlattenedOfferData> GetOffersDataByRegionWithLocation(Guid countryId, Guid stateId, int contentSegmentationType, string userId, decimal latitude, decimal longitude, double radius, DateTime dateTime, int selectorType, int offerPurpose, int pageSize, int pageNumber)
         {
             List<FlattenedOfferData> offers = null;
 
@@ -4876,7 +4876,7 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="stateId"></param>
         /// <param name="dateTime"></param>
         /// <returns></returns>
-        private List<FlattenedOfferData> GetOffersDataByRegion(Guid stateId, Guid countryId, int contentSegmentationType, string userId, DateTime dateTime, int selectorType, int offerPurpose, int pageSize, int pageNumber)
+        public List<FlattenedOfferData> GetOffersDataByRegion(Guid stateId, Guid countryId, int contentSegmentationType, string userId, DateTime dateTime, int selectorType, int offerPurpose, int pageSize, int pageNumber)
         {
             List<FlattenedOfferData> offers = null;
 
@@ -5236,7 +5236,7 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="stateId"></param>
         /// <param name="dateTime"></param>
         /// <returns></returns>
-        private List<FlattenedOfferData> GetOffersDataByRegionForReference(Guid stateId, Guid countryId, int contentSegmentationType, string userId, DateTime dateTime, int referenceType, Guid referenceId, int offerPurpose, int pageSize, int pageNumber)
+        public List<FlattenedOfferData> GetOffersDataByRegionForReference(Guid stateId, Guid countryId, int contentSegmentationType, string userId, DateTime dateTime, int referenceType, Guid referenceId, int offerPurpose, int pageSize, int pageNumber)
         {
             List<FlattenedOfferData> offers = null;
 
@@ -5594,7 +5594,7 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="stateId"></param>
         /// <param name="dateTime"></param>
         /// <returns></returns>
-        private List<FlattenedOfferData> GetOfferDisplayContent(Guid offerId, string userId, int offerPurpose, DateTime dateTime)
+        public List<FlattenedOfferData> GetOfferDisplayContent(Guid offerId, string userId, int offerPurpose, DateTime dateTime)
         {
             List<FlattenedOfferData> offers = null;
 

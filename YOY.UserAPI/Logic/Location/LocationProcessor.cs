@@ -107,8 +107,8 @@ namespace YOY.UserAPI.Logic.Location
             try
             {
                 string[] locationData = location.Trim().Split('*');
-                double latitude = 0;
-                double longitude = 0;
+                decimal latitude = 0;
+                decimal longitude = 0;
 
                 if (locationData != null && locationData.Length == 2)
                 {
@@ -117,9 +117,9 @@ namespace YOY.UserAPI.Logic.Location
 
                         //-------------------COORDINATES DATA-------------------------//
                         //Latitude
-                        double.TryParse(locationData.ElementAt(0), out latitude);
+                        decimal.TryParse(locationData.ElementAt(0), out latitude);
                         //Longitude
-                        double.TryParse(locationData.ElementAt(1), out longitude);
+                        decimal.TryParse(locationData.ElementAt(1), out longitude);
 
                         processedLocation.Latitude = latitude;
                         processedLocation.Longitude = longitude;

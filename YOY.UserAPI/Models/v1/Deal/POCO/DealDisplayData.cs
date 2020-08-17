@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace YOY.UserAPI.Models.v1.Content.POCO
+namespace YOY.UserAPI.Models.v1.Deal.POCO
 {
-    public class DealContentCellDetail : CellContainedObject
+    public class DealDisplayData
     {
+        public Guid Id { set; get; }
+        public string ExtraHint { set; get; }
+        public bool DisplayExtraHint { set; get; }
         public int DealType { set; get; }
         public string DealTypeName { set; get; }
+        public string DealTypeIcon { set; get; }
         public bool Favorite { set; get; }
         public string CommerceLogo { set; get; }
         public string ImgUrl { set; get; }
@@ -24,9 +28,13 @@ namespace YOY.UserAPI.Models.v1.Content.POCO
         public int AvailableQuantity { set; get; }
         public string AvailableQuantityHint { set; get; }
         public bool DisplayAvailableQuantityHint { set; get; }
+        public bool IsNew { set; get; }
         public string ExpirationDate { set; get; }
         public bool DisplayExpirationHint { set; get; }
         public bool HasPreferences { set; get; }
-
+        public int MinAge { set; get; }
+        public int MaxAge { set; get; }
+        public char GenderFocus { set; get; }
+        public double Score { set; get; }
     }
 }

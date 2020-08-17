@@ -991,7 +991,7 @@ namespace YOY.DAO.Entities.Manager
                     OfferId = offerId,
                     Quantity = quantity,
                     HasPreferences = hasPreferences,
-                    ChosenPreferences = chosenPreferences.ToString(),
+                    ChosenPreferences = chosenPreferences != null ? chosenPreferences.ToString() : null,
                     IsActive = true,
                     CreatedDate = DateTime.UtcNow,
                     UpdatedDate = DateTime.UtcNow
@@ -1026,9 +1026,9 @@ namespace YOY.DAO.Entities.Manager
             return shoppingCartItem;
         }
 
-        public bool Put(Guid id, int? quantity, XElement chosenPreferences)
+        public ShoppingCartItem Put(Guid id, int? quantity, XElement chosenPreferences)
         {
-            bool success;
+            ShoppingCartItem shoppingCartItem;
 
             try
             {
@@ -1057,28 +1057,40 @@ namespace YOY.DAO.Entities.Manager
 
                     this._businessObjects.Context.SaveChanges();
 
-                    success = true;
+                    shoppingCartItem = new ShoppingCartItem
+                    {
+                        Id = currentCartItem.Id,
+                        TenantId = currentCartItem.TenantId,
+                        UserId = currentCartItem.UserId,
+                        OfferId = currentCartItem.OfferId,
+                        Quantity = currentCartItem.Quantity,
+                        HasPreferences = currentCartItem.HasPreferences,
+                        ChosenPreferences = XElement.Parse(currentCartItem.ChosenPreferences),
+                        IsActive = (bool)currentCartItem.IsActive,
+                        CreatedDate = currentCartItem.CreatedDate,
+                        UpdatedDate = currentCartItem.UpdatedDate
+                    };
                 }
                 else
                 {
-                    success = false;
+                    shoppingCartItem = null;
                 }
             }
             catch(Exception e)
             {
-                success = false;
+                shoppingCartItem = null;
 
                 //ERROR HANDLING
                 this._businessObjects.StoredProcsHandler.AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
 
             }
 
-            return success;
+            return shoppingCartItem;
         }
 
-        public bool Delete(Guid id)
+        public ShoppingCartItem Delete(Guid id)
         {
-            bool success;
+            ShoppingCartItem shoppingCartItem;
 
             try
             {
@@ -1088,27 +1100,41 @@ namespace YOY.DAO.Entities.Manager
 
                 if (currentCartItem != null)
                 {
+                    shoppingCartItem = new ShoppingCartItem
+                    {
+                        Id = currentCartItem.Id,
+                        TenantId = currentCartItem.TenantId,
+                        UserId = currentCartItem.UserId,
+                        OfferId = currentCartItem.OfferId,
+                        Quantity = currentCartItem.Quantity,
+                        HasPreferences = currentCartItem.HasPreferences,
+                        ChosenPreferences = XElement.Parse(currentCartItem.ChosenPreferences),
+                        IsActive = (bool)currentCartItem.IsActive,
+                        CreatedDate = currentCartItem.CreatedDate,
+                        UpdatedDate = currentCartItem.UpdatedDate
+                    };
+
                     this._businessObjects.Context.OltpshoppingCartItems.Remove(currentCartItem);
 
                     this._businessObjects.Context.SaveChanges();
 
-                    success = true;
+                    
                 }
                 else
                 {
-                    success = false;
+                    shoppingCartItem = null;
                 }
             }
             catch (Exception e)
             {
-                success = false;
+                shoppingCartItem = null;
 
                 //ERROR HANDLING
                 this._businessObjects.StoredProcsHandler.AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
 
             }
 
-            return success;
+            return shoppingCartItem;
         }
 
         #endregion

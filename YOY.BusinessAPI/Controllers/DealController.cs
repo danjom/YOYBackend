@@ -479,35 +479,171 @@ namespace YOY.BusinessAPI.Controllers
 
             Initialize(Guid.Empty, "b5094a32-1c06-475d-87c0-0ed574df5274");
 
-            List<MinTenantInfo> tenantInfos = this._businessObjects.Commerces.Gets(ActiveStates.Active, 100, 0);
-            TenantInfo info;
+            //List<MinTenantInfo> tenantInfos = this._businessObjects.Commerces.Gets(ActiveStates.Active, 100, 0);
+            
             Guid? tenantId;
             Guid categoryId;
 
+            List<Branch> branchHolders = this._businessObjects.Branches.Gets(1);
+            List<Branch> branches = this._businessObjects.Branches.Gets(2);
+
+
             Random random = new Random();
 
-            string[] whiteLogos = { "https://res.cloudinary.com/yoyimgs/image/upload/v1596430960/dev/testing/whiteLogo1.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596430960/dev/testing/whiteLogo2.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596430960/dev/testing/whiteLogo3.png" };
-            string[] logos = { "https://res.cloudinary.com/yoyimgs/image/upload/v1596430630/dev/testing/logo1.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596430629/dev/testing/logo2.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596430629/dev/testing/logo3.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596430629/dev/testing/logo4.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596430629/dev/testing/logo5.png" };
-            string[] carrouselImgs = { "https://res.cloudinary.com/yoyimgs/image/upload/v1596429105/dev/testing/carrousel.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596429105/dev/testing/carrousel2.jpg", "https://res.cloudinary.com/yoyimgs/image/upload/v1596429106/dev/testing/carrousel3.jpg", "https://res.cloudinary.com/yoyimgs/image/upload/v1596429108/dev/testing/carrousel4.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596429105/dev/testing/carrousel5.jpg" };
-            string[] thumbnailsImgs = { "https://res.cloudinary.com/yoyimgs/image/upload/v1596432237/dev/testing/thumbnail1.jpg", "https://res.cloudinary.com/yoyimgs/image/upload/v1596432236/dev/testing/thumbnail2.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596432237/dev/testing/thumbnail3.jpg", "https://res.cloudinary.com/yoyimgs/image/upload/v1596432235/dev/testing/thumbnail4.jpg", "https://res.cloudinary.com/yoyimgs/image/upload/v1596432236/dev/testing/thumbnail5.jpg", "https://res.cloudinary.com/yoyimgs/image/upload/v1596432236/dev/testing/thumbnail6.jpg" };
-
-
-            if (tenantInfos?.Count > 0)
+            if (branches?.Count > 0)
             {
-                foreach(MinTenantInfo item in tenantInfos)
+                foreach(Branch item in branches)
                 {
-                    if(item.Name.Any(c => char.IsDigit(c)) && item.InstanceType == TenantInstanceTypes.Business)
+                    if(item.BranchHolderId != null)
                     {
-                        this._businessObjects.Commerces.Put(item.Id, null, whiteLogos[random.Next(3)], TenantImgTypes.WhiteLogo);
-
-                        this._businessObjects.Commerces.Put(item.Id, null, logos[random.Next(5)], TenantImgTypes.Logo);
-
-                        this._businessObjects.Commerces.Put(item.Id, null, carrouselImgs[random.Next(5)], TenantImgTypes.CarrousedImg);
-
-                        this._businessObjects.Commerces.Put(item.Id, null, thumbnailsImgs[random.Next(6)], TenantImgTypes.Thumbnail);
+                        this._businessObjects.Branches.Put(item.Id, branchHolders.ElementAt(random.Next(branchHolders.Count)).Id);
                     }
                 }
             }
+
+            //string[] imgs = { "https://res.cloudinary.com/yoyimgs/image/upload/v1596430960/dev/testing/whiteLogo1.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596430960/dev/testing/whiteLogo2.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596430960/dev/testing/whiteLogo3.png" };
+
+            //string[] mainHints = { "30%", "50%", "₡25,000", "₡10,500", "Lleva 2", "1 Gratis", "1 gratis" };
+            //string[] complementaryHints = { "En cashback", "De descuento", "En cashback", "De descuento", "Paga 1", "Al comprar 2", "Por la compra de 3" };
+            //string[] dealNames = { "En Predator NIX", "En nuestras camisas", "En Big Mac",  "En carne de res", "En gaseosas", "En donas especiales", "En crepas rellenas"};
+            //string[] keywords = { "promo, comida, dulce, disfruta", "ropa, moda, nuevo, exclusivo", "carnivoro, delicioso, res, pollo, cerdo", "dulce, postres, gusto, antojo", "deportes, zapatos, fit, top", "regalia, compra, promo, especial", "exclusivo, promo, regalo, sorpresa" };
+            //decimal[] prices = { 2500, 21000, 13500, 4300, 5400, 4200, 14530, 4800 };
+            //decimal?[] regularPrices = { null, 30500, 16500, null, 10000, 7230, 21500, null };
+            //int[] availableQuantities = { -1, 5, 10, 15, 25, 50, 100 };
+
+
+            //int[] dealTypes = { DealTypes.InStore, DealTypes.Online, DealTypes.Phone };
+            //int[] extraBonusTypes = {  ExtraBonusTypes.None, ExtraBonusTypes.Percentage, ExtraBonusTypes.FixedAmount };
+            //double[] extraBonusAmounts = { 1300, 2500, 4000, 4500, 5300 };
+            //double[] extraBonusPercentages = { 5, 10, 12, 15, 22 };
+
+            //int extraBonusType;
+            //int pricePos;
+            //double extraBonusValue = 0;
+            //string code = "dealCode ";
+            //string claimLocation = "En nuestros puntos de venta";
+            //string description = "Esta es la descripcion de una promo especial, promo de YOY.\nPromo de YOY, esta es al description de una promo exclusiva.\nCompra con YOY para acceder a esta promo especial";
+
+            //string[] imgUrls = { "https://res.cloudinary.com/yoyimgs/image/upload/v1596269453/dev/testing/offer1.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596269453/dev/testing/offer2.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596269453/dev/testing/offer3.png",
+            //        "https://res.cloudinary.com/yoyimgs/image/upload/v1596269453/dev/testing/offer4.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596269453/dev/testing/offer5.png", "https://res.cloudinary.com/yoyimgs/image/upload/v1596269453/dev/testing/offer6.png"};
+
+            //string[] genders = { "#", "M", "W", "F", "T" };
+            //string gender;
+            //int startAge;
+            //int endAge;
+            //string targettingParams = "";
+            //string relatedCategories = "";
+
+            //Offer offer;
+
+            //List<EnabledCategoryForRelation> categoriesForRelation = null;
+
+            //if (tenantInfos?.Count > 0)
+            //{
+            //    foreach(MinTenantInfo item in tenantInfos)
+            //    {
+            //        if(item.InstanceType == TenantInstanceTypes.Business)
+            //        {
+            //            categoriesForRelation = this._businessObjects.Categories.Gets(item.TenantId);
+
+            //            for(int i = 0; i< 10; ++i)
+            //            {
+            //                gender = genders[random.Next(5)];
+            //                startAge = random.Next(12, 25);
+            //                endAge = random.Next(25, 95);
+
+            //                targettingParams = TargettingParamMarks.Gender + TargettingParamMarks.TypeValueSeparator + gender;
+
+            //                if (startAge <= endAge)
+            //                {
+            //                    targettingParams += TargettingParamMarks.ParamsSeparator + TargettingParamMarks.AgeInterval + TargettingParamMarks.TypeValueSeparator + startAge + "-" + endAge;
+            //                }
+            //                else
+            //                {
+            //                    targettingParams += TargettingParamMarks.ParamsSeparator + TargettingParamMarks.AgeInterval + TargettingParamMarks.TypeValueSeparator + TargettingParamMarks.AnyValue;
+            //                }
+
+            //                extraBonusType = extraBonusTypes[random.Next(3)];
+
+            //                switch (extraBonusType)
+            //                {
+            //                    case ExtraBonusTypes.None:
+            //                        extraBonusValue = 0;
+            //                        break;
+            //                    case ExtraBonusTypes.Percentage:
+            //                        extraBonusValue = extraBonusPercentages[random.Next(5)];
+            //                        break;
+            //                    case ExtraBonusTypes.FixedAmount:
+            //                        extraBonusValue = extraBonusAmounts[random.Next(5)];
+            //                        break;
+
+            //                }
+
+            //                pricePos = random.Next(7);
+
+            //                offer = this._businessObjects.Offers.Post(item.TenantId, categoriesForRelation.ElementAt(random.Next(categoriesForRelation.Count - 1)).CategoryId, OfferTypes.Offer, dealTypes[random.Next(3)], RewardTypes.Deal, OfferPurposeTypes.Deal, GeoSegmentationTypes.Country,
+            //                    DisplayTypes.BroadcastingAndListings, dealNames[random.Next(7)], mainHints[random.Next(7)], complementaryHints[random.Next(7)], keywords[random.Next(7)], code+i, i+description, 0, false, false, false, availableQuantities[random.Next(7)],
+            //                    false, -1, 0, null, claimLocation, prices[pricePos], regularPrices[pricePos], extraBonusValue, extraBonusType, 0, 0, 0, 0, 0, targettingParams, DateTime.UtcNow, DateTime.UtcNow.AddDays(random.Next(15, 100)), "Rules", "Conditions", "Claim Instructions", 0, 0, 0, "", "", random.Next(1,5) );
+
+            //                if(offer != null)
+            //                {
+            //                    this._businessObjects.Offers.Put(offer.Id, offer.OfferType, null, imgUrls[random.Next(6)], OfferImgTypes.DisplayImg);
+
+            //                    //Creates the category relation
+            //                    this._businessObjects.Categories.Post(offer.MainCategoryId, CategoryHerarchyLevels.ProductCategory, offer.Id, CategoryRelationReferenceTypes.Offer);
+
+            //                    relatedCategories = "";
+
+            //                    for(int j=0; j<4; ++j)
+            //                    {
+            //                        do
+            //                        {
+            //                            int pos = random.Next(categoriesForRelation.Count - 1);
+            //                            categoryId = categoriesForRelation.ElementAt(pos).CategoryId;
+
+
+            //                            if (offer.MainCategoryId == categoryId || relatedCategories.Contains(categoriesForRelation.ElementAt(pos).CategoryName))
+            //                                categoryId = Guid.Empty;
+            //                            else
+            //                            {
+
+            //                                relatedCategories += categoriesForRelation.ElementAt(pos).CategoryName + ",";
+            //                            }
+
+            //                        } while (categoryId == Guid.Empty);
+
+
+
+            //                        this._businessObjects.Categories.Post(categoryId, CategoryHerarchyLevels.ProductCategory, offer.Id, CategoryRelationReferenceTypes.Offer);
+            //                    }
+
+            //                    if (offer.DisplayType < DisplayTypes.BroadcastingOnly)//If the offer will be publicly accessible
+            //                    {
+
+            //                        string indexName;
+
+            //                        if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+            //                        {
+            //                            indexName = SearchIndexNames.DevAppend + SearchIndexNames.GeneralContent;
+
+            //                        }
+            //                        else
+            //                        {
+            //                            indexName = SearchIndexNames.ProdAppend + SearchIndexNames.GeneralContent;
+            //                        }
+
+            //                        SearchObjectHandler.SetParams(SearchIndexNames.AppName, indexName);
+
+            //                        bool success = await SearchObjectHandler.AddGeneralSearchableObjectAsync(offer.Id, offer.TenantId, item.CountryId, offer.Keywords, item.LogoUrl, offer.IsSponsored, offer.IsActive, offer.DealType,
+            //                            offer.RelevanceRate, 0, offer.ReleaseDate, offer.ExpirationDate, SearchableObjectTypes.Deal, offer.MainHint + " " + offer.ComplementaryHint, offer.Name, offer.MainCategoryName, relatedCategories + offer.MainCategoryName,
+            //                            this._businessObjects.Categories.GetParentCategory(offer.MainCategoryId, CategoryHerarchyLevels.ProductCategory), offer.Value, 1);
+            //                    }
+            //                }
+
+            //            }
+            //        }
+            //    }
+        //}
 
             return Ok();
         }
@@ -826,7 +962,7 @@ namespace YOY.BusinessAPI.Controllers
                                 };
 
 
-                                Offer newOffer = this._businessObjects.Offers.Post(model.MainCategoryId, offerType, model.DealType, RewardTypes.Deal, OfferPurposeTypes.Deal, GeoSegmentationTypes.Country,
+                                Offer newOffer = this._businessObjects.Offers.Post(model.TenantId, model.MainCategoryId, offerType, model.DealType, RewardTypes.Deal, OfferPurposeTypes.Deal, GeoSegmentationTypes.Country,
                                     DisplayTypes.BroadcastingAndListings, model.Name, model.MainHint, model.ComplementaryHint, model.Keywords, model.Code, model.Description, MinsToUnlockByObjectiveTypes.GenericPurpose,
                                     model.IsExclusive, model.IsSponsored, false, model.AvailableQuantity, false, -1, 0, null, model.ClaimLocation, value, regularValue, extraBonus, model.ExtraBonusType,
                                     value, value, 0, 0, 0, targettingParams, model.ReleaseDate, model.ExpirationDate, tenantInfo.DealRules, tenantInfo.DealConditions, claimInstructions, ScheduleTypes.Continously, TimerTypes.CountDown,
@@ -846,8 +982,6 @@ namespace YOY.BusinessAPI.Controllers
                                     if (newOffer.DisplayType < DisplayTypes.BroadcastingOnly)//If the offer will be publicly accessible
                                     {
 
-                                        ImageHandler imgHandler = new ImageHandler();
-
                                         string indexName;
 
                                         if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
@@ -862,7 +996,7 @@ namespace YOY.BusinessAPI.Controllers
 
                                         SearchObjectHandler.SetParams(SearchIndexNames.AppName, indexName);
 
-                                        bool success = await SearchObjectHandler.AddGeneralSearchableObjectAsync(newOffer.Id, newOffer.TenantId, tenantInfo.CountryId, newOffer.Keywords, imgHandler.GetImgUrl((Guid)tenantInfo.Logo, ImageStorages.Cloudinary, ImageRequesters.App).ImgUrl, newOffer.IsSponsored, newOffer.IsActive, newOffer.DealType, 
+                                        bool success = await SearchObjectHandler.AddGeneralSearchableObjectAsync(newOffer.Id, newOffer.TenantId, tenantInfo.CountryId, newOffer.Keywords, tenantInfo.LogoUrl, newOffer.IsSponsored, newOffer.IsActive, newOffer.DealType, 
                                             newOffer.RelevanceRate, 0, newOffer.ReleaseDate, newOffer.ExpirationDate, SearchableObjectTypes.Deal, newOffer.MainHint + " " + newOffer.ComplementaryHint, newOffer.Name, newOffer.MainCategoryName, newOffer.MainCategoryName,
                                             this._businessObjects.Categories.GetParentCategory(newOffer.MainCategoryId, CategoryHerarchyLevels.ProductCategory), newOffer.Value, 1);
                                     }

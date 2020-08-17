@@ -14,6 +14,21 @@
         public const int Level2 = 2;
     }
 
+    public static class ContainingActionTypes
+    {
+        public const int Add = 1;
+        public const int Updated = 2;
+        public const int Remove = 3;
+        public const int TransferredSuccess = 4;
+        public const int TransferredFail = 5;
+    }
+
+    public static class ShoppingCartDeleteActionTypes
+    {
+        public const int Delete = 1;
+        public const int PassToFavorites = 2;
+    }
+
     public static class ContentFeedTypes
     {
         public const int None = 0;

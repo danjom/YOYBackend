@@ -133,7 +133,7 @@ namespace YOY.BusinessAPI.Handlers.Search
                     RelevanceRate = relevanceRate,
                     UsageCount = usageCount,
                     ReleaseDate = DateTimeToUnixTimestamp(releaseDate),
-                    ExpirationDate = DateTimeToUnixTimestamp(DateTime.MaxValue),
+                    ExpirationDate = DateTimeToUnixTimestamp(expirationDate),
                     //GENERAL CONTENT DATA
                     SearchableObjectType = searchableType,
                     SearchClueKey = searchClueKey,

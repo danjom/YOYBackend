@@ -481,7 +481,7 @@ namespace YOY.BusinessAPI.Controllers
                             dataErrors += "-El máximo de usos por usuario debe ser indicado\n";
                         }
 
-                        if (model.MinPurchaseCountToUse < -1)
+                        if (model.MinPurchasesCountToUse < -1)
                         {
                             valid = false;
                             dataErrors += "-El mínimo de compras realizadas debe ser indicado\n";
@@ -563,7 +563,7 @@ namespace YOY.BusinessAPI.Controllers
 
 
                                 CashIncentive newIncentive = this._businessObjects.CashIncentives.Post(model.Type, DisplayTypes.BroadcastingAndListings, model.ApplyType, model.BenefitAmountType, model.DealType, model.MaxCombinedIncentives, unitValue, previousUnitValue ?? -1, model.MinMembershipLevel,
-                                    minPurchasedAmount, purchasedAmountBlock, -1, model.AvailableQuantity, model.Name, model.MainHint, model.ComplementaryHint, model.Description, model.Keywords, model.IsSponsored, validWeekDays, validMonthDays, validHours, model.MaxUsagePerUser, null, model.MinPurchaseCountToUse,
+                                    minPurchasedAmount, purchasedAmountBlock, -1, model.AvailableQuantity, model.Name, model.MainHint, model.ComplementaryHint, model.Description, model.Keywords, model.IsSponsored, validWeekDays, validMonthDays, validHours, model.MaxUsagePerUser, null, model.MinPurchasesCountToUse,
                                     minPurchasedTotalAmount, GeoSegmentationTypes.Country, tenantInfo.IncentiveRules, tenantInfo.IncentiveConditions, relevanceRate, model.ReleaseDate, model.ExpirationDate);
 
 

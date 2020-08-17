@@ -362,6 +362,12 @@ namespace YOY.DAO.Entities
         /// </summary>
         private SearchLogManager _searchLogManager;
 
+        // SHOPPING CART ITEMS MANAGER --------------------------------------------------------------------------------------------------------------------------------- //
+        /// <summary>
+        /// This property provides functionality to manage the shopping cart items items. Each tenants uses 
+        /// </summary>
+        private ShoppingCartItemManager _shoppingCartItems;
+
         // TEXT MESSAGE LOGS MANAGER --------------------------------------------------------------------------------------------------------------------------------- //
         /// <summary>
         /// This property provides functionality to manage the text message logs. Each tenants uses 
@@ -1491,6 +1497,25 @@ namespace YOY.DAO.Entities
                 } // ELSE ENDS
             } // GET ENDS
         } // PROPERTY SEARCHLOGS ENDS ------------------------------------------------------------------------------------------------------------------------ //
+
+
+        // RESOURCES:/ SHOPPINGCARTITEMS ---------------------------------------------------------------------------------------------------------------------------- //
+        /// <summary>
+        /// This dynamic loader exposes the Shopping Cart Items resource
+        /// </summary>
+        public ShoppingCartItemManager ShoppingCartItems
+        {
+            get
+            {
+                if (this._shoppingCartItems != null)
+                    return _shoppingCartItems;
+                else
+                {
+                    this._shoppingCartItems = new ShoppingCartItemManager(this);
+                    return _shoppingCartItems;
+                } // ELSE ENDS
+            } // GET ENDS
+        } // PROPERTY SHOPPINGCARTITEMS ENDS ------------------------------------------------------------------------------------------------------------------------ //
 
 
         // RESOURCES:/ SEARCHLOGS ---------------------------------------------------------------------------------------------------------------------------- //

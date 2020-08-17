@@ -365,45 +365,14 @@ namespace YOY.DAO.Entities.Manager
             return savedItem;
         }
 
-        public bool Put(Guid referenceId, int referenceType)
-        {
-            bool success = false ;
-
-            try
-            {
-                OltpsavedItems currentSavedItem = (from x in this._businessObjects.Context.OltpsavedItems
-                                                   where x.ReferenceType == referenceType && x.ReferenceId == referenceId
-                                                   select x).FirstOrDefault();
-
-                if(currentSavedItem != null)
-                {
-                    currentSavedItem.IsActive = !currentSavedItem.IsActive;
-                    currentSavedItem.UpdatedDate = DateTime.UtcNow;
-
-                    this._businessObjects.Context.SaveChanges();
-
-                    success = true;
-                }
-            }
-            catch(Exception e)
-            {
-                success = false;
-                //ERROR HANDLING
-                this._businessObjects.StoredProcsHandler.AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
-
-            }
-
-            return success;
-        }
-
-        public bool Delete(Guid referenceId, int referenceType)
+        public bool Delete(Guid referenceId, int referenceType, string userId)
         {
             bool success = false;
 
             try
             {
                 OltpsavedItems currentSavedItem = (from x in this._businessObjects.Context.OltpsavedItems
-                                                   where x.ReferenceType == referenceType && x.ReferenceId == referenceId
+                                                   where x.UserId == userId && x.ReferenceType == referenceType && x.ReferenceId == referenceId
                                                    select x).FirstOrDefault();
 
                 if (currentSavedItem != null)

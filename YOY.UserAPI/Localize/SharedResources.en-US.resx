@@ -159,6 +159,21 @@
   <data name="ByShoppingMall" xml:space="preserve">
     <value>By Shopping Mall</value>
   </data>
+  <data name="CartItemAddedSuccessfully" xml:space="preserve">
+    <value>Added to shopping cart</value>
+  </data>
+  <data name="CartItemDeletedSuccessfully" xml:space="preserve">
+    <value>Removed from shopping cart</value>
+  </data>
+  <data name="CartItemMovedToFavoritesFailed" xml:space="preserve">
+    <value>Removed from cart. Not saved as favorite</value>
+  </data>
+  <data name="CartItemMovedToFavoritesSuccessfully" xml:space="preserve">
+    <value>Saved as favorite</value>
+  </data>
+  <data name="CartItemUpdatedSuccessfully" xml:space="preserve">
+    <value>Shopping cart updated</value>
+  </data>
   <data name="December" xml:space="preserve">
     <value>December</value>
   </data>
@@ -198,6 +213,12 @@
   <data name="FailedOperation" xml:space="preserve">
     <value>Operation failed</value>
   </data>
+  <data name="FavedContentAddedSuccessfully" xml:space="preserve">
+    <value>Added to favorites</value>
+  </data>
+  <data name="FavedContentDeletedSuccessfully" xml:space="preserve">
+    <value>Removed from favorites</value>
+  </data>
   <data name="February" xml:space="preserve">
     <value>February</value>
   </data>
@@ -209,6 +230,9 @@
   </data>
   <data name="GoogleAccountNotFound" xml:space="preserve">
     <value>Google account not found</value>
+  </data>
+  <data name="InStore" xml:space="preserve">
+    <value>In Store</value>
   </data>
   <data name="InvalidAppleId" xml:space="preserve">
     <value>Invalid Apple User ID</value>
@@ -294,11 +318,20 @@
   <data name="October" xml:space="preserve">
     <value>October</value>
   </data>
+  <data name="Online" xml:space="preserve">
+    <value>Online</value>
+  </data>
   <data name="OpenWalletRewardDescription" xml:space="preserve">
     <value>You opened your wallet, with it you earn real cash!</value>
   </data>
   <data name="OpenWalletRewardTitle" xml:space="preserve">
     <value>+{0} YOYs as gift for joining YOY</value>
+  </data>
+  <data name="OperationFailed" xml:space="preserve">
+    <value>Operation failed</value>
+  </data>
+  <data name="OperationFailedMsg" xml:space="preserve">
+    <value>Oops, something went wrong</value>
   </data>
   <data name="OutOfBirthdateRange" xml:space="preserve">
     <value>Birthdate must be greater than 10 and less than 100</value>
@@ -311,6 +344,9 @@
   </data>
   <data name="PersonalIdRecentlyUsedInOtherAccount" xml:space="preserve">
     <value>Inputted id has been recenty linked to other account</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Express</value>
   </data>
   <data name="PhoneNumberAlreadyRegistered" xml:space="preserve">
     <value>This phone number is already linked to other user, please use a different one</value>

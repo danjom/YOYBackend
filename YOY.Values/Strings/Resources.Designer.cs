@@ -1564,7 +1564,7 @@ namespace YOY.Values.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Por Bloque de Monto.
+        ///   Looks up a localized string similar to Por bloque de monto.
         /// </summary>
         public static string ByAmountBlock {
             get {
@@ -1573,7 +1573,7 @@ namespace YOY.Values.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Por Frecuencia y Bloque de Monto.
+        ///   Looks up a localized string similar to Por frecuencia y bloque de monto.
         /// </summary>
         public static string ByAmountBlockPurchaseFrequency {
             get {
@@ -1645,7 +1645,7 @@ namespace YOY.Values.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Por Monto Total.
+        ///   Looks up a localized string similar to Por monto total.
         /// </summary>
         public static string ByTotalAmount {
             get {
@@ -1654,7 +1654,7 @@ namespace YOY.Values.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Por Frecuencia y Monto Total.
+        ///   Looks up a localized string similar to Por frecuencia y monto total.
         /// </summary>
         public static string ByTotalAmountPurchaseFrequency {
             get {
@@ -13486,7 +13486,7 @@ namespace YOY.Values.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Incremento en alcancía.
+        ///   Looks up a localized string similar to Retorno de dinero.
         /// </summary>
         public static string WalletIncrease {
             get {
