@@ -538,6 +538,7 @@
 
     public static class PaymentGateways
     {
+        public const int None = 0;
         public const int All = -1;
         public const int Cardinal = 1;
         public const int SINPE = 2;
@@ -2186,7 +2187,8 @@
     {
         public const int All = 0;
         public const int Purchase = 1;
-        public const int CashbackIncentive = 2;
+        public const int Pay = 2;
+        public const int WalletRecharge = 3;
     }
 
     public static class PurchaseCodeTypes
@@ -2836,7 +2838,24 @@
         public const int DealClaim = 3;
     }
 
-    public static class AdDisplayScreenType
+    public static class InteractionMetricReferenceType
+    {
+        public const int All = -1;
+        public const int Preference = 1;
+        public const int Commerce = 2;
+        public const int ShoppingMall = 3;
+        public const int Deal = 4;
+        public const int CashIncentive = 5;
+    }
+
+    public static class SaleTypes
+    {
+        public const int All = -1;
+        public const int Purchase = 1;
+        public const int Payment = 2;
+    }
+
+    public static class AdDisplayScreenTypes
     {
         public const int All = -1;
         public const int Totem = 1;

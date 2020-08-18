@@ -24,7 +24,7 @@ namespace YOY.DAO.Entities.DB
         public int DealType { get; set; }
         public int DeliveryType { get; set; }
         public Guid? AppliedUserEarningsIncreaserId { get; set; }
-        public decimal TotalPayedAmount { get; set; }
+        public decimal TotalAmount { get; set; }
         public decimal TotalTenantEarnings { get; set; }
         public double TotalCashbackPercentage { get; set; }
         public decimal TotalCashbackTotalAmount { get; set; }

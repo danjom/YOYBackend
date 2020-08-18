@@ -18,16 +18,17 @@ namespace YOY.DTO.Entities
         public string ReferenceTypeName { set; get; }
         public int CurrencyType { set; get; }
         public string CurrencyTypeName { set; get; }
-        public decimal PaymentAmount { set; get; }
-        public decimal DebitedAmount { set; get; }
-        public bool CashbackUsedAsPayment { set; get; }
+        public decimal TotalPaymentAmount { set; get; }
+        public decimal BankingDirectDebitedAmount { set; get; }
+        public bool UserWalletUsedForPayment { set; get; }
         public bool CashIncentiveApplied { set; get; }
         public Guid? AppliedCashIncentiveId { set; get; }
         public bool UserEarningsIncreaserApplied { set; get; }
         public Guid? AppliedUserEarningsIncreaserId { set; get; }
         public decimal? EarningsIncreasementAmount { set; get; }
-        public double CashbackPercentage { set; get; }
-        public decimal CashbackTotalAmount { set; get; }
+        public double UserEarnedCashbackPercentage { set; get; }
+        public decimal UserEarnedCashbackTotalAmount { set; get; }
+        public decimal PlatformFeeAmount { set; get; }
         public int Status { set; get; }
         public string StatusName { set; get; }
         public int ResultCode { set; get; }

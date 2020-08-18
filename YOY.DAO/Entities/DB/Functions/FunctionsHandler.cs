@@ -1854,6 +1854,33 @@ namespace YOY.DAO.Entities.DB.Functions
             return tempclaimableTransactions;
         }
 
+        public List<TempuserInteractionTimeMetrics> GetUserInteractionMetricsTotalTimeByReferences(string userId, DateTime startDate, DateTime endDate)
+        {
+            List<TempuserInteractionTimeMetrics> tempuserInteractionTimeMetrics;
+
+            try
+            {
+                //An independen context is created beacuse this is part of a multithreading logic
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
+                var userIdParam = new SqlParameter("userId", userId);
+                var startDateParam = new SqlParameter("startDate", startDate);
+                var endDateParam = new SqlParameter("endDate", endDate);
+
+                tempuserInteractionTimeMetrics = context.Set<TempuserInteractionTimeMetrics>().FromSqlRaw("SELECT * FROM [dbo].[GetUserInteractionMetricsTotalTimeByReference](@userId, @startDate, @endDate)", new[] { userIdParam, startDateParam, endDateParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                tempuserInteractionTimeMetrics = null;
+
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return tempuserInteractionTimeMetrics;
+        }
+
 
         public List<TempmembershipDetails> GetUserMembershipForTenant(Guid tenantId, string userId)
         {

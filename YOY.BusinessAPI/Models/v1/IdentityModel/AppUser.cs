@@ -13,9 +13,6 @@ namespace YOY.BusinessAPI.Models.v1.IdentityModel
         override public string Id { get; set; }
 
         [Required]
-        public long AccountNumber { set; get; }
-
-        [Required]
         public string Name { set; get; }
 
         public string Gender { set; get; }

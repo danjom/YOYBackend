@@ -9,6 +9,7 @@ namespace YOY.DTO.Entities
         public Guid PurchaseId { set; get; }
         public Guid? OfferId { set; get; }
         public Guid OfferMainCategoryId { set; get; }
+        public string OfferName { set; get; }
         public string OfferMainHint { set; get; }
         public string OfferComplementaryHint { set; get; }
         public string OfferKeywords { set; get; }
@@ -23,12 +24,12 @@ namespace YOY.DTO.Entities
         public Guid? DispatchValidationSourceId { set; get; }
         public int? DispatchValidationSourceType { set; get; }
         public string DispatchValidationSourceTypeName { set; get; }
-        public Guid ShoppingCartItemId { set; get; }
         public bool UserEarningsIncreserApplied { set; get; }
         public Guid? AppliedUserEarningsIncreaserId { set; get; }
         public decimal? IncreasementAmount { set; get; }
         public bool HasPreferences { set; get; }
         public XElement ChosenPreferences { set; get; }
+        public string TextChosenPreferences { set; get; }
         public int Status { set; get; }
         public string StatusName { set; get; }
         public int DeliveryType { set; get; }

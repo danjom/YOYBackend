@@ -21,16 +21,17 @@ namespace YOY.DAO.Entities.DB
         public Guid? ReferenceId { get; set; }
         public int ReferenceType { get; set; }
         public int CurrencyType { get; set; }
-        public decimal PaymentAmount { get; set; }
-        public decimal DebitedAmount { get; set; }
-        public bool CashbackUsedAsPayment { get; set; }
+        public decimal TotalPaymentAmount { get; set; }
+        public decimal BankingDirectDebitedAmount { get; set; }
+        public bool UserWalletUsedForPayment { get; set; }
         public bool CashIncentiveApplied { get; set; }
         public Guid? AppliedCashIncentiveId { get; set; }
         public bool UserEarningsIncreaserApplied { get; set; }
         public Guid? AppliedUserEarningsIncreaserId { get; set; }
         public decimal? EarningsIncreasementAmount { get; set; }
-        public double CashbackPercentage { get; set; }
-        public decimal CashbackTotalAmount { get; set; }
+        public double UserEarnedCashbackPercentage { get; set; }
+        public decimal UserEarnedCashbackTotalAmount { get; set; }
+        public decimal PlatformFeeAmount { get; set; }
         public int Status { get; set; }
         public int ResultCode { get; set; }
         public string ResultMessage { get; set; }

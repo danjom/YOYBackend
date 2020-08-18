@@ -673,6 +673,15 @@ namespace YOY.Values.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pago con el app.
+        /// </summary>
+        public static string AppPay {
+            get {
+                return ResourceManager.GetString("AppPay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Aprobado.
         /// </summary>
         public static string Approved {

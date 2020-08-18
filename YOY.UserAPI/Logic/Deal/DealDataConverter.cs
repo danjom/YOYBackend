@@ -36,6 +36,6 @@ namespace YOY.UserAPI.Logic.Deal
             }
 
             return dealDisplayData;
-        };
+        }
     }
 }

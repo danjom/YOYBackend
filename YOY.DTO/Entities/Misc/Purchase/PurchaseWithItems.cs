@@ -23,7 +23,7 @@ namespace YOY.DTO.Entities.Misc.Purchase
         public int DeliveryType { set; get; }
         public string DeliveryTypeName { set; get; }
         public Guid? AppliedEarningsIncreaserId { set; get; }
-        public decimal TotalPayedAmount { set; get; }
+        public decimal TotalAmount { set; get; }
         public decimal TotalTenantEarnings { set; get; }
         public double TotalCashbackPercentage { set; get; }
         public decimal TotalCashbackAmount { set; get; }

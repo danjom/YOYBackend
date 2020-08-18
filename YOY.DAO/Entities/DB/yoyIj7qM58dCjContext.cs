@@ -80,7 +80,6 @@ namespace YOY.DAO.Entities.DB
         public virtual DbSet<EnabledProductCategoriesForNewOfferView> EnabledProductCategoriesForNewOfferView { get; set; }
         public virtual DbSet<ExceptionLogging> ExceptionLogging { get; set; }
         public virtual DbSet<GeoLocatedTenantsView> GeoLocatedTenantsView { get; set; }
-        public virtual DbSet<OltpaccessMetrics> OltpaccessMetrics { get; set; }
         public virtual DbSet<OltpbroadcastingEvents> OltpbroadcastingEvents { get; set; }
         public virtual DbSet<OltpbroadcastingLogRecords> OltpbroadcastingLogRecords { get; set; }
         public virtual DbSet<OltpbroadcastingLogs> OltpbroadcastingLogs { get; set; }
@@ -159,6 +158,8 @@ namespace YOY.DAO.Entities.DB
         public virtual DbSet<OltptransactionLocationsView> OltptransactionLocationsView { get; set; }
         public virtual DbSet<Oltptransactions> Oltptransactions { get; set; }
         public virtual DbSet<OltptransactionsView> OltptransactionsView { get; set; }
+        public virtual DbSet<OltpuserInteractionMetricTimeByReferenceView> OltpuserInteractionMetricTimeByReferenceView { get; set; }
+        public virtual DbSet<OltpuserInteractionMetrics> OltpuserInteractionMetrics { get; set; }
         public virtual DbSet<OltpuserInterestRecords> OltpuserInterestRecords { get; set; }
         public virtual DbSet<OltpuserInterests> OltpuserInterests { get; set; }
         public virtual DbSet<OltpuserInterestsView> OltpuserInterestsView { get; set; }
@@ -168,6 +169,8 @@ namespace YOY.DAO.Entities.DB
         public virtual DbSet<OltpuserPhoneNumberLinkLogs> OltpuserPhoneNumberLinkLogs { get; set; }
         public virtual DbSet<OltpvalidatePurchaseRegistries> OltpvalidatePurchaseRegistries { get; set; }
         public virtual DbSet<OltpvisitorsLog> OltpvisitorsLog { get; set; }
+        public virtual DbSet<PaymentRequestPaymentView> PaymentRequestPaymentView { get; set; }
+        public virtual DbSet<PurchasePaymentView> PurchasePaymentView { get; set; }
         public virtual DbSet<RefreshTokens> RefreshTokens { get; set; }
         public virtual DbSet<TempbranchHolderDisplayContents> TempbranchHolderDisplayContents { get; set; }
         public virtual DbSet<TempbroadcasterBranchesRelatedData> TempbroadcasterBranchesRelatedData { get; set; }
@@ -187,6 +190,7 @@ namespace YOY.DAO.Entities.DB
         public virtual DbSet<TempsearchableLogs> TempsearchableLogs { get; set; }
         public virtual DbSet<Tempstates> Tempstates { get; set; }
         public virtual DbSet<TemptenantDisplayContents> TemptenantDisplayContents { get; set; }
+        public virtual DbSet<TempuserInteractionTimeMetrics> TempuserInteractionTimeMetrics { get; set; }
         public virtual DbSet<TempuserInterestsWithFactor> TempuserInterestsWithFactor { get; set; }
         public virtual DbSet<UserDataForTokenView> UserDataForTokenView { get; set; }
         public virtual DbSet<UserDataView> UserDataView { get; set; }
@@ -3245,25 +3249,6 @@ namespace YOY.DAO.Entities.DB
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<OltpaccessMetrics>(entity =>
-            {
-                entity.ToTable("OLTPAccessMetrics");
-
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedDate)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getutcdate())");
-
-                entity.Property(e => e.LocationData)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.UserId)
-                    .IsRequired()
-                    .HasMaxLength(450);
-            });
-
             modelBuilder.Entity<OltpbroadcastingEvents>(entity =>
             {
                 entity.ToTable("OLTPBroadcastingEvents");
@@ -5649,25 +5634,27 @@ namespace YOY.DAO.Entities.DB
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.CashbackTotalAmount).HasColumnType("decimal(19, 2)");
+                entity.Property(e => e.BankingDirectDebitedAmount).HasColumnType("decimal(19, 2)");
 
                 entity.Property(e => e.CreatedDate)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getutcdate())");
 
-                entity.Property(e => e.DebitedAmount).HasColumnType("decimal(19, 2)");
-
                 entity.Property(e => e.EarningsIncreasementAmount).HasColumnType("decimal(19, 2)");
 
                 entity.Property(e => e.LiquidationDate).HasColumnType("datetime");
 
-                entity.Property(e => e.PaymentAmount).HasColumnType("decimal(19, 2)");
+                entity.Property(e => e.PlatformFeeAmount).HasColumnType("decimal(19, 2)");
 
                 entity.Property(e => e.ResultMessage)
                     .IsRequired()
                     .HasMaxLength(512);
 
+                entity.Property(e => e.TotalPaymentAmount).HasColumnType("decimal(19, 2)");
+
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.UserEarnedCashbackTotalAmount).HasColumnType("decimal(19, 2)");
 
                 entity.Property(e => e.UserId)
                     .IsRequired()
@@ -6030,6 +6017,11 @@ namespace YOY.DAO.Entities.DB
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
+                entity.Property(e => e.OfferName)
+                    .IsRequired()
+                    .HasMaxLength(60)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.OfferPrice).HasColumnType("decimal(19, 2)");
 
                 entity.Property(e => e.OfferRegularPrice).HasColumnType("decimal(19, 2)");
@@ -6037,6 +6029,10 @@ namespace YOY.DAO.Entities.DB
                 entity.Property(e => e.PayedAmount).HasColumnType("decimal(19, 2)");
 
                 entity.Property(e => e.TenantEarnings).HasColumnType("decimal(19, 2)");
+
+                entity.Property(e => e.TextChosenPreferences)
+                    .HasMaxLength(1024)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.UpdatedDate)
                     .HasColumnType("datetime")
@@ -6102,6 +6098,11 @@ namespace YOY.DAO.Entities.DB
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
+                entity.Property(e => e.OfferName)
+                    .IsRequired()
+                    .HasMaxLength(60)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.OfferPrice).HasColumnType("decimal(19, 2)");
 
                 entity.Property(e => e.OfferRegularPrice).HasColumnType("decimal(19, 2)");
@@ -6120,15 +6121,19 @@ namespace YOY.DAO.Entities.DB
                     .HasMaxLength(8)
                     .IsUnicode(false);
 
-                entity.Property(e => e.PurchaseTotalCashbackTotalAmount).HasColumnType("decimal(19, 2)");
+                entity.Property(e => e.PurchaseTotalAmount).HasColumnType("decimal(19, 2)");
 
-                entity.Property(e => e.PurchaseTotalPayedAmount).HasColumnType("decimal(19, 2)");
+                entity.Property(e => e.PurchaseTotalCashbackTotalAmount).HasColumnType("decimal(19, 2)");
 
                 entity.Property(e => e.PurchaseTotalTenantEarnings).HasColumnType("decimal(19, 2)");
 
                 entity.Property(e => e.PurchaseUpdatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.TenantEarnings).HasColumnType("decimal(19, 2)");
+
+                entity.Property(e => e.TextChosenPreferences)
+                    .HasMaxLength(1024)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
 
@@ -6161,9 +6166,9 @@ namespace YOY.DAO.Entities.DB
                     .HasMaxLength(8)
                     .IsUnicode(false);
 
-                entity.Property(e => e.TotalCashbackTotalAmount).HasColumnType("decimal(19, 2)");
+                entity.Property(e => e.TotalAmount).HasColumnType("decimal(19, 2)");
 
-                entity.Property(e => e.TotalPayedAmount).HasColumnType("decimal(19, 2)");
+                entity.Property(e => e.TotalCashbackTotalAmount).HasColumnType("decimal(19, 2)");
 
                 entity.Property(e => e.TotalTenantEarnings).HasColumnType("decimal(19, 2)");
 
@@ -6653,6 +6658,10 @@ namespace YOY.DAO.Entities.DB
             {
                 entity.ToTable("OLTPSavedItems");
 
+                entity.HasIndex(e => new { e.UserId, e.ReferenceType, e.ReferenceId })
+                    .HasName("IX_OLTPSavedItems_Reference")
+                    .IsUnique();
+
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedDate)
@@ -6663,9 +6672,7 @@ namespace YOY.DAO.Entities.DB
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getutcdate())");
 
-                entity.Property(e => e.UserId)
-                    .IsRequired()
-                    .HasMaxLength(450);
+                entity.Property(e => e.UserId).IsRequired();
 
                 entity.HasOne(d => d.TenantHolder)
                     .WithMany(p => p.OltpsavedItems)
@@ -7249,6 +7256,36 @@ namespace YOY.DAO.Entities.DB
                 entity.Property(e => e.Value).HasColumnType("decimal(19, 2)");
             });
 
+            modelBuilder.Entity<OltpuserInteractionMetricTimeByReferenceView>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("OLTPUserInteractionMetricTimeByReferenceView");
+
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
+            });
+
+            modelBuilder.Entity<OltpuserInteractionMetrics>(entity =>
+            {
+                entity.ToTable("OLTPUserInteractionMetrics");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getutcdate())");
+
+                entity.Property(e => e.LocationData)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
+            });
+
             modelBuilder.Entity<OltpuserInterestRecords>(entity =>
             {
                 entity.ToTable("OLTPUserInterestRecords");
@@ -7553,6 +7590,83 @@ namespace YOY.DAO.Entities.DB
                 entity.Property(e => e.ZipCode)
                     .HasMaxLength(20)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<PaymentRequestPaymentView>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("PaymentRequestPaymentView");
+
+                entity.Property(e => e.DispatchBranchName)
+                    .HasMaxLength(60)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.OpCode)
+                    .HasMaxLength(24)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PayerUserId).HasMaxLength(450);
+
+                entity.Property(e => e.PaymentDate).HasColumnType("datetime");
+
+                entity.Property(e => e.PaymentLiquidationDate).HasColumnType("datetime");
+
+                entity.Property(e => e.PlatformFeeAmount).HasColumnType("decimal(19, 2)");
+
+                entity.Property(e => e.RequestAmount).HasColumnType("decimal(19, 2)");
+
+                entity.Property(e => e.RequestDate).HasColumnType("datetime");
+
+                entity.Property(e => e.TenantName)
+                    .IsRequired()
+                    .HasMaxLength(60)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TotalPaymentAmount).HasColumnType("decimal(19, 2)");
+
+                entity.Property(e => e.UserEarnedCashbackTotalAmount).HasColumnType("decimal(19, 2)");
+            });
+
+            modelBuilder.Entity<PurchasePaymentView>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("PurchasePaymentView");
+
+                entity.Property(e => e.DispatchBranchName)
+                    .HasMaxLength(60)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PaymentDate).HasColumnType("datetime");
+
+                entity.Property(e => e.PaymentLiquidationDate).HasColumnType("datetime");
+
+                entity.Property(e => e.PlatformFeeAmount).HasColumnType("decimal(19, 2)");
+
+                entity.Property(e => e.PurchaseCode)
+                    .IsRequired()
+                    .HasMaxLength(16)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PurchaseDate).HasColumnType("datetime");
+
+                entity.Property(e => e.TenantName)
+                    .IsRequired()
+                    .HasMaxLength(60)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TotalAmount).HasColumnType("decimal(19, 2)");
+
+                entity.Property(e => e.TotalPaymentAmount).HasColumnType("decimal(19, 2)");
+
+                entity.Property(e => e.TotalTenantEarnings).HasColumnType("decimal(19, 2)");
+
+                entity.Property(e => e.UserEarnedCashbackTotalAmount).HasColumnType("decimal(19, 2)");
+
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
             });
 
             modelBuilder.Entity<RefreshTokens>(entity =>
@@ -8860,6 +8974,17 @@ namespace YOY.DAO.Entities.DB
                 entity.Property(e => e.WhiteLogoUrl)
                     .HasMaxLength(512)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<TempuserInteractionTimeMetrics>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("TEMPUserInteractionTimeMetrics");
+
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
             });
 
             modelBuilder.Entity<TempuserInterestsWithFactor>(entity =>

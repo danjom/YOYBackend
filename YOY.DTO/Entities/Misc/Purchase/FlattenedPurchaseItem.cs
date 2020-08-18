@@ -11,9 +11,9 @@ namespace YOY.DTO.Entities.Misc.Purchase
         public Guid PurchaseId { set; get; }
         public string UserId { set; get; }
         public Guid TenantId { set; get; }
-        public Guid ShoppingCartItemId { set; get; }
         public Guid? OfferId { set; get; }
         public Guid OfferMainCategoryId { set; get; }
+        public string OfferName { set; get; }
         public string OfferMainHint { set; get; }
         public string OfferComplementaryHint { set; get; }
         public string OfferKeywords { set; get; }
@@ -27,6 +27,7 @@ namespace YOY.DTO.Entities.Misc.Purchase
         public decimal? IncreasementAmount { set; get; }
         public bool HasPreferences { set; get; }
         public XElement ChosenPreferences { set; get; }
+        public string TextChosenPreferences { set; get; }
         public int Status { set; get; }
         public string StatusName { set; get; }
         public int DeliveryType { set; get; }
@@ -54,7 +55,7 @@ namespace YOY.DTO.Entities.Misc.Purchase
         public int PurchaseDeliveryType { set; get; }
         public string PurchaseDeliveryTypeName { set; get; }
         public Guid? PurchaseAppliedEarningsIncreaserId { set; get; }
-        public decimal PurchaseTotalPayedAmount { set; get; }
+        public decimal PurchaseTotalAmount { set; get; }
         public decimal PurchaseTotalTenantEarnings { set; get; }
         public double PurchaseTotalCashbackPercentage { set; get; }
         public decimal PurchaseTotalCashbackAmount { set; get; }

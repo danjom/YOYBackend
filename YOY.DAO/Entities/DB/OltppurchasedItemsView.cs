@@ -9,9 +9,9 @@ namespace YOY.DAO.Entities.DB
         public Guid PurchaseId { get; set; }
         public string UserId { get; set; }
         public Guid TenantId { get; set; }
-        public Guid ShoppingCartItemId { get; set; }
         public Guid? OfferId { get; set; }
         public Guid OfferMainCategoryId { get; set; }
+        public string OfferName { get; set; }
         public string OfferMainHint { get; set; }
         public string OfferComplementaryHint { get; set; }
         public string OfferKeywords { get; set; }
@@ -25,6 +25,7 @@ namespace YOY.DAO.Entities.DB
         public decimal? IncreasementAmount { get; set; }
         public bool HasPreferences { get; set; }
         public string ChosenPreferences { get; set; }
+        public string TextChosenPreferences { get; set; }
         public int Status { get; set; }
         public int DeliveryType { get; set; }
         public decimal PayedAmount { get; set; }
@@ -45,7 +46,7 @@ namespace YOY.DAO.Entities.DB
         public int PurchaseDealType { get; set; }
         public int PurchaseDeliveryType { get; set; }
         public Guid? PurchaseAppliedEarningsIncreaserId { get; set; }
-        public decimal PurchaseTotalPayedAmount { get; set; }
+        public decimal PurchaseTotalAmount { get; set; }
         public decimal PurchaseTotalTenantEarnings { get; set; }
         public double PurchaseTotalCashbackPercentage { get; set; }
         public decimal PurchaseTotalCashbackTotalAmount { get; set; }

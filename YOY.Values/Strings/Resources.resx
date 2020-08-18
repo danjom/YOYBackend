@@ -321,6 +321,9 @@
   <data name="AnyBranch" xml:space="preserve">
     <value>En cualquiera</value>
   </data>
+  <data name="AppPay" xml:space="preserve">
+    <value>Pago con el app</value>
+  </data>
   <data name="Approved" xml:space="preserve">
     <value>Aprobado</value>
   </data>
