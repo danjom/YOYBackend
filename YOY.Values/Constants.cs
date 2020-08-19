@@ -91,6 +91,19 @@
         public const int FavoriteContentList = 6;
     }
 
+    public static class ContentRulingCriterias
+    {
+        public const int None = 0;
+        public const int New = 1;
+        public const int RelevantForUser = 2;
+        public const int Popular = 3;
+        public const int Special = 4;
+        public const int Saved = 5;
+        public const int Nearby = 6;
+        public const int Sponsored = 7;
+        public const int Suggestions = 8;
+    }
+
     public static class CellTypes
     {
         public const int None = 0;
@@ -2841,11 +2854,17 @@
     public static class InteractionMetricReferenceType
     {
         public const int All = -1;
-        public const int Preference = 1;
-        public const int Commerce = 2;
-        public const int ShoppingMall = 3;
-        public const int Deal = 4;
-        public const int CashIncentive = 5;
+        public const int PayButton = 1;
+        public const int Wallet = 2;
+        public const int ShoppingCart = 3;
+        public const int NotificationLog = 4;
+        public const int Purchases = 5;
+        public const int SearchBar = 6;
+        public const int Preference = 7;
+        public const int Commerce = 8;
+        public const int ShoppingMall = 9;
+        public const int Deal = 10;
+        public const int CashIncentive = 11;
     }
 
     public static class SaleTypes

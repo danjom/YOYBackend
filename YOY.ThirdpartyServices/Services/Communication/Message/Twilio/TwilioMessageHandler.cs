@@ -75,7 +75,7 @@ namespace YOY.ThirdpartyServices.Services.Communication.SMS.TwilioSMS
                 }
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 resourceContent = null;
             }

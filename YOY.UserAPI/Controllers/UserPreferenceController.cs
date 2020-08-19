@@ -74,7 +74,6 @@ namespace YOY.UserAPI.Controllers
             }
         }
 
-        [AllowAnonymous]
         [Route("gets")]
         [HttpGet]
         public IActionResult Gets(string userId, string location, int imgHeight)//latitude*longitude

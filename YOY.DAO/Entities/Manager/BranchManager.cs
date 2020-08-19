@@ -9,6 +9,7 @@ using YOY.DTO.Entities.Misc.Structure.POCO;
 using System.Xml.Linq;
 using YOY.Security.Cryptography;
 using System.Text;
+using YOY.DTO.Entities.Misc.Branch;
 
 namespace YOY.DAO.Entities.Manager
 {
@@ -1618,6 +1619,98 @@ namespace YOY.DAO.Entities.Manager
 
             return success;
         }//METHOD DELETE ENDS --------------------------------------------------------------------------------------------------------------------------- //
+
+        #endregion
+
+        #region BRANCHHOLDERDISPLAYDATE
+
+        public List<BranchHolderDisplayData> GetBranchHoldersDisplayData(Guid countryId, Guid stateId, int contentSegmentationType, int pageSize, int pageNumber)
+        {
+            List<BranchHolderDisplayData> displayData = null;
+
+            var query = (dynamic)null;
+
+            switch (contentSegmentationType)
+            {
+                case GeoSegmentationTypes.Country:
+                    query = from x in this._businessObjects.FuncsHandler.GetBranchHoldersByCountry(countryId, pageSize, pageNumber)
+                            orderby x.Relevance descending, x.BranchName ascending
+                            select x;
+                    break;
+                case GeoSegmentationTypes.State:
+                    query = from x in this._businessObjects.FuncsHandler.GetBranchHoldersByState(countryId, stateId, pageSize, pageNumber)
+                            orderby x.Relevance descending, x.BranchName ascending
+                            select x;
+                    break;
+            }
+
+            if (query != null)
+            {
+                displayData = new List<BranchHolderDisplayData>();
+                BranchHolderDisplayData branchHolder = null;
+                foreach (TempbranchHolderDisplayContents item in query)
+                {
+                    branchHolder = new BranchHolderDisplayData()
+                    {
+                        Id = item.BranchId,
+                        TenantId = item.TenantId,
+                        Name = item.BranchName,
+                        TenantName = item.TenantName,
+                        LogoUrl = item.LogoUrl,
+                        CarrouselImgUrl = item.CarrouselImgUrl
+                    };
+
+                    displayData.Add(branchHolder);
+                }
+            }
+
+            return displayData;
+        }
+
+        public List<BranchHolderDisplayData> GetBranchHoldersDisplayData(Guid countryId, Guid stateId, int contentSegmentationType, double latitude, double longitude, double radius, int pageSize, int pageNumber)
+        {
+            List<BranchHolderDisplayData> displayData = null;
+
+            var query = (dynamic)null;
+
+            switch (contentSegmentationType)
+            {
+                case GeoSegmentationTypes.Country:
+
+                    query = from x in this._businessObjects.FuncsHandler.GetBranchHoldersByCountryAndLocation(latitude, longitude, radius, stateId, pageSize, pageNumber)
+                            orderby x.Distance, x.Relevance descending, x.BranchName ascending
+                            select x;
+                    break;
+                case GeoSegmentationTypes.State:
+
+                    query = from x in this._businessObjects.FuncsHandler.GetBranchHoldersByStateAndLocation(latitude, longitude, radius, countryId, stateId, pageSize, pageNumber)
+                            orderby x.Distance, x.Relevance descending, x.BranchName ascending
+                            select x;
+                    break;
+            }
+
+            if (query != null)
+            {
+                displayData = new List<BranchHolderDisplayData>();
+                BranchHolderDisplayData branchHolder = null;
+                foreach (TempbranchHolderDisplayContents item in query)
+                {
+                    branchHolder = new BranchHolderDisplayData()
+                    {
+                        Id = item.BranchId,
+                        TenantId = item.TenantId,
+                        Name = item.BranchName,
+                        TenantName = item.TenantName,
+                        CarrouselImgUrl = item.CarrouselImgUrl,
+                        LogoUrl = item.LogoUrl
+                    };
+
+                    displayData.Add(branchHolder);
+                }
+            }
+
+            return displayData;
+        }
 
         #endregion
 

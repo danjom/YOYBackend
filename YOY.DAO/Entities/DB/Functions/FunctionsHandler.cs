@@ -1076,11 +1076,13 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var countryIdParam = new SqlParameter("countryId", countryId);
                 var pageSizeParam = new SqlParameter("pageSize", pageSize);
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
-                tempbranchHolders = dbContext.Set<TempbranchHolderDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetBranchHoldersByCountry](@countryId, @pageSize, @pageNumber)", new[] { countryIdParam, pageSizeParam, pageNumberParam }).ToList();
+                tempbranchHolders = context.Set<TempbranchHolderDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetBranchHoldersByCountry](@countryId, @pageSize, @pageNumber)", new[] { countryIdParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -1101,6 +1103,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var latitudeParam = new SqlParameter("latitude", latitude);
                 var longitudeParam = new SqlParameter("longitude", longitude);
                 var radiusParam = new SqlParameter("radius", radius);
@@ -1108,7 +1112,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageSizeParam = new SqlParameter("pageSize", pageSize);
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
-                tempbranchHolders = dbContext.Set<TempbranchHolderDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetBranchHoldersByCountryAndLocation](@latitude, @longitude, @radius, @countryId, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, pageSizeParam, pageNumberParam }).ToList();
+                tempbranchHolders = context.Set<TempbranchHolderDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetBranchHoldersByCountryAndLocation](@latitude, @longitude, @radius, @countryId, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -1122,37 +1126,41 @@ namespace YOY.DAO.Entities.DB.Functions
             return tempbranchHolders;
         }
 
-        public List<TemptenantDisplayContents> GetBranchHoldersByState(Guid countryId, Guid stateId, int pageSize, int pageNumber)
+        public List<TempbranchHolderDisplayContents> GetBranchHoldersByState(Guid countryId, Guid stateId, int pageSize, int pageNumber)
         {
-            List<TemptenantDisplayContents> temptenants;
+            List<TempbranchHolderDisplayContents> tempbranchHolders;
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var countryIdParam = new SqlParameter("countryId", countryId);
                 var stateIdParam = new SqlParameter("stateId", stateId);
                 var pageSizeParam = new SqlParameter("pageSize", pageSize);
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
-                temptenants = dbContext.Set<TemptenantDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetBranchHoldersByState](@countryId, @stateId, @pageSize, @pageNumber)", new[] { countryIdParam, stateIdParam, pageSizeParam, pageNumberParam }).ToList();
+                tempbranchHolders = context.Set<TempbranchHolderDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetBranchHoldersByState](@countryId, @stateId, @pageSize, @pageNumber)", new[] { countryIdParam, stateIdParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
-                temptenants = null;
+                tempbranchHolders = null;
 
                 //ERROR HANDLING
                 AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
 
             }
 
-            return temptenants;
+            return tempbranchHolders;
         }
 
-        public List<TempbranchHolderDisplayContents> GetBranchHolderByStateAndLocation(double latitude, double longitude, double radius, Guid countryId, Guid stateId, int pageSize, int pageNumber)
+        public List<TempbranchHolderDisplayContents> GetBranchHoldersByStateAndLocation(double latitude, double longitude, double radius, Guid countryId, Guid stateId, int pageSize, int pageNumber)
         {
             List<TempbranchHolderDisplayContents> tempbranchHolders;
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var latitudeParam = new SqlParameter("latitude", latitude);
                 var longitudeParam = new SqlParameter("longitude", longitude);
                 var radiusParam = new SqlParameter("radius", radius);
@@ -1161,7 +1169,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageSizeParam = new SqlParameter("pageSize", pageSize);
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
-                tempbranchHolders = dbContext.Set<TempbranchHolderDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetBranchHolderByStateAndLocation](@latitude, @longitude, @radius, @countryId, @stateId, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, stateIdParam, pageSizeParam, pageNumberParam }).ToList();
+                tempbranchHolders = context.Set<TempbranchHolderDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetBranchHolderByStateAndLocation](@latitude, @longitude, @radius, @countryId, @stateId, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, stateIdParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {

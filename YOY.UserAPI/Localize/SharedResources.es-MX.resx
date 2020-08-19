@@ -300,6 +300,9 @@
   <data name="June" xml:space="preserve">
     <value>Junio</value>
   </data>
+  <data name="LeftHint" xml:space="preserve">
+    <value>Quedan {0}</value>
+  </data>
   <data name="March" xml:space="preserve">
     <value>Marzo</value>
   </data>
@@ -320,6 +323,12 @@
   </data>
   <data name="Online" xml:space="preserve">
     <value>Web</value>
+  </data>
+  <data name="OnlyLeftHintMoreThanOne" xml:space="preserve">
+    <value>Solo quedan {0}</value>
+  </data>
+  <data name="OnlyOneLeft" xml:space="preserve">
+    <value>Último disponible</value>
   </data>
   <data name="OpenWalletRewardDescription" xml:space="preserve">
     <value>Abriste you alcancía YOY, ¡con ella ganas dinero real!</value>
@@ -345,7 +354,7 @@
   <data name="PersonalIdRecentlyUsedInOtherAccount" xml:space="preserve">
     <value>Este id se ha asociado recientemente a otra cuenta</value>
   </data>
-  <data name="Phone" xml:space="preserve">
+  <data name="PhoneDeal" xml:space="preserve">
     <value>Express</value>
   </data>
   <data name="PhoneNumberAlreadyRegistered" xml:space="preserve">

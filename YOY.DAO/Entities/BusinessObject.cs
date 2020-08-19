@@ -402,6 +402,12 @@ namespace YOY.DAO.Entities
         /// </summary>
         private UserInterestManager _userInterestManager;
 
+        // USER INTERACTION METRICS --------------------------------------------------------------------------------------------------------------------------------- //
+        /// <summary>
+        /// This property provides functionality to manage user interests. Each tenants uses 
+        /// </summary>
+        private UserInteractionMetricManager _userInteractionMetricManager;
+
         // USERINVITERELATION MANAGER --------------------------------------------------------------------------------------------------------------------------------- //
         /// <summary>
         /// This property provides functionality to manage the user invite relations. Each tenants uses 
@@ -1630,6 +1636,25 @@ namespace YOY.DAO.Entities
                 } // ELSE ENDS
             } // GET ENDS
         } // PROPERTY USERINTERESTS ENDS ------------------------------------------------------------------------------------------------------------------------ //
+
+
+
+        /// <summary>
+        /// This dynamic loader exposes the user interaction metric resource
+        /// </summary>
+        public UserInteractionMetricManager UserInteractionMetrics
+        {
+            get
+            {
+                if (this._userInteractionMetricManager != null)
+                    return _userInteractionMetricManager;
+                else
+                {
+                    this._userInteractionMetricManager = new UserInteractionMetricManager(this);
+                    return _userInteractionMetricManager;
+                } // ELSE ENDS
+            } // GET ENDS
+        } // PROPERTY USERINTERACTIONMETRICS ENDS ------------------------------------------------------------------------------------------------------------------------ //
 
 
         // RESOURCES:/ USERINVITERELATIONS ---------------------------------------------------------------------------------------------------------------------------- //

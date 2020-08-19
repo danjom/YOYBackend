@@ -21,8 +21,8 @@ namespace YOY.UserAPI.Models.v1.Deal.POCO
         public bool DisplayPrice { set; get; }
         public decimal Price { set; get; }
         public bool DisplayRegularPrice { set; get; }
-        public string CurrencySymbol { set; get; }
         public decimal RegularPrice { set; get; }
+        public string CurrencySymbol { set; get; }
         public string CashbackHint { set; get; }
         public bool DisplayCashbackHint { set; get; }
         public int AvailableQuantity { set; get; }

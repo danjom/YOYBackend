@@ -13,6 +13,7 @@ using YOY.DAO.Entities;
 using YOY.DAO.Entities.Manager.Misc.Image;
 using YOY.DTO.Entities;
 using YOY.DTO.Entities.Manager.Misc.InterestPreference;
+using YOY.DTO.Entities.Misc.Branch;
 using YOY.DTO.Entities.Misc.Location;
 using YOY.DTO.Entities.Misc.Offer;
 using YOY.DTO.Entities.Misc.TenantData;
@@ -49,7 +50,7 @@ namespace YOY.UserAPI.Controllers
 
 
         private const string CategorySelectedAppend = "w";
-        private const string CategoryUnSelectedAppend = "b";
+        private const string CategoryUnSelectedAppend = "g";
         private const double slideWidthProp = 0.66666666666666667;
         private const double logoWithWidthProp = 1;
         private const double dealImgWidthProp = 1;
@@ -108,13 +109,16 @@ namespace YOY.UserAPI.Controllers
                     StructureTitle = "",
                     OnSelectMemberActionType = OnSelectCellActionTypes.DisplayPromotionalContent,
                     StructureType = ContentStructureTypes.Slider,
+                    RulingCriteriaType = ContentRulingCriterias.None,
                     ViewAllAccessType = ViewAllCellContentAccess.None,
                     StoreLocally = true,
                     MaxMinsToKeepStored = MaxMinsToStoreHeaderContent,
                     MaxDisplayedCellsOnInitialStructure = -1,
                     MaxMetersToKeepStored = MaxMetersToStoreContent,
                     CellsCount = 0,
-                    Cells = new List<Cell>()
+                    Cells = new List<Cell>(),
+                    PageNumber = 0,
+                    PageSize = 0
                 };
 
                 //1st slide
@@ -225,6 +229,7 @@ namespace YOY.UserAPI.Controllers
                 slider.Cells.Add(slideCell);
 
                 slider.CellsCount = slider.Cells?.Count ?? 0;
+                slider.PageSize = slider.Cells?.Count ?? 0;
 
                 //In this case all cells need to be visible
                 slider.MaxDisplayedCellsOnInitialStructure = slider.CellsCount;
@@ -264,13 +269,16 @@ namespace YOY.UserAPI.Controllers
                     StructureTitle = _localizer["Filter"].Value,
                     OnSelectMemberActionType = OnSelectCellActionTypes.UpdateContentFilterOptions,
                     StructureType = ContentStructureTypes.Carrousel,
+                    RulingCriteriaType = ContentRulingCriterias.None,
                     ViewAllAccessType = ViewAllCellContentAccess.None,
                     StoreLocally = true,
                     MaxMinsToKeepStored = MaxMinsToStoreHeaderContent,
                     MaxDisplayedCellsOnInitialStructure = -1,
                     MaxMetersToKeepStored = MaxMetersToStoreContent,
                     CellsCount = 0,
-                    Cells = new List<Cell>()
+                    Cells = new List<Cell>(),
+                    PageNumber = 0,
+                    PageSize = 0
                 };
 
                 //1st filter option
@@ -333,8 +341,8 @@ namespace YOY.UserAPI.Controllers
                     CommerceId = Guid.Empty,
                     Id = byShoppingMallId,
                     Type = CellTypes.FilterType,
-                    FilterType = ContentFilterTypes.Commerce,
-                    FilterName = _localizer["ByCommerce"].Value
+                    FilterType = ContentFilterTypes.ShoppingMall,
+                    FilterName = _localizer["ByShoppingMall"].Value
                 };
 
                 filterType.DisplayData = filterTypeCell;
@@ -342,7 +350,8 @@ namespace YOY.UserAPI.Controllers
                 //Add 3rd filter type
                 filterTypes.Cells.Add(filterType);
 
-                filterTypes.CellsCount = filterTypes.Cells?.Count ?? 0;
+                filterTypes.CellsCount = filterTypes.Cells?.Count ?? 0; 
+                filterTypes.PageSize = filterTypes.Cells?.Count ?? 0;
 
                 //In this case all cells need to be visible
                 filterTypes.MaxDisplayedCellsOnInitialStructure = filterTypes.CellsCount;
@@ -379,13 +388,16 @@ namespace YOY.UserAPI.Controllers
                     StructureTitle = _localizer["ByCategory"].Value,
                     OnSelectMemberActionType = OnSelectCellActionTypes.UpdateDisplayedContent,
                     StructureType = ContentStructureTypes.Carrousel,
+                    RulingCriteriaType = ContentRulingCriterias.None,
                     ViewAllAccessType = ViewAllCellContentAccess.CategoryList,
                     StoreLocally = true,
                     MaxMinsToKeepStored = MaxMinsToStoreHeaderContent,
                     MaxDisplayedCellsOnInitialStructure = MaxFilterValueCellsOnCarrousel,
                     MaxMetersToKeepStored = MaxMetersToStoreContent,
                     CellsCount = 0,
-                    Cells = new List<Cell>()
+                    Cells = new List<Cell>(),
+                    PageNumber = 0,
+                    PageSize = 0
                 };
 
                 //Retrieves preferences List
@@ -430,7 +442,8 @@ namespace YOY.UserAPI.Controllers
                             Id = item.Id,
                             ContentType = CellDetailTypes.Category,
                             Name = item.Name,
-                            ImgUrl = imgUrl + CategoryUnSelectedAppend
+                            ImgUrl = imgUrl + CategoryUnSelectedAppend,
+                            CommerceId = Guid.Empty
                         };
 
                         filterTypeValue.DetailedContent = cellDetailContent;
@@ -438,6 +451,9 @@ namespace YOY.UserAPI.Controllers
                         categoryOptions.Cells.Add(filterTypeValue);
                     }
                 }
+
+                categoryOptions.CellsCount = categoryOptions.Cells?.Count ?? 0;
+                categoryOptions.PageSize = categoryOptions.Cells?.Count ?? 0;
 
             }
             catch(Exception e)
@@ -474,13 +490,16 @@ namespace YOY.UserAPI.Controllers
                     StructureTitle = _localizer["ByCommerce"].Value,
                     OnSelectMemberActionType = OnSelectCellActionTypes.UpdateDisplayedContent,
                     StructureType = ContentStructureTypes.Carrousel,
+                    RulingCriteriaType = ContentRulingCriterias.None,
                     ViewAllAccessType = ViewAllCellContentAccess.CommerceList,
                     StoreLocally = true,
                     MaxMinsToKeepStored = MaxMinsToStoreHeaderContent,
                     MaxDisplayedCellsOnInitialStructure = MaxFilterValueCellsOnCarrousel,
                     MaxMetersToKeepStored = MaxMetersToStoreContent,
                     CellsCount = 0,
-                    Cells = new List<Cell>()
+                    Cells = new List<Cell>(),
+                    PageSize = pageSize,
+                    PageNumber = 0
                 };
 
                 //COMMERCE OPTIONS
@@ -564,6 +583,7 @@ namespace YOY.UserAPI.Controllers
                             //1st crates the filter value cell
                             carrouselImgUrl = ImageAdapter.TransformImg(item.CarrouselImgUrl, carrouselHeight, (int)Math.Ceiling(carrouselHeight / commerceCarrouselImgWidthProp));
                             logoUrl = ImageAdapter.TransformImg(item.WhiteLogoUrl, logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
+                            thumbnailUrl = ImageAdapter.TransformImg(item.ThumbnailUrl, thumbnailHeight, (int)Math.Ceiling(thumbnailHeight / logoWithWidthProp));
 
                             commerceFilterValueCell = new ContentFilterValueCell
                             {
@@ -585,6 +605,9 @@ namespace YOY.UserAPI.Controllers
                             {
                                 Id = item.TenantId,
                                 Name = item.Name,
+                                ContentType = CellDetailTypes.Commerce,
+                                CommerceId = item.TenantId,
+                                ImgUrl = thumbnailUrl,
                                 CategoryName = item.CategoryName,
                                 DiscountHint = item.DiscountHint,
                                 CashbackHint = item.CashbackHint,
@@ -662,6 +685,7 @@ namespace YOY.UserAPI.Controllers
                             {
                                 Id = item.TenantId,
                                 ContentType = CellDetailTypes.Commerce,
+                                CommerceId = item.TenantId,
                                 Name = item.Name,
                                 ImgUrl = thumbnailUrl,
                                 CategoryName = item.CategoryName,
@@ -677,6 +701,8 @@ namespace YOY.UserAPI.Controllers
                         }
                     }
                 }
+
+                commerceOptions.CellsCount = commerceOptions.Cells?.Count ?? 0;
             }
             catch(Exception e)
             {
@@ -690,14 +716,13 @@ namespace YOY.UserAPI.Controllers
             return commerceOptions;
         }
 
-        private ContentStructure BuildShoppingMallFilterOptions(string userId, Guid byShoppingFilterId, bool validLocation, Guid countryId, Guid userStateId, decimal latitude, decimal longitude, int geoSegmentationType, int logoHeight, int carrouselHeight, int thumbnailHeight, int pageNumber)
+        private ContentStructure BuildShoppingMallFilterOptions(string userId, Guid byShoppingFilterId, bool validLocation, Guid countryId, Guid userStateId, decimal latitude, decimal longitude, int geoSegmentationType, int logoHeight, int pageNumber)
         {
             ContentStructure shoppingMallOptions;
 
             int callId = 5;
             int pageSize = 36;
-            string logoUrl = "";
-            string parameters = "UserId: " + userId + ", ImgHeight: " + carrouselHeight + ", ValidLocation: " + validLocation + ", GeoSegmentationType:" + geoSegmentationType;
+            string parameters = "UserId: " + userId + ", LogoHeight: " + logoHeight + ", ValidLocation: " + validLocation + ", GeoSegmentationType:" + geoSegmentationType;
 
             try
             {
@@ -712,139 +737,202 @@ namespace YOY.UserAPI.Controllers
                     StructureTitle = "",
                     OnSelectMemberActionType = OnSelectCellActionTypes.UpdateDisplayedContent,
                     StructureType = ContentStructureTypes.Carrousel,
+                    RulingCriteriaType = ContentRulingCriterias.None,
                     ViewAllAccessType = ViewAllCellContentAccess.ShoppingMallList,
                     StoreLocally = true,
                     MaxMinsToKeepStored = MaxMinsToStoreHeaderContent,
                     MaxDisplayedCellsOnInitialStructure = MaxFilterValueCellsOnCarrousel,
                     MaxMetersToKeepStored = MaxMetersToStoreContent,
                     CellsCount = 0,
-                    Cells = new List<Cell>()
+                    Cells = new List<Cell>(),
+                    PageNumber = 0,
+                    PageSize = pageSize
                 };
 
-                //1st slide
-                Cell filterTypeValue = new Cell
+                //COMMERCE OPTIONS
+                List<BranchHolderDisplayData> displayData = new List<BranchHolderDisplayData>();
+
+                Cell filterTypeValue;
+                ContentFilterValueCell shoppingMallFilterValueCell;
+                ShoppingMallCellDetail shoppingMallDetailContent;
+                string logoUrl;
+
+                //If we can determine user location and based on it show him contextual commerces
+                if (validLocation)
                 {
-                    Id = Guid.NewGuid(),
-                    Type = CellTypes.ShoppingMall,
-                    OnSelectAction = OnSelectCellActionTypes.UpdateDisplayedContent
-                };
 
-                logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596433873/dev/testing/logoSM1.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
+                    switch (geoSegmentationType)
+                    {
+                        case GeoSegmentationTypes.Country:
 
-                ContentFilterValueCell shoppingMallFilterValueCell = new ContentFilterValueCell
+                            displayData = this._businessObjects.Branches.GetBranchHoldersDisplayData(countryId, Guid.Empty, GeoSegmentationTypes.Country, (double)latitude, (double)longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, pageSize, pageNumber);
+
+                            if (displayData?.Count == 0)//If no tenants nearby, then retrieve from the country
+                            {
+
+                                displayData = this._businessObjects.Branches.GetBranchHoldersDisplayData(countryId, Guid.Empty, GeoSegmentationTypes.Country, pageSize, pageNumber);
+                            }
+
+                            break;
+                        case GeoSegmentationTypes.State:
+
+                            State userState = this._businessObjects.States.Get(userStateId);
+                            Guid stateId = Guid.Empty;
+                            bool currentStateAlreadyTried = false;
+
+                            //1st will try to use state and location
+                            if (userState.InOperation)
+                            {
+                                stateId = userState.Id;
+                                currentStateAlreadyTried = true;
+
+                                displayData = this._businessObjects.Branches.GetBranchHoldersDisplayData(userState.CountryId, stateId, GeoSegmentationTypes.State, (double)latitude, (double)longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, pageSize, pageNumber);
+                            }
+
+                            if (displayData?.Count == 0)
+                            {
+
+                                if (!currentStateAlreadyTried && userState.InOperation)
+                                {
+                                    stateId = userState.Id;
+                                }
+                                else
+                                {
+                                    if (userState.NearestStateId != null)
+                                        stateId = (Guid)userState.NearestStateId;
+                                }
+
+                                displayData = this._businessObjects.Branches.GetBranchHoldersDisplayData(userState.CountryId, stateId, GeoSegmentationTypes.State, pageSize, pageNumber);
+                            }
+
+                            break;
+                    }
+
+
+                    if (displayData?.Count > 0)
+                    {
+
+                        foreach (BranchHolderDisplayData item in displayData)
+                        {
+                            filterTypeValue = new Cell
+                            {
+                                Id = item.Id,
+                                Type = CellTypes.ShoppingMall,
+                                OnSelectAction = OnSelectCellActionTypes.UpdateDisplayedContent,
+                            };
+
+                            //1st crates the filter value cell
+                            logoUrl = ImageAdapter.TransformImg(item.LogoUrl, logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
+
+                            shoppingMallFilterValueCell = new ContentFilterValueCell
+                            {
+                                Id = item.Id,
+                                CommerceId = item.TenantId,
+                                Type = CellTypes.ShoppingMall,
+                                FilterType = ContentFilterTypes.ShoppingMall,
+                                Name = item.Name,
+                                UnselectedImgUrl = "",
+                                SelectedImgUrl = "",
+                                UnselectedIcon = logoUrl,
+                                SelectedIcon = logoUrl
+                            };
+
+                            filterTypeValue.DisplayData = shoppingMallFilterValueCell;
+
+                            //Now creates the commerce detail cell
+                            shoppingMallDetailContent = new ShoppingMallCellDetail
+                            {
+                                Id = item.Id,
+                                BranchName = item.Name,
+                                ShoppingMallName = item.TenantName,
+                                CommerceId = item.TenantId,
+                                ContentType = CellDetailTypes.ShoppingMall,
+                                ImgUrl = logoUrl
+                            };
+
+                            filterTypeValue.DetailedContent = shoppingMallDetailContent;
+
+                            shoppingMallOptions.Cells.Add(filterTypeValue);
+                        }
+                    }
+                }
+                else
                 {
-                    Id = filterTypeValue.Id,
-                    Type = CellTypes.ShoppingMall,
-                    CommerceId = Guid.NewGuid(),
-                    FilterType = ContentFilterTypes.ShoppingMall,
-                    Name = "Express",
-                    SelectedIcon = logoUrl,
-                    UnselectedIcon = logoUrl,
-                    SelectedImgUrl = "",
-                    UnselectedImgUrl = ""
-                };
+                    switch (geoSegmentationType)
+                    {
+                        case GeoSegmentationTypes.Country:
 
-                filterTypeValue.DisplayData = shoppingMallFilterValueCell;
+                            displayData = this._businessObjects.Branches.GetBranchHoldersDisplayData(countryId, Guid.Empty, GeoSegmentationTypes.Country, pageSize, pageNumber);
 
-                ShoppingMallCellDetail shoppingMallDetailContent = new ShoppingMallCellDetail
-                {
-                    ContentType = CellDetailTypes.ShoppingMall,
-                    Id = shoppingMallFilterValueCell.Id,
-                    ImgUrl = logoUrl,
-                    MainName = "Alamada",
-                    BranchName = "Express"
-                };
+                            break;
+                        case GeoSegmentationTypes.State:
 
-                filterTypeValue.DetailedContent = shoppingMallDetailContent;
+                            State userState = this._businessObjects.States.Get(userStateId);
+                            Guid stateId = Guid.Empty;
 
-                //Add 1st shopping mall
-                shoppingMallOptions.Cells.Add(filterTypeValue);
+                            if (userState.InOperation)
+                            {
+                                stateId = userState.Id;
+                            }
+                            else
+                            {
+                                if (userState.NearestStateId != null)
+                                    stateId = (Guid)userState.NearestStateId;
+                            }
 
-                //2nd shoppingMall
-                filterTypeValue = new Cell
-                {
-                    Id = Guid.NewGuid(),
-                    Type = CellTypes.ShoppingMall,
-                    OnSelectAction = OnSelectCellActionTypes.UpdateDisplayedContent
-                };
+                            displayData = this._businessObjects.Branches.GetBranchHoldersDisplayData(userState.CountryId, stateId, GeoSegmentationTypes.State, pageSize, pageNumber);
+                            break;
+                    }
 
-                logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596433873/dev/testing/logoSM2.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
+                    if (displayData?.Count > 0)
+                    {
+                        foreach (BranchHolderDisplayData item in displayData)
+                        {
+                            filterTypeValue = new Cell
+                            {
+                                Id = item.TenantId,
+                                Type = CellTypes.Commerce,
+                                OnSelectAction = OnSelectCellActionTypes.UpdateDisplayedContent,
+                            };
 
-                shoppingMallFilterValueCell = new ContentFilterValueCell
-                {
-                    Id = filterTypeValue.Id,
-                    Type = CellTypes.ShoppingMall,
-                    CommerceId = Guid.NewGuid(),
-                    FilterType = ContentFilterTypes.ShoppingMall,
-                    Name = "Plaza Norte",
-                    SelectedIcon = logoUrl,
-                    UnselectedIcon = logoUrl,
-                    SelectedImgUrl = "",
-                    UnselectedImgUrl = ""
-                };
+                            //1st crates the filter value cell
+                            logoUrl = ImageAdapter.TransformImg(item.LogoUrl, logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
+                            
+                            shoppingMallFilterValueCell = new ContentFilterValueCell
+                            {
+                                Id = item.Id,
+                                CommerceId = item.TenantId,
+                                Type = CellTypes.ShoppingMall,
+                                FilterType = ContentFilterTypes.ShoppingMall,
+                                Name = item.Name,
+                                UnselectedImgUrl = "",
+                                SelectedImgUrl = "",
+                                UnselectedIcon = logoUrl,
+                                SelectedIcon = logoUrl
+                            };
 
-                filterTypeValue.DisplayData = shoppingMallFilterValueCell;
+                            filterTypeValue.DisplayData = shoppingMallFilterValueCell;
 
-                shoppingMallDetailContent = new ShoppingMallCellDetail
-                {
-                    ContentType = CellDetailTypes.ShoppingMall,
-                    Id = shoppingMallFilterValueCell.Id,
-                    ImgUrl = logoUrl,
-                    MainName = "Hyatt",
-                    BranchName = "Plaza Norte"
-                };
+                            //Now creates the commerce detail cell
+                            shoppingMallDetailContent = new ShoppingMallCellDetail
+                            {
+                                Id = item.Id,
+                                CommerceId = item.TenantId,
+                                ContentType = CellDetailTypes.ShoppingMall,
+                                BranchName = item.Name,
+                                ShoppingMallName = item.TenantName,
+                                ImgUrl = logoUrl,
 
-                filterTypeValue.DetailedContent = shoppingMallDetailContent;
+                            };
 
-                //Add 2nd slide
-                shoppingMallOptions.Cells.Add(filterTypeValue);
+                            filterTypeValue.DetailedContent = shoppingMallDetailContent;
 
-                //3rd shopping mall
-                filterTypeValue = new Cell
-                {
-                    Id = Guid.NewGuid(),
-                    Type = CellTypes.ShoppingMall,
-                    OnSelectAction = OnSelectCellActionTypes.UpdateDisplayedContent
-                };
-
-                logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596433873/dev/testing/logoSM3.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
-
-                shoppingMallFilterValueCell = new ContentFilterValueCell
-                {
-                    Id = filterTypeValue.Id,
-                    Type = CellTypes.ShoppingMall,
-                    CommerceId = Guid.NewGuid(),
-                    FilterType = ContentFilterTypes.ShoppingMall,
-                    Name = "Metropoli",
-                    SelectedIcon = logoUrl,
-                    UnselectedIcon = logoUrl,
-                    SelectedImgUrl = "",
-                    UnselectedImgUrl = ""
-                };
-
-                filterTypeValue.DisplayData = shoppingMallFilterValueCell;
-
-                shoppingMallDetailContent = new ShoppingMallCellDetail
-                {
-                    ContentType = CellDetailTypes.ShoppingMall,
-                    Id = shoppingMallFilterValueCell.Id,
-                    ImgUrl = logoUrl,
-                    MainName = "AEON",
-                    BranchName = "Metropoli"
-                };
-
-                filterTypeValue.DetailedContent = shoppingMallDetailContent;
-
-                //Add 3rd slide
-                shoppingMallOptions.Cells.Add(filterTypeValue);
-
-                for(int i = 0; i< 10; ++i)
-                {
-                    shoppingMallOptions.Cells.Add(shoppingMallOptions.Cells[i % 3]);
+                            shoppingMallOptions.Cells.Add(filterTypeValue);
+                        }
+                    }
                 }
 
                 shoppingMallOptions.CellsCount = shoppingMallOptions.Cells?.Count ?? 0;
-
             }
             catch (Exception e)
             {
@@ -854,7 +942,6 @@ namespace YOY.UserAPI.Controllers
                 this._businessObjects.HttpcallInvokationLogs.Post(userId, this.GetType().Name, callId, controllerVersion,
                                     Values.StatusCodes.InternalServerError, 0, parameters, 0, 0, false, null, HttpcallTypes.Get, e.InnerException != null ? e.InnerException.Message : e.Message);
             }
-
 
             return shoppingMallOptions;
         }
@@ -895,6 +982,14 @@ namespace YOY.UserAPI.Controllers
                 if(offers?.Count > 0)
                 {
 
+
+
+                    currentCell = new Cell
+                    {
+                        Id = Guid.NewGuid(),
+                        OnSelectAction = OnSelectCellActionTypes.DisplayDealDetailScreen,
+                        Type = CellTypes.Offer
+                    };
                 }
 
                 ////1st deal cell
@@ -1112,6 +1207,7 @@ namespace YOY.UserAPI.Controllers
                     MaxMinsToKeepStored = MaxMinsToStoreHeaderContent,
                     MaxMetersToKeepStored = MaxMetersToStoreContent,
                     OnSelectMemberActionType = OnSelectCellActionTypes.DisplayDealDetailScreen,
+                    RulingCriteriaType = ContentRulingCriterias.Popular,
                     ViewAllAccessType = ViewAllCellContentAccess.DealContentList,
                     StoreLocally = true,
                     StructureType = ContentStructureTypes.Carrousel,
@@ -1141,6 +1237,7 @@ namespace YOY.UserAPI.Controllers
                     MaxMinsToKeepStored = MaxMinsToStoreHeaderContent,
                     MaxMetersToKeepStored = MaxMetersToStoreContent,
                     OnSelectMemberActionType = OnSelectCellActionTypes.DisplayDealDetailScreen,
+                    RulingCriteriaType = ContentRulingCriterias.RelevantForUser,
                     ViewAllAccessType = ViewAllCellContentAccess.DealContentList,
                     StoreLocally = true,
                     StructureType = ContentStructureTypes.Carrousel,
@@ -1170,6 +1267,7 @@ namespace YOY.UserAPI.Controllers
                     MaxMinsToKeepStored = MaxMinsToStoreHeaderContent,
                     MaxMetersToKeepStored = MaxMetersToStoreContent,
                     OnSelectMemberActionType = OnSelectCellActionTypes.DisplayDealDetailScreen,
+                    RulingCriteriaType = ContentRulingCriterias.Saved,
                     ViewAllAccessType = ViewAllCellContentAccess.FavoriteContentList,
                     StoreLocally = true,
                     StructureType = ContentStructureTypes.Carrousel,
@@ -1343,6 +1441,7 @@ namespace YOY.UserAPI.Controllers
                     MaxMinsToKeepStored = MaxMinsToStoreBodyContent,
                     MaxMetersToKeepStored = MaxMetersToStoreContent,
                     OnSelectMemberActionType = OnSelectCellActionTypes.DisplayCashIncentiveDetailScreen,
+                    RulingCriteriaType = ContentRulingCriterias.Popular,
                     ViewAllAccessType = ViewAllCellContentAccess.CashIncentiveContentList,
                     StoreLocally = true,
                     StructureType = ContentStructureTypes.Carrousel,
@@ -1372,6 +1471,7 @@ namespace YOY.UserAPI.Controllers
                     MaxMinsToKeepStored = MaxMinsToStoreBodyContent,
                     MaxMetersToKeepStored = MaxMetersToStoreContent,
                     OnSelectMemberActionType = OnSelectCellActionTypes.DisplayCashIncentiveDetailScreen,
+                    RulingCriteriaType = ContentRulingCriterias.Suggestions,
                     ViewAllAccessType = ViewAllCellContentAccess.CashIncentiveContentList,
                     StoreLocally = true,
                     StructureType = ContentStructureTypes.Grid,
@@ -1724,6 +1824,7 @@ namespace YOY.UserAPI.Controllers
                     MaxMinsToKeepStored = MaxMinsToStoreHeaderContent,
                     MaxMetersToKeepStored = MaxMetersToStoreContent,
                     OnSelectMemberActionType = OnSelectCellActionTypes.DisplayDealDetailScreen,
+                    RulingCriteriaType = ContentRulingCriterias.Popular,
                     ViewAllAccessType = ViewAllCellContentAccess.DealContentList,
                     StoreLocally = true,
                     StructureType = ContentStructureTypes.Carrousel,
@@ -1753,6 +1854,7 @@ namespace YOY.UserAPI.Controllers
                     MaxMinsToKeepStored = MaxMinsToStoreHeaderContent,
                     MaxMetersToKeepStored = MaxMetersToStoreContent,
                     OnSelectMemberActionType = OnSelectCellActionTypes.DisplayDealDetailScreen,
+                    RulingCriteriaType = ContentRulingCriterias.RelevantForUser,
                     ViewAllAccessType = ViewAllCellContentAccess.DealContentList,
                     StoreLocally = true,
                     StructureType = ContentStructureTypes.Carrousel,
@@ -1782,6 +1884,7 @@ namespace YOY.UserAPI.Controllers
                     MaxMinsToKeepStored = MaxMinsToStoreHeaderContent,
                     MaxMetersToKeepStored = MaxMetersToStoreContent,
                     OnSelectMemberActionType = OnSelectCellActionTypes.DisplayDealDetailScreen,
+                    RulingCriteriaType = ContentRulingCriterias.Popular,
                     ViewAllAccessType = ViewAllCellContentAccess.FavoriteContentList,
                     StoreLocally = true,
                     StructureType = ContentStructureTypes.Carrousel,
@@ -1955,6 +2058,7 @@ namespace YOY.UserAPI.Controllers
                     MaxMinsToKeepStored = MaxMinsToStoreBodyContent,
                     MaxMetersToKeepStored = MaxMetersToStoreContent,
                     OnSelectMemberActionType = OnSelectCellActionTypes.DisplayCashIncentiveDetailScreen,
+                    RulingCriteriaType = ContentRulingCriterias.Suggestions,
                     ViewAllAccessType = ViewAllCellContentAccess.CashIncentiveContentList,
                     StoreLocally = true,
                     StructureType = ContentStructureTypes.Carrousel,
@@ -2034,6 +2138,7 @@ namespace YOY.UserAPI.Controllers
                     StructureTitle = "Comercios populares",
                     OnSelectMemberActionType = OnSelectCellActionTypes.GoToDealsListForCommerce,
                     StructureType = ContentStructureTypes.Carrousel,
+                    RulingCriteriaType = ContentRulingCriterias.Popular,
                     ViewAllAccessType = ViewAllCellContentAccess.CommerceList,
                     StoreLocally = true,
                     MaxMinsToKeepStored = MaxMinsToStoreHeaderContent,
@@ -2356,8 +2461,8 @@ namespace YOY.UserAPI.Controllers
 
 
                     //Add the commerce carrousel to the content feed
-                    ContentStructure shoppingMallCarrousel = this.BuildByCommerceFilterOptions(currentUser.Id, byCommerceFilterId, processedLocation.ValidLocation, (Guid)currentUser.CountryId, (Guid)currentUser.StateId,
-                                                                                              processedLocation.Latitude ?? 0, processedLocation.Longitude ?? 0, currentUser.ContentSegmentationType ?? GeoSegmentationTypes.Country, logoHeight, carrouselLogoHeight, featuredImgHeight, thumbnailHeight, 0);//await buildShoppingMallCarrousel;// 
+                    ContentStructure shoppingMallCarrousel = this.BuildShoppingMallFilterOptions(currentUser.Id, byShoppingMallId, processedLocation.ValidLocation, (Guid)currentUser.CountryId, (Guid)currentUser.StateId,
+                                                                                              processedLocation.Latitude ?? 0, processedLocation.Longitude ?? 0, currentUser.ContentSegmentationType ?? GeoSegmentationTypes.Country, logoHeight, 0);//await buildShoppingMallCarrousel;// 
 
                     List<ContentStructure> contentStructures = this.BuildMainContentDeals(currentUser.Id, processedLocation.ValidLocation, (Guid)currentUser.CountryId, (Guid)currentUser.StateId,
                         processedLocation.Latitude ?? 0, processedLocation.Longitude ?? 0, currentUser.ContentSegmentationType ?? GeoSegmentationTypes.Country, logoHeight, dealLogoHeight, dealImgHeight); //await buildBuildContentStructures;
