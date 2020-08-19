@@ -18,10 +18,12 @@ using YOY.DTO.Entities.Misc.Location;
 using YOY.DTO.Entities.Misc.Offer;
 using YOY.DTO.Entities.Misc.TenantData;
 using YOY.DTO.Entities.Misc.User;
+using YOY.UserAPI.Logic.Deal;
 using YOY.UserAPI.Logic.Image;
 using YOY.UserAPI.Logic.Location;
 using YOY.UserAPI.Models.v1.Content.POCO;
 using YOY.UserAPI.Models.v1.Content.SET;
+using YOY.UserAPI.Models.v1.Deal.POCO;
 using YOY.UserAPI.Models.v1.Miscellaneous.BasicResponse.POCO;
 using YOY.UserAPI.Models.v1.Miscellaneous.Location.POCO;
 using YOY.Values;
@@ -946,12 +948,13 @@ namespace YOY.UserAPI.Controllers
             return shoppingMallOptions;
         }
 
-        public List<ContentStructure> BuildMainContentDeals(string userId, bool validLocation, Guid countryId, Guid userStateId, decimal latitude, decimal longitude, int geoSegmentationType, int logoHeight, int cellLogoHeight, int dealImgHeight)
+        public List<ContentStructure> BuildMainContentDeals(string userId, bool validLocation, Guid countryId, Guid userStateId, decimal latitude, decimal longitude, int geoSegmentationType, int logoHeight, int whiteLogoHeight, int dealImgHeight)
         {
             List<ContentStructure> contentStructures;
 
             int callId = 6;
-            int pageSize = 150;
+            int offerSetToRetrieve = 400;
+            int pageSize = 50;
             string LogoUrl = "";
             string parameters = "UserId: " + userId + ", ImgHeight: " + dealImgHeight + ", ValidLocation: " + validLocation + ", GeoSegmentationType:" + geoSegmentationType;
 
@@ -972,226 +975,96 @@ namespace YOY.UserAPI.Controllers
 
                 if (validLocation)
                 {
-                    offers = this._businessObjects.Offers.GetOffersDataByRegionWithLocation(countryId, userStateId, geoSegmentationType, userId, latitude, longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, DateTime.UtcNow, ContentFilterTypes.Category, OfferPurposeTypes.Deal, 200, 0);
+                    offers = this._businessObjects.Offers.GetOffersDataByRegionWithLocation(countryId, userStateId, geoSegmentationType, userId, latitude, longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, DateTime.UtcNow, ContentFilterTypes.Category, OfferPurposeTypes.Deal, offerSetToRetrieve, 0);
                 }
                 else
                 {
-                    offers = this._businessObjects.Offers.GetOffersDataByRegion(userStateId, countryId, geoSegmentationType, userId, DateTime.UtcNow, ContentFilterTypes.Category, OfferPurposeTypes.Deal, 200, 0);
+                    offers = this._businessObjects.Offers.GetOffersDataByRegion(userStateId, countryId, geoSegmentationType, userId, DateTime.UtcNow, ContentFilterTypes.Category, OfferPurposeTypes.Deal, offerSetToRetrieve, 0);
                 }
 
-                if(offers?.Count > 0)
+                if (offers?.Count > 0)
                 {
 
+                    List<DealDisplayData> dealDisplayData = DealDataConverter.ProccessDeals(offers, _localizer);
 
-
-                    currentCell = new Cell
+                    foreach(DealDisplayData item in dealDisplayData)
                     {
-                        Id = Guid.NewGuid(),
-                        OnSelectAction = OnSelectCellActionTypes.DisplayDealDetailScreen,
-                        Type = CellTypes.Offer
-                    };
+                        currentCell = new Cell
+                        {
+                            Id = item.Id,
+                            OnSelectAction = OnSelectCellActionTypes.DisplayDealDetailScreen,
+                            Type = CellTypes.Offer
+                        };
+
+                        logoUrl = ImageAdapter.TransformImg(item.CommerceWhiteLogoUrl, logoHeight, (int)Math.Ceiling(whiteLogoHeight / logoWithWidthProp));
+                        imgUrl = ImageAdapter.TransformImg(item.DisplayImgUrl, dealImgHeight, (int)Math.Ceiling(dealImgHeight / dealImgWidthProp));
+
+                        displayData = new ContentCellDisplayData
+                        {
+                            Id = currentCell.Id,
+                            CommerceId = item.CommerceId,
+                            Type = CellTypes.Offer,
+                            DealType = item.DealType,
+                            DealTypeName = item.DealTypeName,
+                            DealTypeIcon = item.DealTypeIcon,
+                            CommerceLogo = logoUrl,
+                            ImgUrl = imgUrl,
+                            MainHint = item.MainHint,
+                            ComplementaryHint = item.ComplementaryHint,
+                            ExtraHint = item.ExtraHint,
+                            DisplayExtraHint = item.DisplayExtraHint,
+                            AvailableQuantity = item.AvailableQuantity,
+                            AvailableQuantityHint = item.AvailableQuantityHint,
+                            DisplayAvailableQuantityHint = item.DisplayAvailableQuantityHint,
+                            Favorite = item.Favorite,
+                            DisplayExpirationHint = item.DisplayExpirationHint,
+                            ExpirationDate = item.ExpirationDate
+                        };
+
+                        currentCell.DisplayData = displayData;
+
+                        logoUrl = ImageAdapter.TransformImg(item.CommerceLogoUrl, logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
+
+
+                        cellDetail = new DealContentCellDetail
+                        {
+                            Id = item.Id,
+                            CommerceId = item.CommerceId,
+                            ContentType = CellDetailTypes.Offer,
+                            DealType = item.DealType,
+                            DealTypeName = item.DealTypeName,
+                            DealTypeIcon = item.DealTypeIcon,
+                            CommerceLogo = logoUrl,
+                            ImgUrl = imgUrl,
+                            CurrencySymbol = item.CurrencySymbol,
+                            Price = item.Price,
+                            PriceLiteral = item.PriceLiteral,
+                            DisplayPrice = item.DisplayPrice,
+                            RegularPrice = item.RegularPrice,
+                            RegularPriceLiteral = item.RegularPriceLiteral,
+                            DisplayRegularPrice = item.DisplayRegularPrice,
+                            HasPreferences = item.HasPreferences,
+                            CashbackHint = item.CashbackHint,
+                            DisplayCashbackHint = item.DisplayCashbackHint,
+                            ExtraHint = item.ExtraHint,
+                            DisplayExtraHint = item.DisplayExtraHint,
+                            MainHint = item.MainHint,
+                            ComplementaryHint = item.ComplementaryHint,
+                            DealName = item.Name,
+                            AvailableQuantity = item.AvailableQuantity,
+                            AvailableQuantityHint = item.AvailableQuantityHint,
+                            DisplayAvailableQuantityHint = item.DisplayAvailableQuantityHint,
+                            Favorite = item.Favorite,
+                            DisplayExpirationHint = item.DisplayExpirationHint,
+                            ExpirationDate = item.ExpirationDate
+                        };
+
+                        currentCell.DetailedContent = cellDetail;
+
+                        contentCells.Add(currentCell);
+
+                    }
                 }
-
-                ////1st deal cell
-
-                //currentCell = new Cell
-                //{
-                //    Id = Guid.NewGuid(),
-                //    OnSelectAction = OnSelectCellActionTypes.DisplayDealDetailScreen,
-                //    Type = CellTypes.Offer
-                //};
-
-                //logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596430960/dev/testing/whiteLogo3.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
-                //imgUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596269574/dev/testing/offer3.jpg", dealImgHeight, (int)Math.Ceiling(dealImgHeight / dealImgWidthProp));
-
-                //displayData = new ContentCellDisplayData
-                //{
-                //    Id = currentCell.Id,
-                //    CommerceId = Guid.NewGuid(),
-                //    Type = CellTypes.Offer,
-                //    DealType = DealTypes.InStore,
-                //    CommerceLogo = logoUrl,
-                //    ImgUrl = imgUrl,
-                //    MainHint = "Compra 2",
-                //    ComplementaryHint = "Paga 1",
-                //    ExtraHint = "",
-                //    DisplayExtraHint = false,
-                //    AvailableQuantity = 25,
-                //    AvailableQuantityHint = "Quedan 25",
-                //    DisplayAvailableQuantityHint = true,
-                //    Favorite = true,
-                //    DisplayExpirationHint = false,
-                //    ExpirationDate = DateTime.UtcNow.AddDays(14).ToString("yyyy-MM-dd HH':'mm':'ss")
-                //};
-
-                //currentCell.DisplayData = displayData;
-
-                //logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596430630/dev/testing/logo3.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
-
-
-                //cellDetail = new DealContentCellDetail
-                //{
-                //    Id = currentCell.Id,
-                //    CommerceId = displayData.CommerceId,
-                //    ContentType = CellDetailTypes.Offer,
-                //    DealType = displayData.DealType,
-                //    CommerceLogo = logoUrl,
-                //    ImgUrl = imgUrl,
-                //    CurrencySymbol = "₡",
-                //    Price = 10.550M,
-                //    DisplayPrice = true,
-                //    RegularPrice = 0M,
-                //    DisplayRegularPrice = false,
-                //    HasPreferences = false,
-                //    CashbackHint = "Recibe ₡400 de cashback",
-                //    DisplayCashbackHint = true,
-                //    MainHint = "Compra 2",
-                //    ComplementaryHint = "Paga 1",
-                //    AvailableQuantity = 25,
-                //    AvailableQuantityHint = "Quedan 25",
-                //    DisplayAvailableQuantityHint = true,
-                //    Favorite = true,
-                //    DisplayExpirationHint = false,
-                //    ExpirationDate = DateTime.UtcNow.AddDays(14).ToString("yyyy-MM-dd HH':'mm':'ss")
-                //};
-
-                //currentCell.DetailedContent = cellDetail;
-
-                //contentCells.Add(currentCell);
-
-                ////2nd deal cell
-
-                //currentCell = new Cell
-                //{
-                //    Id = Guid.NewGuid(),
-                //    OnSelectAction = OnSelectCellActionTypes.DisplayDealDetailScreen,
-                //    Type = CellTypes.Offer
-                //};
-
-                //logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596430960/dev/testing/whiteLogo1.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
-                //imgUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596269574/dev/testing/offer2.jpg", dealImgHeight, (int)Math.Ceiling(dealImgHeight / dealImgWidthProp));
-
-                //displayData = new ContentCellDisplayData
-                //{
-                //    Id = currentCell.Id,
-                //    CommerceId = Guid.NewGuid(),
-                //    Type = CellTypes.Offer,
-                //    DealType = DealTypes.InStore,
-                //    CommerceLogo = logoUrl,
-                //    ImgUrl = imgUrl,
-                //    MainHint = "35%",
-                //    ComplementaryHint = "De descuento",
-                //    ExtraHint = "",
-                //    DisplayExtraHint = false,
-                //    AvailableQuantity = 45,
-                //    AvailableQuantityHint = "",
-                //    DisplayAvailableQuantityHint = false,
-                //    Favorite = true,
-                //    DisplayExpirationHint = true,
-                //    ExpirationDate = DateTime.UtcNow.AddDays(2).ToString("yyyy-MM-dd HH':'mm':'ss")
-                //};
-
-                //currentCell.DisplayData = displayData;
-
-                //logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596430630/dev/testing/logo3.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
-
-
-                //cellDetail = new DealContentCellDetail
-                //{
-                //    Id = currentCell.Id,
-                //    CommerceId = displayData.CommerceId,
-                //    ContentType = CellDetailTypes.Offer,
-                //    DealType = displayData.DealType,
-                //    CommerceLogo = logoUrl,
-                //    ImgUrl = imgUrl,
-                //    CurrencySymbol = "₡",
-                //    Price = 10.550M,
-                //    DisplayPrice = true,
-                //    RegularPrice = 0M,
-                //    DisplayRegularPrice = false,
-                //    HasPreferences = false,
-                //    CashbackHint = "Recibe ₡400 de cashback",
-                //    DisplayCashbackHint = true,
-                //    MainHint = "Compra 2",
-                //    ComplementaryHint = "Paga 1",
-                //    AvailableQuantity = 45,
-                //    AvailableQuantityHint = "",
-                //    DisplayAvailableQuantityHint = false,
-                //    Favorite = true,
-                //    DisplayExpirationHint = false,
-                //    ExpirationDate = DateTime.UtcNow.AddDays(2).ToString("yyyy-MM-dd HH':'mm':'ss")
-                //};
-
-                //currentCell.DetailedContent = cellDetail;
-
-                //contentCells.Add(currentCell);
-
-                ////3rd deal cell
-
-                //currentCell = new Cell
-                //{
-                //    Id = Guid.NewGuid(),
-                //    OnSelectAction = OnSelectCellActionTypes.DisplayDealDetailScreen,
-                //    Type = CellTypes.Offer
-                //};
-
-                //logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596430960/dev/testing/whiteLogo2.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
-                //imgUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596269574/dev/testing/offer2.jpg", dealImgHeight, (int)Math.Ceiling(dealImgHeight / dealImgWidthProp));
-
-                //displayData = new ContentCellDisplayData
-                //{
-                //    Id = currentCell.Id,
-                //    CommerceId = Guid.NewGuid(),
-                //    Type = CellTypes.Offer,
-                //    DealType = DealTypes.Online,
-                //    CommerceLogo = logoUrl,
-                //    ImgUrl = imgUrl,
-                //    MainHint = "35% menos",
-                //    ComplementaryHint = "En donas",
-                //    ExtraHint = "",
-                //    DisplayExtraHint = false,
-                //    AvailableQuantity = 15,
-                //    AvailableQuantityHint = "Quedan solo 15",
-                //    DisplayAvailableQuantityHint = true,
-                //    Favorite = true,
-                //    DisplayExpirationHint = true,
-                //    ExpirationDate = DateTime.UtcNow.AddHours(5).ToString("yyyy-MM-dd HH':'mm':'ss")
-                //};
-
-                //currentCell.DisplayData = displayData;
-
-                //logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596430630/dev/testing/logo3.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
-
-
-                //cellDetail = new DealContentCellDetail
-                //{
-                //    Id = currentCell.Id,
-                //    CommerceId = displayData.CommerceId,
-                //    ContentType = CellDetailTypes.Offer,
-                //    DealType = displayData.DealType,
-                //    CommerceLogo = logoUrl,
-                //    ImgUrl = imgUrl,
-                //    CurrencySymbol = "₡",
-                //    Price = 10.550M,
-                //    DisplayPrice = true,
-                //    RegularPrice = 0M,
-                //    DisplayRegularPrice = false,
-                //    HasPreferences = false,
-                //    CashbackHint = "Recibe ₡1,000 de cashback",
-                //    DisplayCashbackHint = true,
-                //    MainHint = "Compra 2",
-                //    ComplementaryHint = "Paga 1",
-                //    AvailableQuantity = 15,
-                //    AvailableQuantityHint = "Quedan solo 15",
-                //    DisplayAvailableQuantityHint = true,
-                //    Favorite = true,
-                //    DisplayExpirationHint = true,
-                //    ExpirationDate = DateTime.UtcNow.AddHours(5).ToString("yyyy-MM-dd HH':'mm':'ss")
-                //};
-
-                //currentCell.DetailedContent = cellDetail;
-
-                //contentCells.Add(currentCell);
 
                 //Build featured deals
 
@@ -1211,7 +1084,9 @@ namespace YOY.UserAPI.Controllers
                     ViewAllAccessType = ViewAllCellContentAccess.DealContentList,
                     StoreLocally = true,
                     StructureType = ContentStructureTypes.Carrousel,
-                    CellsCount = 16,
+                    CellsCount = 26,//just for testing
+                    PageNumber = 0,
+                    PageSize = pageSize,
                     Cells = new List<Cell>()
                 };
 
@@ -1240,8 +1115,10 @@ namespace YOY.UserAPI.Controllers
                     RulingCriteriaType = ContentRulingCriterias.RelevantForUser,
                     ViewAllAccessType = ViewAllCellContentAccess.DealContentList,
                     StoreLocally = true,
-                    StructureType = ContentStructureTypes.Carrousel,
-                    CellsCount = 32,
+                    StructureType = ContentStructureTypes.Grid,
+                    CellsCount = 42,
+                    PageNumber = 0,
+                    PageSize = pageSize,
                     Cells = new List<Cell>()
                 };
 
@@ -1271,7 +1148,9 @@ namespace YOY.UserAPI.Controllers
                     ViewAllAccessType = ViewAllCellContentAccess.FavoriteContentList,
                     StoreLocally = true,
                     StructureType = ContentStructureTypes.Carrousel,
-                    CellsCount = 32,
+                    CellsCount = 15,
+                    PageNumber = 0,
+                    PageSize = pageSize,
                     Cells = new List<Cell>()
                 };
 
@@ -1343,7 +1222,7 @@ namespace YOY.UserAPI.Controllers
                 {
                     Id = Guid.NewGuid(),
                     OnSelectAction = OnSelectCellActionTypes.DisplayDealDetailScreen,
-                    Type = CellTypes.Offer
+                    Type = CellTypes.CashIncentive
                 };
 
                 logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596430629/dev/testing/logo2.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
@@ -1353,7 +1232,7 @@ namespace YOY.UserAPI.Controllers
                 {
                     Id = currentCell.Id,
                     CommerceId = Guid.NewGuid(),
-                    Type = CellTypes.Offer,
+                    Type = CellTypes.CashIncentive,
                     DealType = DealTypes.InStore,
                     CommerceLogo = logoUrl,
                     ImgUrl = imgUrl,
@@ -1388,7 +1267,7 @@ namespace YOY.UserAPI.Controllers
                 {
                     Id = Guid.NewGuid(),
                     OnSelectAction = OnSelectCellActionTypes.DisplayDealDetailScreen,
-                    Type = CellTypes.Offer
+                    Type = CellTypes.CashIncentive
                 };
 
                 logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596430629/dev/testing/logo2.png", logoHeight, (int)Math.Ceiling(logoHeight / logoWithWidthProp));
@@ -1445,7 +1324,9 @@ namespace YOY.UserAPI.Controllers
                     ViewAllAccessType = ViewAllCellContentAccess.CashIncentiveContentList,
                     StoreLocally = true,
                     StructureType = ContentStructureTypes.Carrousel,
-                    CellsCount = 16,
+                    CellsCount = 20,
+                    PageNumber = 0,
+                    PageSize = pageSize,
                     Cells = new List<Cell>()
                 };
 
@@ -2413,59 +2294,59 @@ namespace YOY.UserAPI.Controllers
 
                     
                     ////Task to build slider
-                    //Task<ContentStructure> buildSlider = new Task<ContentStructure>(() => this.BuildSlider(currentUser.Id, contentStateId, (Guid)currentUser.CountryId, sliderHeight));
-                    //buildSlider.Start();
+                    Task<ContentStructure> buildSlider = new Task<ContentStructure>(() => this.BuildSlider(currentUser.Id, contentStateId, (Guid)currentUser.CountryId, sliderHeight));
+                    buildSlider.Start();
 
                     
                     ////Task to build filterTypes
-                    //Task<ContentStructure> buildFilterTypes = new Task<ContentStructure>(() => this.BuildFilterTypes(currentUser.Id, contentStateId, (Guid)currentUser.CountryId, byCategoryFilterId, byCommerceFilterId, byShoppingMallId));
-                    //buildFilterTypes.Start();
+                    Task<ContentStructure> buildFilterTypes = new Task<ContentStructure>(() => this.BuildFilterTypes(currentUser.Id, contentStateId, (Guid)currentUser.CountryId, byCategoryFilterId, byCommerceFilterId, byShoppingMallId));
+                    buildFilterTypes.Start();
 
                     ////Task to build category filter options
-                    //Task<ContentStructure> buildCategoryCarrousel = new Task<ContentStructure>(() => this.BuildByCategoryFilterOptions(currentUser.Id, logoHeight, byCategoryFilterId));
-                    //buildCategoryCarrousel.Start();
+                    Task<ContentStructure> buildCategoryCarrousel = new Task<ContentStructure>(() => this.BuildByCategoryFilterOptions(currentUser.Id, logoHeight, byCategoryFilterId));
+                    buildCategoryCarrousel.Start();
 
                     ////Task to build commerce filter options
-                    //Task<ContentStructure> buildCommerceCarrousel = new Task<ContentStructure>(() => this.BuildByCommerceFilterOptions(currentUser.Id,byCommerceFilterId, processedLocation.ValidLocation, (Guid)currentUser.CountryId, (Guid)currentUser.StateId,
-                    //    processedLocation.Latitude ?? 0, processedLocation.Longitude ?? 0, currentUser.ContentSegmentationType ?? GeoSegmentationTypes.Country, logoHeight, carrouselLogoHeight, featuredImgHeight, thumbnailHeight, 0));
-                    //buildCommerceCarrousel.Start();
+                    Task<ContentStructure> buildCommerceCarrousel = new Task<ContentStructure>(() => this.BuildByCommerceFilterOptions(currentUser.Id,byCommerceFilterId, processedLocation.ValidLocation, (Guid)currentUser.CountryId, (Guid)currentUser.StateId,
+                        processedLocation.Latitude ?? 0, processedLocation.Longitude ?? 0, currentUser.ContentSegmentationType ?? GeoSegmentationTypes.Country, logoHeight, carrouselLogoHeight, featuredImgHeight, thumbnailHeight, 0));
+                    buildCommerceCarrousel.Start();
 
                     ////Task to build shopping mall filter options
-                    //Task<ContentStructure> buildShoppingMallCarrousel = new Task<ContentStructure>(() => this.BuildShoppingMallFilterOptions(currentUser.Id, byCommerceFilterId, processedLocation.ValidLocation, (Guid)currentUser.CountryId, (Guid)currentUser.StateId,
-                    //    processedLocation.Latitude ?? 0, processedLocation.Longitude ?? 0, currentUser.ContentSegmentationType ?? GeoSegmentationTypes.Country, cellLogoHeight, featuredImgHeight, thumbnailHeight, 0));
-                    //buildShoppingMallCarrousel.Start();
+                    Task<ContentStructure> buildShoppingMallCarrousel = new Task<ContentStructure>(() => this.BuildShoppingMallFilterOptions(currentUser.Id, byShoppingMallId, processedLocation.ValidLocation, (Guid)currentUser.CountryId, (Guid)currentUser.StateId,
+                        processedLocation.Latitude ?? 0, processedLocation.Longitude ?? 0, currentUser.ContentSegmentationType ?? GeoSegmentationTypes.Country, cellLogoHeight, 0));
+                    buildShoppingMallCarrousel.Start();
 
 
                     ////Task to build shopping mall filter options
-                    //Task<List<ContentStructure>> buildBuildContentStructures = new Task<List<ContentStructure>>(() => this.BuildMainContentDeals(currentUser.Id, processedLocation.ValidLocation, (Guid)currentUser.CountryId, (Guid)currentUser.StateId,
-                    //    processedLocation.Latitude ?? 0, processedLocation.Longitude ?? 0, currentUser.ContentSegmentationType ?? GeoSegmentationTypes.Country, logoHeight, dealLogoHeight, dealImgHeight));
-                    //buildBuildContentStructures.Start();
+                    Task<List<ContentStructure>> buildBuildContentStructures = new Task<List<ContentStructure>>(() => this.BuildMainContentDeals(currentUser.Id, processedLocation.ValidLocation, (Guid)currentUser.CountryId, (Guid)currentUser.StateId,
+                        processedLocation.Latitude ?? 0, processedLocation.Longitude ?? 0, currentUser.ContentSegmentationType ?? GeoSegmentationTypes.Country, logoHeight, dealLogoHeight, dealImgHeight));
+                    buildBuildContentStructures.Start();
 
                     //-----------------------------------------------TASKS CONTENT STRUCTURES RETRIEVAL----------------------------------------------------------------
 
                     //Add the slider to the content feed
-                    ContentStructure slider =  this.BuildSlider(currentUser.Id, contentStateId, (Guid)currentUser.CountryId, sliderHeight);//await buildSlider; //
+                    ContentStructure slider =  await buildSlider; //this.BuildSlider(currentUser.Id, contentStateId, (Guid)currentUser.CountryId, sliderHeight);//
 
 
                     //Add the filter types to the content feed
-                    ContentStructure filterTypes = this.BuildFilterTypes(currentUser.Id, contentStateId, (Guid)currentUser.CountryId, byCategoryFilterId, byCommerceFilterId, byShoppingMallId);//await buildFilterTypes; // 
+                    ContentStructure filterTypes = await buildFilterTypes; // this.BuildFilterTypes(currentUser.Id, contentStateId, (Guid)currentUser.CountryId, byCategoryFilterId, byCommerceFilterId, byShoppingMallId);//
 
 
                     //Add the category carrousel to the content feed
-                    ContentStructure categoryCarrousel = this.BuildByCategoryFilterOptions(currentUser.Id, logoHeight, byCategoryFilterId);//await buildCategoryCarrousel; // 
+                    ContentStructure categoryCarrousel = await buildCategoryCarrousel; // this.BuildByCategoryFilterOptions(currentUser.Id, logoHeight, byCategoryFilterId);//
 
 
                     //Add the commerce carrousel to the content feed
-                    ContentStructure commerceCarrousel = this.BuildByCommerceFilterOptions(currentUser.Id, byCommerceFilterId, processedLocation.ValidLocation, (Guid)currentUser.CountryId, (Guid)currentUser.StateId,
-                        processedLocation.Latitude ?? 0, processedLocation.Longitude ?? 0, currentUser.ContentSegmentationType ?? GeoSegmentationTypes.Country, logoHeight, carrouselLogoHeight, featuredImgHeight, thumbnailHeight, 0);//await buildCommerceCarrousel;// 
+                    ContentStructure commerceCarrousel = await buildCommerceCarrousel;// this.BuildByCommerceFilterOptions(currentUser.Id, byCommerceFilterId, processedLocation.ValidLocation, (Guid)currentUser.CountryId, (Guid)currentUser.StateId,
+                    //processedLocation.Latitude ?? 0, processedLocation.Longitude ?? 0, currentUser.ContentSegmentationType ?? GeoSegmentationTypes.Country, logoHeight, carrouselLogoHeight, featuredImgHeight, thumbnailHeight, 0);//
 
 
                     //Add the commerce carrousel to the content feed
-                    ContentStructure shoppingMallCarrousel = this.BuildShoppingMallFilterOptions(currentUser.Id, byShoppingMallId, processedLocation.ValidLocation, (Guid)currentUser.CountryId, (Guid)currentUser.StateId,
-                                                                                              processedLocation.Latitude ?? 0, processedLocation.Longitude ?? 0, currentUser.ContentSegmentationType ?? GeoSegmentationTypes.Country, logoHeight, 0);//await buildShoppingMallCarrousel;// 
+                    ContentStructure shoppingMallCarrousel = await buildShoppingMallCarrousel;// this.BuildShoppingMallFilterOptions(currentUser.Id, byShoppingMallId, processedLocation.ValidLocation, (Guid)currentUser.CountryId, (Guid)currentUser.StateId,
+                    //processedLocation.Latitude ?? 0, processedLocation.Longitude ?? 0, currentUser.ContentSegmentationType ?? GeoSegmentationTypes.Country, logoHeight, 0);//
 
-                    List<ContentStructure> contentStructures = this.BuildMainContentDeals(currentUser.Id, processedLocation.ValidLocation, (Guid)currentUser.CountryId, (Guid)currentUser.StateId,
-                        processedLocation.Latitude ?? 0, processedLocation.Longitude ?? 0, currentUser.ContentSegmentationType ?? GeoSegmentationTypes.Country, logoHeight, dealLogoHeight, dealImgHeight); //await buildBuildContentStructures;
+                    List<ContentStructure> contentStructures = await buildBuildContentStructures; //this.BuildMainContentDeals(currentUser.Id, processedLocation.ValidLocation, (Guid)currentUser.CountryId, (Guid)currentUser.StateId,
+                        //processedLocation.Latitude ?? 0, processedLocation.Longitude ?? 0, currentUser.ContentSegmentationType ?? GeoSegmentationTypes.Country, logoHeight, dealLogoHeight, dealImgHeight); //
 
 
                     if (slider != null && slider.Cells?.Count > 0)

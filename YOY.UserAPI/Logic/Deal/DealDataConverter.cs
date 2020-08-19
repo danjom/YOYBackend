@@ -14,8 +14,13 @@ namespace YOY.UserAPI.Logic.Deal
     {
 
         private static int minAvailableQuantityToDisplayHint = 20;
+        private static int minAvailableQuantityToDisplayVeryFewHint = 7; 
+        private static int minAvailableQuantityToDisplayLastOnesHint = 1;
         private static int minDaysLeftToDisplayHint = 5;
         private static int maxDaysToConsiderAsNew = 7;
+        private static double extraHintCashbackPercentageLowerReference = 10;
+        private static double extraHintCashbackPercentageUpperReference = 25;
+        private static int extraHintCashbackAmountLengthReference = 5;
         private static IStringLocalizer<SharedResources> _localizer;
 
         private static string GetDealTypeName(int type)
@@ -42,11 +47,41 @@ namespace YOY.UserAPI.Logic.Deal
             return typeName;
         }
 
+        private static string FormatDecimalNumberString(decimal number)
+        {
+            var s = string.Format("{0:n}", number);
+
+            if (s.EndsWith(".00"))
+            {
+                return s.Replace(".00","");
+            }
+            else
+            {
+                return s;
+            }
+        }
+
+        private static string FormatDoubleNumberString(double number)
+        {
+            var s = string.Format("{0:n}", number);
+
+            if (s.EndsWith(".00"))
+            {
+                return s.Replace(".00", "");
+            }
+            else
+            {
+                return s;
+            }
+        }
+
         public static List<DealDisplayData> ProccessDeals(List<FlattenedOfferData> offers, IStringLocalizer<SharedResources> localizer)
         {
             List<DealDisplayData> dealDisplayData;
 
             _localizer = localizer;
+
+            double cashbackAmount;
 
             try
             {
@@ -62,23 +97,28 @@ namespace YOY.UserAPI.Logic.Deal
                             displayData = new DealDisplayData
                             {
                                 Id = item.Offer.Id,
+                                CommerceId = item.Offer.TenantId,
                                 ExtraHint = "",
                                 DisplayExtraHint = false,
                                 DealType = item.Offer.DealType,
                                 DealTypeName = GetDealTypeName(item.Offer.DealType),
                                 DealTypeIcon = GetDealTypeIconUrl(item.Offer.DealType),
                                 Favorite = false,
-                                CommerceLogo = item.Tenant.LogoUrl,
-                                ImgUrl = item.Offer.DisplayImgUrl,
+                                CommerceLogoUrl = item.Tenant.LogoUrl,
+                                CommerceWhiteLogoUrl = item.Tenant.WhiteLogoUrl,
+                                DisplayImgUrl = item.Offer.DisplayImgUrl,
                                 MainHint = item.Offer.MainHint,
                                 ComplementaryHint = item.Offer.ComplementaryHint,
+                                Name = item.Offer.Name,
                                 DisplayPrice = item.Offer.OfferType == OfferTypes.Offer,
                                 Price = item.Offer.Value,
+                                PriceLiteral = item.Tenant.CurrencySymbol + FormatDecimalNumberString(item.Offer.Value),
                                 DisplayRegularPrice = item.Offer.RegularValue != null,
                                 RegularPrice = item.Offer.RegularValue ?? 0,
-                                CurrencySymbol = item.Tenant.CurrencySymbol,
-                                CashbackHint = item.Tenant.CashbackPercentage + "% de cashback",
-                                DisplayCashbackHint = true,
+                                RegularPriceLiteral = item.Offer.RegularValue != null ? item.Tenant.CurrencySymbol + FormatDecimalNumberString((decimal)item.Offer.RegularValue) : "",
+                                CurrencySymbol =  item.Tenant.CurrencySymbol,
+                                CashbackHint = item.Offer.ExtraBonusType != ExtraBonusTypes.None ? _localizer["CashbackPercentageLabel", item.Tenant.CashbackPercentage].Value : "",
+                                DisplayCashbackHint = item.Offer.ExtraBonusType == ExtraBonusTypes.None,
                                 AvailableQuantity = item.Offer.AvailableQuantity != -1 ? item.Offer.AvailableQuantity : int.MaxValue,
                                 DisplayAvailableQuantityHint = item.Offer.AvailableQuantity != -1 && item.Offer.AvailableQuantity <= minAvailableQuantityToDisplayHint,
                                 ExpirationDate = item.Offer.ExpirationDate.ToString("yyyy-MM-dd HH':'mm':'ss"),
@@ -90,13 +130,13 @@ namespace YOY.UserAPI.Logic.Deal
 
                             if (displayData.DisplayAvailableQuantityHint)
                             {
-                                if (displayData.AvailableQuantity > 5)
+                                if (displayData.AvailableQuantity > minAvailableQuantityToDisplayVeryFewHint)
                                 {
                                     displayData.AvailableQuantityHint = _localizer["LeftHint", displayData.AvailableQuantity].Value;
                                 }
                                 else
                                 {
-                                    if (displayData.AvailableQuantity > 1)
+                                    if (displayData.AvailableQuantity > minAvailableQuantityToDisplayLastOnesHint)
                                     {
                                         displayData.AvailableQuantityHint = _localizer["OnlyLeftHintMoreThanOne", displayData.AvailableQuantity].Value;
                                     }
@@ -106,6 +146,46 @@ namespace YOY.UserAPI.Logic.Deal
                                     }
                                 }
                             }
+
+                            if(!displayData.DisplayCashbackHint && !displayData.DisplayExpirationHint)
+                            {
+                                if(item.Offer.ExtraBonusType != ExtraBonusTypes.None)
+                                    displayData.DisplayExtraHint = true;
+
+                                switch (item.Offer.ExtraBonusType)
+                                {
+                                    case ExtraBonusTypes.FixedAmount:
+                                        displayData.ExtraHint = _localizer["ExtraHintFixedAmount", displayData.CurrencySymbol + FormatDoubleNumberString(item.Offer.ExtraBonus)];
+                                        break;
+                                    case ExtraBonusTypes.Percentage:
+                                        if(item.Offer.ExtraBonus < extraHintCashbackPercentageLowerReference)
+                                        {
+                                            cashbackAmount = ((double)item.Offer.Value * item.Offer.ExtraBonus) / 100;
+
+                                            if (cashbackAmount.ToString().Length > extraHintCashbackAmountLengthReference)
+                                                displayData.ExtraHint = _localizer["ExtraHintFixedAmount", displayData.CurrencySymbol + FormatDoubleNumberString(cashbackAmount)];
+                                            else
+                                                displayData.ExtraHint = _localizer["ExtraHintPercentage", item.Offer.ExtraBonus];
+                                        }
+                                        else
+                                        {
+                                            if(item.Offer.ExtraBonus < extraHintCashbackPercentageUpperReference)
+                                            {
+                                                cashbackAmount = ((double)item.Offer.Value * item.Offer.ExtraBonus) / 100;
+
+                                                displayData.ExtraHint = _localizer["ExtraHintFixedAmount", displayData.CurrencySymbol + FormatDoubleNumberString(cashbackAmount)];
+                                            }
+                                            else
+                                            {
+                                                displayData.ExtraHint = _localizer["ExtraHintPercentage", item.Offer.ExtraBonus];
+                                            }
+                                        }
+                                        break;
+                                }
+
+                            }
+
+                            dealDisplayData.Add(displayData);
                         }
                         
                     }

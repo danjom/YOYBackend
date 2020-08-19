@@ -8,20 +8,25 @@ namespace YOY.UserAPI.Models.v1.Deal.POCO
     public class DealDisplayData
     {
         public Guid Id { set; get; }
+        public Guid CommerceId { set; get; }
         public string ExtraHint { set; get; }
         public bool DisplayExtraHint { set; get; }
         public int DealType { set; get; }
         public string DealTypeName { set; get; }
         public string DealTypeIcon { set; get; }
         public bool Favorite { set; get; }
-        public string CommerceLogo { set; get; }
-        public string ImgUrl { set; get; }
+        public string CommerceLogoUrl { set; get; }
+        public string CommerceWhiteLogoUrl { set; get; }
+        public string DisplayImgUrl { set; get; }
         public string MainHint { set; get; }
         public string ComplementaryHint { set; get; }
+        public string Name { set; get; }
         public bool DisplayPrice { set; get; }
         public decimal Price { set; get; }
+        public string PriceLiteral { set; get; }
         public bool DisplayRegularPrice { set; get; }
         public decimal RegularPrice { set; get; }
+        public string RegularPriceLiteral { set; get; }
         public string CurrencySymbol { set; get; }
         public string CashbackHint { set; get; }
         public bool DisplayCashbackHint { set; get; }

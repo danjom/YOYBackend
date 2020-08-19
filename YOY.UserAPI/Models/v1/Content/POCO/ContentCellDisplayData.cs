@@ -9,6 +9,7 @@ namespace YOY.UserAPI.Models.v1.Content.POCO
     {
         public int DealType { set; get; }
         public string DealTypeName { set; get; }
+        public string DealTypeIcon { set; get; }
         public bool Favorite { set; get; }
         public string CommerceLogo { set; get; }
         public string ImgUrl { set; get; }
