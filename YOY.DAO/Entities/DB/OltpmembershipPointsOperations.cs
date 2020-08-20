@@ -22,6 +22,9 @@ namespace YOY.DAO.Entities.DB
         public int ReferenceType { get; set; }
         public int Type { get; set; }
         public int ObjectiveType { get; set; }
+        public int OriginType { get; set; }
+        public bool WithdrawAllowed { get; set; }
+        public bool TransferAllowed { get; set; }
         public int Status { get; set; }
         public bool IsActive { get; set; }
         public bool? Registered { get; set; }

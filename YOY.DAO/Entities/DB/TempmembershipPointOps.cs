@@ -12,7 +12,10 @@ namespace YOY.DAO.Entities.DB
         public Guid? ReferenceId { get; set; }
         public int ReferenceType { get; set; }
         public int Type { get; set; }
+        public int OriginType { get; set; }
         public int ObjectiveType { get; set; }
+        public bool WithdrawAllowed { get; set; }
+        public bool TransferAllowed { get; set; }
         public int Status { get; set; }
         public decimal AvailablePoints { get; set; }
         public decimal UsedPoints { get; set; }

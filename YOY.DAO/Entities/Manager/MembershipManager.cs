@@ -1027,6 +1027,9 @@ namespace YOY.DAO.Entities.Manager
                     ObjectiveType = objectiveType,
                     Type = MembershipPointsOperationTypes.PointsBalance,
                     Status = MembershipPointsOperationStatuses.Accessible,
+                    OriginType = MembershipPointsOperationOriginTypes.Signup,
+                    TransferAllowed = false,
+                    WithdrawAllowed = false,
                     AvailablePoints = welcomePoints,
                     Details = Resources.JoinWelcomePoints,
                     UsedPoints = 0,
@@ -1177,6 +1180,9 @@ namespace YOY.DAO.Entities.Manager
                         ObjectiveType = objectiveType,
                         Type = MembershipPointsOperationTypes.PointsBalance,
                         Status = MembershipPointsOperationStatuses.Accessible,
+                        OriginType = MembershipPointsOperationOriginTypes.Signup,
+                        TransferAllowed = false,
+                        WithdrawAllowed = false,
                         Details = Resources.JoinWelcomePoints,
                         AvailablePoints = welcomePoints,
                         UsedPoints = 0,
@@ -2364,6 +2370,9 @@ namespace YOY.DAO.Entities.Manager
                             ReferenceId = item.ReferenceId,
                             ReferenceType = item.ReferenceType,
                             Type = item.Type,
+                            OriginType = item.OriginType,
+                            TransferAllowed = item.TransferAllowed,
+                            WithdrawAllowed = item.WithdrawAllowed,
                             Status = item.Status,
                             StatusName = this.GetOperationStatusName(item.Status),
                             AvailablePoints = (long)item.AvailablePoints,
@@ -2431,6 +2440,9 @@ namespace YOY.DAO.Entities.Manager
                             ReferenceId = item.ReferenceId,
                             ReferenceType = item.ReferenceType,
                             Type = item.Type,
+                            OriginType = item.OriginType,
+                            TransferAllowed = item.TransferAllowed,
+                            WithdrawAllowed = item.WithdrawAllowed,
                             Status = item.Status,
                             StatusName = this.GetOperationStatusName(item.Status),
                             AvailablePoints = (long)item.AvailablePoints,
@@ -2477,6 +2489,29 @@ namespace YOY.DAO.Entities.Manager
                     break;
                 case MembershipPointsOperationTypes.ConvertPoints:
                     typeName = Resources.ConvertPoints;
+                    break;
+            }
+
+            return typeName;
+        }
+
+        public string GetOperationOriginTypeName(int type)
+        {
+            string typeName = "";
+
+            switch (type)
+            {
+                case MembershipPointsOperationOriginTypes.Signup:
+                    typeName = Resources.Signup;
+                    break;
+                case MembershipPointsOperationOriginTypes.FriendPurchase:
+                    typeName = Resources.FriendPurchase;
+                    break;
+                case MembershipPointsOperationOriginTypes.Purchase:
+                    typeName = Resources.Purchase;
+                    break;
+                case MembershipPointsOperationOriginTypes.Payment:
+                    typeName = Resources.Payment;
                     break;
             }
 
@@ -2687,6 +2722,10 @@ namespace YOY.DAO.Entities.Manager
                             TypeName = this.GetOperationTypeName(item.Type),
                             ObjectiveType = item.ObjectiveType,
                             ObjectiveTypeName = this.GetOperationObjectiveTypeName(item.ObjectiveType),
+                            OriginType = item.OriginType,
+                            OriginTypeName = this.GetOperationOriginTypeName(item.OriginType),
+                            TransferAllowed = item.TransferAllowed,
+                            WithdrawAllowed = item.WithdrawAllowed,
                             Status = item.Status,
                             StatusName = this.GetOperationStatusName(item.Status),
                             AvailablePoints = item.AvailablePoints,
@@ -4573,6 +4612,10 @@ namespace YOY.DAO.Entities.Manager
                             ObjectiveTypeName = this.GetOperationObjectiveTypeName(item.ObjectiveType),
                             Status = item.Status,
                             StatusName = this.GetOperationStatusName(item.Status),
+                            OriginType = item.OriginType,
+                            OriginTypeName = this.GetOperationOriginTypeName(item.OriginType),
+                            TransferAllowed = item.TransferAllowed,
+                            WithdrawAllowed = item.WithdrawAllowed,
                             AvailablePoints = item.AvailablePoints,
                             UsedPoints = item.UsedPoints,
                             Code = item.Code,
@@ -4638,6 +4681,10 @@ namespace YOY.DAO.Entities.Manager
                             ObjectiveTypeName = this.GetOperationObjectiveTypeName(item.ObjectiveType),
                             Status = item.Status,
                             StatusName = this.GetOperationStatusName(item.Status),
+                            OriginType = item.OriginType,
+                            OriginTypeName = this.GetOperationOriginTypeName(item.OriginType),
+                            TransferAllowed = item.TransferAllowed,
+                            WithdrawAllowed = item.WithdrawAllowed,
                             AvailablePoints = item.AvailablePoints,
                             UsedPoints = item.UsedPoints,
                             Code = item.Code,
@@ -4700,6 +4747,10 @@ namespace YOY.DAO.Entities.Manager
                             ObjectiveTypeName = this.GetOperationObjectiveTypeName(item.ObjectiveType),
                             Status = item.Status,
                             StatusName = this.GetOperationStatusName(item.Status),
+                            OriginType = item.OriginType,
+                            OriginTypeName = this.GetOperationOriginTypeName(item.OriginType),
+                            TransferAllowed = item.TransferAllowed,
+                            WithdrawAllowed = item.WithdrawAllowed,
                             AvailablePoints = item.AvailablePoints,
                             UsedPoints = item.UsedPoints,
                             Code = item.Code,
@@ -4912,7 +4963,7 @@ namespace YOY.DAO.Entities.Manager
         /// <param name="username"></param>
         /// <param name="loyaltyPoints"></param>
         /// <returns></returns>
-        public Guid? Put(Guid membershipId, decimal loyaltyPoints, Guid beneficiaryTenantId, Guid sourceTenantId, Guid? monetaryFeeLogId, Guid? referenceId, int referenceType, int validMonths, int objectiveType, int status, string details)
+        public Guid? Put(Guid membershipId, decimal loyaltyPoints, Guid beneficiaryTenantId, Guid sourceTenantId, Guid? monetaryFeeLogId, Guid? referenceId, int referenceType, int validMonths, int objectiveType, int status, int originType, string details)
         {
             Guid? operationId = null;
 
@@ -4921,6 +4972,29 @@ namespace YOY.DAO.Entities.Manager
 
                 if (loyaltyPoints > 0)//Add points
                 {
+                    bool withdrawAllowed = false;
+                    bool transferAllowed = false;
+
+                    switch (originType)
+                    {
+                        case MembershipPointsOperationOriginTypes.Signup:
+                            withdrawAllowed = false;
+                            transferAllowed = false;
+                            break;
+                        case MembershipPointsOperationOriginTypes.FriendPurchase:
+                            withdrawAllowed = true;
+                            transferAllowed = true;
+                            break;
+                        case MembershipPointsOperationOriginTypes.Purchase:
+                            withdrawAllowed = true;
+                            transferAllowed = true;
+                            break;
+                        case MembershipPointsOperationOriginTypes.Payment:
+                            withdrawAllowed = true;
+                            transferAllowed = true;
+                            break;
+                    }
+
 
                     OltpmembershipPointsOperations newOperation = new OltpmembershipPointsOperations
                     {
@@ -4936,6 +5010,9 @@ namespace YOY.DAO.Entities.Manager
                         Type = MembershipPointsOperationTypes.PointsBalance,
                         ObjectiveType = objectiveType,
                         Status = status,
+                        OriginType = originType,
+                        TransferAllowed = transferAllowed,
+                        WithdrawAllowed = withdrawAllowed,
                         AvailablePoints = loyaltyPoints,
                         UsedPoints = 0,
                         Code = "",
@@ -5044,7 +5121,7 @@ namespace YOY.DAO.Entities.Manager
                 //1st needs to get deduct the points from the provider membership
 
                 var providerQuery = from x in this._businessObjects.Context.OltpmembershipPointsOperations
-                                    where x.ProviderMembershipId == providerMembershipId && x.IsActive && x.Type == MembershipPointsOperationTypes.PointsBalance && x.Status == MembershipPointsOperationStatuses.Accessible && x.AvailablePoints > 0 && x.ExpirationDate > date
+                                    where x.ProviderMembershipId == providerMembershipId && x.IsActive && x.Type == MembershipPointsOperationTypes.PointsBalance && x.Status == MembershipPointsOperationStatuses.Accessible && x.TransferAllowed && x.AvailablePoints > 0 && x.ExpirationDate > date
                                     orderby x.ExpirationDate ascending
                                     select x;
 
@@ -5118,6 +5195,9 @@ namespace YOY.DAO.Entities.Manager
                         ObjectiveType = objectiveType,
                         Type = MembershipPointsOperationTypes.TransferPoints,
                         Status = status,
+                        OriginType = MembershipPointsOperationOriginTypes.Transfer,
+                        TransferAllowed = false,
+                        WithdrawAllowed = false,
                         AvailablePoints = 0,
                         UsedPoints = loyaltyPoints,
                         Code = "",
@@ -5157,6 +5237,9 @@ namespace YOY.DAO.Entities.Manager
                                 Type = MembershipPointsOperationTypes.PointsBalance,
                                 ObjectiveType = objectiveType,
                                 Status = status,
+                                OriginType = MembershipPointsOperationOriginTypes.Transfer,
+                                WithdrawAllowed = true,
+                                TransferAllowed = true,
                                 AvailablePoints = opItem.PointsToTransfer,
                                 UsedPoints = 0,
                                 Code = "",
@@ -5223,7 +5306,7 @@ namespace YOY.DAO.Entities.Manager
                         //1st needs to get deduct the points from the provider membership
 
                         var providerQuery = from x in this._businessObjects.Context.OltpmembershipPointsOperations
-                                            where x.ProviderMembershipId == providerMembershipId && x.IsActive && x.Type == MembershipPointsOperationTypes.PointsBalance && x.Status == MembershipPointsOperationStatuses.Accessible && x.AvailablePoints > 0 && x.ExpirationDate > date
+                                            where x.ProviderMembershipId == providerMembershipId && x.IsActive && x.Type == MembershipPointsOperationTypes.PointsBalance && x.Status == MembershipPointsOperationStatuses.Accessible && x.WithdrawAllowed && x.AvailablePoints > 0 && x.ExpirationDate > date
                                             orderby x.ExpirationDate ascending
                                             select x;
 
@@ -5281,6 +5364,9 @@ namespace YOY.DAO.Entities.Manager
                                 ObjectiveType = objectiveType,
                                 Type = MembershipPointsOperationTypes.ConvertPoints,
                                 Status = status,
+                                OriginType = MembershipPointsOperationOriginTypes.None,
+                                TransferAllowed = false,
+                                WithdrawAllowed = false,
                                 AvailablePoints = 0,
                                 UsedPoints = requiredPoints,
                                 Code = conversionCode,

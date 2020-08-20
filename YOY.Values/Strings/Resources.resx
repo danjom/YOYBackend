@@ -1912,6 +1912,9 @@ Cualquier duda o consulta, escribe a info@clubyoy.com</value>
   <data name="FriendlyName" xml:space="preserve">
     <value>Nombre Púbico</value>
   </data>
+  <data name="FriendPurchase" xml:space="preserve">
+    <value>Compra de amigo</value>
+  </data>
   <data name="From" xml:space="preserve">
     <value>de</value>
   </data>
@@ -3178,6 +3181,9 @@ Cualquier duda o consulta, escribe a info@clubyoy.com</value>
   <data name="PayerTypes" xml:space="preserve">
     <value>Pagador</value>
   </data>
+  <data name="Payment" xml:space="preserve">
+    <value>Pago</value>
+  </data>
   <data name="PaymentAmount" xml:space="preserve">
     <value>Monto de Pago</value>
   </data>
@@ -3465,6 +3471,9 @@ Cualquier duda o consulta, escribe a info@clubyoy.com</value>
   </data>
   <data name="PurchaIncentiveDetails" xml:space="preserve">
     <value>Detalles de Incentivo de Compra</value>
+  </data>
+  <data name="Purchase" xml:space="preserve">
+    <value>Compra</value>
   </data>
   <data name="PurchaseClubAndWalletEarnPointsMsg" xml:space="preserve">
     <value>Ganaste &lt;WalletEarnedPoints&gt; YOYs en tu Alcancía y &lt;ClubEarnedPoints&gt; YOYs por usar YOY en &lt;CommerceName&gt;</value>
@@ -4006,6 +4015,9 @@ Cualquier duda o consulta, escribe a info@clubyoy.com</value>
   <data name="SignalRecognition" xml:space="preserve">
     <value>Reconocimiento de señales</value>
   </data>
+  <data name="Signup" xml:space="preserve">
+    <value>Unirse</value>
+  </data>
   <data name="Silver" xml:space="preserve">
     <value>Plata</value>
   </data>
@@ -4314,6 +4326,9 @@ Cualquier duda o consulta, escribe a info@clubyoy.com</value>
   </data>
   <data name="TransactionType" xml:space="preserve">
     <value>Tipo</value>
+  </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>Transferencia</value>
   </data>
   <data name="TransferedMoneyReceivedModalTitle" xml:space="preserve">
     <value>¡Te han enviado dinero!</value>

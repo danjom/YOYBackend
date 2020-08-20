@@ -1676,6 +1676,17 @@
         public const int ConvertPoints = 3;
     }
 
+    public static class MembershipPointsOperationOriginTypes
+    {
+        public const int None = 0;
+        public const int All = -1;
+        public const int Signup = 1;
+        public const int FriendPurchase = 2;
+        public const int Transfer = 3;
+        public const int Purchase = 4;
+        public const int Payment = 5;
+    }
+
     public static class MembershipPointsOperationStatuses
     {
         public const int All = -1;

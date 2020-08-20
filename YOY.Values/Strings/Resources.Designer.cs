@@ -5332,6 +5332,15 @@ namespace YOY.Values.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Compra de amigo.
+        /// </summary>
+        public static string FriendPurchase {
+            get {
+                return ResourceManager.GetString("FriendPurchase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to de.
         /// </summary>
         public static string From {
@@ -9130,6 +9139,15 @@ namespace YOY.Values.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pago.
+        /// </summary>
+        public static string Payment {
+            get {
+                return ResourceManager.GetString("Payment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Monto de Pago.
         /// </summary>
         public static string PaymentAmount {
@@ -9990,6 +10008,15 @@ namespace YOY.Values.Strings {
         public static string PurchaIncentiveDetails {
             get {
                 return ResourceManager.GetString("PurchaIncentiveDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compra.
+        /// </summary>
+        public static string Purchase {
+            get {
+                return ResourceManager.GetString("Purchase", resourceCulture);
             }
         }
         
@@ -11614,6 +11641,15 @@ namespace YOY.Values.Strings {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unirse.
+        /// </summary>
+        public static string Signup {
+            get {
+                return ResourceManager.GetString("Signup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Plata.
         /// </summary>
         public static string Silver {
@@ -12537,6 +12573,15 @@ namespace YOY.Values.Strings {
         public static string TransactionType {
             get {
                 return ResourceManager.GetString("TransactionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transferencia.
+        /// </summary>
+        public static string Transfer {
+            get {
+                return ResourceManager.GetString("Transfer", resourceCulture);
             }
         }
         
