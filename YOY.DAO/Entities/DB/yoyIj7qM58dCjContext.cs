@@ -165,6 +165,7 @@ namespace YOY.DAO.Entities.DB
         public virtual DbSet<OltpuserInterestsView> OltpuserInterestsView { get; set; }
         public virtual DbSet<OltpuserInviteRelations> OltpuserInviteRelations { get; set; }
         public virtual DbSet<OltpuserLocationLogs> OltpuserLocationLogs { get; set; }
+        public virtual DbSet<OltpuserPaymentRecords> OltpuserPaymentRecords { get; set; }
         public virtual DbSet<OltpuserPersonalIdLinkLogs> OltpuserPersonalIdLinkLogs { get; set; }
         public virtual DbSet<OltpuserPhoneNumberLinkLogs> OltpuserPhoneNumberLinkLogs { get; set; }
         public virtual DbSet<OltpvalidatePurchaseRegistries> OltpvalidatePurchaseRegistries { get; set; }
@@ -3677,9 +3678,9 @@ namespace YOY.DAO.Entities.DB
 
                 entity.Property(e => e.MinMembershipLevel).HasDefaultValueSql("((1))");
 
-                entity.Property(e => e.MinPurchasedAmount).HasColumnType("decimal(19, 2)");
+                entity.Property(e => e.MinPurchasedAmountToBeApplied).HasColumnType("decimal(19, 2)");
 
-                entity.Property(e => e.MinPurchasedTotalAmount).HasColumnType("decimal(19, 2)");
+                entity.Property(e => e.MinPurchasedAmountToCount).HasColumnType("decimal(19, 2)");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -3707,11 +3708,6 @@ namespace YOY.DAO.Entities.DB
                     .HasDefaultValueSql("(getutcdate())");
 
                 entity.Property(e => e.ValidHours)
-                    .IsRequired()
-                    .HasMaxLength(32)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ValidMonthDays)
                     .IsRequired()
                     .HasMaxLength(32)
                     .IsUnicode(false);
@@ -4924,11 +4920,21 @@ namespace YOY.DAO.Entities.DB
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Details)
+                    .IsRequired()
+                    .HasMaxLength(512)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.ModifierUserId).HasMaxLength(450);
 
                 entity.Property(e => e.ReferenceCode)
                     .IsRequired()
                     .HasMaxLength(32)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Subject)
+                    .IsRequired()
+                    .HasMaxLength(128)
                     .IsUnicode(false);
 
                 entity.Property(e => e.TransferedAmount).HasColumnType("decimal(19, 2)");
@@ -7451,6 +7457,39 @@ namespace YOY.DAO.Entities.DB
                     .HasConstraintName("FK_OLTPUserLocationLogs_AspNetUsers");
             });
 
+            modelBuilder.Entity<OltpuserPaymentRecords>(entity =>
+            {
+                entity.ToTable("OLTPUserPaymentRecords");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.PayedAmount).HasColumnType("decimal(19, 2)");
+
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
+                entity.HasOne(d => d.PaymentLog)
+                    .WithMany(p => p.OltpuserPaymentRecords)
+                    .HasForeignKey(d => d.PaymentLogId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_OLTPUserPaymentRecords_OLTPPaymentLogs");
+
+                entity.HasOne(d => d.Tenant)
+                    .WithMany(p => p.OltpuserPaymentRecords)
+                    .HasForeignKey(d => d.TenantId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_OLTPUserPaymentRecords_DEFTenants");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.OltpuserPaymentRecords)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_OLTPUserPaymentRecords_AspNetUsers");
+            });
+
             modelBuilder.Entity<OltpuserPersonalIdLinkLogs>(entity =>
             {
                 entity.HasKey(e => new { e.UserId, e.PersonalId });
@@ -7947,9 +7986,9 @@ namespace YOY.DAO.Entities.DB
 
                 entity.Property(e => e.MaxValue).HasColumnType("decimal(19, 2)");
 
-                entity.Property(e => e.MinPurchasedAmount).HasColumnType("decimal(19, 2)");
+                entity.Property(e => e.MinPurchasedAmountToBeApplied).HasColumnType("decimal(19, 2)");
 
-                entity.Property(e => e.MinPurchasedTotalAmount).HasColumnType("decimal(19, 2)");
+                entity.Property(e => e.MinPurchasedAmountToCount).HasColumnType("decimal(19, 2)");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -7987,11 +8026,6 @@ namespace YOY.DAO.Entities.DB
                 entity.Property(e => e.UnitValue).HasColumnType("decimal(19, 2)");
 
                 entity.Property(e => e.ValidHours)
-                    .IsRequired()
-                    .HasMaxLength(32)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ValidMonthDays)
                     .IsRequired()
                     .HasMaxLength(32)
                     .IsUnicode(false);

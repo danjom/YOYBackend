@@ -32,8 +32,6 @@ namespace YOY.BusinessAPI.Models.v1.CashIncentive.POCO
         [Required]
         public string DealTypeName { set; get; }
         [Required]
-        public int MaxCombinedIncentives { set; get; }
-        [Required]
         public decimal UnitValue { set; get; }
         [AllowNull]
         public decimal? PreviousUnitValue { set; get; }
@@ -42,7 +40,7 @@ namespace YOY.BusinessAPI.Models.v1.CashIncentive.POCO
         [Required]
         public string MinMembershipLevelName { set; get; }
         [Required]
-        public decimal MinPurchasedAmount { set; get; }
+        public decimal MinPurchasedAmountToBeApplied { set; get; }
         [AllowNull]
         public decimal? PurchasedAmountBlock { set; get; }
         [Required]
@@ -66,15 +64,13 @@ namespace YOY.BusinessAPI.Models.v1.CashIncentive.POCO
         [Required]
         public string ValidWeekDays { set; get; }
         [Required]
-        public string ValidMonthDays { set; get; }
-        [Required]
         public string ValidHours { set; get; }
         [Required]
         public int MaxUsagePerUser { set; get; }
         [Required]
         public int MinPurchasesCountToUse { set; get; }
         [Required]
-        public decimal MinPurchasedTotalAmount { set; get; }
+        public decimal MinPurchasedAmountToCount { set; get; }
         [Required]
         public int UsageCount { set; get; }
         [Required]

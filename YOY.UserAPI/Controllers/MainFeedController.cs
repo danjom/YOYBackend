@@ -893,7 +893,7 @@ namespace YOY.UserAPI.Controllers
                         {
                             filterTypeValue = new Cell
                             {
-                                Id = item.TenantId,
+                                Id = item.Id,
                                 Type = CellTypes.ShoppingMall,
                                 OnSelectAction = OnSelectCellActionTypes.UpdateDisplayedContent,
                             };
@@ -965,7 +965,8 @@ namespace YOY.UserAPI.Controllers
 
                 List<Cell> contentCells = new List<Cell>();
                 Cell currentCell;
-                ContentCellDisplayData displayData;
+                DealContentCellDisplayData dealCellDisplayData;
+                CashbackContentCellDisplayData cashIncentiveCellDisplayData;
                 DealContentCellDetail cellDetail;
 
                 string logoUrl;
@@ -999,7 +1000,7 @@ namespace YOY.UserAPI.Controllers
                         logoUrl = ImageAdapter.TransformImg(item.CommerceWhiteLogoUrl, brandingLogoHeight, (int)Math.Ceiling(brandingLogoHeight / logoWithWidthProp));
                         imgUrl = ImageAdapter.TransformImg(item.DisplayImgUrl, dealImgHeight, (int)Math.Ceiling(dealImgHeight / dealImgWidthProp));
 
-                        displayData = new ContentCellDisplayData
+                        dealCellDisplayData = new DealContentCellDisplayData
                         {
                             Id = currentCell.Id,
                             CommerceId = item.CommerceId,
@@ -1011,8 +1012,8 @@ namespace YOY.UserAPI.Controllers
                             ImgUrl = imgUrl,
                             MainHint = item.MainHint,
                             ComplementaryHint = item.ComplementaryHint,
-                            ExtraHint = item.ExtraHint,
-                            DisplayExtraHint = item.DisplayExtraHint,
+                            CashbackHint = item.CashbackHint,
+                            DisplayCashbackHint = item.DisplayCashbackHint,
                             AvailableQuantity = item.AvailableQuantity,
                             AvailableQuantityHint = item.AvailableQuantityHint,
                             DisplayAvailableQuantityHint = item.DisplayAvailableQuantityHint,
@@ -1021,7 +1022,7 @@ namespace YOY.UserAPI.Controllers
                             ExpirationDate = item.ExpirationDate
                         };
 
-                        currentCell.DisplayData = displayData;
+                        currentCell.DisplayData = dealCellDisplayData;
 
                         logoUrl = ImageAdapter.TransformImg(item.CommerceLogoUrl, contentLogoHeight, (int)Math.Ceiling(contentLogoHeight / logoWithWidthProp));
 
@@ -1046,8 +1047,6 @@ namespace YOY.UserAPI.Controllers
                             HasPreferences = item.HasPreferences,
                             CashbackHint = item.CashbackHint,
                             DisplayCashbackHint = item.DisplayCashbackHint,
-                            ExtraHint = item.ExtraHint,
-                            DisplayExtraHint = item.DisplayExtraHint,
                             MainHint = item.MainHint,
                             ComplementaryHint = item.ComplementaryHint,
                             DealName = item.Name,
@@ -1159,7 +1158,7 @@ namespace YOY.UserAPI.Controllers
                 for (int i = 0; i < currentStructure.CellsCount; ++i)
                 {
                     currentStructure.Cells.Add(contentCells[random.Next(0, 1000) % contentCells.Count]);
-                    ((ContentCellDisplayData)currentStructure.Cells[i].DisplayData).Favorite = true;
+                    ((DealContentCellDisplayData)currentStructure.Cells[i].DisplayData).Favorite = true;
 
                 }
 
@@ -1183,7 +1182,7 @@ namespace YOY.UserAPI.Controllers
                 logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596430629/dev/testing/logo5.png", contentLogoHeight, (int)Math.Ceiling(contentLogoHeight / logoWithWidthProp));
                 imgUrl = "";
 
-                displayData = new ContentCellDisplayData
+                cashIncentiveCellDisplayData = new CashbackContentCellDisplayData
                 {
                     Id = currentCell.Id,
                     CommerceId = Guid.NewGuid(),
@@ -1192,27 +1191,54 @@ namespace YOY.UserAPI.Controllers
                     DealTypeName = "En línea",
                     DealTypeIcon = "https://res.cloudinary.com/yoyimgs/image/upload/v1597767894/global/deal_icons/online-deal.png",
                     CommerceLogo = logoUrl,
-                    ImgUrl = imgUrl,
                     MainHint = "7% Cashback",
                     ComplementaryHint = "Antes 3%",
-                    ExtraHint = "Compras +₡10,000",
-                    DisplayExtraHint = true,
-                    AvailableQuantity = -1,
-                    AvailableQuantityHint = "",
-                    DisplayAvailableQuantityHint = false,
+                    UnlockHint = "Estás a 5 compras",
+                    DisplayUnlockHint = true,
                     Favorite = true,
                     DisplayExpirationHint = false,
                     ExpirationDate = DateTime.UtcNow.AddDays(14).ToString("yyyy-MM-dd HH':'mm':'ss")
                 };
 
-                currentCell.DisplayData = displayData;
+                currentCell.DisplayData = cashIncentiveCellDisplayData;
 
                 cashCellDetail = new CashIncentiveContentCellDetail
                 {
                     Id = currentCell.Id,
-                    CommerceId = displayData.CommerceId,
-                    ContentType = CellDetailTypes.CashIncentive
+                    CommerceId = cashIncentiveCellDisplayData.CommerceId,
+                    ContentType = CellDetailTypes.CashIncentive,
+                    DealType = DealTypes.Online,
+                    DealTypeName = "En línea",
+                    DealTypeIcon = "https://res.cloudinary.com/yoyimgs/image/upload/v1597767894/global/deal_icons/online-deal.png",
+                    DisplayExpirationHint = false,
+                    ExpirationDate = DateTime.UtcNow.AddDays(14).ToString("yyyy-MM-dd HH':'mm':'ss"),
+                    AppliesToInAppPurchases = true,
+                    CommerceLogo = logoUrl,
+                    MainHint = "7% cashback",
+                    ComplementaryHint = "Antes 3%",
+                    Favorite = true,
+                    MaxValueHint = "Recibe hasta ₡6,500",
+                    DisplayMaxValueHint = true,
+                    Value = 7,
+                    ValueLiteral = "Ganas 7%",
+                    DisplayValue = true,
+                    RegularValue = 3,
+                    RegularValueLiteral = "Ganas 3%",
+                    DisplayRegularValue = true,
+                    MembershipLevelHint = "Debes ser Plata para accederlo",
+                    DisplayMembershipLevelHint = true,
+                    MinMembershipLevel = 2,
+                    MinPurchaseAmountToApplyHint = "Compras mayores a ₡10,000",
+                    DisplayMinPurchaseAmountToApplyHint = true,
+                    MainUnlockHint = "5 compras más para desbloquearlo",
+                    DisplayMainUnlockHint = true,
+                    ComplementaryUnlockHint = "Monto mínimo ₡12,000",
+                    DisplayComplementaryUnlockHint = true,
+                    AvailabiltySchedule = "Del 2 al 30 de Setiembre\nLunes a Viernes\nDe 11am-6pm",
+                    DisplayAvailabilitySchedule = true,
+                    AvailableToUse = false
                 };
+
 
                 currentCell.DetailedContent = cashCellDetail;
 
@@ -1230,7 +1256,7 @@ namespace YOY.UserAPI.Controllers
                 logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596430629/dev/testing/logo2.png", contentLogoHeight, (int)Math.Ceiling(contentLogoHeight / logoWithWidthProp));
                 imgUrl = "";
 
-                displayData = new ContentCellDisplayData
+                cashIncentiveCellDisplayData = new CashbackContentCellDisplayData
                 {
                     Id = currentCell.Id,
                     CommerceId = Guid.NewGuid(),
@@ -1239,26 +1265,51 @@ namespace YOY.UserAPI.Controllers
                     DealTypeName = "En tienda",
                     DealTypeIcon = "https://res.cloudinary.com/yoyimgs/image/upload/v1597767894/global/deal_icons/instore-deal.png",
                     CommerceLogo = logoUrl,
-                    ImgUrl = imgUrl,
-                    MainHint = "₡1000",
-                    ComplementaryHint = "En cada ₡10,000",
-                    ExtraHint = "10% cashback",
-                    DisplayExtraHint = true,
-                    AvailableQuantity = 45,
-                    AvailableQuantityHint = "",
-                    DisplayAvailableQuantityHint = false,
-                    Favorite = true,
+                    MainHint = "₡1,000",
+                    ComplementaryHint = "Por cada ₡10,000",
+                    UnlockHint = "Compras +₡12,000",
+                    DisplayUnlockHint = true,
+                    Favorite = false,
                     DisplayExpirationHint = true,
                     ExpirationDate = DateTime.UtcNow.AddDays(2).ToString("yyyy-MM-dd HH':'mm':'ss")
                 };
 
-                currentCell.DisplayData = displayData;
+                currentCell.DisplayData = cashIncentiveCellDisplayData;
 
                 cashCellDetail = new CashIncentiveContentCellDetail
                 {
                     Id = currentCell.Id,
-                    CommerceId = displayData.CommerceId,
-                    ContentType = CellDetailTypes.CashIncentive
+                    CommerceId = cashIncentiveCellDisplayData.CommerceId,
+                    ContentType = CellDetailTypes.CashIncentive,
+                    DealType = DealTypes.InStore,
+                    DealTypeName = "En tienda",
+                    DealTypeIcon = "https://res.cloudinary.com/yoyimgs/image/upload/v1597767894/global/deal_icons/instore-deal.png",
+                    DisplayExpirationHint = true,
+                    ExpirationDate = DateTime.UtcNow.AddDays(2).ToString("yyyy-MM-dd HH':'mm':'ss"),
+                    AppliesToInAppPurchases = false,
+                    CommerceLogo = logoUrl,
+                    MainHint = "₡1,000",
+                    ComplementaryHint = "Por cada ₡10,000",
+                    Favorite = false,
+                    MaxValueHint = "",
+                    DisplayMaxValueHint = false,
+                    Value = 1000,
+                    ValueLiteral = "",
+                    DisplayValue = false,
+                    RegularValue = 0,
+                    RegularValueLiteral = "",
+                    DisplayRegularValue = false,
+                    MembershipLevelHint = "",
+                    DisplayMembershipLevelHint = false,
+                    MinMembershipLevel = 1,
+                    MinPurchaseAmountToApplyHint = "",
+                    DisplayMinPurchaseAmountToApplyHint = false,
+                    MainUnlockHint = "",
+                    DisplayMainUnlockHint = false,
+                    ComplementaryUnlockHint = "",
+                    DisplayComplementaryUnlockHint = false,
+                    AvailabiltySchedule = "\nLunes a Miercoles\nDe 1pm-6pm\nSábados y Domingos 10am-5pm",
+                    DisplayAvailabilitySchedule = true
                 };
 
                 currentCell.DetailedContent = cashCellDetail;
@@ -1277,7 +1328,7 @@ namespace YOY.UserAPI.Controllers
                 logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596430629/dev/testing/logo2.png", contentLogoHeight, (int)Math.Ceiling(contentLogoHeight / logoWithWidthProp));
                 imgUrl = "";
 
-                displayData = new ContentCellDisplayData
+                cashIncentiveCellDisplayData = new CashbackContentCellDisplayData
                 {
                     Id = currentCell.Id,
                     CommerceId = Guid.NewGuid(),
@@ -1286,26 +1337,51 @@ namespace YOY.UserAPI.Controllers
                     DealTypeName = "Telefónico",
                     DealTypeIcon = "https://res.cloudinary.com/yoyimgs/image/upload/v1597767894/global/deal_icons/phone-deal.png",
                     CommerceLogo = logoUrl,
-                    ImgUrl = imgUrl,
-                    MainHint = "Helado gratis",
+                    MainHint = "9% cashback",
                     ComplementaryHint = "Compras +₡3,000",
-                    ExtraHint = "",
-                    DisplayExtraHint = false,
-                    AvailableQuantity = 10,
-                    AvailableQuantityHint = "Quedan solo 10",
-                    DisplayAvailableQuantityHint = true,
+                    UnlockHint = "Estás a 3 compras",
+                    DisplayUnlockHint = true,
                     Favorite = true,
                     DisplayExpirationHint = true,
                     ExpirationDate = DateTime.UtcNow.AddHours(5).ToString("yyyy-MM-dd HH':'mm':'ss")
                 };
 
-                currentCell.DisplayData = displayData;
+                currentCell.DisplayData = cashIncentiveCellDisplayData;
 
                 cashCellDetail = new CashIncentiveContentCellDetail
                 {
                     Id = currentCell.Id,
-                    CommerceId = displayData.CommerceId,
-                    ContentType = CellDetailTypes.CashIncentive
+                    CommerceId = cashIncentiveCellDisplayData.CommerceId,
+                    ContentType = CellDetailTypes.CashIncentive,
+                    DealType = DealTypes.Phone,
+                    DealTypeName = "Telefónico",
+                    DealTypeIcon = "https://res.cloudinary.com/yoyimgs/image/upload/v1597767894/global/deal_icons/phone-deal.png",
+                    DisplayExpirationHint = true,
+                    ExpirationDate = DateTime.UtcNow.AddHours(5).ToString("yyyy-MM-dd HH':'mm':'ss"),
+                    AppliesToInAppPurchases = false,
+                    CommerceLogo = logoUrl,
+                    MainHint = "9% cashback",
+                    ComplementaryHint = "Compras +₡3,000",
+                    Favorite = true,
+                    MaxValueHint = "",
+                    DisplayMaxValueHint = false,
+                    Value = 9,
+                    ValueLiteral = "+9% en tu alcancía",
+                    DisplayValue = true,
+                    RegularValue = 0,
+                    RegularValueLiteral = "",
+                    DisplayRegularValue = false,
+                    MembershipLevelHint = "Debes ser Oro para accederlo",
+                    DisplayMembershipLevelHint = true,
+                    MinMembershipLevel = 3,
+                    MinPurchaseAmountToApplyHint = "",
+                    DisplayMinPurchaseAmountToApplyHint = false,
+                    MainUnlockHint = "",
+                    DisplayMainUnlockHint = false,
+                    ComplementaryUnlockHint = "",
+                    DisplayComplementaryUnlockHint = false,
+                    AvailabiltySchedule = "\nTodos los días\nDe 1pm-6pm\nSábados y Domingos 10am-5pm",
+                    DisplayAvailabilitySchedule = true
                 };
 
                 currentCell.DetailedContent = cashCellDetail;
@@ -1409,7 +1485,7 @@ namespace YOY.UserAPI.Controllers
 
                 List<Cell> contentCells = new List<Cell>();
                 Cell currentCell;
-                ContentCellDisplayData displayData;
+                DealContentCellDisplayData displayData;
                 DealContentCellDetail cellDetail;
 
                 string logoUrl;
@@ -1431,7 +1507,7 @@ namespace YOY.UserAPI.Controllers
                         logoUrl = ImageAdapter.TransformImg(item.CommerceWhiteLogoUrl, brandingLogoHeight, (int)Math.Ceiling(brandingLogoHeight / logoWithWidthProp));
                         imgUrl = ImageAdapter.TransformImg(item.DisplayImgUrl, dealImgHeight, (int)Math.Ceiling(dealImgHeight / dealImgWidthProp));
 
-                        displayData = new ContentCellDisplayData
+                        displayData = new DealContentCellDisplayData
                         {
                             Id = currentCell.Id,
                             CommerceId = item.CommerceId,
@@ -1443,8 +1519,8 @@ namespace YOY.UserAPI.Controllers
                             ImgUrl = imgUrl,
                             MainHint = item.MainHint,
                             ComplementaryHint = item.ComplementaryHint,
-                            ExtraHint = item.ExtraHint,
-                            DisplayExtraHint = item.DisplayExtraHint,
+                            CashbackHint = item.CashbackHint,
+                            DisplayCashbackHint = item.DisplayCashbackHint,
                             AvailableQuantity = item.AvailableQuantity,
                             AvailableQuantityHint = item.AvailableQuantityHint,
                             DisplayAvailableQuantityHint = item.DisplayAvailableQuantityHint,
@@ -1478,8 +1554,6 @@ namespace YOY.UserAPI.Controllers
                             HasPreferences = item.HasPreferences,
                             CashbackHint = item.CashbackHint,
                             DisplayCashbackHint = item.DisplayCashbackHint,
-                            ExtraHint = item.ExtraHint,
-                            DisplayExtraHint = item.DisplayExtraHint,
                             MainHint = item.MainHint,
                             ComplementaryHint = item.ComplementaryHint,
                             DealName = item.Name,
@@ -1560,7 +1634,7 @@ namespace YOY.UserAPI.Controllers
                 for (int i = 0; i < currentStructure.CellsCount; ++i)
                 {
                     currentStructure.Cells.Add(contentCells[random.Next(0, 1000) % contentCells.Count]);
-                    ((ContentCellDisplayData)currentStructure.Cells[i].DisplayData).Favorite = true;
+                    ((DealContentCellDisplayData)currentStructure.Cells[i].DisplayData).Favorite = true;
 
                 }
 
@@ -1584,7 +1658,7 @@ namespace YOY.UserAPI.Controllers
                 logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596430629/dev/testing/logo5.png", contentLogoHeight, (int)Math.Ceiling(contentLogoHeight / logoWithWidthProp));
                 imgUrl = "";
 
-                displayData = new ContentCellDisplayData
+                displayData = new DealContentCellDisplayData
                 {
                     Id = currentCell.Id,
                     CommerceId = Guid.NewGuid(),
@@ -1596,8 +1670,8 @@ namespace YOY.UserAPI.Controllers
                     ImgUrl = imgUrl,
                     MainHint = "14% Cashback",
                     ComplementaryHint = "Antes 6%",
-                    ExtraHint = "Compras +₡12,000",
-                    DisplayExtraHint = true,
+                    CashbackHint = "Compras +₡12,000",
+                    DisplayCashbackHint = true,
                     AvailableQuantity = -1,
                     AvailableQuantityHint = "",
                     DisplayAvailableQuantityHint = false,
@@ -1631,7 +1705,7 @@ namespace YOY.UserAPI.Controllers
                 logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596430629/dev/testing/logo2.png", contentLogoHeight, (int)Math.Ceiling(contentLogoHeight / logoWithWidthProp));
                 imgUrl = "";
 
-                displayData = new ContentCellDisplayData
+                displayData = new DealContentCellDisplayData
                 {
                     Id = currentCell.Id,
                     CommerceId = Guid.NewGuid(),
@@ -1643,8 +1717,8 @@ namespace YOY.UserAPI.Controllers
                     ImgUrl = imgUrl,
                     MainHint = "₡1000",
                     ComplementaryHint = "En cada ₡10,000",
-                    ExtraHint = "10% cashback",
-                    DisplayExtraHint = true,
+                    CashbackHint = "10% cashback",
+                    DisplayCashbackHint = true,
                     AvailableQuantity = 45,
                     AvailableQuantityHint = "",
                     DisplayAvailableQuantityHint = false,
@@ -1678,7 +1752,7 @@ namespace YOY.UserAPI.Controllers
                 logoUrl = ImageAdapter.TransformImg("https://res.cloudinary.com/yoyimgs/image/upload/v1596430629/dev/testing/logo2.png", contentLogoHeight, (int)Math.Ceiling(contentLogoHeight / logoWithWidthProp));
                 imgUrl = "";
 
-                displayData = new ContentCellDisplayData
+                displayData = new DealContentCellDisplayData
                 {
                     Id = currentCell.Id,
                     CommerceId = Guid.NewGuid(),
@@ -1690,8 +1764,8 @@ namespace YOY.UserAPI.Controllers
                     ImgUrl = imgUrl,
                     MainHint = "Helado gratis",
                     ComplementaryHint = "Compras +₡4,500",
-                    ExtraHint = "",
-                    DisplayExtraHint = true,
+                    CashbackHint = "",
+                    DisplayCashbackHint = true,
                     AvailableQuantity = 15,
                     AvailableQuantityHint = "Solo quedan 15",
                     DisplayAvailableQuantityHint = true,
@@ -2028,8 +2102,6 @@ namespace YOY.UserAPI.Controllers
             return commerceOptions;
         }
 
-
-        [AllowAnonymous]
         [Route("gets")]
         [HttpGet]
         public async Task<IActionResult> GetsAsync(string userId, string location, int sliderHeight, int dealImgHeight, int contentLogoHeight, int brandingLogoHeight, int cardLogoHeight, int cardImgHeight, int thumbnailHeight)
@@ -2218,8 +2290,7 @@ namespace YOY.UserAPI.Controllers
 
             return result;
         }
-        
-        [AllowAnonymous]
+
         [Route("getsByFilter")]
         [HttpGet]
         public async Task<IActionResult> GetsAsync(string userId, string location, int filterType, Guid filterValue, int dealImgHeight, int contentLogoHeight, int brandingLogoHeight, int cardLogoHeight, int cardImgHeight, int thumbnailHeight)

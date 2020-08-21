@@ -21,6 +21,8 @@ namespace YOY.DAO.Entities.DB
         public int DestionationType { get; set; }
         public string DestinationName { get; set; }
         public string ReferenceCode { get; set; }
+        public string Subject { get; set; }
+        public string Details { get; set; }
         public int Status { get; set; }
         public DateTime CreatedDate { get; set; }
         public string ModifierUserId { get; set; }

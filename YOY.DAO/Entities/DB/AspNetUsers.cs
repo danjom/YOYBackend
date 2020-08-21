@@ -36,6 +36,7 @@ namespace YOY.DAO.Entities.DB
             Oltptransactions = new HashSet<Oltptransactions>();
             OltpuserInterests = new HashSet<OltpuserInterests>();
             OltpuserLocationLogs = new HashSet<OltpuserLocationLogs>();
+            OltpuserPaymentRecords = new HashSet<OltpuserPaymentRecords>();
         }
 
         public string Id { get; set; }
@@ -107,5 +108,6 @@ namespace YOY.DAO.Entities.DB
         public virtual ICollection<Oltptransactions> Oltptransactions { get; set; }
         public virtual ICollection<OltpuserInterests> OltpuserInterests { get; set; }
         public virtual ICollection<OltpuserLocationLogs> OltpuserLocationLogs { get; set; }
+        public virtual ICollection<OltpuserPaymentRecords> OltpuserPaymentRecords { get; set; }
     }
 }

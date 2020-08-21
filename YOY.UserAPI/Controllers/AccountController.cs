@@ -1518,6 +1518,74 @@ namespace YOY.UserAPI.Controllers
             return result;
         }//PUT ENDS ----------------------------------------------------------------------------------------------------------//
 
+        /// <summary>
+        /// Updates an user account and retrieve the profile updated
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("resetPassword")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest model)
+        {
+            IActionResult result = null;
+            int callId = 6;
+            string parameters = model.ToString();
+            string errorMsg;
+
+
+            Initialize(Guid.Empty);
+
+            if (!ModelState.IsValid)
+            {
+                errorMsg = "ERROR: Invalid data received, " + parameters;
+                result = new BadRequestObjectResult(
+                                new BasicResponse
+                                {
+                                    StatusCode = Values.StatusCodes.BadRequest,
+                                    CustomAction = UserappErrorCustomActions.None,
+                                    DisplayMsgToUser = false,
+                                    DevError = _localizer["InvalidPayload"].Value,
+                                    MsgContent = "",
+                                    MsgTitle = ""
+                                });
+
+
+                //Registers the invalid call
+                this._businessObjects.HttpcallInvokationLogs.Post(model.Email, this.GetType().Name, callId, controllerVersion,
+                                    StatusCodes.BadRequest, 0, parameters, 0, 0, false, null, HttpcallTypes.Put, errorMsg);
+
+            }
+            else
+            {
+                try
+                {
+                    //Logic to create password recover email
+
+                    result = Ok(new BasicResponse
+                    {
+                        StatusCode = Values.StatusCodes.Ok,
+                        CustomAction = UserappErrorCustomActions.None,
+                        DisplayMsgToUser = false,
+                        DevError = "",
+                        MsgTitle = "",
+                        MsgContent = ""
+                    });
+
+                }
+                catch (Exception e)
+                {
+                    errorMsg = "ERROR: An exception occured " + e.Message;
+                    result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
+
+                    //Registers the invalid call
+                    this._businessObjects.HttpcallInvokationLogs.Post(model.Email, this.GetType().Name, callId, controllerVersion,
+                                        StatusCodes.InternalServerError, 0, parameters, 0, 0, false, null, HttpcallTypes.Put, errorMsg);
+                }
+            }
+
+            return result;
+        }//PUT ENDS ----------------------------------------------------------------------------------------------------------//
+
 
 
         #endregion

@@ -20,12 +20,11 @@ namespace YOY.DTO.Entities
         public string BenefitAmountTypeName { set; get; }
         public int DealType { set; get; }
         public string DealTypeName { set; get; }
-        public int MaxCombinedIncentives { set; get; }
         public decimal UnitValue { set; get; }
         public decimal PreviousUnitValue { set; get; }
         public int MinMembershipLevel { set; get; }
         public string MinMembershipLevelName { set; get; }
-        public decimal MinPurchasedAmount { set; get; }
+        public decimal MinPurchasedAmountToBeApplied { set; get; }
         public decimal PurchasedAmountBlock { set; get; }
         public decimal MaxValue { set; get; }
         public int AvailableQuantity { set; get; }
@@ -34,15 +33,15 @@ namespace YOY.DTO.Entities
         public string ComplementaryHint { set; get; }
         public string Description { set; get; }
         public string Keywords { set; get; }
+        public bool ApplyToInAppPurchases { set; get; }
         public bool IsActive { set; get; }
         public bool IsSponsored { set; get; }
         public string ValidWeekDays { set; get; }
-        public string ValidMonthDays { set; get; }
         public string ValidHours { set; get; }
         public int MaxUsagePerUser { set; get; }
         public DateTime? PurchasesCountStartDate { set; get; }
         public int MinPurchasesCountToUse { set; get; }
-        public decimal MinPurchasedTotalAmount { set; get; }
+        public decimal MinPurchasedAmountToCount { set; get; }
         public int UsageCount { set; get; }
         public int GeoSegmentationType { set; get; }
         public string GeoSegmentationTypeName { set; get; }

@@ -79,15 +79,36 @@ namespace YOY.BusinessAPI.Controllers
                 TenantId = tenantId,
                 BranchId = branchId,
                 Sales = new List<SaleData>(),
-                PendingAmount = 0,
+                PendingAmount = "",
                 TotalRecords = 0,
-                TotalAmount = 0,
-                WithdrawedAmount = 0
+                TotalAmount = "",
+                WithdrawedAmount = ""
             };
 
 
             //Use test data
             int daysDiff = (int)Math.Floor((end - start).TotalDays);
+
+            string branchName = "Branch";
+            string commerceName = "Commerce";
+
+            if (branchId != Guid.Empty)
+            {
+                Branch branch = this._businessObjects.Branches.Get(branchId, false, DateTime.UtcNow);
+
+                if (branch != null)
+                {
+                    branchName = branch.Name;
+                }
+            }
+
+            if (tenantId != null)
+            {
+                TenantInfo info = this._businessObjects.Commerces.Get(tenantId, CommerceKeys.TenantKey);
+
+                if (info != null)
+                    commerceName = info.Name;
+            }
 
 
             Random random = new Random();
@@ -97,7 +118,7 @@ namespace YOY.BusinessAPI.Controllers
             decimal total;
             decimal totalAmount = 0;
             decimal totalPending = 0;
-            int[] purchaseStatuses = { PurchaseStatuses.Placed, PurchaseStatuses.Payed, PurchaseStatuses.Delivered };
+            //int[] purchaseStatuses = { PurchaseStatuses.Placed, PurchaseStatuses.Payed, PurchaseStatuses.Delivered };
             string[] purchaseStatusesName = { "Completada", "Pagada", "Entregada" };
 
             for(int i = 0; i< 350; ++i)
@@ -106,26 +127,24 @@ namespace YOY.BusinessAPI.Controllers
                 status = random.Next(3);
                 total = (decimal)(random.NextDouble() * 25000);
 
-                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
 
                 saleData = new SaleData
                 {
                     Id = Guid.Empty,
-                    BranchName = "Branch " + i,
-                    CommerceName = "Commerce " + tenantId,
+                    BranchName = branchName + i +"-"+random.Next(400,999),
+                    CommerceName = commerceName + tenantId,
                     PaymentStatusName = "Completado",
                     SaleStatusName = purchaseStatusesName[status],
                     CompletedDate = date,
                     CompletedDateLiteral = date.Day+ "/" + monthAbbreviations[date.Month] + "/" + date.Year + " " + date.Hour + ":" + date.Minute,
                     CreatedDate = date.AddMinutes(-1 * random.Next(30)),
-                    ReferenceCode = (Enumerable.Repeat(chars, 7).Select(s => s[random.Next(s.Length)]).ToArray()).ToString(),
+                    ReferenceCode = i+"IRNDJE3"+random.Next(5860),
                     SaleType = SaleTypes.Purchase,
                     SaleTypeName = "Compra de promo",
                     CommerceEarnings = total * 0.8M,
                     TotalAmount = total,
                     LiquidationStatusName = "Depositado",
-                    LiquidationReferenceCode = (Enumerable.Repeat(chars, 10).Select(s => s[random.Next(s.Length)]).ToArray()).ToString()
+                    LiquidationReferenceCode = i + "FGURH34N" + random.Next(7450)
                 };
 
                 saleData.CreatedDateLiteral = saleData.CreatedDate.Day + "/" + monthAbbreviations[date.Month] + "/" + date.Year + " " + saleData.CreatedDate.Hour + ":" + saleData.CreatedDate.Minute;
@@ -142,9 +161,9 @@ namespace YOY.BusinessAPI.Controllers
             }
 
             saleDataSet.TotalRecords = saleDataSet?.Sales?.Count ?? 0;
-            saleDataSet.TotalAmount = totalAmount;
-            saleDataSet.PendingAmount = totalPending;
-            saleDataSet.WithdrawedAmount = totalAmount - totalPending;
+            saleDataSet.TotalAmount = "$" + totalAmount;
+            saleDataSet.PendingAmount = "$" + totalPending;
+            saleDataSet.WithdrawedAmount = "$" + (totalAmount - totalPending);
 
             return saleDataSet;
         }
@@ -158,12 +177,32 @@ namespace YOY.BusinessAPI.Controllers
                 TenantId = tenantId,
                 BranchId = branchId,
                 Sales = new List<SaleData>(),
-                PendingAmount = 0,
+                PendingAmount = "",
                 TotalRecords = 0,
-                TotalAmount = 0,
-                WithdrawedAmount = 0
+                TotalAmount = "",
+                WithdrawedAmount = ""
             };
 
+            string branchName = "Branch";
+            string commerceName = "Commerce";
+
+            if(branchId != Guid.Empty)
+            {
+                Branch branch = this._businessObjects.Branches.Get(branchId, false, DateTime.UtcNow);
+
+                if (branch != null)
+                {
+                    branchName = branch.Name;
+                }
+            }
+
+            if(tenantId != null)
+            {
+                TenantInfo info = this._businessObjects.Commerces.Get(tenantId, CommerceKeys.TenantKey);
+
+                if (info != null)
+                    commerceName = info.Name;
+            }
 
             //Use test data
             int daysDiff = (int)Math.Floor((end - start).TotalDays);
@@ -177,32 +216,31 @@ namespace YOY.BusinessAPI.Controllers
             decimal totalAmount = 0;
             decimal totalPending = 0;
 
-            for (int i = 0; i < 350; ++i)
+            for (int i = 0; i < 500 && i < pageSize; ++i)
             {
                 date = start.AddDays(random.Next(daysDiff + 1));
                 status = random.Next(3);
                 total = (decimal)(random.NextDouble() * 25000);
 
-                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
 
                 saleData = new SaleData
                 {
                     Id = Guid.Empty,
-                    BranchName = "Branch " + i,
-                    CommerceName = "Commerce " + tenantId,
+                    BranchName = i + branchName + random.Next(350),
+                    CommerceName = commerceName + tenantId,
                     PaymentStatusName = "Completado",
                     SaleStatusName = "Pagado por el usuario",
                     CompletedDate = date,
                     CompletedDateLiteral = date.Day + "/" + monthAbbreviations[date.Month] + "/" + date.Year + " " + date.Hour + ":" + date.Minute,
                     CreatedDate = date.AddMinutes(-1 * random.Next(30)),
-                    ReferenceCode = (Enumerable.Repeat(chars, 7).Select(s => s[random.Next(s.Length)]).ToArray()).ToString(),
+                    ReferenceCode = i + "KFE4T4IG" + random.Next(1200),
                     SaleType = SaleTypes.Payment,
                     SaleTypeName = "Pago con YOY",
                     CommerceEarnings = total * 0.8M,
                     TotalAmount = total,
                     LiquidationStatusName = "Depositado",
-                    LiquidationReferenceCode = (Enumerable.Repeat(chars, 10).Select(s => s[random.Next(s.Length)]).ToArray()).ToString()
+                    LiquidationReferenceCode = i + "ZJFRGR9JF" + random.Next(4200),
                 };
 
                 saleData.CreatedDateLiteral = saleData.CreatedDate.Day + "/" + monthAbbreviations[date.Month] + "/" + date.Year + " " + saleData.CreatedDate.Hour + ":" + saleData.CreatedDate.Minute;
@@ -219,9 +257,9 @@ namespace YOY.BusinessAPI.Controllers
             }
 
             saleDataSet.TotalRecords = saleDataSet?.Sales?.Count ?? 0;
-            saleDataSet.TotalAmount = totalAmount;
-            saleDataSet.PendingAmount = totalPending;
-            saleDataSet.WithdrawedAmount = totalAmount - totalPending;
+            saleDataSet.TotalAmount = "$" + totalAmount;
+            saleDataSet.PendingAmount = "$" + totalPending;
+            saleDataSet.WithdrawedAmount = "$" + (totalAmount - totalPending);
 
             return saleDataSet;
         }
@@ -232,7 +270,7 @@ namespace YOY.BusinessAPI.Controllers
         [ProducesResponseType(Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest)]
         public IActionResult Gets(Guid employeeId, Guid branchId, Guid tenantId, string userId, int saleType, DateTime startDate, DateTime endDate, int pageSize, int pageNumber)
         {
-            IActionResult result = new BadRequestResult();
+            IActionResult result;
             SaleDataSet saleDataSet = new SaleDataSet
             {
                 StartDate = startDate,
@@ -240,10 +278,10 @@ namespace YOY.BusinessAPI.Controllers
                 TenantId = tenantId,
                 BranchId = branchId,
                 Sales = new List<SaleData>(),
-                PendingAmount = 0,
+                PendingAmount = "",
                 TotalRecords = 0,
-                TotalAmount = 0,
-                WithdrawedAmount = 0
+                TotalAmount = "",
+                WithdrawedAmount = ""
             };
 
             string errorMsg;
@@ -252,6 +290,8 @@ namespace YOY.BusinessAPI.Controllers
 
             try
             {
+                Initialize(tenantId, userId);
+
                 switch (saleType)
                 {
                     case SaleTypes.Purchase:

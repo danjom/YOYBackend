@@ -175,7 +175,7 @@
     <value>Carrito actualizado</value>
   </data>
   <data name="CashbackPercentageLabel" xml:space="preserve">
-    <value>+{0}% de cashback</value>
+    <value>+{0} cashback</value>
   </data>
   <data name="December" xml:space="preserve">
     <value>Diciembre</value>
@@ -209,12 +209,6 @@
   </data>
   <data name="ErrorUpdatingProfilePicture" xml:space="preserve">
     <value>Hubo un error al actualizar tu foto de perfil</value>
-  </data>
-  <data name="ExtraHintFixedAmount" xml:space="preserve">
-    <value>Ganas {0}</value>
-  </data>
-  <data name="ExtraHintPercentage" xml:space="preserve">
-    <value>Ganas {0}%</value>
   </data>
   <data name="FacebookAccountNotFound" xml:space="preserve">
     <value>Cuenta de Facebook no encontrada</value>

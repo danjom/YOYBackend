@@ -35,9 +35,6 @@ namespace YOY.BusinessAPI.Models.v1.CashIncentive.POCO
         public int DealType { set; get; }
         [NotNull]
         [Required]
-        public int MaxCombinedIncentives { set; get; }
-        [NotNull]
-        [Required]
         public string UnitValue { set; get; }
         [NotNull]
         [Required]
@@ -47,7 +44,7 @@ namespace YOY.BusinessAPI.Models.v1.CashIncentive.POCO
         public int MinMembershipLevel { set; get; }
         [NotNull]
         [Required]
-        public string MinPurchasedAmount { set; get; }
+        public string MinPurchasedAmountToBeApplied { set; get; }
         [NotNull]
         [Required]
         public string PurchasedAmountBlock { set; get; }
@@ -71,13 +68,13 @@ namespace YOY.BusinessAPI.Models.v1.CashIncentive.POCO
         public string Keywords { set; get; }
         [NotNull]
         [Required]
+        public bool AppliesToInAppPurchases { set; get; }
+        [NotNull]
+        [Required]
         public bool IsSponsored { set; get; }
         [NotNull]
         [Required]
         public List<string> ValidWeekDays { set; get; }
-        [NotNull]
-        [Required]
-        public List<string> ValidMonthDays { set; get; }
         [NotNull]
         [Required]
         public List<string> ValidHours { set; get; }
@@ -89,7 +86,7 @@ namespace YOY.BusinessAPI.Models.v1.CashIncentive.POCO
         public int MinPurchasesCountToUse { set; get; }
         [NotNull]
         [Required]
-        public string MinPurchasedTotalAmount { set; get; }
+        public string MinPurchasedAmountToCount { set; get; }
         [AllowNull]
         public string RelevanceRate { set; get; }
         [NotNull]

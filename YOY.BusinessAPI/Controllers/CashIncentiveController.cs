@@ -101,12 +101,11 @@ namespace YOY.BusinessAPI.Controllers
                 TypeName = data.TypeName,
                 DealType = data.DealType,
                 DealTypeName = data.DealTypeName,
-                MaxCombinedIncentives = data.MaxCombinedIncentives,
                 UnitValue = data.UnitValue,
                 PreviousUnitValue = data.PreviousUnitValue,
                 MinMembershipLevel = data.MinMembershipLevel,
                 MinMembershipLevelName = data.MinMembershipLevelName,
-                MinPurchasedAmount = data.MinPurchasedAmount,
+                MinPurchasedAmountToBeApplied = data.MinPurchasedAmountToBeApplied,
                 PurchasedAmountBlock = data.PurchasedAmountBlock,
                 MaxValue = data.MaxValue,
                 AvailableQuantity = data.AvailableQuantity,
@@ -119,10 +118,9 @@ namespace YOY.BusinessAPI.Controllers
                 IsSponsored = data.IsSponsored,
                 ValidHours = data.ValidHours,
                 ValidWeekDays = data.ValidWeekDays,
-                ValidMonthDays = data.ValidMonthDays,
                 MaxUsagePerUser = data.MaxUsagePerUser,
                 MinPurchasesCountToUse = data.MinPurchasesCountToUse,
-                MinPurchasedTotalAmount = data.MinPurchasedTotalAmount,
+                MinPurchasedAmountToCount = data.MinPurchasedAmountToCount,
                 UsageCount = data.UsageCount,
                 GeoSegmentationType = data.GeoSegmentationType,
                 GeoSegmentationTypeName = data.GeoSegmentationTypeName,
@@ -346,8 +344,8 @@ namespace YOY.BusinessAPI.Controllers
                         else
                             previousUnitValue = -1;
 
-                        Decimal.TryParse(model.MinPurchasedAmount, out decimal minPurchasedAmount);
-                        Decimal.TryParse(model.MinPurchasedTotalAmount, out decimal minPurchasedTotalAmount);
+                        Decimal.TryParse(model.MinPurchasedAmountToBeApplied, out decimal minPurchasedAmountToBeApplied);
+                        Decimal.TryParse(model.MinPurchasedAmountToCount, out decimal minPurchasedAmountToCount);
                         Decimal.TryParse(model.PurchasedAmountBlock, out decimal purchasedAmountBlock);
 
                         double relevanceRate;
@@ -385,22 +383,16 @@ namespace YOY.BusinessAPI.Controllers
                             dataErrors += "- El tipo de incentivo debe ser seleccionado\n";
                         }
 
-                        if (model.MaxCombinedIncentives < 0)
-                        {
-                            valid = false;
-                            dataErrors += "- Máximo de incentivos acumulables debe ser mayor o igual a 0\n";
-                        }
-
                         if (model.MinMembershipLevel < MembershipLevels.Bronze || model.MinMembershipLevel > MembershipLevels.Diamond)
                         {
                             valid = false;
                             dataErrors += "- El mínimo nivel de lealtad debe ser seleccionado\n";
                         }
 
-                        if (minPurchasedAmount < 0)
+                        if (minPurchasedAmountToBeApplied < 0)
                         {
                             valid = false;
-                            dataErrors += "- El monto mínimo de compra debe ser mayor que 0\n";
+                            dataErrors += "- El monto mínimo de compra para aplicar debe ser mayor que 0\n";
                         }
 
                         if (purchasedAmountBlock < 0)
@@ -457,12 +449,6 @@ namespace YOY.BusinessAPI.Controllers
                             dataErrors += "-El beneficio anterior debe ser menor que el monto del beneficio\n";
                         }
 
-                        if (model.ValidMonthDays?.Count == 0)
-                        {
-                            valid = false;
-                            dataErrors += "-Las fechas de validez deben ser indicadas\n";
-                        }
-
                         if (model.ValidWeekDays?.Count == 0)
                         {
                             valid = false;
@@ -487,10 +473,10 @@ namespace YOY.BusinessAPI.Controllers
                             dataErrors += "-El mínimo de compras realizadas debe ser indicado\n";
                         }
 
-                        if (minPurchasedTotalAmount < 0)
+                        if (minPurchasedAmountToCount < 0)
                         {
                             valid = false;
-                            dataErrors += "-El mínimo total de pagos debe ser indicado\n";
+                            dataErrors += "-El mínimo de compra participante debe ser indicado\n";
                         }
 
                         if (relevanceRate < 0)
@@ -524,12 +510,6 @@ namespace YOY.BusinessAPI.Controllers
                             model.ExpirationDate = LocalToUtc(model.ExpirationDate, this._businessObjects.Tenant.UtcTimeDiff);
 
 
-                            string validMonthDays = "";
-
-                            foreach(string item in model.ValidMonthDays)
-                            {
-                                validMonthDays = item + "*";
-                            }
 
                             string validWeekDays = "";
 
@@ -562,9 +542,9 @@ namespace YOY.BusinessAPI.Controllers
                                 };
 
 
-                                CashIncentive newIncentive = this._businessObjects.CashIncentives.Post(model.Type, DisplayTypes.BroadcastingAndListings, model.ApplyType, model.BenefitAmountType, model.DealType, model.MaxCombinedIncentives, unitValue, previousUnitValue ?? -1, model.MinMembershipLevel,
-                                    minPurchasedAmount, purchasedAmountBlock, -1, model.AvailableQuantity, model.Name, model.MainHint, model.ComplementaryHint, model.Description, model.Keywords, model.IsSponsored, validWeekDays, validMonthDays, validHours, model.MaxUsagePerUser, null, model.MinPurchasesCountToUse,
-                                    minPurchasedTotalAmount, GeoSegmentationTypes.Country, tenantInfo.IncentiveRules, tenantInfo.IncentiveConditions, relevanceRate, model.ReleaseDate, model.ExpirationDate);
+                                CashIncentive newIncentive = this._businessObjects.CashIncentives.Post(model.Type, DisplayTypes.BroadcastingAndListings, model.ApplyType, model.BenefitAmountType, model.DealType, unitValue, previousUnitValue ?? -1, model.MinMembershipLevel,
+                                    minPurchasedAmountToBeApplied, purchasedAmountBlock, -1, model.AvailableQuantity, model.Name, model.MainHint, model.ComplementaryHint, model.Description, model.Keywords, model.AppliesToInAppPurchases, model.IsSponsored, validWeekDays, validHours, model.MaxUsagePerUser, null, model.MinPurchasesCountToUse,
+                                    minPurchasedAmountToCount, GeoSegmentationTypes.Country, tenantInfo.IncentiveRules, tenantInfo.IncentiveConditions, relevanceRate, model.ReleaseDate, model.ExpirationDate);
 
 
 
@@ -716,8 +696,8 @@ namespace YOY.BusinessAPI.Controllers
                         else
                             previousUnitValue = -1;
 
-                        Decimal.TryParse(model.MinPurchasedAmount, out decimal minPurchasedAmount);
-                        Decimal.TryParse(model.MinPurchasedTotalAmount, out decimal minPurchasedTotalAmount);
+                        Decimal.TryParse(model.MinPurchasedAmountToBeApplied, out decimal minPurchasedAmountToBeApplied);
+                        Decimal.TryParse(model.MinPurchasedAmountToCount, out decimal minPurchasedAmountToCount);
                         Decimal.TryParse(model.PurchasedAmountBlock, out decimal purchasedAmountBlock);
 
                         double relevanceRate;
@@ -755,22 +735,16 @@ namespace YOY.BusinessAPI.Controllers
                             dataErrors += "- El tipo de incentivo debe ser seleccionado\n";
                         }
 
-                        if (model.MaxCombinedIncentives < 0)
-                        {
-                            valid = false;
-                            dataErrors += "- Máximo de incentivos acumulables debe ser mayor o igual a 0\n";
-                        }
-
                         if (model.MinMembershipLevel < MembershipLevels.Bronze || model.MinMembershipLevel > MembershipLevels.Diamond)
                         {
                             valid = false;
                             dataErrors += "- El mínimo nivel de lealtad debe ser seleccionado\n";
                         }
 
-                        if (minPurchasedAmount < 0)
+                        if (minPurchasedAmountToBeApplied < 0)
                         {
                             valid = false;
-                            dataErrors += "- El monto mínimo de compra debe ser mayor que 0\n";
+                            dataErrors += "- El monto mínimo de compra para aplicar debe ser mayor que 0\n";
                         }
 
                         if (purchasedAmountBlock < 0)
@@ -827,12 +801,6 @@ namespace YOY.BusinessAPI.Controllers
                             dataErrors += "-El beneficio anterior debe ser menor que el monto del beneficio\n";
                         }
 
-                        if (model.ValidMonthDays?.Count == 0)
-                        {
-                            valid = false;
-                            dataErrors += "-Las fechas de validez deben ser indicadas\n";
-                        }
-
                         if (model.ValidWeekDays?.Count == 0)
                         {
                             valid = false;
@@ -857,10 +825,10 @@ namespace YOY.BusinessAPI.Controllers
                             dataErrors += "-El mínimo de compras realizadas debe ser indicado\n";
                         }
 
-                        if (minPurchasedTotalAmount < 0)
+                        if (minPurchasedAmountToCount < 0)
                         {
                             valid = false;
-                            dataErrors += "-El mínimo total de pagos debe ser indicado\n";
+                            dataErrors += "-El mínimo de compra participante debe ser indicado\n";
                         }
 
                         if (relevanceRate < 0)
@@ -894,13 +862,6 @@ namespace YOY.BusinessAPI.Controllers
                             model.ExpirationDate = LocalToUtc(model.ExpirationDate, this._businessObjects.Tenant.UtcTimeDiff);
 
 
-                            string validMonthDays = "";
-
-                            foreach (string item in model.ValidMonthDays)
-                            {
-                                validMonthDays = item + "*";
-                            }
-
                             string validWeekDays = "";
 
                             foreach (string item in model.ValidWeekDays)
@@ -927,9 +888,9 @@ namespace YOY.BusinessAPI.Controllers
                                 if (incentive != null)
                                 {
 
-                                    CashIncentive updatedCashIncentive = this._businessObjects.CashIncentives.Put(model.Id, model.Type, DisplayTypes.BroadcastingAndListings, model.ApplyType, model.BenefitAmountType, model.DealType, model.MaxCombinedIncentives,
-                                        unitValue, previousUnitValue ?? -1, model.MinMembershipLevel, minPurchasedAmount, purchasedAmountBlock, -1, model.AvailableQuantity, model.Name, model.MainHint, model.ComplementaryHint, model.Description, model.Keywords, model.IsSponsored,
-                                        validWeekDays, validMonthDays, validHours, model.MaxUsagePerUser, null, model.MinPurchaseCountToUse, minPurchasedTotalAmount, GeoSegmentationTypes.Country, tenantInfo.IncentiveRules, tenantInfo.IncentiveConditions,
+                                    CashIncentive updatedCashIncentive = this._businessObjects.CashIncentives.Put(model.Id, model.Type, DisplayTypes.BroadcastingAndListings, model.ApplyType, model.BenefitAmountType, model.DealType,
+                                        unitValue, previousUnitValue ?? -1, model.MinMembershipLevel, minPurchasedAmountToBeApplied, purchasedAmountBlock, -1, model.AvailableQuantity, model.Name, model.MainHint, model.ComplementaryHint, model.Description, model.Keywords, model.AppliesToInAppPurchases, 
+                                        model.IsSponsored, validWeekDays, validHours, model.MaxUsagePerUser, null, model.MinPurchaseCountToUse, minPurchasedAmountToCount, GeoSegmentationTypes.Country, tenantInfo.IncentiveRules, tenantInfo.IncentiveConditions,
                                         relevanceRate, model.ReleaseDate, model.ExpirationDate);
 
 

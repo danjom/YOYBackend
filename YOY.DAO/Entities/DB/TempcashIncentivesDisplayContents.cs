@@ -12,28 +12,27 @@ namespace YOY.DAO.Entities.DB
         public int DisplayType { get; set; }
         public int Type { get; set; }
         public int DealType { get; set; }
-        public int MaxCombinedIncentives { get; set; }
         public string MainHint { get; set; }
         public string ComplementaryHint { get; set; }
         public decimal UnitValue { get; set; }
         public decimal PreviousUnitValue { get; set; }
         public int MinMembershipLevel { get; set; }
-        public decimal MinPurchasedAmount { get; set; }
+        public decimal MinPurchasedAmountToBeApplied { get; set; }
         public decimal PurchasedAmountBlock { get; set; }
         public decimal MaxValue { get; set; }
         public int AvailableQuantity { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Keywords { get; set; }
+        public bool AppliesToInAppPurchases { get; set; }
         public bool IsSponsored { get; set; }
         public bool IsActive { get; set; }
         public string ValidWeekDays { get; set; }
-        public string ValidMonthDays { get; set; }
         public string ValidHours { get; set; }
         public int MaxUsagesPerUser { get; set; }
         public DateTime? PurchasesCountStartDate { get; set; }
         public int MinPurchasesCountToUse { get; set; }
-        public decimal MinPurchasedTotalAmount { get; set; }
+        public decimal MinPurchasedAmountToCount { get; set; }
         public int UsageCount { get; set; }
         public double RelevanceRate { get; set; }
         public int GeoSegmentationType { get; set; }

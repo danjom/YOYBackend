@@ -9,8 +9,6 @@ namespace YOY.UserAPI.Models.v1.Deal.POCO
     {
         public Guid Id { set; get; }
         public Guid CommerceId { set; get; }
-        public string ExtraHint { set; get; }
-        public bool DisplayExtraHint { set; get; }
         public int DealType { set; get; }
         public string DealTypeName { set; get; }
         public string DealTypeIcon { set; get; }

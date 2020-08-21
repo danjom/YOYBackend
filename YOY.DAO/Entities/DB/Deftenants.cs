@@ -40,6 +40,7 @@ namespace YOY.DAO.Entities.DB
             OltpsavedItems = new HashSet<OltpsavedItems>();
             Oltpsearchables = new HashSet<Oltpsearchables>();
             OltpshoppingCartItems = new HashSet<OltpshoppingCartItems>();
+            OltpuserPaymentRecords = new HashSet<OltpuserPaymentRecords>();
             OltpvalidatePurchaseRegistries = new HashSet<OltpvalidatePurchaseRegistries>();
         }
 
@@ -85,6 +86,7 @@ namespace YOY.DAO.Entities.DB
         public virtual ICollection<OltpsavedItems> OltpsavedItems { get; set; }
         public virtual ICollection<Oltpsearchables> Oltpsearchables { get; set; }
         public virtual ICollection<OltpshoppingCartItems> OltpshoppingCartItems { get; set; }
+        public virtual ICollection<OltpuserPaymentRecords> OltpuserPaymentRecords { get; set; }
         public virtual ICollection<OltpvalidatePurchaseRegistries> OltpvalidatePurchaseRegistries { get; set; }
     }
 }
