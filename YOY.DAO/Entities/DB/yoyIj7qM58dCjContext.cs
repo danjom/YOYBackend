@@ -5238,6 +5238,10 @@ namespace YOY.DAO.Entities.DB
                     .HasMaxLength(64)
                     .IsUnicode(false);
 
+                entity.Property(e => e.ProductHint)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.PublishingStatus).HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.PurchasesCountStartDate).HasColumnType("datetime");
@@ -8524,11 +8528,6 @@ namespace YOY.DAO.Entities.DB
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(60)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.PreferenceIcon)
                     .HasMaxLength(200)
                     .IsUnicode(false);
@@ -8539,6 +8538,11 @@ namespace YOY.DAO.Entities.DB
                     .IsUnicode(false);
 
                 entity.Property(e => e.PreferenceScore).HasColumnType("decimal(16, 3)");
+
+                entity.Property(e => e.ProductHint)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.PurchasesCountStartDate).HasColumnType("datetime");
 

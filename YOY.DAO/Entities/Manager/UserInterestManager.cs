@@ -493,7 +493,7 @@ namespace YOY.DAO.Entities.Manager
                     //Active by default
 
 
-                    this._businessObjects.Context.OltpuserInterests.Add(newInterest);
+                    context.OltpuserInterests.Add(newInterest);
                 }
                 else
                 {
@@ -526,9 +526,9 @@ namespace YOY.DAO.Entities.Manager
                     Year = currentUtcDate.Year
                 };
 
-                this._businessObjects.Context.OltpuserInterestRecords.Add(newInterestRecord);
+                context.OltpuserInterestRecords.Add(newInterestRecord);
 
-                this._businessObjects.Context.SaveChanges();
+                context.SaveChanges();
 
                 var queryInterest = (dynamic)null;
 
@@ -705,24 +705,15 @@ namespace YOY.DAO.Entities.Manager
                 yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();//New context is created because this call is part of an async logic
 
 
-                var query = from x in context.OltpuserInterests
-                            where x.UserId == userId && x.InterestId == interestId
-                            select x;
-
-                OltpuserInterests interest = null;
-                if (query != null)
-                {
-                    foreach (OltpuserInterests item in query)
-                    {
-                        interest = item;
-                    }
-                }
+                OltpuserInterests interest = (from x in context.OltpuserInterests
+                                                where x.UserId == userId && x.InterestId == interestId
+                                                select x).FirstOrDefault();
 
                 if (interest != null)
                 {
                     interest.IsActive = !interest.IsActive;
                     interest.UpdatedDate = DateTime.UtcNow;
-                    this._businessObjects.Context.SaveChanges();
+                    context.SaveChanges();
 
                     success = true;
 

@@ -25,6 +25,7 @@ namespace YOY.DTO.Entities
         public int DisplayType { set; get; }
         public string DisplayTypeName { set; get; }
         public string Name { set; get; }
+        public string ProductHint { set; get; }
         public string MainHint { set; get; }
         public string ComplementaryHint { set; get; }
         public string Keywords { set; get; }

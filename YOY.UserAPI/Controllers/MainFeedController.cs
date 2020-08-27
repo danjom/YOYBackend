@@ -1,18 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using CloudinaryDotNet.Actions;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.EntityFrameworkCore.Query;
-using Microsoft.Extensions.Localization;
 using YOY.DAO.Entities;
-using YOY.DAO.Entities.Manager.Misc.Image;
-using YOY.DTO.Entities;
 using YOY.DTO.Entities.Manager.Misc.InterestPreference;
 using YOY.DTO.Entities.Misc.Branch;
 using YOY.DTO.Entities.Misc.Location;
@@ -69,6 +62,9 @@ namespace YOY.UserAPI.Controllers
         private const int MaxContentCellsOnGrid = 16;
 
         private const int controllerVersion = 1;
+
+        private const int filterOptionsPageSize = 36;
+        private const int contentPageSize = 36;
         #endregion
 
         #region METHODS
@@ -148,7 +144,7 @@ namespace YOY.UserAPI.Controllers
                 SlideCellDetail slideCellDetailContent = new SlideCellDetail
                 {
                     Id = slideCell.Id,
-                    ContentType = CellDetailTypes.Slide,
+                    ContentType = CellTypes.Slide,
                     RetrievePromotionalContent = true,
                     Title = "Noches de feria",
                     Description = "Todos los fines de semana de Agosto, iniciando el Jueves, a partir del as 7pm, aprovechá los mejores beneficios comprando con YOY"
@@ -184,7 +180,7 @@ namespace YOY.UserAPI.Controllers
                 slideCellDetailContent = new SlideCellDetail
                 {
                     Id = slideCell.Id,
-                    ContentType = CellDetailTypes.Slide,
+                    ContentType = CellTypes.Slide,
                     RetrievePromotionalContent = true,
                     Title = "Pizza Month",
                     Description = "Agosto es el mes de la pizza, por ello te traemos las mejores promos de tus pizzerias favorita, no te lo perdás!!"
@@ -220,7 +216,7 @@ namespace YOY.UserAPI.Controllers
                 slideCellDetailContent = new SlideCellDetail
                 {
                     Id = slideCell.Id,
-                    ContentType = CellDetailTypes.Slide,
+                    ContentType = CellTypes.Slide,
                     RetrievePromotionalContent = true,
                     Title = "Sopresas inéditas",
                     Description = "A partir de hoy y durante 10 días, podrás obtener promos de hasta el 85% con el código SORPRESASMAX. Ingresá a la sección de códigos y activalo"
@@ -443,7 +439,7 @@ namespace YOY.UserAPI.Controllers
                         cellDetailContent = new CategoryCellDetail
                         {
                             Id = item.Id,
-                            ContentType = CellDetailTypes.Category,
+                            ContentType = CellTypes.Category,
                             Name = item.Name,
                             ImgUrl = imgUrl + CategoryUnSelectedAppend,
                             CommerceId = Guid.Empty
@@ -476,7 +472,6 @@ namespace YOY.UserAPI.Controllers
         {
             ContentStructure commerceOptions;
 
-            int pageSize = 36;
             int callId = 4;
             string parameters = "UserId: " + userId + ", ImgHeight: " + carrouselHeight + ", ValidLocation: " + validLocation + ", GeoSegmentationType:" + geoSegmentationType;
 
@@ -501,7 +496,7 @@ namespace YOY.UserAPI.Controllers
                     MaxMetersToKeepStored = MaxMetersToStoreContent,
                     CellsCount = 0,
                     Cells = new List<Cell>(),
-                    PageSize = pageSize,
+                    PageSize = filterOptionsPageSize,
                     PageNumber = 0
                 };
 
@@ -523,12 +518,12 @@ namespace YOY.UserAPI.Controllers
                     {
                         case GeoSegmentationTypes.Country:
 
-                            displayData = this._businessObjects.Commerces.GetTenantsDisplayData(userId, countryId, Guid.Empty, GeoSegmentationTypes.Country, (double)latitude, (double)longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, pageSize, pageNumber);
+                            displayData = this._businessObjects.Commerces.GetTenantsDisplayData(userId, countryId, Guid.Empty, GeoSegmentationTypes.Country, (double)latitude, (double)longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, filterOptionsPageSize, pageNumber);
 
                             if (displayData?.Count == 0)//If no tenants nearby, then retrieve from the country
                             {
 
-                                displayData = this._businessObjects.Commerces.GetTenantsDisplayData(userId, countryId, Guid.Empty, GeoSegmentationTypes.Country, pageSize, pageNumber);
+                                displayData = this._businessObjects.Commerces.GetTenantsDisplayData(userId, countryId, Guid.Empty, GeoSegmentationTypes.Country, filterOptionsPageSize, pageNumber);
                             }
 
                             break;
@@ -544,11 +539,11 @@ namespace YOY.UserAPI.Controllers
                                 stateId = userState.Id;
                                 currentStateAlreadyTried = true;
 
-                                displayData = this._businessObjects.Commerces.GetTenantsDisplayData(userId, userState.CountryId, stateId, GeoSegmentationTypes.State, (double)latitude, (double)longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, pageSize, pageNumber);
+                                displayData = this._businessObjects.Commerces.GetTenantsDisplayData(userId, userState.CountryId, stateId, GeoSegmentationTypes.State, (double)latitude, (double)longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, filterOptionsPageSize, pageNumber);
                             }
                             else
                             {//If state isn't in operation, retrieve preferences based in country and geolocation
-                                displayData = this._businessObjects.Commerces.GetTenantsDisplayData(userId, userState.CountryId, (double)latitude, (double)longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, pageSize, pageNumber);
+                                displayData = this._businessObjects.Commerces.GetTenantsDisplayData(userId, userState.CountryId, (double)latitude, (double)longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, filterOptionsPageSize, pageNumber);
                             }
 
                             if (displayData?.Count == 0)
@@ -564,7 +559,7 @@ namespace YOY.UserAPI.Controllers
                                         stateId = (Guid)userState.NearestStateId;
                                 }
 
-                                displayData = this._businessObjects.Commerces.GetTenantsDisplayData(userId, userState.CountryId, stateId, GeoSegmentationTypes.State, pageSize, pageNumber);
+                                displayData = this._businessObjects.Commerces.GetTenantsDisplayData(userId, userState.CountryId, stateId, GeoSegmentationTypes.State, filterOptionsPageSize, pageNumber);
                             }
 
                             break;
@@ -608,7 +603,7 @@ namespace YOY.UserAPI.Controllers
                             {
                                 Id = item.TenantId,
                                 Name = item.Name,
-                                ContentType = CellDetailTypes.Commerce,
+                                ContentType = CellTypes.Commerce,
                                 CommerceId = item.TenantId,
                                 ImgUrl = thumbnailUrl,
                                 CategoryName = item.CategoryName,
@@ -630,7 +625,7 @@ namespace YOY.UserAPI.Controllers
                     {
                         case GeoSegmentationTypes.Country:
 
-                            displayData = this._businessObjects.Commerces.GetTenantsDisplayData(userId, countryId, Guid.Empty, GeoSegmentationTypes.Country, pageSize, pageNumber);
+                            displayData = this._businessObjects.Commerces.GetTenantsDisplayData(userId, countryId, Guid.Empty, GeoSegmentationTypes.Country, filterOptionsPageSize, pageNumber);
 
                             break;
                         case GeoSegmentationTypes.State:
@@ -648,7 +643,7 @@ namespace YOY.UserAPI.Controllers
                                     stateId = (Guid)userState.NearestStateId;
                             }
 
-                            displayData = this._businessObjects.Commerces.GetTenantsDisplayData(userId, userState.CountryId, stateId, GeoSegmentationTypes.State, pageSize, pageNumber);
+                            displayData = this._businessObjects.Commerces.GetTenantsDisplayData(userId, userState.CountryId, stateId, GeoSegmentationTypes.State, filterOptionsPageSize, pageNumber);
                             break;
                     }
 
@@ -687,7 +682,7 @@ namespace YOY.UserAPI.Controllers
                             commerceDetailContent = new CommerceCellDetail
                             {
                                 Id = item.TenantId,
-                                ContentType = CellDetailTypes.Commerce,
+                                ContentType = CellTypes.Commerce,
                                 CommerceId = item.TenantId,
                                 Name = item.Name,
                                 ImgUrl = thumbnailUrl,
@@ -724,7 +719,6 @@ namespace YOY.UserAPI.Controllers
             ContentStructure shoppingMallOptions;
 
             int callId = 5;
-            int pageSize = 36;
             string parameters = "UserId: " + userId + ", LogoHeight: " + logoHeight + ", ValidLocation: " + validLocation + ", GeoSegmentationType:" + geoSegmentationType;
 
             try
@@ -749,7 +743,7 @@ namespace YOY.UserAPI.Controllers
                     CellsCount = 0,
                     Cells = new List<Cell>(),
                     PageNumber = 0,
-                    PageSize = pageSize
+                    PageSize = filterOptionsPageSize
                 };
 
                 //COMMERCE OPTIONS
@@ -768,12 +762,12 @@ namespace YOY.UserAPI.Controllers
                     {
                         case GeoSegmentationTypes.Country:
 
-                            displayData = this._businessObjects.Branches.GetBranchHoldersDisplayData(countryId, Guid.Empty, GeoSegmentationTypes.Country, (double)latitude, (double)longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, pageSize, pageNumber);
+                            displayData = this._businessObjects.Branches.GetBranchHoldersDisplayData(countryId, Guid.Empty, GeoSegmentationTypes.Country, (double)latitude, (double)longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, filterOptionsPageSize, pageNumber);
 
                             if (displayData?.Count == 0)//If no tenants nearby, then retrieve from the country
                             {
 
-                                displayData = this._businessObjects.Branches.GetBranchHoldersDisplayData(countryId, Guid.Empty, GeoSegmentationTypes.Country, pageSize, pageNumber);
+                                displayData = this._businessObjects.Branches.GetBranchHoldersDisplayData(countryId, Guid.Empty, GeoSegmentationTypes.Country, filterOptionsPageSize, pageNumber);
                             }
 
                             break;
@@ -788,8 +782,7 @@ namespace YOY.UserAPI.Controllers
                             {
                                 stateId = userState.Id;
                                 currentStateAlreadyTried = true;
-
-                                displayData = this._businessObjects.Branches.GetBranchHoldersDisplayData(userState.CountryId, stateId, GeoSegmentationTypes.State, (double)latitude, (double)longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, pageSize, pageNumber);
+                                displayData = this._businessObjects.Branches.GetBranchHoldersDisplayData(userState.CountryId, stateId, GeoSegmentationTypes.State, (double)latitude, (double)longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, filterOptionsPageSize, pageNumber);
                             }
 
                             if (displayData?.Count == 0)
@@ -805,7 +798,7 @@ namespace YOY.UserAPI.Controllers
                                         stateId = (Guid)userState.NearestStateId;
                                 }
 
-                                displayData = this._businessObjects.Branches.GetBranchHoldersDisplayData(userState.CountryId, stateId, GeoSegmentationTypes.State, pageSize, pageNumber);
+                                displayData = this._businessObjects.Branches.GetBranchHoldersDisplayData(userState.CountryId, stateId, GeoSegmentationTypes.State, filterOptionsPageSize, pageNumber);
                             }
 
                             break;
@@ -849,7 +842,7 @@ namespace YOY.UserAPI.Controllers
                                 BranchName = item.Name,
                                 ShoppingMallName = item.TenantName,
                                 CommerceId = item.TenantId,
-                                ContentType = CellDetailTypes.ShoppingMall,
+                                ContentType = CellTypes.ShoppingMall,
                                 ImgUrl = logoUrl
                             };
 
@@ -865,7 +858,7 @@ namespace YOY.UserAPI.Controllers
                     {
                         case GeoSegmentationTypes.Country:
 
-                            displayData = this._businessObjects.Branches.GetBranchHoldersDisplayData(countryId, Guid.Empty, GeoSegmentationTypes.Country, pageSize, pageNumber);
+                            displayData = this._businessObjects.Branches.GetBranchHoldersDisplayData(countryId, Guid.Empty, GeoSegmentationTypes.Country, filterOptionsPageSize, pageNumber);
 
                             break;
                         case GeoSegmentationTypes.State:
@@ -883,7 +876,7 @@ namespace YOY.UserAPI.Controllers
                                     stateId = (Guid)userState.NearestStateId;
                             }
 
-                            displayData = this._businessObjects.Branches.GetBranchHoldersDisplayData(userState.CountryId, stateId, GeoSegmentationTypes.State, pageSize, pageNumber);
+                            displayData = this._businessObjects.Branches.GetBranchHoldersDisplayData(userState.CountryId, stateId, GeoSegmentationTypes.State, filterOptionsPageSize, pageNumber);
                             break;
                     }
 
@@ -921,7 +914,7 @@ namespace YOY.UserAPI.Controllers
                             {
                                 Id = item.Id,
                                 CommerceId = item.TenantId,
-                                ContentType = CellDetailTypes.ShoppingMall,
+                                ContentType = CellTypes.ShoppingMall,
                                 BranchName = item.Name,
                                 ShoppingMallName = item.TenantName,
                                 ImgUrl = logoUrl,
@@ -955,7 +948,6 @@ namespace YOY.UserAPI.Controllers
 
             int callId = 6;
             int offerSetToRetrieve = 400;
-            int pageSize = 50;
             string parameters = "UserId: " + userId + ", ImgHeight: " + dealImgHeight + ", ValidLocation: " + validLocation + ", GeoSegmentationType:" + geoSegmentationType;
 
 
@@ -972,13 +964,15 @@ namespace YOY.UserAPI.Controllers
                 string logoUrl;
                 string imgUrl;
 
-                List<FlattenedOfferData> offers;
+                List<FlattenedOfferData> offers = null;
 
                 if (validLocation)
                 {
                     offers = this._businessObjects.Offers.GetOffersDataByRegionWithLocation(countryId, userStateId, geoSegmentationType, userId, latitude, longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, DateTime.UtcNow, ContentFilterTypes.Category, OfferPurposeTypes.Deal, offerSetToRetrieve, 0);
                 }
-                else
+
+
+                if(!validLocation || offers?.Count == 0)
                 {
                     offers = this._businessObjects.Offers.GetOffersDataByRegion(userStateId, countryId, geoSegmentationType, userId, DateTime.UtcNow, ContentFilterTypes.Category, OfferPurposeTypes.Deal, offerSetToRetrieve, 0);
                 }
@@ -1031,7 +1025,7 @@ namespace YOY.UserAPI.Controllers
                         {
                             Id = item.Id,
                             CommerceId = item.CommerceId,
-                            ContentType = CellDetailTypes.Offer,
+                            ContentType = CellTypes.Offer,
                             DealType = item.DealType,
                             DealTypeName = item.DealTypeName,
                             DealTypeIcon = item.DealTypeIcon,
@@ -1085,7 +1079,7 @@ namespace YOY.UserAPI.Controllers
                     StructureType = ContentStructureTypes.Carrousel,
                     CellsCount = 26,//just for testing
                     PageNumber = 0,
-                    PageSize = pageSize,
+                    PageSize = contentPageSize,
                     Cells = new List<Cell>()
                 };
 
@@ -1117,7 +1111,7 @@ namespace YOY.UserAPI.Controllers
                     StructureType = ContentStructureTypes.Grid,
                     CellsCount = 42,
                     PageNumber = 0,
-                    PageSize = pageSize,
+                    PageSize = contentPageSize,
                     Cells = new List<Cell>()
                 };
 
@@ -1149,7 +1143,7 @@ namespace YOY.UserAPI.Controllers
                     StructureType = ContentStructureTypes.Carrousel,
                     CellsCount = 15,
                     PageNumber = 0,
-                    PageSize = pageSize,
+                    PageSize = contentPageSize,
                     Cells = new List<Cell>()
                 };
 
@@ -1206,7 +1200,7 @@ namespace YOY.UserAPI.Controllers
                 {
                     Id = currentCell.Id,
                     CommerceId = cashIncentiveCellDisplayData.CommerceId,
-                    ContentType = CellDetailTypes.CashIncentive,
+                    ContentType = CellTypes.CashIncentive,
                     DealType = DealTypes.Online,
                     DealTypeName = "En línea",
                     DealTypeIcon = "https://res.cloudinary.com/yoyimgs/image/upload/v1597767894/global/deal_icons/online-deal.png",
@@ -1280,7 +1274,7 @@ namespace YOY.UserAPI.Controllers
                 {
                     Id = currentCell.Id,
                     CommerceId = cashIncentiveCellDisplayData.CommerceId,
-                    ContentType = CellDetailTypes.CashIncentive,
+                    ContentType = CellTypes.CashIncentive,
                     DealType = DealTypes.InStore,
                     DealTypeName = "En tienda",
                     DealTypeIcon = "https://res.cloudinary.com/yoyimgs/image/upload/v1597767894/global/deal_icons/instore-deal.png",
@@ -1352,7 +1346,7 @@ namespace YOY.UserAPI.Controllers
                 {
                     Id = currentCell.Id,
                     CommerceId = cashIncentiveCellDisplayData.CommerceId,
-                    ContentType = CellDetailTypes.CashIncentive,
+                    ContentType = CellTypes.CashIncentive,
                     DealType = DealTypes.Phone,
                     DealTypeName = "Telefónico",
                     DealTypeIcon = "https://res.cloudinary.com/yoyimgs/image/upload/v1597767894/global/deal_icons/phone-deal.png",
@@ -1408,7 +1402,7 @@ namespace YOY.UserAPI.Controllers
                     StructureType = ContentStructureTypes.Carrousel,
                     CellsCount = 20,
                     PageNumber = 0,
-                    PageSize = pageSize,
+                    PageSize = contentPageSize,
                     Cells = new List<Cell>()
                 };
 
@@ -1440,7 +1434,7 @@ namespace YOY.UserAPI.Controllers
                     StructureType = ContentStructureTypes.Grid,
                     CellsCount = 32,
                     PageNumber = 0,
-                    PageSize = pageSize,
+                    PageSize = contentPageSize,
                     Cells = new List<Cell>()
                 };
 
@@ -1472,8 +1466,6 @@ namespace YOY.UserAPI.Controllers
 
             int callId = 7;
             int offerSetToRetrieve = 400;
-            int pageSize = 50;
-            string LogoUrl = "";
             string parameters = "UserId: " + userId + ", ImgHeight: " + dealImgHeight + ", ValidLocation: " + validLocation + ", GeoSegmentationType:" + geoSegmentationType;
 
 
@@ -1538,7 +1530,7 @@ namespace YOY.UserAPI.Controllers
                         {
                             Id = item.Id,
                             CommerceId = item.CommerceId,
-                            ContentType = CellDetailTypes.Offer,
+                            ContentType = CellTypes.Offer,
                             DealType = item.DealType,
                             DealTypeName = item.DealTypeName,
                             DealTypeIcon = item.DealTypeIcon,
@@ -1592,7 +1584,7 @@ namespace YOY.UserAPI.Controllers
                     StoreLocally = true,
                     StructureType = ContentStructureTypes.Carrousel,
                     PageNumber = 0,
-                    PageSize = pageSize,
+                    PageSize = contentPageSize,
                     CellsCount = 32,
                     Cells = new List<Cell>()
                 };
@@ -1625,7 +1617,7 @@ namespace YOY.UserAPI.Controllers
                     StructureType = ContentStructureTypes.Carrousel,
                     CellsCount = 32,
                     PageNumber = 0,
-                    PageSize = pageSize,
+                    PageSize = contentPageSize,
                     Cells = new List<Cell>()
                 };
 
@@ -1686,7 +1678,7 @@ namespace YOY.UserAPI.Controllers
                 {
                     Id = currentCell.Id,
                     CommerceId = displayData.CommerceId,
-                    ContentType = CellDetailTypes.CashIncentive
+                    ContentType = CellTypes.CashIncentive
                 };
 
                 currentCell.DetailedContent = cashCellDetail;
@@ -1733,7 +1725,7 @@ namespace YOY.UserAPI.Controllers
                 {
                     Id = currentCell.Id,
                     CommerceId = displayData.CommerceId,
-                    ContentType = CellDetailTypes.CashIncentive,
+                    ContentType = CellTypes.CashIncentive,
                 };
 
                 currentCell.DetailedContent = cashCellDetail;
@@ -1780,7 +1772,7 @@ namespace YOY.UserAPI.Controllers
                 {
                     Id = currentCell.Id,
                     CommerceId = displayData.CommerceId,
-                    ContentType = CellDetailTypes.CashIncentive
+                    ContentType = CellTypes.CashIncentive
                 };
 
                 currentCell.DetailedContent = cashCellDetail;
@@ -1806,7 +1798,7 @@ namespace YOY.UserAPI.Controllers
                     StoreLocally = true,
                     StructureType = ContentStructureTypes.Carrousel,
                     PageNumber = 0,
-                    PageSize = pageSize,
+                    PageSize = contentPageSize,
                     CellsCount = 16,
                     Cells = new List<Cell>()
                 };
@@ -1837,7 +1829,7 @@ namespace YOY.UserAPI.Controllers
                     StoreLocally = true,
                     StructureType = ContentStructureTypes.Grid,
                     PageNumber = 0,
-                    PageSize = pageSize,
+                    PageSize = contentPageSize,
                     CellsCount = 32,
                     Cells = new List<Cell>()
                 };
@@ -2071,7 +2063,7 @@ namespace YOY.UserAPI.Controllers
                             commerceDetailContent = new CommerceCellDetail
                             {
                                 Id = item.TenantId,
-                                ContentType = CellDetailTypes.Commerce,
+                                ContentType = CellTypes.Commerce,
                                 Name = item.Name,
                                 ImgUrl = thumbnailUrl,
                                 CategoryName = item.CategoryName,
@@ -2102,6 +2094,7 @@ namespace YOY.UserAPI.Controllers
             return commerceOptions;
         }
 
+        [AllowAnonymous]
         [Route("gets")]
         [HttpGet]
         public async Task<IActionResult> GetsAsync(string userId, string location, int sliderHeight, int dealImgHeight, int contentLogoHeight, int brandingLogoHeight, int cardLogoHeight, int cardImgHeight, int thumbnailHeight)

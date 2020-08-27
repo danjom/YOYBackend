@@ -234,6 +234,12 @@
   <data name="GoogleAccountNotFound" xml:space="preserve">
     <value>Cuenta de Google no encontrada</value>
   </data>
+  <data name="IncorrectCurrentPassword" xml:space="preserve">
+    <value>La contraseña actual es incorrecta, para poder cambiar tu contraseña debes ingresar correctamente la actual</value>
+  </data>
+  <data name="IncorrectCurrentPasswordTitle" xml:space="preserve">
+    <value>Contraseña incorrecta</value>
+  </data>
   <data name="InStore" xml:space="preserve">
     <value>En tienda</value>
   </data>

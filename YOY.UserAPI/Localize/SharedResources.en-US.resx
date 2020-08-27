@@ -240,6 +240,12 @@
   <data name="GoogleAccountNotFound" xml:space="preserve">
     <value>Google account not found</value>
   </data>
+  <data name="IncorrectCurrentPassword" xml:space="preserve">
+    <value>Current password is incorrect, in order to change your password you need to enter the current one correctly</value>
+  </data>
+  <data name="IncorrectCurrentPasswordTitle" xml:space="preserve">
+    <value>Wrong password</value>
+  </data>
   <data name="InStore" xml:space="preserve">
     <value>In Store</value>
   </data>

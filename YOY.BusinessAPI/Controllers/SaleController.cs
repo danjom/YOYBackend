@@ -40,6 +40,12 @@ namespace YOY.BusinessAPI.Controllers
 
         #region METHODS
 
+        private static double SignificantTruncate(double num, int significantDigits)
+        {
+            double y = Math.Pow(10, significantDigits);
+            return Math.Truncate(num * y) / y;
+        }
+
         private void Initialize(Guid commerceId, string userId)
         {
             //1st initialize in order to get tenant data
@@ -121,11 +127,11 @@ namespace YOY.BusinessAPI.Controllers
             //int[] purchaseStatuses = { PurchaseStatuses.Placed, PurchaseStatuses.Payed, PurchaseStatuses.Delivered };
             string[] purchaseStatusesName = { "Completada", "Pagada", "Entregada" };
 
-            for(int i = 0; i< 350; ++i)
+            for(int i = 0; i< 500 && i < pageSize; ++i)
             {
                 date = start.AddDays(random.Next(daysDiff + 1));
                 status = random.Next(3);
-                total = (decimal)(random.NextDouble() * 25000);
+                total = (decimal)SignificantTruncate((random.NextDouble() * 25000),2);
 
 
                 saleData = new SaleData
@@ -220,7 +226,7 @@ namespace YOY.BusinessAPI.Controllers
             {
                 date = start.AddDays(random.Next(daysDiff + 1));
                 status = random.Next(3);
-                total = (decimal)(random.NextDouble() * 25000);
+                total = (decimal)SignificantTruncate((random.NextDouble() * 25000),2);
 
 
 

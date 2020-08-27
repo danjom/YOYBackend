@@ -95,9 +95,10 @@ namespace YOY.UserAPI.Controllers
             };
         }
 
-        private System.Drawing.Image Base64ToImage(string base64String)
+        private ProfilePicData SaveBase64Img(string base64String)
         {
-            System.Drawing.Image image = null;
+            System.Drawing.Image image;
+            ProfilePicData picData = null;
             int callId = 0;
 
             try
@@ -106,7 +107,32 @@ namespace YOY.UserAPI.Controllers
                 byte[] imageBytes = Convert.FromBase64String(base64String);
                 // Convert byte[] to Image
                 using var ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
-                image = System.Drawing.Image.FromStream(ms, true, true);
+                image = System.Drawing.Image.FromStream(ms);
+
+                var directoryPath = Path.Combine(_env.WebRootPath, "images");
+                if (!Directory.Exists(directoryPath))
+                    Directory.CreateDirectory(directoryPath);
+
+                string extension = Path.GetExtension(".png");
+                string path = Path.Combine(directoryPath, Guid.NewGuid().ToString() + extension);
+                image.Save(path, System.Drawing.Imaging.ImageFormat.Png); // Save file into disk
+
+                using (var streamBitmap = new MemoryStream(imageBytes))
+                {
+                    using (image = System.Drawing.Image.FromStream(streamBitmap))
+                    {
+                        image.Save(path);
+
+                        picData = new ProfilePicData
+                        {
+                            Path = path,
+                            Height = image.Height,
+                            Width = image.Width
+                        };
+                    }
+                }
+
+                
             }
             catch (Exception e)
             {
@@ -118,7 +144,7 @@ namespace YOY.UserAPI.Controllers
             }
 
 
-            return image;
+            return picData;
 
         }
 
@@ -127,33 +153,28 @@ namespace YOY.UserAPI.Controllers
 
             string imgUrl = "";
 
-            if (base64String.Contains(allowedImgFormats))
+            base64String = base64String.Trim(new char[] { '\r', '\t', '\n' }).Replace("\\\\", "\\").Replace('-', '+').Replace('_', '/');
+
+
+            string enviromentFolder;
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
             {
-                base64String = base64String.Replace(allowedImgFormats, "");
+                enviromentFolder = ImageFolders.DevFolder;
 
-                var directoryPath = Path.Combine(_env.WebRootPath, "images");
-                if (!Directory.Exists(directoryPath))
-                    Directory.CreateDirectory(directoryPath);
-
-                string enviromentFolder;
-                if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
-                {
-                    enviromentFolder = ImageFolders.DevFolder;
-
-                }
-                else
-                {
-                    enviromentFolder = ImageFolders.ProdFolder;
-                }
+            }
+            else
+            {
+                enviromentFolder = ImageFolders.ProdFolder;
+            }
 
 
-                System.Drawing.Image image = this.Base64ToImage(base64String);
+            ProfilePicData picData = this.SaveBase64Img(base64String);
 
+            if(picData != null && !string.IsNullOrEmpty(picData.Path))
+            {
                 string extension = Path.GetExtension(".png");
-                string path = Path.Combine(directoryPath, Guid.NewGuid().ToString() + extension);
-                image.Save(path); // Save file into disk
-                UploadResponse response = CloudinaryStorage.UploadImage(path, enviromentFolder, ImageFolders.ProfilePics, "0", image.Height, image.Width);
-                FileInfo fileDel = new FileInfo(path);
+                UploadResponse response = CloudinaryStorage.UploadImage(picData.Path, enviromentFolder, ImageFolders.ProfilePics, "0", picData.Width, picData.Height);
+                FileInfo fileDel = new FileInfo(picData.Path);
                 fileDel.Delete();
 
 
@@ -162,7 +183,8 @@ namespace YOY.UserAPI.Controllers
                     imgUrl = baseImgStorageUrl + response.Version + "/" + response.PublicId + "." + response.Format;
                 }
             }
-              
+            
+
             return imgUrl;
         }
 
@@ -957,6 +979,7 @@ namespace YOY.UserAPI.Controllers
         /// <returns></returns>
         [HttpPut]
         [Route("putField")]
+        [AllowAnonymous]
         public async Task<IActionResult> Put([FromBody] UserProfileUpdatedField model)
         {
             IActionResult result;
@@ -1196,15 +1219,23 @@ namespace YOY.UserAPI.Controllers
                                 try
                                 {
                                     u.ProfilePicUrl = this.SaveImage(model.FieldValue);
-                                    updateUserResult = await _userManager.UpdateAsync(u);
 
                                     if (!string.IsNullOrWhiteSpace(u.ProfilePicUrl))
                                     {
-                                        if (updateUserResult.Succeeded)
-                                            success = true;
+                                        updateUserResult = await _userManager.UpdateAsync(u);
+
+                                        if (!string.IsNullOrWhiteSpace(u.ProfilePicUrl))
+                                        {
+                                            if (updateUserResult.Succeeded)
+                                                success = true;
+                                            else
+                                            {
+                                                customErroMsg = _localizer["ErrorSettingProfilePicture"].Value;
+                                                success = false;
+                                            }
+                                        }
                                         else
                                         {
-                                            customErroMsg = _localizer["ErrorSettingProfilePicture"].Value;
                                             success = false;
                                         }
                                     }
@@ -1213,6 +1244,7 @@ namespace YOY.UserAPI.Controllers
                                         success = false;
                                     }
                                     
+
                                 }
                                 catch (Exception e)
                                 {
@@ -1409,6 +1441,7 @@ namespace YOY.UserAPI.Controllers
             return result;
         }//PUT ENDS ----------------------------------------------------------------------------------------------------------//
 
+        
         /// <summary>
         /// Updates an user account and retrieve the profile updated
         /// </summary>
@@ -1497,9 +1530,9 @@ namespace YOY.UserAPI.Controllers
                                     StatusCode = Values.StatusCodes.BadRequest,
                                     CustomAction = UserappErrorCustomActions.None,
                                     DisplayMsgToUser = true,
-                                    DevError = _localizer["PasswordMismatch"].Value,
-                                    MsgContent = _localizer["PasswordMismatch"].Value,
-                                    MsgTitle = _localizer["PasswordMismatchTitle"].Value,
+                                    DevError = _localizer["IncorrectCurrentPassword"].Value,
+                                    MsgContent = _localizer["IncorrectCurrentPassword"].Value,
+                                    MsgTitle = _localizer["IncorrectCurrentPasswordTitle"].Value,
                                 });
                     }
 
@@ -1524,6 +1557,7 @@ namespace YOY.UserAPI.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPut]
+        [AllowAnonymous]
         [Route("resetPassword")]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest model)
         {

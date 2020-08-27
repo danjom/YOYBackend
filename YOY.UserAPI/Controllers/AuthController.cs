@@ -225,6 +225,11 @@ namespace YOY.UserAPI.Controllers
                         int interestsCount = this._businessObjects.UserInterests.Gets(dataForToken.AccountNumber, ActiveStates.Active);
 
                         authDetails.ShowPrefrencesChooser = !(interestsCount > 0);
+
+                        if(!authDetails.ShowLocationChooser && !authDetails.ShowPrefrencesChooser)
+                        {
+                            authDetails.AskBirthdate = false;
+                        }
                     }
                     else
                     {

@@ -107,7 +107,7 @@ namespace YOY.UserAPI.Logic.Deal
                                 DisplayImgUrl = item.Offer.DisplayImgUrl,
                                 MainHint = item.Offer.MainHint,
                                 ComplementaryHint = item.Offer.ComplementaryHint,
-                                Name = item.Offer.Name,
+                                Name = item.Offer.ProductHint,
                                 DisplayPrice = item.Offer.OfferType == OfferTypes.Offer,
                                 Price = item.Offer.Value,
                                 PriceLiteral = item.Tenant.CurrencySymbol + FormatDecimalNumberString(item.Offer.Value),

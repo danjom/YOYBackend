@@ -15,7 +15,7 @@ namespace YOY.DTO.Entities.Misc.Offer
         public int PurposeType { set; get; }
         public int GeoSegmentationType { set; get; }
         public int DisplayType { set; get; }
-        public string Name { set; get; }
+        public string ProductHint { set; get; }
         public string MainHint { set; get; }
         public string ComplementaryHint { set; get; }
         public string Keywords { set; get; }

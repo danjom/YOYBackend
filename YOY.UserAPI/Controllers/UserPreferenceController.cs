@@ -74,6 +74,7 @@ namespace YOY.UserAPI.Controllers
             }
         }
 
+        [AllowAnonymous]
         [Route("gets")]
         [HttpGet]
         public IActionResult Gets(string userId, string location, int imgHeight)//latitude*longitude
@@ -112,7 +113,7 @@ namespace YOY.UserAPI.Controllers
                         foreach (UserPreferenceData item in categoryPreferences)
                         {
 
-                            item.BaseImgUrl = ImageAdapter.TransformImg(item.BaseImgUrl, imgHeight, (int)Math.Ceiling(imgHeight*ImgWidthProp));
+                            item.BaseImgUrl = ImageAdapter.TransformImg(item.BaseImgUrl, imgHeight, (int)Math.Ceiling(imgHeight * ImgWidthProp));
 
 
                             item.UnSeletedImgUrl = item.BaseImgUrl + CategoryUnSelectedAppend;
@@ -138,11 +139,11 @@ namespace YOY.UserAPI.Controllers
                         {
                             case GeoSegmentationTypes.Country:
 
-                                tenantPreferences = this._businessObjects.UserInterests.GetPreferences(currentUser.Id, (Guid)currentUser.CountryId, Guid.Empty, GeoSegmentationTypes.Country, (double)processedLocation.Latitude, (double)processedLocation.Longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, PageSize, 0 );
+                                tenantPreferences = this._businessObjects.UserInterests.GetPreferences(currentUser.Id, (Guid)currentUser.CountryId, Guid.Empty, GeoSegmentationTypes.Country, (double)processedLocation.Latitude, (double)processedLocation.Longitude, DistanceLimits.MaxKMRangeToShowOffers * 1000, PageSize, 0);
 
                                 if (tenantPreferences?.Count == 0)//If no tenants nearby, then retrieve from the country
                                 {
-                                    
+
                                     tenantPreferences = this._businessObjects.UserInterests.GetPreferences(currentUser.Id, (Guid)currentUser.CountryId, Guid.Empty, GeoSegmentationTypes.Country, PageSize, 0);
                                 }
 
@@ -277,7 +278,7 @@ namespace YOY.UserAPI.Controllers
                         else
                             preferences.ContentType = UserPreferenceResponseContentType.None;
                     }
-                        
+
 
 
                     result = Ok(preferences);
@@ -322,6 +323,7 @@ namespace YOY.UserAPI.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [AllowAnonymous]
         [Route("post")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] UserChosenPreferenceSet model)
@@ -594,6 +596,16 @@ namespace YOY.UserAPI.Controllers
 
                     }
 
+                }
+
+                //If there are interests that previously user had but this time were unselected
+                foreach (UserInterest item in userInterests)
+                {
+                    if (item.IsActive)
+                    {
+                        //Just need to update the deactive state
+                        this._businessObjects.UserInterests.Put(userId, item.InterestId);
+                    }
                 }
 
                 success = true;
