@@ -26,7 +26,7 @@
     public static class ShoppingCartDeleteActionTypes
     {
         public const int Delete = 1;
-        public const int PassToFavorites = 2;
+        public const int MoveToFavorites = 2;
     }
 
     public static class ContentFeedTypes

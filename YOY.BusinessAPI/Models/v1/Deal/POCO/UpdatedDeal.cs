@@ -39,6 +39,9 @@ namespace YOY.BusinessAPI.Models.v1.Deal.POCO
         public string ComplementaryHint { set; get; }
         [Required]
         [NotNull]
+        public string ProductHint { set; get; }
+        [Required]
+        [NotNull]
         public string Keywords { set; get; }
         [Required]
         [NotNull]

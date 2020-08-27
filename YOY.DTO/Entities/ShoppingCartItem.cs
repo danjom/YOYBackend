@@ -14,6 +14,7 @@ namespace YOY.DTO.Entities
         public int Quantity { set; get; }
         public bool HasPreferences { set; get; }
         public XElement ChosenPreferences { set; get; }
+        public string AdditionalNotes { set; get; }
         public bool IsActive { set; get; }
         public DateTime CreatedDate { set; get; }
         public DateTime UpdatedDate { set; get; }

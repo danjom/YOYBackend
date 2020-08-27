@@ -773,6 +773,7 @@ namespace YOY.DAO.Entities.Manager
                             Quantity = item.Quantity,
                             HasPreferences = item.HasPreferences,
                             ChosenPreferences = XElement.Parse(item.ChosenPreferences),
+                            AdditionalNotes = item.AdditionalNotes,
                             IsActive = (bool)item.IsActive,
                             CreatedDate = item.CreatedDate,
                             UpdatedDate = item.UpdatedDate,
@@ -886,6 +887,7 @@ namespace YOY.DAO.Entities.Manager
                         Quantity = item.Quantity,
                         HasPreferences = item.HasPreferences,
                         ChosenPreferences = XElement.Parse(item.ChosenPreferences),
+                        AdditionalNotes = item.AdditionalNotes,
                         IsActive = (bool)item.IsActive,
                         CreatedDate = item.CreatedDate,
                         UpdatedDate = item.UpdatedDate,
@@ -977,7 +979,7 @@ namespace YOY.DAO.Entities.Manager
             return shoppingCartItem;
         }
 
-        public ShoppingCartItem Post(Guid tenantId, string userId, Guid offerId, int quantity, bool hasPreferences, XElement chosenPreferences)
+        public ShoppingCartItem Post(Guid tenantId, string userId, Guid offerId, int quantity, bool hasPreferences, XElement chosenPreferences, string additionalNotes)
         {
             ShoppingCartItem shoppingCartItem;
 
@@ -992,6 +994,7 @@ namespace YOY.DAO.Entities.Manager
                     Quantity = quantity,
                     HasPreferences = hasPreferences,
                     ChosenPreferences = chosenPreferences != null ? chosenPreferences.ToString() : null,
+                    AdditionalNotes = additionalNotes,
                     IsActive = true,
                     CreatedDate = DateTime.UtcNow,
                     UpdatedDate = DateTime.UtcNow
@@ -1009,6 +1012,7 @@ namespace YOY.DAO.Entities.Manager
                     Quantity = newCartItem.Quantity,
                     HasPreferences = newCartItem.HasPreferences,
                     ChosenPreferences = XElement.Parse(newCartItem.ChosenPreferences),
+                    AdditionalNotes = newCartItem.AdditionalNotes,
                     IsActive = (bool)newCartItem.IsActive,
                     CreatedDate = newCartItem.CreatedDate,
                     UpdatedDate = newCartItem.UpdatedDate
@@ -1026,7 +1030,7 @@ namespace YOY.DAO.Entities.Manager
             return shoppingCartItem;
         }
 
-        public ShoppingCartItem Put(Guid id, int? quantity, XElement chosenPreferences)
+        public ShoppingCartItem Put(Guid id, int? quantity, string additionalNotes, XElement chosenPreferences)
         {
             ShoppingCartItem shoppingCartItem;
 
@@ -1038,15 +1042,32 @@ namespace YOY.DAO.Entities.Manager
 
                 if(currentCartItem != null)
                 {
-                    if(quantity != null)
+                    if(chosenPreferences == null && string.IsNullOrEmpty(additionalNotes))
                     {
-                        currentCartItem.Quantity = (int)quantity;
+                        //In this case is necessary justo to update quantity
+                        if (quantity != null)
+                        {
+                            currentCartItem.Quantity = (int)quantity;
+                        }
                     }
+                    else
+                    {
+                        if (quantity != null)
+                        {
+                            currentCartItem.Quantity = (int)quantity;
+                        }
 
-                    if(chosenPreferences != null)
-                    {
-                        currentCartItem.ChosenPreferences = chosenPreferences.ToString();
+                        if (chosenPreferences != null)
+                        {
+                            currentCartItem.ChosenPreferences = chosenPreferences.ToString();
+                        }
+
+                        if (additionalNotes != null)
+                        {
+                            currentCartItem.AdditionalNotes = additionalNotes;
+                        }
                     }
+                    
 
                     currentCartItem.UpdatedDate = DateTime.UtcNow;
 
@@ -1066,6 +1087,7 @@ namespace YOY.DAO.Entities.Manager
                         Quantity = currentCartItem.Quantity,
                         HasPreferences = currentCartItem.HasPreferences,
                         ChosenPreferences = XElement.Parse(currentCartItem.ChosenPreferences),
+                        AdditionalNotes = currentCartItem.AdditionalNotes,
                         IsActive = (bool)currentCartItem.IsActive,
                         CreatedDate = currentCartItem.CreatedDate,
                         UpdatedDate = currentCartItem.UpdatedDate
@@ -1109,6 +1131,7 @@ namespace YOY.DAO.Entities.Manager
                         Quantity = currentCartItem.Quantity,
                         HasPreferences = currentCartItem.HasPreferences,
                         ChosenPreferences = XElement.Parse(currentCartItem.ChosenPreferences),
+                        AdditionalNotes = currentCartItem.AdditionalNotes,
                         IsActive = (bool)currentCartItem.IsActive,
                         CreatedDate = currentCartItem.CreatedDate,
                         UpdatedDate = currentCartItem.UpdatedDate

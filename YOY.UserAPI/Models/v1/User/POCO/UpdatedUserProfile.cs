@@ -23,9 +23,6 @@ namespace YOY.UserAPI.Models.v1.User.POCO
         [DataType(DataType.Text)]
         public string Name { set; get; }
         [AllowNull]
-        [DataType(DataType.Date)]
-        public DateTime? BirthDate { set; get; }
-        [AllowNull]
         [DataType(DataType.Text)]
         public string Gender { set; get; }
         [AllowNull]

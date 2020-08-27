@@ -55,6 +55,8 @@ namespace YOY.BusinessAPI.Controllers
         private const int mainHintMaxLength = 10;
         private const int complementaryHintMinLength = 3;
         private const int complementaryHintMaxLength = 22;
+        private const int productHintMinLength = 5;
+        private const int productHintMaxLength = 30;
         private const int nameMinLength = 5;
         private const int nameMaxLength = 64;
         private const int keywordsMaxLength = 1000;
@@ -644,7 +646,13 @@ namespace YOY.BusinessAPI.Controllers
                         if (string.IsNullOrWhiteSpace(model.ComplementaryHint) || model.ComplementaryHint.Length < complementaryHintMinLength || model.ComplementaryHint.Length > complementaryHintMaxLength)
                         {
                             valid = false;
-                            dataErrors += "-La frase secundaria debe tener de " + complementaryHintMinLength + " a " + complementaryHintMaxLength + " caracteres\n";
+                            dataErrors += "-La frase complementaria debe tener de " + complementaryHintMinLength + " a " + complementaryHintMaxLength + " caracteres\n";
+                        }
+
+                        if (string.IsNullOrWhiteSpace(model.ProductHint) || model.ProductHint.Length < productHintMinLength || model.ProductHint.Length > productHintMaxLength)
+                        {
+                            valid = false;
+                            dataErrors += "-La frase del producto debe tener de " + productHintMinLength + " a " + productHintMaxLength + " caracteres\n";
                         }
 
                         if (string.IsNullOrWhiteSpace(model.Name) || model.Name.Length < nameMinLength || model.Name.Length > nameMaxLength)
@@ -786,7 +794,7 @@ namespace YOY.BusinessAPI.Controllers
 
 
                                 Offer newOffer = this._businessObjects.Offers.Post(model.TenantId, model.MainCategoryId, offerType, model.DealType, RewardTypes.Deal, OfferPurposeTypes.Deal, GeoSegmentationTypes.Country,
-                                    DisplayTypes.BroadcastingAndListings, model.Name, model.MainHint, model.ComplementaryHint, model.Keywords, model.Code, model.Description, MinsToUnlockByObjectiveTypes.GenericPurpose,
+                                    DisplayTypes.BroadcastingAndListings, model.Name, model.MainHint, model.ComplementaryHint, model.ProductHint, model.Keywords, model.Code, model.Description, MinsToUnlockByObjectiveTypes.GenericPurpose,
                                     model.IsExclusive, model.IsSponsored, false, model.AvailableQuantity, false, -1, 0, null, model.ClaimLocation, value, regularValue, extraBonus, model.ExtraBonusType,
                                     value, value, 0, 0, 0, targettingParams, model.ReleaseDate, model.ExpirationDate, tenantInfo.DealRules, tenantInfo.DealConditions, claimInstructions, ScheduleTypes.Continously, TimerTypes.CountDown,
                                     BroadcastingTimerByDisplayTypes.BroadcastingAndListings, "", "", relevanceRate);
@@ -972,7 +980,13 @@ namespace YOY.BusinessAPI.Controllers
                         if (string.IsNullOrWhiteSpace(model.ComplementaryHint) || model.ComplementaryHint.Length < complementaryHintMinLength || model.ComplementaryHint.Length > complementaryHintMaxLength)
                         {
                             valid = false;
-                            dataErrors += "-La frase secundaria debe tener de " + complementaryHintMinLength + " a " + complementaryHintMaxLength + " caracteres\n";
+                            dataErrors += "-La frase complementaria debe tener de " + complementaryHintMinLength + " a " + complementaryHintMaxLength + " caracteres\n";
+                        }
+
+                        if (string.IsNullOrWhiteSpace(model.ProductHint) || model.ProductHint.Length < productHintMinLength || model.ProductHint.Length > productHintMaxLength)
+                        {
+                            valid = false;
+                            dataErrors += "-La frase del producto debe tener de " + productHintMinLength + " a " + productHintMaxLength + " caracteres\n";
                         }
 
                         if (string.IsNullOrWhiteSpace(model.Name) || model.Name.Length < nameMinLength || model.Name.Length > nameMaxLength)
@@ -1110,9 +1124,9 @@ namespace YOY.BusinessAPI.Controllers
                                 {
                                     currentMainCategoryId = offer.MainCategoryId;
 
-                                    Offer updatedOffer = this._businessObjects.Offers.Put(model.Id, model.MainCategoryId, model.DealType, model.Name, model.MainHint, model.ComplementaryHint, model.Keywords, model.Code, model.Description, model.IsExclusive,
-                                        model.IsSponsored, false, model.AvailableQuantity, -1, 0, null, model.ClaimLocation, value, regularValue, extraBonus, model.ExtraBonusType, value,
-                                        value, 0, 0, 0, targettingParams, model.ReleaseDate, model.ExpirationDate, relevanceRate);
+                                    Offer updatedOffer = this._businessObjects.Offers.Put(model.Id, model.MainCategoryId, model.DealType, model.Name, model.MainHint, model.ComplementaryHint, model.ProductHint,
+                                        model.Keywords, model.Code, model.Description, model.IsExclusive, model.IsSponsored, false, model.AvailableQuantity, -1, 0, null, model.ClaimLocation, 
+                                        value, regularValue, extraBonus, model.ExtraBonusType, value, value, 0, 0, 0, targettingParams, model.ReleaseDate, model.ExpirationDate, relevanceRate);
 
 
 

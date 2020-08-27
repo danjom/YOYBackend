@@ -13,5 +13,6 @@ namespace YOY.UserAPI.Models.v1.Miscellaneous.BasicResponse.POCO
         public string DevError { set; get; }
         public string MsgContent { set; get; }
         public string MsgTitle { set; get; }
+        public object ExtraData { set; get; }
     }
 }

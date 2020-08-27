@@ -21,7 +21,10 @@ namespace YOY.UserAPI.Models.v1.ShoppingCart.POCO
         [NotNull]
         public int Quantity { set; get; }
         [Required]
-        [NotNull]
+        [AllowNull]
+        public string AdditionalNotes { set; get; }
+
+        [AllowNull]
         public List<Pair<Guid, Guid>> ChosenPreferences { set; get; }
     }
 }

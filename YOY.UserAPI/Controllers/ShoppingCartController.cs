@@ -95,7 +95,7 @@ namespace YOY.UserAPI.Controllers
                         chosenPreferences = XElement.Parse(preferences);
                     }
 
-                    ShoppingCartItem cartItem = this._businessObjects.ShoppingCartItems.Post(model.CommerceId, model.UserId, model.DealId, model.Quantity, hasPreferences, chosenPreferences);
+                    ShoppingCartItem cartItem = this._businessObjects.ShoppingCartItems.Post(model.CommerceId, model.UserId, model.DealId, model.Quantity, hasPreferences, chosenPreferences, model.AdditionalNotes);
 
 
                     if (cartItem != null)
@@ -198,8 +198,12 @@ namespace YOY.UserAPI.Controllers
                         chosenPreferences = XElement.Parse(preferences);
                     }
 
-                    ShoppingCartItem cartItem = this._businessObjects.ShoppingCartItems.Put(model.ItemId, model.Quantity, chosenPreferences);
+                    ShoppingCartItem cartItem;
 
+                    if (chosenPreferences != null && chosenPreferences.IsEmpty)
+                        cartItem = this._businessObjects.ShoppingCartItems.Put(model.ItemId, model.Quantity, model.AdditionalNotes, chosenPreferences);
+                    else
+                        cartItem = this._businessObjects.ShoppingCartItems.Put(model.ItemId, model.Quantity, null, null);
 
                     if (cartItem != null)
                     {
@@ -270,91 +274,91 @@ namespace YOY.UserAPI.Controllers
 
 
 
-        [HttpPut]
-        [Route("putQuantity")]
-        public IActionResult Put([FromBody] ShoppingCartItemUpdatedQuantity model)
-        {
-            IActionResult result;
-            int callId = 2;
-            string parameters = model.ToString();
-            string errorMsg;
+        //[HttpPut]
+        //[Route("putQuantity")]
+        //public IActionResult Put([FromBody] ShoppingCartItemUpdatedQuantity model)
+        //{
+        //    IActionResult result;
+        //    int callId = 2;
+        //    string parameters = model.ToString();
+        //    string errorMsg;
 
-            try
-            {
-                Initialize(Guid.Empty);
+        //    try
+        //    {
+        //        Initialize(Guid.Empty);
 
-                if (ModelState.IsValid && model.Quantity > 0)
-                {
+        //        if (ModelState.IsValid && model.Quantity > 0)
+        //        {
 
-                    ShoppingCartItem cartItem = this._businessObjects.ShoppingCartItems.Put(model.ItemId, model.Quantity, null);
+        //            ShoppingCartItem cartItem = this._businessObjects.ShoppingCartItems.Put(model.ItemId, model.Quantity, null);
 
 
-                    if (cartItem != null)
-                    {
-                        ShoppingCartItemSuccessfulOperation successOperation = new ShoppingCartItemSuccessfulOperation
-                        {
-                            OperationType = ContainingActionTypes.Updated,
-                            CommerceId = cartItem.TenantId,
-                            Id = cartItem.Id,
-                            DealId = cartItem.OfferId,
-                            Quantity = cartItem.Quantity,
-                            Message = _localizer["CartItemUpdatedSuccessfully"]
-                        };
+        //            if (cartItem != null)
+        //            {
+        //                ShoppingCartItemSuccessfulOperation successOperation = new ShoppingCartItemSuccessfulOperation
+        //                {
+        //                    OperationType = ContainingActionTypes.Updated,
+        //                    CommerceId = cartItem.TenantId,
+        //                    Id = cartItem.Id,
+        //                    DealId = cartItem.OfferId,
+        //                    Quantity = cartItem.Quantity,
+        //                    Message = _localizer["CartItemUpdatedSuccessfully"]
+        //                };
 
-                        result = Ok(successOperation);
-                    }
-                    else
-                    {
-                        errorMsg = "Saved item add failed";
-                        result = new BadRequestObjectResult((
-                                    new BasicResponse
-                                    {
-                                        StatusCode = Values.StatusCodes.BadRequest,
-                                        CustomAction = UserappErrorCustomActions.None,
-                                        DisplayMsgToUser = true,
-                                        DevError = _localizer["OperationFailed"].Value,
-                                        MsgContent = _localizer["OperationFailedMsg"],
-                                        MsgTitle = ""
-                                    }));
+        //                result = Ok(successOperation);
+        //            }
+        //            else
+        //            {
+        //                errorMsg = "Saved item add failed";
+        //                result = new BadRequestObjectResult((
+        //                            new BasicResponse
+        //                            {
+        //                                StatusCode = Values.StatusCodes.BadRequest,
+        //                                CustomAction = UserappErrorCustomActions.None,
+        //                                DisplayMsgToUser = true,
+        //                                DevError = _localizer["OperationFailed"].Value,
+        //                                MsgContent = _localizer["OperationFailedMsg"],
+        //                                MsgTitle = ""
+        //                            }));
 
-                        //Registers the invalid call
-                        this._businessObjects.HttpcallInvokationLogs.Post("", this.GetType().Name, callId, controllerVersion,
-                                            Values.StatusCodes.BadRequest, 0, parameters, 0, 0, false, null, HttpcallTypes.Post, errorMsg);
-                    }
+        //                //Registers the invalid call
+        //                this._businessObjects.HttpcallInvokationLogs.Post("", this.GetType().Name, callId, controllerVersion,
+        //                                    Values.StatusCodes.BadRequest, 0, parameters, 0, 0, false, null, HttpcallTypes.Post, errorMsg);
+        //            }
 
-                }
-                else
-                {
-                    errorMsg = "Invalid payload";
-                    result = new BadRequestObjectResult((
-                                new BasicResponse
-                                {
-                                    StatusCode = Values.StatusCodes.BadRequest,
-                                    CustomAction = UserappErrorCustomActions.None,
-                                    DisplayMsgToUser = true,
-                                    DevError = _localizer["InvalidPayload"].Value,
-                                    MsgContent = _localizer["OperationFailedMsg"],
-                                    MsgTitle = ""
-                                }));
+        //        }
+        //        else
+        //        {
+        //            errorMsg = "Invalid payload";
+        //            result = new BadRequestObjectResult((
+        //                        new BasicResponse
+        //                        {
+        //                            StatusCode = Values.StatusCodes.BadRequest,
+        //                            CustomAction = UserappErrorCustomActions.None,
+        //                            DisplayMsgToUser = true,
+        //                            DevError = _localizer["InvalidPayload"].Value,
+        //                            MsgContent = _localizer["OperationFailedMsg"],
+        //                            MsgTitle = ""
+        //                        }));
 
-                    //Registers the invalid call
-                    this._businessObjects.HttpcallInvokationLogs.Post("", this.GetType().Name, callId, controllerVersion,
-                                        Values.StatusCodes.BadRequest, 0, parameters, 0, 0, false, null, HttpcallTypes.Post, errorMsg);
-                }
+        //            //Registers the invalid call
+        //            this._businessObjects.HttpcallInvokationLogs.Post("", this.GetType().Name, callId, controllerVersion,
+        //                                Values.StatusCodes.BadRequest, 0, parameters, 0, 0, false, null, HttpcallTypes.Post, errorMsg);
+        //        }
 
-            }
-            catch (Exception e)
-            {
-                errorMsg = "Error: An exception has occured, " + e.InnerException != null ? e.InnerException.Message : e.Message;
-                result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        errorMsg = "Error: An exception has occured, " + e.InnerException != null ? e.InnerException.Message : e.Message;
+        //        result = new StatusCodeResult(Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError);
 
-                //Registers the invalid call
-                this._businessObjects.HttpcallInvokationLogs.Post(model.UserId, this.GetType().Name, callId, controllerVersion,
-                                    Values.StatusCodes.InternalServerError, 0, parameters, 0, 0, false, null, HttpcallTypes.Post, errorMsg);
-            }
+        //        //Registers the invalid call
+        //        this._businessObjects.HttpcallInvokationLogs.Post(model.UserId, this.GetType().Name, callId, controllerVersion,
+        //                            Values.StatusCodes.InternalServerError, 0, parameters, 0, 0, false, null, HttpcallTypes.Post, errorMsg);
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
         [HttpDelete]
         [Route("delete")]
@@ -377,7 +381,7 @@ namespace YOY.UserAPI.Controllers
                     {
                         ShoppingCartItemSuccessfulOperation successOperation;
 
-                        if (model.ActionType == ShoppingCartDeleteActionTypes.PassToFavorites)
+                        if (model.ActionType == ShoppingCartDeleteActionTypes.MoveToFavorites)
                         {
                             SavedItem savedItem = this._businessObjects.SavedItems.Get(SavedItemReferenceTypes.Offer, cartItem.OfferId);
 

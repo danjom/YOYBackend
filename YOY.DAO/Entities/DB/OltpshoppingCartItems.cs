@@ -12,6 +12,7 @@ namespace YOY.DAO.Entities.DB
         public int Quantity { get; set; }
         public bool HasPreferences { get; set; }
         public string ChosenPreferences { get; set; }
+        public string AdditionalNotes { get; set; }
         public bool? IsActive { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }

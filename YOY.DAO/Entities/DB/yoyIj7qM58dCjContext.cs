@@ -5369,6 +5369,10 @@ namespace YOY.DAO.Entities.DB
                     .HasMaxLength(64)
                     .IsUnicode(false);
 
+                entity.Property(e => e.ProductHint)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.PurchasesCountStartDate).HasColumnType("datetime");
 
                 entity.Property(e => e.RegularValue).HasColumnType("decimal(19, 2)");
@@ -6868,6 +6872,10 @@ namespace YOY.DAO.Entities.DB
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
+                entity.Property(e => e.AdditionalNotes)
+                    .HasMaxLength(512)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.ChosenPreferences).HasColumnType("xml");
 
                 entity.Property(e => e.CreatedDate)
@@ -6904,6 +6912,10 @@ namespace YOY.DAO.Entities.DB
                 entity.HasNoKey();
 
                 entity.ToView("OLTPShoppingCartItemsView");
+
+                entity.Property(e => e.AdditionalNotes)
+                    .HasMaxLength(512)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.CategoryName)
                     .IsRequired()
@@ -6977,7 +6989,7 @@ namespace YOY.DAO.Entities.DB
                     .IsUnicode(false);
 
                 entity.Property(e => e.TargettingParams)
-                    .HasMaxLength(512)
+                    .HasMaxLength(128)
                     .IsUnicode(false);
 
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");

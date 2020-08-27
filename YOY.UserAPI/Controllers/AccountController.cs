@@ -734,7 +734,6 @@ namespace YOY.UserAPI.Controllers
                     if (u != null)
                     {
                         u.Name = model.Name;
-                        u.DateOfBirth = model.BirthDate;
                         u.UserName = model.Email;
                         u.Email = model.Email;
                         u.Gender = !string.IsNullOrWhiteSpace(model.Gender) ? model.Gender.ToUpper().ToCharArray()[0] + "" : "-";
@@ -1011,6 +1010,7 @@ namespace YOY.UserAPI.Controllers
                 try
                 {
                     bool success = false;
+                    object extraData = null;
 
                     Initialize(Guid.Empty);
                     IdentityResult updateUserResult = null;
@@ -1227,7 +1227,14 @@ namespace YOY.UserAPI.Controllers
                                         if (!string.IsNullOrWhiteSpace(u.ProfilePicUrl))
                                         {
                                             if (updateUserResult.Succeeded)
+                                            {
                                                 success = true;
+
+                                                extraData = new AssignedProfilePic
+                                                {
+                                                    PicUrl = u.ProfilePicUrl,
+                                                };
+                                            }
                                             else
                                             {
                                                 customErroMsg = _localizer["ErrorSettingProfilePicture"].Value;
@@ -1390,7 +1397,8 @@ namespace YOY.UserAPI.Controllers
 
 
                         if (success)
-                            result = Ok(new BasicResponse
+                        {
+                            BasicResponse successResponse = new BasicResponse
                             {
                                 StatusCode = Values.StatusCodes.Ok,
                                 CustomAction = UserappErrorCustomActions.None,
@@ -1398,7 +1406,17 @@ namespace YOY.UserAPI.Controllers
                                 DevError = "",
                                 MsgContent = "",
                                 MsgTitle = ""
-                            });
+                            };
+
+
+                            if (extraData != null)
+                            {
+                                successResponse.ExtraData = extraData;
+                            }
+
+                                result = Ok(successResponse);
+
+                        }
                         else
                         {
                             result = new BadRequestObjectResult(new BasicResponse

@@ -15,6 +15,7 @@ namespace YOY.DAO.Entities.DB
         public int GeoSegmentationType { get; set; }
         public int DisplayType { get; set; }
         public string Name { get; set; }
+        public string ProductHint { get; set; }
         public string MainHint { get; set; }
         public string ComplementaryHint { get; set; }
         public string Keywords { get; set; }
