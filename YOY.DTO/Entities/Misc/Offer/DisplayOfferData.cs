@@ -41,6 +41,7 @@ namespace YOY.DTO.Entities.Misc.Offer
         public string Conditions { set; get; }
         public string ClaimInstructions { set; get; }
         public double RelevanceRate { set; get; }
+        public decimal? RelevanceScoreForMainCategory { set; get; }
         public string TargettingParams { set; get; }
         public DateTime ReleaseDate { set; get; }
         public DateTime ExpirationDate { set; get; }

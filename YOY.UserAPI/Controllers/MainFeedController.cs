@@ -955,11 +955,15 @@ namespace YOY.UserAPI.Controllers
             {
                 contentStructures = new List<ContentStructure>();
 
-                List<Cell> contentCells = new List<Cell>();
+                List<Cell> contentCellsByUserRelevance = new List<Cell>();
+                List<Cell> contentCellsByGeneralRelevance = new List<Cell>();
+
                 Cell currentCell;
                 DealContentCellDisplayData dealCellDisplayData;
                 CashbackContentCellDisplayData cashIncentiveCellDisplayData;
                 DealContentCellDetail cellDetail;
+
+                List<Guid> mainDealIds = new List<Guid>();
 
                 string logoUrl;
                 string imgUrl;
@@ -1020,7 +1024,6 @@ namespace YOY.UserAPI.Controllers
 
                         logoUrl = ImageAdapter.TransformImg(item.CommerceLogoUrl, contentLogoHeight, (int)Math.Ceiling(contentLogoHeight / logoWithWidthProp));
 
-
                         cellDetail = new DealContentCellDetail
                         {
                             Id = item.Id,
@@ -1068,7 +1071,7 @@ namespace YOY.UserAPI.Controllers
                     HasOwner = false,
                     CellOwnerId = Guid.Empty,
                     DisplayStructureTitle = true,
-                    StructureTitle = "Destacados",
+                    StructureTitle = _localizer["FeaturedDeals"].Value,
                     MaxDisplayedCellsOnInitialStructure = MaxContentCellsOnCarrousel,
                     MaxMinsToKeepStored = MaxMinsToStoreHeaderContent,
                     MaxMetersToKeepStored = MaxMetersToStoreContent,
@@ -1077,7 +1080,7 @@ namespace YOY.UserAPI.Controllers
                     ViewAllAccessType = ViewAllCellContentAccess.DealContentList,
                     StoreLocally = true,
                     StructureType = ContentStructureTypes.Carrousel,
-                    CellsCount = 26,//just for testing
+                    CellsCount = 0,
                     PageNumber = 0,
                     PageSize = contentPageSize,
                     Cells = new List<Cell>()
@@ -1085,7 +1088,8 @@ namespace YOY.UserAPI.Controllers
 
                 Random random = new Random();
 
-                for (int i=0; i < currentStructure.CellsCount; ++i)
+                //Fill the featured deals structure
+                for (int i=0; i < currentStructure.PageSize; ++i)
                 {
                     currentStructure.Cells.Add(contentCells[random.Next(0, 1000) % contentCells.Count]);
                 }
@@ -2094,7 +2098,6 @@ namespace YOY.UserAPI.Controllers
             return commerceOptions;
         }
 
-        [AllowAnonymous]
         [Route("gets")]
         [HttpGet]
         public async Task<IActionResult> GetsAsync(string userId, string location, int sliderHeight, int dealImgHeight, int contentLogoHeight, int brandingLogoHeight, int cardLogoHeight, int cardImgHeight, int thumbnailHeight)
@@ -2284,6 +2287,7 @@ namespace YOY.UserAPI.Controllers
             return result;
         }
 
+        [AllowAnonymous]
         [Route("getsByFilter")]
         [HttpGet]
         public async Task<IActionResult> GetsAsync(string userId, string location, int filterType, Guid filterValue, int dealImgHeight, int contentLogoHeight, int brandingLogoHeight, int cardLogoHeight, int cardImgHeight, int thumbnailHeight)

@@ -222,6 +222,9 @@
   <data name="FavedContentDeletedSuccessfully" xml:space="preserve">
     <value>Eliminado de favoritos</value>
   </data>
+  <data name="FeaturedDeals" xml:space="preserve">
+    <value>Destacados</value>
+  </data>
   <data name="February" xml:space="preserve">
     <value>Febrero</value>
   </data>

@@ -228,6 +228,9 @@
   <data name="FavedContentDeletedSuccessfully" xml:space="preserve">
     <value>Removed from favorites</value>
   </data>
+  <data name="FeaturedDeals" xml:space="preserve">
+    <value>Featured</value>
+  </data>
   <data name="February" xml:space="preserve">
     <value>February</value>
   </data>

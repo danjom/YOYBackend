@@ -38,6 +38,12 @@ namespace YOY.UserAPI.Models.v1.Deal.POCO
         public int MinAge { set; get; }
         public int MaxAge { set; get; }
         public char GenderFocus { set; get; }
-        public double Score { set; get; }
+        public double OverallRate { set; get; }
+        public double DealRelevanceRate { set; get; }
+        public decimal PreferenceRelevanceScore { set; get; }
+        public decimal MainCategoryRelevanceScore { set; get; }
+        public decimal TenantRelevanceScore { set; get; }
+        public double TenantRelevanceRate { set; get; }
+        public double ClaimCount { set; get; }
     }
 }

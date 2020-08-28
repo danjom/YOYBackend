@@ -158,6 +158,7 @@ namespace YOY.DAO.Entities.DB
         public virtual DbSet<OltptransactionLocationsView> OltptransactionLocationsView { get; set; }
         public virtual DbSet<Oltptransactions> Oltptransactions { get; set; }
         public virtual DbSet<OltptransactionsView> OltptransactionsView { get; set; }
+        public virtual DbSet<OltpuserDisplayedContents> OltpuserDisplayedContents { get; set; }
         public virtual DbSet<OltpuserInteractionMetricTimeByReferenceView> OltpuserInteractionMetricTimeByReferenceView { get; set; }
         public virtual DbSet<OltpuserInteractionMetrics> OltpuserInteractionMetrics { get; set; }
         public virtual DbSet<OltpuserInterestRecords> OltpuserInterestRecords { get; set; }
@@ -7276,6 +7277,21 @@ namespace YOY.DAO.Entities.DB
                     .HasMaxLength(450);
 
                 entity.Property(e => e.Value).HasColumnType("decimal(19, 2)");
+            });
+
+            modelBuilder.Entity<OltpuserDisplayedContents>(entity =>
+            {
+                entity.ToTable("OLTPUserDisplayedContents");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getutcdate())");
+
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
             });
 
             modelBuilder.Entity<OltpuserInteractionMetricTimeByReferenceView>(entity =>

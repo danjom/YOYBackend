@@ -122,8 +122,13 @@ namespace YOY.UserAPI.Logic.Deal
                                 ExpirationDate = item.Offer.ExpirationDate.ToString("yyyy-MM-dd HH':'mm':'ss"),
                                 DisplayExpirationHint = (item.Offer.ExpirationDate - DateTime.UtcNow).TotalDays <= minDaysLeftToDisplayHint,
                                 HasPreferences = item.Offer.HasPreferences,
-                                IsNew = (DateTime.UtcNow - item.Offer.CreatedDate).TotalDays < maxDaysToConsiderAsNew
-
+                                IsNew = (DateTime.UtcNow - item.Offer.CreatedDate).TotalDays < maxDaysToConsiderAsNew,
+                                DealRelevanceRate = item.Offer.RelevanceRate,
+                                TenantRelevanceScore = item.Tenant.RelevanceScore ?? -1,
+                                TenantRelevanceRate = item.Tenant.RelevanceStatus,
+                                ClaimCount = item.Offer.ClaimCount,
+                                MainCategoryRelevanceScore = item.Offer.RelevanceScoreForMainCategory ?? -1,
+                                PreferenceRelevanceScore = item.Preference.RelevanceScore ?? -1
                             };
 
                             if (displayData.DisplayAvailableQuantityHint)
@@ -189,6 +194,51 @@ namespace YOY.UserAPI.Logic.Deal
                                 }
                                     
 
+                            }
+
+                            if (!string.IsNullOrWhiteSpace(item.Offer.TargettingParams))
+                            {
+                                char[] paramsSeparator = { TargettingParamMarks.ParamsSeparator[0] };
+                                //1st split all the params
+                                string[] paramsByType = item.Offer.TargettingParams.Split(paramsSeparator);
+
+                                for (int i = 0; i < paramsByType.Length; ++i)
+                                {
+                                    char[] paramValueSeparator = { TargettingParamMarks.TypeValueSeparator[0] };
+
+                                    string[] paramValues = paramsByType[i].Split(paramValueSeparator);
+
+                                    char[] valuesSeparator = { TargettingParamMarks.ValueSeparator[0] };
+
+                                    switch (paramValues[0])
+                                    {
+                                        case TargettingParamMarks.Gender:
+
+                                            displayData.GenderFocus = paramValues[1][0];
+
+                                            break;
+                                        case TargettingParamMarks.AgeInterval:
+
+                                            string[] values = paramValues[1].Split(valuesSeparator);
+
+                                            int startAge;
+                                            int.TryParse(values[0], out startAge);
+                                            displayData.MinAge = startAge;
+
+                                            int endAge;
+                                            int.TryParse(values[1], out endAge);
+                                            displayData.MaxAge = endAge;
+
+                                            break;
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                displayData.GenderFocus = GenderParams.Any;
+                                displayData.MinAge = 1;
+                                displayData.MaxAge = 99;
                             }
 
                             dealDisplayData.Add(displayData);
