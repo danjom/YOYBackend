@@ -151,13 +151,13 @@
     <value>Bronce</value>
   </data>
   <data name="ByCategory" xml:space="preserve">
-    <value>Por Categoría</value>
+    <value>Categoría</value>
   </data>
   <data name="ByCommerce" xml:space="preserve">
-    <value>Por Comercios</value>
+    <value>Comercios</value>
   </data>
   <data name="ByShoppingMall" xml:space="preserve">
-    <value>Por Centro Comercial</value>
+    <value>Centro Comercial</value>
   </data>
   <data name="CartItemAddedSuccessfully" xml:space="preserve">
     <value>Agregado al carrito</value>
@@ -230,6 +230,9 @@
   </data>
   <data name="Filter" xml:space="preserve">
     <value>Filtrar</value>
+  </data>
+  <data name="ForYouDeals" xml:space="preserve">
+    <value>Especiales para tí</value>
   </data>
   <data name="Gold" xml:space="preserve">
     <value>Oro</value>
@@ -321,6 +324,9 @@
   <data name="May" xml:space="preserve">
     <value>Mayo</value>
   </data>
+  <data name="NewDeals" xml:space="preserve">
+    <value>Lo nuevo</value>
+  </data>
   <data name="NotSpecified" xml:space="preserve">
     <value>Sin especificar</value>
   </data>
@@ -386,6 +392,9 @@
   </data>
   <data name="RepeatedPhoneNumberTitle" xml:space="preserve">
     <value>Número inválido</value>
+  </data>
+  <data name="SavedDeals" xml:space="preserve">
+    <value>Tus favoritos</value>
   </data>
   <data name="September" xml:space="preserve">
     <value>Setiembre</value>

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using YOY.DAO.Entities.DB;
 using YOY.DTO.Entities;
+using YOY.DTO.Entities.Misc.Branch;
+using YOY.DTO.Entities.Misc.Offer;
 using YOY.Values;
 using YOY.Values.Strings;
 
@@ -393,6 +395,137 @@ namespace YOY.DAO.Entities.Manager
             }
 
             return success;
+        }
+
+        #endregion
+
+        #region SAVEDCONTENTFULLDATA
+
+        public List<FlattenedOfferData> GetSavedOffersForUser(string userId, Guid countryId, Guid stateId, int contentSegmentationType, int offerPurpose, DateTime dateTime, int pageSize, int pageNumber)
+        {
+            List<FlattenedOfferData> offers = null;
+
+            try
+            {
+                var query = (dynamic)null;
+
+                switch (contentSegmentationType)
+                {
+                    case GeoSegmentationTypes.Country:
+
+                        query = from x in this._businessObjects.FuncsHandler.GetSavedOffersForUserByCountry(countryId, userId, offerPurpose, dateTime, pageSize, pageNumber)
+                                where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
+                                select x;
+                        break;
+                    case GeoSegmentationTypes.State:
+
+                        query = from x in this._businessObjects.FuncsHandler.GetSavedOffersForUserByState(countryId, stateId, userId, offerPurpose, dateTime, pageSize, pageNumber)
+                                where x.AvailableQuantity == -1 || x.AvailableQuantity > 0
+                                select x;
+                        break;
+                }
+
+                if (query != null)
+                {
+                    FlattenedOfferData offer;
+                    offers = new List<FlattenedOfferData>();
+
+                    foreach (TempofferDisplayContents item in query)
+                    {
+                        if (item.AvailableQuantity == -1 || item.AvailableQuantity > 0)
+                        {
+                            offer = new FlattenedOfferData
+                            {
+                                SelectorType = -1,
+                                Offer = new DisplayOfferData
+                                {
+                                    Id = item.Id,
+                                    TenantId = item.TenantId,
+                                    MainCategoryId = item.MainCategoryId,
+                                    OfferType = item.OfferType,
+                                    DealType = item.DealType,
+                                    PurposeType = item.PurposeType,
+                                    RewardType = item.RewardType,
+                                    GeoSegmentationType = item.GeoSegmentationType,
+                                    DisplayType = item.DisplayType,
+                                    MainHint = item.MainHint,
+                                    ComplementaryHint = item.ComplementaryHint,
+                                    ProductHint = item.ProductHint,
+                                    Keywords = item.Keywords,
+                                    Description = item.Description,
+                                    MinsToUnlock = item.MinsToUnlock,
+                                    IsActive = item.IsActive,
+                                    IsSponsored = item.IsSponsored,
+                                    IsExclusive = item.IsExclusive,
+                                    HasPreferences = item.HasPreferences,
+                                    Value = item.Value,
+                                    RegularValue = item.RegularValue,
+                                    ExtraBonus = item.ExtraBonus,
+                                    ExtraBonusType = item.ExtraBonusType,
+                                    AvailableQuantity = item.AvailableQuantity,
+                                    OneTimeRedemption = item.OneTimeRedemption,
+                                    MaxClaimsPerUser = item.MaxClaimsPerUser,
+                                    MinPurchasesCountToRedeem = item.MinPurchasesCountToRedeem,
+                                    PurchasesCountStartDate = item.PurchasesCountStartDate,
+                                    ClaimCount = item.ClaimCount,
+                                    ClaimLocation = item.ClaimLocation,
+                                    DisplayImgUrl = item.DisplayImageUrl,
+                                    Rules = item.Rules,
+                                    Conditions = item.Conditions,
+                                    ClaimInstructions = item.ClaimInstructions,
+                                    RelevanceRate = item.RelevanceRate,
+                                    RelevanceScoreForMainCategory = item.RelevanceScore,
+                                    TargettingParams = item.TargettingParams,
+                                    ReleaseDate = item.ReleaseDate,
+                                    ExpirationDate = item.ExpirationDate,
+                                    CreatedDate = item.CreatedDate
+                                },
+                                Tenant = new DTO.Entities.Misc.TenantData.BasicTenantData
+                                {
+                                    Id = item.TenantId,
+                                    Name = item.TenantName,
+                                    LogoUrl = item.TenantLogoUrl,
+                                    WhiteLogoUrl = item.TenantWhiteLogoUrl,
+                                    CountryId = item.TenantCountryId,
+                                    CurrencySymbol = item.CurrencySymbol,
+                                    CashbackPercentage = item.TenantCashbackPercentage,
+                                    RelevanceStatus = item.TenantRelevanceStatus,
+                                    Type = item.TenantType,
+                                    CategoryId = item.TenantCategoryId,
+                                    RelevanceScore = null,//When its selector is category, there is no info about tenant relevance
+
+                                },
+                                Preference = new DTO.Entities.Misc.InterestPreference.BasicUserPreferenceData
+                                {
+                                    Id = item.PreferenceId,
+                                    Name = item.PreferenceName,
+                                    Icon = item.PreferenceIcon,
+                                    RelevanceScore = item.PreferenceScore
+                                },
+                                BranchHolder = new BasicBranchHolderData//In this case is irrelevant
+                                {
+                                    Id = Guid.Empty,
+                                    Name = "",
+                                    TenantName = "",
+                                    RelevanceStatus = -1
+                                },
+                                ExactLocationBased = true
+                            };
+
+                            offers.Add(offer);
+                        }
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                offers = null;
+                //ERROR HANDLING
+                this._businessObjects.StoredProcsHandler.AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return offers;
         }
 
         #endregion

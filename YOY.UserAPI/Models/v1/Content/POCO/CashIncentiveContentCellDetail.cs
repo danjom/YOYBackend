@@ -7,13 +7,7 @@ namespace YOY.UserAPI.Models.v1.Content.POCO
 {
     public class CashIncentiveContentCellDetail : CellContainedObject
     {
-        public int DealType { set; get; }
-        public string DealTypeName { set; get; }
-        public string DealTypeIcon { set; get; }
-        public bool Favorite { set; get; }
         public string CommerceLogo { set; get; }
-        public string MainHint { set; get; }
-        public string ComplementaryHint { set; get; }
         public string MinPurchaseAmountToApplyHint { set; get; }
         public bool DisplayMinPurchaseAmountToApplyHint { set; get; }
         public string MembershipLevelHint { set; get; }
@@ -32,8 +26,6 @@ namespace YOY.UserAPI.Models.v1.Content.POCO
         public bool DisplayMainUnlockHint { set; get; }
         public string ComplementaryUnlockHint { set; get; }
         public bool DisplayComplementaryUnlockHint { set; get; }
-        public string ExpirationDate { set; get; }
-        public bool DisplayExpirationHint { set; get; }
         public string AvailabiltySchedule { set; get; }
         public bool DisplayAvailabilitySchedule { set; get; }
         public bool AvailableToUse { set; get; }

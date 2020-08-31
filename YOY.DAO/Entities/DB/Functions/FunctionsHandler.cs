@@ -77,6 +77,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var userIdParam = new SqlParameter("userId", userId);
                 var countryIdParam = new SqlParameter("countryId", countryId);
                 var dateTimeParam = new SqlParameter("dateTime", dateTime);
@@ -84,7 +86,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempcashIncentives = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByCountryBranchHolderFocus](@countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempcashIncentives = context.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByCountryBranchHolderFocus](@countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -105,6 +107,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var userIdParam = new SqlParameter("userId", userId);
                 var countryIdParam = new SqlParameter("countryId", countryId);
                 var branchHolderIdParam = new SqlParameter("branchHolderId", branchHolderId);
@@ -113,7 +117,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempcashIncentives = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByCountryForBranchHolder](@countryId, @userId, @branchHolderId, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, branchHolderIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempcashIncentives = context.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByCountryForBranchHolder](@countryId, @userId, @branchHolderId, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, branchHolderIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -134,6 +138,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var userIdParam = new SqlParameter("userId", userId);
                 var countryIdParam = new SqlParameter("countryId", countryId);
                 var tenantIdParam = new SqlParameter("tenantId", tenantId);
@@ -142,7 +148,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempcashIncentives = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByCountryForTenant](@countryId, @userId, @tenantId, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, tenantIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempcashIncentives = context.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByCountryForTenant](@countryId, @userId, @tenantId, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, tenantIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -163,6 +169,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var userIdParam = new SqlParameter("userId", userId);
                 var countryIdParam = new SqlParameter("countryId", countryId);
                 var dateTimeParam = new SqlParameter("dateTime", dateTime);
@@ -170,7 +178,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempcashIncentives = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByCountryTenantFocus](@countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempcashIncentives = context.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByCountryTenantFocus](@countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -191,6 +199,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var latitudeParam = new SqlParameter("latitude", latitude);
                 var longitudeParam = new SqlParameter("longitude", longitude);
                 var radiusParam = new SqlParameter("radius", radius);
@@ -201,7 +211,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempcashIncentive = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByCountryWithLocationBranchHolderFocus](@latitude, @longitude, @radius, @countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempcashIncentive = context.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByCountryWithLocationBranchHolderFocus](@latitude, @longitude, @radius, @countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -222,6 +232,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var latitudeParam = new SqlParameter("latitude", latitude);
                 var longitudeParam = new SqlParameter("longitude", longitude);
                 var radiusParam = new SqlParameter("radius", radius);
@@ -232,7 +244,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempcashIncentives = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashbackIncentivesByCountryWithLocationTenantFocus](@latitude, @longitude, @radius, @countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempcashIncentives = context.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashbackIncentivesByCountryWithLocationTenantFocus](@latitude, @longitude, @radius, @countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -253,6 +265,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var userIdParam = new SqlParameter("userId", userId);
                 var stateIdParam = new SqlParameter("stateId", stateId);
                 var countryIdParam = new SqlParameter("countryId", countryId);
@@ -261,7 +275,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempcashIncentives = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByStateBranchHolderFocus](@stateId, @countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempcashIncentives = context.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByStateBranchHolderFocus](@stateId, @countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -282,6 +296,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var userIdParam = new SqlParameter("userId", userId);
                 var stateIdParam = new SqlParameter("stateId", stateId);
                 var countryIdParam = new SqlParameter("countryId", countryId);
@@ -291,7 +307,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempcashIncentives = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByStateForBranchHolder](@stateId, @countryId, @userId, @branchHolderId, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, branchHolderIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempcashIncentives = context.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByStateForBranchHolder](@stateId, @countryId, @userId, @branchHolderId, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, branchHolderIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -312,6 +328,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var userIdParam = new SqlParameter("userId", userId);
                 var stateIdParam = new SqlParameter("stateId", stateId);
                 var countryIdParam = new SqlParameter("countryId", countryId);
@@ -321,7 +339,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempcashIncentives = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByStateForTenant](@stateId, @countryId, @userId, @tenantId, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, tenantIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempcashIncentives = context.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByStateForTenant](@stateId, @countryId, @userId, @tenantId, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, tenantIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -342,6 +360,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var userIdParam = new SqlParameter("userId", userId);
                 var stateIdParam = new SqlParameter("stateId", stateId);
                 var countryIdParam = new SqlParameter("countryId", countryId);
@@ -350,7 +370,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempcashIncentives = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByStateTenantFocus](@stateId, @countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempcashIncentives = context.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByStateTenantFocus](@stateId, @countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -371,6 +391,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var latitudeParam = new SqlParameter("latitude", latitude);
                 var longitudeParam = new SqlParameter("longitude", longitude);
                 var radiusParam = new SqlParameter("radius", radius);
@@ -382,7 +404,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempcashIncentive = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByStateWithLocationBranchHolderFocus](@latitude, @longitude, @radius, @stateId, @countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, stateIdParam, countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempcashIncentive = context.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByStateWithLocationBranchHolderFocus](@latitude, @longitude, @radius, @stateId, @countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, stateIdParam, countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -403,6 +425,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var latitudeParam = new SqlParameter("latitude", latitude);
                 var longitudeParam = new SqlParameter("longitude", longitude);
                 var radiusParam = new SqlParameter("radius", radius);
@@ -414,7 +438,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempcashIncentives = dbContext.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByStateWithLocationTenantFocus](@latitude, @longitude, @radius, @stateId, @countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, stateIdParam, countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempcashIncentives = context.Set<TempcashIncentivesDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableCashIncentivesByStateWithLocationTenantFocus](@latitude, @longitude, @radius, @stateId, @countryId, @userId, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, stateIdParam, countryIdParam, userIdParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -435,6 +459,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var countryIdParam = new SqlParameter("countryId", countryId);
                 var userIdParam = new SqlParameter("userId", userId);
                 var offerPurposeParam = new SqlParameter("offerPurpose", offerPurpose);
@@ -443,7 +469,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryBranchHolderFocus]( @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempoffers = context.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryBranchHolderFocus]( @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -464,6 +490,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var countryIdParam = new SqlParameter("countryId", countryId);
                 var userIdParam = new SqlParameter("userId", userId);
                 var branchHolderIdParam = new SqlParameter("branchHolderId", branchHolderId);
@@ -473,7 +501,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryForBranchHolder]( @countryId, @userId, @branchHolderId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, branchHolderIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempoffers = context.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryForBranchHolder]( @countryId, @userId, @branchHolderId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, branchHolderIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -494,6 +522,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var countryIdParam = new SqlParameter("countryId", countryId);
                 var userIdParam = new SqlParameter("userId", userId);
                 var preferenceIdParam = new SqlParameter("preferenceId", preferenceId);
@@ -503,7 +533,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryForPreference]( @countryId, @userId, @preferenceId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, preferenceIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempoffers = context.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryForPreference]( @countryId, @userId, @preferenceId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, preferenceIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -524,6 +554,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var countryIdParam = new SqlParameter("countryId", countryId);
                 var userIdParam = new SqlParameter("userId", userId);
                 var tenantIdParam = new SqlParameter("tenantId", tenantId);
@@ -533,7 +565,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryForTenant]( @countryId, @userId, @tenantId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, tenantIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempoffers = context.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryForTenant]( @countryId, @userId, @tenantId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, tenantIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -554,6 +586,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var countryIdParam = new SqlParameter("countryId", countryId);
                 var userIdParam = new SqlParameter("userId", userId);
                 var offerPurposeParam = new SqlParameter("offerPurpose", offerPurpose);
@@ -562,7 +596,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryPreferenceFocus]( @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempoffers = context.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryPreferenceFocus]( @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -582,6 +616,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var countryIdParam = new SqlParameter("countryId", countryId);
                 var userIdParam = new SqlParameter("userId", userId);
                 var offerPurposeParam = new SqlParameter("offerPurpose", offerPurpose);
@@ -590,7 +626,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryTenantFocus]( @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempoffers = context.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryTenantFocus]( @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -611,6 +647,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var latitudeParam = new SqlParameter("latitude", latitude);
                 var longitudeParam = new SqlParameter("longitude", longitude);
                 var radiusParam = new SqlParameter("radius", radius);
@@ -622,7 +660,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryWithLocationBranchHolderFocus](@latitude, @longitude, @radius, @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempoffers = context.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryWithLocationBranchHolderFocus](@latitude, @longitude, @radius, @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -643,6 +681,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var latitudeParam = new SqlParameter("latitude", latitude);
                 var longitudeParam = new SqlParameter("longitude", longitude);
                 var radiusParam = new SqlParameter("radius", radius);
@@ -654,7 +694,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryWithLocationPreferenceFocus](@latitude, @longitude, @radius, @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempoffers = context.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryWithLocationPreferenceFocus](@latitude, @longitude, @radius, @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -675,6 +715,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var latitudeParam = new SqlParameter("latitude", latitude);
                 var longitudeParam = new SqlParameter("longitude", longitude);
                 var radiusParam = new SqlParameter("radius", radius);
@@ -686,7 +728,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryWithLocationTenantFocus](@latitude, @longitude, @radius, @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempoffers = context.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByCountryWithLocationTenantFocus](@latitude, @longitude, @radius, @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -707,6 +749,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var countryIdParam = new SqlParameter("stateId", stateId);
                 var stateIdParam = new SqlParameter("countryId", countryId);
                 var userIdParam = new SqlParameter("userId", userId);
@@ -716,7 +760,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByStateBranchHolderFocus](@stateId, @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempoffers = context.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByStateBranchHolderFocus](@stateId, @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -737,6 +781,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var countryIdParam = new SqlParameter("stateId", stateId);
                 var stateIdParam = new SqlParameter("countryId", countryId);
                 var userIdParam = new SqlParameter("userId", userId);
@@ -747,7 +793,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByStateForBranchHolder](@stateId, @countryId, @userId, @branchHolderId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, branchHolderIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempoffers = context.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByStateForBranchHolder](@stateId, @countryId, @userId, @branchHolderId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, branchHolderIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -768,6 +814,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var countryIdParam = new SqlParameter("stateId", stateId);
                 var stateIdParam = new SqlParameter("countryId", countryId);
                 var userIdParam = new SqlParameter("userId", userId);
@@ -778,7 +826,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByStateForPreference](@stateId, @countryId, @userId, @preferenceId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, preferenceIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempoffers = context.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByStateForPreference](@stateId, @countryId, @userId, @preferenceId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, preferenceIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -799,6 +847,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var countryIdParam = new SqlParameter("stateId", stateId);
                 var stateIdParam = new SqlParameter("countryId", countryId);
                 var userIdParam = new SqlParameter("userId", userId);
@@ -809,7 +859,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByStateForTenant](@stateId, @countryId, @userId, @tenantId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, tenantIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempoffers = context.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByStateForTenant](@stateId, @countryId, @userId, @tenantId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, tenantIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -830,6 +880,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var countryIdParam = new SqlParameter("stateId", stateId);
                 var stateIdParam = new SqlParameter("countryId", countryId);
                 var userIdParam = new SqlParameter("userId", userId);
@@ -839,7 +891,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByStatePreferenceFocus](@stateId, @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempoffers = context.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByStatePreferenceFocus](@stateId, @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -860,6 +912,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var countryIdParam = new SqlParameter("stateId", stateId);
                 var stateIdParam = new SqlParameter("countryId", countryId);
                 var userIdParam = new SqlParameter("userId", userId);
@@ -869,7 +923,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByStateTenantFocus](@stateId, @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempoffers = context.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByStateTenantFocus](@stateId, @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { stateIdParam, countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -890,6 +944,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var latitudeParam = new SqlParameter("latitude", latitude);
                 var longitudeParam = new SqlParameter("longitude", longitude);
                 var radiusParam = new SqlParameter("radius", radius);
@@ -902,7 +958,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByStateWithLocationBranchHolderFocus](@latitude, @longitude, @radius, @stateId, @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, stateIdParam, countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempoffers = context.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByStateWithLocationBranchHolderFocus](@latitude, @longitude, @radius, @stateId, @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, stateIdParam, countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -923,6 +979,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var latitudeParam = new SqlParameter("latitude", latitude);
                 var longitudeParam = new SqlParameter("longitude", longitude);
                 var radiusParam = new SqlParameter("radius", radius);
@@ -935,7 +993,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByStateWithLocationPreferenceFocus](@latitude, @longitude, @radius, @stateId, @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, stateIdParam, countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempoffers = context.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByStateWithLocationPreferenceFocus](@latitude, @longitude, @radius, @stateId, @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, stateIdParam, countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -956,6 +1014,8 @@ namespace YOY.DAO.Entities.DB.Functions
 
             try
             {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
                 var latitudeParam = new SqlParameter("latitude", latitude);
                 var longitudeParam = new SqlParameter("longitude", longitude);
                 var radiusParam = new SqlParameter("radius", radius);
@@ -968,7 +1028,7 @@ namespace YOY.DAO.Entities.DB.Functions
                 var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
 
                 //Processing
-                tempoffers = dbContext.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByStateWithLocationTenantFocus](@latitude, @longitude, @radius, @stateId, @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, stateIdParam, countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+                tempoffers = context.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetAvailableOffersByStateWithLocationTenantFocus](@latitude, @longitude, @radius, @stateId, @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { latitudeParam, longitudeParam, radiusParam, stateIdParam, countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
             }
             catch (Exception e)
             {
@@ -1451,6 +1511,67 @@ namespace YOY.DAO.Entities.DB.Functions
             }
 
             return temprewards;
+        }
+        public List<TempofferDisplayContents> GetSavedOffersForUserByCountry(Guid countryId, string userId, int offerPurpose, DateTime dateTime, int pageSize, int pageNumber)
+        {
+            List<TempofferDisplayContents> tempoffers;
+
+            try
+            {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var userIdParam = new SqlParameter("userId", userId);
+                var offerPurposeParam = new SqlParameter("offerPurpose", offerPurpose);
+                var dateTimeParam = new SqlParameter("dateTime", dateTime);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
+
+                //Processing
+                tempoffers = context.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetSavedOffersForUserByCountry]( @countryId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                tempoffers = null;
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return tempoffers;
+
+
+        }
+        public List<TempofferDisplayContents> GetSavedOffersForUserByState(Guid countryId, Guid stateId, string userId, int offerPurpose, DateTime dateTime, int pageSize, int pageNumber)
+        {
+            List<TempofferDisplayContents> tempoffers;
+
+            try
+            {
+                yoyIj7qM58dCjContext context = new yoyIj7qM58dCjContext();
+
+                var countryIdParam = new SqlParameter("countryId", countryId);
+                var stateIdParam = new SqlParameter("stateId", stateId);
+                var userIdParam = new SqlParameter("userId", userId);
+                var offerPurposeParam = new SqlParameter("offerPurpose", offerPurpose);
+                var dateTimeParam = new SqlParameter("dateTime", dateTime);
+                var pageSizeParam = new SqlParameter("pageSize", pageSize);
+                var pageNumberParam = new SqlParameter("pageNumber", pageNumber);
+
+                //Processing
+                tempoffers = context.Set<TempofferDisplayContents>().FromSqlRaw("SELECT * FROM [dbo].[GetSavedOffersForUserByState]( @countryId, @stateId, @userId, @offerPurpose, @dateTime, @pageSize, @pageNumber)", new[] { countryIdParam, stateIdParam, userIdParam, offerPurposeParam, dateTimeParam, pageSizeParam, pageNumberParam }).ToList();
+            }
+            catch (Exception e)
+            {
+                tempoffers = null;
+                //ERROR HANDLING
+                AddExceptionLogging(ExceptionLayers.DAO, this.GetType().Name, e.Message.ToString(), e.GetType().Name.ToString(), e.StackTrace.ToString(), "");
+
+            }
+
+            return tempoffers;
+
+
         }
 
         public List<TempsearchableLogs> GetSearchesByUser(DateTime startDate, DateTime endDate, string userId, Guid indexOwner)

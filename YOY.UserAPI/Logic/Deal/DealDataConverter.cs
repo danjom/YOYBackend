@@ -75,7 +75,140 @@ namespace YOY.UserAPI.Logic.Deal
             }
         }
 
-        public static List<DealDisplayData> ProccessDeals(List<FlattenedOfferData> offers, IStringLocalizer<SharedResources> localizer)
+        private static double CalculateOverAllScore(double mainCategoryRelevanceScore, double preferenceRelevanceScore, double tenantRelevanceScore, double dealRelevanceRate, double tenantRelevanceRate, bool isSponsored, char genderParam, int minAgeParam, int maxAgeParam, char userGender, int? userAge)
+        {
+            double score = 0;
+
+            try
+            {
+                //Current logic to calculate score is 35% comes from MainCategoryRelevanceScore, 25% from Preferce Score
+                //20% from tenant Score.
+
+                double mainCategoryRelevanceScoreWeght = 0.35;
+                double preferenceRelevanceScoreWeight = 0.25;
+                double tenantRelevanceScoreWeight = 0.2;
+
+                if(mainCategoryRelevanceScore > 0)
+                {
+                    if (preferenceRelevanceScore > 0)
+                    {
+                        if(tenantRelevanceScore > 0)
+                        {
+                            score = mainCategoryRelevanceScore * mainCategoryRelevanceScoreWeght + preferenceRelevanceScore * preferenceRelevanceScoreWeight + tenantRelevanceScore * tenantRelevanceScoreWeight;
+                        }
+                        else
+                        {
+                            score = mainCategoryRelevanceScore * mainCategoryRelevanceScoreWeght + (preferenceRelevanceScore * (preferenceRelevanceScoreWeight + tenantRelevanceScoreWeight))*0.7;
+                        }
+                    }
+                    else
+                    {
+                        if (tenantRelevanceScore > 0)
+                        {
+                            score = (mainCategoryRelevanceScore*(mainCategoryRelevanceScoreWeght + preferenceRelevanceScoreWeight))*0.7 + tenantRelevanceScore * tenantRelevanceScoreWeight;
+                        }
+                        else
+                        {
+                            score = (mainCategoryRelevanceScore * (mainCategoryRelevanceScoreWeght + preferenceRelevanceScoreWeight + tenantRelevanceScoreWeight))*0.4;
+                        }
+                    }
+                }
+                else
+                {
+                    if (preferenceRelevanceScore > 0)
+                    {
+                        if (tenantRelevanceScore > 0)
+                        {
+                            score = (preferenceRelevanceScore * (mainCategoryRelevanceScoreWeght + preferenceRelevanceScoreWeight))*0.7 + tenantRelevanceScore * tenantRelevanceScoreWeight;
+                        }
+                        else
+                        {
+                            score = (preferenceRelevanceScore * (mainCategoryRelevanceScoreWeght + preferenceRelevanceScoreWeight + tenantRelevanceScoreWeight)) * 0.4;
+                        }
+                    }
+                    else
+                    {
+                        if (tenantRelevanceScore > 0)
+                        {
+                            score = (tenantRelevanceScore * (mainCategoryRelevanceScoreWeght + preferenceRelevanceScoreWeight + tenantRelevanceScoreWeight)) * 0.4;
+                        }
+                        else
+                        {
+                            score = 1;
+                        }
+                    }
+                }
+
+                //Now check the target params
+                switch (userGender)
+                {
+                    case ProfileGenders.Male:
+
+                        if (string.Equals(genderParam, GenderParams.OnlyFemale))
+                        {
+                            score *= 0.4;
+                        }
+                        else
+                        {
+                            if(string.Equals(genderParam, GenderParams.MostLikelyFemale))
+                            {
+                                score *= 0.7;
+                            }
+                        }
+
+                        break;
+                    case ProfileGenders.Female:
+
+                        if (string.Equals(genderParam, GenderParams.OnlyMale))
+                        {
+                            score *= 0.4;
+                        }
+                        else
+                        {
+                            if (string.Equals(genderParam, GenderParams.MostLikelyMale))
+                            {
+                                score *= 0.7;
+                            }
+                        }
+
+                        break;
+                }
+
+                if(userAge != null)
+                {
+                    if (userAge < minAgeParam || userAge > maxAgeParam)
+                    {
+                        score *= 0.65;
+                    }
+                }
+
+                if(score > 0)
+                {
+                    //Tenant relevance status can increase score upto 10 %, deal relevance status can increse score upto 20 %
+
+                    double tenantRateIncreaser = ((tenantRelevanceRate) / TenantRelevanceStatuses.AnchorBusiness)*0.1;
+
+                    double dealRateIncreaser = ((dealRelevanceRate) / 5)*0.2;//max deal rate is 5
+
+                    score *= 1 + (tenantRateIncreaser + dealRateIncreaser);
+                }
+
+                if (isSponsored)
+                {
+                    //If it's sponsored increases score 50%
+                    score *= 1 + 0.5;
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
+
+            return score;
+        }
+
+        public static List<DealDisplayData> ProccessDeals(List<FlattenedOfferData> offers, IStringLocalizer<SharedResources> localizer, char userGender, int? userAge)
         {
             List<DealDisplayData> dealDisplayData;
 
@@ -114,7 +247,7 @@ namespace YOY.UserAPI.Logic.Deal
                                 DisplayRegularPrice = item.Offer.RegularValue != null,
                                 RegularPrice = item.Offer.RegularValue ?? 0,
                                 RegularPriceLiteral = item.Offer.RegularValue != null ? item.Tenant.CurrencySymbol + FormatDecimalNumberString((decimal)item.Offer.RegularValue) : "",
-                                CurrencySymbol =  item.Tenant.CurrencySymbol,
+                                CurrencySymbol = item.Tenant.CurrencySymbol,
                                 CashbackHint = "",
                                 DisplayCashbackHint = false,
                                 AvailableQuantity = item.Offer.AvailableQuantity != -1 ? item.Offer.AvailableQuantity : int.MaxValue,
@@ -122,13 +255,14 @@ namespace YOY.UserAPI.Logic.Deal
                                 ExpirationDate = item.Offer.ExpirationDate.ToString("yyyy-MM-dd HH':'mm':'ss"),
                                 DisplayExpirationHint = (item.Offer.ExpirationDate - DateTime.UtcNow).TotalDays <= minDaysLeftToDisplayHint,
                                 HasPreferences = item.Offer.HasPreferences,
+                                IsSponsored = item.Offer.IsSponsored,
                                 IsNew = (DateTime.UtcNow - item.Offer.CreatedDate).TotalDays < maxDaysToConsiderAsNew,
                                 DealRelevanceRate = item.Offer.RelevanceRate,
                                 TenantRelevanceScore = item.Tenant.RelevanceScore ?? -1,
                                 TenantRelevanceRate = item.Tenant.RelevanceStatus,
-                                ClaimCount = item.Offer.ClaimCount,
+                                PurchaseCount = item.Offer.ClaimCount,
                                 MainCategoryRelevanceScore = item.Offer.RelevanceScoreForMainCategory ?? -1,
-                                PreferenceRelevanceScore = item.Preference.RelevanceScore ?? -1
+                                PreferenceRelevanceScore = item.Preference.RelevanceScore ?? -1,
                             };
 
                             if (displayData.DisplayAvailableQuantityHint)
@@ -240,6 +374,8 @@ namespace YOY.UserAPI.Logic.Deal
                                 displayData.MinAge = 1;
                                 displayData.MaxAge = 99;
                             }
+
+                            displayData.OverallScore = CalculateOverAllScore((double)displayData.MainCategoryRelevanceScore, (double)displayData.PreferenceRelevanceScore, (double)displayData.TenantRelevanceScore, displayData.DealRelevanceRate, displayData.TenantRelevanceRate, displayData.IsSponsored, displayData.GenderFocus, displayData.MinAge, displayData.MaxAge, userGender, userAge);
 
                             dealDisplayData.Add(displayData);
                         }
