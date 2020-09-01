@@ -1263,6 +1263,12 @@ namespace YOY.UserAPI.Controllers
                 }
 
                 currentStructure.CellsCount = currentStructure.Cells?.Count ?? 0;
+                
+
+                if(currentStructure.Cells?.Count < currentStructure.MaxDisplayedCellsOnInitialStructure)
+                {
+                    currentStructure.MaxDisplayedCellsOnInitialStructure = currentStructure.Cells?.Count ?? 0;
+                }
 
                 contentStructures.Add(currentStructure);
 
@@ -2400,7 +2406,6 @@ namespace YOY.UserAPI.Controllers
             return commerceOptions;
         }
 
-        [AllowAnonymous]
         [Route("gets")]
         [HttpGet]
         public async Task<IActionResult> GetsAsync(string userId, string location, int sliderHeight, int dealImgHeight, int contentLogoHeight, int brandingLogoHeight, int cardLogoHeight, int cardImgHeight, int thumbnailHeight)

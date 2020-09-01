@@ -1,24 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
+using YOY.CashierAPI.Config;
+using YOY.CashierAPI.Handlers.Authentication;
+using YOY.CashierAPI.Models.Authentication;
+using YOY.CashierAPI.Models.v1.IdentityModel;
+using YOY.CashierAPI.Models.v1.Miscellaneous.POCO;
 using YOY.DAO.Entities;
 using YOY.DTO.Entities.Misc.User;
 using YOY.Values;
-using YOY.Values.Strings;
-using YOY.UserAPI.Config;
-using YOY.UserAPI.Handlers.Authentication;
-using YOY.UserAPI.Models.Authentication;
-using YOY.UserAPI.Models.v1.IdentityModel;
-using Microsoft.Extensions.Localization;
-using YOY.UserAPI.Models.v1.Miscellaneous.BasicResponse.POCO;
-using Microsoft.Extensions.Configuration;
 
-namespace YOY.UserAPI.Controllers
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace YOY.CashierAPI.Controllers
 {
     [RequireHttps]
     [Authorize]
@@ -83,11 +85,12 @@ namespace YOY.UserAPI.Controllers
                             || (identityUser = await ValidateUser(credentials)) == null)
                         {
                             return new BadRequestObjectResult(
-                                new BasicResponse { 
+                                new BasicResponse
+                                {
                                     StatusCode = Values.StatusCodes.BadRequest,
                                     CustomAction = UserappErrorCustomActions.None,
                                     DisplayMsgToUser = true,
-                                    DevError = _localizer["InvalidCredentials"].Value, 
+                                    DevError = _localizer["InvalidCredentials"].Value,
                                     MsgContent = _localizer["WrongUsernameOrPassword"].Value,
                                     MsgTitle = _localizer["WrongUsernameOrPasswordTitle"].Value
                                 });
@@ -163,83 +166,24 @@ namespace YOY.UserAPI.Controllers
                             {
                                 UserId = dataForToken.UserId,
                                 Username = dataForToken.UserName,
-                                AccountNumber = dataForToken.AccountNumber,
-                                AccountCode = dataForToken.AccountCode,
-                                ProfilePicUrl = dataForToken.ProfilePic ?? "",
-                                Name = dataForToken.Name.Split(' ')[0],
-                                CountryId = dataForToken.CountryId ?? Guid.Empty,
-                                Language = string.IsNullOrWhiteSpace(dataForToken.Language) ? credentials.Language : dataForToken.Language,
-                                StateId = dataForToken.StateId ?? Guid.Empty,
-                                StateName = dataForToken.StateName ?? "",
-                                CountryFlag = dataForToken.CountryFlag ?? "",
-                                //CountryCode = dataForToken.country
-                                CurrencySymbol = dataForToken.CurrencySymbol ?? "",
-                                CurrencyType = dataForToken.CurrencyType ?? 0,
-                                AvailablePoints = dataForToken.AvailablePoints,
-                                UtcTimeZone = dataForToken.StateUtcTimeZone ?? 0,
-                                MembershipLevel = dataForToken.MembershipLevel,
-                                ShowLocationChooser = dataForToken.StateId == null,
-                                AskBirthdate = dataForToken.DateOfBirth == null,
-                                AndroidVersion = dataForToken.LastestAndroidVersion,
-                                iOSVersion = dataForToken.LastestiOSVersion,
+                                Name = dataForToken.Name,
+                                ProfilePicUrl = dataForToken?.ProfilePic ?? "",
+                                Language = dataForToken.Language,
                                 Token = token.ToString(),
                                 RefreshToken = refreshToken.Value,
-                                RefreshTokenExpirationUtcDate = refreshToken.ExpiresUTC,
-                                IntroVideoLink = "",
+                                RefreshTokenExpirationUtcDate = refreshToken.ExpiresUTC
                             };
-
-                            if (string.IsNullOrWhiteSpace(dataForToken.Language))
-                            {
-                                //In case language hasn't been set
-                                this._businessObjects.Users.Put(dataForToken.AccountNumber, UserProfileFieldTypes.Language, credentials.Language);
-                            }
-
-                            switch (dataForToken.CurrencyType)
-                            {
-                                case CurrencyTypes.MexicanPeso:
-
-                                    //The points are stored in dollars equivalent, needs to be converted to user's country currency
-
-                                    authDetails.WalletAmount = dataForToken.CurrencySymbol + Math.Round((dataForToken.AvailablePoints / MembershipConfigValues.WalletPointsPerUSValue) * MoneyConversions.MexicanValue, 2);
-
-                                    break;
-                                case CurrencyTypes.CostaRicanColon:
-
-                                    authDetails.WalletAmount = dataForToken.CurrencySymbol + Math.Round((dataForToken.AvailablePoints / MembershipConfigValues.WalletPointsPerUSValue) * MoneyConversions.CostaRicanValue, 2);
-
-                                    break;
-                                case CurrencyTypes.ColombianPeso:
-
-                                    authDetails.WalletAmount = dataForToken.CurrencySymbol + Math.Round((dataForToken.AvailablePoints / MembershipConfigValues.WalletPointsPerUSValue) * MoneyConversions.ColombianValue, 2);
-
-                                    break;
-                                case CurrencyTypes.USDollar:
-
-                                    authDetails.WalletAmount = dataForToken.CurrencySymbol + Math.Round((dataForToken.AvailablePoints / MembershipConfigValues.WalletPointsPerUSValue) * MoneyConversions.USValue, 2);
-
-                                    break;
-                            }
-                        }
-
-                        //Preferences values
-                        int interestsCount = this._businessObjects.UserInterests.Gets(dataForToken.AccountNumber, ActiveStates.Active);
-
-                        authDetails.ShowPrefrencesChooser = !(interestsCount > 0);
-
-                        if(!authDetails.ShowLocationChooser && !authDetails.ShowPrefrencesChooser)
-                        {
-                            authDetails.AskBirthdate = false;
                         }
                     }
                     else
                     {
-                        if(valid && !identityUser.EmailConfirmed && !identityUser.PhoneNumberConfirmed)
+                        if (valid && !identityUser.EmailConfirmed && !identityUser.PhoneNumberConfirmed)
                         {
                             return new UnauthorizedObjectResult(
                                 new BasicResponse
                                 {
                                     StatusCode = Values.StatusCodes.Unauthorized,
-                                    CustomAction = UserappErrorCustomActions.PhoneValidationRequired,
+                                    CustomAction = UserappErrorCustomActions.None,
                                     DisplayMsgToUser = true,
                                     DevError = _localizer["NotValidatedAccount"].Value,
                                     MsgContent = _localizer["AccountValidationNeeded"].Value,
@@ -284,13 +228,13 @@ namespace YOY.UserAPI.Controllers
             {
                 OwnRefreshTokenHandler refreshTokenGenerator = new OwnRefreshTokenHandler(_configuration["yoyapiuser-refreshtokenSalt"], _configuration["DB-Conn"]);
 
-               
-                if(refreshTokenGenerator.RevokeToken(model.userName, model.refreshToken))
+
+                if (refreshTokenGenerator.RevokeToken(model.userName, model.refreshToken))
                 {
 
                     return Ok(
-                        new BasicResponse 
-                        { 
+                        new BasicResponse
+                        {
                             StatusCode = Values.StatusCodes.Ok,
                             CustomAction = UserappErrorCustomActions.None,
                             DisplayMsgToUser = false,
@@ -317,7 +261,7 @@ namespace YOY.UserAPI.Controllers
                                     MsgTitle = ""
                                 });
             }
-            
+
         }
 
         private async Task<AppUser> ValidateUser(TokenCredentials credentials)
@@ -346,7 +290,7 @@ namespace YOY.UserAPI.Controllers
         #endregion
 
         #region CONSTRUCTORS
-        
+
         public AuthController(IOptions<JwtBearerTokenSettings> jwtTokenOptions, UserManager<AppUser> userManager, IStringLocalizer<SharedResources> localizer, IConfiguration configuration)
         {
             this.jwtBearerTokenSettings = jwtTokenOptions.Value;

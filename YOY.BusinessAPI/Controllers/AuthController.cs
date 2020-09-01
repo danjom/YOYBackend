@@ -91,7 +91,7 @@ namespace YOY.BusinessAPI.Controllers
                         }
                     }
 
-                    if (valid)
+                    if (valid && (identityUser.PhoneNumberConfirmed || identityUser.EmailConfirmed))
                     {
                         if(tokenGenerator == null)
                             tokenGenerator = new JWTTokenHandler(jwtBearerTokenSettings, _configuration["bizapi-secret"]);
